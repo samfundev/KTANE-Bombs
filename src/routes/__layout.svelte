@@ -1,3 +1,29 @@
+<script lang="ts" context="module">
+
+	import client from '$lib/client';
+	import type { RequestHandlerOutput } from '@sveltejs/kit';
+	let unverifiedMissions = 0;
+	let unverifiedPacks = 0;
+	let unverifiedCompletions = 0;
+	async function RunVerify(): Promise<RequestHandlerOutput> {
+		unverifiedCompletions = await client.completion.count({
+			where: {
+				verified: false
+			}
+		});
+	  unverifiedMissions = await client.mission.count({
+			where: {
+				verified: false
+			}
+		});
+		unverifiedPacks = await client.missionPack.count({
+			where: {
+				verified: false
+			}
+		});
+	}
+	RunVerify();
+</script>
 <script lang="ts">
 	import { session } from '$app/stores';
 	import { Permission } from '$lib/types';
@@ -6,7 +32,7 @@
 	import { hasPermission, hasAnyPermission } from '$lib/util';
 	import { onMount } from 'svelte';
 	import { toasts, ToastContainer, FlatToast } from 'svelte-toasts';
-
+	
 	const user: FrontendUser | null = $session.user;
 
 	onMount(() => {
@@ -17,7 +43,6 @@
 			placement: 'top-center',
 			duration: 5000
 		});
-
 		darkQuery.addEventListener('change', (event) => {
 			toasts.setDefaults({
 				theme: event.matches ? 'dark' : 'light'
@@ -33,8 +58,11 @@
 		<a class="block" href="/upload">Upload</a>
 		<a class="block" href="/users">Users</a>
 		{#if user}
-			{#if hasAnyPermission(user, Permission.VerifyMission, Permission.VerifyCompletion)}
-				<a class="block" href="/verify">Verify</a>
+			{#if hasAnyPermission(user, Permission.VerifyMission, Permission.VerifyCompletion, Permission.VerifyMissionPack)}
+					{#await RunVerify()}
+					<a class="block" href="/verify">Verify {((hasPermission(user, Permission.VerifyMission) ? unverifiedMissions : 0) + (hasPermission(user, Permission.VerifyCompletion) ? unverifiedCompletions : 0) + (hasPermission(user, Permission.VerifyMissionPack) ? unverifiedPacks : 0))}</a>
+					{/await}
+					
 			{/if}
 
 			<div style="margin-left: auto;">

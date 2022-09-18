@@ -5,3 +5,4 @@ node_modules
 /functions
 /bombdata/bombhtml
 .env
+RunServer.bat
