@@ -14,7 +14,7 @@
 	let sortOrder: string = 'alphabetical';
 	let mustHaves: { [k:string]: MustHave } = {};
 	let limits: { [k:string]: number[] } = {};
-	let hasOptions = ["Has Boss", "Has Semi-Boss", "Has PseudoNeedy", "Has Needy"];
+	let hasOptions = ["Has Boss", "Has Semi-Boss", "Has PseudoNeedy", "Has Needy", "Has Been Solved"];
 	let sortOptions = ["Alphabetical", "Date Published", "Module Count", "Bomb Time", "Solves", "Rule Seeded Mods %"];
 	let limitDef: { [k:string]: number[] } = { mods: [1,500], time: [1,720], strk: [1,40], widg: [0,20] };
 
@@ -58,6 +58,8 @@
 	function intnan (val:number): boolean | string { return isNaN(val) ? 'int' : (val >= 0 ? true : '≥0'); }
 
 	checks["sort-reverse"] = false;
+	checks["search-modname"] = false;
+	checks["search-modid"] = false;
 	hasOptions.forEach(x => { mustHaves[toDashed(x)] = MustHave.Either; });
 	Object.keys(limitDef).forEach((x,i) => { limits[x] = [ limitDef[x][0], limitDef[x][1] ] });
 	
@@ -121,6 +123,14 @@
 				<Input id="option-wdgu" bind:value={limits["widg"][1]} classes="limits" parse={integer}
 					validate={intnan} on:change={setOption}/>
 			</div>
+			<div class="vspace"></div>
+			<span>Search by:</span>
+			<Checkbox id="option-search-modname" label="Mod Name"
+				bind:checked={checks["search-modname"]}
+				sideLabel labelAfter on:change={setOption}/>
+			<Checkbox id="option-search-modid" label="ModuleID"
+				bind:checked={checks["search-modid"]}
+				sideLabel labelAfter on:change={setOption}/>
 		</div>
 		<div class="center-divider"></div>
 		<div>
@@ -191,7 +201,7 @@
 	}
 	.center-divider {
 		width: 0;
-		height: 240px;
+		height: 265px;
 		border: 1px solid #00000066;
 		margin: 0 .5em;
 	}
