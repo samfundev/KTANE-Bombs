@@ -11,6 +11,7 @@
 	export let required: boolean = false;
 	export let sideLabel: boolean = false;
 	export let autoExpand: boolean = false;
+	export let rows: number = 2;
 	export let options: any[] | null = null;
 	export let display = (value: any) => value.toString();
 	export let parse = (value: string): any => value;
@@ -70,6 +71,7 @@
 		{placeholder}
 		class={classes}
 		{required}
+		{rows}
 		bind:this={text_area}
 		list={id + '-list'}
 		value={displayValue}
@@ -95,11 +97,11 @@
 
 <style>
 	textarea {
-		background-color: rgb(15, 15, 15);
+		background-color: var(--textbox-background);
 		padding: var(--gap);
 		border: none;
 		border-radius: 5px;
-		color: white;
+		color: var(--textbox-text-color);
 		width: 100%;
 		box-sizing: border-box;
 	}

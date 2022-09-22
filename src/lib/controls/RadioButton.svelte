@@ -1,7 +1,9 @@
 <script lang="ts">
 	export let id: string;
-	export let checked: any = false;
+	export let name: string;
+	export let value: any;
 	export let label: string = '';
+	export let group: any = '';
 	export let sideLabel: boolean = false;
 	export let labelAfter: boolean = false;
 	export let disabled: boolean = false;
@@ -14,7 +16,7 @@
 			<slot />
 		</label>
 	{/if}
-	<input {id} type="checkbox" bind:checked {disabled} on:change/>
+	<input {id} type="radio" bind:group {name} {value} {disabled} on:change/>
 	{#if labelAfter}
 		<label for={id}>
 			{label}
@@ -29,6 +31,7 @@
 		padding: var(--gap);
 		border: none;
 		box-sizing: border-box;
+		margin: 2.8px;
 	}
 	label {
 		cursor: pointer;

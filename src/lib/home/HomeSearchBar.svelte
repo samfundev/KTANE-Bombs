@@ -6,14 +6,13 @@
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
 	import { onMount } from 'svelte';
 	import { writable, type Writable } from "svelte/store";
-	import { browser } from "$app/env";
-	import HomeFilters from './HomeFilters.svelte';
+	import HomeOptionsMenu from './HomeOptionsMenu.svelte';
 
-	let searchOptionsW: Writable<string[] | null>;
+	let lStore: { [k:string]: Writable<any | null> } = {};
 	let searchOptions: string[];
 	let searchField: HTMLInputElement | null;
 	let filters: HTMLDivElement;
-	let filterTab: HTMLDivElement;
+	let optionsTab: HTMLDivElement;
 	export let missions: Mission[];
 	export let missionCards: { [name: string]: any } = {};
 	export let validSearchOptions: boolean[] = [];
@@ -28,26 +27,20 @@
 
 	let prevDisap = 0;
 
-	if (browser) {
-		let op = localStorage.getItem("searchOptions");
-		searchOptions = JSON.parse(op || '[]');
-		if (searchOptions.length > 0)
-			searchOptionBoxes.forEach((o, i) => { validSearchOptions[i] = searchOptions.includes(o); });
-		else {
-			defaultSearchOptions.forEach((o, i) => { validSearchOptions[i] = o; });
-			searchOptions = searchOptionBoxes.filter((_,i) => validSearchOptions[i]);
-		}
-		searchOptionsW = writable(searchOptions);
-		searchOptionsW.subscribe(value => {
-			localStorage.setItem("searchOptions", JSON.stringify(value || ''));
+	function localSubscribe(item:any, key:string) {
+		let wr = writable(item);
+		wr.subscribe(value => {
+			localStorage.setItem(key, JSON.stringify(value || ''));
 		});
+		lStore[key] = wr;
 	}
+
 	let layoutSearch: LayoutSearchFilter;
 	
 	function setSearchOptions() {
 		let options = searchOptionBoxes.filter((_, idx) => { return validSearchOptions[idx]; });
 		searchOptions = options;
-		searchOptionsW.set(searchOptions);
+		lStore["searchOptions"].set(searchOptions);
 		searchOptionBoxes.forEach((o, i) => {
 			validSearchOptions[i] = searchOptions.includes(o);
 		});
@@ -64,13 +57,26 @@
 		return searchOptions.includes("invert") != evaluateLogicalStringSearch(searchText, searchWhat);
 	}
 
-	onMount(async ()=> {
+	function homeOptionUpdate(event:any) {
+		console.log(event.detail.op);
+	}
+
+	onMount(() => {
 		searchField = <HTMLInputElement>document.getElementById("bomb-search-field");
 		searchField?.focus();
-		layoutSearch.updateSearch();
 		document.onclick = () => {
 			prevDisap = disappear(prevDisap);
 		}
+		let op = localStorage.getItem("searchOptions");
+		searchOptions = JSON.parse(op || '[]');
+		if (searchOptions.length > 0)
+			searchOptionBoxes.forEach((o, i) => { validSearchOptions[i] = searchOptions.includes(o); });
+		else {
+			defaultSearchOptions.forEach((o, i) => { validSearchOptions[i] = o; });
+			searchOptions = searchOptionBoxes.filter((_,i) => validSearchOptions[i]);
+		}
+		localSubscribe(searchOptions, "searchOptions");
+		layoutSearch.updateSearch();
 	});
 </script>
 
@@ -78,7 +84,7 @@
 	<span>Results: {resultsText}</span>
 	<div class="spacer2"></div>
 	<LayoutSearchFilter id="bomb-search-field" label="Search:"
-		title={searchTooltip} textArea autoExpand
+		title={searchTooltip} textArea rows={1} autoExpand
 		bind:items={missionCards}
 		filterFunc={bombSearchFilter}
 		bind:numResults={resultsText}
@@ -94,29 +100,31 @@
 	{/each}
 	</div>
 	<div class="spacer"></div>
-	<div class="tab filter-tab"
-		bind:this={filterTab}
+	<div class="tab options-tab"
+		bind:this={optionsTab}
 		on:click={(event) => {
-			prevDisap = popup(event, filters, filterTab, prevDisap + 2);
+			prevDisap = popup(event, filters, optionsTab, prevDisap + 2, true);
 		}}>
-		Filters
+		Options
 	</div>
-	<HomeFilters bind:div={filters}
+	<HomeOptionsMenu bind:div={filters} on:update={homeOptionUpdate}
 		on:click={() => prevDisap++}/>
-	
 </div>
 
 <style>
 	.search-bar {
+		position: sticky;
+		background: var(--foreground);
+		top: 44px;
 		justify-content: center;
 		gap: 3px;
+		padding: 5px 0;
 	}
 	.search-bar > span { min-width: 100px; }
 	.search-bar .spacer { width: 50px; }
 	.search-bar .spacer2 { width: 100px; }
 
 	.hstack.boxes {
-		width: 250px;
 		flex-wrap: wrap;
 	}
 
@@ -125,7 +133,8 @@
 		position: absolute;
 		border: 1px solid black;
 		padding: 1em;
-		background: #fafaff;
+		background: var(--popup-background);
+		color: var(--text-color);
 		box-shadow: 5px 5px 5px rgba(0,0,0,.3);
 		z-index: 100;
 	}
@@ -140,8 +149,8 @@
 		display: none !important;
 	}
 
-	.filter-tab {
-		background-image: url('$lib/img/filter-icon.png');
+	.options-tab {
+		background-image: url('$lib/img/sliders.png');
 	}
 	:global(.search-bar .tab) {
 		display: inline-block;
@@ -157,6 +166,8 @@
 		color: #024;
 		cursor: pointer;
 	    padding: .2em .5em .115em 28px;
+		position: relative;
+		top: 5px;
 		margin-left: .2em;
 		vertical-align: bottom;
 		background-size: 20px 20px;

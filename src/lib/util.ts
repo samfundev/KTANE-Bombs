@@ -195,20 +195,19 @@ export function disappear(preventDisappear:number = 0): number {
 	return preventDisappear;
 }
 
-export function popup (event:any, wnd:HTMLElement, obj:HTMLElement, pd:number, skew:number[] = [0,0], page:HTMLElement | null = null): number {
+export function popup (event:any, wnd:HTMLElement, obj:HTMLElement, pd:number, relative:boolean = false, skew:number[] = [0,0]): number {
 	let wasHidden = wnd.classList.contains('hidden');
 	let pd2 = disappear(pd);
 	if (wasHidden) {
 		wnd.style.left = '';
 		wnd.style.top = '';
 		wnd.classList.remove("hidden");
-		// Desktop interface: position relative to the click
-		if (!page) page = wnd.parentElement;
+		// Desktop interface: position relative to the object clicked
 		let maxLeft = Math.max(getWindowWidth() - wnd.clientWidth - 30, 0);
 		let maxTop = Math.max(getWindowHeight() - wnd.clientHeight - 30, 0);
 		let rect = obj.getBoundingClientRect();
-		wnd.style.left = Math.min(event.clientX - wnd.clientWidth*0.75 + skew[0], maxLeft) + 'px';
-		wnd.style.top = Math.min(rect.bottom + skew[1], maxTop) + 'px';
+		wnd.style.left = Math.min((relative? obj.offsetLeft : rect.left) - wnd.clientWidth*0.5 + skew[0], maxLeft) + 'px';
+		wnd.style.top = Math.min((relative? rect.height + obj.offsetTop : rect.bottom) + skew[1], maxTop) + 'px';
 	}
 
 	return pd2;

@@ -10,6 +10,7 @@
 	export let searchText: string = '';
 	export let title: string = '';
 	export let textArea: boolean = false;
+	export let rows: number = 2;
 	export let autoExpand: boolean = false;
 	export let numResults: number = 0;
 	export let showNoneForBlank: boolean = false;
@@ -62,14 +63,14 @@
 
 {#if textArea}
 	<TextArea {label} {id} {title} sideLabel classes="search-field"
-			on:input={updateSearch} {autoExpand}
+			on:input={updateSearch} {autoExpand} {rows}
 			bind:value={rawSearchText}/>
 {:else}
 	<Input {label} {id} {title} sideLabel classes="search-field"
 			on:input={updateSearch}
 			bind:value={rawSearchText}/>
 {/if}
-<div class="search-field-clear" on:click={clearSearch}></div>
+<div class="search-field-clear dark-invert" on:click={clearSearch}></div>
 
 <style>
 	:global(.search-field) { min-width: 65px; }

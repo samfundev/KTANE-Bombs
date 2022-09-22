@@ -60,6 +60,22 @@ export class Completion {
 	solo = false;
 }
 
+export enum MustHave {
+	Either = 0,
+	Yes = 1,
+	No = 2
+}
+export class HomeOptions {
+	sortOrder: string = '';
+	checks: { [k:string]: boolean } = {};
+	modules: { [k:string]: MustHave } = {};
+	numMods = [1, 500];
+	time = [1,720];
+	strikes = [1,40];
+	widgets = [0,20];
+	mustHave: { [k:string]: MustHave } = {};
+}
+
 export type QueueItem = MissionQueueItem | CompletionQueueItem | MissionPackQueueItem;
 
 export interface MissionQueueItem {

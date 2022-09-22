@@ -91,11 +91,11 @@
 
 <style>
 	input {
-		background-color: rgb(15, 15, 15);
+		background-color: var(--textbox-background);
 		padding: var(--gap);
 		border: none;
 		border-radius: 5px;
-		color: white;
+		color: var(--textbox-text-color);
 		width: 100%;
 		box-sizing: border-box;
 	}

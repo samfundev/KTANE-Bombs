@@ -62,6 +62,9 @@
 		--background: lightgray;
 		--foreground: white;
 		--text-color: black;
+		--textbox-text-color: white;
+		--textbox-background: rgb(15, 15, 15);
+		--popup-background: #fafaff;
 		--light-text-color: rgb(100, 100, 100);
 		--link-text-color: currentColor;
 		--link-visited-text-color: currentColor;
@@ -73,9 +76,15 @@
 			--background: rgb(50, 50, 50);
 			--foreground: rgb(30, 30, 30);
 			--text-color: white;
+			--textbox-text-color: black;
+			--textbox-background: lightgray;
+			--popup-background: rgb(50, 50, 50);
 			--light-text-color: rgb(150, 150, 150);
 			--link-text-color: rgb(200, 200, 200);
 			--link-visited-text-color: rgb(130, 130, 130);
+		}
+		:global(.dark-invert) {
+			filter: invert(90%);
 		}
 	}
 
@@ -204,7 +213,7 @@
 	}
 
 	.max-width {
-		width: min(calc(100vw - 2 * var(--gap)), 1150px);
+		width: min(calc(100vw - 4 * var(--gap)), 1150px);
 		margin: 0 auto;
 	}
 </style>
