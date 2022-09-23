@@ -1,6 +1,5 @@
 import client from '$lib/client';
 import { getData } from '$lib/repo';
-import { FilterableGroup, Filterable } from '$lib/types';
 import type { RequestHandlerOutput } from '@sveltejs/kit';
 
 export async function get(): Promise<RequestHandlerOutput> {

@@ -1,21 +1,27 @@
 <script lang="ts">
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import HomeSearchBar from '$lib/home/HomeSearchBar.svelte';
+	import type { Mission } from '$lib/types';
 	import type { RepoModule } from '$lib/repo';
-	import { Bomb, Filterable, FilterableGroup, type Mission } from '$lib/types';
-	import { onMount } from 'svelte';
-	import { group_outros } from 'svelte/internal';
 
 	export let missions: Mission[];
+	export let missionCards: any = {};
 	export let modules: RepoModule[];
-	export let group: FilterableGroup = new FilterableGroup();
 
-	missions.forEach((m,i) => {
-		group.g[i] = new Filterable(m);
-	});
+	let render = false;
+	let searchBar: HomeSearchBar;
 
 	function onChange() {
-		group = group;	//signals svelte to rerender the bombs section
+		render = false;
+		missions = missions;	//signals svelte to rerender the bombs section
+		setTimeout(() => {
+			render = true;
+			missions = missions;	//signals svelte to rerender the bombs section
+			missions.forEach(m => {
+				missionCards[m.name] = document.getElementById('mission-' + m.name);
+			});
+			setTimeout(() => {searchBar.updateSearch();},1000);
+		}, 50);
 	}
 </script>
 
@@ -23,11 +29,13 @@
 	<title>Challenge Bombs</title>
 </svelte:head>
 <h1 class="header">Challenge Bombs</h1>
-<HomeSearchBar bind:group={group} on:change={onChange} {modules}/>
+<HomeSearchBar bind:this={searchBar} bind:missions={missions} bind:missionCards={missionCards} on:change={onChange} {modules}/>
 <div class="bombs">
-	{#each group.g as mission, index}
-		{#if !mission.Hidden}
-			<MissionCard mission={mission.o} id={'mission-' + index}/>
+	{#each missions as mission, index}
+		{#if render}
+			<MissionCard {mission} 
+				id={'mission-input-' + index} cardID={'mission-' + mission.name}
+				bind:card={missionCards[mission.name]}/>
 		{/if}
 	{/each}
 </div>

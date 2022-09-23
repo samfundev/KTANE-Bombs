@@ -6,18 +6,19 @@
 	export let selectable: boolean = false;
 	export let selected: boolean = false;
 	export let id: string = '';
+	export let cardID: string = '';
 	export let card: any = null;
 </script>
 
 {#if selectable}
-	<div class="selectable-card" bind:this={card}>
+	<div class="selectable-card" bind:this={card} id={cardID}>
 		<input {id} type="checkbox" bind:checked={selected} />
 		<label for={id} class="mission" class:selected>
 			<MissionCardInner {mission} />
 		</label>
 	</div>
 {:else}
-	<a class="mission" bind:this={card} href="mission/{encodeURIComponent(mission.name)}">
+	<a class="mission" bind:this={card} href="mission/{encodeURIComponent(mission.name)}" id={cardID}>
 		<MissionCardInner {mission} />
 	</a>
 {/if}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Bomb, Completion, FilterableGroup, HomeOptions, Mission } from '$lib/types';
+	import { Bomb, Completion, HomeOptions, Mission } from '$lib/types';
 	import { evaluateLogicalStringSearch, disappear, popup, titleCase } from '$lib/util';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
@@ -9,12 +9,15 @@
 	import type { RepoModule } from '$lib/repo';
 	import { getModule } from '$lib/../routes/mission/_shared';
 
-	export let group: FilterableGroup;
+	export let missions: Mission[];
+	export let missionCards: { [name: string]: any } = {};
 	export let modules: RepoModule[];
 	export let validSearchOptions: boolean[] = [];
 	export let searchOptionBoxes = ["names", "authors", "solved by", "invert"];
-	export let resultsText = Object.keys(group.g).length;
+	export let resultsText = missions.length;
 
+	let sortOrder: string = '';
+	let reverse: boolean = false;
 	let modulesInMission: { [name: string]: RepoModule[] } = {};
 	// let modsInMission: { [name: string]: string[] } = {};
 	let lStore: { [k:string]: Writable<any | null> } = {};
@@ -49,28 +52,28 @@
 		searchOptionBoxes.forEach((o, i) => {
 			validSearchOptions[i] = searchOptions.includes(o);
 		});
-		layoutSearch.updateSearch();
+		updateSearch();
 	}
 
 	function onlyUnique(item:any, pos:number, self:any[]): boolean {
 		return self.indexOf(item) == pos;
 	}
 
-	function bombSearchFilter(ms:Mission, searchText:string) {
+	function bombSearchFilter(name:string, searchText:string) {
 		let searchWhat = '';
 		if (searchOptions?.includes("names")) {
-			if(options.checks["search-missname"]) searchWhat += ' ' + ms.name.toLowerCase();
+			if(options.checks["search-missname"]) searchWhat += ' ' + name.toLowerCase();
 			if(options.checks["search-modname"])
-				searchWhat += ' ' + modulesInMission[ms.name].map(m => m.Name).join(' ').toLowerCase();
+				searchWhat += ' ' + modulesInMission[name].map(m => m.Name).join(' ').toLowerCase();
 			if(options.checks["search-modid"])
-				searchWhat += ' ' + modulesInMission[ms.name].map(m => m.ModuleID).join(' ').toLowerCase();
+				searchWhat += ' ' + modulesInMission[name].map(m => m.ModuleID).join(' ').toLowerCase();
 		}
 		if (searchOptions?.includes("authors"))
-			searchWhat += ' ' + group.g.find(x => x.o.name == ms.name)?.o.authors.join(' ').toLowerCase();
+			searchWhat += ' ' + missions.find(x => x.name == name)?.authors.join(' ').toLowerCase();
 		if (searchOptions?.includes("solved by")) {
-			let m = group.g.find(x => x.o.name == ms.name);
-			searchWhat += ' ' + m?.o.completions.map((x:Completion) => x.team).flat().filter(onlyUnique)
-				.join(' ').toLowerCase() + (m?.o.tpSolve ? ' twitch plays':'');
+			let m = missions.find(x => x.name == name);
+			searchWhat += ' ' + m?.completions.map((x:Completion) => x.team).flat().filter(onlyUnique)
+				.join(' ').toLowerCase() + (m?.tpSolve ? ' twitch plays':'');
 		}
 
 		return searchOptions?.includes("invert") != evaluateLogicalStringSearch(searchText, searchWhat);
@@ -86,24 +89,27 @@
 	function homeOptionUpdate(event:any) {
 		Object.assign(options, event.detail.op)
 		console.log(options);
-		if (group.sortOrder != options.sortOrder || group.reverse != options.checks["sort-reverse"]) {
-			group.sortOrder = options.sortOrder;
-			group.reverse = options.checks["sort-reverse"];
-			switch(group.sortOrder) {
+		if (sortOrder != options.sortOrder || reverse != options.checks["sort-reverse"]) {
+			sortOrder = options.sortOrder;
+			reverse = options.checks["sort-reverse"];
+			switch(sortOrder) {
 			case 'bomb-time':
-				group.g.sort((a, b) => (timeSum(a.o.bombs) > timeSum(b.o.bombs) != group.reverse ? 1 : -1));
+				missions.sort((a, b) => (timeSum(a.bombs) > timeSum(b.bombs) != reverse ? 1 : -1));
 				break;
 			case 'module-count':
-				if (Object.keys(modulesInMission).length == group.g.length)
-				group.g.sort((a, b) => (modSum(a.o.bombs) > modSum(b.o.bombs) != group.reverse ? 1 : -1));
+				// if (Object.keys(modulesInMission).length == group.g.length)
+				missions.sort((a, b) => (modSum(a.bombs) > modSum(b.bombs) != reverse ? 1 : -1));
 				break;
 			default:
-				group.g.sort((a, b) => (a.o.name.toLowerCase() > b.o.name.toLowerCase() != group.reverse ? 1 : -1));
+				missions.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() != reverse ? 1 : -1));
 				break;
 			}
+			dispatch('change');
 		}
-		layoutSearch.updateSearch();
+		updateSearch();
 	}
+
+	export const updateSearch = () => { layoutSearch.updateSearch(); }
 
 	onMount(() => {
 		searchField = <HTMLInputElement>document.getElementById("bomb-search-field");
@@ -120,13 +126,13 @@
 			searchOptions = searchOptionBoxes.filter((_,i) => validSearchOptions[i]);
 		}
 		localSubscribe(searchOptions, "searchOptions");
-		group.g.forEach(m => {
-			modulesInMission[m.o.name] = m.o.bombs.map((b:Bomb) => b.pools.map(p => p.modules)).flat(2).filter(onlyUnique).map((m:string) => getModule(m, modules));
+		missions.forEach(m => {
+			modulesInMission[m.name] = m.bombs.map((b:Bomb) => b.pools.map(p => p.modules)).flat(2).filter(onlyUnique).map(m => getModule(m, modules));
 			// modsInMission[m.o.name] = [""];
 			// Object.assign(modsInMission[m.o.name], modulesInMission[m.o.name].map(m => m.Name));
 		});
 		// console.log(modsInMission);
-		layoutSearch.updateSearch();
+		updateSearch();
 	});
 </script>
 
@@ -135,8 +141,7 @@
 	<div class="spacer"></div>
 	<LayoutSearchFilter id="bomb-search-field" label="Search:"
 		title={searchTooltip} textArea rows={1} autoExpand
-		bind:items={group}
-		on:change
+		bind:items={missionCards}
 		filterFunc={bombSearchFilter}
 		bind:numResults={resultsText}
 		bind:this={layoutSearch}/>

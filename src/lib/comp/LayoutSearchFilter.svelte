@@ -1,13 +1,12 @@
 <script lang="ts">
 	import Input from '$lib/controls/Input.svelte';
 	import TextArea from '$lib/controls/TextArea.svelte';
-	import type { FilterableGroup } from '$lib/types';
 	import { onMount, createEventDispatcher } from 'svelte';
 
 	export let id: string;
 	export let label: string = "Find:";
-	export let items: FilterableGroup;
-	export let filterFunc: (item:any, text:string) => boolean;
+	export let items: { [name: string]: any };
+	export let filterFunc: (itemKey:string, text:string) => boolean;
 	export let searchText: string = '';
 	export let title: string = '';
 	export let textArea: boolean = false;
@@ -24,11 +23,11 @@
 
 	function clearSearch() {
 		rawSearchText = '';
-		items.g.forEach(item => {
+		Object.keys(items).forEach(name => {
 			if (showNoneForBlank)
-				item.Hidden = true;
+				items[name].classList.add("search-filtered-out");
 			else
-				item.Hidden = false;
+				items[name].classList.remove("search-filtered-out");
 		});
 		if (showNoneForBlank) numResults = 0;
 		else numResults = Object.keys(items).length;
@@ -45,15 +44,15 @@
 	function updateSearchFilter() {
 		numResults = 0;
 		searching = true;
-		items.g.forEach(item => {
+		Object.keys(items).forEach(item => {
 			if (showNoneForBlank && searchText.length == 0)
-				item.Hidden = true;
-			else if (filterFunc(item.o, searchText)) {
-				item.Hidden = false;
+				items[item]?.classList.add("search-filtered-out");
+			else if (filterFunc(item, searchText)) {
+				items[item]?.classList.remove("search-filtered-out");
 				numResults++;
 			}
 			else
-				item.Hidden = true;
+				items[item]?.classList.add("search-filtered-out");
 		});
 		searching = false;
 		dispatch('change');

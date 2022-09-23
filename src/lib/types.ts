@@ -76,20 +76,6 @@ export class HomeOptions {
 	mustHave: { [k:string]: MustHave } = {};
 }
 
-export class Filterable {
-	constructor(item:any) {
-		this.o = item;
-	}
-	Hidden = false;
-	o: any;
-}
-
-export class FilterableGroup {
-	sortOrder: string = '';
-	reverse: boolean = false;
-	g: Filterable[] = [];
-}
-
 export type QueueItem = MissionQueueItem | CompletionQueueItem | MissionPackQueueItem;
 
 export interface MissionQueueItem {
