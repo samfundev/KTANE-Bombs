@@ -1,23 +1,28 @@
 <script lang="ts">
-	import type { Mission } from '$lib/types';
+	import { Bomb, Completion, FilterableGroup, HomeOptions, Mission } from '$lib/types';
 	import { evaluateLogicalStringSearch, disappear, popup, titleCase } from '$lib/util';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
-	import Input from '$lib/controls/Input.svelte';
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
-	import { onMount } from 'svelte';
+	import { onMount, createEventDispatcher } from 'svelte';
 	import { writable, type Writable } from "svelte/store";
 	import HomeOptionsMenu from './HomeOptionsMenu.svelte';
+	import type { RepoModule } from '$lib/repo';
+	import { getModule } from '$lib/../routes/mission/_shared';
 
+	export let group: FilterableGroup;
+	export let modules: RepoModule[];
+	export let validSearchOptions: boolean[] = [];
+	export let searchOptionBoxes = ["names", "authors", "solved by", "invert"];
+	export let resultsText = Object.keys(group.g).length;
+
+	let modulesInMission: { [name: string]: RepoModule[] } = {};
+	// let modsInMission: { [name: string]: string[] } = {};
 	let lStore: { [k:string]: Writable<any | null> } = {};
 	let searchOptions: string[];
 	let searchField: HTMLInputElement | null;
 	let filters: HTMLDivElement;
 	let optionsTab: HTMLDivElement;
-	export let missions: Mission[];
-	export let missionCards: { [name: string]: any } = {};
-	export let validSearchOptions: boolean[] = [];
-	export let searchOptionBoxes = ["names", "authors", "solved by", "invert"];
-	export let resultsText = missions.length;
+	let layoutSearch: LayoutSearchFilter;
 	const defaultSearchOptions = [true, false, false, false];
 	const searchTooltip =
 		'Logical operators supported: &&(and), ||(or), !!(not)\n'+
@@ -26,6 +31,8 @@
 		'Brackets are supported too: [[ thing one || aaa ]] && [[ bbb || !!ccc ]]'
 
 	let prevDisap = 0;
+	let options = new HomeOptions();
+	let dispatch = createEventDispatcher();
 
 	function localSubscribe(item:any, key:string) {
 		let wr = writable(item);
@@ -34,8 +41,6 @@
 		});
 		lStore[key] = wr;
 	}
-
-	let layoutSearch: LayoutSearchFilter;
 	
 	function setSearchOptions() {
 		let options = searchOptionBoxes.filter((_, idx) => { return validSearchOptions[idx]; });
@@ -47,18 +52,57 @@
 		layoutSearch.updateSearch();
 	}
 
-	function bombSearchFilter(name:string, searchText:string) {
-		let searchWhat = '';
-		if (searchOptions.includes("names")) searchWhat += ' ' + name.toLowerCase();
-		if (searchOptions.includes("authors")) searchWhat += ' ' + missions.find(x => x.name == name)?.authors?.join(' ').toLowerCase();
-		if (searchOptions.includes("solved by"))
-			searchWhat += ' ' + missions.find(x => x.name == name)?.completions.map(x => x.team.join(' ')).join(' ').toLowerCase();
+	function onlyUnique(item:any, pos:number, self:any[]): boolean {
+		return self.indexOf(item) == pos;
+	}
 
-		return searchOptions.includes("invert") != evaluateLogicalStringSearch(searchText, searchWhat);
+	function bombSearchFilter(ms:Mission, searchText:string) {
+		let searchWhat = '';
+		if (searchOptions?.includes("names")) {
+			if(options.checks["search-missname"]) searchWhat += ' ' + ms.name.toLowerCase();
+			if(options.checks["search-modname"])
+				searchWhat += ' ' + modulesInMission[ms.name].map(m => m.Name).join(' ').toLowerCase();
+			if(options.checks["search-modid"])
+				searchWhat += ' ' + modulesInMission[ms.name].map(m => m.ModuleID).join(' ').toLowerCase();
+		}
+		if (searchOptions?.includes("authors"))
+			searchWhat += ' ' + group.g.find(x => x.o.name == ms.name)?.o.authors.join(' ').toLowerCase();
+		if (searchOptions?.includes("solved by")) {
+			let m = group.g.find(x => x.o.name == ms.name);
+			searchWhat += ' ' + m?.o.completions.map((x:Completion) => x.team).flat().filter(onlyUnique)
+				.join(' ').toLowerCase() + (m?.o.tpSolve ? ' twitch plays':'');
+		}
+
+		return searchOptions?.includes("invert") != evaluateLogicalStringSearch(searchText, searchWhat);
+	}
+
+	function timeSum(bombs:Bomb[]) {
+		return Math.max(...bombs.map(b => b.time));
+	}
+	function modSum(bombs:Bomb[]) {
+		return bombs.map(b => b.modules).reduce((a, b) => a + b, 0);
 	}
 
 	function homeOptionUpdate(event:any) {
-		console.log(event.detail.op);
+		Object.assign(options, event.detail.op)
+		console.log(options);
+		if (group.sortOrder != options.sortOrder || group.reverse != options.checks["sort-reverse"]) {
+			group.sortOrder = options.sortOrder;
+			group.reverse = options.checks["sort-reverse"];
+			switch(group.sortOrder) {
+			case 'bomb-time':
+				group.g.sort((a, b) => (timeSum(a.o.bombs) > timeSum(b.o.bombs) != group.reverse ? 1 : -1));
+				break;
+			case 'module-count':
+				if (Object.keys(modulesInMission).length == group.g.length)
+				group.g.sort((a, b) => (modSum(a.o.bombs) > modSum(b.o.bombs) != group.reverse ? 1 : -1));
+				break;
+			default:
+				group.g.sort((a, b) => (a.o.name.toLowerCase() > b.o.name.toLowerCase() != group.reverse ? 1 : -1));
+				break;
+			}
+		}
+		layoutSearch.updateSearch();
 	}
 
 	onMount(() => {
@@ -76,16 +120,23 @@
 			searchOptions = searchOptionBoxes.filter((_,i) => validSearchOptions[i]);
 		}
 		localSubscribe(searchOptions, "searchOptions");
+		group.g.forEach(m => {
+			modulesInMission[m.o.name] = m.o.bombs.map((b:Bomb) => b.pools.map(p => p.modules)).flat(2).filter(onlyUnique).map((m:string) => getModule(m, modules));
+			// modsInMission[m.o.name] = [""];
+			// Object.assign(modsInMission[m.o.name], modulesInMission[m.o.name].map(m => m.Name));
+		});
+		// console.log(modsInMission);
 		layoutSearch.updateSearch();
 	});
 </script>
 
 <div class="search-bar hstack">
 	<span>Results: {resultsText}</span>
-	<div class="spacer2"></div>
+	<div class="spacer"></div>
 	<LayoutSearchFilter id="bomb-search-field" label="Search:"
 		title={searchTooltip} textArea rows={1} autoExpand
-		bind:items={missionCards}
+		bind:items={group}
+		on:change
 		filterFunc={bombSearchFilter}
 		bind:numResults={resultsText}
 		bind:this={layoutSearch}/>
@@ -122,10 +173,10 @@
 	}
 	.search-bar > span { min-width: 100px; }
 	.search-bar .spacer { width: 50px; }
-	.search-bar .spacer2 { width: 100px; }
 
 	.hstack.boxes {
 		flex-wrap: wrap;
+		gap: 7px;
 	}
 
 	:global(.popup) {
@@ -147,6 +198,9 @@
 
 	:global(.hidden) {
 		display: none !important;
+	}
+	:global(#bomb-search-field) {
+		width: 300px;
 	}
 
 	.options-tab {

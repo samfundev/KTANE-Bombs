@@ -1,28 +1,34 @@
 <script lang="ts">
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import HomeSearchBar from '$lib/home/HomeSearchBar.svelte';
-	import type { Mission } from '$lib/types';
+	import type { RepoModule } from '$lib/repo';
+	import { Bomb, Filterable, FilterableGroup, type Mission } from '$lib/types';
 	import { onMount } from 'svelte';
-
+	import { group_outros } from 'svelte/internal';
 
 	export let missions: Mission[];
-	export let missionCards: any = {};
+	export let modules: RepoModule[];
+	export let group: FilterableGroup = new FilterableGroup();
 
-	missions.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
+	missions.forEach((m,i) => {
+		group.g[i] = new Filterable(m);
+	});
+
+	function onChange() {
+		group = group;	//signals svelte to rerender the bombs section
+	}
 </script>
 
 <svelte:head>
 	<title>Challenge Bombs</title>
 </svelte:head>
 <h1 class="header">Challenge Bombs</h1>
-<HomeSearchBar missions={missions}
-	missionCards={missionCards}>
-</HomeSearchBar>
+<HomeSearchBar bind:group={group} on:change={onChange} {modules}/>
 <div class="bombs">
-	{#each missions as mission, index}
-		<MissionCard {mission} 
-			id={'mission-' + index}
-			bind:card={missionCards[mission.name]}/>
+	{#each group.g as mission, index}
+		{#if !mission.Hidden}
+			<MissionCard mission={mission.o} id={'mission-' + index}/>
+		{/if}
 	{/each}
 </div>
 

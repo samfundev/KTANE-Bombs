@@ -1,4 +1,6 @@
 import client from '$lib/client';
+import { getData } from '$lib/repo';
+import { FilterableGroup, Filterable } from '$lib/types';
 import type { RequestHandlerOutput } from '@sveltejs/kit';
 
 export async function get(): Promise<RequestHandlerOutput> {
@@ -18,7 +20,8 @@ export async function get(): Promise<RequestHandlerOutput> {
 
 	return {
 		body: {
-			missions
+			missions,
+			modules: await getData()
 		}
 	};
 }

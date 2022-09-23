@@ -42,7 +42,7 @@ export class Bomb {
 }
 
 export class Pool {
-	modules: string[];
+	modules: string[];	//listed by Module ID, not name
 	count: number;
 
 	constructor(modules: string[], count: number) {
@@ -74,6 +74,20 @@ export class HomeOptions {
 	strikes = [1,40];
 	widgets = [0,20];
 	mustHave: { [k:string]: MustHave } = {};
+}
+
+export class Filterable {
+	constructor(item:any) {
+		this.o = item;
+	}
+	Hidden = false;
+	o: any;
+}
+
+export class FilterableGroup {
+	sortOrder: string = '';
+	reverse: boolean = false;
+	g: Filterable[] = [];
 }
 
 export type QueueItem = MissionQueueItem | CompletionQueueItem | MissionPackQueueItem;

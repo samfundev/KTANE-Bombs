@@ -15,8 +15,14 @@
 	let mustHaves: { [k:string]: MustHave } = {};
 	let limits: { [k:string]: number[] } = {};
 	let hasOptions = ["Has Boss", "Has Semi-Boss", "Has PseudoNeedy", "Has Needy", "Has Been Solved"];
-	let sortOptions = ["Alphabetical", "Date Published", "Module Count", "Bomb Time", "Solves", "Rule Seeded Mods %"];
-	let limitDef: { [k:string]: number[] } = { mods: [1,500], time: [1,720], strk: [1,40], widg: [0,20] };
+	let sortOptions = ["Alphabetical", "Module Count", "Bomb Time", "Solves", "Rule Seeded Mods %"];
+	let limitDef: { [k:string]: number[] } = { mods: [1,500], time: [1,720], strk: [1,40], widg: [0,20], prof: [80] };
+	let checkDef: { [k:string]: boolean } = {
+		"sort-reverse": false,
+		"search-missname": true,
+		"search-modname": false,
+		"search-modid": false
+	};
 
 	function localSubscribe(item:any, key:string) {
 		let wr = writable(item);
@@ -56,16 +62,15 @@
 
 	function integer (str:string): any { return parseInt(str); }
 	function intnan (val:number): boolean | string { return isNaN(val) ? 'int' : (val >= 0 ? true : '≥0'); }
+	function percent (val:number): boolean | string { return isNaN(val) ? 'int' : (val >= 0 && val <= 100 ? true : '0–100'); }
 
-	checks["sort-reverse"] = false;
-	checks["search-modname"] = false;
-	checks["search-modid"] = false;
+	Object.keys(checkDef).forEach((x:string) => { checks[x] = checkDef[x]; });
 	hasOptions.forEach(x => { mustHaves[toDashed(x)] = MustHave.Either; });
-	Object.keys(limitDef).forEach((x,i) => { limits[x] = [ limitDef[x][0], limitDef[x][1] ] });
+	Object.keys(limitDef).forEach((x,i) => { limits[x] = limitDef[x].length > 1 ? [ limitDef[x][0], limitDef[x][1] ] : [ limitDef[x][0] ] });
 	
 	onMount(() => {
 		Object.keys(checks).forEach((x:string) => {
-			checks[x] = JSON.parse(localStorage.getItem(`option-${x}`) || 'false');
+			checks[x] = JSON.parse(localStorage.getItem(`option-${x}`) || JSON.stringify(checkDef[x]));
 		});
 		Object.keys(checks).forEach((x:string) => { localSubscribe(checks[x], `option-${x}`); });
 
@@ -81,6 +86,7 @@
 			limits[x] = JSON.parse(localStorage.getItem(`option-${x}-lim`) || JSON.stringify(limitDef[x]));
 		});
 		Object.keys(limits).forEach((x:string) => { localSubscribe(limits[x], `option-${x}-lim`); });
+		setOption();
 	});
 </script>
 
@@ -124,11 +130,14 @@
 					validate={intnan} on:change={setOption}/>
 			</div>
 			<div class="vspace"></div>
-			<span>Search by:</span>
-			<Checkbox id="option-search-modname" label="Mod Name"
+			<span class="nowrap"><b>“</b>Names<b>”</b> search is:</span>
+			<Checkbox id="option-search-missname" label="Mission Name"
+				bind:checked={checks["search-missname"]}
+				sideLabel labelAfter on:change={setOption}/>
+			<Checkbox id="option-search-modname" label="Module Name"
 				bind:checked={checks["search-modname"]}
 				sideLabel labelAfter on:change={setOption}/>
-			<Checkbox id="option-search-modid" label="ModuleID"
+			<Checkbox id="option-search-modid" label="Module ID"
 				bind:checked={checks["search-modid"]}
 				sideLabel labelAfter on:change={setOption}/>
 		</div>
@@ -137,7 +146,7 @@
 			<table>
 			{#each hasOptions as op, index}
 			<tr>
-				<td class="row-header">{op}</td>
+				<td class="row-header nowrap">{op}</td>
 				<td><RadioButton id={`option-${toDashed(op)}-yes}`} label="Yes" value={MustHave.Yes} sideLabel
 					name={`option-${toDashed(op)}`} bind:group={mustHaves[toDashed(op)]} on:change={setOption}/>
 				</td>
@@ -150,8 +159,8 @@
 			</table>
 			<div class="vspace"></div>
 			<div class="hstack">
-				<span class="row-header">Sort by:</span>
-				<Checkbox id="option-sort-reverse" label="Reverse"
+				<span class="row-header nowrap">Sort by:</span>
+				<Checkbox id="option-sort-reverse" label="Descending"
 					bind:checked={checks["sort-reverse"]}
 					sideLabel labelAfter on:change={setOption}/>
 			</div>
@@ -162,18 +171,28 @@
 		</div>
 	</div>
 	<div class="vspace"></div>
+	<div class="hstack gap">
+		<span>Filter by profile:</span>
+		<button>Import</button>
+		<a href="https://ktane.timwi.de/More/Profile%20Editor.html" target="_blank">Profile Editor</a>
+		<div class="hstack">
+			<b>≥</b>
+			<Input id="profile-percentage" bind:value={limits["prof"][0]} classes="percent" parse={integer}
+				validate={percent} on:change={setOption}/>
+			<span><b>%</b> from profile</span>
+		</div>
+	</div>
 	<table>
-		<tr><th colspan="2"><u>Module Selector</u></th></tr>
-		<tr>
-			<th><u>Yes</u></th><th><u>No</u></th>
-		</tr>
+		<tr><th><u>Yes</u></th><th><u>No</u></th></tr>
 		<tr>
 			<td>
 				<div class="module-list">
+					Coming Soon
 				</div>
 			</td>
 			<td>
 				<div class="module-list">
+					Coming Soon
 				</div>
 			</td>
 		</tr>
@@ -181,27 +200,32 @@
 </div>
 
 <style>
-	.vspace {
-		height: 10px;
-	}
-	:global(#options input.limits) {
-		width: 50px;
-	}
+	.hstack.gap { gap: 10px; }
+	.hstack.gap > .hstack { gap: 2px; }
+	.vspace { height: 10px; }
+	:global(#options input.limits) { width: 50px; }
+	:global(#options input.percent) { width: 33px; }
 	.through {
 		padding: 0 2px;
 		line-height: 25px;
 	}
-	.through::after { content: '—'; }
-	.row-header {
-		padding-right: 7px;
+	a {
 		white-space: nowrap;
+		color: blue;
 	}
+	.through::after { content: '—'; }
+	.nowrap { white-space: nowrap; }
+	.nowrap b {
+		font-style: normal;
+	}
+	.row-header { padding-right: 7px; }
+	button { padding: 4px; }
 	.columns {
 		align-items: flex-start;
 	}
 	.center-divider {
 		width: 0;
-		height: 265px;
+		height: 285px;
 		border: 1px solid #00000066;
 		margin: 0 .5em;
 	}
@@ -210,7 +234,7 @@
 	}
 	.module-list {
 		width: 220px;
-		height: 150px;
+		height: 50px;
 		border: 1px solid;
 		padding: 2px;
 		overflow-y: auto;

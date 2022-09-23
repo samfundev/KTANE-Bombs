@@ -35,6 +35,6 @@
 		user-select: none;
 	}
 	.hstack {
-		gap: 3px;
+		gap: 2px;
 	}
 </style>

@@ -38,7 +38,10 @@
 <div class="mission-name">{mission.name}</div>
 <div class="indicator" style:background={color} {title} />
 <div class="stats">
-	{statBomb.modules} Modules · {formatTime(statBomb.time)} · {statBomb.strikes}
+	{#if bombs.length > 1}
+		{bombs.length} B ·
+	{/if}
+	{statBomb.modules} {bombs.length > 1 ? "Mods":"Modules"} · {formatTime(statBomb.time)} · {statBomb.strikes}
 	Strikes · {statBomb.widgets}
 	Widgets
 	{#if mission.factory !== null}

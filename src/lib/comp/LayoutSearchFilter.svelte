@@ -1,16 +1,18 @@
 <script lang="ts">
 	import Input from '$lib/controls/Input.svelte';
 	import TextArea from '$lib/controls/TextArea.svelte';
+	import type { FilterableGroup } from '$lib/types';
 	import { onMount, createEventDispatcher } from 'svelte';
 
 	export let id: string;
 	export let label: string = "Find:";
-	export let items: { [name: string]: any };
-	export let filterFunc: (itemKey:string, text:string) => boolean;
+	export let items: FilterableGroup;
+	export let filterFunc: (item:any, text:string) => boolean;
 	export let searchText: string = '';
 	export let title: string = '';
 	export let textArea: boolean = false;
 	export let rows: number = 2;
+	export let classes: string = '';
 	export let autoExpand: boolean = false;
 	export let numResults: number = 0;
 	export let showNoneForBlank: boolean = false;
@@ -22,15 +24,15 @@
 
 	function clearSearch() {
 		rawSearchText = '';
-		Object.keys(items).forEach(name => {
+		items.g.forEach(item => {
 			if (showNoneForBlank)
-				items[name].classList.add("search-filtered-out");
+				item.Hidden = true;
 			else
-				items[name].classList.remove("search-filtered-out");
+				item.Hidden = false;
 		});
 		if (showNoneForBlank) numResults = 0;
 		else numResults = Object.keys(items).length;
-		dispatch('clearsearch');
+		dispatch('change');
 		searchField?.focus();
 	}
 
@@ -43,17 +45,18 @@
 	function updateSearchFilter() {
 		numResults = 0;
 		searching = true;
-		Object.keys(items).forEach(item => {
+		items.g.forEach(item => {
 			if (showNoneForBlank && searchText.length == 0)
-				items[item].classList.add("search-filtered-out");
-			else if (filterFunc(item, searchText)) {
-				items[item].classList.remove("search-filtered-out");
+				item.Hidden = true;
+			else if (filterFunc(item.o, searchText)) {
+				item.Hidden = false;
 				numResults++;
 			}
 			else
-				items[item].classList.add("search-filtered-out");
+				item.Hidden = true;
 		});
 		searching = false;
+		dispatch('change');
 	}
 
 	onMount(() => {
@@ -62,11 +65,11 @@
 </script>
 
 {#if textArea}
-	<TextArea {label} {id} {title} sideLabel classes="search-field"
+	<TextArea {label} {id} {title} sideLabel classes="search-field {classes}"
 			on:input={updateSearch} {autoExpand} {rows}
 			bind:value={rawSearchText}/>
 {:else}
-	<Input {label} {id} {title} sideLabel classes="search-field"
+	<Input {label} {id} {title} sideLabel classes="search-field {classes}"
 			on:input={updateSearch}
 			bind:value={rawSearchText}/>
 {/if}
