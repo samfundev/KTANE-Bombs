@@ -10,6 +10,7 @@ export function getModule(moduleID: string, modules: RepoModule[] | null) {
 	return {
 		Name: moduleID,
 		ModuleID: moduleID,
+		RuleSeedSupport: null,
 		X: 0,
 		Y: 0
 	};

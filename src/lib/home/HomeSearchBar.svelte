@@ -75,15 +75,52 @@
 			searchWhat += ' ' + m?.completions.map((x:Completion) => x.team).flat().filter(onlyUnique)
 				.join(' ').toLowerCase() + (m?.tpSolve ? ' twitch plays':'');
 		}
+		if (name == "'Not' Centurion")
+			console.log(searchWhat);
 
 		return searchOptions?.includes("invert") != evaluateLogicalStringSearch(searchText, searchWhat);
 	}
 
-	function timeSum(bombs:Bomb[]) {
-		return Math.max(...bombs.map(b => b.time));
+	function timeSum(m:Mission) {
+		return Math.max(...m.bombs.map(b => b.time));
 	}
-	function modSum(bombs:Bomb[]) {
-		return bombs.map(b => b.modules).reduce((a, b) => a + b, 0);
+	function modSum(m:Mission) {
+		return m.bombs.map(b => b.modules).reduce((a, b) => a + b, 0);
+	}
+	function ruleSeedPercent(m:Mission) {
+		let rs = modulesInMission[m.name].map(m => m.RuleSeedSupport != null);
+		return rs.filter(x => x).length / rs.length;
+	}
+
+	function numCompletions(m:Mission) { return m.completions.length; }
+
+	function compare(a:Mission, b:Mission, primary:(m:Mission)=>number, secondary:(m:Mission)=>number): boolean {
+		let diff = primary(a) - primary(b);
+		if (diff > 0)
+			return true;
+		else if (diff < 0)
+			return false;
+		else
+			return secondary(a) > secondary(b);
+	}
+
+	function delayModulesCalculation(func: ()=>void, alt: ()=>void, time:number): boolean {
+		if (Object.keys(modulesInMission).length != missions.length) {
+			setTimeout(() => {
+				if (Object.keys(modulesInMission).length == missions.length) func();
+				else alt();
+				dispatch('change');
+			}, time);
+			return false;
+		}
+		else {
+			func();
+			return true;
+		}
+	}
+
+	function defaultSort() {
+		missions.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() != reverse ? 1 : -1));
 	}
 
 	function homeOptionUpdate(event:any) {
@@ -92,19 +129,27 @@
 		if (sortOrder != options.sortOrder || reverse != options.checks["sort-reverse"]) {
 			sortOrder = options.sortOrder;
 			reverse = options.checks["sort-reverse"];
+			let fastSort = true;
 			switch(sortOrder) {
 			case 'bomb-time':
-				missions.sort((a, b) => (timeSum(a.bombs) > timeSum(b.bombs) != reverse ? 1 : -1));
+				missions.sort((a, b) => (compare(a, b, timeSum, modSum) != reverse ? 1 : -1));
 				break;
 			case 'module-count':
-				// if (Object.keys(modulesInMission).length == group.g.length)
-				missions.sort((a, b) => (modSum(a.bombs) > modSum(b.bombs) != reverse ? 1 : -1));
+				missions.sort((a, b) => (compare(a, b, modSum, timeSum) != reverse ? 1 : -1));
+				break;
+			case 'solves':
+				missions.sort((a, b) => (compare(a, b, numCompletions, timeSum) != reverse ? 1 : -1));
+				break;
+			case 'rule-seeded-mods-%':
+				fastSort = delayModulesCalculation(() => {
+					missions.sort((a, b) => (ruleSeedPercent(a) > ruleSeedPercent(b) != reverse ? 1 : -1));
+				}, defaultSort, 100);
 				break;
 			default:
-				missions.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() != reverse ? 1 : -1));
+				defaultSort();
 				break;
 			}
-			dispatch('change');
+			if (fastSort) dispatch('change');
 		}
 		updateSearch();
 	}
@@ -127,7 +172,7 @@
 		}
 		localSubscribe(searchOptions, "searchOptions");
 		missions.forEach(m => {
-			modulesInMission[m.name] = m.bombs.map((b:Bomb) => b.pools.map(p => p.modules)).flat(2).filter(onlyUnique).map(m => getModule(m, modules));
+			modulesInMission[m.name] = m.bombs.map((b:Bomb) => b.pools.map(p => p.modules.filter(onlyUnique))).flat(2).map(m => getModule(m, modules));
 			// modsInMission[m.o.name] = [""];
 			// Object.assign(modsInMission[m.o.name], modulesInMission[m.o.name].map(m => m.Name));
 		});

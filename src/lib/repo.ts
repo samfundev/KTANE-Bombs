@@ -1,6 +1,7 @@
 export type RepoModule = {
 	ModuleID: string;
 	Name: string;
+	RuleSeedSupport: string | null;
 	X: number;
 	Y: number;
 };
