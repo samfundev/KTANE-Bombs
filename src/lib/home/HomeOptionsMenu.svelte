@@ -11,12 +11,12 @@
 	const dispatch = createEventDispatcher();
 	let lStore: { [k:string]: Writable<any | null> } = {};
 	let checks: { [k:string]: boolean } = {};
-	let sortOrder: string = 'alphabetical';
+	let sortOrder: string = '';
 	let mustHaves: { [k:string]: MustHave } = {};
 	let limits: { [k:string]: number[] } = {};
 	let hasOptions = ["Has Boss", "Has Semi-Boss", "Has PseudoNeedy", "Has Needy", "Has Been Solved"];
 	let sortOptions = ["Alphabetical", "Module Count", "Bomb Time", "Solves", "Rule Seeded Mods %"];
-	let limitDef: { [k:string]: number[] } = { mods: [1,500], time: [1,720], strk: [1,40], widg: [0,20], prof: [80] };
+	let limitDef: { [k:string]: number[] } = { mods: [1,600], time: [1,1500], strk: [1,150], widg: [0,40], prof: [80] };
 	let checkDef: { [k:string]: boolean } = {
 		"sort-reverse": false,
 		"search-missname": true,
@@ -51,6 +51,11 @@
 		Object.assign(op.checks, checks);
 		Object.assign(op.mustHave, mustHaves);
 		op.sortOrder = sortOrder;
+		Object.assign(op.time, limits['time']);
+		Object.assign(op.numMods, limits['mods']);
+		Object.assign(op.strikes, limits['strk']);
+		Object.assign(op.widgets, limits['widg']);
+		Object.assign(op.profPerc, limits['prof']);
 		dispatch('update', {
 			op: op
 		});
@@ -64,9 +69,13 @@
 	function intnan (val:number): boolean | string { return isNaN(val) ? 'int' : (val >= 0 ? true : '≥0'); }
 	function percent (val:number): boolean | string { return isNaN(val) ? 'int' : (val >= 0 && val <= 100 ? true : '0–100'); }
 
-	Object.keys(checkDef).forEach((x:string) => { checks[x] = checkDef[x]; });
-	hasOptions.forEach(x => { mustHaves[toDashed(x)] = MustHave.Either; });
-	Object.keys(limitDef).forEach((x,i) => { limits[x] = limitDef[x].length > 1 ? [ limitDef[x][0], limitDef[x][1] ] : [ limitDef[x][0] ] });
+	function setDefaults() {
+		sortOrder = "alphabetical";
+		Object.keys(checkDef).forEach((x:string) => { checks[x] = checkDef[x]; });
+		hasOptions.forEach(x => { mustHaves[toDashed(x)] = MustHave.Either; });
+		Object.keys(limitDef).forEach((x,i) => { limits[x] = limitDef[x].length > 1 ? [ limitDef[x][0], limitDef[x][1] ] : [ limitDef[x][0] ] });
+	}
+	setDefaults();
 	
 	onMount(() => {
 		Object.keys(checks).forEach((x:string) => {
@@ -143,6 +152,10 @@
 		</div>
 		<div class="center-divider"></div>
 		<div>
+			<button class="defaults" on:click={() => {
+				setDefaults();
+				setOption();
+			}}>Defaults</button>
 			<table>
 			{#each hasOptions as op, index}
 			<tr>
@@ -220,6 +233,10 @@
 	}
 	.row-header { padding-right: 7px; }
 	button { padding: 4px; }
+	button.defaults {
+		padding: 2px;
+		line-height: 14px;
+	}
 	.columns {
 		align-items: flex-start;
 	}

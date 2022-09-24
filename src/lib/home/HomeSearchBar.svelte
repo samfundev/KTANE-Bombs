@@ -61,6 +61,7 @@
 
 	function bombSearchFilter(name:string, searchText:string) {
 		let searchWhat = '';
+		let ms = missions.find(x => x.name == name) || missions[0];
 		if (searchOptions?.includes("names")) {
 			if(options.checks["search-missname"]) searchWhat += ' ' + name.toLowerCase();
 			if(options.checks["search-modname"])
@@ -69,16 +70,22 @@
 				searchWhat += ' ' + modulesInMission[name].map(m => m.ModuleID).join(' ').toLowerCase();
 		}
 		if (searchOptions?.includes("authors"))
-			searchWhat += ' ' + missions.find(x => x.name == name)?.authors.join(' ').toLowerCase();
+			searchWhat += ' ' + ms.authors.join(' ').toLowerCase();
 		if (searchOptions?.includes("solved by")) {
-			let m = missions.find(x => x.name == name);
-			searchWhat += ' ' + m?.completions.map((x:Completion) => x.team).flat().filter(onlyUnique)
-				.join(' ').toLowerCase() + (m?.tpSolve ? ' twitch plays':'');
+			searchWhat += ' ' + ms.completions.map((x:Completion) => x.team).flat().filter(onlyUnique)
+				.join(' ').toLowerCase() + (ms.tpSolve ? ' twitch plays':'');
 		}
-		if (name == "'Not' Centurion")
-			console.log(searchWhat);
+		
+		let pass = true;
+		let time = timeSum(ms)/60;
+		let mods = modSum(ms);
+		let strk = Math.max(...ms.bombs.map((bomb) => bomb.strikes));
+		let widg = Math.max(...ms.bombs.map((bomb) => bomb.widgets));
+		if (time < options.time[0] || time > options.time[1] || mods < options.numMods[0] || mods > options.numMods[1] ||
+			strk < options.strikes[0] || strk > options.strikes[1] || widg < options.widgets[0] || widg > options.widgets[1])
+			pass = false;
 
-		return searchOptions?.includes("invert") != evaluateLogicalStringSearch(searchText, searchWhat);
+		return searchOptions?.includes("invert") != (pass && evaluateLogicalStringSearch(searchText, searchWhat));
 	}
 
 	function timeSum(m:Mission) {

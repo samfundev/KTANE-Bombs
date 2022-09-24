@@ -69,10 +69,11 @@ export class HomeOptions {
 	sortOrder: string = '';
 	checks: { [k:string]: boolean } = {};
 	modules: { [k:string]: MustHave } = {};
-	numMods = [1, 500];
+	numMods = [1, 550];
 	time = [1,720];
-	strikes = [1,40];
+	strikes = [1,50];
 	widgets = [0,20];
+	profPerc = [80]
 	mustHave: { [k:string]: MustHave } = {};
 }
 
