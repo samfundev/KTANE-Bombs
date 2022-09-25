@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Bomb, Completion, HomeOptions, Mission } from '$lib/types';
+	import { Bomb, Completion, HomeOptions, Mission, MustHave } from '$lib/types';
 	import { evaluateLogicalStringSearch, disappear, popup, titleCase } from '$lib/util';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
@@ -19,7 +19,7 @@
 	let sortOrder: string = '';
 	let reverse: boolean = false;
 	let modulesInMission: { [name: string]: RepoModule[] } = {};
-	// let modsInMission: { [name: string]: string[] } = {};
+	let specialsInMission: { [name: string]: { [name: string]: RepoModule[] } } = {};
 	let lStore: { [k:string]: Writable<any | null> } = {};
 	let searchOptions: string[];
 	let searchField: HTMLInputElement | null;
@@ -60,6 +60,7 @@
 	}
 
 	function bombSearchFilter(name:string, searchText:string) {
+		let text = searchText.toLowerCase();
 		let searchWhat = '';
 		let ms = missions.find(x => x.name == name) || missions[0];
 		if (searchOptions?.includes("names")) {
@@ -76,16 +77,35 @@
 				.join(' ').toLowerCase() + (ms.tpSolve ? ' twitch plays':'');
 		}
 		
-		let pass = true;
+		let filtered = true;
 		let time = timeSum(ms)/60;
 		let mods = modSum(ms);
 		let strk = Math.max(...ms.bombs.map((bomb) => bomb.strikes));
 		let widg = Math.max(...ms.bombs.map((bomb) => bomb.widgets));
-		if (time < options.time[0] || time > options.time[1] || mods < options.numMods[0] || mods > options.numMods[1] ||
-			strk < options.strikes[0] || strk > options.strikes[1] || widg < options.widgets[0] || widg > options.widgets[1])
-			pass = false;
+		filtered = time < options.time[0] || time > options.time[1] || mods < options.numMods[0] || mods > options.numMods[1] ||
+			strk < options.strikes[0] || strk > options.strikes[1] || widg < options.widgets[0] || widg > options.widgets[1] ||
+			!meetsHave(numCompletions(ms) > 0, options.mustHave['has-been-solved']) ||
+			!meetsHave(specialsInMission[name]['boss'].length > 0, options.mustHave['has-boss']) ||
+			!meetsHave(specialsInMission[name]['semi'].length > 0, options.mustHave['has-semi-boss']) ||
+			!meetsHave(specialsInMission[name]['psdn'].length > 0, options.mustHave['has-pseudoneedy']) ||
+			!meetsHave(specialsInMission[name]['need'].length > 0, options.mustHave['has-needy']);
 
-		return searchOptions?.includes("invert") != (pass && evaluateLogicalStringSearch(searchText, searchWhat));
+		return searchOptions?.includes("invert") != (!filtered && evaluateLogicalStringSearch(text, searchWhat));
+	}
+
+	function separateSpecialModules(msName:string): { [name: string]: any } {
+		let bosses = modulesInMission[msName].filter(m => m.BossStatus);
+		return {
+			boss:bosses.filter(m => m.BossStatus == "FullBoss"),
+			semi:bosses.filter(m => m.BossStatus == "SemiBoss"),
+			psdn:modulesInMission[msName].filter(m => m.Quirks?.includes("PseudoNeedy")),
+			reg:modulesInMission[msName].filter(m => m.Type == "Regular"),
+			need:modulesInMission[msName].filter(m => m.Type == "Needy")
+		};
+	}
+
+	function meetsHave(test:boolean, crit:MustHave) {
+		return crit == MustHave.Either || (test && crit == MustHave.Yes) || (!test && crit == MustHave.No);
 	}
 
 	function timeSum(m:Mission) {
@@ -99,7 +119,7 @@
 		return rs.filter(x => x).length / rs.length;
 	}
 
-	function numCompletions(m:Mission) { return m.completions.length; }
+	function numCompletions(m:Mission) { return m.completions.length + (m.tpSolve ? 1 : 0); }
 
 	function compare(a:Mission, b:Mission, primary:(m:Mission)=>number, secondary:(m:Mission)=>number): boolean {
 		let diff = primary(a) - primary(b);
@@ -180,10 +200,10 @@
 		localSubscribe(searchOptions, "searchOptions");
 		missions.forEach(m => {
 			modulesInMission[m.name] = m.bombs.map((b:Bomb) => b.pools.map(p => p.modules.filter(onlyUnique))).flat(2).map(m => getModule(m, modules));
-			// modsInMission[m.o.name] = [""];
-			// Object.assign(modsInMission[m.o.name], modulesInMission[m.o.name].map(m => m.Name));
 		});
-		// console.log(modsInMission);
+		missions.forEach(m => {
+			specialsInMission[m.name] = separateSpecialModules(m.name);
+		});
 		updateSearch();
 	});
 </script>

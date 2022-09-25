@@ -8,9 +8,12 @@ export function getModule(moduleID: string, modules: RepoModule[] | null) {
 	}
 
 	return {
-		Name: moduleID,
+		BossStatus: null,
 		ModuleID: moduleID,
+		Name: moduleID,
 		RuleSeedSupport: null,
+		Type: moduleID.match(/needy/gi)? "Needy" : "Regular",
+		Quirks: null,
 		X: 0,
 		Y: 0
 	};

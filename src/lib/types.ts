@@ -68,13 +68,19 @@ export enum MustHave {
 export class HomeOptions {
 	sortOrder: string = '';
 	checks: { [k:string]: boolean } = {};
-	modules: { [k:string]: MustHave } = {};
-	numMods = [1, 550];
-	time = [1,720];
-	strikes = [1,50];
-	widgets = [0,20];
+	modules: { [k:string]: any } = {};
+	numMods = [1, 600];
+	time = [1,1500];
+	strikes = [1,150];
+	widgets = [0,40];
 	profPerc = [80]
 	mustHave: { [k:string]: MustHave } = {};
+}
+
+export enum Operation {
+	Expert = 0,
+	Defuser = 1,
+	Combined = 2
 }
 
 export type QueueItem = MissionQueueItem | CompletionQueueItem | MissionPackQueueItem;
