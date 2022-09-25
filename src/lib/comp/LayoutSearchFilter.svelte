@@ -23,15 +23,9 @@
 
 	function clearSearch() {
 		rawSearchText = '';
-		Object.keys(items).forEach(name => {
-			if (showNoneForBlank)
-				items[name].classList.add("search-filtered-out");
-			else
-				items[name].classList.remove("search-filtered-out");
-		});
 		if (showNoneForBlank) numResults = 0;
 		else numResults = Object.keys(items).length;
-		dispatch('change');
+		updateSearch();
 		searchField?.focus();
 	}
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Bomb, Completion, HomeOptions, Mission, MustHave } from '$lib/types';
+	import { Bomb, Completion, HomeOptions, Mission, MustHave, Operation } from '$lib/types';
 	import { evaluateLogicalStringSearch, disappear, popup, titleCase } from '$lib/util';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
@@ -63,12 +63,13 @@
 		let text = searchText.toLowerCase();
 		let searchWhat = '';
 		let ms = missions.find(x => x.name == name) || missions[0];
+		let modIDsInMission = modulesInMission[name].map(m => m.ModuleID).join(' ');
 		if (searchOptions?.includes("names")) {
 			if(options.checks["search-missname"]) searchWhat += ' ' + name.toLowerCase();
 			if(options.checks["search-modname"])
 				searchWhat += ' ' + modulesInMission[name].map(m => m.Name).join(' ').toLowerCase();
 			if(options.checks["search-modid"])
-				searchWhat += ' ' + modulesInMission[name].map(m => m.ModuleID).join(' ').toLowerCase();
+				searchWhat += ' ' + modIDsInMission.toLowerCase();
 		}
 		if (searchOptions?.includes("authors"))
 			searchWhat += ' ' + ms.authors.join(' ').toLowerCase();
@@ -76,21 +77,40 @@
 			searchWhat += ' ' + ms.completions.map((x:Completion) => x.team).flat().filter(onlyUnique)
 				.join(' ').toLowerCase() + (ms.tpSolve ? ' twitch plays':'');
 		}
+		let textMatch = evaluateLogicalStringSearch(text, searchWhat);
 		
-		let filtered = true;
-		let time = timeSum(ms)/60;
-		let mods = modSum(ms);
-		let strk = Math.max(...ms.bombs.map((bomb) => bomb.strikes));
-		let widg = Math.max(...ms.bombs.map((bomb) => bomb.widgets));
-		filtered = time < options.time[0] || time > options.time[1] || mods < options.numMods[0] || mods > options.numMods[1] ||
-			strk < options.strikes[0] || strk > options.strikes[1] || widg < options.widgets[0] || widg > options.widgets[1] ||
-			!meetsHave(numCompletions(ms) > 0, options.mustHave['has-been-solved']) ||
-			!meetsHave(specialsInMission[name]['boss'].length > 0, options.mustHave['has-boss']) ||
-			!meetsHave(specialsInMission[name]['semi'].length > 0, options.mustHave['has-semi-boss']) ||
-			!meetsHave(specialsInMission[name]['psdn'].length > 0, options.mustHave['has-pseudoneedy']) ||
-			!meetsHave(specialsInMission[name]['need'].length > 0, options.mustHave['has-needy']);
+		let filtered = false;
+		if (textMatch) {
+			let time = timeSum(ms)/60;
+			let mods = modSum(ms);
+			let strk = Math.max(...ms.bombs.map((bomb) => bomb.strikes));
+			let widg = Math.max(...ms.bombs.map((bomb) => bomb.widgets));
+			
+			filtered = time < options.time[0] || time > options.time[1] || mods < options.numMods[0] || mods > options.numMods[1] ||
+				strk < options.strikes[0] || strk > options.strikes[1] || widg < options.widgets[0] || widg > options.widgets[1] ||
+				!meetsHave(numCompletions(ms) > 0, options.mustHave['has-been-solved']) ||
+				!meetsHave(specialsInMission[name]['boss'].length > 0, options.mustHave['has-boss']) ||
+				!meetsHave(specialsInMission[name]['semi'].length > 0, options.mustHave['has-semi-boss']) ||
+				!meetsHave(specialsInMission[name]['psdn'].length > 0, options.mustHave['has-pseudoneedy']) ||
+				!meetsHave(specialsInMission[name]['need'].length > 0, options.mustHave['has-needy']);
+			if (!filtered && options.modules["Operation"] != undefined) {
+				filtered = options.modules["Operation"] != Operation.Defuser && percentFromEnabled(name) < options.profPerc[0] ||
+					// options.modules["Operation"] == Operation.Combined &&
+					// options.modules["EnabledList"].some((m:string) => !modIDsInMission.includes(m)) ||
+					options.modules["Operation"] != Operation.Expert &&
+					modulesInMission[name].some(m => (options.modules["DisabledList"] || []).includes(m.ModuleID));
+			}
+		}
 
-		return searchOptions?.includes("invert") != (!filtered && evaluateLogicalStringSearch(text, searchWhat));
+		return searchOptions?.includes("invert") != (textMatch && !filtered);
+	}
+
+	function percentFromEnabled(msName:string): number {
+		let percent = modulesInMission[msName].filter(m => (options.modules["EnabledList"] || []).includes(m.ModuleID))
+			.length * 100 / modulesInMission[msName].length;
+		// if (percent >= options.profPerc[0])
+		// 	console.log(msName + ": " + percent);
+		return percent;
 	}
 
 	function separateSpecialModules(msName:string): { [name: string]: any } {
@@ -172,6 +192,11 @@
 					missions.sort((a, b) => (ruleSeedPercent(a) > ruleSeedPercent(b) != reverse ? 1 : -1));
 				}, defaultSort, 100);
 				break;
+			case 'expert-match':
+				fastSort = delayModulesCalculation(() => {
+					missions.sort((a, b) => (percentFromEnabled(a.name) > percentFromEnabled(b.name) != reverse ? 1 : -1));
+				}, defaultSort, 100);
+				break;
 			default:
 				defaultSort();
 				break;
@@ -236,7 +261,7 @@
 		Options
 	</div>
 	<HomeOptionsMenu bind:div={filters} on:update={homeOptionUpdate}
-		on:click={() => prevDisap++}/>
+		on:click={() => prevDisap++} {modules}/>
 </div>
 
 <style>
@@ -271,6 +296,10 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+	}
+
+	:global(.hstack.wrap) {
+		flex-wrap: wrap;
 	}
 
 	:global(.hidden) {

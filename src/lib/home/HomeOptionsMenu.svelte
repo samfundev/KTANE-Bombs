@@ -2,10 +2,12 @@
 	import Checkbox from "$lib/controls/Checkbox.svelte";
 	import Input from "$lib/controls/Input.svelte";
 	import RadioButton from "$lib/controls/RadioButton.svelte";
+	import type { RepoModule } from "$lib/repo";
 	import { HomeOptions, MustHave, Operation } from "$lib/types";
 	import { onMount, createEventDispatcher } from "svelte";
 	import { writable, type Writable } from "svelte/store";
 
+	export let modules: RepoModule[];
 	export let div: HTMLDivElement | null = null;
 
 	const dispatch = createEventDispatcher();
@@ -36,6 +38,11 @@
 		lStore[key] = wr;
 	}
 
+	let prevSortOrder = '';
+	let preExpertSortOrder = '';	//sort order before switching to the special match% sort order for expert profiles
+	let prefersMatchSort = true;
+	const matchSort = "expert-match";
+	
 	function setOption() {
 		Object.keys(checks).forEach((x:string) => {
 			lStore[`option-${x}`]?.set(checks[x]);
@@ -44,11 +51,25 @@
 			lStore[`option-${x}`]?.set(mustHaves[x]);
 		});
 		lStore['option-sort-order']?.set(sortOrder);
+
+		lStore['prefers-match-sort']?.set(prefersMatchSort);
 		Object.keys(limits).forEach((x:string) => {
 			lStore[`option-${x}-lim`]?.set(limits[x]);
 		});
-		lStore['modules']?.set(profile);
+		lStore['imported-profile']?.set(profile);
 		fireUpdate();
+	}
+
+	function setSortOrder() {
+		if (profile["Operation"] != undefined && profile["Operation"] != Operation.Defuser) {
+			if (sortOrder == matchSort) {
+				preExpertSortOrder = prevSortOrder;
+				prefersMatchSort = true;
+			}
+			else prefersMatchSort = false;
+		}
+		prevSortOrder = sortOrder;
+		setOption();
 	}
 
 	function fireUpdate() {
@@ -67,16 +88,43 @@
 		});
 	}
 
+	function removeNonRegNeedyMods(list:string[]) {
+		let listC: string[] = [];
+		Object.assign(listC, list);
+		listC.forEach(mod => {
+			let found = modules.find(x => x.ModuleID == mod);
+			if (!found || (found.Type != "Regular" && found.Type != "Needy"))
+				list.splice(list.findIndex(x => x == mod), 1);
+		});
+	}
+
 	async function importProfile (file: File) {
 		var fr = new FileReader();
 		fr.readAsText(file);
 		fr.onload = () => {
 			let p = JSON.parse(<string>fr.result || '{}');
-			if ("Operation" in p && "DisabledList" in p && "EnabledList" in p) {
+			if ("Operation" in p && (p["Operation"] == Operation.Combined && "DisabledList" in p && "EnabledList" in p ||
+				p["Operation"] == Operation.Expert && "EnabledList" in p || p["Operation"] == Operation.Defuser && "DisabledList" in p
+			)) {
 				p["Name"] = file.name;
+				operation = p["Operation"];
+
+				if (operation == Operation.Defuser)
+					delete p["EnabledList"];
+				else {
+					if (profile["Operation"] == undefined) preExpertSortOrder = sortOrder;
+					if (prefersMatchSort) sortOrder = matchSort;
+					removeNonRegNeedyMods(p["EnabledList"]);
+				}
+
+				if (operation == Operation.Expert)
+					delete p["DisabledList"];
+				else
+					removeNonRegNeedyMods(p["DisabledList"]);
+
+				profile = {};
 				Object.assign(profile, p);
-				profile = profile;
-				operation = profile["Operation"];
+				profile == profile;
 				setOption();
 			}
 			else {
@@ -88,6 +136,12 @@
 		};
 	}
 
+	function clearProfile() {
+		if (prefersMatchSort && operation != Operation.Defuser) sortOrder = preExpertSortOrder;
+		profile = {};
+		setOption();
+	}
+
 	function toDashed(str:string): string {
 		return str.replace(/ /g, "-").toLowerCase();
 	}
@@ -97,7 +151,8 @@
 	function percent (val:number): boolean | string { return isNaN(val) ? 'int' : (val >= 0 && val <= 100 ? true : '0–100'); }
 
 	function setDefaults() {
-		sortOrder = "alphabetical";
+		sortOrder = preExpertSortOrder = "alphabetical";
+		prefersMatchSort = true;
 		Object.keys(checkDef).forEach((x:string) => { checks[x] = checkDef[x]; });
 		hasOptions.forEach(x => { mustHaves[toDashed(x)] = MustHave.Either; });
 		Object.keys(limitDef).forEach((x,i) => { limits[x] = limitDef[x].length > 1 ? [ limitDef[x][0], limitDef[x][1] ] : [ limitDef[x][0] ] });
@@ -116,8 +171,10 @@
 		});
 		Object.keys(mustHaves).forEach((x:string) => { localSubscribe(mustHaves[x], `option-${x}`); });
 
-		sortOrder = JSON.parse(localStorage.getItem('option-sort-order') || '"alphabetical"');
+		prevSortOrder = sortOrder = JSON.parse(localStorage.getItem('option-sort-order') || '"alphabetical"');
 		localSubscribe(sortOrder, 'option-sort-order');
+		prefersMatchSort = JSON.parse(localStorage.getItem('prefers-match-sort') || 'true');
+		localSubscribe(prefersMatchSort, 'prefers-match-sort');
 
 		Object.keys(limits).forEach((x:string) => {
 			limits[x] = JSON.parse(localStorage.getItem(`option-${x}-lim`) || JSON.stringify(limitDef[x]));
@@ -126,7 +183,8 @@
 
 		Object.assign(profile, JSON.parse(localStorage.getItem('imported-profile') || "{}"));
 		localSubscribe(profile, 'imported-profile');
-		
+		operation = profile["Operation"] || Operation.Expert;
+		profile = profile;
 		setOption();
 	});
 </script>
@@ -211,34 +269,43 @@
 			</div>
 			{#each sortOptions as op}
 				<RadioButton id={`option-sort-${toDashed(op)}}`} label={op} value={toDashed(op)} sideLabel labelAfter
-					name={`option-${toDashed(op)}`} bind:group={sortOrder} on:change={setOption}/>
+					name={'option-sort-order'} bind:group={sortOrder} on:change={setSortOrder}/>
 			{/each}
+			{#if profile["Operation"] != undefined && operation != Operation.Defuser}
+				<RadioButton id={'option-sort-expertmatch'} label="Mods from profile %" value="expert-match" sideLabel labelAfter
+					name={'option-sort-order'} bind:group={sortOrder} on:change={setSortOrder}/>
+			{/if}
 		</div>
 	</div>
 	<div class="vspace"></div>
 	<div class="hstack gap">
 		<span>Profile Filter:</span>
 		<input class="hidden" id="profile-to-upload" type="file" accept=".json" bind:files bind:this={fileInput} on:change={() => importProfile(files[0])}/>
-		<button on:click={ () => fileInput.click() }>Import</button>
+		<button on:click={ () => {fileInput.value = ''; fileInput.click()} }>Import</button>
+		{#if profile["Operation"] != undefined}
+			<button on:click={clearProfile}>Clear</button>
+		{/if}
 		<a href="https://ktane.timwi.de/More/Profile%20Editor.html" target="_blank">Profile Editor</a>
-		<div class="hstack smallgap">
-			<b>≥</b>
-			<Input id="profile-percentage" bind:value={limits["prof"][0]} classes="percent" parse={integer}
-				validate={percent} on:change={setOption}/>
-			<span><b>%</b> from profile</span>
-		</div>
+		{#if profile["Operation"] != undefined && profile["Operation"] != Operation.Defuser}
+			<div class="hstack smallgap">
+				<b>≥</b>
+				<Input id="profile-percentage" bind:value={limits["prof"][0]} classes="percent" parse={integer}
+					validate={percent} on:change={setOption}/>
+				<span><b>%</b> from profile</span>
+			</div>
+		{/if}
 	</div>
-	{#if Object.keys(profile).length > 1}
-		<p>
+	{#if profile["Operation"] != undefined}
+		<p class="explanation">
 		{#if operation==Operation.Expert}
-			Expert: <b class="qt">“</b>Yes<b class="qt">”</b> mods must show up on the mission
+			Expert: A minimum percent of mods in the mission must be found in the <b class="qt">“</b>Yes<b class="qt">”</b> list
 		{:else if operation==Operation.Defuser}
 			Defuser: <b class="qt">“</b>No<b class="qt">”</b> mods can't show up on the mission
 		{:else}
-			Combined: <b class="qt">“</b>Yes<b class="qt">”</b> mods must show up, <b class="qt">“</b>No<b class="qt">”</b> mods can't show up, others are not enforced
+			Combined: A minimum percent of mods in the mission must be in the <b class="qt">“</b>Yes<b class="qt">”</b> list. <b class="qt">“</b>No<b class="qt">”</b> mods can't show up, others are not enforced
 		{/if}
 		</p>
-		<div class="hstack gap">
+		<div class="hstack gap wrap">
 			<span><b>Profile:</b> {profile["Name"]},</span>
 			<span><b>Type:</b> {Operation[operation]}</span>
 		</div>
@@ -247,16 +314,20 @@
 			<tr>
 				<td class="top">
 					<div class="module-list">
+						{#if profile["EnabledList"]}
 						{#each profile["EnabledList"] as mod}
 							{mod}<br>
 						{/each}
+						{/if}
 					</div>
 				</td>
 				<td class="top">
 					<div class="module-list">
+						{#if profile["DisabledList"]}
 						{#each profile["DisabledList"] as mod}
 							{mod}<br>
 						{/each}
+						{/if}
 					</div>
 				</td>
 			</tr>
@@ -272,6 +343,7 @@
 		margin: .3em 0;
 		white-space: normal;
 	}
+	.explanation { width: 470px; }
 	.hstack.gap { gap: 10px; }
 	.hstack.smallgap { gap: 2px; }
 	.vspace { height: 10px; }
@@ -319,7 +391,7 @@
 		max-height: 180px;
 		border: 1px solid;
 		padding: 2px;
-		overflow-y: auto;
+		overflow: auto;
 		background-color: var(--textbox-background);
 		color: var(--textbox-text-color);
 	}
