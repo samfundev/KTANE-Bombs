@@ -58,11 +58,11 @@
 </script>
 
 {#if textArea}
-	<TextArea {label} {id} {title} sideLabel classes="search-field {classes}"
+	<TextArea {label} {id} {title} labelClass="help" sideLabel classes="search-field {classes}"
 			on:input={updateSearch} {autoExpand} {rows}
 			bind:value={rawSearchText}/>
 {:else}
-	<Input {label} {id} {title} sideLabel classes="search-field {classes}"
+	<Input {label} {id} {title} labelClass="help" sideLabel classes="search-field {classes}"
 			on:input={updateSearch}
 			bind:value={rawSearchText}/>
 {/if}
@@ -71,6 +71,8 @@
 <style>
 	:global(.search-field) { min-width: 65px; }
 	:global(.search-filtered-out) { display: none !important; }
+
+	:global(label.help) { cursor: help; }
 
 	.search-field-clear {
 		background: url('$lib/img/clear-button.svg') right center no-repeat;

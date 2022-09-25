@@ -240,6 +240,7 @@
 		title={searchTooltip} textArea rows={1} autoExpand
 		bind:items={missionCards}
 		filterFunc={bombSearchFilter}
+		classes="help"
 		bind:numResults={resultsText}
 		bind:this={layoutSearch}/>
 	

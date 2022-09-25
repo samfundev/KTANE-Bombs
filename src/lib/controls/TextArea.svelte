@@ -7,6 +7,7 @@
 	export let type: string = 'text';
 	export let placeholder: string = '';
 	export let classes: string = '';
+	export let labelClass: string = '';
 	export let title: string = '';
 	export let required: boolean = false;
 	export let sideLabel: boolean = false;
@@ -61,7 +62,7 @@
 </script>
 
 <div class:hstack={sideLabel}>
-	<label for={id} {title}>
+	<label for={id} {title} class={labelClass}>
 		{label}
 		<slot />
 	</label>

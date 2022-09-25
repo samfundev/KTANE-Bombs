@@ -29,6 +29,11 @@
 		"search-modname": false,
 		"search-modid": false
 	};
+	let opExplain = 'Expert: A minimum percent of mods in the mission must be found in the "Yes" list\n'+
+		'Defuser: "No" mods cannot show up on the mission\n'+
+		'Combined: A minimum percent of mods in the mission must be found in the "Yes" list,\n'+
+		'                  "No" mods cannot show up, others are not enforced';
+
 
 	function localSubscribe(item:any, key:string) {
 		let wr = writable(item);
@@ -279,7 +284,9 @@
 	</div>
 	<div class="vspace"></div>
 	<div class="hstack gap">
-		<span>Profile Filter:</span>
+		<span title={opExplain} class="opexplain">
+			Profile Filter:
+		</span>
 		<input class="hidden" id="profile-to-upload" type="file" accept=".json" bind:files bind:this={fileInput} on:change={() => importProfile(files[0])}/>
 		<button on:click={ () => {fileInput.value = ''; fileInput.click()} }>Import</button>
 		{#if profile["Operation"] != undefined}
@@ -343,13 +350,16 @@
 		margin: .3em 0;
 		white-space: normal;
 	}
-	.explanation { width: 470px; }
+	.explanation {width: 470px;}
+	.opexplain { cursor: help; }
+
 	.hstack.gap { gap: 10px; }
 	.hstack.smallgap { gap: 2px; }
 	.vspace { height: 10px; }
 	td.top { vertical-align: top; }
 	:global(#options input.limits) { width: 50px; }
 	:global(#options input.percent) { width: 33px; }
+
 	.through {
 		padding: 0 2px;
 		line-height: 25px;
@@ -358,8 +368,10 @@
 		white-space: nowrap;
 		color: rgb(71, 39, 255);
 	}
+
 	.through::after { content: '—'; }
 	.nowrap { white-space: nowrap; }
+
 	b.qt {
 		font-style: normal;
 	}
@@ -367,8 +379,10 @@
 		color: red;
 		font-weight: bold;
 	}
+
 	.row-header { padding-right: 7px; }
 	button { padding: 4px; }
+
 	button.defaults {
 		padding: 2px;
 		line-height: 14px;
