@@ -356,7 +356,7 @@
 	}
 	a {
 		white-space: nowrap;
-		color: blue;
+		color: rgb(71, 39, 255);
 	}
 	.through::after { content: '—'; }
 	.nowrap { white-space: nowrap; }
