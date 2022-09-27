@@ -23,8 +23,6 @@
 
 	function clearSearch() {
 		rawSearchText = '';
-		if (showNoneForBlank) numResults = 0;
-		else numResults = Object.keys(items).length;
 		updateSearch();
 		searchField?.focus();
 	}

@@ -12,6 +12,7 @@
 	let searchBar: HomeSearchBar;
 
 	function onChange() {
+		if (!render) setTimeout(() => {searchBar.updateSearch();}, 200);
 		render = true; 			//don't render until first sort has finished on page load
 		missions = missions;	//signals svelte to rerender the bombs section
 	}

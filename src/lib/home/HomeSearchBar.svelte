@@ -59,7 +59,7 @@
 		return self.indexOf(item) == pos;
 	}
 
-	function bombSearchFilter(name:string, searchText:string) {
+	function bombSearchFilter(name:string, searchText:string): boolean {
 		let text = searchText.toLowerCase();
 		let searchWhat = '';
 		let ms = missions.find(x => x.name == name) || missions[0];
