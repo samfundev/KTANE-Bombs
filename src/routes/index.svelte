@@ -12,16 +12,8 @@
 	let searchBar: HomeSearchBar;
 
 	function onChange() {
-		render = false;
+		render = true; 			//don't render until first sort has finished on page load
 		missions = missions;	//signals svelte to rerender the bombs section
-		setTimeout(() => {
-			render = true;
-			missions = missions;	//signals svelte to rerender the bombs section
-			missions.forEach(m => {
-				missionCards[m.name] = document.getElementById('mission-' + m.name);
-			});
-			setTimeout(() => {searchBar.updateSearch();},1000);
-		}, 50);
 	}
 </script>
 
@@ -31,7 +23,7 @@
 <h1 class="header">Challenge Bombs</h1>
 <HomeSearchBar bind:this={searchBar} bind:missions={missions} bind:missionCards={missionCards} on:change={onChange} {modules}/>
 <div class="bombs">
-	{#each missions as mission, index}
+	{#each missions as mission, index (mission.name)}
 		{#if render}
 			<MissionCard {mission} 
 				id={'mission-input-' + index} cardID={'mission-' + mission.name}
