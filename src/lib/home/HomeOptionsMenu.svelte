@@ -20,6 +20,7 @@
 	let limits: { [k:string]: number[] } = {};
 	let files: FileList;
 	let fileInput: HTMLInputElement;
+	let filesValid = true;
 	let hasOptions = ["Has Boss", "Has Semi-Boss", "Has PseudoNeedy", "Has Needy", "Has Been Solved"];
 	let sortOptions = ["Alphabetical", "Module Count", "Bomb Time", "Solves", "Rule Seeded Mods %"];
 	let limitDef: { [k:string]: number[] } = { mods: [1,600], time: [1,1500], strk: [1,150], widg: [0,40], prof: [80] };
@@ -103,42 +104,80 @@
 		});
 	}
 
-	async function importProfile (file: File) {
-		var fr = new FileReader();
-		fr.readAsText(file);
-		fr.onload = () => {
-			let p = JSON.parse(<string>fr.result || '{}');
-			if ("Operation" in p && (p["Operation"] == Operation.Combined && "DisabledList" in p && "EnabledList" in p ||
-				p["Operation"] == Operation.Expert && "EnabledList" in p || p["Operation"] == Operation.Defuser && "DisabledList" in p
-			)) {
-				p["Name"] = file.name;
-				operation = p["Operation"];
+	function onlyUnique(item:any, pos:number, self:any[]): boolean {
+		return self.indexOf(item) == pos;
+	}
 
-				if (operation == Operation.Defuser)
-					delete p["EnabledList"];
-				else {
-					if (profile["Operation"] == undefined) preExpertSortOrder = sortOrder;
-					if (prefersMatchSort) sortOrder = matchSort;
-					removeNonRegNeedyMods(p["EnabledList"]);
+	function readFileAsText(file: Blob) {
+		return new Promise(function(resolve,reject){
+			let fr = new FileReader();
+
+			fr.onload = function(){
+				resolve(fr.result);
+			};
+
+			fr.onerror = function(){
+				reject(fr);
+			};
+
+			fr.readAsText(file);
+		});
+	}
+
+	async function importProfile (files: FileList) {
+		if(!files.length) return;
+
+		let readers = [];
+		for (let f = 0; filesValid && f < files.length; f++)
+			readers.push(readFileAsText(files[f]));
+
+		filesValid = true;
+		Promise.all(readers).then((fl) => {
+			for (let f = 0; filesValid && f < fl.length; f++) {
+				let name = files[f].name.replace(/\.[^/.]+$/, "");
+				let p = JSON.parse(<string>fl[f] || '{}');
+				if ("Operation" in p && (p["Operation"] == Operation.Combined && "DisabledList" in p && "EnabledList" in p ||
+					p["Operation"] == Operation.Expert && "EnabledList" in p || p["Operation"] == Operation.Defuser && "DisabledList" in p
+				)) {
+					operation = p["Operation"];
+
+					if (operation == Operation.Defuser)
+						delete p["EnabledList"];
+					else {
+						if (profile["Operation"] == undefined) preExpertSortOrder = sortOrder;
+						if (prefersMatchSort) sortOrder = matchSort;
+						removeNonRegNeedyMods(p["EnabledList"]);
+					}
+
+					if (operation == Operation.Expert)
+						delete p["DisabledList"];
+					else
+						removeNonRegNeedyMods(p["DisabledList"]);
+
+					if (!profile["DisabledList"]) profile["DisabledList"] = [];
+					if (!profile["EnabledList"]) profile["EnabledList"] = [];
+					if (!profile["Name"]) profile["Name"] = "";
+					
+					profile["Name"] = (f == 0 && profile["Name"].length == 0) ? name : `${profile["Name"]}, ${name}`;
+					profile["Operation"] = (profile["Operation"] == undefined || operation == profile["Operation"]) ? operation : Operation.Combined;
+					operation = profile["Operation"];
+					
+					if (p["DisabledList"])
+						profile["DisabledList"] = profile["DisabledList"].concat(p["DisabledList"]).filter(onlyUnique);
+					if (p["EnabledList"])
+						profile["EnabledList"] = profile["EnabledList"].concat(p["EnabledList"]).filter(onlyUnique);
+					profile == profile;
+					setOption();
 				}
-
-				if (operation == Operation.Expert)
-					delete p["DisabledList"];
-				else
-					removeNonRegNeedyMods(p["DisabledList"]);
-
-				profile = {};
-				Object.assign(profile, p);
-				profile == profile;
-				setOption();
-			}
-			else {
-				profile["Name"] = file.name;
-				console.log("Operation:" + "Operation" in p);
-				console.log("DisabledList:" + "DisabledList" in p);
-				console.log("EnabledList:" + "EnabledList" in p);
-			}
-		};
+				else {
+					profile["Name"] = name;
+					console.log("Operation:" + "Operation" in p);
+					console.log("DisabledList:" + "DisabledList" in p);
+					console.log("EnabledList:" + "EnabledList" in p);
+					filesValid = false;
+				}
+			};
+		});
 	}
 
 	function clearProfile() {
@@ -284,11 +323,15 @@
 	</div>
 	<div class="vspace"></div>
 	<div class="hstack gap">
-		<span title={opExplain} class="opexplain">
-			Profile Filter:
-		</span>
-		<input class="hidden" id="profile-to-upload" type="file" accept=".json" bind:files bind:this={fileInput} on:change={() => importProfile(files[0])}/>
-		<button on:click={ () => {fileInput.value = ''; fileInput.click()} }>Import</button>
+		<span title={opExplain} class="opexplain">Profile Filter:</span>
+		<input class="hidden" id="profile-to-upload" type="file" multiple accept=".json" bind:files bind:this={fileInput} on:change={() => importProfile(files)}/>
+		<button on:click={ () => {fileInput.value = ''; fileInput.click()} }>
+		{#if profile["Operation"] != undefined}
+			Add
+		{:else}
+			Import
+		{/if}
+		</button>
 		{#if profile["Operation"] != undefined}
 			<button on:click={clearProfile}>Clear</button>
 		{/if}
@@ -313,7 +356,7 @@
 		{/if}
 		</p>
 		<div class="hstack gap wrap">
-			<span><b>Profile:</b> {profile["Name"]},</span>
+			<span><b>Profile:</b> {profile["Name"]}</span>
 			<span><b>Type:</b> {Operation[operation]}</span>
 		</div>
 		<table>
