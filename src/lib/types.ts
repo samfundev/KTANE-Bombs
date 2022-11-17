@@ -13,7 +13,8 @@ export enum Permission {
 	VerifyMission = 1,
 	VerifyCompletion = 2,
 	VerifyMissionPack = 3,
-	RenameUser = 4
+	RenameUser = 4,
+	DownloadDatabase = 5
 }
 
 export type ID<T> = T & { id: number };

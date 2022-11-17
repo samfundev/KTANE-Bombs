@@ -10,7 +10,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 	const { mission } = params;
 	const missionResult = await client.mission.findFirst({
 		where: {
-			name: `${mission}`
+			name: mission
 		},
 		select: {
 			name: true,
