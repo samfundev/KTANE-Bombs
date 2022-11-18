@@ -13,15 +13,6 @@
 	let missions: MissionWithPack[] = [];
 	let selectedMissions: Record<number, boolean> = {};
 
-	function correctNameCapitalization(names: string): string[] {
-		let replaced = parseList(names).map(n => {
-			if (authorNames.some(an => an.toLowerCase() === n.toLowerCase()))
-				return <string>authorNames.find(an => an.toLowerCase() === n.toLowerCase());
-			else return n;
-		});
-		return replaced;
-	}
-
 	function parseMissions(text: string) {
 		let missions: MissionWithPack[] = [];
 		let mission: MissionWithPack | null = null;
@@ -126,7 +117,7 @@
 		})
 			.then(response => {
 				const plural = Object.values(selectedMissions).filter(value => value).length > 1;
-				const word = `Misison${plural ? 's' : ''}`;
+				const word = `Mission${plural ? 's' : ''}`;
 				if (response.ok) {
 					toast.success(`${word} uploaded successfully!`);
 				} else {
@@ -156,10 +147,8 @@
 							name="Authors"
 							label="Authors"
 							id="mission-authors"
-							parse={correctNameCapitalization}
-							validate={value => value != null}
-							display={displayStringList}
-							instantFormat={false}
+							options={authorNames}
+							optionalOptions={true}
 							bind:value={mission.authors} />
 						<Input
 							name="Mission Pack"

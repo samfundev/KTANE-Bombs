@@ -26,11 +26,11 @@ export const load: PageServerLoad = async function () {
 		authorNames: missions
 			.map(mission => mission.authors)
 			.flat()
-			.filter(onlyUnique),
+			.filter(onlyUnique).sort(),
 		solverNames: missions
 			.map(mission => mission.completions.map(comp => comp.team))
 			.flat(2)
-			.filter(onlyUnique),
+			.filter(onlyUnique).sort(),
 		packs: packs.sort((a, b) => {
 			return a.name.localeCompare(b.name);
 		})

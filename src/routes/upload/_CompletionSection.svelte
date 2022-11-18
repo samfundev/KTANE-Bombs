@@ -17,49 +17,107 @@
 
 	let valid: boolean = false;
 
-	$: {
+	let team = [{label:"Defuser", text:""}];
+	let proofs = [""];
+
+	function dynamicProofBoxes(){
+		for(let i = 0; i < proofs.length; i++){
+			if(proofs[i] === "" && i != proofs.length-1){
+				for(let j = i; j < proofs.length-1; j++){
+					proofs[j] = proofs[j+1];
+				}
+				proofs.pop();
+				i--;
+				continue;
+			}
+		}
+		if(proofs[proofs.length-1] !== ""){
+			proofs[proofs.length] = "";
+		}
+	}
+
+	function validateUrl(text:any) : string | boolean{
+		if(text === ""){
+			return '';
+		}
 		let url: URL | null = null;
-		try {
-			url = new URL(proofString);
-		} catch {}
 
-		if (url?.protocol === 'http:') {
-			url.protocol = 'https:';
+			try{
+				url = new URL(text);
+			} catch (e : any){
+					return "Invalid url";
+			}
+			if (url?.protocol === 'http:') {
+				url.protocol = 'https:';
+			}
+			if(url?.protocol !== "https:"){
+				return "Invalid url";
+			}
+		return '';
+	}
+	
+
+		
+
+	function parseUrls(urlList: any[]) : string[]{
+		let outUrls: string[] = [];
+		for(let i = 0; i < urlList.length-1; i++){
+			let url: URL | null = null;
+			try{
+				url = new URL(urlList[i]);
+			} catch{}
+			if (url?.protocol === 'http:') {
+				url.protocol = 'https:';
+			}
+
+			if (url?.protocol === 'https:') {
+				outUrls[outUrls.length] = url.toString();
+			}
 		}
+		return outUrls;
+	}
+	
 
-		if (url?.protocol === 'https:') {
-			completion.proofs = [url.toString()];
-		} else {
-			completion.proofs = [];
+	function dynamicTeamBoxes(){
+		for(let i = 0; i < team.length; i++){
+			if(team[i].text === "" && i != team.length-1){
+				for(let j = i; j < team.length-1; j++){
+					team[j] = team[j+1];
+				}
+				team.pop();
+				i--;
+				continue;
+			}
+			if(i == 0){
+				team[i].label = "Defuser"
+			}
 		}
+		if(team[team.length-1].text !== ""){
+			team[team.length] = {label:"Expert",text:""};
+		}
+	}
 
-		teamString = correctNameCapitalization(teamString);
-		completion.team = parseList(teamString);
+	function parseTeam(teamList : any) :string[] {
+		let outTeam :string[] = [];
+		for(let i = 0; i < teamList.length-1; i++){
+			outTeam[i] = teamList[i].text;
+		}
+		return outTeam;
+	}
+
+	$: {
+		dynamicProofBoxes();
+		completion.proofs = parseUrls(proofs)
+
+		dynamicTeamBoxes();
+		completion.team = parseTeam(team);
 
 		if (completion.team.length > 1) completion.solo = false;
 
 		valid = missionNames.includes(missionName) && completion.proofs.length !== 0 && completion.team.length !== 0;
 	}
 
-	function uniqueNames(): string[] {
-		return completion.team.filter(n => !solverNames.some(sn => sn.toLowerCase() === n.toLowerCase()));
-	}
-
-	function correctNameCapitalization(names: string): string {
-		let replaced = parseList(names).map(n => {
-			if (solverNames.some(sn => sn.toLowerCase() === n.toLowerCase()))
-				return solverNames.find(sn => sn.toLowerCase() === n.toLowerCase());
-			else return n;
-		});
-		return replaced.join(', ');
-	}
-
 	function upload() {
-		let uNames = uniqueNames();
-		if (uNames.length > 0) {
-			let conf = `Are you sure? These names are NOT currently credited with any solves: ${uNames.join(', ')}`;
-			if (!confirm(conf)) return;
-		}
 		fetch('/upload/completion', {
 			method: 'POST',
 			headers: {
@@ -85,7 +143,11 @@
 		options={missionNames}
 		validate={value => value !== null}
 		bind:value={missionName} />
-	<Input id="proof" type="url" label="Proof" placeholder="https://ktane.timwi.de" required bind:value={proofString} />
+	<div>
+		{#each proofs as proof, i}
+			<Input id="proof" type="url" label="Proof #{i+1}" placeholder="https://ktane.timwi.de" validate={validateUrl} bind:value={proof} />
+		{/each}
+	</div>
 	<Input
 		id="time"
 		type="text"
@@ -97,7 +159,11 @@
 		placeholder="1:23:45.67"
 		required
 		bind:value={completion.time} />
-	<Input id="team" type="text" label="Team" placeholder="Defuser, Expert 1, ..." required bind:value={teamString} />
+		<div>
+			{#each team as member}
+				<Input id="member" type="text" label={member.label} optionalOptions={true} options={solverNames} bind:value={member.text} />
+			{/each}
+		</div>
 	<Checkbox id="solo" label="Solo" bind:checked={completion.solo} disabled={completion.team.length > 1} />
 </form>
 <CompletionCard {completion} />

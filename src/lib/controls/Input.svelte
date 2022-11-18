@@ -14,6 +14,7 @@
 	export let sideLabel: boolean = false;
 	export let instantFormat: boolean = true;
 	export let options: any[] | null = null;
+	export let optionalOptions : boolean = false;
 	export let display = (value: any) => value.toString();
 	export let parse = (value: string): any => value;
 	export let validate = (_value: any): boolean | string => true;
@@ -30,7 +31,7 @@
 	const handleInput = (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
 		displayValue = e.currentTarget.value;
 		let newValue = parse(e.currentTarget.value);
-		if (options !== null) {
+		if (options !== null && !optionalOptions) {
 			let match = false;
 			for (const option of options) {
 				if (newValue === display(option)) {
@@ -49,9 +50,8 @@
 
 	function handleValidity(value: any, showErrors: boolean = true): boolean {
 		const validity = validate(value);
-		if (required) {
+		if (required || validity !== null) {
 			input.setCustomValidity(typeof validity === 'string' ? validity : validity ? '' : 'Invalid value.');
-			input.reportValidity();
 		}
 
 		if (showErrors) error = input.validationMessage;
