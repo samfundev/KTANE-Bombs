@@ -17,7 +17,7 @@
 		else {
 			let url: URL | null = null;
 			try{
-				url = new URL(str);
+				url = new URL(trimmed);
 			} catch (e : any){
 				return null;
 			}
