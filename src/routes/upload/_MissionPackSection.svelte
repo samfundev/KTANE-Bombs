@@ -15,9 +15,16 @@
 		let trimmed = str.trim();
 		if (isOnlyDigits(trimmed)) return trimmed;
 		else {
-			trimmed = trimmed.replace('https://steamcommunity.com/sharedfiles/filedetails/?id=', '');
-			trimmed = trimmed.substring(0, trimmed.search(/[^0-9]/));
-			if (isOnlyDigits(trimmed)) return trimmed;
+			let url: URL | null = null;
+			try{
+				url = new URL(str);
+			} catch (e : any){
+				return null;
+			}
+			if(url?.hostname !== "steamcommunity.com") return null;
+			let id = url?.searchParams?.get('id')
+			if(id === null) return null;
+			if (isOnlyDigits(id)) return id;
 		}
 		return null;
 	}
