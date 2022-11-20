@@ -14,18 +14,24 @@
 	function parseSteamId(str: string): string | null {
 		let trimmed = str.trim();
 		if (isOnlyDigits(trimmed)) return trimmed;
-		else {
-			let url: URL | null = null;
-			try{
-				url = new URL(trimmed);
-			} catch (e : any){
-				return null;
-			}
-			if(url?.hostname !== "steamcommunity.com") return null;
-			let id = url?.searchParams?.get('id')
-			if(id === null) return null;
-			if (isOnlyDigits(id)) return id;
+
+		let url: URL | null = null;
+		try {
+			url = new URL(trimmed);
+		} catch (e: any) {
+			return null;
 		}
+
+		if (url?.hostname !== 'steamcommunity.com') return null;
+
+		let id = url?.searchParams?.get('id');
+		if (id === null) return null;
+
+		if (isOnlyDigits(id)) return id;
+
+		id = id.substring(0, id.search(/[^0-9]/));
+		if (isOnlyDigits(id)) return id;
+
 		return null;
 	}
 
