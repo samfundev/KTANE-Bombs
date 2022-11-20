@@ -16,20 +16,15 @@
 		if (isOnlyDigits(trimmed)) return trimmed;
 		else {
 			let url: URL | null = null;
-			try {
+			try{
 				url = new URL(trimmed);
-			} catch (e: any) {
+			} catch (e : any){
 				return null;
 			}
-			if (url?.hostname !== 'steamcommunity.com') return null;
-			let id = url?.searchParams?.get('id');
-			if (id === null) return null;
-			console.log();
+			if(url?.hostname !== "steamcommunity.com") return null;
+			let id = url?.searchParams?.get('id')
+			if(id === null) return null;
 			if (isOnlyDigits(id)) return id;
-			else {
-				let numbers = id.substring(0, id.search(/[^0-9]/));
-				if (isOnlyDigits(numbers)) return numbers;
-			}
 		}
 		return null;
 	}
