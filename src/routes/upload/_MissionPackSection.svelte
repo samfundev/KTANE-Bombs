@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Input from '$lib/controls/Input.svelte';
 	import type { MissionPack } from '$lib/types';
-	import { isOnlyDigits, requiredField } from '$lib/util';
+	import { isOnlyDigits } from '$lib/util';
 	import toast from 'svelte-french-toast';
 
 	let pack: MissionPack = {
@@ -9,37 +9,30 @@
 		steamId: ''
 	};
 
-	let steamIdText: string = '';
 	$: valid = pack.name.length > 0 && pack.steamId.length > 0;
 
-	function validSteamID(str: string): string | boolean {
-		pack.steamId = '';
+	function parseSteamId(str: string): string | null {
 		let trimmed = str.trim();
-		if (isOnlyDigits(trimmed)) {
-			pack.steamId = trimmed;
-			return true;
-		}
-		if (trimmed.length < 1) return requiredField();
+		if (isOnlyDigits(trimmed)) return trimmed;
 
 		let url: URL | null = null;
 		try {
 			url = new URL(trimmed);
 		} catch (e: any) {
-			return 'Invalid URL';
+			return null;
 		}
 
-		if (url?.hostname !== 'steamcommunity.com') return 'steamcommunity.com URL';
+		if (url?.hostname !== 'steamcommunity.com') return null;
 
 		let id = url?.searchParams?.get('id');
-		if (id === null) return 'ID is required in URL';
+		if (id === null) return null;
 
-		id = id.substring(0, id.search(/[^0-9]|$/));
-		if (isOnlyDigits(id)) {
-			pack.steamId = id;
-			return true;
-		}
+		if (isOnlyDigits(id)) return id;
 
-		return 'Invalid Workshop URL';
+		id = id.substring(0, id.search(/[^0-9]/));
+		if (isOnlyDigits(id)) return id;
+
+		return null;
 	}
 
 	function upload() {
@@ -63,7 +56,13 @@
 
 <div class="block flex grow">
 	<Input label="Name" id="pack-name" required bind:value={pack.name} />
-	<Input label="Steam ID / Workshop URL" id="pack-steam-id" required validate={validSteamID} bind:value={steamIdText} />
+	<Input
+		label="Steam ID"
+		id="pack-steam-id"
+		parse={parseSteamId}
+		validate={value => value != null}
+		instantFormat={false}
+		bind:value={pack.steamId} />
 </div>
 <div class="block">
 	<button on:click={upload} disabled={!valid}>Upload</button>

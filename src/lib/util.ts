@@ -278,7 +278,3 @@ export function checkIfImageExists(url: string, callback: (exists: boolean) => v
 		};
 	}
 }
-
-export function requiredField(): string {
-	return 'Please fill out this field.';
-}
