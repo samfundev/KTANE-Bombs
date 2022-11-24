@@ -17,100 +17,71 @@
 
 	let valid: boolean = false;
 
-	let team = [{label:"Defuser", text:""}];
-	let proofs = [""];
+	let team = [{ invalid: false, text: '' }];
+	let proofs = [{ invalid: false, text: '' }];
 
-	function dynamicProofBoxes(){
-		for(let i = 0; i < proofs.length; i++){
-			if(proofs[i] === "" && i != proofs.length-1){
-				for(let j = i; j < proofs.length-1; j++){
-					proofs[j] = proofs[j+1];
+	function dynamicBoxes(inputList: any[]) {
+		for (let i = 0; i < inputList.length; i++) {
+			if (inputList[i].text === '' && i != inputList.length - 1) {
+				for (let j = i; j < inputList.length - 1; j++) {
+					inputList[j] = inputList[j + 1];
 				}
-				proofs.pop();
+				inputList.pop();
 				i--;
 				continue;
 			}
 		}
-		if(proofs[proofs.length-1] !== ""){
-			proofs[proofs.length] = "";
+		if (inputList[inputList.length - 1].text !== '') {
+			inputList[inputList.length] = { invalid: false, text: '' };
 		}
 	}
 
-	function validateUrl(text:any) : string | boolean{
-		if(text === ""){
-			return '';
+	function parseURL(text: string): any[] {
+		if (text === '') {
+			return [true, ''];
 		}
 		let url: URL | null = null;
 
-			try{
-				url = new URL(text);
-			} catch (e : any){
-					return "Invalid url";
-			}
-			if (url?.protocol === 'http:') {
-				url.protocol = 'https:';
-			}
-			if(url?.protocol !== "https:"){
-				return "Invalid url";
-			}
-		return '';
-	}
-	
-
-		
-
-	function parseUrls(urlList: any[]) : string[]{
-		let outUrls: string[] = [];
-		for(let i = 0; i < urlList.length-1; i++){
-			let url: URL | null = null;
-			try{
-				url = new URL(urlList[i]);
-			} catch{}
-			if (url?.protocol === 'http:') {
-				url.protocol = 'https:';
-			}
-
-			if (url?.protocol === 'https:') {
-				outUrls[outUrls.length] = url.toString();
-			}
+		try {
+			url = new URL(text);
+		} catch (e: any) {
+			return [false, 'Invalid url'];
 		}
-		return outUrls;
-	}
-	
-
-	function dynamicTeamBoxes(){
-		for(let i = 0; i < team.length; i++){
-			if(team[i].text === "" && i != team.length-1){
-				for(let j = i; j < team.length-1; j++){
-					team[j] = team[j+1];
-				}
-				team.pop();
-				i--;
-				continue;
-			}
-			if(i == 0){
-				team[i].label = "Defuser"
-			}
+		if (url?.protocol === 'http:') {
+			url.protocol = 'https:';
 		}
-		if(team[team.length-1].text !== ""){
-			team[team.length] = {label:"Expert",text:""};
+		if (url?.protocol !== 'https:') {
+			return [false, 'Invalid url'];
 		}
+		return [true, url.toString()];
 	}
 
-	function parseTeam(teamList : any) :string[] {
-		let outTeam :string[] = [];
-		for(let i = 0; i < teamList.length-1; i++){
-			outTeam[i] = teamList[i].text;
+	function validateURL(text: any): string | boolean {
+		let funcReturn = parseURL(text);
+		return !funcReturn[0] ? funcReturn[1] : '';
+	}
+
+	function parseTeam(teamList: any[], func: Function | null): string[] {
+		let outTeam: string[] = [];
+		for (let i = 0; i < teamList.length - 1; i++) {
+			if (teamList[i].invalid) {
+				return [];
+			}
+			if (func === null) outTeam[outTeam.length] = teamList[i].text;
+			else {
+				let funcReturn = func(teamList[i].text);
+				if (funcReturn[0]) outTeam[outTeam.length] = funcReturn[1];
+			}
 		}
 		return outTeam;
 	}
 
 	$: {
-		dynamicProofBoxes();
-		completion.proofs = parseUrls(proofs)
+		dynamicBoxes(proofs);
+		completion.proofs = parseTeam(proofs, parseURL);
 
-		dynamicTeamBoxes();
-		completion.team = parseTeam(team);
+		dynamicBoxes(team);
+		completion.team = parseTeam(team, null);
 
 		if (completion.team.length > 1) completion.solo = false;
 
@@ -145,7 +116,14 @@
 		bind:value={missionName} />
 	<div>
 		{#each proofs as proof, i}
-			<Input id="proof" type="url" label="Proof #{i+1}" placeholder="https://ktane.timwi.de" validate={validateUrl} bind:value={proof} />
+			<Input
+				id="proof"
+				type="url"
+				label="Proof #{i + 1}"
+				placeholder="https://ktane.timwi.de"
+				validate={validateURL}
+				bind:invalid={proof.invalid}
+				bind:value={proof.text} />
 		{/each}
 	</div>
 	<Input
@@ -159,11 +137,17 @@
 		placeholder="1:23:45.67"
 		required
 		bind:value={completion.time} />
-		<div>
-			{#each team as member}
-				<Input id="member" type="text" label={member.label} optionalOptions={true} options={solverNames} bind:value={member.text} />
-			{/each}
-		</div>
+	<div>
+		{#each team as member, index}
+			<Input
+				id="member"
+				type="text"
+				label={index == 0 ? 'Defuser' : 'Expert'}
+				optionalOptions={true}
+				options={solverNames}
+				bind:value={member.text} />
+		{/each}
+	</div>
 	<Checkbox id="solo" label="Solo" bind:checked={completion.solo} disabled={completion.team.length > 1} />
 </form>
 <CompletionCard {completion} />

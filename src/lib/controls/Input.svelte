@@ -14,10 +14,11 @@
 	export let sideLabel: boolean = false;
 	export let instantFormat: boolean = true;
 	export let options: any[] | null = null;
-	export let optionalOptions : boolean = false;
+	export let optionalOptions: boolean = false;
 	export let display = (value: any) => value.toString();
 	export let parse = (value: string): any => value;
 	export let validate = (_value: any): boolean | string => true;
+	export let invalid: boolean = false;
 
 	const dispatch = createEventDispatcher();
 	let input: HTMLInputElement;
@@ -56,6 +57,7 @@
 
 		if (showErrors) error = input.validationMessage;
 
+		invalid = !(validity === true || validity === '');
 		return validity === true || validity === '';
 	}
 
