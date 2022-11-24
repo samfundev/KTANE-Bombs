@@ -4,8 +4,8 @@
 	import NoContent from '$lib/comp/NoContent.svelte';
 	import type { RepoModule } from '$lib/repo';
 	import Select from '$lib/controls/Select.svelte';
-	import { Permission, type Completion, type ID, type Mission, type MissionPack } from '$lib/types';
-	import { displayStringList, formatTime, getModule, hasPermission, parseInteger, parseList, parseTime, pluralize } from '$lib/util';
+	import { Permission, type Completion, type ID, type Mission, type MissionPack, type Bomb, Pool } from '$lib/types';
+	import { displayStringList, formatTime, hasPermission, parseInteger, parseList, parseTime } from '$lib/util';
 	import equal from 'fast-deep-equal';
 	import { sortBombs } from '../../_shared';
 	import type { EditMission } from './_types';
@@ -15,6 +15,7 @@
 	export let data;
 
 	let mission: EditMission & { verified: boolean } = data.mission;
+	let missionNames: string[] = data.missionNames;
 	let packs: Pick<ID<MissionPack>, 'id' | 'name'>[] = data.packs;
 	let modules: Record<string, RepoModule> | null = data.modules;
 
@@ -52,7 +53,7 @@
 	}
 
 	async function deleteMission() {
-		if (!confirm('This cannot be undone. Are you sure?')) return;
+		if (!confirm('Delete Mission. This cannot be undone. Are you sure?')) return;
 		const fData = new FormData();
 		fData.append('mission', JSON.stringify(originalMission));
 
@@ -68,7 +69,7 @@
 	}
 
 	async function deleteCompletion(completion: ID<Completion>) {
-		if (!confirm('This cannot be undone. Are you sure?')) return;
+		if (!confirm('Delete Solve. This cannot be undone. Are you sure?')) return;
 		const fData = new FormData();
 		fData.append('completion', JSON.stringify(completion));
 
@@ -85,9 +86,20 @@
 		setOriginalMission();
 	}
 
+	async function deletePool(bomb: Bomb, index: number) {
+		if (!confirm('Delete Pool. Are you sure?')) return;
+		bomb.pools.splice(index, 1);
+		mission = mission;
+	}
+	async function addPool(bomb: Bomb) {
+		bomb.pools.push(new Pool([''], 1));
+		mission = mission;
+	}
+
 	for (const bomb of mission.bombs) {
 		bomb.pools.sort((a, b) => a.modules.join().localeCompare(b.modules.join()));
 	}
+	missionNames.unshift('');
 </script>
 
 <svelte:head>
@@ -103,6 +115,12 @@
 		options={packs}
 		display={pack => pack.name}
 		validate={value => value !== null} />
+	<Input
+		id="mission-variant"
+		label="Variant of"
+		options={missionNames}
+		validate={value => value !== null}
+		bind:value={mission.variantOf} />
 	<div class="actions">
 		<button on:click={deleteMission}>Delete</button>
 	</div>
@@ -156,9 +174,10 @@
 					bind:value={bomb.widgets} />
 				<Checkbox sideLabel label="Designed for TP" id="designed-for-tp" bind:checked={mission.designedForTP} />
 			</div>
-			<div class="block flex column relative">
-				{#each bomb.pools as pool, index}
+			<div class="block flex column relative pools">
+				{#each bomb.pools as pool, index (pool)}
 					<div class="pool">
+						<span class="pool-index">{index + 1}: </span>
 						<Input
 							label="Count"
 							id="pool-count-{bomb.id}-{index}"
@@ -173,11 +192,14 @@
 							classes="pool-modules"
 							parse={parseList}
 							display={displayStringList}
+							instantFormat={false}
 							validate={value => value != null}
 							required
 							bind:value={pool.modules} />
+						<div class="delete-pool dark-invert" on:click={() => deletePool(bomb, index)} />
 					</div>
 				{/each}
+				<button class="add-pool" on:click={() => addPool(bomb)}>Add</button>
 			</div>
 		{/each}
 	</div>
@@ -244,6 +266,10 @@
 		text-align: center;
 	}
 
+	.pools {
+		align-items: center;
+	}
+
 	.pool {
 		padding: var(--gap);
 		flex-grow: 1;
@@ -251,7 +277,8 @@
 
 		display: flex;
 		gap: var(--gap);
-		align-items: center;
+		align-items: flex-end;
+		justify-content: center;
 	}
 
 	:global(.pool input.pool-count) {
@@ -259,6 +286,30 @@
 	}
 	:global(.pool input.pool-modules) {
 		width: 40em;
+	}
+
+	.pool-index {
+		margin-bottom: 2px;
+		width: 35px;
+		text-align: right;
+	}
+
+	.delete-pool {
+		background: url('$lib/img/clear-button.svg') right center no-repeat;
+		width: 1.25em;
+		height: 1.25em;
+		min-width: 1.25em;
+		margin: 0 5px 2px 2px;
+		display: inline-block;
+		visibility: hidden;
+		vertical-align: middle;
+		cursor: pointer;
+	}
+	.pool:hover > .delete-pool {
+		visibility: visible;
+	}
+	.add-pool {
+		width: fit-content;
 	}
 
 	.tp-solve {
@@ -280,6 +331,7 @@
 		width: calc((min(100vw, 1150px) - 4 * var(--gap)));
 
 		transform: translateY(100%);
+		pointer-events: none;
 		opacity: 0;
 		transition: transform 0.4s, opacity 0.4s;
 		transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
@@ -291,6 +343,7 @@
 	}
 
 	.save-changes {
+		pointer-events: auto;
 		justify-content: center;
 		align-items: center;
 		box-shadow: var(--foreground) 0 0 10px;

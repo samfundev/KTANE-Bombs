@@ -139,7 +139,7 @@
 	<div class="block">Select one or more missions from the logfile.</div>
 	<form on:submit|preventDefault={sendMissions}>
 		<div class="missions flex column">
-			{#each missions as mission, i}
+			{#each missions as mission, i (mission)}
 				<div class="flex">
 					<MissionCard {mission} selectable id={i.toString()} bind:selected={selectedMissions[i]} />
 					<div class="block">

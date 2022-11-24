@@ -1,18 +1,31 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import type { FrontendUser } from '$lib/types';
+	import { checkIfImageExists } from '$lib/util';
 
 	export let user: FrontendUser;
+
+	let imageExists = false;
+	let alternate = Math.max(0, parseInt(user.id.slice(-2)) % 5);
+
+	if (user.avatar.length > 1 && browser)
+		checkIfImageExists(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`, exists => {
+			imageExists = exists;
+		});
 </script>
 
 <div class="block user">
-	{#if user.avatar.length == 1}
-		<img class="avatar" src="https://cdn.discordapp.com/embed/avatars/{user.avatar}.png?size=32" alt="Avatar" />
-	{:else}
+	{#if user.avatar.length != 1 && imageExists}
 		<img class="avatar" src="https://cdn.discordapp.com/avatars/{user.id}/{user.avatar}.webp?size=32" alt="Avatar" />
+	{:else}
+		<img
+			class="avatar"
+			src="https://cdn.discordapp.com/embed/avatars/{user.avatar.length == 1 ? user.avatar : alternate}.png?size=32"
+			alt="Avatar" />
 	{/if}
-	<span class="username">{user.username}</span>
+	<div class:username={user.discordName?.length > 0}>{user.username}</div>
 	{#if user.discordName?.length > 0}
-		<span class="discord">Discord: {user.discordName}</span>
+		<div class="discord">Discord: {user.discordName}</div>
 	{/if}
 </div>
 
@@ -23,8 +36,11 @@
 		gap: var(--gap);
 		align-items: center;
 	}
+	.username {
+		min-width: 350px;
+	}
 	.discord {
-		margin-left: 50px;
+		margin-left: 10px;
 	}
 
 	.avatar {

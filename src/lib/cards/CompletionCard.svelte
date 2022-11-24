@@ -1,32 +1,17 @@
 <script lang="ts">
 	import type { Completion } from '$lib/types';
-	import { formatTime } from '$lib/util';
+	import { formatTime, getPersonColor } from '$lib/util';
 
 	export let completion: Completion;
-
-	function getPersonColor(size: number, index: number): string {
-		return size === 1
-			? completion.solo
-				? '#00ffff'
-				: 'hsl(300, 100%, 75%)'
-			: index === 0
-			? 'hsl(210, 100%, 65%)'
-			: 'hsl(0, 100%, 70%)';
-	}
 </script>
 
 <div class="completion">
-	<span
-		class="time"
-		class:first={completion.first}
-		class:old={completion.old}
-		title={formatTime(completion.time, true)}>{formatTime(completion.time)}</span
-	>
+	<span class="time" class:first={completion.first} class:old={completion.old} title={formatTime(completion.time, true)}
+		>{formatTime(completion.time)}</span>
 	<div class="team">
 		{#each completion.team as person, i}
-			<span class="person" style="background-color: {getPersonColor(completion.team.length, i)}"
-				>{person}</span
-			>
+			<span class="person" style="background-color: {getPersonColor(completion.team.length, i, completion.solo)}"
+				>{person}</span>
 		{/each}
 	</div>
 	<div class="flex column">

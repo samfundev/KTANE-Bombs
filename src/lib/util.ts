@@ -23,9 +23,7 @@ export function formatTime(seconds: number, milliseconds = false): string {
 }
 
 export function parseTime(time: string): number | null {
-	const match = time.match(
-		/^(?:(?<hours>\d+:)?(?<minutes>\d{1,2}:))?(?<seconds>\d{1,2}(?:.\d{1,2})?)$/
-	);
+	const match = time.match(/^(?:(?<hours>\d+:)?(?<minutes>\d{1,2}:))?(?<seconds>\d{1,2}(?:.\d{1,2})?)$/);
 	if (match === null) {
 		return null;
 	}
@@ -70,7 +68,7 @@ export function hasPermission(user: FrontendUser | null, permission: Permission)
 }
 
 export function hasAnyPermission(user: FrontendUser | null, ...permissions: Permission[]): boolean {
-	return permissions.some((permission) => hasPermission(user, permission));
+	return permissions.some(permission => hasPermission(user, permission));
 }
 
 export function forbidden(locals: App.Locals) {
@@ -83,7 +81,7 @@ export function forbidden(locals: App.Locals) {
 export function fixPools<T>(mission: T & { bombs: client.Bomb[] }): T & { bombs: Bomb[] } {
 	return {
 		...mission,
-		bombs: mission.bombs.map((bomb) => {
+		bombs: mission.bombs.map(bomb => {
 			return {
 				...bomb,
 				pools: bomb.pools as unknown as Pool[]
@@ -94,17 +92,17 @@ export function fixPools<T>(mission: T & { bombs: client.Bomb[] }): T & { bombs:
 
 export function getSolveTypes(mission: Mission) {
 	return {
-		normalSolve: mission.completions.some((completion) => completion.team.length >= 2),
-		efmSolve: mission.completions.some((completion) => completion.team.length == 1),
-		soloSolve: mission.completions.some((completion) => completion.solo)
+		normalSolve: mission.completions.some(completion => completion.team.length >= 2),
+		efmSolve: mission.completions.some(completion => completion.team.length == 1),
+		soloSolve: mission.completions.some(completion => completion.solo)
 	};
 }
 
 export function parseList(value: string) {
 	return value
 		.split(',')
-		.map((name) => name.trim())
-		.filter((name) => name.length !== 0);
+		.map(name => name.trim())
+		.filter(name => name.length !== 0);
 }
 
 export function displayStringList(list: string[]): string {
@@ -145,15 +143,14 @@ export function evaluateLogicalStringSearch(expression: string, searchWhat: stri
 		//valid parentheses found
 		const stripped = exprAfter.slice(br[0] + 2, br[1]);
 		const val = evaluateLogicalStringSearch(stripped, searchWhat);
-		exprAfter =
-			exprAfter.slice(0, br[0]) + (val ? ' ' : '!@#%^&*)(*&#@!') + exprAfter.slice(br[1] + 2);
+		exprAfter = exprAfter.slice(0, br[0]) + (val ? ' ' : '!@#%^&*)(*&#@!') + exprAfter.slice(br[1] + 2);
 		br = findMatchingBrackets(exprAfter, left, right);
 	}
 
-	const searchParamOr = exprAfter.split(oor).map((x) => x.trim());
+	const searchParamOr = exprAfter.split(oor).map(x => x.trim());
 	let matches = false;
 	for (let oo = 0; !matches && oo < searchParamOr.length; oo++) {
-		const searchParamAnd = searchParamOr[oo].split(aand).map((x) => x.trim());
+		const searchParamAnd = searchParamOr[oo].split(aand).map(x => x.trim());
 		matches = true;
 		for (let aa = 0; matches && aa < searchParamAnd.length; aa++) {
 			const notThis = searchParamAnd[aa].indexOf(nnot) == 0;
@@ -219,10 +216,8 @@ export function popup(
 		const maxTop = Math.max(getWindowHeight() - wnd.clientHeight - 30, 0);
 		const rect = obj.getBoundingClientRect();
 		wnd.style.left =
-			Math.min((relative ? obj.offsetLeft : rect.left) - wnd.clientWidth * 0.5 + skew[0], maxLeft) +
-			'px';
-		wnd.style.top =
-			Math.min((relative ? rect.height + obj.offsetTop : rect.bottom) + skew[1], maxTop) + 'px';
+			Math.min((relative ? obj.offsetLeft : rect.left) - wnd.clientWidth * 0.5 + skew[0], maxLeft) + 'px';
+		wnd.style.top = Math.min((relative ? rect.height + obj.offsetTop : rect.bottom) + skew[1], maxTop) + 'px';
 	}
 
 	return pd2;
@@ -231,14 +226,11 @@ export function popup(
 export function titleCase(str: string): string {
 	return str
 		.split(' ')
-		.map((x) => x.charAt(0).toUpperCase() + x.slice(1))
+		.map(x => x.charAt(0).toUpperCase() + x.slice(1))
 		.join(' ');
 }
 
-export function getModule(
-	moduleID: string,
-	modules: Record<string, RepoModule> | null
-): RepoModule {
+export function getModule(moduleID: string, modules: Record<string, RepoModule> | null): RepoModule {
 	const module = modules === null ? null : modules[moduleID];
 	if (module != null) {
 		return module;
@@ -256,6 +248,43 @@ export function getModule(
 	};
 }
 
+export function hasSpecialIcon(moduleID: string): boolean {
+	return [
+		'ALL_NEEDY',
+		'ALL_SOLVABLE',
+		'ALL_VANILLA_SOLVABLE',
+		'ALL_VANILLA_NEEDY',
+		'ALL_MODS_SOLVABLE',
+		'ALL_MODS_NEEDY'
+	].includes(moduleID);
+}
+
+export function getPersonColor(size: number, index: number, solo: boolean): string {
+	return size === 1
+		? solo
+			? '#00ffff'
+			: 'hsl(300, 100%, 75%)'
+		: index === 0
+		? 'hsl(210, 100%, 65%)'
+		: 'hsl(0, 100%, 70%)';
+}
+
 export function onlyUnique(item: any, pos: number, self: any[]): boolean {
 	return self.indexOf(item) == pos;
+}
+
+//Must be used only on the browser
+export function checkIfImageExists(url: string, callback: (exists: boolean) => void) {
+	const img = new Image();
+	img.src = url;
+
+	if (img.complete) callback(true);
+	else {
+		img.onload = () => {
+			callback(true);
+		};
+		img.onerror = () => {
+			callback(false);
+		};
+	}
 }

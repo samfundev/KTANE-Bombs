@@ -2,7 +2,7 @@
 	import Dialog from '$lib/controls/Dialog.svelte';
 	import Input from '$lib/controls/Input.svelte';
 	import { Completion, Mission, Permission, type FrontendUser } from '$lib/types';
-	import { hasPermission } from '$lib/util';
+	import { getPersonColor, hasPermission } from '$lib/util';
 	import UserPermissions from '../_UserPermissions.svelte';
 	import { page } from '$app/stores';
 	export let data;
@@ -33,16 +33,6 @@
 		alert('Failed to edit name.');
 	}
 
-	function getPersonColor(completion: Pick<Completion, 'team' | 'solo'>): string {
-		return completion.team.length === 1
-			? completion.solo
-				? '#00ffff'
-				: 'hsl(300, 100%, 75%)'
-			: completion.team.indexOf(username) === 0
-			? 'hsl(210, 100%, 65%)'
-			: 'hsl(0, 100%, 70%)';
-	}
-
 	// Sort completions
 	completions.sort((a, b) => a.mission.name.localeCompare(b.mission.name));
 </script>
@@ -52,12 +42,24 @@
 </svelte:head>
 
 <h1 class="header">{username}</h1>
+<div class="block legend flex">
+	<span style="background-color: {getPersonColor(2, 0, false)}; color:#000">Defuser</span>
+	<span style="background-color: {getPersonColor(2, 1, false)}; color:#000">Expert</span>
+	<span style="background-color: {getPersonColor(1, 0, false)}; color:#000">EFM</span>
+	<span style="background-color: {getPersonColor(1, 0, true)}; color:#000">Solo</span>
+</div>
 <div class="block flex column content-width">
 	<h2>Solves</h2>
 	<div class="solves flex grow">
 		{#each completions as completion}
 			<a href="/mission/{encodeURIComponent(completion.mission.name)}">
-				<div class="block" style:background-color={getPersonColor(completion)}>
+				<div
+					class="block"
+					style:background-color={getPersonColor(
+						completion.team.length,
+						completion.team.indexOf(username),
+						completion.solo
+					)}>
 					{completion.mission.name}
 				</div>
 			</a>
@@ -88,6 +90,13 @@
 <style>
 	h2 {
 		margin: 0;
+	}
+
+	.legend {
+		justify-content: center;
+	}
+	.legend > span {
+		padding: var(--gap);
 	}
 
 	.solves {

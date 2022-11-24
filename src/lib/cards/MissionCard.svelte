@@ -1,6 +1,7 @@
 <script lang="ts">
 	import MissionCardInner from './MissionCardInner.svelte';
 	import type { Mission } from '$lib/types';
+	import { getSolveTypes, listify } from '$lib/util';
 
 	export let mission: Mission;
 	export let selectable: boolean = false;
@@ -8,6 +9,17 @@
 	export let id: string = '';
 	export let cardID: string = '';
 	export let card: any = null;
+
+	const solveTypes = getSolveTypes(mission);
+
+	const solvers = [
+		solveTypes.normalSolve ? 'by a team' : null,
+		solveTypes.efmSolve ? 'via EFM' : null,
+		mission.tpSolve ? 'on Twitch Plays' : null,
+		solveTypes.soloSolve ? 'solo' : null
+	].flatMap(solver => solver ?? []);
+	const title =
+		solvers.length === 0 ? "This mission hasn't been solved." : `This mission has been solved ${listify(solvers)}.`;
 </script>
 
 {#if selectable}
@@ -19,7 +31,15 @@
 	</div>
 {:else}
 	<a class="mission" bind:this={card} href="mission/{encodeURIComponent(mission.name)}" id={cardID}>
+		<div />
 		<MissionCardInner {mission} />
+		<div class="indicator flex column" {title}>
+			<span class:hidden={!solveTypes.normalSolve} style="background-color: hsl(210, 100%, 65%); color:#000">T</span>
+			<span class:hidden={!solveTypes.efmSolve} style="background-color: hsl(300, 100%, 75%); color:#000">E</span>
+			<span class:hidden={!mission.tpSolve} style="background-color: #9146ff; color:#FFF">TP</span>
+			<span class:hidden={!solveTypes.soloSolve} style="background-color: #00ffff; color:#000">S</span>
+		</div>
+		<div />
 	</a>
 {/if}
 
@@ -29,14 +49,29 @@
 
 		display: grid;
 		background: var(--foreground);
-		padding: 10px;
-		padding-right: 0;
+		padding: 0 0 0 10px;
 		column-gap: 20px;
 
-		grid-template-columns: 1fr 10px;
-		grid-template-rows: auto auto;
+		grid-template-columns: 1fr 15px;
+		grid-template-rows: 10px auto auto 10px;
 		color: inherit;
 		text-decoration: inherit;
+	}
+
+	.indicator {
+		grid-column: 2;
+		grid-row: 1 / span 4;
+		justify-content: center;
+		gap: 0;
+	}
+	.indicator > span {
+		font-size: 11.5px;
+		text-align: center;
+		padding: 1px 0 0;
+		line-height: 1.1;
+	}
+	.hidden {
+		display: none;
 	}
 
 	input {

@@ -43,7 +43,7 @@
 <h1 class="header">Verify Queue</h1>
 
 <div class="flex column">
-	{#each queue as item}
+	{#each queue as item, index (item)}
 		<div class="item {item.type}">
 			{#if item.type === 'mission'}
 				<MissionCard mission={item.mission} />
