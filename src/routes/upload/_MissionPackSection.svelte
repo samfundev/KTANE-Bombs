@@ -9,30 +9,32 @@
 		steamId: ''
 	};
 
-	$: valid = pack.name.length > 0 && pack.steamId.length > 0;
+	let invalid = false;
 
-	function parseSteamId(str: string): string | null {
+	$: valid = !invalid && pack.name.length > 0 && pack.steamId.length > 0;
+
+	function validateSteamId(str: string): string | boolean {
 		let trimmed = str.trim();
-		if (isOnlyDigits(trimmed)) return trimmed;
+		if (isOnlyDigits(trimmed)) return '';
 
 		let url: URL | null = null;
 		try {
 			url = new URL(trimmed);
 		} catch (e: any) {
-			return null;
+			return 'Invalid Steam Workshop URL or Workshop ID.';
 		}
 
-		if (url?.hostname !== 'steamcommunity.com') return null;
+		if (url?.hostname !== 'steamcommunity.com') return 'Invalid Steam Workshop URL or Workshop ID.';
 
 		let id = url?.searchParams?.get('id');
-		if (id === null) return null;
+		if (id === null) return 'Invalid Steam Workshop URL or Workshop ID.';
 
-		if (isOnlyDigits(id)) return id;
+		if (isOnlyDigits(id)) return '';
 
 		id = id.substring(0, id.search(/[^0-9]/));
-		if (isOnlyDigits(id)) return id;
+		if (isOnlyDigits(id)) return '';
 
-		return null;
+		return 'Invalid Steam Workshop URL or Workshop ID';
 	}
 
 	function upload() {
@@ -57,11 +59,11 @@
 <div class="block flex grow">
 	<Input label="Name" id="pack-name" required bind:value={pack.name} />
 	<Input
-		label="Steam ID"
+		label="Steam ID / Workshop URL"
 		id="pack-steam-id"
-		parse={parseSteamId}
-		validate={value => value != null}
-		instantFormat={false}
+		validate={validateSteamId}
+		required
+		bind:invalid
 		bind:value={pack.steamId} />
 </div>
 <div class="block">
