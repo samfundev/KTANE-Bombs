@@ -10,31 +10,43 @@
 	};
 
 	let invalid = false;
+	let valid = false;
+	let inputtedId = '';
+	$: {
+		pack.steamId = getSteamID(inputtedId);
+		valid = !invalid && pack.name.length > 0 && pack.steamId.length > 0;
+	}
 
-	$: valid = !invalid && pack.name.length > 0 && pack.steamId.length > 0;
-
-	function validateSteamId(str: string): string | boolean {
+	function getSteamID(str: string): string {
 		let trimmed = str.trim();
-		if (isOnlyDigits(trimmed)) return '';
+		if (isOnlyDigits(trimmed)) return trimmed;
 
 		let url: URL | null = null;
 		try {
 			url = new URL(trimmed);
 		} catch (e: any) {
-			return 'Invalid Steam Workshop URL or Workshop ID.';
+			return '';
 		}
 
-		if (url?.hostname !== 'steamcommunity.com') return 'Invalid Steam Workshop URL or Workshop ID.';
+		if (url?.hostname !== 'steamcommunity.com') return '';
 
 		let id = url?.searchParams?.get('id');
-		if (id === null) return 'Invalid Steam Workshop URL or Workshop ID.';
+		if (id === null) return '';
 
-		if (isOnlyDigits(id)) return '';
+		if (isOnlyDigits(id)) return id;
 
 		id = id.substring(0, id.search(/[^0-9]/));
-		if (isOnlyDigits(id)) return '';
+		if (isOnlyDigits(id)) return id;
 
-		return 'Invalid Steam Workshop URL or Workshop ID';
+		return '';
+	}
+
+	function validateSteamID(str: string): string | boolean {
+		let id = getSteamID(str);
+		if (id === '') {
+			return 'Invalid Steam Workshop URL or Workshop ID.';
+		}
+		return '';
 	}
 
 	function upload() {
@@ -61,10 +73,10 @@
 	<Input
 		label="Steam ID / Workshop URL"
 		id="pack-steam-id"
-		validate={validateSteamId}
+		validate={validateSteamID}
 		required
 		bind:invalid
-		bind:value={pack.steamId} />
+		bind:value={inputtedId} />
 </div>
 <div class="block">
 	<button on:click={upload} disabled={!valid}>Upload</button>
