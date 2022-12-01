@@ -58,7 +58,7 @@
 		if (showErrors) error = input.validationMessage;
 
 		invalid = !(validity === true || validity === '');
-		return validity === true || validity === '';
+		return !invalid;
 	}
 
 	onMount(() => handleValidity(value, false));
