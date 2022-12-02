@@ -19,6 +19,7 @@
 	export let parse = (value: string): any => value;
 	export let validate = (_value: any): boolean | string => true;
 	export let invalid: boolean = false;
+	export let forceValidate: boolean = false;
 
 	const dispatch = createEventDispatcher();
 	let input: HTMLInputElement;
@@ -51,7 +52,7 @@
 
 	function handleValidity(value: any, showErrors: boolean = true): boolean {
 		const validity = validate(value);
-		if (required || validity !== null) {
+		if (required || forceValidate) {
 			input.setCustomValidity(typeof validity === 'string' ? validity : validity ? '' : 'Invalid value');
 		}
 
