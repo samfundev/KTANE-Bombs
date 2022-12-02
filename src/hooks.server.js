@@ -6,6 +6,7 @@ export async function handle({ event, resolve }) {
 
 	event.locals.token = token ?? null;
 	if (!conflict) {
+		// @ts-ignore
 		event.locals.user = token
 			? await client.user.findFirst({
 					where: {
@@ -21,6 +22,6 @@ export async function handle({ event, resolve }) {
 			: null;
 	}
 	const response = await resolve(event);
-
+	response.headers.set("Access-Control-Allow-Origin", "*");
 	return response;
 }
