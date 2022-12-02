@@ -133,6 +133,7 @@
 					label="Proof #{i + 1}"
 					placeholder="https://ktane.timwi.de"
 					validate={validateURL}
+					forceValidate={true}
 					bind:invalid={proof.invalid}
 					bind:value={proof.text} />
 			</div>
