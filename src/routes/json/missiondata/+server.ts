@@ -47,7 +47,12 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		}
 	});
 
-	let missionPacks: { name: string; steamID: string; verified: boolean, missions: (Mission & { variant: null | number })[] }[] = [];
+	let missionPacks: {
+		name: string;
+		steamID: string;
+		verified: boolean;
+		missions: (Mission & { variant: null | number })[];
+	}[] = [];
 	missionsObj.forEach(miss => {
 		let bombs: Bomb[] = [];
 		Object.assign(bombs, miss.bombs);
