@@ -23,6 +23,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			},
 			completions: {
 				select: {
+					verified: true,
 					proofs: true,
 					time: true,
 					team: true,
@@ -35,8 +36,10 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			tpSolve: true,
 			factory: true,
 			variant: true,
+			verified: true,
 			missionPack: {
 				select: {
+					verified: true,
 					name: true,
 					steamId: true
 				}
@@ -44,8 +47,8 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		}
 	});
 
-	let missionPacks: { name: string; steamID: string; missions: (Mission & { variant: null | number })[] }[] = [];
-	missionsObj.forEach((miss, idx) => {
+	let missionPacks: { name: string; steamID: string; verified: boolean, missions: (Mission & { variant: null | number })[] }[] = [];
+	missionsObj.forEach(miss => {
 		let bombs: Bomb[] = [];
 		Object.assign(bombs, miss.bombs);
 		let pack = missionPacks.find(mp => mp.steamID == miss.missionPack?.steamId);
@@ -57,6 +60,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			tpSolve: miss.tpSolve,
 			designedForTP: miss.designedForTP,
 			factory: miss.factory,
+			verified: miss.verified,
 			variant: miss.variant
 		};
 		if (pack) {
@@ -65,6 +69,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			missionPacks.push({
 				name: miss.missionPack?.name ?? '',
 				steamID: miss.missionPack?.steamId ?? '',
+				verified: miss.missionPack?.verified ?? false,
 				missions: [newMission]
 			});
 		}

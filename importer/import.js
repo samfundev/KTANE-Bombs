@@ -11,9 +11,11 @@ const { PrismaClient } = pkg;
 			create: {
 				name: pack.name,
 				steamId: pack.steamID,
+				verified: pack.verified
 			},
 			update: {
 				steamId: pack.steamID,
+				verified: pack.verified
 			},
 			where: {
 				name: pack.name
@@ -31,17 +33,19 @@ const { PrismaClient } = pkg;
 					completions: {
 						create: mission.completions
 					},
-					tpSolve: mission.tpsolve,
-					designedForTP: mission.designedfortp,
+					tpSolve: mission.tpSolve,
+					designedForTP: mission.designedForTP,
 					factory: mission.factory,
 					variant: mission.variant,
+					verified: mission.verified,
 					missionPackId: missionPack.id
 				},
 				update: {
-					tpSolve: mission.tpsolve,
-					designedForTP: mission.designedfortp,
+					tpSolve: mission.tpSolve,
+					designedForTP: mission.designedForTP,
 					factory: mission.factory,
 					variant: mission.variant,
+					verified: mission.verified,
 					missionPackId: missionPack.id
 				},
 				where: {
