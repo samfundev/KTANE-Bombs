@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Completion } from '$lib/types';
-	import { formatTime, getPersonColor } from '$lib/util';
+	import { formatTime, getPersonColor, linkIsLogfile, linkIsVideo } from '$lib/util';
 
 	export let completion: Completion;
 </script>
@@ -16,7 +16,13 @@
 	</div>
 	<div class="flex column">
 		{#each completion.proofs as proof}
-			<a href={proof}>Link</a>
+			{#if linkIsVideo(proof)}
+				<a href={proof}>Vid</a>
+			{:else if linkIsLogfile(proof)}
+				<a href={proof}>Log</a>
+			{:else}
+				<a href={proof}>Link</a>
+			{/if}
 		{/each}
 	</div>
 </div>
