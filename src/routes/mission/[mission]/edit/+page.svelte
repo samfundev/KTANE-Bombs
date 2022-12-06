@@ -27,6 +27,9 @@
 		originalMission = JSON.parse(JSON.stringify(mission));
 	}
 
+	for (const bomb of mission.bombs) {
+		bomb.pools.sort((a, b) => a.modules.join().localeCompare(b.modules.join()));
+	}
 	setOriginalMission();
 
 	$: modified = !equal(mission, originalMission);
@@ -96,9 +99,6 @@
 		mission = mission;
 	}
 
-	for (const bomb of mission.bombs) {
-		bomb.pools.sort((a, b) => a.modules.join().localeCompare(b.modules.join()));
-	}
 	missionNames.unshift('');
 </script>
 
@@ -125,13 +125,15 @@
 		<button on:click={deleteMission}>Delete</button>
 	</div>
 </div>
-<div class="block">
+<div class="block flex">
 	<Select
 		label="Factory"
 		id="mission-factory"
 		bind:value={mission.factory}
 		options={[null, 'Static', 'Sequence']}
 		display={mode => mode ?? 'None'} />
+	<div class="hspace" />
+	<Checkbox label="Designed for TP" id="designed-for-tp" bind:checked={mission.designedForTP} />
 </div>
 {#if !mission.verified}
 	<div class="block centered not-verified">This mission has not been verified.</div>
@@ -172,7 +174,6 @@
 					validate={intnan0}
 					required
 					bind:value={bomb.widgets} />
-				<Checkbox sideLabel label="Designed for TP" id="designed-for-tp" bind:checked={mission.designedForTP} />
 			</div>
 			<div class="block flex column relative pools">
 				{#each bomb.pools as pool, index (pool)}
@@ -264,6 +265,9 @@
 	}
 	.centered {
 		text-align: center;
+	}
+	.hspace {
+		width: 20px;
 	}
 
 	.pools {
