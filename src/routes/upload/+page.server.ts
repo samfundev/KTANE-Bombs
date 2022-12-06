@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import { onlyUnique } from '$lib/util';
+import { excludeArticleSort, onlyUnique, withoutArticle } from '$lib/util';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async function () {
@@ -22,7 +22,7 @@ export const load: PageServerLoad = async function () {
 	});
 
 	return {
-		missionNames: missions.map(mission => mission.name).sort(),
+		missionNames: missions.map(mission => mission.name).sort(excludeArticleSort),
 		authorNames: missions
 			.map(mission => mission.authors)
 			.flat()
@@ -34,7 +34,7 @@ export const load: PageServerLoad = async function () {
 			.filter(onlyUnique)
 			.sort(),
 		packs: packs.sort((a, b) => {
-			return a.name.localeCompare(b.name);
+			return withoutArticle(a.name).localeCompare(withoutArticle(b.name));
 		})
 	};
 };

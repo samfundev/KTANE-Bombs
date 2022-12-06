@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { Bomb, Completion, HomeOptions, Mission, MustHave, Operation } from '$lib/types';
-	import { evaluateLogicalStringSearch, disappear, popup, titleCase, getModule, onlyUnique } from '$lib/util';
+	import {
+		evaluateLogicalStringSearch,
+		disappear,
+		popup,
+		titleCase,
+		getModule,
+		onlyUnique,
+		withoutArticle
+	} from '$lib/util';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
 	import { onMount, createEventDispatcher } from 'svelte';
@@ -183,7 +191,9 @@
 	}
 
 	function defaultSort() {
-		missions.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() != reverse ? 1 : -1));
+		missions.sort((a, b) =>
+			withoutArticle(a.name.toLowerCase()) > withoutArticle(b.name.toLowerCase()) != reverse ? 1 : -1
+		);
 	}
 
 	function homeOptionUpdate(event: any) {

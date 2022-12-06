@@ -1,4 +1,5 @@
 import client from '$lib/client';
+import { withoutArticle } from '$lib/util';
 
 export async function GET() {
 	const missions = await client.mission.findMany({
@@ -25,7 +26,7 @@ export async function GET() {
 				};
 			})
 			.sort((a, b) => {
-				return a.name.localeCompare(b.name);
+				return withoutArticle(a.name).localeCompare(withoutArticle(b.name));
 			})
 	);
 

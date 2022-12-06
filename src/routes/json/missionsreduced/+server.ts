@@ -1,6 +1,6 @@
 import client from '$lib/client';
-import { onlyUnique, getModule } from '$lib/util';
-import type { Bomb, Mission } from '$lib/types';
+import { onlyUnique, withoutArticle } from '$lib/util';
+import type { Mission } from '$lib/types';
 
 export async function GET() {
 	const missionsObj = await client.mission.findMany({
@@ -46,7 +46,7 @@ export async function GET() {
 				};
 			})
 			.sort((a, b) => {
-				return a.name.localeCompare(b.name);
+				return withoutArticle(a.name).localeCompare(withoutArticle(b.name));
 			})
 	);
 

@@ -288,3 +288,11 @@ export function checkIfImageExists(url: string, callback: (exists: boolean) => v
 		};
 	}
 }
+
+export function withoutArticle(name: string): string {
+	return name.replace(/^the /i, '');
+}
+
+export function excludeArticleSort(a: string, b: string): number {
+	return withoutArticle(a).localeCompare(withoutArticle(b));
+}

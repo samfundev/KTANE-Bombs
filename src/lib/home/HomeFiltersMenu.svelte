@@ -4,7 +4,7 @@
 	import RadioButton from '$lib/controls/RadioButton.svelte';
 	import type { RepoModule } from '$lib/repo';
 	import { HomeOptions, MustHave, Operation } from '$lib/types';
-	import { getModule, parseInteger } from '$lib/util';
+	import { excludeArticleSort, getModule, parseInteger } from '$lib/util';
 	import { onMount, createEventDispatcher } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 
@@ -186,12 +186,12 @@
 					noList = [];
 					if (profile['DisabledList']) {
 						Object.assign(noList, profile['DisabledList']);
-						noList = noList.map(m => getModule(m, modules).Name).sort();
+						noList = noList.map(m => getModule(m, modules).Name).sort(excludeArticleSort);
 					}
 					yesList = [];
 					if (profile['EnabledList']) {
 						Object.assign(yesList, profile['EnabledList']);
-						yesList = yesList.map(m => getModule(m, modules).Name).sort();
+						yesList = yesList.map(m => getModule(m, modules).Name).sort(excludeArticleSort);
 					}
 
 					profile == profile;

@@ -1,7 +1,7 @@
 import client from '$lib/client';
 import { getData } from '$lib/repo';
 import { Completion, Permission, type ID } from '$lib/types';
-import { forbidden, hasPermission } from '$lib/util';
+import { excludeArticleSort, forbidden, hasPermission } from '$lib/util';
 import type { RequestEvent, ServerLoadEvent } from '@sveltejs/kit';
 import type { EditMission } from './_types';
 import { redirect, error } from '@sveltejs/kit';
@@ -84,7 +84,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			...missionResult,
 			variantOf: firstVariant?.name ?? ''
 		},
-		missionNames: missions.map(m => m.name).sort(),
+		missionNames: missions.map(m => m.name).sort(excludeArticleSort),
 		packs,
 		modules: await getData()
 	};

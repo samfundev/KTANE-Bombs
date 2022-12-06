@@ -2,7 +2,7 @@
 	import Dialog from '$lib/controls/Dialog.svelte';
 	import Input from '$lib/controls/Input.svelte';
 	import { Completion, IndividualCompletion, Mission, Permission, type FrontendUser } from '$lib/types';
-	import { getPersonColor, hasPermission } from '$lib/util';
+	import { getPersonColor, hasPermission, withoutArticle } from '$lib/util';
 	import UserPermissions from '../_UserPermissions.svelte';
 	import { page } from '$app/stores';
 	import MissionCompletionCard from '$lib/cards/MissionCompletionCard.svelte';
@@ -36,7 +36,7 @@
 
 	let missions: { [name: string]: IndividualCompletion } = {};
 	// Sort completions
-	completions.sort((a, b) => a.mission.name.localeCompare(b.mission.name));
+	completions.sort((a, b) => withoutArticle(a.mission.name).localeCompare(withoutArticle(b.mission.name)));
 	completions.forEach(c => {
 		let name = c.mission.name;
 		if (!(name in missions)) {
