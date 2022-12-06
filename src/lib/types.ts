@@ -65,6 +65,18 @@ export class Completion {
 	solo = false;
 }
 
+export class IndividualCompletion {
+	name: string = '';
+	nDefuser = 0;
+	nExpert = 0;
+	nEFM = 0;
+	nSolo = 0;
+	defuser = false;
+	expert = false;
+	efm = false;
+	solo = false;
+}
+
 export enum MustHave {
 	Either = 0,
 	Yes = 1,

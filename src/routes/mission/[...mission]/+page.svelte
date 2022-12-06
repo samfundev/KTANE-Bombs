@@ -49,19 +49,13 @@
 {#if mission.factory !== null}
 	<div class="block centered">Factory: {mission.factory}</div>
 {/if}
-<div class="block legend flex">
-	<span class="boss">Boss</span>
-	<span class="needy">Needy</span>
-	<span class="quirks">Quirky</span>
-	<div class="hspace" />
-	<span class="first-solve">First Solve</span>
-	<span style="background-color: {getPersonColor(2, 0, false)}; color:#000">Defuser</span>
-	<span style="background-color: {getPersonColor(2, 1, false)}; color:#000">Expert</span>
-	<span style="background-color: {getPersonColor(1, 0, false)}; color:#000">EFM</span>
-	<span style="background-color: {getPersonColor(1, 0, true)}; color:#000">Solo</span>
-</div>
 <div class="main-content">
 	<div class="bombs">
+		<div class="block legend flex">
+			<span class="boss">Boss/Semi-Boss</span>
+			<span class="needy">Needy</span>
+			<span class="quirks">Has Other Quirks</span>
+		</div>
 		{#each mission.bombs as bomb}
 			<div class="block">
 				{pluralize(bomb.modules, 'Module')} · {formatTime(bomb.time)} · {pluralize(bomb.strikes, 'Strike')} · {pluralize(
@@ -89,6 +83,13 @@
 		{/each}
 	</div>
 	<div class="flex column">
+		<div class="block legend flex">
+			<span class="first-solve">First Solve</span>
+			<span style="background-color: {getPersonColor(2, 0, false)}; color:#000">Defuser</span>
+			<span style="background-color: {getPersonColor(2, 1, false)}; color:#000">Expert</span>
+			<span style="background-color: {getPersonColor(1, 0, false)}; color:#000">EFM</span>
+			<span style="background-color: {getPersonColor(1, 0, true)}; color:#000">Solo</span>
+		</div>
 		<div class="block header">Solves</div>
 		<CompletionList {mission} />
 		{#each variants ?? [] as variant}
