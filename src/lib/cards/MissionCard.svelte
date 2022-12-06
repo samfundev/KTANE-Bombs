@@ -52,7 +52,7 @@
 		padding: 0 0 0 10px;
 		column-gap: 20px;
 
-		grid-template-columns: 1fr 15px;
+		grid-template-columns: 1fr 20px;
 		grid-template-rows: 10px auto auto 10px;
 		color: inherit;
 		text-decoration: inherit;
@@ -71,10 +71,10 @@
 		gap: 0;
 	}
 	.indicator > span {
-		font-size: 11.5px;
+		font-size: 12.5px;
 		text-align: center;
-		padding: 1px 0 0;
-		line-height: 1.1;
+		padding: 3px 2px 1px;
+		line-height: 1;
 	}
 	.hidden {
 		display: none;
