@@ -99,7 +99,8 @@
 				strk > options.strikes[1] ||
 				widg < options.widgets[0] ||
 				widg > options.widgets[1] ||
-				!meetsHave(numCompletions(ms) > 0, options.mustHave['has-been-solved']) ||
+				!meetsHave(numCompletions(ms, false) > 0, options.mustHave['has-team/efm-solve']) ||
+				!meetsHave(ms.tpSolve, options.mustHave['has-tp-solve']) ||
 				!meetsHave(ms.designedForTP, options.mustHave['designed-for-tp']) ||
 				!meetsHave(specialsInMission[name]['boss'].length > 0, options.mustHave['has-boss']) ||
 				!meetsHave(specialsInMission[name]['semi'].length > 0, options.mustHave['has-semi-boss']) ||
@@ -151,8 +152,8 @@
 		return rs.filter(x => x).length / rs.length;
 	}
 
-	function numCompletions(m: Mission) {
-		return m.completions.length + (m.tpSolve ? 1 : 0);
+	function numCompletions(m: Mission, countTP: boolean = true) {
+		return m.completions.length + (countTP && m.tpSolve ? 1 : 0);
 	}
 
 	function compare(
