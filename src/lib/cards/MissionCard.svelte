@@ -25,7 +25,7 @@
 {#if selectable}
 	<div class="selectable-card" bind:this={card} id={cardID}>
 		<input {id} type="checkbox" bind:checked={selected} />
-		<label for={id} class="mission" class:selected>
+		<label for={id} class="mission selectable" class:selected>
 			<MissionCardInner {mission} />
 		</label>
 	</div>
@@ -56,6 +56,12 @@
 		grid-template-rows: 10px auto auto 10px;
 		color: inherit;
 		text-decoration: inherit;
+	}
+	.mission.selectable {
+		padding: 10px;
+		padding-right: 0;
+		grid-template-columns: 1fr;
+		grid-template-rows: auto auto;
 	}
 
 	.indicator {

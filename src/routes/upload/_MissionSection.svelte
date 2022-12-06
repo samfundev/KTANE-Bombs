@@ -159,7 +159,7 @@
 							display={pack => (pack === null ? '' : pack.name)}
 							validate={pack => pack !== null}
 							required={selectedMissions[i]} />
-						<Checkbox id="designed-for-tp" label="Designed for TP" bind:checked={mission.designedForTP} sideLabel />
+						<Checkbox id="designed-for-tp-{i}" label="Designed for TP" bind:checked={mission.designedForTP} sideLabel />
 					</div>
 				</div>
 			{/each}
