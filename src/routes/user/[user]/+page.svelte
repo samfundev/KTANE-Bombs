@@ -108,7 +108,7 @@
 
 	let wrView = writable(byRole);
 	if (browser) {
-		byRole = JSON.parse(localStorage.getItem('user-solves-view') || viewOptions[0]);
+		byRole = JSON.parse(localStorage.getItem('user-solves-view') || JSON.stringify(viewOptions[0]));
 		wrView.subscribe(value => {
 			localStorage.setItem('user-solves-view', JSON.stringify(value));
 		});
