@@ -288,39 +288,3 @@ export function checkIfImageExists(url: string, callback: (exists: boolean) => v
 		};
 	}
 }
-
-export function linkIsVideo(link: string): boolean {
-	let url: URL | null = null;
-	try {
-		url = new URL(link);
-	} catch (e: any) {
-		return false;
-	}
-
-	let host = url.hostname.toLowerCase();
-	if (
-		host.includes('youtube.com') ||
-		host.includes('youtu.be') ||
-		host.includes('vimeo.com') ||
-		host.includes('twitch.tv') ||
-		host.includes('bilibili.com')
-	) {
-		return true;
-	}
-	return false;
-}
-
-export function linkIsLogfile(link: string): boolean {
-	let url: URL | null = null;
-	try {
-		url = new URL(link);
-	} catch (e: any) {
-		return false;
-	}
-
-	let path = url.pathname.toLowerCase();
-	if (url.hostname.includes('ktane.timwi.de') && (path.includes('more/logfile') || path.includes('lfa'))) {
-		return true;
-	}
-	return false;
-}
