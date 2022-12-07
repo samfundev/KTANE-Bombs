@@ -4,6 +4,7 @@
 	export let label: string;
 	export let options: any[];
 	export let display = (obj: any) => obj.toString();
+	export let sideLabel: boolean = false;
 
 	const handleInput = (e: Event & { currentTarget: EventTarget & HTMLSelectElement }) => {
 		let newValue = e.currentTarget.value;
@@ -16,7 +17,7 @@
 	};
 </script>
 
-<div>
+<div class={sideLabel ? 'hstack' : 'vstack'}>
 	<label for={id}>
 		{label}
 		<slot />
@@ -37,5 +38,15 @@
 		color: white;
 		width: 100%;
 		box-sizing: border-box;
+	}
+	.hstack {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 3px;
+	}
+	.vstack {
+		display: flex;
+		flex-direction: column;
 	}
 </style>

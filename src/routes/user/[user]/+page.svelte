@@ -1,20 +1,27 @@
 <script lang="ts">
 	import Dialog from '$lib/controls/Dialog.svelte';
 	import Input from '$lib/controls/Input.svelte';
+	import Select from '$lib/controls/Select.svelte';
 	import { Completion, IndividualCompletion, Mission, Permission, type FrontendUser } from '$lib/types';
-	import { getPersonColor, hasPermission, withoutArticle } from '$lib/util';
+	import { getPersonColor, hasPermission, onlyUnique, withoutArticle } from '$lib/util';
 	import UserPermissions from '../_UserPermissions.svelte';
 	import { page } from '$app/stores';
 	import MissionCompletionCard from '$lib/cards/MissionCompletionCard.svelte';
+	import { browser } from '$app/environment';
 	export let data;
+	let stats: { distinct: number; defuser: number; expert: number; efm: number } = data.stats;
 	let username: string = data.username;
 	let shownUser: FrontendUser | null = data.shownUser;
-	let completions: (Pick<Completion, 'team' | 'solo'> & { mission: { name: string } })[] = data.completions;
+	type MissionCompletion = Pick<Completion, 'team' | 'solo'> & { mission: { name: string } };
+	let completions: MissionCompletion[] = data.completions;
 
 	let newUsername = username;
 	const oldUsername = username;
 
 	let dialog: HTMLDialogElement;
+
+	const viewOptions = ['Alphabetical', 'By Role'];
+	let byRole = viewOptions[0];
 
 	async function editName() {
 		const response = await fetch('/user/rename', {
@@ -35,6 +42,7 @@
 	}
 
 	let missions: { [name: string]: IndividualCompletion } = {};
+	let missionsNames: { [name: string]: MissionCompletion[] } = {};
 	// Sort completions
 	completions.sort((a, b) => withoutArticle(a.mission.name).localeCompare(withoutArticle(b.mission.name)));
 	completions.forEach(c => {
@@ -61,6 +69,45 @@
 			}
 		}
 	});
+	function filterUnique(item: MissionCompletion, pos: number, self: MissionCompletion[]): boolean {
+		return self.findIndex(c => c.mission.name == item.mission.name) == pos;
+	}
+
+	function selectSolveType(key: string, comp: IndividualCompletion): number {
+		switch (key) {
+			case 'Defuser':
+				return comp.nDefuser;
+			case 'Expert':
+				return comp.nExpert;
+			case 'EFM':
+				return comp.nEFM;
+			case 'Solo':
+				return comp.nSolo;
+			default:
+				return 1;
+		}
+	}
+
+	missionsNames['Defuser + Expert + EFM'] = Object.entries(missions)
+		.map(([name, c]) => (c.defuser && c.expert && c.efm ? completions.find(comp => comp.mission.name == name) : null))
+		.flatMap(m => m ?? []);
+	missionsNames['Defuser'] = [];
+	missionsNames['Expert'] = [];
+	missionsNames['EFM'] = [];
+	missionsNames['Solo'] = [];
+	completions.forEach(c => {
+		if (c.team.length === 1) {
+			if (c.solo) missionsNames['Solo'].push(c);
+			else missionsNames['EFM'].push(c);
+		} else {
+			if (c.team.indexOf(username) == 0) missionsNames['Defuser'].push(c);
+			else missionsNames['Expert'].push(c);
+		}
+	});
+	// missionsNames['Defuser'] = missionsNames['Defuser'].filter(filterUnique);
+	// missionsNames['Expert'] = missionsNames['Expert'].filter(filterUnique);
+	// missionsNames['EFM'] = missionsNames['EFM'].filter(filterUnique);
+	// missionsNames['Solo'] = missionsNames['Solo'].filter(filterUnique);
 </script>
 
 <svelte:head>
@@ -68,19 +115,56 @@
 </svelte:head>
 
 <h1 class="header">{username}</h1>
+<div class="table">
+	<b class="block" title="Number of distinct missions solved.">Distinct</b>
+	<b class="block" title="Number of missions solved (including duplicates).">Total</b>
+	<b class="block">Defuser</b>
+	<b class="block">Expert</b>
+	<b class="block">EFM</b>
+	<div class="block">{stats.distinct}</div>
+	<div class="block">{stats.defuser + stats.expert + stats.efm}</div>
+	<div class="block">{stats.defuser}</div>
+	<div class="block">{stats.expert}</div>
+	<div class="block">{stats.efm}</div>
+</div>
 <div class="block legend flex">
-	<span class="green" style="background-color: #00ff005A">Def & Exp & EFM</span>
+	<span class="green" style="background-color: #00ff0044">Defuser + Expert + EFM</span>
 	<span style="background-color: {getPersonColor(2, 0, false)}">Defuser</span>
 	<span style="background-color: {getPersonColor(2, 1, false)}">Expert</span>
 	<span style="background-color: {getPersonColor(1, 0, false)}">EFM</span>
 	<span style="background-color: {getPersonColor(1, 0, true)}">Solo</span>
+	<div style="width:30px" />
+	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={byRole} />
 </div>
 <div class="block"><h2>Solves</h2></div>
-<div class="solves flex grow">
-	{#each Object.entries(missions) as [_, mission]}
-		<MissionCompletionCard {mission} />
+{#if byRole == viewOptions[1]}
+	{#each Object.entries(missionsNames) as [key, compList]}
+		{#if compList.length > 0}
+			<div class="block"><h4>{key}: {compList.filter(filterUnique).length} solves</h4></div>
+			<div class="solves flex grow">
+				{#each compList.filter(filterUnique) as comp}
+					<a href="/mission/{encodeURIComponent(comp.mission.name)}" class:green={key.includes('+')}>
+						<div
+							class="block"
+							style:background-color={key.includes('+')
+								? '#00ff0044'
+								: getPersonColor(comp.team.length, comp.team.indexOf(username), comp.solo)}>
+							<span class="mission-name">{comp.mission.name}</span>
+							<span class:hidden={selectSolveType(key, missions[comp.mission.name]) < 2}
+								>×{selectSolveType(key, missions[comp.mission.name])}</span>
+						</div>
+					</a>
+				{/each}
+			</div>
+		{/if}
 	{/each}
-</div>
+{:else}
+	<div class="solves flex grow">
+		{#each Object.values(missions) as mission}
+			<MissionCompletionCard {mission} {username} />
+		{/each}
+	</div>
+{/if}
 {#if hasPermission($page.data.user, Permission.RenameUser)}
 	<div class="block flex column content-width">
 		<button on:click={() => dialog.showModal()}>Edit Name</button>
@@ -105,7 +189,20 @@
 {/if}
 
 <style>
-	h2 {
+	.table {
+		display: grid;
+		grid-template-columns: auto auto auto auto auto;
+		gap: var(--gap);
+		text-align: center;
+	}
+
+	.table b.block {
+		position: sticky;
+		top: calc(1.25em + 4 * var(--gap) + 2px);
+	}
+
+	h2,
+	h4 {
 		margin: 0;
 	}
 
@@ -123,6 +220,18 @@
 		gap: var(--gap);
 		align-content: start;
 		white-space: nowrap;
+	}
+	a {
+		text-decoration: none;
+	}
+	a span.mission-name {
+		text-decoration: underline;
+	}
+	a.green {
+		background-color: var(--foreground);
+	}
+	a span.hidden {
+		display: none;
 	}
 	.legend .green {
 		color: var(--text-color);
