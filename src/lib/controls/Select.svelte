@@ -1,10 +1,14 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+
 	export let id: string;
 	export let value: any;
 	export let label: string;
 	export let options: any[];
 	export let display = (obj: any) => obj.toString();
 	export let sideLabel: boolean = false;
+
+	const dispatch = createEventDispatcher();
 
 	const handleInput = (e: Event & { currentTarget: EventTarget & HTMLSelectElement }) => {
 		let newValue = e.currentTarget.value;
@@ -14,6 +18,7 @@
 				return;
 			}
 		}
+		dispatch('input');
 	};
 </script>
 
@@ -22,7 +27,7 @@
 		{label}
 		<slot />
 	</label>
-	<select {id} on:input={handleInput}>
+	<select {id} on:change on:input={handleInput}>
 		{#each options as option}
 			<option selected={option === value}>{display(option)}</option>
 		{/each}
@@ -31,11 +36,11 @@
 
 <style>
 	select {
-		background-color: rgb(15, 15, 15);
+		background-color: var(--textbox-background);
 		padding: var(--gap);
 		border: none;
 		border-radius: 5px;
-		color: white;
+		color: var(--textbox-text-color);
 		width: 100%;
 		box-sizing: border-box;
 	}

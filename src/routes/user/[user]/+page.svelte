@@ -8,6 +8,7 @@
 	import { page } from '$app/stores';
 	import MissionCompletionCard from '$lib/cards/MissionCompletionCard.svelte';
 	import { browser } from '$app/environment';
+	import { writable } from 'svelte/store';
 	export let data;
 	let stats: { distinct: number; defuser: number; expert: number; efm: number } = data.stats;
 	let username: string = data.username;
@@ -21,7 +22,7 @@
 	let dialog: HTMLDialogElement;
 
 	const viewOptions = ['Alphabetical', 'By Role'];
-	let byRole = viewOptions[0];
+	let byRole = '';
 
 	async function editName() {
 		const response = await fetch('/user/rename', {
@@ -104,6 +105,19 @@
 			else missionsNames['Expert'].push(c);
 		}
 	});
+
+	let wrView = writable(byRole);
+	if (browser) {
+		byRole = JSON.parse(localStorage.getItem('user-solves-view') || viewOptions[0]);
+		wrView.subscribe(value => {
+			localStorage.setItem('user-solves-view', JSON.stringify(value));
+		});
+		storeView();
+	}
+	function storeView() {
+		wrView.set(byRole);
+	}
+
 	// missionsNames['Defuser'] = missionsNames['Defuser'].filter(filterUnique);
 	// missionsNames['Expert'] = missionsNames['Expert'].filter(filterUnique);
 	// missionsNames['EFM'] = missionsNames['EFM'].filter(filterUnique);
@@ -134,14 +148,14 @@
 	<span style="background-color: {getPersonColor(1, 0, false)}">EFM</span>
 	<span style="background-color: {getPersonColor(1, 0, true)}">Solo</span>
 	<div style="width:30px" />
-	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={byRole} />
+	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={byRole} on:change={storeView} />
 </div>
 <div class="block"><h2>Solves</h2></div>
 {#if byRole == viewOptions[1]}
 	{#each Object.entries(missionsNames) as [key, compList]}
 		{#if compList.length > 0}
 			<div class="block"><h4>{key}: {compList.filter(filterUnique).length} solves</h4></div>
-			<div class="solves flex grow">
+			<div class="solves role flex grow">
 				{#each compList.filter(filterUnique) as comp}
 					<a href="/mission/{encodeURIComponent(comp.mission.name)}" class:green={key.includes('+')}>
 						<div
@@ -208,12 +222,19 @@
 
 	.legend {
 		justify-content: center;
-		color: #000;
 	}
 	.legend > span {
 		padding: var(--gap);
+		color: #000;
 	}
 
+	.solves > a {
+		background-color: var(--foreground);
+		color: var(--text-color);
+	}
+	.solves.role > a:not(.green) {
+		color: #000;
+	}
 	.solves {
 		display: flex;
 		flex-wrap: wrap;
