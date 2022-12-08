@@ -22,5 +22,6 @@
 <style>
 	a {
 		text-decoration: none;
+		color: var(--text-color);
 	}
 </style>

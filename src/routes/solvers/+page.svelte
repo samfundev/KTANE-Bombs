@@ -37,6 +37,10 @@
 
 	.table b.block {
 		position: sticky;
-		top: calc(1.25em + 4 * var(--gap) + 2px);
+		top: var(--stick-under-navbar);
+	}
+
+	a {
+		color: var(--text-color);
 	}
 </style>

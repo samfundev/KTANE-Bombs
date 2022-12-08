@@ -168,6 +168,8 @@
 
 	.legend {
 		justify-content: center;
+		position: sticky;
+		top: var(--stick-under-navbar);
 	}
 	.legend > span {
 		padding: var(--gap);

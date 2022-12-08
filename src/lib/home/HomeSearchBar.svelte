@@ -319,7 +319,7 @@
 	.search-bar {
 		position: sticky;
 		background: var(--foreground);
-		top: 44px;
+		top: calc(var(--stick-under-navbar) + 1px);
 		justify-content: center;
 		gap: 3px;
 		padding: 5px 0;

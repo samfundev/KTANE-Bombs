@@ -55,6 +55,7 @@
 		--blue-link-color: blue;
 		--blue-link-visited-color: rgb(156, 34, 232);
 		--accent: #bc421e;
+		--stick-under-navbar: calc(1.25em + 4 * var(--gap) + 2px);
 	}
 
 	@media (prefers-color-scheme: dark) {

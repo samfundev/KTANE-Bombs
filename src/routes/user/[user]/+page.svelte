@@ -153,16 +153,12 @@
 
 <h1 class="header">{username}</h1>
 <div class="table">
-	<b class="block" title="Number of distinct missions solved.">Distinct</b>
-	<b class="block" title="Number of missions solved (including duplicates).">Total</b>
-	<b class="block" title="Including solos">Defuser</b>
-	<b class="block">Expert</b>
-	<b class="block">EFM</b>
-	<div class="block">{stats.distinct}</div>
-	<div class="block">{stats.defuser + stats.expert + stats.efm}</div>
-	<div class="block">{stats.defuser}</div>
-	<div class="block">{stats.expert}</div>
-	<div class="block">{stats.efm}</div>
+	<b class="block" title="Number of distinct missions solved.">Distinct: {stats.distinct}</b>
+	<b class="block" title="Number of missions solved (including duplicates)."
+		>Total: {stats.defuser + stats.expert + stats.efm}</b>
+	<b class="block" title="Including solos">Defuser: {stats.defuser}</b>
+	<b class="block">Expert: {stats.expert}</b>
+	<b class="block">EFM: {stats.efm}</b>
 </div>
 <div class="block legend flex">
 	<span class="green" style="background-color: #00ff0044">Defuser + Expert + EFM</span>
@@ -240,11 +236,6 @@
 		text-align: center;
 	}
 
-	.table b.block {
-		position: sticky;
-		top: calc(1.25em + 4 * var(--gap) + 2px);
-	}
-
 	h2,
 	h4 {
 		margin: 0;
@@ -252,7 +243,8 @@
 
 	.legend {
 		justify-content: center;
-		position: relative;
+		position: sticky;
+		top: var(--stick-under-navbar);
 	}
 	.legend > span {
 		padding: var(--gap);
