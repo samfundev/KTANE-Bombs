@@ -40,8 +40,10 @@ export const load = async function ({ params }: any) {
 	let completer = {
 		distinct: new Set(),
 		defuser: new Set(),
+		defuserOnly: new Set(),
 		expert: new Set(),
-		efm: new Set()
+		efm: new Set(),
+		solo: new Set()
 	};
 	for (const completion of completions) {
 		for (const [index, name] of completion.team.entries()) {
@@ -52,6 +54,8 @@ export const load = async function ({ params }: any) {
 					completer.efm.add(missionKey);
 				} else if (index === 0) {
 					completer.defuser.add(missionKey);
+					if (completion.team.length === 1 && completion.solo) completer.solo.add(missionKey);
+					else completer.defuserOnly.add(missionKey);
 				} else {
 					completer.expert.add(missionKey);
 				}
@@ -71,8 +75,10 @@ export const load = async function ({ params }: any) {
 		stats: {
 			distinct: completer.distinct.size,
 			defuser: completer.defuser.size,
+			defuserOnly: completer.defuserOnly.size,
 			expert: completer.expert.size,
-			efm: completer.efm.size
+			efm: completer.efm.size,
+			solo: completer.solo.size
 		}
 	};
 };

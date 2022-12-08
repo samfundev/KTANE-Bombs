@@ -3,17 +3,26 @@
 	import Input from '$lib/controls/Input.svelte';
 	import Select from '$lib/controls/Select.svelte';
 	import { Completion, IndividualCompletion, Mission, Permission, type FrontendUser } from '$lib/types';
-	import { getPersonColor, hasPermission, onlyUnique, withoutArticle } from '$lib/util';
+	import { getPersonColor, hasPermission, onlyUnique, pluralize, withoutArticle } from '$lib/util';
 	import UserPermissions from '../_UserPermissions.svelte';
 	import { page } from '$app/stores';
 	import MissionCompletionCard from '$lib/cards/MissionCompletionCard.svelte';
 	import { browser } from '$app/environment';
 	import { writable } from 'svelte/store';
 	export let data;
-	let stats: { distinct: number; defuser: number; expert: number; efm: number } = data.stats;
+
+	type SolveStats = {
+		distinct: number;
+		defuser: number;
+		defuserOnly: number;
+		expert: number;
+		efm: number;
+		solo: number;
+	};
+	type MissionCompletion = Pick<Completion, 'team' | 'solo'> & { mission: { name: string } };
+	let stats: SolveStats = data.stats;
 	let username: string = data.username;
 	let shownUser: FrontendUser | null = data.shownUser;
-	type MissionCompletion = Pick<Completion, 'team' | 'solo'> & { mission: { name: string } };
 	let completions: MissionCompletion[] = data.completions;
 
 	let newUsername = username;
@@ -74,7 +83,7 @@
 		return self.findIndex(c => c.mission.name == item.mission.name) == pos;
 	}
 
-	function selectSolveType(key: string, comp: IndividualCompletion): number {
+	function selectSolveCount(key: string, comp: IndividualCompletion): number {
 		switch (key) {
 			case 'Defuser':
 				return comp.nDefuser;
@@ -88,14 +97,28 @@
 				return 1;
 		}
 	}
+	function selectDistinctSolveCount(key: string, stat: SolveStats): number {
+		switch (key) {
+			case 'Defuser':
+				return stat.defuserOnly;
+			case 'Expert':
+				return stat.expert;
+			case 'EFM':
+				return stat.efm;
+			case 'Solo':
+				return stat.solo;
+			default:
+				return 0;
+		}
+	}
 
 	missionsNames['Defuser + Expert + EFM'] = Object.entries(missions)
 		.map(([name, c]) => (c.defuser && c.expert && c.efm ? completions.find(comp => comp.mission.name == name) : null))
 		.flatMap(m => m ?? []);
+	missionsNames['Solo'] = [];
 	missionsNames['Defuser'] = [];
 	missionsNames['Expert'] = [];
 	missionsNames['EFM'] = [];
-	missionsNames['Solo'] = [];
 	completions.forEach(c => {
 		if (c.team.length === 1) {
 			if (c.solo) missionsNames['Solo'].push(c);
@@ -132,7 +155,7 @@
 <div class="table">
 	<b class="block" title="Number of distinct missions solved.">Distinct</b>
 	<b class="block" title="Number of missions solved (including duplicates).">Total</b>
-	<b class="block">Defuser</b>
+	<b class="block" title="Including solos">Defuser</b>
 	<b class="block">Expert</b>
 	<b class="block">EFM</b>
 	<div class="block">{stats.distinct}</div>
@@ -143,20 +166,28 @@
 </div>
 <div class="block legend flex">
 	<span class="green" style="background-color: #00ff0044">Defuser + Expert + EFM</span>
+	<span style="background-color: {getPersonColor(1, 0, true)}">Solo</span>
 	<span style="background-color: {getPersonColor(2, 0, false)}">Defuser</span>
 	<span style="background-color: {getPersonColor(2, 1, false)}">Expert</span>
 	<span style="background-color: {getPersonColor(1, 0, false)}">EFM</span>
-	<span style="background-color: {getPersonColor(1, 0, true)}">Solo</span>
-	<div style="width:30px" />
-	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={byRole} on:change={storeView} />
+	<div class="right-side">
+		<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={byRole} on:change={storeView} />
+	</div>
 </div>
 <div class="block"><h2>Solves</h2></div>
 {#if byRole == viewOptions[1]}
 	{#each Object.entries(missionsNames) as [key, compList]}
 		{#if compList.length > 0}
-			<div class="block"><h4>{key}: {compList.filter(filterUnique).length} solves</h4></div>
+			{@const dist = selectDistinctSolveCount(key, stats)}
+			<div class="block">
+				<h4>
+					<span>{key}: {pluralize(compList.length, 'solve')}</span>
+					<span class:hidden={key.includes('+') || dist == compList.length}>[{dist} distinct]</span>
+				</h4>
+			</div>
 			<div class="solves role flex grow">
 				{#each compList.filter(filterUnique) as comp}
+					{@const solveCount = selectSolveCount(key, missions[comp.mission.name])}
 					<a href="/mission/{encodeURIComponent(comp.mission.name)}" class:green={key.includes('+')}>
 						<div
 							class="block"
@@ -164,8 +195,7 @@
 								? '#00ff0044'
 								: getPersonColor(comp.team.length, comp.team.indexOf(username), comp.solo)}>
 							<span class="mission-name">{comp.mission.name}</span>
-							<span class:hidden={selectSolveType(key, missions[comp.mission.name]) < 2}
-								>×{selectSolveType(key, missions[comp.mission.name])}</span>
+							<span class:hidden={solveCount < 2}>×{solveCount}</span>
 						</div>
 					</a>
 				{/each}
@@ -222,10 +252,18 @@
 
 	.legend {
 		justify-content: center;
+		position: relative;
 	}
 	.legend > span {
 		padding: var(--gap);
 		color: #000;
+	}
+	.legend .green {
+		color: var(--text-color);
+	}
+	.right-side {
+		position: absolute;
+		right: var(--gap);
 	}
 
 	.solves > a {
@@ -251,10 +289,8 @@
 	a.green {
 		background-color: var(--foreground);
 	}
-	a span.hidden {
+	a span.hidden,
+	h4 span.hidden {
 		display: none;
-	}
-	.legend .green {
-		color: var(--text-color);
 	}
 </style>
