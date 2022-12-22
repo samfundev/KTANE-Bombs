@@ -33,7 +33,8 @@ export const load = async function ({ params }: any) {
 		where: {
 			team: {
 				has: params.user
-			}
+			},
+			verified: true
 		}
 	});
 

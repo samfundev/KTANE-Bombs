@@ -11,7 +11,11 @@ export async function GET() {
 			authors: true,
 			bombs: true,
 			tpSolve: true,
-			completions: true
+			completions: {
+				where: {
+					verified: true
+				}
+			}
 		}
 	});
 	let result = JSON.stringify(

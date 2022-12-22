@@ -14,7 +14,11 @@ export const load: PageServerLoad = async function () {
 			designedForTP: true,
 			tpSolve: true,
 			factory: true,
-			completions: true
+			completions: {
+				where: {
+					verified: true
+				}
+			}
 		}
 	});
 

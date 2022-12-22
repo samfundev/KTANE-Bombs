@@ -13,7 +13,11 @@ export async function GET() {
 			bombs: true,
 			designedForTP: true,
 			tpSolve: true,
-			completions: true
+			completions: {
+				where: {
+					verified: true
+				}
+			}
 		}
 	});
 

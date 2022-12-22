@@ -14,6 +14,9 @@ export const load: PageServerLoad = async function () {
 			},
 			team: true,
 			solo: true
+		},
+		where: {
+			verified: true
 		}
 	});
 
