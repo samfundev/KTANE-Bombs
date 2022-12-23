@@ -87,9 +87,10 @@ export class HomeOptions {
 	checks: { [k: string]: boolean } = {};
 	modules: { [k: string]: any } = {};
 	numMods = [1, 600];
-	time = [1, 1500];
+	time = [1, 1600];
 	strikes = [1, 150];
 	widgets = [0, 40];
+	numBombs = [1, 30];
 	profPerc = [80];
 	mustHave: { [k: string]: MustHave } = {};
 }

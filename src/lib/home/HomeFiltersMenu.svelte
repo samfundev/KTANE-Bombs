@@ -33,12 +33,13 @@
 		'Has Needy',
 		'Designed for TP'
 	];
-	let sortOptions = ['Alphabetical', 'Module Count', 'Bomb Time', 'Solves', 'Rule Seeded Mods %'];
+	let sortOptions = ['Alphabetical', 'Module Count', 'Bomb Time', 'Solves', 'Bomb Count', 'Rule Seeded Mods %'];
 	let limitDef: { [k: string]: number[] } = {
 		mods: [1, 600],
-		time: [1, 1500],
+		time: [1, 1600],
 		strk: [1, 150],
 		widg: [0, 40],
+		bmbs: [1, 30],
 		prof: [80]
 	};
 	let checkDef: { [k: string]: boolean } = {
@@ -101,6 +102,7 @@
 		Object.assign(op.numMods, limits['mods']);
 		Object.assign(op.strikes, limits['strk']);
 		Object.assign(op.widgets, limits['widg']);
+		Object.assign(op.numBombs, limits['bmbs']);
 		Object.assign(op.profPerc, limits['prof']);
 		Object.assign(op.modules, profile);
 		dispatch('update', {
@@ -380,6 +382,29 @@
 					on:change={setOption} />
 			</div>
 			<div class="vspace" />
+			<span>Bombs</span>
+			<div class="flex">
+				<Input
+					required
+					name="option-bmsl"
+					id="option-bmsl"
+					bind:value={limits['bmbs'][0]}
+					classes="limits"
+					parse={parseInteger}
+					validate={intnan}
+					on:change={setOption} />
+				<span class="through" />
+				<Input
+					required
+					name="option-bmsu"
+					id="option-bmsu"
+					bind:value={limits['bmbs'][1]}
+					classes="limits"
+					parse={parseInteger}
+					validate={intnan}
+					on:change={setOption} />
+			</div>
+			<div class="vspace" />
 			<Checkbox
 				id="option-persist-searchtext"
 				label="Persist Query"
@@ -614,7 +639,7 @@
 	}
 	.center-divider {
 		width: 0;
-		height: 285px;
+		height: 310px;
 		border: 1px solid var(--light-text-color);
 		margin: 0 0.8em;
 	}

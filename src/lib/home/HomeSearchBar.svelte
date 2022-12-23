@@ -108,6 +108,8 @@
 				strk > options.strikes[1] ||
 				widg < options.widgets[0] ||
 				widg > options.widgets[1] ||
+				ms.bombs.length < options.numBombs[0] ||
+				ms.bombs.length > options.numBombs[1] ||
 				!meetsHave(numCompletions(ms, false) > 0, options.mustHave['has-team/efm-solve']) ||
 				!meetsHave(ms.tpSolve, options.mustHave['has-tp-solve']) ||
 				!meetsHave(ms.designedForTP, options.mustHave['designed-for-tp']) ||
@@ -151,7 +153,7 @@
 	}
 
 	function timeSum(m: Mission) {
-		return Math.max(...m.bombs.map(b => b.time));
+		return m.bombs.map(b => b.time).reduce((a, b) => a + b, 0);
 	}
 	function modSum(m: Mission) {
 		return m.bombs.map(b => b.modules).reduce((a, b) => a + b, 0);
@@ -169,7 +171,7 @@
 		a: Mission,
 		b: Mission,
 		primary: (m: Mission) => number,
-		secondary: (m: Mission) => number
+		secondary: (m: Mission) => number | string
 	): boolean {
 		let diff = primary(a) - primary(b);
 		if (diff > 0) return true;
@@ -213,6 +215,9 @@
 					break;
 				case 'solves':
 					missions.sort((a, b) => (compare(a, b, numCompletions, timeSum) != reverse ? 1 : -1));
+					break;
+				case 'bomb-count':
+					missions.sort((a, b) => (compare(a, b, m => m.bombs.length, timeSum) != reverse ? 1 : -1));
 					break;
 				case 'rule-seeded-mods-%':
 					fastSort = delayModulesCalculation(

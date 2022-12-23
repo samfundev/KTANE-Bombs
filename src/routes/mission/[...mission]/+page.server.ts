@@ -16,7 +16,11 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			name: true,
 			authors: true,
 			verified: true,
-			bombs: true,
+			bombs: {
+				orderBy: {
+					id: 'asc'
+				}
+			},
 			completions: {
 				where: {
 					verified: true

@@ -203,7 +203,7 @@
 				</div>
 			{/each}
 		</div>
-		{#if Object.values(selectedMissions).some(a => a) && Object.values(selectedMissions).every((e, i) => e != missionNameError[i])}
+		{#if Object.values(selectedMissions).some(a => a) && Object.values(selectedMissions).every((e, i) => !(e && missionNameError[i]))}
 			<div class="block">
 				<button type="submit"
 					>Upload Mission{Object.values(selectedMissions).filter(a => a).length == 1 ? '' : 's'}</button>
