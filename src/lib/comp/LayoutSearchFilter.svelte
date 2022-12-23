@@ -1,13 +1,15 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import Input from '$lib/controls/Input.svelte';
 	import TextArea from '$lib/controls/TextArea.svelte';
-	import { onMount, createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 
 	export let id: string;
 	export let label: string = 'Find:';
 	export let items: { [name: string]: any };
 	export let filterFunc: (itemKey: string, text: string) => boolean;
 	export let searchText: string = '';
+	export let rawSearchText: string = '';
 	export let title: string = '';
 	export let textArea: boolean = false;
 	export let rows: number = 2;
@@ -19,11 +21,11 @@
 
 	const dispatch = createEventDispatcher();
 	let searchField: HTMLInputElement | null;
-	let rawSearchText: string = '';
 
 	function clearSearch() {
 		rawSearchText = '';
 		updateSearch();
+		dispatch('change');
 		searchField?.focus();
 	}
 
@@ -44,12 +46,10 @@
 			} else items[item]?.classList.add('search-filtered-out');
 		});
 		searching = false;
-		dispatch('change');
+		dispatch('input');
 	}
 
-	onMount(() => {
-		searchField = <HTMLInputElement>document.getElementById(id);
-	});
+	if (browser) searchField = <HTMLInputElement>document.getElementById(id);
 </script>
 
 {#if textArea}
@@ -61,6 +61,7 @@
 		sideLabel
 		classes="search-field {classes}"
 		on:input={updateSearch}
+		on:change
 		{autoExpand}
 		{rows}
 		bind:value={rawSearchText} />
@@ -73,6 +74,7 @@
 		sideLabel
 		classes="search-field {classes}"
 		on:input={updateSearch}
+		on:change
 		bind:value={rawSearchText} />
 {/if}
 <div class="search-field-clear dark-invert" on:click={clearSearch} />

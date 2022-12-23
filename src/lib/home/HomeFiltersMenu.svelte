@@ -42,7 +42,8 @@
 		prof: [80]
 	};
 	let checkDef: { [k: string]: boolean } = {
-		'sort-reverse': false
+		'sort-reverse': false,
+		'persist-searchtext': true
 	};
 	let opExplain =
 		'Expert: A minimum percent of mods in the mission must be found in the "Yes" list\n' +
@@ -379,6 +380,12 @@
 					on:change={setOption} />
 			</div>
 			<div class="vspace" />
+			<Checkbox
+				id="option-persist-searchtext"
+				label="Persist Query"
+				bind:checked={checks['persist-searchtext']}
+				sideLabel
+				on:change={setOption} />
 		</div>
 		<div class="center-divider" />
 		<div>

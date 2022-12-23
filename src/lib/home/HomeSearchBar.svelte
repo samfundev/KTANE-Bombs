@@ -30,6 +30,7 @@
 	let lStore: { [k: string]: Writable<any | null> } = {};
 	let searchOptions: string[];
 	let searchField: HTMLInputElement | null;
+	let searchText: string;
 	let filters: HTMLDivElement;
 	let filterTab: HTMLDivElement;
 	let layoutSearch: LayoutSearchFilter;
@@ -57,7 +58,7 @@
 			return validSearchOptions[idx];
 		});
 		searchOptions = options;
-		lStore['searchOptions'].set(searchOptions);
+		lStore['home-search-options'].set(searchOptions);
 		searchOptionBoxes.forEach((o, i) => {
 			validSearchOptions[i] = searchOptions.includes(o);
 		});
@@ -243,6 +244,9 @@
 	export const updateSearch = () => {
 		layoutSearch.updateSearch();
 	};
+	function storeSearchText() {
+		if (options.checks['persist-searchtext']) lStore['home-previous-search-text'].set(searchText);
+	}
 
 	onMount(() => {
 		searchField = <HTMLInputElement>document.getElementById('bomb-search-field');
@@ -250,7 +254,9 @@
 		document.onclick = () => {
 			prevDisap = disappear(prevDisap);
 		};
-		let op = localStorage.getItem('searchOptions');
+		let op = localStorage.getItem('home-search-options');
+		if (options.checks['persist-searchtext'])
+			searchText = JSON.parse(localStorage.getItem('home-previous-search-text') || JSON.stringify(''));
 		searchOptions = JSON.parse(op || '[]');
 		if (searchOptions.length > 0)
 			searchOptionBoxes.forEach((o, i) => {
@@ -262,7 +268,9 @@
 			});
 			searchOptions = searchOptionBoxes.filter((_, i) => validSearchOptions[i]);
 		}
-		localSubscribe(searchOptions, 'searchOptions');
+		localSubscribe(searchOptions, 'home-search-options');
+		localSubscribe(searchText, 'home-previous-search-text');
+		storeSearchText();
 		missions.forEach(m => {
 			modulesInMission[m.name] = m.bombs
 				.map((b: Bomb) => b.pools.map(p => p.modules.filter(onlyUnique)))
@@ -272,6 +280,7 @@
 		missions.forEach(m => {
 			specialsInMission[m.name] = separateSpecialModules(m.name);
 		});
+		options.checks['persist-searchtext'];
 		updateSearch();
 	});
 </script>
@@ -283,12 +292,14 @@
 		id="bomb-search-field"
 		label="Search:"
 		title={searchTooltip}
-		textArea
 		rows={1}
+		textArea
 		autoExpand
+		bind:rawSearchText={searchText}
 		bind:items={missionCards}
 		filterFunc={bombSearchFilter}
 		classes="help"
+		on:change={storeSearchText}
 		bind:numResults={resultsText}
 		bind:this={layoutSearch} />
 
