@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Input from '$lib/controls/Input.svelte';
+	import Select from '$lib/controls/Select.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import { Bomb, Pool, type MissionPackSelection, type MissionWithPack } from '$lib/types';
 	import { reservedSearchStrings } from '$lib/util';
@@ -37,7 +38,7 @@
 					authors: [],
 					designedForTP: false,
 					tpSolve: false,
-					factory: '',
+					factory: null,
 					missionPack: null
 				};
 
@@ -64,18 +65,21 @@
 					const count = parseInt(match[2]);
 
 					const modules = match[1].split(', ');
-					// If the sources are listed, update the "module" to include the source.
-					const sources = match[3]?.split(', ');
-					if (sources !== undefined && sources.length === 1) {
-						const source = sources[0] == 'Modded' ? 'MODS' : 'VANILLA';
-						modules[0] = `ALL_${source}_${modules[0].substring(4)}`;
-					}
+					if (!modules[0].toLowerCase().startsWith('multiple bombs')) {
+						// If the sources are listed, update the "module" to include the source.
+						const sources = match[3]?.split(', ');
+						if (sources !== undefined && sources.length === 1) {
+							const source = sources[0] == 'Modded' ? 'MODS' : 'VANILLA';
+							modules[0] = `ALL_${source}_${modules[0].substring(4)}`;
+						}
 
-					bomb.pools.push(new Pool(modules, count));
-					bomb.modules += count;
+						bomb.pools.push(new Pool(modules, count));
+						bomb.modules += count;
+					}
 				}
 
 				mission.bombs.push(bomb);
+				if (mission.bombs.length > 1) mission.factory = 'Sequence';
 			} else if (line.startsWith('[WidgetGenerator] Added widget: ') && bomb !== null) {
 				bomb.widgets++;
 			} else if (line.startsWith('[Tweaks] LFAEvent ') && mission !== null) {
@@ -174,19 +178,26 @@
 						<Input
 							name="Authors"
 							label="Authors"
-							id="mission-authors"
+							id="mission-authors-{i}"
 							options={authorNames}
 							optionalOptions={true}
 							bind:value={mission.authors} />
 						<Input
 							name="Mission Pack"
 							label="Mission Pack"
-							id="mission-pack"
+							id="mission-pack-{i}"
 							bind:value={mission.missionPack}
 							options={packs}
 							display={pack => (pack === null ? '' : pack.name)}
 							validate={pack => pack !== null}
 							required={selectedMissions[i]} />
+						{#if mission.bombs.length > 1}
+							<Select
+								label="Factory"
+								id="mission-factory-{i}"
+								bind:value={mission.factory}
+								options={['Static', 'Sequence']} />
+						{/if}
 						<Checkbox id="designed-for-tp-{i}" label="Designed for TP" bind:checked={mission.designedForTP} sideLabel />
 					</div>
 				</div>
