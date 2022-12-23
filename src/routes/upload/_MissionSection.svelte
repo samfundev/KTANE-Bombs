@@ -2,16 +2,19 @@
 	import Input from '$lib/controls/Input.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import { Bomb, Pool, type MissionPackSelection, type MissionWithPack } from '$lib/types';
-	import { displayStringList, parseList } from '$lib/util';
+	import { reservedSearchStrings } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 
-	export let packs: MissionPackSelection[];
+	export let missionNames: string[];
 	export let authorNames: string[];
+	export let packs: MissionPackSelection[];
 
 	let files: FileList;
 	let missions: MissionWithPack[] = [];
 	let selectedMissions: Record<number, boolean> = {};
+	let missionNameError: boolean[] = [];
+	let nameErrorReason: ('exists' | 'reserved')[] = [];
 
 	function parseMissions(text: string) {
 		let missions: MissionWithPack[] = [];
@@ -39,6 +42,8 @@
 				};
 
 				missions = [...missions, mission];
+				missionNameError.push(false);
+				nameErrorReason.push('exists');
 			} else if (line.startsWith('[BombGenerator] Generator settings: ') && mission !== null) {
 				let match = line.match(/Time: (\d+), NumStrikes: (\d+)/);
 				if (match === null) throw new Error('This regex should always match');
@@ -83,7 +88,16 @@
 				}
 
 				const event = JSON.parse(json);
-				if (event.type === 'ROUND_START') mission.name = event.mission;
+				if (event.type === 'ROUND_START') {
+					mission.name = event.mission;
+					if (reservedSearchStrings.some(str => mission?.name.includes(str))) {
+						missionNameError[missionNameError.length - 1] = true;
+						nameErrorReason[nameErrorReason.length - 1] = 'reserved';
+					} else if (missionNames.some(n => n.toLowerCase() == mission?.name.toLowerCase())) {
+						missionNameError[missionNameError.length - 1] = true;
+						nameErrorReason[nameErrorReason.length - 1] = 'exists';
+					}
+				}
 			} else if (line.startsWith('[Factory] Creating gamemode') && mission !== null) {
 				const match = line.match(/Creating gamemode '(.+)'\./);
 				if (match === null) throw new Error('This regex should always match');
@@ -141,7 +155,21 @@
 		<div class="missions flex column">
 			{#each missions as mission, i (mission)}
 				<div class="flex">
-					<MissionCard {mission} selectable id={i.toString()} bind:selected={selectedMissions[i]} />
+					<div class="flex column mission-holder">
+						<MissionCard {mission} selectable id={'missioncard' + i} bind:selected={selectedMissions[i]} />
+						{#if missionNameError[i]}
+							<span class="block error">
+								{#if nameErrorReason[i] == 'exists'}
+									<b>This mission name already exists.</b>
+								{:else}
+									<b>Mission name may not contain any of these strings exactly:</b>
+									{#each reservedSearchStrings as str, index}
+										<b>{str}</b>{index < reservedSearchStrings.length - 1 ? ', ' : ''}
+									{/each}
+								{/if}
+							</span>
+						{/if}
+					</div>
 					<div class="block">
 						<Input
 							name="Authors"
@@ -164,7 +192,7 @@
 				</div>
 			{/each}
 		</div>
-		{#if Object.values(selectedMissions).some(a => a)}
+		{#if Object.values(selectedMissions).some(a => a) && Object.values(selectedMissions).every((e, i) => e != missionNameError[i])}
 			<div class="block">
 				<button type="submit"
 					>Upload Mission{Object.values(selectedMissions).filter(a => a).length == 1 ? '' : 's'}</button>
@@ -172,3 +200,12 @@
 		{/if}
 	</form>
 {/if}
+
+<style>
+	.mission-holder {
+		width: 100%;
+	}
+	.error {
+		color: red;
+	}
+</style>

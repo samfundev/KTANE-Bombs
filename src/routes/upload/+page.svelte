@@ -26,7 +26,7 @@
 	</div>
 </div>
 {#if section == 'mission'}
-	<MissionSection {packs} {authorNames} />
+	<MissionSection {missionNames} {authorNames} {packs} />
 {:else if section == 'missionpack'}
 	<MissionPackSection />
 {:else}

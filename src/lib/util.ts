@@ -129,12 +129,13 @@ function findMatchingBrackets(str: string, left: string, right: string): number[
 // example: thing one && aaa || bbb && !!ccc
 // which means: ("thing one" and "aaa") or ("bbb" and not "ccc")
 // brackets are supported too: [[ thing one || aaa ]] && [[ bbb || !!ccc ]]
+export const reservedSearchStrings = ['[[', ']]', '&&', '||', '!!'];
 export function evaluateLogicalStringSearch(expression: string, searchWhat: string): boolean {
-	const left = '[[';
-	const right = ']]';
-	const aand = '&&';
-	const oor = '||';
-	const nnot = '!!';
+	let left = reservedSearchStrings[0];
+	let right = reservedSearchStrings[1];
+	let aand = reservedSearchStrings[2];
+	let oor = reservedSearchStrings[3];
+	let nnot = reservedSearchStrings[4];
 	const expr = expression.trim();
 	let exprAfter = expr;
 
