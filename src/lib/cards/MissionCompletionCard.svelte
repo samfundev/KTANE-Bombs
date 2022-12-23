@@ -18,30 +18,34 @@
 		{mission.name}
 	</div>
 	<div {title}>
-		<div
-			class:hidden={!mission.defuser}
-			class:hspace={mission.nDefuser < 2}
-			style="background-color: {getPersonColor(2, 0, false)}">
-			<span class:hidden={mission.nDefuser < 2}>×{mission.nDefuser}</span>
-		</div>
-		<div
-			class:hidden={!mission.expert}
-			class:hspace={mission.nExpert < 2}
-			style="background-color: {getPersonColor(2, 1, false)}">
-			<span class:hidden={mission.nExpert < 2}>×{mission.nExpert}</span>
-		</div>
-		<div
-			class:hidden={!mission.efm}
-			class:hspace={mission.nEFM < 2}
-			style="background-color: {getPersonColor(1, 0, false)}">
-			<span class:hidden={mission.nEFM < 2}>×{mission.nEFM}</span>
-		</div>
-		<div
-			class:hidden={!mission.solo}
-			class:hspace={mission.nEFM < 2}
-			style="background-color: {getPersonColor(1, 0, true)}">
-			<span class:hidden={mission.nSolo < 2}>×{mission.nSolo}</span>
-		</div>
+		{#if mission.defuser}
+			<div class:hspace={mission.nDefuser < 2} style="background-color: {getPersonColor(2, 0, false)}">
+				{#if mission.nDefuser > 1}
+					×{mission.nDefuser}
+				{/if}
+			</div>
+		{/if}
+		{#if mission.expert}
+			<div class:hspace={mission.nExpert < 2} style="background-color: {getPersonColor(2, 1, false)}">
+				{#if mission.nExpert > 1}
+					×{mission.nExpert}
+				{/if}
+			</div>
+		{/if}
+		{#if mission.efm}
+			<div class:hspace={mission.nEFM < 2} style="background-color: {getPersonColor(1, 0, false)}">
+				{#if mission.nEFM > 1}
+					×{mission.nEFM}
+				{/if}
+			</div>
+		{/if}
+		{#if mission.solo}
+			<div class:hspace={mission.nSolo < 2} style="background-color: {getPersonColor(1, 0, true)}">
+				{#if mission.nSolo > 1}
+					×{mission.nSolo}
+				{/if}
+			</div>
+		{/if}
 	</div>
 </a>
 
@@ -73,11 +77,6 @@
 	}
 	.hspace {
 		min-width: 16px;
-	}
-
-	.mission div.hidden,
-	.mission span.hidden {
-		display: none;
 	}
 
 	.green {

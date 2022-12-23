@@ -69,14 +69,12 @@
 				missions[name].efm = true;
 				missions[name].nEFM += 1;
 			}
+		} else if (c.team.indexOf(username) == 0) {
+			missions[name].defuser = true;
+			missions[name].nDefuser += 1;
 		} else {
-			if (c.team.indexOf(username) == 0) {
-				missions[name].defuser = true;
-				missions[name].nDefuser += 1;
-			} else {
-				missions[name].expert = true;
-				missions[name].nExpert += 1;
-			}
+			missions[name].expert = true;
+			missions[name].nExpert += 1;
 		}
 	});
 	function filterUnique(item: MissionCompletion, pos: number, self: MissionCompletion[]): boolean {
@@ -140,11 +138,6 @@
 	function storeView() {
 		wrView.set(byRole);
 	}
-
-	// missionsNames['Defuser'] = missionsNames['Defuser'].filter(filterUnique);
-	// missionsNames['Expert'] = missionsNames['Expert'].filter(filterUnique);
-	// missionsNames['EFM'] = missionsNames['EFM'].filter(filterUnique);
-	// missionsNames['Solo'] = missionsNames['Solo'].filter(filterUnique);
 </script>
 
 <svelte:head>
@@ -178,7 +171,9 @@
 			<div class="block">
 				<h4>
 					<span>{key}: {pluralize(compList.length, 'solve')}</span>
-					<span class:hidden={key.includes('+') || dist == compList.length}>[{dist} distinct]</span>
+					{#if !key.includes('+') && dist != compList.length}
+						[{dist} distinct]
+					{/if}
 				</h4>
 			</div>
 			<div class="solves role flex grow">
@@ -191,7 +186,9 @@
 								? '#00ff0044'
 								: getPersonColor(comp.team.length, comp.team.indexOf(username), comp.solo)}>
 							<span class="mission-name">{comp.mission.name}</span>
-							<span class:hidden={solveCount < 2}>×{solveCount}</span>
+							{#if solveCount > 1}
+								<b>×{solveCount}</b>
+							{/if}
 						</div>
 					</a>
 				{/each}
@@ -280,9 +277,5 @@
 	}
 	a.green {
 		background-color: var(--foreground);
-	}
-	a span.hidden,
-	h4 span.hidden {
-		display: none;
 	}
 </style>
