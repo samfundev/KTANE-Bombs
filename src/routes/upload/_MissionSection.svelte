@@ -2,24 +2,26 @@
 	import Input from '$lib/controls/Input.svelte';
 	import Select from '$lib/controls/Select.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
-	import { Bomb, Pool, type MissionPackSelection, type MissionWithPack } from '$lib/types';
+	import { Bomb, Pool, type MissionPackSelection } from '$lib/types';
 	import { reservedSearchStrings } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
+	import type { ReplaceableMission } from './_types';
 
 	export let missionNames: string[];
 	export let authorNames: string[];
 	export let packs: MissionPackSelection[];
 
 	let files: FileList;
-	let missions: MissionWithPack[] = [];
+	let missions: ReplaceableMission[] = [];
 	let selectedMissions: Record<number, boolean> = {};
-	let missionNameError: boolean[] = [];
-	let nameErrorReason: ('exists' | 'reserved')[] = [];
+	let missionNameQuirk: number[] = [];
+	const EXISTS = 1;
+	const RESERVED = 2;
 
 	function parseMissions(text: string) {
-		let missions: MissionWithPack[] = [];
-		let mission: MissionWithPack | null = null;
+		let missions: ReplaceableMission[] = [];
+		let mission: ReplaceableMission | null = null;
 		let bomb: Bomb | null = null;
 		let lineIndex = 0;
 		const lines = text.split('\n');
@@ -39,12 +41,12 @@
 					designedForTP: false,
 					tpSolve: false,
 					factory: null,
-					missionPack: null
+					missionPack: null,
+					replace: false
 				};
 
 				missions = [...missions, mission];
-				missionNameError.push(false);
-				nameErrorReason.push('exists');
+				missionNameQuirk.push(0);
 			} else if (line.startsWith('[BombGenerator] Generator settings: ') && mission !== null) {
 				let match = line.match(/Time: (\d+), NumStrikes: (\d+)/);
 				if (match === null) throw new Error('This regex should always match');
@@ -95,11 +97,10 @@
 				if (event.type === 'ROUND_START') {
 					mission.name = event.mission;
 					if (reservedSearchStrings.some(str => mission?.name.includes(str))) {
-						missionNameError[missionNameError.length - 1] = true;
-						nameErrorReason[nameErrorReason.length - 1] = 'reserved';
+						missionNameQuirk[missionNameQuirk.length - 1] = RESERVED;
 					} else if (missionNames.some(n => n.toLowerCase() == mission?.name.toLowerCase())) {
-						missionNameError[missionNameError.length - 1] = true;
-						nameErrorReason[nameErrorReason.length - 1] = 'exists';
+						missionNameQuirk[missionNameQuirk.length - 1] = EXISTS;
+						mission.replace = true;
 					}
 				}
 			} else if (line.startsWith('[Factory] Creating gamemode') && mission !== null) {
@@ -161,17 +162,21 @@
 				<div class="flex">
 					<div class="flex column mission-holder">
 						<MissionCard {mission} selectable id={'missioncard' + i} bind:selected={selectedMissions[i]} />
-						{#if missionNameError[i]}
-							<span class="block error">
-								{#if nameErrorReason[i] == 'exists'}
-									<b>This mission name already exists.</b>
-								{:else}
+						{#if missionNameQuirk[i] > 0}
+							{#if missionNameQuirk[i] == EXISTS}
+								<span class="block info">
+									<b>
+										This mission name already exists. Selecting this would replace the existing mission if accepted.
+									</b>
+								</span>
+							{:else if missionNameQuirk[i] == RESERVED}
+								<span class="block error">
 									<b>Mission name may not contain any of these strings exactly:</b>
 									{#each reservedSearchStrings as str, index}
 										<b>{str}</b>{index < reservedSearchStrings.length - 1 ? ', ' : ''}
 									{/each}
-								{/if}
-							</span>
+								</span>
+							{/if}
 						{/if}
 					</div>
 					<div class="block">
@@ -203,7 +208,7 @@
 				</div>
 			{/each}
 		</div>
-		{#if Object.values(selectedMissions).some(a => a) && Object.values(selectedMissions).every((e, i) => !(e && missionNameError[i]))}
+		{#if Object.values(selectedMissions).some(a => a) && Object.values(selectedMissions).every((e, i) => !(e && missionNameQuirk[i] >= RESERVED))}
 			<div class="block">
 				<button type="submit"
 					>Upload Mission{Object.values(selectedMissions).filter(a => a).length == 1 ? '' : 's'}</button>

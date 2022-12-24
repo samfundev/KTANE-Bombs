@@ -105,7 +105,7 @@ export type QueueItem = MissionQueueItem | CompletionQueueItem | MissionPackQueu
 
 export interface MissionQueueItem {
 	type: 'mission';
-	mission: ID<Mission>;
+	mission: ID<MissionWithPack>;
 }
 
 export interface CompletionQueueItem {

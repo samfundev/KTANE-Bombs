@@ -46,7 +46,14 @@
 	{#each queue as item, index (item)}
 		<div class="item {item.type}">
 			{#if item.type === 'mission'}
-				<MissionCard mission={item.mission} />
+				<div>
+					<MissionCard mission={item.mission} />
+					{#if item.mission.name.startsWith('[[UPDATE]] ')}
+						<div class="block red">
+							This would update the parameters of the mission: {item.mission.name.substring(11)}
+						</div>
+					{/if}
+				</div>
 			{:else if item.type === 'completion'}
 				<CompletionCard completion={item.completion} />
 				<MissionCard mission={item.mission} />
@@ -76,5 +83,8 @@
 
 	.item.completion {
 		grid-template-columns: 1fr 1fr auto;
+	}
+	.block.red {
+		color: red;
 	}
 </style>

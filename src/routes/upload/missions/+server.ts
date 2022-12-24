@@ -1,9 +1,9 @@
 import client from '$lib/client';
-import type { MissionWithPack } from '$lib/types';
 import { error, type RequestEvent } from '@sveltejs/kit';
+import type { ReplaceableMission } from '../_types';
 
 export async function POST({ request }: RequestEvent) {
-	const missions: MissionWithPack[] = await request.json();
+	const missions: ReplaceableMission[] = await request.json();
 	if (missions.some(m => m.missionPack === null)) {
 		throw error(400, 'Mission pack is required');
 	}
@@ -11,7 +11,7 @@ export async function POST({ request }: RequestEvent) {
 	for (const mission of missions) {
 		await client.mission.create({
 			data: {
-				name: mission.name,
+				name: (mission.replace ? '[[UPDATE]] ' : '') + mission.name,
 				authors: mission.authors,
 				bombs: {
 					create: mission.bombs.map(bomb => {
@@ -21,6 +21,7 @@ export async function POST({ request }: RequestEvent) {
 						};
 					})
 				},
+				factory: mission.factory,
 				designedForTP: mission.designedForTP,
 				missionPackId: mission.missionPack?.id,
 				verified: false

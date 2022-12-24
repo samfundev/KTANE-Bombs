@@ -2,8 +2,6 @@ import client from '$lib/client';
 import type { CompletionQueueItem, MissionQueueItem, QueueItem } from '$lib/types';
 import { Permission, type MissionPackQueueItem } from '$lib/types';
 import { fixPools, forbidden, hasAnyPermission, hasPermission, onlyUnique } from '$lib/util';
-import type { ServerLoadEvent } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
 
 export const load = async function ({ parent, locals }: any) {
 	const { user } = await parent();
@@ -23,8 +21,19 @@ export const load = async function ({ parent, locals }: any) {
 				id: true,
 				name: true,
 				authors: true,
-				bombs: true,
-				factory: true
+				bombs: {
+					orderBy: {
+						id: 'asc'
+					}
+				},
+				designedForTP: true,
+				factory: true,
+				missionPack: {
+					select: {
+						id: true,
+						name: true
+					}
+				}
 			}
 		});
 
@@ -35,7 +44,6 @@ export const load = async function ({ parent, locals }: any) {
 					mission: {
 						...fixPools(mission),
 						completions: [],
-						designedForTP: false,
 						tpSolve: false
 					}
 				} as MissionQueueItem;
