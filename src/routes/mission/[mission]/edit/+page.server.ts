@@ -133,6 +133,7 @@ export const actions: Actions = {
 		const fData = await request.formData();
 		const mission: EditMission = JSON.parse(fData.get('mission')?.toString() ?? '');
 		if (mission.variantOf != null) {
+			//find the mission that this edited mission is said to be a variant of
 			let selected = await client.mission.findFirst({
 				where: {
 					name: mission.variantOf
@@ -142,7 +143,9 @@ export const actions: Actions = {
 					id: true
 				}
 			});
-			if (!selected) {
+			async function cleanOthers() {
+				if (mission.variant == null) return;
+				//find other missions with the edited mission's variant ID
 				let other = await client.mission.findMany({
 					where: {
 						variant: mission.variant,
@@ -154,6 +157,7 @@ export const actions: Actions = {
 						id: true
 					}
 				});
+				//if there is only one other, remove that one's variant ID too since you need at least 2 missions in a variant group
 				if (other.length == 1) {
 					await client.mission.update({
 						where: {
@@ -164,29 +168,39 @@ export const actions: Actions = {
 						}
 					});
 				}
+			}
+			if (!selected) {
+				//not found, so clean broken variant group and remove the edited mission's variant ID
+				await cleanOthers();
 				mission.variant = null;
-			} else if (!selected.variant) {
-				let variants = await client.mission.findMany({
-					where: {
-						NOT: {
-							variant: null
+			} else {
+				//found one
+				//clean broken variant group if this mission was in one
+				await cleanOthers();
+				if (!selected.variant) {
+					//the found one isn't in a variant group, calculate new variant ID
+					let variants = await client.mission.findMany({
+						where: {
+							NOT: {
+								variant: null
+							}
+						},
+						select: {
+							variant: true
 						}
-					},
-					select: {
-						variant: true
-					}
-				});
-				let max = Math.max(...variants.map(v => v.variant ?? -1));
-				mission.variant = max + 1;
-				await client.mission.update({
-					where: {
-						id: selected.id
-					},
-					data: {
-						variant: mission.variant
-					}
-				});
-			} else mission.variant = selected.variant;
+					});
+					let max = Math.max(...variants.map(v => v.variant ?? -1));
+					mission.variant = max + 1;
+					await client.mission.update({
+						where: {
+							id: selected.id
+						},
+						data: {
+							variant: mission.variant
+						}
+					});
+				} else mission.variant = selected.variant; //join existing variant group
+			}
 		}
 
 		await client.mission.update({
@@ -205,10 +219,7 @@ export const actions: Actions = {
 							time: bomb.time,
 							strikes: bomb.strikes,
 							widgets: bomb.widgets,
-							pools: bomb.pools.map(pool => ({
-								modules: pool.modules,
-								count: pool.count
-							}))
+							pools: JSON.parse(JSON.stringify(bomb.pools))
 						}
 					}))
 				},
