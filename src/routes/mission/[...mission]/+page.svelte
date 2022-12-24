@@ -20,7 +20,7 @@
 			if (mod.BossStatus != undefined) classes += ' boss';
 			if (mod.Quirks != undefined) classes += ' quirks';
 			if (mod.Type == 'Needy') classes += ' needy';
-		}
+		} else classes += ' border';
 		return classes;
 	}
 
@@ -46,8 +46,15 @@
 {#if !mission.verified}
 	<div class="block centered not-verified">This mission has not been verified.</div>
 {/if}
-{#if mission.factory !== null}
-	<div class="block centered">Factory: {mission.factory}</div>
+{#if mission.factory !== null || mission.designedForTP}
+	<div class="block hstack">
+		{#if mission.factory !== null}
+			<span>Factory: {mission.factory}</span>
+		{/if}
+		{#if mission.designedForTP}
+			<span class="designed-for-tp">Designed for TP</span>
+		{/if}
+	</div>
 {/if}
 <div class="main-content">
 	<div class="bombs">
@@ -62,9 +69,6 @@
 					bomb.widgets,
 					'Widget'
 				)}
-				{#if mission.designedForTP}
-					· <span class="designed-for-tp">Designed for TP</span>
-				{/if}
 			</div>
 			<div class="pools">
 				{#each bomb.pools as pool}
@@ -119,6 +123,11 @@
 	.hspace {
 		width: 100px;
 	}
+	.hstack {
+		display: flex;
+		justify-content: center;
+		gap: 20px;
+	}
 
 	.bombs {
 		display: flex;
@@ -161,6 +170,10 @@
 	span.needy {
 		background-color: #0000ff66 !important;
 	}
+	.pool.border {
+		border: 2px dashed var(--textbox-background);
+	}
+
 	span.first-solve {
 		background-color: hsl(43, 74%, 70%);
 		color: black;
