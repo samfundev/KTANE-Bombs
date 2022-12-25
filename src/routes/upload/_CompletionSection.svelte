@@ -104,7 +104,9 @@
 			body: JSON.stringify({ completion, missionName })
 		})
 			.then(response => {
-				if (response.ok) {
+				if (response.status == 202) {
+					toast.success('Solve REPLACEMENT uploaded successfully!');
+				} else if (response.ok) {
 					toast.success('Solve uploaded successfully!');
 				} else {
 					toast.error('Solve failed to upload.');

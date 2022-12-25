@@ -105,13 +105,13 @@ export type QueueItem = MissionQueueItem | CompletionQueueItem | MissionPackQueu
 
 export interface MissionQueueItem {
 	type: 'mission';
-	mission: ID<MissionWithPack>;
+	mission: Omit<ID<MissionWithPack>, 'bombs'> & { bombs: ID<Bomb>[] };
 }
 
 export interface CompletionQueueItem {
 	type: 'completion';
 	completion: ID<Completion>;
-	mission: ID<Mission>;
+	mission: Omit<ID<Mission>, 'completions'> & { completions: ID<Completion>[] };
 }
 
 export interface MissionPackQueueItem {

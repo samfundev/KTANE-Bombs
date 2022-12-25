@@ -1,8 +1,10 @@
 <script lang="ts">
-	import type { QueueItem } from '$lib/types';
+	import type { CompletionQueueItem, QueueItem } from '$lib/types';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import NoContent from '$lib/comp/NoContent.svelte';
+	import CompletionList from '$lib/comp/CompletionList.svelte';
+	import { formatTime } from '$lib/util';
 	export let data;
 	let queue: QueueItem[] = data.queue;
 	let solverNames: string[] = data.solverNames;
@@ -11,11 +13,29 @@
 		return names.filter(n => !solverNames.some(sn => sn.toLowerCase() === n.toLowerCase()));
 	}
 
+	function matchingSolve(item: CompletionQueueItem) {
+		return item.mission.completions.findIndex(
+			c =>
+				JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
+				JSON.stringify(item.completion.team.slice(0, 1).concat(item.completion.team.slice(1).sort()))
+		);
+	}
+
 	async function verify(item: QueueItem, accept: boolean) {
-		if (accept && item.type == 'completion' && solverNames?.length > 0) {
-			let uNames = uniqueNames(item.completion.team);
-			if (uNames.length > 0) {
-				let conf = `Are you sure? These names are NOT currently credited with any solves: ${uNames.join(', ')}`;
+		let equalSolve = -1;
+		if (accept && item.type == 'completion') {
+			if (solverNames?.length > 0) {
+				let uNames = uniqueNames(item.completion.team);
+				if (uNames.length > 0) {
+					let conf = `Are you sure? These names are NOT currently credited with any solves: ${uNames.join(', ')}`;
+					if (!confirm(conf)) return;
+				}
+			}
+			equalSolve = matchingSolve(item);
+			if (equalSolve >= 0) {
+				let conf = `Are you sure? This will replace an existing solve of time: ${formatTime(
+					item.mission.completions[equalSolve].time
+				)}`;
 				if (!confirm(conf)) return;
 			}
 		}
@@ -24,7 +44,8 @@
 				method: 'POST',
 				body: JSON.stringify({
 					item,
-					accept
+					accept,
+					replaceId: equalSolve >= 0 ? (item as CompletionQueueItem).mission.completions[equalSolve].id : -1
 				})
 			});
 		} catch (error) {

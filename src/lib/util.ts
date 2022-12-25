@@ -1,5 +1,5 @@
 import type * as client from '@prisma/client';
-import type { Bomb, FrontendUser, Mission, Permission, Pool } from './types';
+import type { Bomb, FrontendUser, ID, Mission, Permission, Pool } from './types';
 import { redirect, error } from '@sveltejs/kit';
 import type { RepoModule } from './repo';
 
@@ -78,7 +78,7 @@ export function forbidden(locals: App.Locals) {
 	return error(403, 'You do not have permission for to do that.');
 }
 
-export function fixPools<T>(mission: T & { bombs: client.Bomb[] }): T & { bombs: Bomb[] } {
+export function fixPools<T>(mission: T & { bombs: client.Bomb[] }): T & { bombs: ID<Bomb>[] } {
 	return {
 		...mission,
 		bombs: mission.bombs.map(bomb => {
