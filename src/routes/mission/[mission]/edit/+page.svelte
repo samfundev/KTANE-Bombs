@@ -30,6 +30,7 @@
 	for (const bomb of mission.bombs) {
 		bomb.pools.sort((a, b) => a.modules.join().localeCompare(b.modules.join()));
 	}
+	mission.completions.sort((a, b) => b.time - a.time);
 	setOriginalMission();
 
 	$: modified = !equal(mission, originalMission);
@@ -209,7 +210,15 @@
 		{#each mission.completions as completion}
 			<div class="block flex column relative">
 				<Input label="Proof" id="completion-proof" bind:value={completion.proofs} />
-				<Input label="Time" id="completion-time" bind:value={completion.time} parse={parseTime} display={formatTime} />
+				<Input
+					label="Time"
+					id="completion-time"
+					validate={value => value != null}
+					display={value => formatTime(value, value % 1 != 0)}
+					instantFormat={false}
+					placeholder="1:23:45.67"
+					bind:value={completion.time}
+					parse={parseTime} />
 				<Input
 					label="Team"
 					id="completion-team"
