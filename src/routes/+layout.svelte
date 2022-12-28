@@ -20,7 +20,7 @@
 			{/if}
 
 			<div style="margin-left: auto;">
-				<a href="/user/{user.username}">
+				<a href="/user/{encodeURIComponent(user.username)}">
 					<UserCard {user} />
 				</a>
 			</div>

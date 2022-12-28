@@ -18,7 +18,7 @@
 	<b class="block">EFM</b>
 	{#each completers as completer, index}
 		<div class="block">{index + 1}</div>
-		<div class="block"><a href="/user/{completer.name}">{completer.name}</a></div>
+		<div class="block"><a href="/user/{encodeURIComponent(completer.name)}">{completer.name}</a></div>
 		<div class="block">{completer.distinct}</div>
 		<div class="block">{completer.defuser + completer.expert + completer.efm}</div>
 		<div class="block">{completer.defuser}</div>

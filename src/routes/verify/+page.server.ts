@@ -75,7 +75,9 @@ export const load = async function ({ parent, locals }: any) {
 				mission: {
 					include: {
 						bombs: true,
-						completions: true
+						completions: {
+							where: { verified: true }
+						}
 					}
 				}
 			}

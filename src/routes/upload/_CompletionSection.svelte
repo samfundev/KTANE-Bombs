@@ -130,7 +130,7 @@
 		{#each proofs as proof, i}
 			<div class="dynamicBlock">
 				<Input
-					id="proof"
+					id="proof-{i}"
 					type="url"
 					label="Proof #{i + 1}"
 					placeholder="https://ktane.timwi.de"
@@ -157,7 +157,7 @@
 		{#each team as member, index}
 			<div class="dynamicBlock">
 				<Input
-					id="member"
+					id="member-{index}"
 					type="text"
 					label={index == 0 ? 'Defuser' : 'Expert'}
 					optionalOptions={true}

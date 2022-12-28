@@ -44,7 +44,7 @@
 		});
 
 		if (response.ok) {
-			location.href = `/user/${newUsername}`;
+			location.href = `/user/${encodeURIComponent(newUsername)}`;
 			return;
 		}
 
