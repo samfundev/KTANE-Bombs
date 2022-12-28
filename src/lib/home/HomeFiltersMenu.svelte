@@ -416,35 +416,36 @@
 		<div>
 			<table>
 				{#each hasOptions as op, index}
+					{@const dashOp = toDashed(op)}
 					<tr>
 						<td class="row-header nowrap">{op}</td>
 						<td>
 							<RadioButton
-								id={`option-${toDashed(op)}-yes}`}
+								id="option-{dashOp}-yes"
 								label="Yes"
 								value={MustHave.Yes}
 								sideLabel
-								name={`option-${toDashed(op)}`}
-								bind:group={mustHaves[toDashed(op)]}
+								name="option-{dashOp}"
+								bind:group={mustHaves[dashOp]}
 								on:change={setOption} />
 						</td>
 						<td>
 							<RadioButton
-								id={`option-${toDashed(op)}-no}`}
+								id="option-{dashOp}-no"
 								label="No"
 								value={MustHave.No}
 								sideLabel
-								name={`option-${toDashed(op)}`}
-								bind:group={mustHaves[toDashed(op)]}
+								name="option-{dashOp}"
+								bind:group={mustHaves[dashOp]}
 								on:change={setOption} /></td>
 						<td>
 							<RadioButton
-								id={`option-${toDashed(op)}-either}`}
+								id="option-{dashOp}-either"
 								label="Either"
 								value={MustHave.Either}
 								sideLabel
-								name={`option-${toDashed(op)}`}
-								bind:group={mustHaves[toDashed(op)]}
+								name="option-{dashOp}"
+								bind:group={mustHaves[dashOp]}
 								on:change={setOption} /></td>
 					</tr>
 				{/each}

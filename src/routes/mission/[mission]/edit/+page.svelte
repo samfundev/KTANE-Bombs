@@ -207,21 +207,24 @@
 	</div>
 	<div class="flex column">
 		<div class="block header">Solves</div>
-		{#each mission.completions as completion}
+		{#each mission.completions as completion, ci}
 			<div class="block flex column relative">
 				<Input label="Proof" id="completion-proof" bind:value={completion.proofs} />
-				<Input
-					label="Time"
-					id="completion-time"
-					validate={value => value != null}
-					display={value => formatTime(value, value % 1 != 0)}
-					instantFormat={false}
-					placeholder="1:23:45.67"
-					bind:value={completion.time}
-					parse={parseTime} />
+				<div class="hstack">
+					<Input
+						label="Time"
+						id="completion-time-{ci}"
+						validate={value => value != null}
+						display={value => formatTime(value, value % 1 != 0)}
+						instantFormat={false}
+						placeholder="1:23:45.67"
+						bind:value={completion.time}
+						parse={parseTime} />
+					<Checkbox id="completion-first-{ci}" sideLabel label="First" bind:checked={completion.first} />
+				</div>
 				<Input
 					label="Team"
-					id="completion-team"
+					id="completion-team-{ci}"
 					bind:value={completion.team}
 					parse={value => value.split(',').map(person => person.trim())}
 					display={list => list.join(', ')} />
@@ -277,6 +280,11 @@
 	}
 	.hspace {
 		width: 20px;
+	}
+	.hstack {
+		display: flex;
+		align-items: flex-end;
+		gap: 10px;
 	}
 
 	.pools {
