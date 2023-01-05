@@ -195,6 +195,7 @@
 							options={packs}
 							display={pack => (pack === null ? '' : pack.name)}
 							validate={pack => pack !== null}
+							instantFormat={false}
 							required={selectedMissions[i]} />
 						{#if mission.bombs.length > 1}
 							<Select

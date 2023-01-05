@@ -38,8 +38,14 @@ export const POST: RequestHandler = async function ({ locals, request }: Request
 							data: {
 								authors: item.mission.authors,
 								bombs: {
-									//connect new bomb records to existing mission
-									connect: item.mission.bombs.map(bomb => ({ ['id']: bomb.id }))
+									//create new bomb records matching the queue item's bombs
+									create: item.mission.bombs.map(bomb => ({
+										modules: bomb.modules,
+										time: bomb.time,
+										strikes: bomb.strikes,
+										widgets: bomb.widgets,
+										pools: JSON.parse(JSON.stringify(bomb.pools))
+									}))
 								},
 								factory: item.mission.factory,
 								missionPackId: item.mission.missionPack?.id,
@@ -47,20 +53,8 @@ export const POST: RequestHandler = async function ({ locals, request }: Request
 								designedForTP: item.mission.designedForTP
 							}
 						});
-						//connect existing mission to new bomb records
-						item.mission.bombs.forEach(async b => {
-							await client.bomb.update({
-								where: {
-									id: b.id
-								},
-								data: {
-									mission: {
-										connect: { id: item.mission.id }
-									}
-								}
-							});
-						});
 						//delete queue item in database entirely
+						await client.bomb.deleteMany({ where: { missionId: item.mission.id } });
 						await client.mission.delete({ where: { id: item.mission.id } });
 					} catch (e) {
 						throw e;

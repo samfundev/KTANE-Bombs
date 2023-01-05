@@ -4,7 +4,15 @@
 	import NoContent from '$lib/comp/NoContent.svelte';
 	import type { RepoModule } from '$lib/repo';
 	import Select from '$lib/controls/Select.svelte';
-	import { Permission, type Completion, type ID, type Mission, type MissionPack, type Bomb, Pool } from '$lib/types';
+	import {
+		Permission,
+		type Completion,
+		type ID,
+		type Mission,
+		type Bomb,
+		Pool,
+		type MissionPackSelection
+	} from '$lib/types';
 	import { displayStringList, formatTime, hasPermission, parseInteger, parseList, parseTime } from '$lib/util';
 	import equal from 'fast-deep-equal';
 	import { sortBombs } from '../../_shared';
@@ -16,7 +24,7 @@
 
 	let mission: EditMission & { verified: boolean } = data.mission;
 	let missionNames: string[] = data.missionNames;
-	let packs: Pick<ID<MissionPack>, 'id' | 'name'>[] = data.packs;
+	let packs: MissionPackSelection[] = data.packs;
 	let modules: Record<string, RepoModule> | null = data.modules;
 
 	sortBombs(mission, modules);
@@ -113,6 +121,8 @@
 		label="Mission Pack"
 		id="mission-pack"
 		bind:value={mission.missionPack}
+		required
+		instantFormat={false}
 		options={packs}
 		display={pack => pack.name}
 		validate={value => value !== null} />
