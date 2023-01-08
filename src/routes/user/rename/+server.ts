@@ -70,5 +70,5 @@ export const POST: RequestHandler = async function ({ locals, request }) {
 		});
 	}
 
-	throw redirect(301, `/user/${username}`);
+	throw redirect(301, `/user/${encodeURIComponent(username)}`);
 };
