@@ -38,16 +38,18 @@ export const load = async function ({ parent, locals }: any) {
 		});
 
 		queue.push(
-			...missions.map(mission => {
-				return {
-					type: 'mission',
-					mission: {
-						...fixPools(mission),
-						completions: [],
-						tpSolve: false
-					}
-				} as MissionQueueItem;
-			})
+			...missions
+				.map(mission => {
+					return {
+						type: 'mission',
+						mission: {
+							...fixPools(mission),
+							completions: [],
+							tpSolve: false
+						}
+					} as MissionQueueItem;
+				})
+				.sort((a, b) => a.mission.id - b.mission.id)
 		);
 	}
 
@@ -89,13 +91,15 @@ export const load = async function ({ parent, locals }: any) {
 			.filter(onlyUnique);
 
 		queue.push(
-			...completions.map(completion => {
-				return {
-					type: 'completion',
-					completion,
-					mission: fixPools(completion.mission)
-				} as CompletionQueueItem;
-			})
+			...completions
+				.map(completion => {
+					return {
+						type: 'completion',
+						completion,
+						mission: fixPools(completion.mission)
+					} as CompletionQueueItem;
+				})
+				.sort((a, b) => a.completion.id - b.completion.id)
 		);
 	}
 
@@ -108,12 +112,14 @@ export const load = async function ({ parent, locals }: any) {
 		});
 
 		queue.push(
-			...missionPacks.map(pack => {
-				return {
-					type: 'missionpack',
-					pack
-				} as MissionPackQueueItem;
-			})
+			...missionPacks
+				.map(pack => {
+					return {
+						type: 'missionpack',
+						pack
+					} as MissionPackQueueItem;
+				})
+				.sort((a, b) => a.pack.id - b.pack.id)
 		);
 	}
 

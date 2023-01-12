@@ -23,14 +23,10 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			authors: true,
 			verified: true,
 			bombs: {
-				orderBy: {
-					id: 'asc'
-				}
+				orderBy: { id: 'asc' }
 			},
 			completions: {
-				where: {
-					verified: true
-				},
+				where: { verified: true },
 				select: client.$exclude('completion', ['missionId'])
 			},
 			designedForTP: true,
@@ -59,9 +55,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 
 	const missions = await client.mission.findMany({
 		where: {
-			NOT: {
-				name: mission
-			}
+			NOT: { name: mission }
 		},
 		select: {
 			name: true
@@ -71,9 +65,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 	const firstVariant = await client.mission.findFirst({
 		where: {
 			variant: missionResult.variant ?? -1,
-			NOT: {
-				id: missionResult.id
-			}
+			NOT: { id: missionResult.id }
 		},
 		select: {
 			name: true

@@ -17,14 +17,10 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			authors: true,
 			verified: true,
 			bombs: {
-				orderBy: {
-					id: 'asc'
-				}
+				orderBy: { id: 'asc' }
 			},
 			completions: {
-				where: {
-					verified: true
-				}
+				where: { verified: true }
 			},
 			designedForTP: true,
 			tpSolve: true,
@@ -55,9 +51,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 					select: {
 						name: true,
 						completions: {
-							where: {
-								verified: true
-							}
+							where: { verified: true }
 						},
 						tpSolve: true
 					}

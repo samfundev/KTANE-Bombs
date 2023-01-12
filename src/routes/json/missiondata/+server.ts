@@ -9,10 +9,12 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		throw forbidden(locals);
 	}
 	const missionsObj = await client.mission.findMany({
+		orderBy: { id: 'asc' },
 		select: {
 			name: true,
 			authors: true,
 			bombs: {
+				orderBy: { id: 'asc' },
 				select: {
 					modules: true,
 					time: true,
@@ -22,6 +24,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 				}
 			},
 			completions: {
+				orderBy: { id: 'asc' },
 				select: {
 					verified: true,
 					proofs: true,
@@ -78,6 +81,25 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 				missions: [newMission]
 			});
 		}
+	});
+
+	const packs = await client.missionPack.findMany({
+		orderBy: { id: 'asc' },
+		select: {
+			name: true,
+			steamId: true,
+			missions: true,
+			verified: true
+		}
+	});
+	packs.forEach(p => {
+		if (missionPacks.findIndex(mp => mp.name == p.name) < 0)
+			missionPacks.push({
+				name: p.name,
+				steamID: p.steamId,
+				verified: p.verified,
+				missions: []
+			});
 	});
 
 	return new Response(JSON.stringify(missionPacks));
