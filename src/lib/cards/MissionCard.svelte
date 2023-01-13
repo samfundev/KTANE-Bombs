@@ -30,7 +30,7 @@
 		</label>
 	</div>
 {:else}
-	<a class="mission" bind:this={card} href="mission/{encodeURIComponent(mission.name)}" id={cardID}>
+	<a class="mission" bind:this={card} href="/mission/{encodeURIComponent(mission.name)}" id={cardID}>
 		<div />
 		<MissionCardInner {mission} />
 		<div class="indicator flex column" {title}>

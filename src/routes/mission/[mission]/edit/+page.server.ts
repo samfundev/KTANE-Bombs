@@ -72,10 +72,6 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		}
 	});
 
-	if (!missionResult.verified && !hasPermission(locals.user, Permission.VerifyMission)) {
-		throw forbidden(locals);
-	}
-
 	return {
 		mission: {
 			...missionResult,
@@ -233,7 +229,7 @@ export const actions: Actions = {
 			}
 		});
 
-		throw redirect(303, '/mission/' + mission.name);
+		throw redirect(303, '/mission/' + encodeURIComponent(mission.name));
 	}
 };
 

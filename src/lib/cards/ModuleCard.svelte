@@ -11,7 +11,7 @@
 	class:pseudoneedy={module.Quirks?.includes('PseudoNeedy')}
 	class:needy={module.Type == 'Needy'}>
 	{#if hasSpecialIcon(module.ModuleID)}
-		<div class="image {module.ModuleID}" alt={module.Name} />
+		<div class="image {module.ModuleID}" />
 	{:else}
 		<img
 			src="https://ktane.timwi.de/iconsprite"
