@@ -46,8 +46,7 @@
 		});
 
 		if (response.status == 202) {
-			if (!confirm(`Merge this user with existing solver and mission author (${newUsername})? This cannot be undone.`))
-				return;
+			if (!confirm(`Merge this user with existing solver and mission author (${newUsername})?`)) return;
 			response = await fetch('/user/rename', {
 				method: 'POST',
 				body: JSON.stringify({
