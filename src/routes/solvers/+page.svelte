@@ -7,7 +7,10 @@
 <svelte:head>
 	<title>Solvers</title>
 </svelte:head>
-<h1 class="header">Solvers</h1>
+<h1 class="header">
+	Solvers
+	<a href="/user/Twitch%20Plays">Twitch Plays</a>
+</h1>
 <div class="table">
 	<b class="block" />
 	<b class="block">Name</b>
@@ -33,6 +36,16 @@
 		grid-template-columns: min-content min-content auto auto auto auto auto;
 		gap: var(--gap);
 		text-align: center;
+	}
+	.header {
+		position: relative;
+	}
+	.header a {
+		position: absolute;
+		font-size: 12pt;
+		line-height: 2.2;
+		color: #9146ff;
+		left: 10px;
 	}
 
 	.table b.block {

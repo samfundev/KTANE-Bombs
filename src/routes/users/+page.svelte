@@ -14,7 +14,7 @@
 
 <h1 class="header">Users</h1>
 {#each users as user}
-	<a href="user/{encodeURIComponent(user.username)}">
+	<a href="/user/{encodeURIComponent(user.username)}">
 		<UserCard {user} />
 	</a>
 {/each}

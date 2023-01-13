@@ -15,6 +15,7 @@
 	export let instantFormat: boolean = true;
 	export let options: any[] | null = null;
 	export let optionalOptions: boolean = false;
+	export let disabled: boolean = false;
 	export let display = (value: any) => value.toString();
 	export let parse = (value: string): any => value;
 	export let validate = (_value: any): boolean | string => true;
@@ -74,6 +75,7 @@
 		{name}
 		{id}
 		{type}
+		{disabled}
 		{placeholder}
 		class={classes}
 		{required}
@@ -108,6 +110,9 @@
 		color: var(--textbox-text-color);
 		width: 100%;
 		box-sizing: border-box;
+	}
+	input:disabled {
+		background-color: #888;
 	}
 	.hstack {
 		display: flex;

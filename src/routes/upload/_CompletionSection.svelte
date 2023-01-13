@@ -20,6 +20,7 @@
 
 	let team = [{ invalid: false, text: '' }];
 	let proofs = [{ invalid: false, text: '' }];
+	let tpSolve = false;
 
 	function dynamicBoxes(inputList: any[]) {
 		let max = inputList.length - 1;
@@ -79,13 +80,21 @@
 	}
 
 	$: {
+		if (tpSolve) {
+			completion.solo = false;
+			team = [{ invalid: false, text: 'Twitch Plays' }];
+		}
+
 		dynamicBoxes(proofs);
 		completion.proofs = parseTeam(proofs, parseURL);
 
 		dynamicBoxes(team);
 		completion.team = parseTeam(team, null);
 
-		if (completion.team.length > 1) completion.solo = false;
+		if (completion.team.length > 1) {
+			completion.solo = false;
+			tpSolve = false;
+		}
 
 		valid =
 			!missionInvalid &&
@@ -162,11 +171,17 @@
 					label={index == 0 ? 'Defuser' : 'Expert'}
 					optionalOptions={true}
 					options={solverNames}
+					disabled={tpSolve || (index > 0 && team[0].text === 'Twitch Plays')}
 					bind:value={member.text} />
 			</div>
 		{/each}
 	</div>
-	<Checkbox id="solo" label="Solo" bind:checked={completion.solo} disabled={completion.team.length > 1} />
+	<Checkbox id="solo" label="Solo" bind:checked={completion.solo} disabled={tpSolve} />
+	<Checkbox
+		id="tpSolve"
+		label="TP Solve"
+		bind:checked={tpSolve}
+		disabled={completion.solo || completion.team.length > 1} />
 </form>
 <CompletionCard {completion} />
 <div class="block">

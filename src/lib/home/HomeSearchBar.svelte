@@ -195,7 +195,7 @@
 
 	function defaultSort() {
 		missions.sort((a, b) =>
-			withoutArticle(a.name.toLowerCase()) > withoutArticle(b.name.toLowerCase()) != reverse ? 1 : -1
+			withoutArticle(a.name.toLowerCase()).localeCompare(withoutArticle(b.name.toLowerCase())) > 0 != reverse ? 1 : -1
 		);
 	}
 

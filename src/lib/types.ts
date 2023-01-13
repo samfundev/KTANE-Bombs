@@ -126,3 +126,9 @@ export interface Completer {
 	expert: number;
 	efm: number;
 }
+
+export class MissionCompletion {
+	team: string[] = [];
+	solo = false;
+	mission: Pick<Mission, 'name'> = { name: '' };
+}

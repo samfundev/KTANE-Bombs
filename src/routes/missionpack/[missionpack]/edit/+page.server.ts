@@ -91,21 +91,6 @@ export const actions: Actions = {
 			}
 		});
 
-		// const queries = [
-		// 	...pack.missions.map(mission =>
-		// 		client.mission.update({
-		// 			where: {
-		// 				id: mission.id
-		// 			},
-		// 			data: {
-		// 				missionPackId: pack.id
-		// 			}
-		// 		})
-		// 	)
-		// ];
-
-		// await client.$transaction(queries);
-
 		throw redirect(303, '/missionpack/' + encodeURIComponent(pack.name));
 	}
 };

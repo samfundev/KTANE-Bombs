@@ -4,6 +4,7 @@
 	import type { Mission } from '$lib/types';
 
 	export let mission: Pick<Mission, 'completions' | 'tpSolve'>;
+	let tpSolve = mission.completions.find(c => c.team[0] === 'Twitch Plays');
 
 	$: mission.completions.sort((a, b) => b.time - a.time);
 </script>
@@ -14,7 +15,7 @@
 	{:else}
 		<NoContent>No solves, <a href="/upload">be the first</a>!</NoContent>
 	{/each}
-	{#if mission.tpSolve}
+	{#if mission.tpSolve && tpSolve === undefined}
 		<div class="block">Solved by <span class="tp-solve">Twitch Plays</span></div>
 	{/if}
 </div>
@@ -30,6 +31,6 @@
 	.tp-solve {
 		padding: 1px 3px;
 		border-radius: 5px;
-		background-color: #9146ff;
+		background-color: #9a4aff;
 	}
 </style>

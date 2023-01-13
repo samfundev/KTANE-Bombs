@@ -2,8 +2,8 @@
 	import Dialog from '$lib/controls/Dialog.svelte';
 	import Input from '$lib/controls/Input.svelte';
 	import Select from '$lib/controls/Select.svelte';
-	import { Completion, IndividualCompletion, Mission, Permission, type FrontendUser } from '$lib/types';
-	import { getPersonColor, hasPermission, onlyUnique, pluralize, withoutArticle } from '$lib/util';
+	import { IndividualCompletion, Mission, MissionCompletion, Permission, type FrontendUser } from '$lib/types';
+	import { getPersonColor, hasPermission, pluralize, withoutArticle } from '$lib/util';
 	import UserPermissions from '../_UserPermissions.svelte';
 	import { page } from '$app/stores';
 	import MissionCompletionCard from '$lib/cards/MissionCompletionCard.svelte';
@@ -19,14 +19,16 @@
 		efm: number;
 		solo: number;
 	};
-	type MissionCompletion = Pick<Completion, 'team' | 'solo'> & { mission: { name: string } };
+
 	let stats: SolveStats = data.stats;
 	let username: string = data.username;
 	let shownUser: FrontendUser | null = data.shownUser;
 	let completions: MissionCompletion[] = data.completions;
+	let tpMissions: Mission[] = data.tpMissions;
 
 	let newUsername = username;
 	const oldUsername = username;
+	let tp = username === 'Twitch Plays';
 
 	let dialog: HTMLDialogElement;
 
@@ -68,28 +70,43 @@
 	let missionsNames: { [name: string]: MissionCompletion[] } = {};
 	// Sort completions
 	completions.sort((a, b) => withoutArticle(a.mission.name).localeCompare(withoutArticle(b.mission.name)));
-	completions.forEach(c => {
-		let name = c.mission.name;
-		if (!(name in missions)) {
-			missions[name] = new IndividualCompletion();
-			missions[name].name = name;
-		}
-		if (c.team.length === 1) {
-			if (c.solo) {
-				missions[name].solo = true;
-				missions[name].nSolo += 1;
-			} else {
+	if (tp) {
+		tpMissions.forEach(m => {
+			let name = m.name;
+			if (!(name in missions)) {
+				missions[name] = new IndividualCompletion();
+				missions[name].name = name;
 				missions[name].efm = true;
-				missions[name].nEFM += 1;
+				missions[name].nEFM = 1;
 			}
-		} else if (c.team.indexOf(username) == 0) {
-			missions[name].defuser = true;
-			missions[name].nDefuser += 1;
-		} else {
-			missions[name].expert = true;
-			missions[name].nExpert += 1;
-		}
-	});
+		});
+	} else {
+		completions.forEach(c => {
+			let name = c.mission.name;
+			if (!(name in missions)) {
+				missions[name] = new IndividualCompletion();
+				missions[name].name = name;
+			}
+			if (tp) {
+				missions[name].efm = true;
+				missions[name].nEFM = 1;
+			} else if (c.team.length === 1) {
+				if (c.solo) {
+					missions[name].solo = true;
+					missions[name].nSolo += 1;
+				} else {
+					missions[name].efm = true;
+					missions[name].nEFM += 1;
+				}
+			} else if (c.team.indexOf(username) == 0) {
+				missions[name].defuser = true;
+				missions[name].nDefuser += 1;
+			} else {
+				missions[name].expert = true;
+				missions[name].nExpert += 1;
+			}
+		});
+	}
 	function filterUnique(item: MissionCompletion, pos: number, self: MissionCompletion[]): boolean {
 		return self.findIndex(c => c.mission.name == item.mission.name) == pos;
 	}
@@ -130,15 +147,24 @@
 	missionsNames['Defuser'] = [];
 	missionsNames['Expert'] = [];
 	missionsNames['EFM'] = [];
-	completions.forEach(c => {
-		if (c.team.length === 1) {
-			if (c.solo) missionsNames['Solo'].push(c);
-			else missionsNames['EFM'].push(c);
-		} else {
-			if (c.team.indexOf(username) == 0) missionsNames['Defuser'].push(c);
-			else missionsNames['Expert'].push(c);
-		}
-	});
+	if (tp) {
+		tpMissions.forEach(m => {
+			let c = new MissionCompletion();
+			c.mission.name = m.name;
+			c.team = ['Twitch Plays'];
+			missionsNames['EFM'].push(c);
+		});
+	} else {
+		completions.forEach(c => {
+			if (c.team.length === 1) {
+				if (c.solo) missionsNames['Solo'].push(c);
+				else missionsNames['EFM'].push(c);
+			} else {
+				if (c.team.indexOf(username) == 0) missionsNames['Defuser'].push(c);
+				else missionsNames['Expert'].push(c);
+			}
+		});
+	}
 
 	let wrView = writable(byRole);
 	if (browser) {
@@ -167,11 +193,15 @@
 	<b class="block">EFM: {stats.efm}</b>
 </div>
 <div class="block legend flex">
-	<span class="green" style="background-color: #00ff0044">Defuser + Expert + EFM</span>
-	<span style="background-color: {getPersonColor(1, 0, true)}">Solo</span>
-	<span style="background-color: {getPersonColor(2, 0, false)}">Defuser</span>
-	<span style="background-color: {getPersonColor(2, 1, false)}">Expert</span>
-	<span style="background-color: {getPersonColor(1, 0, false)}">EFM</span>
+	{#if tp}
+		<span style="background-color: {getPersonColor(1, 0, false, true)}">TP</span>
+	{:else}
+		<span class="green" style="background-color: #00ff0044">Defuser + Expert + EFM</span>
+		<span style="background-color: {getPersonColor(1, 0, true)}">Solo</span>
+		<span style="background-color: {getPersonColor(2, 0, false)}">Defuser</span>
+		<span style="background-color: {getPersonColor(2, 1, false)}">Expert</span>
+		<span style="background-color: {getPersonColor(1, 0, false)}">EFM</span>
+	{/if}
 	<div class="right-side">
 		<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={byRole} on:change={storeView} />
 	</div>
@@ -190,12 +220,14 @@
 				</h4>
 			</div>
 			<div class="solves role flex grow">
-				{#each compList.filter(filterUnique) as comp}
+				{#each compList.filter(filterUnique).sort((a, b) => a.mission.name.localeCompare(b.mission.name)) as comp}
 					{@const solveCount = selectSolveCount(key, missions[comp.mission.name])}
 					<a href="/mission/{encodeURIComponent(comp.mission.name)}" class:green={key.includes('+')}>
 						<div
 							class="block"
-							style:background-color={key.includes('+')
+							style:background-color={tp
+								? '#9a4aff'
+								: key.includes('+')
 								? '#00ff0044'
 								: getPersonColor(comp.team.length, comp.team.indexOf(username), comp.solo)}>
 							<span class="mission-name">{comp.mission.name}</span>
@@ -210,7 +242,7 @@
 	{/each}
 {:else}
 	<div class="solves flex grow">
-		{#each Object.values(missions) as mission}
+		{#each Object.values(missions).sort((a, b) => a.name.localeCompare(b.name)) as mission}
 			<MissionCompletionCard {mission} {username} />
 		{/each}
 	</div>

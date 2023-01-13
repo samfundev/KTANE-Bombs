@@ -34,8 +34,14 @@
 		>{formatTime(completion.time)}</span>
 	<div class="team">
 		{#each completion.team as person, i}
-			<span class="person" style="background-color: {getPersonColor(completion.team.length, i, completion.solo)}"
-				>{person}</span>
+			<span
+				class="person"
+				style="background-color: {getPersonColor(
+					completion.team.length,
+					i,
+					completion.solo,
+					completion.team[0] === 'Twitch Plays'
+				)}">{person}</span>
 		{/each}
 	</div>
 	<div class="flex column">

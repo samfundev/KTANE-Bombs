@@ -1,6 +1,5 @@
 import client from '$lib/client';
 import type { Completer } from '$lib/types';
-import type { RequestHandler, RequestEvent } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async function () {
@@ -16,7 +15,10 @@ export const load: PageServerLoad = async function () {
 			solo: true
 		},
 		where: {
-			verified: true
+			verified: true,
+			NOT: {
+				team: { has: 'Twitch Plays' }
+			}
 		}
 	});
 

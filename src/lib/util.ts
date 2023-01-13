@@ -260,10 +260,12 @@ export function hasSpecialIcon(moduleID: string): boolean {
 	].includes(moduleID);
 }
 
-export function getPersonColor(size: number, index: number, solo: boolean): string {
+export function getPersonColor(size: number, index: number, solo: boolean, tpSolve: boolean = false): string {
 	return size === 1
 		? solo
 			? '#00ffff'
+			: tpSolve
+			? '#9a4aff'
 			: 'hsl(300, 100%, 75%)'
 		: index === 0
 		? 'hsl(210, 100%, 65%)'

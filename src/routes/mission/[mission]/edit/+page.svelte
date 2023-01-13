@@ -230,6 +230,7 @@
 						placeholder="1:23:45.67"
 						bind:value={completion.time}
 						parse={parseTime} />
+					<Checkbox id="completion-solo-{ci}" sideLabel label="Solo" bind:checked={completion.solo} />
 					<Checkbox id="completion-first-{ci}" sideLabel label="First" bind:checked={completion.first} />
 				</div>
 				<Input
@@ -346,7 +347,7 @@
 	.tp-solve {
 		padding: 1px 3px;
 		border-radius: 5px;
-		background-color: #9146ff;
+		background-color: #9a4aff;
 	}
 
 	.header {

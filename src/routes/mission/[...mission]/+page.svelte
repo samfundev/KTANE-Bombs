@@ -94,6 +94,7 @@
 			<span style="background-color: {getPersonColor(2, 1, false)}; color:#000">Expert</span>
 			<span style="background-color: {getPersonColor(1, 0, false)}; color:#000">EFM</span>
 			<span style="background-color: {getPersonColor(1, 0, true)}; color:#000">Solo</span>
+			<span style="background-color: {getPersonColor(1, 0, false, true)}; color:#FFF">TP</span>
 		</div>
 		<div class="block header">Solves</div>
 		<CompletionList {mission} />
