@@ -124,7 +124,7 @@
 		required
 		instantFormat={false}
 		options={packs}
-		display={pack => pack.name}
+		display={pack => pack?.name}
 		validate={value => value !== null} />
 	<Input
 		id="mission-variant"

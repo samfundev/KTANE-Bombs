@@ -93,7 +93,7 @@ export function fixPools<T>(mission: T & { bombs: client.Bomb[] }): T & { bombs:
 export function getSolveTypes(mission: Mission) {
 	return {
 		normalSolve: mission.completions.some(completion => completion.team.length >= 2),
-		efmSolve: mission.completions.some(completion => completion.team.length == 1),
+		efmSolve: mission.completions.some(completion => completion.team.length == 1 && !completion.solo),
 		soloSolve: mission.completions.some(completion => completion.solo)
 	};
 }
@@ -296,4 +296,36 @@ export function withoutArticle(name: string): string {
 
 export function excludeArticleSort(a: string, b: string): number {
 	return withoutArticle(a).localeCompare(withoutArticle(b));
+}
+
+export function getSteamID(str: string): string {
+	let trimmed = str.trim();
+	if (isOnlyDigits(trimmed)) return trimmed;
+
+	let url: URL | null = null;
+	try {
+		url = new URL(trimmed);
+	} catch (e: any) {
+		return '';
+	}
+
+	if (url?.hostname !== 'steamcommunity.com') return '';
+
+	let id = url?.searchParams?.get('id');
+	if (id === null) return '';
+
+	if (isOnlyDigits(id)) return id;
+
+	id = id.substring(0, id.search(/[^0-9]/));
+	if (isOnlyDigits(id)) return id;
+
+	return '';
+}
+
+export function validateSteamID(str: string): string | boolean {
+	let id = getSteamID(str);
+	if (id === '') {
+		return 'Invalid Steam Workshop URL or Workshop ID.';
+	}
+	return '';
 }

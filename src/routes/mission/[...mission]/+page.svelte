@@ -33,11 +33,12 @@
 <div class="block relative">
 	<h1 class="header">{mission.name}</h1>
 	<div class="centered">
-		by {mission.authors.join(', ')}
-		from
-		<a href="https://steamcommunity.com/sharedfiles/filedetails/?id={mission.missionPack.steamId}">
-			{mission.missionPack.name}
-		</a>
+		by {mission.authors.join(', ')} from
+		{#if mission.missionPack}
+			<a href="/missionpack/{encodeURIComponent(mission.missionPack.name)}">{mission.missionPack.name}</a>
+		{:else}
+			---
+		{/if}
 	</div>
 	{#if hasPermission($page.data.user, Permission.VerifyMission)}
 		<a href={$page.url.href + '/edit'} class="top-right">Edit</a>
