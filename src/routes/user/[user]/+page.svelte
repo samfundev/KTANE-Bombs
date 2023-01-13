@@ -34,14 +34,27 @@
 	let byRole = '';
 
 	async function editName() {
-		const response = await fetch('/user/rename', {
+		let response = await fetch('/user/rename', {
 			method: 'POST',
 			body: JSON.stringify({
 				oldUsername,
 				username: newUsername,
-				userExists: shownUser !== null
+				nameExistsOK: false
 			})
 		});
+
+		if (response.status == 202) {
+			if (!confirm(`Merge this user with existing solver and mission author (${newUsername})? This cannot be undone.`))
+				return;
+			response = await fetch('/user/rename', {
+				method: 'POST',
+				body: JSON.stringify({
+					oldUsername,
+					username: newUsername,
+					nameExistsOK: true
+				})
+			});
+		}
 
 		if (response.ok) {
 			location.href = `/user/${encodeURIComponent(newUsername)}`;

@@ -7,7 +7,7 @@ import { redirect } from '@sveltejs/kit';
 export const POST: RequestHandler = async function ({ locals, request }) {
 	if (!hasPermission(locals.user, Permission.RenameUser)) forbidden(locals);
 
-	const { oldUsername, username, userExists } = await request.json();
+	const { oldUsername, username, nameExistsOK } = await request.json();
 
 	const completions = await client.completion.findMany({
 		where: {
@@ -24,6 +24,27 @@ export const POST: RequestHandler = async function ({ locals, request }) {
 			}
 		}
 	});
+	if (!nameExistsOK) {
+		const completionsMerge = await client.completion.findMany({
+			where: {
+				team: {
+					has: username
+				}
+			}
+		});
+
+		const missionsMerge = await client.mission.findMany({
+			where: {
+				authors: {
+					has: username
+				}
+			}
+		});
+
+		console.log(missionsMerge);
+		console.log(completionsMerge);
+		if (missionsMerge.length > 0 || completionsMerge.length > 0) return new Response(undefined, { status: 202 });
+	}
 
 	const queries = [
 		// Mission
