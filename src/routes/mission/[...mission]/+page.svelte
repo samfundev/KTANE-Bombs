@@ -35,7 +35,7 @@
 	<div class="centered">
 		by {mission.authors.join(', ')} from
 		{#if mission.missionPack}
-			<a href="/missionpack/{encodeURIComponent(mission.missionPack.name)}">{mission.missionPack.name}</a>
+			<a class="pack" href="/missionpack/{encodeURIComponent(mission.missionPack.name)}">{mission.missionPack.name}</a>
 		{:else}
 			---
 		{/if}
@@ -146,14 +146,13 @@
 	.centered {
 		text-align: center;
 	}
+	a.pack {
+		color: var(--text-color);
+	}
 
 	.pools {
 		display: flex;
 		flex-wrap: wrap;
-		/*
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-		*/
 		gap: var(--gap);
 		align-content: start;
 	}

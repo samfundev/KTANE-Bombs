@@ -16,7 +16,7 @@
 	<h1 class="header">{pack.name}</h1>
 	<div class="flex">
 		<span>{pack.missions.length} Missions</span>
-		<a href="https://steamcommunity.com/sharedfiles/filedetails/?id={pack.steamId}">Steam Workshop</a>
+		<a class="steam" href="https://steamcommunity.com/sharedfiles/filedetails/?id={pack.steamId}">Steam Workshop</a>
 	</div>
 	{#if hasPermission($page.data.user, Permission.VerifyMissionPack)}
 		<a href={$page.url.href + '/edit'} class="top-right">Edit</a>
@@ -60,6 +60,9 @@
 
 	.centered {
 		text-align: center;
+	}
+	a.steam {
+		color: var(--text-color);
 	}
 
 	.flex {

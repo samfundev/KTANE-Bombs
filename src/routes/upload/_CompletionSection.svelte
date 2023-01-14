@@ -80,11 +80,6 @@
 	}
 
 	$: {
-		if (tpSolve) {
-			completion.solo = false;
-			team = [{ invalid: false, text: 'Twitch Plays' }];
-		}
-
 		dynamicBoxes(proofs);
 		completion.proofs = parseTeam(proofs, parseURL);
 
@@ -102,6 +97,17 @@
 			completion.proofs.length !== 0 &&
 			completion.team.length !== 0 &&
 			!timerInvalid;
+	}
+
+	function tpChange() {
+		if (tpSolve) {
+			completion.solo = false;
+			team = [{ invalid: false, text: 'Twitch Plays' }];
+		} else team = [{ invalid: false, text: '' }];
+	}
+
+	function teamChange() {
+		if (team[0].text === 'Twitch Plays') tpSolve = true;
 	}
 
 	function upload() {
@@ -171,7 +177,8 @@
 					label={index == 0 ? 'Defuser' : 'Expert'}
 					optionalOptions={true}
 					options={solverNames}
-					disabled={tpSolve || (index > 0 && team[0].text === 'Twitch Plays')}
+					disabled={tpSolve}
+					on:change={teamChange}
 					bind:value={member.text} />
 			</div>
 		{/each}
@@ -181,6 +188,7 @@
 		id="tpSolve"
 		label="TP Solve"
 		bind:checked={tpSolve}
+		on:change={tpChange}
 		disabled={completion.solo || completion.team.length > 1} />
 </form>
 <CompletionCard {completion} />
