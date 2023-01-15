@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Permission, Pool, type Mission, type MissionPack } from '$lib/types';
-	import { formatTime, getModule, getPersonColor, hasPermission, pluralize } from '$lib/util';
+	import { formatTime, getModule, getPersonColor, hasPermission, onlyUnique, pluralize } from '$lib/util';
 	import CompletionList from '$lib/comp/CompletionList.svelte';
 	import type { RepoModule } from '$lib/repo';
 	import { page } from '$app/stores';
@@ -22,6 +22,28 @@
 			if (mod.Type == 'Needy') classes += ' needy';
 		} else classes += ' border';
 		return classes;
+	}
+
+	function condensedPool(pool: Pool) {
+		let fPool = pool.modules.filter(onlyUnique);
+		if (fPool.length == pool.modules.length && fPool.length > 1) {
+			return {
+				uniform: true,
+				mods: fPool.map(mod => {
+					return { mod, frac: 1 / fPool.length };
+				})
+			};
+		}
+
+		return {
+			uniform: false,
+			mods: fPool.map(mod => {
+				return {
+					mod,
+					frac: pool.modules.filter(m => m === mod).length / pool.modules.length
+				};
+			})
+		};
 	}
 
 	sortBombs(mission, modules);
@@ -73,10 +95,14 @@
 			</div>
 			<div class="pools">
 				{#each bomb.pools as pool}
+					{@const cond = condensedPool(pool)}
 					<div class={poolClass(pool)}>
 						<div class="modules">
-							{#each pool.modules.map(module => getModule(module, modules)) as module}
-								<ModuleCard {module} />
+							{#if cond.uniform}
+								<div class="all-percent">{Math.floor(cond.mods[0].frac * 1000) / 10}% each:</div>
+							{/if}
+							{#each cond.mods.map(mod => getModule(mod.mod, modules)) as module, idx}
+								<ModuleCard {module} fraction={!cond.uniform ? cond.mods[idx].frac : 1} />
 							{/each}
 						</div>
 						{#if pool.count !== 1}
@@ -120,6 +146,13 @@
 			display: flex;
 			flex-direction: column;
 		}
+	}
+
+	.all-percent {
+		line-height: 32px;
+		padding: var(--gap);
+		font-weight: bold;
+		font-size: 120%;
 	}
 
 	.hspace {

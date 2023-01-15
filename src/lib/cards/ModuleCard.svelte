@@ -3,6 +3,7 @@
 	import { hasSpecialIcon } from '$lib/util';
 
 	export let module: RepoModule;
+	export let fraction: number = 1;
 </script>
 
 <div
@@ -19,6 +20,11 @@
 			style="object-position: -{module.X * 32}px -{module.Y * 32}px" />
 	{/if}
 	<span>{module.Name}</span>
+	{#if fraction < 0.02}
+		<b>{Math.round(fraction * 1000) / 10}%</b>
+	{:else if fraction < 1}
+		<b>{Math.round(fraction * 100)}%</b>
+	{/if}
 </div>
 
 <style>
