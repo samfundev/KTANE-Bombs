@@ -32,6 +32,7 @@
 	.tp-solve {
 		padding: 1px 3px;
 		border-radius: 5px;
-		background-color: #9a4aff;
+		background-color: #9146ff;
+		color: #fff;
 	}
 </style>

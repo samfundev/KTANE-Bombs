@@ -5,6 +5,8 @@
 
 	export let completion: Completion;
 
+	const tp = completion.team[0] === TP_TEAM;
+
 	function classifyLink(link: string): string {
 		let url: URL | null = null;
 		try {
@@ -37,12 +39,8 @@
 		{#each completion.team as person, i}
 			<span
 				class="person"
-				style="background-color: {getPersonColor(
-					completion.team.length,
-					i,
-					completion.solo,
-					completion.team[0] === TP_TEAM
-				)}">{person}</span>
+				class:tp-solve={tp}
+				style="background-color: {getPersonColor(completion.team.length, i, completion.solo, tp)}">{person}</span>
 		{/each}
 	</div>
 	<div class="flex column">
@@ -89,5 +87,8 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: var(--gap);
+	}
+	.tp-solve {
+		color: #fff;
 	}
 </style>

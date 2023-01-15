@@ -194,7 +194,7 @@
 </div>
 <div class="block legend flex">
 	{#if tp}
-		<span style="background-color: {getPersonColor(1, 0, false, true)}">TP</span>
+		<span style="color:#fff; background-color: {getPersonColor(1, 0, false, true)}">TP</span>
 	{:else}
 		<span class="green" style="background-color: #00ff0044">Defuser + Expert + EFM</span>
 		<span style="background-color: {getPersonColor(1, 0, true)}">Solo</span>
@@ -225,11 +225,10 @@
 					<a href="/mission/{encodeURIComponent(comp.mission.name)}" class:green={key.includes('+')}>
 						<div
 							class="block"
-							style:background-color={tp
-								? '#9a4aff'
-								: key.includes('+')
+							class:tp-solve={tp}
+							style:background-color={key.includes('+')
 								? '#00ff0044'
-								: getPersonColor(comp.team.length, comp.team.indexOf(username), comp.solo)}>
+								: getPersonColor(comp.team.length, comp.team.indexOf(username), comp.solo, tp)}>
 							<span class="mission-name">{comp.mission.name}</span>
 							{#if solveCount > 1}
 								<b>×{solveCount}</b>
@@ -281,6 +280,9 @@
 	h2,
 	h4 {
 		margin: 0;
+	}
+	.tp-solve {
+		color: #fff;
 	}
 
 	.legend {

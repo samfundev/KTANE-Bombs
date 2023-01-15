@@ -265,7 +265,7 @@ export function getPersonColor(size: number, index: number, solo: boolean, tpSol
 		? solo
 			? '#00ffff'
 			: tpSolve
-			? '#9a4aff'
+			? '#9146ff'
 			: 'hsl(300, 100%, 75%)'
 		: index === 0
 		? 'hsl(210, 100%, 65%)'
