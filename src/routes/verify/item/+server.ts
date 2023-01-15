@@ -3,6 +3,7 @@ import { Permission } from '$lib/types';
 import type { QueueItem } from '$lib/types';
 import { forbidden, hasPermission } from '$lib/util';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
+import { TP_TEAM } from '$lib/const';
 
 export const POST: RequestHandler = async function ({ locals, request }: RequestEvent) {
 	const { accept, item, replaceId }: { accept: boolean; item: QueueItem; replaceId: number } = await request.json();
@@ -83,7 +84,9 @@ export const POST: RequestHandler = async function ({ locals, request }: Request
 			}
 
 			if (accept) {
+				const tp = item.completion.team[0] === TP_TEAM;
 				const first =
+					!tp &&
 					(await client.completion.findFirst({
 						where: {
 							missionId: item.mission.id,
@@ -91,6 +94,12 @@ export const POST: RequestHandler = async function ({ locals, request }: Request
 							first: true
 						}
 					})) === null;
+
+				if (tp)
+					await client.mission.update({
+						where: { id: item.mission.id },
+						data: { tpSolve: true }
+					});
 
 				if (replaceId >= 0) {
 					await client.completion.update({

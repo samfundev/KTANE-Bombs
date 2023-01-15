@@ -5,6 +5,7 @@
 	import { Completion } from '$lib/types';
 	import { formatTime, parseTime } from '$lib/util';
 	import toast from 'svelte-french-toast';
+	import { TP_TEAM } from '$lib/const';
 
 	export let missionNames: string[];
 	export let solverNames: string[];
@@ -102,12 +103,12 @@
 	function tpChange() {
 		if (tpSolve) {
 			completion.solo = false;
-			team = [{ invalid: false, text: 'Twitch Plays' }];
+			team = [{ invalid: false, text: TP_TEAM }];
 		} else team = [{ invalid: false, text: '' }];
 	}
 
 	function teamChange() {
-		if (team[0].text === 'Twitch Plays') tpSolve = true;
+		if (team[0].text === TP_TEAM) tpSolve = true;
 	}
 
 	function upload() {
@@ -183,7 +184,7 @@
 			</div>
 		{/each}
 	</div>
-	<Checkbox id="solo" label="Solo" bind:checked={completion.solo} disabled={tpSolve} />
+	<Checkbox id="solo" label="Solo" bind:checked={completion.solo} disabled={tpSolve || completion.team.length > 1} />
 	<Checkbox
 		id="tpSolve"
 		label="TP Solve"

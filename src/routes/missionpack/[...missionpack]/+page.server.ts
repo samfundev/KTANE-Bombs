@@ -7,7 +7,6 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async function ({ params, locals }: ServerLoadEvent) {
 	const { missionpack } = params;
-	console.log(params);
 	const pack = await client.missionPack.findFirst({
 		where: {
 			name: missionpack
@@ -35,8 +34,6 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			verified: true
 		}
 	});
-
-	console.log(pack?.steamId);
 
 	if (pack === null) {
 		throw error(404, 'Mission pack not found.');

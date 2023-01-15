@@ -19,6 +19,7 @@
 	import type { EditMission } from './_types';
 	import { page } from '$app/stores';
 	import { applyAction } from '$app/forms';
+	import { TP_TEAM } from '$lib/const';
 
 	export let data;
 
@@ -29,7 +30,7 @@
 
 	sortBombs(mission, modules);
 
-	let originalMission: Mission;
+	let originalMission: EditMission;
 
 	function setOriginalMission() {
 		originalMission = JSON.parse(JSON.stringify(mission));
@@ -53,6 +54,7 @@
 	async function saveChanges() {
 		const fData = new FormData();
 		fData.append('mission', JSON.stringify(mission));
+		fData.append('variantEdit', JSON.stringify(originalMission.variantOf != mission.variantOf));
 
 		const response = await fetch('?/editMission', {
 			method: 'POST',
@@ -250,7 +252,7 @@
 		{/each}
 		<div class="block">
 			<Checkbox id="mission-tp" bind:checked={mission.tpSolve}>
-				Solved by <span class="tp-solve">Twitch Plays</span>
+				Solved by <span class="tp-solve">{TP_TEAM}</span>
 			</Checkbox>
 		</div>
 	</div>

@@ -23,7 +23,7 @@
 	{/if}
 </div>
 {#if !pack.verified}
-	<div class="block centered not-verified">This mission has not been verified.</div>
+	<div class="block centered not-verified">This mission pack has not been verified.</div>
 {/if}
 <div class="main-content">
 	<div />

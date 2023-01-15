@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { TP_TEAM } from '$lib/const';
 	import type { Completion } from '$lib/types';
 	import { formatTime, getPersonColor } from '$lib/util';
 
@@ -40,7 +41,7 @@
 					completion.team.length,
 					i,
 					completion.solo,
-					completion.team[0] === 'Twitch Plays'
+					completion.team[0] === TP_TEAM
 				)}">{person}</span>
 		{/each}
 	</div>

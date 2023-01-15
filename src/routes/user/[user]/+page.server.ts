@@ -1,11 +1,12 @@
 import client from '$lib/client';
+import { TP_TEAM } from '$lib/const';
 import { Permission } from '$lib/types';
 import { forbidden, hasPermission } from '$lib/util';
 import type { Mission } from '@prisma/client';
 import { error } from '@sveltejs/kit';
 
 export const load = async function ({ params }: any) {
-	const tp = params.user === 'Twitch Plays';
+	const tp = params.user === TP_TEAM;
 	const user = await client.user.findFirst({
 		where: {
 			username: params.user

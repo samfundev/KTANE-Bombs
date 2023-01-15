@@ -15,6 +15,7 @@
 	import { writable, type Writable } from 'svelte/store';
 	import HomeFiltersMenu from './HomeFiltersMenu.svelte';
 	import type { RepoModule } from '$lib/repo';
+	import { TP_TEAM } from '$lib/const';
 
 	export let missions: Mission[];
 	export let missionCards: { [name: string]: any } = {};
@@ -164,7 +165,7 @@
 	}
 
 	function numCompletions(m: Mission, countTP: boolean = true) {
-		return m.completions.length + (countTP && m.tpSolve ? 1 : 0);
+		return m.completions.filter(c => c.team[0] != TP_TEAM).length + (countTP && m.tpSolve ? 1 : 0);
 	}
 
 	function compare(

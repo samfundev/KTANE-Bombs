@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { TP_TEAM } from '$lib/const';
 	import type { IndividualCompletion } from '$lib/types';
 	import { getPersonColor, listify } from '$lib/util';
 
@@ -18,7 +19,7 @@
 		{mission.name}
 	</div>
 	<div {title}>
-		{#if username === 'Twitch Plays'}
+		{#if username === TP_TEAM}
 			<div class="hspace" style="background-color: {getPersonColor(1, 0, false, true)}" />
 		{:else}
 			{#if mission.defuser}

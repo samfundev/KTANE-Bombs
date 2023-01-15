@@ -41,8 +41,6 @@ export const POST: RequestHandler = async function ({ locals, request }) {
 			}
 		});
 
-		console.log(missionsMerge);
-		console.log(completionsMerge);
 		if (missionsMerge.length > 0 || completionsMerge.length > 0) return new Response(undefined, { status: 202 });
 	}
 

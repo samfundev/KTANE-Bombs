@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { TP_TEAM } from '$lib/const';
 	import type { Completer } from '$lib/types';
 	export let data;
 	let completers: Completer[] = data.completers;
@@ -9,7 +10,7 @@
 </svelte:head>
 <h1 class="header">
 	Solvers
-	<a href="/user/Twitch%20Plays">Twitch Plays</a>
+	<a href="/user/Twitch%20Plays">{TP_TEAM}</a>
 </h1>
 <div class="table">
 	<b class="block" />

@@ -9,6 +9,7 @@
 	import MissionCompletionCard from '$lib/cards/MissionCompletionCard.svelte';
 	import { browser } from '$app/environment';
 	import { writable } from 'svelte/store';
+	import { TP_TEAM } from '$lib/const';
 	export let data;
 
 	type SolveStats = {
@@ -28,7 +29,7 @@
 
 	let newUsername = username;
 	const oldUsername = username;
-	let tp = username === 'Twitch Plays';
+	let tp = username === TP_TEAM;
 
 	let dialog: HTMLDialogElement;
 
@@ -150,7 +151,7 @@
 		tpMissions.forEach(m => {
 			let c = new MissionCompletion();
 			c.mission.name = m.name;
-			c.team = ['Twitch Plays'];
+			c.team = [TP_TEAM];
 			missionsNames['EFM'].push(c);
 		});
 	} else {

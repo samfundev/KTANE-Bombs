@@ -121,7 +121,9 @@ export const actions: Actions = {
 
 		const fData = await request.formData();
 		const mission: EditMission = JSON.parse(fData.get('mission')?.toString() ?? '');
-		if (mission.variantOf != null) {
+		const variantEdit: boolean = JSON.parse(fData.get('variantEdit')?.toString() ?? '');
+
+		if (variantEdit && mission.variantOf != null) {
 			//find the mission that this edited mission is said to be a variant of
 			let selected = await client.mission.findFirst({
 				where: {
@@ -132,8 +134,8 @@ export const actions: Actions = {
 					id: true
 				}
 			});
-			async function cleanOthers() {
-				if (mission.variant == null) return;
+			//clean broken variant group
+			if (mission.variant != null) {
 				//find other missions with the edited mission's variant ID
 				let other = await client.mission.findMany({
 					where: {
@@ -159,13 +161,10 @@ export const actions: Actions = {
 				}
 			}
 			if (!selected) {
-				//not found, so clean broken variant group and remove the edited mission's variant ID
-				await cleanOthers();
+				//not found, so remove the edited mission's variant ID
 				mission.variant = null;
 			} else {
 				//found one
-				//clean broken variant group if this mission was in one
-				await cleanOthers();
 				if (!selected.variant) {
 					//the found one isn't in a variant group, calculate new variant ID
 					let variants = await client.mission.findMany({

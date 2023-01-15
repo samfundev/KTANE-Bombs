@@ -2,6 +2,7 @@
 	import MissionCardInner from './MissionCardInner.svelte';
 	import type { Mission } from '$lib/types';
 	import { getSolveTypes, listify } from '$lib/util';
+	import { TP_TEAM } from '$lib/const';
 
 	export let mission: Mission;
 	export let selectable: boolean = false;
@@ -15,7 +16,7 @@
 	const solvers = [
 		solveTypes.normalSolve ? 'by a team' : null,
 		solveTypes.efmSolve ? 'via EFM' : null,
-		mission.tpSolve ? 'on Twitch Plays' : null,
+		mission.tpSolve ? `on ${TP_TEAM}` : null,
 		solveTypes.soloSolve ? 'solo' : null
 	].flatMap(solver => solver ?? []);
 	const title =

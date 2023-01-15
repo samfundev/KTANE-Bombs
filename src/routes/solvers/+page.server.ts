@@ -1,4 +1,5 @@
 import client from '$lib/client';
+import { TP_TEAM } from '$lib/const';
 import type { Completer } from '$lib/types';
 import type { PageServerLoad } from './$types';
 
@@ -17,7 +18,7 @@ export const load: PageServerLoad = async function () {
 		where: {
 			verified: true,
 			NOT: {
-				team: { has: 'Twitch Plays' }
+				team: { has: TP_TEAM }
 			}
 		}
 	});

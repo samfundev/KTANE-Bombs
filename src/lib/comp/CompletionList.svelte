@@ -1,10 +1,11 @@
 <script lang="ts">
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import NoContent from '$lib/comp/NoContent.svelte';
+	import { TP_TEAM } from '$lib/const';
 	import type { Mission } from '$lib/types';
 
 	export let mission: Pick<Mission, 'completions' | 'tpSolve'>;
-	let tpSolve = mission.completions.find(c => c.team[0] === 'Twitch Plays');
+	let tpSolve = mission.completions.find(c => c.team[0] === TP_TEAM);
 
 	$: mission.completions.sort((a, b) => b.time - a.time);
 </script>
@@ -16,7 +17,7 @@
 		<NoContent>No solves, <a href="/upload">be the first</a>!</NoContent>
 	{/each}
 	{#if mission.tpSolve && tpSolve === undefined}
-		<div class="block">Solved by <span class="tp-solve">Twitch Plays</span></div>
+		<div class="block">Solved by <span class="tp-solve">{TP_TEAM}</span></div>
 	{/if}
 </div>
 
