@@ -138,14 +138,25 @@
 		<button on:click={deleteMission}>Delete</button>
 	</div>
 </div>
-<div class="block flex">
+<div class="block flex hspace">
 	<Select
 		label="Factory"
 		id="mission-factory"
 		bind:value={mission.factory}
 		options={[null, 'Static', 'Sequence']}
 		display={mode => mode ?? 'None'} />
-	<div class="hspace" />
+	<Select
+		label="Time Mode"
+		id="mission-time-mode"
+		bind:value={mission.timeMode}
+		options={[null, 'Local', 'Global']}
+		display={mode => mode ?? 'None'} />
+	<Select
+		label="Strike Mode"
+		id="mission-strike-mode"
+		bind:value={mission.strikeMode}
+		options={[null, 'Local', 'Global']}
+		display={mode => mode ?? 'None'} />
 	<Checkbox label="Designed for TP" id="designed-for-tp" bind:checked={mission.designedForTP} />
 </div>
 {#if !mission.verified}
@@ -291,13 +302,15 @@
 	.centered {
 		text-align: center;
 	}
-	.hspace {
-		width: 20px;
-	}
+
 	.hstack {
 		display: flex;
 		align-items: flex-end;
 		gap: 10px;
+	}
+
+	.flex.hspace {
+		gap: 20px;
 	}
 
 	.pools {

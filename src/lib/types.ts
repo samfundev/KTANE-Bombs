@@ -36,6 +36,8 @@ export class Mission {
 	designedForTP = false;
 	tpSolve = false;
 	factory: string | null = null;
+	strikeMode: string | null = null;
+	timeMode: string | null = null;
 }
 
 export class Bomb {
@@ -63,6 +65,7 @@ export class Completion {
 	first = false;
 	old = false;
 	solo = false;
+	notes: string | null = null;
 }
 
 export class IndividualCompletion {

@@ -49,6 +49,8 @@ export const POST: RequestHandler = async function ({ locals, request }: Request
 									}))
 								},
 								factory: item.mission.factory,
+								timeMode: item.mission.timeMode,
+								strikeMode: item.mission.strikeMode,
 								missionPackId: item.mission.missionPack?.id,
 								name: name,
 								designedForTP: item.mission.designedForTP

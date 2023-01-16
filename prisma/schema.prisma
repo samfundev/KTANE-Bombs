@@ -34,6 +34,8 @@ model Mission {
   designedForTP  Boolean      @default(false)
   tpSolve        Boolean      @default(false)
   factory        String?
+  strikeMode     String?
+  timeMode       String?
   verified       Boolean      @default(true)
   variant        Int?
 
@@ -61,6 +63,7 @@ model Completion {
   first  Boolean
   old    Boolean
   solo   Boolean
+  notes  String?
 
   mission   Mission @relation(fields: [missionId], references: [id], onDelete: Cascade)
   missionId Int

@@ -32,6 +32,8 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			designedForTP: true,
 			tpSolve: true,
 			factory: true,
+			timeMode: true,
+			strikeMode: true,
 			variant: true,
 			missionPack: {
 				select: {
@@ -220,6 +222,8 @@ export const actions: Actions = {
 					}))
 				},
 				factory: mission.factory,
+				timeMode: mission.timeMode,
+				strikeMode: mission.strikeMode,
 				missionPackId: mission.missionPack.id,
 				name: mission.name,
 				tpSolve: mission.tpSolve,

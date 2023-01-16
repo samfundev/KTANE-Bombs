@@ -41,6 +41,8 @@
 					designedForTP: false,
 					tpSolve: false,
 					factory: null,
+					timeMode: null,
+					strikeMode: null,
 					missionPack: null,
 					replace: false
 				};
@@ -81,7 +83,11 @@
 				}
 
 				mission.bombs.push(bomb);
-				if (mission.bombs.length > 1) mission.factory = 'Sequence';
+				if (mission.bombs.length > 1) {
+					mission.factory = 'Sequence';
+					mission.timeMode = 'Local';
+					mission.strikeMode = 'Local';
+				}
 			} else if (line.startsWith('[WidgetGenerator] Added widget: ') && bomb !== null) {
 				bomb.widgets++;
 			} else if (line.startsWith('[Tweaks] LFAEvent ') && mission !== null) {
@@ -203,6 +209,16 @@
 								id="mission-factory-{i}"
 								bind:value={mission.factory}
 								options={['Static', 'Sequence']} />
+							<Select
+								label="Time Mode"
+								id="mission-timemode-{i}"
+								bind:value={mission.timeMode}
+								options={['Local', 'Global']} />
+							<Select
+								label="Strike Mode"
+								id="mission-strikemode-{i}"
+								bind:value={mission.strikeMode}
+								options={['Local', 'Global']} />
 						{/if}
 						<Checkbox id="designed-for-tp-{i}" label="Designed for TP" bind:checked={mission.designedForTP} sideLabel />
 					</div>

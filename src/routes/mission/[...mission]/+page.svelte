@@ -131,6 +131,12 @@
 		{#if mission.factory !== null}
 			<span>Factory: {mission.factory}</span>
 		{/if}
+		{#if mission.timeMode !== null}
+			<span>{mission.timeMode} Time</span>
+		{/if}
+		{#if mission.strikeMode !== null}
+			<span>{mission.strikeMode} Strikes</span>
+		{/if}
 		{#if mission.designedForTP}
 			<span class="designed-for-tp">Designed for TP</span>
 		{/if}
