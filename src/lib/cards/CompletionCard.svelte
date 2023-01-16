@@ -35,13 +35,18 @@
 <div class="completion">
 	<span class="time" class:first={completion.first} class:old={completion.old} title={formatTime(completion.time, true)}
 		>{formatTime(completion.time)}</span>
-	<div class="team">
-		{#each completion.team as person, i}
-			<span
-				class="person"
-				class:tp-solve={tp}
-				style="background-color: {getPersonColor(completion.team.length, i, completion.solo, tp)}">{person}</span>
-		{/each}
+	<div class="flex notes">
+		<div class="team">
+			{#each completion.team as person, i}
+				<span
+					class="person"
+					class:tp-solve={tp}
+					style="background-color: {getPersonColor(completion.team.length, i, completion.solo, tp)}">{person}</span>
+			{/each}
+		</div>
+		{#if completion.notes !== null}
+			<div class="note" title={completion.notes} />
+		{/if}
 	</div>
 	<div class="flex column">
 		{#each completion.proofs as proof}
@@ -90,5 +95,16 @@
 	}
 	.tp-solve {
 		color: #fff;
+	}
+
+	.note {
+		background-image: url('$lib/img/note.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		width: 20px;
+		height: 28px;
+	}
+	.notes {
+		align-items: center;
 	}
 </style>

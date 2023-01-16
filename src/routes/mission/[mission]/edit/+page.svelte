@@ -2,17 +2,10 @@
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import Input from '$lib/controls/Input.svelte';
 	import NoContent from '$lib/comp/NoContent.svelte';
+	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import type { RepoModule } from '$lib/repo';
 	import Select from '$lib/controls/Select.svelte';
-	import {
-		Permission,
-		type Completion,
-		type ID,
-		type Mission,
-		type Bomb,
-		Pool,
-		type MissionPackSelection
-	} from '$lib/types';
+	import { Permission, type Completion, type ID, type Bomb, Pool, type MissionPackSelection } from '$lib/types';
 	import { displayStringList, formatTime, hasPermission, parseInteger, parseList, parseTime } from '$lib/util';
 	import equal from 'fast-deep-equal';
 	import { sortBombs } from '../../_shared';
@@ -20,6 +13,7 @@
 	import { page } from '$app/stores';
 	import { applyAction } from '$app/forms';
 	import { TP_TEAM } from '$lib/const';
+	import TextArea from '$lib/controls/TextArea.svelte';
 
 	export let data;
 
@@ -110,6 +104,14 @@
 		mission = mission;
 	}
 
+	let shownComp = mission.completions.reduce((result: { [id: string]: boolean }, curr) => {
+		result[curr.id] = false;
+		return result;
+	}, {});
+	function showComp(id: number) {
+		shownComp[id] = !shownComp[id];
+	}
+
 	missionNames.unshift('');
 </script>
 
@@ -165,7 +167,7 @@
 <div class="main-content">
 	<div class="bombs">
 		{#each mission.bombs as bomb}
-			<div class="block flex column relative">
+			<div class="block flex relative">
 				<Input
 					label="Number of Modules"
 					id="bomb-modules-{bomb.id}"
@@ -232,30 +234,41 @@
 		<div class="block header">Solves</div>
 		{#each mission.completions as completion, ci}
 			<div class="block flex column relative">
-				<Input label="Proof" id="completion-proof" bind:value={completion.proofs} />
-				<div class="hstack">
-					<Input
-						label="Time"
-						id="completion-time-{ci}"
-						validate={value => value != null}
-						display={value => formatTime(value, value % 1 != 0)}
-						instantFormat={false}
-						placeholder="1:23:45.67"
-						bind:value={completion.time}
-						parse={parseTime} />
-					<Checkbox id="completion-solo-{ci}" sideLabel label="Solo" bind:checked={completion.solo} />
-					<Checkbox id="completion-first-{ci}" sideLabel label="First" bind:checked={completion.first} />
-				</div>
-				<Input
-					label="Team"
-					id="completion-team-{ci}"
-					bind:value={completion.team}
-					parse={value => value.split(',').map(person => person.trim())}
-					display={list => list.join(', ')} />
-				{#if hasPermission($page.data.user, Permission.VerifyCompletion)}
-					<div class="actions">
-						<button on:click={() => deleteCompletion(completion)}>Delete</button>
+				{#if shownComp[completion.id]}
+					<Input label="Proof" id="completion-proof" bind:value={completion.proofs} />
+					<div class="hstack">
+						<Input
+							label="Time"
+							id="completion-time-{ci}"
+							validate={value => value != null}
+							display={value => formatTime(value, value % 1 != 0)}
+							instantFormat={false}
+							placeholder="1:23:45.67"
+							bind:value={completion.time}
+							parse={parseTime} />
+						<Checkbox id="completion-solo-{ci}" sideLabel label="Solo" bind:checked={completion.solo} />
+						<Checkbox id="completion-first-{ci}" sideLabel label="First" bind:checked={completion.first} />
 					</div>
+					<Input
+						label="Team"
+						id="completion-team-{ci}"
+						bind:value={completion.team}
+						parse={value => value.split(',').map(person => person.trim())}
+						display={list => list.join(', ')} />
+					<TextArea
+						id="completion-notes-{ci}"
+						label="Notes"
+						display={val => val ?? ''}
+						bind:value={completion.notes}
+						parse={val => (val?.length > 0 ? val : null)} />
+					{#if hasPermission($page.data.user, Permission.VerifyCompletion)}
+						<div class="actions">
+							<button on:click={() => deleteCompletion(completion)}>Delete</button>
+						</div>
+					{/if}
+				{:else}
+					<CompletionCard {completion} />
+					<div class="show-comp" on:click={() => showComp(completion.id)}>Edit</div>
 				{/if}
 			</div>
 		{:else}
@@ -357,6 +370,11 @@
 	}
 	.add-pool {
 		width: fit-content;
+	}
+
+	.show-comp {
+		cursor: pointer;
+		text-decoration: underline;
 	}
 
 	.tp-solve {
