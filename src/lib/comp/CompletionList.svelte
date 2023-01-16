@@ -29,6 +29,10 @@
 		gap: var(--gap);
 	}
 
+	a {
+		color: var(--text-color);
+	}
+
 	.tp-solve {
 		padding: 1px 3px;
 		border-radius: 5px;

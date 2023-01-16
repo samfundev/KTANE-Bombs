@@ -4,6 +4,7 @@
 
 	export let module: RepoModule;
 	export let fraction: number = 1;
+	export let alwaysShow: boolean = false;
 </script>
 
 <div
@@ -22,7 +23,7 @@
 	<span>{module.Name}</span>
 	{#if fraction < 0.02}
 		<b>{Math.round(fraction * 1000) / 10}%</b>
-	{:else if fraction < 1}
+	{:else if fraction < 1 || alwaysShow}
 		<b>{Math.round(fraction * 100)}%</b>
 	{/if}
 </div>

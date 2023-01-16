@@ -1,11 +1,22 @@
 <script lang="ts">
 	import { Permission, Pool, type Mission, type MissionPack } from '$lib/types';
-	import { formatTime, getModule, getPersonColor, hasPermission, onlyUnique, pluralize } from '$lib/util';
+	import {
+		excludeArticleSort,
+		formatTime,
+		getModule,
+		getPersonColor,
+		hasPermission,
+		onlyUnique,
+		pluralize
+	} from '$lib/util';
 	import CompletionList from '$lib/comp/CompletionList.svelte';
 	import type { RepoModule } from '$lib/repo';
 	import { page } from '$app/stores';
 	import { sortBombs } from '../_shared';
 	import ModuleCard from '$lib/cards/ModuleCard.svelte';
+	import { writable } from 'svelte/store';
+	import { browser } from '$app/environment';
+	import Select from '$lib/controls/Select.svelte';
 
 	type Variant = Pick<Mission, 'name' | 'completions' | 'tpSolve'>;
 	export let data;
@@ -13,10 +24,13 @@
 	export let variants: Variant[] | null = data.variants;
 	export let modules: Record<string, RepoModule> | null = data.modules;
 
-	function poolClass(pool: Pool): string {
+	const viewOptions = ['Pools', 'Percentages'];
+	let byPerc = '';
+
+	function poolClass(mods: string[]): string {
 		let classes = 'pool';
-		if (pool.modules.length == 1) {
-			let mod = getModule(pool.modules[0], modules);
+		if (mods.length == 1) {
+			let mod = getModule(mods[0], modules);
 			if (mod.BossStatus != undefined) classes += ' boss';
 			if (mod.Quirks != undefined) classes += ' quirks';
 			if (mod.Type == 'Needy') classes += ' needy';
@@ -24,29 +38,72 @@
 		return classes;
 	}
 
-	function condensedPool(pool: Pool) {
+	function poolFractions(pool: Pool) {
 		let fPool = pool.modules.filter(onlyUnique);
+		return fPool.map(mod => {
+			return {
+				mod,
+				frac: pool.modules.filter(m => m === mod).length / pool.modules.length
+			};
+		});
+	}
+
+	function condensedPool(pool: Pool) {
+		let fPool = poolFractions(pool);
 		if (fPool.length == pool.modules.length && fPool.length > 1) {
 			return {
 				uniform: true,
-				mods: fPool.map(mod => {
-					return { mod, frac: 1 / fPool.length };
+				count: pool.count,
+				mods: fPool.map(p => {
+					return { mod: p.mod, frac: 1 / fPool.length };
 				})
 			};
 		}
 
 		return {
 			uniform: false,
-			mods: fPool.map(mod => {
-				return {
-					mod,
-					frac: pool.modules.filter(m => m === mod).length / pool.modules.length
-				};
-			})
+			count: pool.count,
+			mods: fPool
 		};
 	}
 
 	sortBombs(mission, modules);
+
+	type BombFrac = {
+		mods: { mod: string; frac: number }[];
+		pools: { uniform: boolean; count: number; mods: { mod: string; frac: number }[] }[];
+	};
+
+	let bombFrac: BombFrac[] = [];
+	mission.bombs.forEach(b => {
+		let fPools = b.pools.map(p => condensedPool(p));
+		let modNames = b.pools
+			.flatMap(p => p.modules)
+			.filter(onlyUnique)
+			.sort(excludeArticleSort);
+		let mods: { mod: string; frac: number }[] = [];
+		modNames.forEach(m => {
+			let prob = 1;
+			fPools.forEach(p => {
+				let modF = p.mods.find(mod => mod.mod == m);
+				if (modF) prob *= Math.pow(1 - modF.frac, p.count);
+			});
+			mods.push({ mod: m, frac: 1 - prob });
+		});
+		bombFrac.push({ mods, pools: fPools });
+	});
+
+	let wrView = writable(byPerc);
+	if (browser) {
+		byPerc = JSON.parse(localStorage.getItem('mission-pools-view') || JSON.stringify(viewOptions[0]));
+		wrView.subscribe(value => {
+			localStorage.setItem('mission-pools-view', JSON.stringify(value));
+		});
+		storeView();
+	}
+	function storeView() {
+		wrView.set(byPerc);
+	}
 </script>
 
 <svelte:head>
@@ -81,36 +138,54 @@
 {/if}
 <div class="main-content">
 	<div class="bombs">
-		<div class="block legend flex">
-			<span class="boss">Boss/Semi-Boss</span>
-			<span class="needy">Needy</span>
-			<span class="quirks">Has Other Quirks</span>
+		<div class="block flex">
+			<div class="legend left flex">
+				<span class="boss">Boss/Semi-Boss</span>
+				<span class="needy">Needy</span>
+				<span class="quirks">Has Other Quirks</span>
+			</div>
+			<Select
+				id="view-select"
+				label="View:"
+				sideLabel
+				options={viewOptions}
+				bind:value={byPerc}
+				on:change={storeView} />
 		</div>
-		{#each mission.bombs as bomb}
+		{#each mission.bombs as bomb, bIdx}
 			<div class="block">
 				{pluralize(bomb.modules, 'Module')} · {formatTime(bomb.time)} · {pluralize(bomb.strikes, 'Strike')} · {pluralize(
 					bomb.widgets,
 					'Widget'
 				)}
 			</div>
-			<div class="pools">
-				{#each bomb.pools as pool}
-					{@const cond = condensedPool(pool)}
-					<div class={poolClass(pool)}>
-						<div class="modules">
-							{#if cond.uniform}
-								<div class="all-percent">{Math.floor(cond.mods[0].frac * 1000) / 10}% each:</div>
-							{/if}
-							{#each cond.mods.map(mod => getModule(mod.mod, modules)) as module, idx}
-								<ModuleCard {module} fraction={!cond.uniform ? cond.mods[idx].frac : 1} />
-							{/each}
-						</div>
-						{#if pool.count !== 1}
-							<span style="white-space: nowrap"> ×{pool.count}</span>
-						{/if}
+			{#if byPerc == viewOptions[1]}
+				<div class="pools column">
+					<div class="mod-list">
+						{#each bombFrac[bIdx].mods as pool}
+							<ModuleCard module={getModule(pool.mod, modules)} fraction={pool.frac} alwaysShow />
+						{/each}
 					</div>
-				{/each}
-			</div>
+				</div>
+			{:else}
+				<div class="pools">
+					{#each bombFrac[bIdx].pools as pool}
+						<div class={poolClass(pool.mods.map(p => p.mod))}>
+							<div class="modules">
+								{#if pool.uniform}
+									<div class="all-percent">{Math.floor(pool.mods[0].frac * 1000) / 10}% each:</div>
+								{/if}
+								{#each pool.mods.map(mod => getModule(mod.mod, modules)) as module, idx}
+									<ModuleCard {module} fraction={!pool.uniform ? pool.mods[idx].frac : 1} />
+								{/each}
+							</div>
+							{#if pool.count !== 1}
+								<span style="white-space: nowrap"> ×{pool.count}</span>
+							{/if}
+						</div>
+					{/each}
+				</div>
+			{/if}
 		{/each}
 	</div>
 	<div class="flex column">
@@ -208,15 +283,26 @@
 		border: 2px dashed var(--textbox-background);
 	}
 
+	.mod-list {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		background-color: var(--foreground);
+		flex-grow: 1;
+	}
+
 	span.first-solve {
 		background-color: hsl(43, 74%, 70%);
 		color: black;
 	}
 
 	.legend {
+		flex-wrap: wrap;
 		justify-content: center;
 		position: sticky;
 		top: var(--stick-under-navbar);
+	}
+	.legend.left {
+		width: 80%;
 	}
 	.legend > span {
 		padding: var(--gap);

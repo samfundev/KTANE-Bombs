@@ -192,19 +192,19 @@
 	<b class="block">Expert: {stats.expert}</b>
 	<b class="block">EFM: {stats.efm}</b>
 </div>
-<div class="block legend flex">
-	{#if tp}
-		<span style="color:#fff; background-color: {getPersonColor(1, 0, false, true)}">TP</span>
-	{:else}
-		<span class="green" style="background-color: #00ff0044">Defuser + Expert + EFM</span>
-		<span style="background-color: {getPersonColor(1, 0, true)}">Solo</span>
-		<span style="background-color: {getPersonColor(2, 0, false)}">Defuser</span>
-		<span style="background-color: {getPersonColor(2, 1, false)}">Expert</span>
-		<span style="background-color: {getPersonColor(1, 0, false)}">EFM</span>
-	{/if}
-	<div class="right-side">
-		<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={byRole} on:change={storeView} />
+<div class="block flex">
+	<div class="legend flex">
+		{#if tp}
+			<span style="color:#fff; background-color: {getPersonColor(1, 0, false, true)}">TP</span>
+		{:else}
+			<span class="green" style="background-color: #00ff0044">Defuser + Expert + EFM</span>
+			<span style="background-color: {getPersonColor(1, 0, true)}">Solo</span>
+			<span style="background-color: {getPersonColor(2, 0, false)}">Defuser</span>
+			<span style="background-color: {getPersonColor(2, 1, false)}">Expert</span>
+			<span style="background-color: {getPersonColor(1, 0, false)}">EFM</span>
+		{/if}
 	</div>
+	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={byRole} on:change={storeView} />
 </div>
 <div class="block"><h2>Solves</h2></div>
 {#if byRole == viewOptions[1]}
@@ -286,6 +286,8 @@
 	}
 
 	.legend {
+		flex-wrap: wrap;
+		width: 85%;
 		justify-content: center;
 		position: sticky;
 		top: var(--stick-under-navbar);
@@ -296,10 +298,6 @@
 	}
 	.legend .green {
 		color: var(--text-color);
-	}
-	.right-side {
-		position: absolute;
-		right: var(--gap);
 	}
 
 	.solves > a {
