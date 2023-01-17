@@ -28,6 +28,8 @@ export const load = async function ({ parent, locals }: any) {
 				},
 				designedForTP: true,
 				factory: true,
+				timeMode: true,
+				strikeMode: true,
 				missionPack: {
 					select: {
 						id: true,

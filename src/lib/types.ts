@@ -90,10 +90,10 @@ export class HomeOptions {
 	checks: { [k: string]: boolean } = {};
 	modules: { [k: string]: any } = {};
 	numMods = [1, 600];
-	time = [1, 1600];
-	strikes = [1, 150];
-	widgets = [0, 40];
-	numBombs = [1, 30];
+	time = [1, 1800];
+	strikes = [1, 200];
+	widgets = [0, 50];
+	numBombs = [1, 50];
 	profPerc = [80];
 	mustHave: { [k: string]: MustHave } = {};
 }

@@ -97,7 +97,7 @@
 		if (textMatch) {
 			let time = timeSum(ms) / 60;
 			let mods = modSum(ms);
-			let strk = Math.max(...ms.bombs.map(bomb => bomb.strikes));
+			let strk = strikeSum(ms);
 			let widg = Math.max(...ms.bombs.map(bomb => bomb.widgets));
 
 			filtered =
@@ -154,7 +154,14 @@
 	}
 
 	function timeSum(m: Mission) {
-		return m.bombs.map(b => b.time).reduce((a, b) => a + b, 0);
+		return m.timeMode === 'Global'
+			? Math.max(...m.bombs.map(bomb => bomb.time))
+			: m.bombs.map(bomb => bomb.time).reduce((a, b) => a + b, 0);
+	}
+	function strikeSum(m: Mission) {
+		return m.strikeMode === 'Global'
+			? Math.max(...m.bombs.map(bomb => bomb.strikes))
+			: m.bombs.map(bomb => bomb.strikes).reduce((a, b) => a + b, 0);
 	}
 	function modSum(m: Mission) {
 		return m.bombs.map(b => b.modules).reduce((a, b) => a + b, 0);

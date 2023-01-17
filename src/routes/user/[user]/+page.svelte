@@ -192,7 +192,7 @@
 	<b class="block">Expert: {stats.expert}</b>
 	<b class="block">EFM: {stats.efm}</b>
 </div>
-<div class="block flex">
+<div class="block legend-bar flex">
 	<div class="legend flex">
 		{#if tp}
 			<span style="color:#fff; background-color: {getPersonColor(1, 0, false, true)}">TP</span>
@@ -285,12 +285,14 @@
 		color: #fff;
 	}
 
+	.legend-bar {
+		position: sticky;
+		top: var(--stick-under-navbar);
+	}
 	.legend {
 		flex-wrap: wrap;
 		width: 85%;
 		justify-content: center;
-		position: sticky;
-		top: var(--stick-under-navbar);
 	}
 	.legend > span {
 		padding: var(--gap);

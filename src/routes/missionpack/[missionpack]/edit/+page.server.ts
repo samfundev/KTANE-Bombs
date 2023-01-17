@@ -27,6 +27,8 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 					designedForTP: true,
 					tpSolve: true,
 					factory: true,
+					timeMode: true,
+					strikeMode: true,
 					completions: {
 						where: { verified: true }
 					}

@@ -36,10 +36,10 @@
 	let sortOptions = ['Alphabetical', 'Module Count', 'Bomb Time', 'Solves', 'Bomb Count', 'Rule Seeded Mods %'];
 	let limitDef: { [k: string]: number[] } = {
 		mods: [1, 600],
-		time: [1, 1600],
-		strk: [1, 150],
-		widg: [0, 40],
-		bmbs: [1, 30],
+		time: [1, 1800],
+		strk: [1, 200],
+		widg: [0, 50],
+		bmbs: [1, 50],
 		prof: [80]
 	};
 	let checkDef: { [k: string]: boolean } = {

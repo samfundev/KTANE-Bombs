@@ -185,7 +185,7 @@
 							{/if}
 						{/if}
 					</div>
-					<div class="block">
+					<div class="block params">
 						<Input
 							name="Authors"
 							label="Authors"
@@ -204,21 +204,23 @@
 							instantFormat={false}
 							required={selectedMissions[i]} />
 						{#if mission.bombs.length > 1}
-							<Select
-								label="Factory"
-								id="mission-factory-{i}"
-								bind:value={mission.factory}
-								options={['Static', 'Sequence']} />
-							<Select
-								label="Time Mode"
-								id="mission-timemode-{i}"
-								bind:value={mission.timeMode}
-								options={['Local', 'Global']} />
-							<Select
-								label="Strike Mode"
-								id="mission-strikemode-{i}"
-								bind:value={mission.strikeMode}
-								options={['Local', 'Global']} />
+							<div class="flex grow hspace">
+								<Select
+									label="Factory"
+									id="mission-factory-{i}"
+									bind:value={mission.factory}
+									options={['Static', 'Sequence']} />
+								<Select
+									label="Time Mode"
+									id="mission-timemode-{i}"
+									bind:value={mission.timeMode}
+									options={['Local', 'Global']} />
+								<Select
+									label="Strike Mode"
+									id="mission-strikemode-{i}"
+									bind:value={mission.strikeMode}
+									options={['Local', 'Global']} />
+							</div>
 						{/if}
 						<Checkbox id="designed-for-tp-{i}" label="Designed for TP" bind:checked={mission.designedForTP} sideLabel />
 					</div>
@@ -236,9 +238,15 @@
 
 <style>
 	.mission-holder {
-		width: 100%;
+		width: 74%;
 	}
 	.error {
 		color: red;
+	}
+	.flex.hspace {
+		gap: 10px;
+	}
+	.block.params {
+		width: 26%;
 	}
 </style>

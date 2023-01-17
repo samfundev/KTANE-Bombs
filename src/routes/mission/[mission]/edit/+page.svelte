@@ -118,7 +118,7 @@
 <svelte:head>
 	<title>{mission.name}</title>
 </svelte:head>
-<div class="block flex column relative">
+<div class="block flex grow relative">
 	<Input label="Name" id="mission-name" bind:value={mission.name} />
 	<Input label="Authors" id="mission-authors" bind:value={mission.authors} parse={parseList} />
 	<Input

@@ -27,10 +27,10 @@
 	const viewOptions = ['Pools', 'Percentages'];
 	let byPerc = '';
 
-	function poolClass(mods: string[]): string {
-		let classes = 'pool';
-		if (mods.length == 1) {
-			let mod = getModule(mods[0], modules);
+	function poolClass(mods: string[] = [], module: RepoModule | null = null): string {
+		let classes = '';
+		if (module || mods.length == 1) {
+			let mod = module ?? getModule(mods[0], modules);
 			if (mod.BossStatus != undefined) classes += ' boss';
 			if (mod.Quirks != undefined) classes += ' quirks';
 			if (mod.Type == 'Needy') classes += ' needy';
@@ -144,7 +144,7 @@
 {/if}
 <div class="main-content">
 	<div class="bombs">
-		<div class="block flex">
+		<div class="block legend-bar flex">
 			<div class="legend left flex">
 				<span class="boss">Boss/Semi-Boss</span>
 				<span class="needy">Needy</span>
@@ -169,14 +169,17 @@
 				<div class="pools column">
 					<div class="mod-list">
 						{#each bombFrac[bIdx].mods as pool}
-							<ModuleCard module={getModule(pool.mod, modules)} fraction={pool.frac} alwaysShow />
+							{@const module = getModule(pool.mod, modules)}
+							<div class="single {poolClass([], module)}">
+								<ModuleCard {module} fraction={pool.frac} alwaysShow />
+							</div>
 						{/each}
 					</div>
 				</div>
 			{:else}
 				<div class="pools">
 					{#each bombFrac[bIdx].pools as pool}
-						<div class={poolClass(pool.mods.map(p => p.mod))}>
+						<div class="pool {poolClass(pool.mods.map(p => p.mod))}">
 							<div class="modules">
 								{#if pool.uniform}
 									<div class="all-percent">{Math.floor(pool.mods[0].frac * 1000) / 10}% each:</div>
@@ -186,7 +189,7 @@
 								{/each}
 							</div>
 							{#if pool.count !== 1}
-								<span style="white-space: nowrap"> ×{pool.count}</span>
+								<span class="multiplier"> ×{pool.count}</span>
 							{/if}
 						</div>
 					{/each}
@@ -195,7 +198,7 @@
 		{/each}
 	</div>
 	<div class="flex column">
-		<div class="block legend flex">
+		<div class="block legend-bar legend flex">
 			<span class="first-solve">First Solve</span>
 			<span style="background-color: {getPersonColor(2, 0, false)}; color:#000">Defuser</span>
 			<span style="background-color: {getPersonColor(2, 1, false)}; color:#000">Expert</span>
@@ -271,22 +274,26 @@
 		align-content: start;
 	}
 	:global(.pool:not(.quirks) .module.quirks),
-	.pool.quirks,
+	:is(.pool, .single).quirks,
 	span.quirks {
 		background-color: #00bbff55 !important;
 	}
 	:global(.pool:not(.boss) .module.boss),
-	.pool.boss,
+	:is(.pool, .single).boss,
 	span.boss {
 		background-color: #ff000055 !important;
 	}
 	:global(.pool:not(.needy) .module.needy),
-	.pool.needy,
+	:is(.pool, .single).needy,
 	span.needy {
 		background-color: #0000ff66 !important;
 	}
 	.pool.border {
 		border: 2px dashed var(--textbox-background);
+	}
+	.multiplier {
+		white-space: nowrap;
+		font-size: 120%;
 	}
 
 	.mod-list {
@@ -301,11 +308,13 @@
 		color: black;
 	}
 
+	.legend-bar {
+		position: sticky;
+		top: var(--stick-under-navbar);
+	}
 	.legend {
 		flex-wrap: wrap;
 		justify-content: center;
-		position: sticky;
-		top: var(--stick-under-navbar);
 	}
 	.legend.left {
 		width: 80%;
