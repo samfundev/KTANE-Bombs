@@ -35,10 +35,18 @@
 		<div />
 		<MissionCardInner {mission} />
 		<div class="indicator flex column" {title}>
-			<span class:hidden={!solveTypes.normalSolve} style="background-color: hsl(210, 100%, 65%); color:#000">T</span>
-			<span class:hidden={!solveTypes.efmSolve} style="background-color: hsl(300, 100%, 75%); color:#000">E</span>
-			<span class:hidden={!mission.tpSolve} style="background-color: #9146ff; color:#FFF">TP</span>
-			<span class:hidden={!solveTypes.soloSolve} style="background-color: #00ffff; color:#000">S</span>
+			{#if solveTypes.normalSolve}
+				<span style="background-color: hsl(210, 100%, 65%); color:#000">T</span>
+			{/if}
+			{#if solveTypes.efmSolve}
+				<span style="background-color: hsl(300, 100%, 75%); color:#000">E</span>
+			{/if}
+			{#if mission.tpSolve}
+				<span style="background-color: #9146ff; color:#FFF">TP</span>
+			{/if}
+			{#if solveTypes.soloSolve}
+				<span style="background-color: #00ffff; color:#000">S</span>
+			{/if}
 		</div>
 		<div />
 	</a>
@@ -76,9 +84,6 @@
 		text-align: center;
 		padding: 3px 2px 1px;
 		line-height: 1;
-	}
-	.hidden {
-		display: none;
 	}
 
 	input {

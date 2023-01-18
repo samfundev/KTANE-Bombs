@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { TP_TEAM } from '$lib/const';
 	import type { Completion } from '$lib/types';
-	import { formatTime, getPersonColor } from '$lib/util';
+	import { formatTime, getPersonColor, popup, preventDisappear } from '$lib/util';
 
 	export let completion: Completion;
 
 	const tp = completion.team[0] === TP_TEAM;
+	let note: HTMLDivElement;
+	let noteIcon: HTMLDivElement;
 
 	function classifyLink(link: string): string {
 		let url: URL | null = null;
@@ -45,10 +47,13 @@
 			{/each}
 		</div>
 		{#if completion.notes !== null}
-			<div class="note" title={completion.notes} />
+			<div class="note" bind:this={noteIcon} on:click={() => popup(note, noteIcon, true)} title={completion.notes} />
+			<div bind:this={note} on:click={() => preventDisappear(note)} class="popup disappear disappear-stat0 hidden">
+				<span class="popup-text">{completion.notes}</span>
+			</div>
 		{/if}
 	</div>
-	<div class="flex column">
+	<div class="flex column proof">
 		{#each completion.proofs as proof}
 			<a href={proof}>{classifyLink(proof)}</a>
 		{/each}
@@ -58,7 +63,7 @@
 <style>
 	.completion {
 		display: grid;
-		grid-template-columns: auto 1fr auto;
+		grid-template-columns: auto 1fr 27px;
 		grid-template-rows: min-content;
 		align-content: center;
 		align-items: center;
@@ -91,10 +96,14 @@
 	.team {
 		display: flex;
 		flex-wrap: wrap;
+		flex: 1;
 		gap: var(--gap);
 	}
 	.tp-solve {
 		color: #fff;
+	}
+	.proof {
+		align-items: flex-end;
 	}
 
 	.note {
@@ -103,8 +112,15 @@
 		background-repeat: no-repeat;
 		width: 20px;
 		height: 28px;
+		cursor: pointer;
 	}
 	.notes {
 		align-items: center;
+	}
+	.popup {
+		padding: 0.5em;
+	}
+	.popup-text {
+		white-space: pre;
 	}
 </style>

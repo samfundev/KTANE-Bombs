@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Permission, Pool, type Mission, type MissionPack } from '$lib/types';
 	import {
+	disappearAll,
 		excludeArticleSort,
 		formatTime,
 		getModule,
@@ -24,7 +25,7 @@
 	export let variants: Variant[] | null = data.variants;
 	export let modules: Record<string, RepoModule> | null = data.modules;
 
-	const viewOptions = ['Pools', 'Percentages'];
+	const viewOptions = ['Pools', 'Probabilities'];
 	let byPerc = '';
 
 	function poolClass(mods: string[] = [], module: RepoModule | null = null): string {
@@ -94,15 +95,16 @@
 	});
 
 	let wrView = writable(byPerc);
+	function storeView() {
+		wrView.set(byPerc);
+	}
 	if (browser) {
+		document.onclick = () => disappearAll();
 		byPerc = JSON.parse(localStorage.getItem('mission-pools-view') || JSON.stringify(viewOptions[0]));
 		wrView.subscribe(value => {
 			localStorage.setItem('mission-pools-view', JSON.stringify(value));
 		});
 		storeView();
-	}
-	function storeView() {
-		wrView.set(byPerc);
 	}
 </script>
 

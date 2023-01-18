@@ -190,24 +190,55 @@ export function getWindowHeight(): number {
 	);
 }
 
-export function disappear(preventDisappear = 0): number {
-	if (preventDisappear === 0) {
-		const toHide = document.getElementsByClassName('disappear');
-		for (let i = 0; i < toHide.length; i++) toHide[i].classList.add('hidden');
-	} else return preventDisappear - 1;
-	return preventDisappear;
+export function disappearAll() {
+	const toHide = document.getElementsByClassName('disappear');
+
+	for (let i = 0; i < toHide.length; i++) {
+		let classes = toHide[i].classList;
+		if (classes.contains('hidden')) continue;
+		let statString = Array.from(classes).find(c => c.startsWith('disappear-stat')) ?? '';
+		let stat = parseInt(statString?.substring(14) ?? '1');
+		if (stat == 0) {
+			for (let i = 0; i < toHide.length; i++) {
+				let cl = toHide[i].classList;
+				if (!cl.contains('hidden')) {
+					cl.add('hidden');
+					cl.remove(Array.from(cl).find(c => c.startsWith('disappear-stat')) ?? '');
+					cl.add('disappear-stat0');
+				}
+			}
+			return;
+		}
+		classes.remove(statString);
+		classes.add(`disappear-stat${stat - 1}`);
+	}
+
+}
+export function disappear(elem: HTMLElement) {
+	let classes = elem.classList;
+	if (classes.contains('hidden')) return;
+	let statString = Array.from(classes).find(c => c.startsWith('disappear-stat')) ?? '';
+	let stat = parseInt(statString?.substring(14) ?? '1');
+	if (stat == 0) {
+		classes.add('hidden');
+	} else {
+		classes.remove(statString);
+		classes.add(`disappear-stat${stat - 1}`);
+	}
 }
 
-export function popup(
-	event: any,
-	wnd: HTMLElement,
-	obj: HTMLElement,
-	pd: number,
-	relative = false,
-	skew: number[] = [0, 0]
-): number {
+export function preventDisappear(elem: HTMLElement) {
+	let classes = elem.classList;
+	let statString = Array.from(classes).find(c => c.startsWith('disappear-stat')) ?? '';
+	let stat = parseInt(statString?.substring(14) ?? '1');
+
+	classes.remove(statString);
+	classes.add(`disappear-stat${stat + 1}`);
+}
+
+export function popup(wnd: HTMLElement, obj: HTMLElement, relative = false, skew: number[] = [0, 0]) {
 	const wasHidden = wnd.classList.contains('hidden');
-	const pd2 = disappear(pd);
+	preventDisappear(wnd);
 	if (wasHidden) {
 		wnd.style.left = '';
 		wnd.style.top = '';
@@ -220,8 +251,6 @@ export function popup(
 			Math.min((relative ? obj.offsetLeft : rect.left) - wnd.clientWidth * 0.5 + skew[0], maxLeft) + 'px';
 		wnd.style.top = Math.min((relative ? rect.height + obj.offsetTop : rect.bottom) + skew[1], maxTop) + 'px';
 	}
-
-	return pd2;
 }
 
 export function titleCase(str: string): string {

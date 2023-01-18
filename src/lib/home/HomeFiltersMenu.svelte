@@ -278,7 +278,7 @@
 	});
 </script>
 
-<div class="popup disappear hidden" id="options" on:click bind:this={div}>
+<div class="popup disappear disappear-stat0 hidden" id="options" on:click bind:this={div}>
 	<div class="hstack center">
 		<button
 			class="defaults"

@@ -34,11 +34,12 @@
 	<slot />
 </div>
 
-<Toaster toastOptions={{
-	style: "background: var(--background); color: var(--text-color);",
-	duration: 5000,
-	position: "top-center"
-}} />
+<Toaster
+	toastOptions={{
+		style: 'background: var(--background); color: var(--text-color);',
+		duration: 5000,
+		position: 'top-center'
+	}} />
 
 <style>
 	:root {
@@ -176,6 +177,21 @@
 
 	:global(.st-toast.light) {
 		background: white !important;
+	}
+
+	:global(.popup) {
+		display: block;
+		position: absolute;
+		border: 1px solid black;
+		padding: 1em;
+		background: var(--popup-background);
+		color: var(--text-color);
+		box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+		z-index: 100;
+	}
+
+	:global(.hidden) {
+		display: none !important;
 	}
 
 	.navbar-background {

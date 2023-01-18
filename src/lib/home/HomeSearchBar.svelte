@@ -7,7 +7,8 @@
 		titleCase,
 		getModule,
 		onlyUnique,
-		withoutArticle
+		withoutArticle,
+		preventDisappear
 	} from '$lib/util';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
@@ -42,7 +43,6 @@
 		'Which means: ("thing one" AND "aaa") OR ("bbb" AND NOT "ccc")\n' +
 		'Brackets are supported too: [[ thing one || aaa ]] && [[ bbb || !!ccc ]]';
 
-	let prevDisap = 0;
 	let options = new HomeOptions();
 	let dispatch = createEventDispatcher();
 
@@ -264,9 +264,7 @@
 	onMount(() => {
 		searchField = <HTMLInputElement>document.getElementById('bomb-search-field');
 		searchField?.focus();
-		document.onclick = () => {
-			prevDisap = disappear(prevDisap);
-		};
+		document.onclick = () => disappear(filters);
 		let op = localStorage.getItem('home-search-options');
 		if (options.checks['persist-searchtext'])
 			searchText = JSON.parse(localStorage.getItem('home-previous-search-text') || JSON.stringify(''));
@@ -328,15 +326,12 @@
 		{/each}
 	</div>
 	<div class="spacer" />
-	<div
-		class="tab filter-tab"
-		bind:this={filterTab}
-		on:click={event => {
-			prevDisap = popup(event, filters, filterTab, prevDisap + 2, true);
-		}}>
-		Filters
-	</div>
-	<HomeFiltersMenu bind:div={filters} on:update={homeOptionUpdate} on:click={() => prevDisap++} {modules} />
+	<div class="tab filter-tab" bind:this={filterTab} on:click={() => popup(filters, filterTab, true)}>Filters</div>
+	<HomeFiltersMenu
+		bind:div={filters}
+		on:click={() => preventDisappear(filters)}
+		on:update={homeOptionUpdate}
+		{modules} />
 </div>
 
 <style>
@@ -365,20 +360,6 @@
 		gap: 7px;
 	}
 
-	:global(.popup) {
-		display: block;
-		position: absolute;
-		border: 1px solid black;
-		padding: 1em;
-		background: var(--popup-background);
-		color: var(--text-color);
-		box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
-		z-index: 100;
-	}
-
-	:global(.hidden) {
-		display: none !important;
-	}
 	:global(#bomb-search-field) {
 		width: 300px;
 	}
