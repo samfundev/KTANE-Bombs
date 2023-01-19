@@ -355,6 +355,7 @@
 
 	.top-right {
 		position: absolute;
+		color: var(--text-color);
 		top: var(--gap);
 		right: var(--gap);
 	}

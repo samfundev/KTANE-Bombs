@@ -4,7 +4,6 @@
 	export let id: string;
 	export let value: any;
 	export let label: string = '';
-	export let type: string = 'text';
 	export let placeholder: string = '';
 	export let classes: string = '';
 	export let labelClass: string = '';
@@ -83,13 +82,11 @@
 	</label>
 	<textarea
 		{id}
-		{type}
 		{placeholder}
 		class={classes}
 		{required}
 		{rows}
 		bind:this={text_area}
-		list={id + '-list'}
 		value={displayValue}
 		on:input={handleInput}
 		on:change={() => {

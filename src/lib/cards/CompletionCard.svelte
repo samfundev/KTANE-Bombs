@@ -5,7 +5,7 @@
 
 	export let completion: Completion;
 
-	const tp = completion.team[0] === TP_TEAM;
+	$: tp = completion.team[0] === TP_TEAM;
 	let note: HTMLDivElement;
 	let noteIcon: HTMLDivElement;
 
