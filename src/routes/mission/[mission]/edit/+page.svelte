@@ -45,7 +45,13 @@
 	mission.completions.sort((a, b) => b.time - a.time);
 	setOriginalMission();
 
-	$: modified = !equal(mission, originalMission);
+	let modified = false;
+	let tpCompletion = false;
+	$: {
+		modified = !equal(mission, originalMission);
+		tpCompletion = mission.completions.some(c => c.team[0] === TP_TEAM);
+		if (tpCompletion) mission.tpSolve = true;
+	}
 
 	function intnan0(val: number): boolean | string {
 		return isNaN(val) ? 'int' : val >= 0 ? true : '≥0';
@@ -258,8 +264,8 @@
 							placeholder="1:23:45.67"
 							bind:value={completion.time}
 							parse={parseTime} />
-						<Checkbox id="completion-solo-{ci}" sideLabel label="Solo" bind:checked={completion.solo} />
-						<Checkbox id="completion-first-{ci}" sideLabel label="First" bind:checked={completion.first} />
+						<Checkbox id="completion-solo-{ci}" sideLabel labelAfter label="Solo" bind:checked={completion.solo} />
+						<Checkbox id="completion-first-{ci}" sideLabel labelAfter label="First" bind:checked={completion.first} />
 					</div>
 					<Input
 						label="Team"
@@ -280,18 +286,22 @@
 						</div>
 					{/if}
 				{:else}
-					<CompletionCard {completion} />
-					<div class="show-comp" on:click={() => showComp(completion.id)}>Edit</div>
+					<div class="relative">
+						<CompletionCard {completion} />
+						<button class="actions edit" on:click={() => showComp(completion.id)}>Edit</button>
+					</div>
 				{/if}
 			</div>
 		{:else}
 			<NoContent>No solves to edit.</NoContent>
 		{/each}
-		<div class="block">
-			<Checkbox id="mission-tp" bind:checked={mission.tpSolve}>
-				Solved by <span class="tp-solve">{TP_TEAM}</span>
-			</Checkbox>
-		</div>
+		{#if !tpCompletion}
+			<div class="block">
+				<Checkbox id="mission-tp" sideLabel labelAfter bind:checked={mission.tpSolve}>
+					Solved by <span class="tp-solve">{TP_TEAM}</span>
+				</Checkbox>
+			</div>
+		{/if}
 	</div>
 </div>
 <div class="bottom-center flex" class:visible={modified}>
@@ -385,11 +395,6 @@
 		width: fit-content;
 	}
 
-	.show-comp {
-		cursor: pointer;
-		text-decoration: underline;
-	}
-
 	.tp-solve {
 		padding: 1px 3px;
 		border-radius: 5px;
@@ -399,6 +404,11 @@
 	.header {
 		font-weight: bold;
 		text-align: center;
+	}
+
+	.actions.edit {
+		left: calc(-1 * var(--gap));
+		right: unset;
 	}
 
 	.bottom-center {

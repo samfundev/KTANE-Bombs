@@ -222,7 +222,12 @@
 									options={['Local', 'Global']} />
 							</div>
 						{/if}
-						<Checkbox id="designed-for-tp-{i}" label="Designed for TP" bind:checked={mission.designedForTP} sideLabel />
+						<Checkbox
+							id="designed-for-tp-{i}"
+							label="Designed for TP"
+							bind:checked={mission.designedForTP}
+							sideLabel
+							labelAfter />
 					</div>
 				</div>
 			{/each}

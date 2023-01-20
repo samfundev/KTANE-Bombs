@@ -105,6 +105,9 @@
 	.proof {
 		align-items: flex-end;
 	}
+	.proof a {
+		color: var(--link-text-color);
+	}
 
 	.note {
 		background-image: url('$lib/img/note.png');

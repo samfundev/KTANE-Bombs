@@ -71,12 +71,9 @@
 	</div>
 </div>
 <div class="main-content">
-	<div />
-	<div class="missions">
-		{#each pack.missions as mission}
-			<MissionCard {mission} />
-		{/each}
-	</div>
+	{#each pack.missions as mission}
+		<MissionCard {mission} />
+	{/each}
 </div>
 <div class="bottom-center flex" class:visible={modified}>
 	<div class="save-changes block flex">
@@ -88,7 +85,7 @@
 <style>
 	.main-content {
 		display: grid;
-		grid-template-columns: 1fr 3fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
 		gap: var(--gap);
 	}
 
@@ -97,12 +94,6 @@
 			display: flex;
 			flex-direction: column;
 		}
-	}
-
-	.missions {
-		display: flex;
-		flex-direction: column;
-		gap: var(--gap);
 	}
 
 	.bottom-center {

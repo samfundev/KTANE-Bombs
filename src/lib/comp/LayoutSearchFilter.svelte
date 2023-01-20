@@ -87,10 +87,6 @@
 		display: none !important;
 	}
 
-	:global(label.help) {
-		cursor: help;
-	}
-
 	.search-field-clear {
 		background: url('$lib/img/clear-button.svg') right center no-repeat;
 		width: 1.25em;

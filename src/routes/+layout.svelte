@@ -194,6 +194,10 @@
 		display: none !important;
 	}
 
+	:global(label.help) {
+		cursor: help;
+	}
+
 	.navbar-background {
 		background: var(--accent);
 		outline: var(--accent) 2px dashed;

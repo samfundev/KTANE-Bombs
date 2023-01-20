@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Permission, Pool, type Mission, type MissionPack } from '$lib/types';
 	import {
-	disappearAll,
+		disappearAll,
 		excludeArticleSort,
 		formatTime,
 		getModule,
@@ -27,6 +27,9 @@
 
 	const viewOptions = ['Pools', 'Probabilities'];
 	let byPerc = '';
+	const viewTitle =
+		'Pools view shows the actual module pools as defined by the mission author.\n' +
+		'Probabilities view shows probability that at least one instance of a module will be present on a bomb.';
 
 	function poolClass(mods: string[] = [], module: RepoModule | null = null): string {
 		let classes = '';
@@ -155,6 +158,8 @@
 			<Select
 				id="view-select"
 				label="View:"
+				labelClass="help"
+				title={viewTitle}
 				sideLabel
 				options={viewOptions}
 				bind:value={byPerc}
@@ -345,7 +350,7 @@
 	.modules {
 		display: flex;
 		flex-wrap: wrap;
-		gap: calc(var(--gap) * 3);
+		gap: calc(var(--gap) * 2);
 	}
 
 	.header {

@@ -5,6 +5,8 @@
 	export let value: any;
 	export let label: string;
 	export let options: any[];
+	export let title: string = '';
+	export let labelClass: string = '';
 	export let display = (obj: any) => obj.toString();
 	export let sideLabel: boolean = false;
 
@@ -23,7 +25,7 @@
 </script>
 
 <div class={sideLabel ? 'hstack' : 'vstack'}>
-	<label for={id}>
+	<label for={id} {title} class={labelClass}>
 		{label}
 		<slot />
 	</label>

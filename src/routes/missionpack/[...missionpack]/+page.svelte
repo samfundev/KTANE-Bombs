@@ -26,18 +26,15 @@
 	<div class="block centered not-verified">This mission pack has not been verified.</div>
 {/if}
 <div class="main-content">
-	<div />
-	<div class="missions">
-		{#each pack.missions as mission}
-			<MissionCard {mission} />
-		{/each}
-	</div>
+	{#each pack.missions as mission}
+		<MissionCard {mission} />
+	{/each}
 </div>
 
 <style>
 	.main-content {
 		display: grid;
-		grid-template-columns: 1fr 3fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
 		gap: var(--gap);
 	}
 
@@ -50,12 +47,6 @@
 
 	.not-verified {
 		color: red;
-	}
-
-	.missions {
-		display: flex;
-		flex-direction: column;
-		gap: var(--gap);
 	}
 
 	.centered {

@@ -410,6 +410,7 @@
 				label="Persist Query"
 				bind:checked={checks['persist-searchtext']}
 				sideLabel
+				labelAfter
 				on:change={setOption} />
 		</div>
 		<div class="center-divider" />
