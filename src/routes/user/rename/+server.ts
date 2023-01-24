@@ -25,7 +25,7 @@ export const POST: RequestHandler = async function ({ locals, request }) {
 		}
 	});
 	if (!nameExistsOK) {
-		const completionsMerge = await client.completion.findMany({
+		const completionsMerge = await client.completion.findFirst({
 			where: {
 				team: {
 					has: username
@@ -33,7 +33,7 @@ export const POST: RequestHandler = async function ({ locals, request }) {
 			}
 		});
 
-		const missionsMerge = await client.mission.findMany({
+		const missionsMerge = await client.mission.findFirst({
 			where: {
 				authors: {
 					has: username
@@ -41,7 +41,7 @@ export const POST: RequestHandler = async function ({ locals, request }) {
 			}
 		});
 
-		if (missionsMerge.length > 0 || completionsMerge.length > 0) return new Response(undefined, { status: 202 });
+		if (missionsMerge !== null || completionsMerge !== null) return new Response(undefined, { status: 202 });
 	}
 
 	const queries = [

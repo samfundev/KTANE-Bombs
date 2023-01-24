@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Permission } from '$lib/types';
-	import { hasPermission } from '$lib/util';
+	import { hasPermission, pluralize } from '$lib/util';
 	import { page } from '$app/stores';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import type { EditMissionPack } from '../_types';
@@ -15,7 +15,7 @@
 <div class="block relative">
 	<h1 class="header">{pack.name}</h1>
 	<div class="flex">
-		<span>{pack.missions.length} Missions</span>
+		<span>{pluralize(pack.missions.length, 'Mission')}</span>
 		<a class="steam" href="https://steamcommunity.com/sharedfiles/filedetails/?id={pack.steamId}">Steam Workshop</a>
 	</div>
 	{#if hasPermission($page.data.user, Permission.VerifyMissionPack)}

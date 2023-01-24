@@ -62,16 +62,6 @@ export const actions: Actions = {
 			}
 		});
 
-		// Null out Mission Pack field from missions
-		await client.mission.updateMany({
-			where: {
-				missionPackId: pack.id
-			},
-			data: {
-				missionPackId: null
-			}
-		});
-
 		throw redirect(303, '/');
 	},
 

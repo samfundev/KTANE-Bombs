@@ -358,5 +358,5 @@ export function validateSteamID(str: string): string | boolean {
 	if (id === '') {
 		return 'Invalid Steam Workshop URL or Workshop ID.';
 	}
-	return '';
+	return true;
 }

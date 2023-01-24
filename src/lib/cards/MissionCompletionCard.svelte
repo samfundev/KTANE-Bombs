@@ -19,37 +19,35 @@
 		{mission.name}
 	</div>
 	<div {title}>
-		{#if username === TP_TEAM}
-			<div class="hspace" style="background-color: {getPersonColor(1, 0, false, true)}" />
-		{:else}
-			{#if mission.defuser}
-				<div class:hspace={mission.nDefuser < 2} style="background-color: {getPersonColor(2, 0, false)}">
-					{#if mission.nDefuser > 1}
-						×{mission.nDefuser}
-					{/if}
-				</div>
-			{/if}
-			{#if mission.expert}
-				<div class:hspace={mission.nExpert < 2} style="background-color: {getPersonColor(2, 1, false)}">
-					{#if mission.nExpert > 1}
-						×{mission.nExpert}
-					{/if}
-				</div>
-			{/if}
-			{#if mission.efm}
-				<div class:hspace={mission.nEFM < 2} style="background-color: {getPersonColor(1, 0, false)}">
-					{#if mission.nEFM > 1}
-						×{mission.nEFM}
-					{/if}
-				</div>
-			{/if}
-			{#if mission.solo}
-				<div class:hspace={mission.nSolo < 2} style="background-color: {getPersonColor(1, 0, true)}">
-					{#if mission.nSolo > 1}
-						×{mission.nSolo}
-					{/if}
-				</div>
-			{/if}
+		{#if mission.defuser}
+			<div class:hspace={mission.nDefuser < 2} style="background-color: {getPersonColor(2, 0, false)}">
+				{#if mission.nDefuser > 1}
+					×{mission.nDefuser}
+				{/if}
+			</div>
+		{/if}
+		{#if mission.expert}
+			<div class:hspace={mission.nExpert < 2} style="background-color: {getPersonColor(2, 1, false)}">
+				{#if mission.nExpert > 1}
+					×{mission.nExpert}
+				{/if}
+			</div>
+		{/if}
+		{#if mission.efm}
+			<div
+				class:hspace={mission.nEFM < 2}
+				style="background-color: {getPersonColor(1, 0, false, username === TP_TEAM)}">
+				{#if mission.nEFM > 1}
+					×{mission.nEFM}
+				{/if}
+			</div>
+		{/if}
+		{#if mission.solo}
+			<div class:hspace={mission.nSolo < 2} style="background-color: {getPersonColor(1, 0, true)}">
+				{#if mission.nSolo > 1}
+					×{mission.nSolo}
+				{/if}
+			</div>
 		{/if}
 	</div>
 </a>
