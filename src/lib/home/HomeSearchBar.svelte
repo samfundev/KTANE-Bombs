@@ -2,7 +2,7 @@
 	import { Bomb, Completion, HomeOptions, Mission, MustHave, Operation } from '$lib/types';
 	import {
 		evaluateLogicalStringSearch,
-		disappear,
+		disappearAll,
 		popup,
 		titleCase,
 		getModule,
@@ -17,6 +17,7 @@
 	import HomeFiltersMenu from './HomeFiltersMenu.svelte';
 	import type { RepoModule } from '$lib/repo';
 	import { TP_TEAM } from '$lib/const';
+	import HomeAboutMenu from './HomeAboutMenu.svelte';
 
 	export let missions: Mission[];
 	export let missionCards: { [name: string]: any } = {};
@@ -35,6 +36,8 @@
 	let searchText: string;
 	let filters: HTMLDivElement;
 	let filterTab: HTMLDivElement;
+	let aboutMenu: HTMLDivElement;
+	let aboutTab: HTMLDivElement;
 	let layoutSearch: LayoutSearchFilter;
 	const defaultSearchOptions = [true, false, false, false, false];
 	const searchTooltip =
@@ -264,7 +267,7 @@
 	onMount(() => {
 		searchField = <HTMLInputElement>document.getElementById('bomb-search-field');
 		searchField?.focus();
-		document.onclick = () => disappear(filters);
+		document.onclick = () => disappearAll();
 		let op = localStorage.getItem('home-search-options');
 		if (options.checks['persist-searchtext'])
 			searchText = JSON.parse(localStorage.getItem('home-previous-search-text') || JSON.stringify(''));
@@ -300,7 +303,6 @@
 
 <div class="search-bar hstack">
 	<span>Results: {resultsText} of {missions.length}</span>
-	<div class="spacer" />
 	<LayoutSearchFilter
 		id="bomb-search-field"
 		label="Search:"
@@ -327,8 +329,9 @@
 				bind:checked={validSearchOptions[index]} />
 		{/each}
 	</div>
-	<div class="spacer" />
+	<div class="tab about-tab" bind:this={aboutTab} on:click={() => popup(aboutMenu, aboutTab, true)}>About</div>
 	<div class="tab filter-tab" bind:this={filterTab} on:click={() => popup(filters, filterTab, true)}>Filters</div>
+	<HomeAboutMenu bind:div={aboutMenu} on:click={() => preventDisappear(aboutMenu)} />
 	<HomeFiltersMenu
 		bind:div={filters}
 		on:click={() => preventDisappear(filters)}
@@ -348,14 +351,12 @@
 	.search-bar > span {
 		min-width: 100px;
 	}
-	.search-bar .spacer {
-		width: 45px;
-	}
 
 	.hstack {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+		justify-content: space-around;
 	}
 	.hstack.boxes {
 		flex-wrap: wrap;
@@ -369,7 +370,10 @@
 	.filter-tab {
 		background-image: url('$lib/img/filter-icon.png');
 	}
-	:global(.search-bar .tab) {
+	.about-tab {
+		background-image: url('$lib/img/about-icon.png');
+	}
+	.search-bar .tab {
 		display: inline-block;
 		background-color: #eef;
 		border: 1px solid #eef;

@@ -52,32 +52,34 @@
 	if (browser) searchField = <HTMLInputElement>document.getElementById(id);
 </script>
 
-{#if textArea}
-	<TextArea
-		{label}
-		{id}
-		{title}
-		labelClass="help"
-		sideLabel
-		classes="search-field {classes}"
-		on:input={updateSearch}
-		on:change
-		{autoExpand}
-		{rows}
-		bind:value={rawSearchText} />
-{:else}
-	<Input
-		{label}
-		{id}
-		{title}
-		labelClass="help"
-		sideLabel
-		classes="search-field {classes}"
-		on:input={updateSearch}
-		on:change
-		bind:value={rawSearchText} />
-{/if}
-<div class="search-field-clear dark-invert" on:click={clearSearch} />
+<div class="flex">
+	{#if textArea}
+		<TextArea
+			{label}
+			{id}
+			{title}
+			labelClass="help"
+			sideLabel
+			classes="search-field {classes}"
+			on:input={updateSearch}
+			on:change
+			{autoExpand}
+			{rows}
+			bind:value={rawSearchText} />
+	{:else}
+		<Input
+			{label}
+			{id}
+			{title}
+			labelClass="help"
+			sideLabel
+			classes="search-field {classes}"
+			on:input={updateSearch}
+			on:change
+			bind:value={rawSearchText} />
+	{/if}
+	<div class="search-field-clear dark-invert" on:click={clearSearch} />
+</div>
 
 <style>
 	:global(.search-field) {
@@ -86,13 +88,15 @@
 	:global(.search-filtered-out) {
 		display: none !important;
 	}
+	.flex {
+		align-items: center;
+	}
 
 	.search-field-clear {
 		background: url('$lib/img/clear-button.svg') right center no-repeat;
 		width: 1.25em;
 		height: 1.25em;
 		min-width: 1.25em;
-		margin: 0 5px 0 2px;
 		display: inline-block;
 		vertical-align: middle;
 		cursor: pointer;
