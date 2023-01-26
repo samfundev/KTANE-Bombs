@@ -12,6 +12,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		orderBy: { id: 'asc' },
 		select: {
 			name: true,
+			id: true,
 			authors: true,
 			bombs: {
 				orderBy: { id: 'asc' },
@@ -27,10 +28,12 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 				orderBy: { id: 'asc' },
 				select: {
 					verified: true,
+					id: true,
 					proofs: true,
 					time: true,
 					team: true,
 					first: true,
+					notes: true,
 					old: true,
 					solo: true
 				}
@@ -38,6 +41,8 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			designedForTP: true,
 			tpSolve: true,
 			factory: true,
+			strikeMode: true,
+			timeMode: true,
 			variant: true,
 			verified: true,
 			missionPack: {
@@ -62,12 +67,15 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		let pack = missionPacks.find(mp => mp.steamID == miss.missionPack?.steamId);
 		let newMission = {
 			name: miss.name,
+			id: miss.id,
 			authors: miss.authors,
 			bombs: bombs,
 			completions: miss.completions,
 			tpSolve: miss.tpSolve,
 			designedForTP: miss.designedForTP,
 			factory: miss.factory,
+			strikeMode: miss.strikeMode,
+			timeMode: miss.timeMode,
 			verified: miss.verified,
 			variant: miss.variant
 		};
