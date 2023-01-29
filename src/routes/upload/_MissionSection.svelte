@@ -57,7 +57,7 @@
 				bomb.time = parseInt(match[1]);
 				bomb.strikes = parseInt(match[2]);
 				bomb.pools = [];
-				bomb.widgets = 1;
+				bomb.widgets = -1;
 				bomb.modules = 0;
 
 				match = readLine().match(/(\d+) Pools:/);
@@ -84,7 +84,7 @@
 
 				mission.bombs.push(bomb);
 				if (mission.bombs.length > 1) {
-					mission.factory = 'Sequence';
+					if (mission.factory === null) mission.factory = 'Sequence';
 					mission.timeMode = 'Local';
 					mission.strikeMode = 'Local';
 				}
@@ -116,6 +116,10 @@
 				mission.factory = match[1].replace('Finite', 'Sequence');
 			}
 		}
+
+		missions.forEach(m => {
+			if (m.bombs.length < 2) m.factory = null;
+		});
 
 		return missions;
 	}
