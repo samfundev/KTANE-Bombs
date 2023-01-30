@@ -2,7 +2,7 @@
 	import { Permission } from '$lib/types';
 	import type { FrontendUser } from '$lib/types';
 	import UserCard from '$lib/cards/UserCard.svelte';
-	import { hasPermission, hasAnyPermission } from '$lib/util';
+	import { hasAnyPermission } from '$lib/util';
 	import { Toaster } from 'svelte-french-toast';
 	import { beforeNavigate } from '$app/navigation';
 	export let data;
@@ -198,6 +198,32 @@
 		color: var(--text-color);
 		box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
 		z-index: 100;
+	}
+
+	:global(.popup-tab) {
+		font-size: 12pt;
+		font-weight: normal;
+		display: inline-block;
+		background-color: #eef;
+		border: 1px solid #eef;
+		border-bottom: none;
+		border-top-color: #ccf;
+		border-right-color: #ccf;
+		border-right-width: 2px;
+		border-top-left-radius: 0.5em;
+		border-top-right-radius: 0.5em;
+		text-decoration: none;
+		color: #024;
+		cursor: pointer;
+		padding: 0.2em 0.5em 0.115em 28px;
+		position: relative;
+		top: 5px;
+		margin-left: 0.2em;
+		vertical-align: bottom;
+		background-size: 20px 20px;
+		background-position: 4px center;
+		background-repeat: no-repeat;
+		align-self: flex-end;
 	}
 
 	:global(.hidden) {

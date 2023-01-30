@@ -17,7 +17,6 @@
 	import HomeFiltersMenu from './HomeFiltersMenu.svelte';
 	import type { RepoModule } from '$lib/repo';
 	import { TP_TEAM } from '$lib/const';
-	import HomeAboutMenu from './HomeAboutMenu.svelte';
 
 	export let missions: Mission[];
 	export let missionCards: { [name: string]: any } = {};
@@ -36,8 +35,6 @@
 	let searchText: string;
 	let filters: HTMLDivElement;
 	let filterTab: HTMLDivElement;
-	let aboutMenu: HTMLDivElement;
-	let aboutTab: HTMLDivElement;
 	let layoutSearch: LayoutSearchFilter;
 	const defaultSearchOptions = [true, false, false, false, false];
 	const searchTooltip =
@@ -297,7 +294,9 @@
 		options.checks['persist-searchtext'];
 		updateSearch();
 
-		return () => document.onclick = null;
+		return () => {
+			document.onclick = null;
+		};
 	});
 </script>
 
@@ -329,9 +328,7 @@
 				bind:checked={validSearchOptions[index]} />
 		{/each}
 	</div>
-	<div class="tab about-tab" bind:this={aboutTab} on:click={() => popup(aboutMenu, aboutTab, true)}>About</div>
-	<div class="tab filter-tab" bind:this={filterTab} on:click={() => popup(filters, filterTab, true)}>Filters</div>
-	<HomeAboutMenu bind:div={aboutMenu} on:click={() => preventDisappear(aboutMenu)} />
+	<div class="popup-tab filter-tab" bind:this={filterTab} on:click={() => popup(filters, filterTab, true)}>Filters</div>
 	<HomeFiltersMenu
 		bind:div={filters}
 		on:click={() => preventDisappear(filters)}
@@ -345,7 +342,7 @@
 		background: var(--foreground);
 		top: calc(var(--stick-under-navbar) + 1px);
 		justify-content: center;
-		gap: 3px;
+		gap: 5px;
 		padding: 5px 0;
 	}
 	.search-bar > span {
@@ -369,31 +366,5 @@
 
 	.filter-tab {
 		background-image: url('$lib/img/filter-icon.png');
-	}
-	.about-tab {
-		background-image: url('$lib/img/about-icon.png');
-	}
-	.search-bar .tab {
-		display: inline-block;
-		background-color: #eef;
-		border: 1px solid #eef;
-		border-bottom: none;
-		border-top-color: #ccf;
-		border-right-color: #ccf;
-		border-right-width: 2px;
-		border-top-left-radius: 0.5em;
-		border-top-right-radius: 0.5em;
-		text-decoration: none;
-		color: #024;
-		cursor: pointer;
-		padding: 0.2em 0.5em 0.115em 28px;
-		position: relative;
-		top: 5px;
-		margin-left: 0.2em;
-		vertical-align: bottom;
-		background-size: 20px 20px;
-		background-position: 4px center;
-		background-repeat: no-repeat;
-		align-self: flex-end;
 	}
 </style>

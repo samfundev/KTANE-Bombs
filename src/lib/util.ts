@@ -244,9 +244,14 @@ export function popup(wnd: HTMLElement, obj: HTMLElement, relative = false, skew
 		wnd.style.top = '';
 		wnd.classList.remove('hidden');
 		// Desktop interface: position relative to the object clicked
-		const maxLeft = Math.max(getWindowWidth() - wnd.clientWidth - 30, 0);
-		const maxTop = Math.max(getWindowHeight() - wnd.clientHeight - 30, 0);
+		const ww = getWindowWidth();
+		const wh = getWindowHeight();
+		const maxLeft = Math.max(ww - wnd.clientWidth - 30, 0);
+		const maxTop = Math.max(wh - wnd.clientHeight - 30, 0);
 		const rect = obj.getBoundingClientRect();
+		console.log(maxLeft);
+		console.log(maxTop);
+		console.log(rect);
 		wnd.style.left =
 			Math.min((relative ? obj.offsetLeft : rect.left) - wnd.clientWidth * 0.5 + skew[0], maxLeft) + 'px';
 		wnd.style.top = Math.min((relative ? rect.height + obj.offsetTop : rect.bottom) + skew[1], maxTop) + 'px';
