@@ -216,9 +216,9 @@
 		<div class="block header">Solves</div>
 		<CompletionList {mission} />
 		{#each variants ?? [] as variant}
-			<div class="block header" style="margin-top: calc(var(--gap) * 3);">
+			<a href="/mission/{encodeURIComponent(variant.name)}" class="block header variant">
 				{variant.name}
-			</div>
+			</a>
 			<CompletionList mission={variant} />
 		{/each}
 	</div>
@@ -356,6 +356,10 @@
 	.header {
 		font-weight: bold;
 		text-align: center;
+	}
+	a.variant {
+		color: var(--text-color);
+		margin-top: calc(var(--gap) * 3);
 	}
 
 	.top-right {

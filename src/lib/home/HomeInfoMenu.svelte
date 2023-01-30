@@ -11,6 +11,6 @@
 
 <style>
 	.popup a {
-		color: var(link-text-color);
+		color: var(--text-color);
 	}
 </style>
