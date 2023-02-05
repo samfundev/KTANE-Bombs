@@ -1,8 +1,31 @@
 <svelte:head>
-	<title>What’s New?</title>
+	<title>What's New?</title>
 </svelte:head>
 <div class="block">
 	<h1 class="header">What’s New?</h1>
+</div>
+<div class="block update">
+	<h3>6 February 2023</h3>
+	<ul>
+		<li>New page: What's New? (You're looking at it!)</li>
+		<li>
+			New Info tab in the top navigation bar
+			<ul>
+				<li>GitHub link where you can post suggestions, issues, or even contribute to the project</li>
+				<li>Link to What's New page</li>
+			</ul>
+		</li>
+		<li>
+			On a mission page, if it has a variant, click on the name of the variant to go to that variant's mission page.
+
+			<ul>
+				<li>Go check out: <a href="/mission/No-Needy%20Centurion">No-Needy Centurion</a></li>
+				<li>Also: <a href="/mission/Triforce">Triforce</a></li>
+				<li>Also: <a href="/mission/Fate">Fate</a></li>
+			</ul>
+		</li>
+		<li>A few navigation bug fixes</li>
+	</ul>
 </div>
 <div class="block update">
 	<h3>24 January 2023</h3>
@@ -29,7 +52,6 @@
 		<li>Multi-bomb missions now have Time Mode and Strike Mode (global / local)</li>
 	</ul>
 </div>
-
 <div class="block update">
 	<h3>11 January 2023</h3>
 	<ul>

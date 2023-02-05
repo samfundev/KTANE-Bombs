@@ -300,53 +300,53 @@
 	});
 </script>
 
-<div class="search-bar hstack">
-	<span>Results: {resultsText} of {missions.length}</span>
-	<LayoutSearchFilter
-		id="bomb-search-field"
-		label="Search:"
-		title={searchTooltip}
-		rows={1}
-		textArea
-		autoExpand
-		bind:rawSearchText={searchText}
-		bind:items={missionCards}
-		filterFunc={bombSearchFilter}
-		classes="help"
-		on:change={storeSearchText}
-		bind:numResults={resultsText}
-		bind:this={layoutSearch} />
+<div class="search-bar">
+	<div class="hstack controls">
+		<span>Results: {resultsText} of {missions.length}</span>
+		<LayoutSearchFilter
+			id="bomb-search-field"
+			label="Search:"
+			title={searchTooltip}
+			rows={1}
+			textArea
+			autoExpand
+			bind:rawSearchText={searchText}
+			bind:items={missionCards}
+			filterFunc={bombSearchFilter}
+			classes="help"
+			on:change={storeSearchText}
+			bind:numResults={resultsText}
+			bind:this={layoutSearch} />
 
-	<div class="hstack boxes">
-		{#each searchOptionBoxes as option, index}
-			<Checkbox
-				id="search-by-{option.replace(/ /g, '')}"
-				label={titleCase(option)}
-				sideLabel
-				labelAfter
-				on:change={setSearchOptions}
-				bind:checked={validSearchOptions[index]} />
-		{/each}
+		<div class="hstack boxes">
+			{#each searchOptionBoxes as option, index}
+				<Checkbox
+					id="search-by-{option.replace(/ /g, '')}"
+					label={titleCase(option)}
+					sideLabel
+					labelAfter
+					on:change={setSearchOptions}
+					bind:checked={validSearchOptions[index]} />
+			{/each}
+		</div>
 	</div>
-	<div class="popup-tab filter-tab" bind:this={filterTab} on:click={() => popup(filters, filterTab, true)}>Filters</div>
-	<HomeFiltersMenu
-		bind:div={filters}
-		on:click={() => preventDisappear(filters)}
-		on:update={homeOptionUpdate}
-		{modules} />
+	<div class="tabs" bind:this={filterTab}>
+		<div class="popup-tab filter-tab" on:click={() => popup(filters, filterTab, false, [0,5])}>Filters</div>
+	</div>
 </div>
+
+<HomeFiltersMenu bind:div={filters} on:click={() => preventDisappear(filters)} on:update={homeOptionUpdate} {modules} />
 
 <style>
 	.search-bar {
 		position: sticky;
 		background: var(--foreground);
 		top: calc(var(--stick-under-navbar) + 1px);
-		justify-content: center;
-		gap: 5px;
 		padding: 5px 0;
 	}
-	.search-bar > span {
+	.search-bar > .hstack > span {
 		min-width: 100px;
+		margin-left: var(--gap);
 	}
 
 	.hstack {
@@ -354,10 +354,20 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-around;
+		gap: 10px;
+		flex-wrap: wrap;
+	}
+	.hstack.controls {
+		justify-content: left;
+		width: calc(100% - 90px);
 	}
 	.hstack.boxes {
-		flex-wrap: wrap;
 		gap: 7px;
+	}
+	.tabs {
+		position: absolute;
+		right: var(--gap);
+		bottom: var(--gap);
 	}
 
 	:global(#bomb-search-field) {

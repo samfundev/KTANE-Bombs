@@ -3,8 +3,6 @@
 	import HomeSearchBar from '$lib/home/HomeSearchBar.svelte';
 	import type { Mission } from '$lib/types';
 	import type { RepoModule } from '$lib/repo';
-	import { popup, preventDisappear } from '$lib/util';
-	import HomeInfoMenu from '$lib/home/HomeInfoMenu.svelte';
 
 	export let data;
 	let missions: Mission[] = data.missions;
@@ -13,8 +11,6 @@
 
 	let render = false;
 	let searchBar: HomeSearchBar;
-	let infoMenu: HTMLDivElement;
-	let infoTab: HTMLDivElement;
 
 	function onChange() {
 		if (!render)
@@ -31,14 +27,9 @@
 </svelte:head>
 <div class="relative">
 	<h1 class="header">Challenge Bombs</h1>
-
-	<div class="tab-holder" bind:this={infoTab}>
-		<div class="popup-tab info-tab" on:click={() => popup(infoMenu, infoTab, true, [8, 6])}>Info</div>
-	</div>
-	<HomeInfoMenu bind:div={infoMenu} on:click={() => preventDisappear(infoMenu)} />
 </div>
 <HomeSearchBar bind:this={searchBar} bind:missions bind:missionCards on:change={onChange} {modules} />
-<div class="bombs">
+<div class="bombs mission-card-grid">
 	{#each missions as mission, index (mission.name)}
 		{#if render}
 			<MissionCard
@@ -55,15 +46,6 @@
 		width: 100%;
 		height: 100%;
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
 		gap: var(--gap);
-	}
-	.info-tab {
-		background-image: url('$lib/img/info-icon.png');
-	}
-	.tab-holder {
-		position: absolute;
-		right: var(--gap);
-		bottom: var(--gap);
 	}
 </style>

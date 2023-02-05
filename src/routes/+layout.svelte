@@ -5,9 +5,14 @@
 	import { hasAnyPermission } from '$lib/util';
 	import { Toaster } from 'svelte-french-toast';
 	import { beforeNavigate } from '$app/navigation';
+	import { popup, preventDisappear } from '$lib/util';
+	import HomeInfoMenu from '$lib/home/HomeInfoMenu.svelte';
+
 	export let data;
 	const user: FrontendUser | null = data.user;
 
+	let infoMenu: HTMLDivElement;
+	let infoTab: HTMLDivElement;
 	beforeNavigate(({ from, to, cancel }) => {
 		// If we're navigating to the same route, use browser navigation instead
 		// This saves us from having to make our pages reactive to the data variable
@@ -28,15 +33,21 @@
 			{#if hasAnyPermission(user, Permission.VerifyMission, Permission.VerifyCompletion, Permission.VerifyMissionPack)}
 				<a class="block" href="/verify">Verify</a>
 			{/if}
+		{/if}
+		<div style="margin-left: auto" class="block tab-holder" bind:this={infoTab}>
+			<div class="info-tab" on:click={() => popup(infoMenu, infoTab, true, [8, 6])}>Info</div>
+			<HomeInfoMenu bind:div={infoMenu} on:click={() => preventDisappear(infoMenu)} />
+		</div>
 
-			<div style="margin-left: auto;">
+		{#if user}
+			<div>
 				<a href="/user/{encodeURIComponent(user.username)}">
 					<UserCard {user} />
 				</a>
 			</div>
 			<a class="block" rel="external" href="/logout">Logout</a>
 		{:else}
-			<a class="block" style="margin-left: auto;" rel="external" href="/login">Login</a>
+			<a class="block" rel="external" href="/login">Login</a>
 		{/if}
 	</div>
 </div>
@@ -234,6 +245,20 @@
 		cursor: help;
 	}
 
+	:global(.mission-card-grid) {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+	@media screen and (max-width: 875px) {
+		:global(.mission-card-grid) {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+	@media screen and (max-width: 650px) {
+		:global(.mission-card-grid) {
+			grid-template-columns: 1fr;
+		}
+	}
+
 	.navbar-background {
 		background: var(--accent);
 		outline: var(--accent) 2px dashed;
@@ -255,6 +280,12 @@
 	.navbar a {
 		color: var(--text-color);
 		text-decoration: none;
+	}
+	.info-tab {
+		cursor: pointer;
+	}
+	.tab-holder {
+		bottom: var(--gap);
 	}
 
 	.max-width {

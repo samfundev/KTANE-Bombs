@@ -70,7 +70,7 @@
 		<button on:click={deleteMissionPack}>Delete</button>
 	</div>
 </div>
-<div class="main-content">
+<div class="main-content mission-card-grid">
 	{#each pack.missions as mission}
 		<MissionCard {mission} />
 	{/each}
@@ -85,15 +85,7 @@
 <style>
 	.main-content {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
 		gap: var(--gap);
-	}
-
-	@media (max-width: 600px) {
-		.main-content {
-			display: flex;
-			flex-direction: column;
-		}
 	}
 
 	.bottom-center {
