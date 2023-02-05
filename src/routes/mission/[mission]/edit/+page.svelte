@@ -6,15 +6,7 @@
 	import type { RepoModule } from '$lib/repo';
 	import Select from '$lib/controls/Select.svelte';
 	import { Permission, type Completion, type ID, type Bomb, Pool, type MissionPackSelection } from '$lib/types';
-	import {
-		disappearAll,
-		displayStringList,
-		formatTime,
-		hasPermission,
-		parseInteger,
-		parseList,
-		parseTime
-	} from '$lib/util';
+	import { displayStringList, formatTime, hasPermission, parseInteger, parseList, parseTime } from '$lib/util';
 	import equal from 'fast-deep-equal';
 	import { sortBombs } from '../../_shared';
 	import type { EditMission } from './_types';
@@ -22,7 +14,6 @@
 	import { applyAction } from '$app/forms';
 	import { TP_TEAM } from '$lib/const';
 	import TextArea from '$lib/controls/TextArea.svelte';
-	import { browser } from '$app/environment';
 
 	export let data;
 
@@ -128,9 +119,6 @@
 	}
 
 	missionNames.unshift('');
-	if (browser) {
-		document.onclick = () => disappearAll();
-	}
 </script>
 
 <svelte:head>

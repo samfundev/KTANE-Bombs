@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Permission, Pool, type Mission, type MissionPack } from '$lib/types';
 	import {
-		disappearAll,
 		excludeArticleSort,
 		formatTime,
 		getModule,
@@ -102,7 +101,6 @@
 		wrView.set(byPerc);
 	}
 	if (browser) {
-		document.onclick = () => disappearAll();
 		byPerc = JSON.parse(localStorage.getItem('mission-pools-view') || JSON.stringify(viewOptions[0]));
 		wrView.subscribe(value => {
 			localStorage.setItem('mission-pools-view', JSON.stringify(value));

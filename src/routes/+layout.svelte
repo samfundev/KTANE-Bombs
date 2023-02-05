@@ -6,6 +6,9 @@
 	import { Toaster } from 'svelte-french-toast';
 	import { beforeNavigate } from '$app/navigation';
 	import { popup, preventDisappear } from '$lib/util';
+	import { browser } from '$app/environment';
+	import { disappearAll } from '$lib/util';
+	import { onMount } from 'svelte';
 	import HomeInfoMenu from '$lib/home/HomeInfoMenu.svelte';
 
 	export let data;
@@ -21,6 +24,12 @@
 			location.href = to.url.href;
 		}
 	});
+	onMount(() => {
+		document.onclick = () => disappearAll();
+		return () => {
+			document.onclick = null;
+		};
+	});
 </script>
 
 <div class="navbar-background">
@@ -34,8 +43,12 @@
 				<a class="block" href="/verify">Verify</a>
 			{/if}
 		{/if}
-		<div style="margin-left: auto" class="block tab-holder" bind:this={infoTab}>
-			<div class="info-tab" on:click={() => popup(infoMenu, infoTab, true, [8, 6])}>Info</div>
+		<div
+			style="margin-left: auto"
+			class="block info-tab"
+			bind:this={infoTab}
+			on:click={() => popup(infoMenu, infoTab, true, [8, 6])}>
+			Info
 			<HomeInfoMenu bind:div={infoMenu} on:click={() => preventDisappear(infoMenu)} />
 		</div>
 
@@ -283,9 +296,6 @@
 	}
 	.info-tab {
 		cursor: pointer;
-	}
-	.tab-holder {
-		bottom: var(--gap);
 	}
 
 	.max-width {

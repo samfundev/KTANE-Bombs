@@ -264,7 +264,6 @@
 	onMount(() => {
 		searchField = <HTMLInputElement>document.getElementById('bomb-search-field');
 		searchField?.focus();
-		document.onclick = () => disappearAll();
 		let op = localStorage.getItem('home-search-options');
 		if (options.checks['persist-searchtext'])
 			searchText = JSON.parse(localStorage.getItem('home-previous-search-text') || JSON.stringify(''));
@@ -293,10 +292,6 @@
 		});
 		options.checks['persist-searchtext'];
 		updateSearch();
-
-		return () => {
-			document.onclick = null;
-		};
 	});
 </script>
 
@@ -331,7 +326,7 @@
 		</div>
 	</div>
 	<div class="tabs" bind:this={filterTab}>
-		<div class="popup-tab filter-tab" on:click={() => popup(filters, filterTab, false, [0,5])}>Filters</div>
+		<div class="popup-tab filter-tab" on:click={() => popup(filters, filterTab, false, [0, 5])}>Filters</div>
 	</div>
 </div>
 
