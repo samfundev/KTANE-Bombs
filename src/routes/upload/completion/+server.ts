@@ -26,11 +26,14 @@ export async function POST({ request }: RequestEvent) {
 		return new Response(undefined, { status: 406 });
 	}
 
-	let equalSolve = mission.completions.findIndex(
+	let equalSolves = mission.completions.filter(
 		c =>
 			JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
 			JSON.stringify(completion.team.slice(0, 1).concat(completion.team.slice(1).sort()))
 	);
+	if (equalSolves.some(s => s.verified == false))
+		//don't allow duplicate solve uploads that are already in the verify queue
+		return new Response(undefined, { status: 409 });
 
 	await client.completion.create({
 		data: {
@@ -44,6 +47,7 @@ export async function POST({ request }: RequestEvent) {
 			verified: false
 		}
 	});
-	if (equalSolve >= 0) return new Response(undefined, { status: 202 });
+
+	if (equalSolves.length > 0) return new Response(undefined, { status: 202 }); //replacing an existing solve
 	else return new Response(undefined);
 }

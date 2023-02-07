@@ -122,6 +122,8 @@
 			.then(response => {
 				if (response.status == 202) {
 					toast.success('Solve REPLACEMENT uploaded successfully!');
+				} else if (response.status == 409) {
+					toast.error('Solve already exists in the verify queue.');
 				} else if (response.ok) {
 					toast.success('Solve uploaded successfully!');
 				} else {
