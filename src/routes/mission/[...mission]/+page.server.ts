@@ -28,6 +28,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			timeMode: true,
 			strikeMode: true,
 			variant: true,
+			logfile: true,
 			missionPack: {
 				select: {
 					name: true,

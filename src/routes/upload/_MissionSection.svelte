@@ -3,7 +3,7 @@
 	import Select from '$lib/controls/Select.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import { Bomb, Pool, type MissionPackSelection } from '$lib/types';
-	import { reservedSearchStrings } from '$lib/util';
+	import { getLogfileLinks, reservedSearchStrings, validateLogfileLink } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import type { ReplaceableMission } from './_types';
@@ -12,12 +12,23 @@
 	export let authorNames: string[];
 	export let packs: MissionPackSelection[];
 
-	let files: FileList;
+	let invalid = false;
+	let logfileLink = '';
+	let parsedLogfileLink = '';
 	let missions: ReplaceableMission[] = [];
 	let selectedMissions: Record<number, boolean> = {};
 	let missionNameQuirk: number[] = [];
 	const EXISTS = 1;
 	const RESERVED = 2;
+
+	async function readLogfile() {
+		if (invalid) return;
+		let links = getLogfileLinks(logfileLink);
+		parsedLogfileLink = links[1];
+		fetch(links[0])
+			.then(v => v.text())
+			.then(f => (missions = parseMissions(f)));
+	}
 
 	function parseMissions(text: string) {
 		let missions: ReplaceableMission[] = [];
@@ -44,7 +55,8 @@
 					timeMode: null,
 					strikeMode: null,
 					missionPack: null,
-					replace: false
+					replace: false,
+					logfile: parsedLogfileLink
 				};
 
 				missions = [...missions, mission];
@@ -124,18 +136,6 @@
 		return missions;
 	}
 
-	async function readFiles() {
-		missions = (
-			await Promise.all(
-				Array.from(files ?? []).map(async file => {
-					const text = await file.text();
-
-					return parseMissions(text);
-				})
-			)
-		).flat();
-	}
-
 	function sendMissions() {
 		fetch('/upload/missions', {
 			method: 'POST',
@@ -159,10 +159,14 @@
 
 <div class="block flex column">
 	<div>Select a logfile that contains the mission to upload.</div>
-	<div>
-		<label for="logfile">Logfile:</label>
-		<input id="logfile" type="file" accept=".txt,.log" required bind:files on:change={readFiles} />
-	</div>
+	<Input
+		label="Logfile link:"
+		id="logfile-link"
+		bind:invalid
+		bind:value={logfileLink}
+		required
+		validate={validateLogfileLink} />
+	<div><button disabled={invalid} on:click={readLogfile}>Get Mission Info</button></div>
 </div>
 {#if missions.length !== 0}
 	<div class="block">Select one or more missions from the logfile.</div>

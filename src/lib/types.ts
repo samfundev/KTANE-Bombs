@@ -38,6 +38,7 @@ export class Mission {
 	factory: string | null = null;
 	strikeMode: string | null = null;
 	timeMode: string | null = null;
+	logfile: string | null = null;
 }
 
 export class Bomb {

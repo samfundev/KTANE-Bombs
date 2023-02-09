@@ -364,3 +364,35 @@ export function validateSteamID(str: string): string | boolean {
 	}
 	return true;
 }
+
+export function validateLogfileLink(link: string): string | boolean {
+	let url = getLogfileLinks(link);
+	if (url[0] === '') {
+		return 'Invalid Logfile Analyzer link';
+	}
+	return true;
+}
+
+export function getLogfileLinks(link: string): string[] {
+	let url: URL | null = null;
+	try {
+		url = new URL(link);
+	} catch (e: any) {
+		return [''];
+	}
+
+	let host = url.hostname.toLowerCase();
+	let path = url.pathname.toLowerCase();
+	if (
+		host.includes('ktane.timwi.de') &&
+		(path.includes('more/logfile') || path.includes('lfa')) &&
+		url.hash.includes('file=')
+	) {
+		let start = url.hash.indexOf('file=') + 5;
+		let end = url.hash.slice(start).search(/[^a-zA-Z0-9]/) + start;
+		if (end < start) end = url.hash.length;
+		let fileId = url.hash.slice(start, end);
+		return ['https://ktane.timwi.de/Logfiles/' + fileId + '.txt', 'https://ktane.timwi.de/lfa#file=' + fileId];
+	}
+	return [''];
+}

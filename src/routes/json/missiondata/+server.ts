@@ -1,7 +1,6 @@
 import client from '$lib/client';
-import { onlyUnique, getModule, hasPermission, forbidden } from '$lib/util';
 import { Bomb, Permission, type Mission } from '$lib/types';
-import type { MissionPack } from '@prisma/client';
+import { forbidden, hasPermission } from '$lib/util';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
@@ -45,6 +44,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			timeMode: true,
 			variant: true,
 			verified: true,
+			logfile: true,
 			missionPack: {
 				select: {
 					verified: true,
@@ -77,6 +77,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			strikeMode: miss.strikeMode,
 			timeMode: miss.timeMode,
 			verified: miss.verified,
+			logfile: miss.logfile,
 			variant: miss.variant
 		};
 		if (pack) {

@@ -121,6 +121,10 @@
 		{:else}
 			---
 		{/if}
+
+		{#if hasPermission($page.data.user, Permission.VerifyMission) && mission.logfile !== null}
+			<a class="logfile" href={mission.logfile}>Original Logfile</a>
+		{/if}
 	</div>
 	{#if hasPermission($page.data.user, Permission.VerifyMission)}
 		<a href={$page.url.href + '/edit'} class="top-right">Edit</a>
@@ -268,8 +272,14 @@
 	.centered {
 		text-align: center;
 	}
-	a.pack {
+	a {
 		color: var(--text-color);
+	}
+	a.logfile {
+		margin-left: 20px;
+	}
+	a.variant {
+		margin-top: calc(var(--gap) * 3);
 	}
 
 	.pools {
@@ -354,10 +364,6 @@
 	.header {
 		font-weight: bold;
 		text-align: center;
-	}
-	a.variant {
-		color: var(--text-color);
-		margin-top: calc(var(--gap) * 3);
 	}
 
 	.top-right {

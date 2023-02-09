@@ -53,6 +53,7 @@ export const POST: RequestHandler = async function ({ locals, request }: Request
 								strikeMode: item.mission.strikeMode,
 								missionPackId: item.mission.missionPack?.id,
 								name: name,
+								logfile: item.mission.logfile,
 								designedForTP: item.mission.designedForTP
 							}
 						});

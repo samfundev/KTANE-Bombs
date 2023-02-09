@@ -38,6 +38,7 @@ model Mission {
   timeMode       String?
   verified       Boolean      @default(true)
   variant        Int?
+  logfile        String?
 
   missionPack   MissionPack? @relation(fields: [missionPackId], references: [id])
   missionPackId Int?

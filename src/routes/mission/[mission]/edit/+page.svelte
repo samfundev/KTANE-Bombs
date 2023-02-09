@@ -6,7 +6,16 @@
 	import type { RepoModule } from '$lib/repo';
 	import Select from '$lib/controls/Select.svelte';
 	import { Permission, type Completion, type ID, type Bomb, Pool, type MissionPackSelection } from '$lib/types';
-	import { displayStringList, formatTime, hasPermission, parseInteger, parseList, parseTime } from '$lib/util';
+	import {
+		displayStringList,
+		formatTime,
+		getLogfileLinks,
+		hasPermission,
+		parseInteger,
+		parseList,
+		parseTime,
+		validateLogfileLink
+	} from '$lib/util';
 	import equal from 'fast-deep-equal';
 	import { sortBombs } from '../../_shared';
 	import type { EditMission } from './_types';
@@ -21,6 +30,7 @@
 	let missionNames: string[] = data.missionNames;
 	let packs: MissionPackSelection[] = data.packs;
 	let modules: Record<string, RepoModule> | null = data.modules;
+	let logfile = mission.logfile ?? '';
 
 	sortBombs(mission, modules);
 
@@ -39,9 +49,11 @@
 	let modified = false;
 	let tpCompletion = false;
 	$: {
-		modified = !equal(mission, originalMission);
+		let log = getLogfileLinks(logfile);
+		mission.logfile = log[0] === '' ? null : log[1];
 		tpCompletion = mission.completions.some(c => c.team[0] === TP_TEAM);
 		if (tpCompletion) mission.tpSolve = true;
+		modified = !equal(mission, originalMission);
 	}
 
 	function intnan0(val: number): boolean | string {
@@ -166,6 +178,17 @@
 		options={[null, 'Local', 'Global']}
 		display={mode => mode ?? 'None'} />
 	<Checkbox label="Designed for TP" id="designed-for-tp" bind:checked={mission.designedForTP} />
+</div>
+<div class="block">
+	<Input
+		label="Logfile Link"
+		id="mission-logfile"
+		validate={v => (v === '' ? true : validateLogfileLink(v))}
+		forceValidate
+		bind:value={logfile} />
+	{#if mission.logfile !== null}
+		<a href={mission.logfile}>Original Logfile</a>
+	{/if}
 </div>
 {#if !mission.verified}
 	<div class="block centered not-verified">This mission has not been verified.</div>
