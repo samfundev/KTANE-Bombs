@@ -1,4 +1,6 @@
-<script lang="ts">import { reservedSearchStrings } from '$lib/util';</script> 
+<script lang="ts">
+	import { reservedSearchStrings } from '$lib/util';
+</script>
 
 <svelte:head>
 	<title>Rules</title>
@@ -11,7 +13,8 @@
 
 	<p>
 		In order for a bomb to show on your profile, you must submit it here with the names of everyone who helped solve the
-		bomb and their roles with proper verification. Proper verification includes a logfile or recording of the bomb.
+		bomb and their roles with proper verification. Proper verification includes a logfile or recording of the bomb, with
+		the latter being required for a Solo solve.
 	</p>
 
 	<p>Actions/mods that will invalidate your solve include:</p>
@@ -19,10 +22,9 @@
 		<li>Using any feature enabled by turning off "Disable Advantageous Features".</li>
 		<li>Playing in any timer mode besides Normal mode.</li>
 		<li>Taking screenshots or recordings of the bomb during a team solve to aid in solving.</li>
-		<li>Using local, private, or unlisted mods to replace modules on the bomb with easier or different versions.</li>
 		<li>
-			Using local, private, or unlisted mods to give an unfair advantage such as modifying the logging or fixing bomb
-			RNG.
+			Using local, private, or unlisted mods to give an unfair advantage such as modifying the logging, fixing bomb RNG,
+			or replacing modules on the bomb with easier versions.
 		</li>
 		<li>Using the Twitch Plays or Unity Explorer mods during a solve.</li>
 		<li>Using advantageous features from the Command Line mod.</li>
