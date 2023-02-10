@@ -8,7 +8,7 @@
 
 <h1 class="header">Rules</h1>
 
-<body>
+<div class="block">
 	<h2>Rules for Uploading Solves</h2>
 
 	<p>
@@ -49,7 +49,8 @@
 		</li>
 		<li>An expert viewing the bomb during the solve.</li>
 	</ul>
-
+</div>
+<div class="block">
 	<h2>Rules for Uploading Missions</h2>
 
 	<p>Missions that break any of the below rules will lead to them being denied by the maintainers:</p>
@@ -72,4 +73,4 @@
 			pointers to fix this.
 		</li>
 	</ul>
-</body>
+</div>
