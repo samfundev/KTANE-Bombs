@@ -167,12 +167,14 @@
 	}
 
 	let wrView = writable(byRole);
+	let render = false;
 	if (browser) {
 		byRole = JSON.parse(localStorage.getItem('user-solves-view') || JSON.stringify(viewOptions[0]));
 		wrView.subscribe(value => {
 			localStorage.setItem('user-solves-view', JSON.stringify(value));
 		});
 		storeView();
+		render = true;
 	}
 	function storeView() {
 		wrView.set(byRole);
@@ -207,7 +209,7 @@
 	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={byRole} on:change={storeView} />
 </div>
 <div class="block"><h2>Solves</h2></div>
-{#if byRole == viewOptions[1]}
+{#if render && byRole == viewOptions[1]}
 	{#each Object.entries(missionsNames) as [key, compList]}
 		{#if compList.length > 0}
 			{@const dist = selectDistinctSolveCount(key, stats)}
@@ -239,7 +241,7 @@
 			</div>
 		{/if}
 	{/each}
-{:else}
+{:else if render}
 	<div class="solves flex grow">
 		{#each Object.values(missions).sort((a, b) => a.name.localeCompare(b.name)) as mission}
 			<MissionCompletionCard {mission} {username} />
