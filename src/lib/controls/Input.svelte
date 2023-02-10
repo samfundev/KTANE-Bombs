@@ -30,10 +30,14 @@
 	}
 
 	let error = '';
+	export const setValue = (val: any) => {
+		value = val;
+		displayValue = display(value);
+		doHandleInput(displayValue);
+	};
 
-	const handleInput = (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
-		displayValue = e.currentTarget.value;
-		let newValue = parse(e.currentTarget.value);
+	function doHandleInput(val: any) {
+		let newValue = parse(val);
 		if (options !== null && !optionalOptions) {
 			let match = false;
 			for (const option of options) {
@@ -49,6 +53,10 @@
 
 		if (handleValidity(newValue)) value = newValue;
 		dispatch('input');
+	}
+	const handleInput = (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
+		displayValue = e.currentTarget.value;
+		doHandleInput(displayValue);
 	};
 
 	function handleValidity(value: any, showErrors: boolean = true): boolean {

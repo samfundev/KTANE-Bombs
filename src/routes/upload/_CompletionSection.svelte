@@ -3,7 +3,7 @@
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import Input from '$lib/controls/Input.svelte';
 	import { Completion } from '$lib/types';
-	import { formatTime, parseTime } from '$lib/util';
+	import { formatTime, getLogfileLinks, parseTime } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import { TP_TEAM } from '$lib/const';
 
@@ -22,6 +22,10 @@
 	let team = [{ invalid: false, text: '' }];
 	let proofs = [{ invalid: false, text: '' }];
 	let tpSolve = false;
+	const MIN_TIME = 0.01;
+	let parsedTimes: number[] = [MIN_TIME];
+	let parsedLogfiles: string[] = [];
+	let timeInput: Input;
 
 	function dynamicBoxes(inputList: any[]) {
 		let max = inputList.length - 1;
@@ -60,6 +64,49 @@
 		return [true, url.toString()];
 	}
 
+	function getTimes(text: string) {
+		let lineIndex = 0;
+		const lines = text.split('\n');
+
+		function readLine() {
+			return lines[lineIndex++];
+		}
+
+		while (lineIndex < lines.length) {
+			let line = readLine().trim();
+			if (line.startsWith('[Tweaks] LFAEvent ')) {
+				const match = line.match(/LFAEvent (\d+)/);
+				if (match === null) throw new Error('This regex should always match');
+
+				let json = '';
+				for (let i = 0; i < parseInt(match[1]); i++) {
+					json += readLine();
+				}
+
+				const event = JSON.parse(json);
+				if (event.type === 'ROUND_START' && event.mission) {
+					let match = missionNames.find(name => name.toLowerCase() === event.mission.toLowerCase());
+					if (match !== undefined) missionName = match;
+				} else if (event.type === 'BOMB_SOLVE' && event.bombTime) {
+					let n = parseFloat(event.bombTime);
+					if (!isNaN(n)) {
+						n = Math.max(Math.round(n * 100) / 100, MIN_TIME);
+						parsedTimes.push(n);
+						// completion.time = n;
+						timeInput.setValue(n);
+					}
+				}
+			}
+		}
+		// console.log(parsedTimes);
+	}
+
+	function validateTime(time: number): string | boolean {
+		if (time == null) return 'Ivalid time';
+		else if (time > 0) return true;
+		else return 'Time must be ≥ 0.01s';
+	}
+
 	function validateURL(text: any): string | boolean {
 		let funcReturn = parseURL(text);
 		return !funcReturn[0] ? funcReturn[1] : '';
@@ -73,8 +120,18 @@
 			}
 			if (func === null) outTeam[outTeam.length] = teamList[i].text;
 			else {
+				//URL
 				let funcReturn = func(teamList[i].text);
-				if (funcReturn[0]) outTeam[outTeam.length] = funcReturn[1];
+				if (funcReturn[0]) {
+					outTeam[outTeam.length] = funcReturn[1];
+					let links = getLogfileLinks(funcReturn[1]);
+					if (links[0] !== '' && !parsedLogfiles.includes(links[0])) {
+						parsedLogfiles.push(links[0]);
+						fetch(links[0])
+							.then(v => v.text())
+							.then(f => getTimes(f));
+					}
+				}
 			}
 		}
 		return outTeam;
@@ -160,14 +217,17 @@
 		{/each}
 	</div>
 	<Input
+		bind:this={timeInput}
 		id="time"
 		type="text"
 		parse={parseTime}
-		validate={value => value != null}
+		validate={validateTime}
 		display={value => formatTime(value, value % 1 != 0)}
 		instantFormat={false}
 		label="Time Remaining"
 		placeholder="1:23:45.67"
+		bind:options={parsedTimes}
+		optionalOptions
 		required
 		bind:invalid={timerInvalid}
 		bind:value={completion.time} />
