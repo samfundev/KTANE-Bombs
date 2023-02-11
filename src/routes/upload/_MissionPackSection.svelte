@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Input from '$lib/controls/Input.svelte';
 	import type { MissionPack } from '$lib/types';
-	import { getSteamID, isOnlyDigits, validateSteamID } from '$lib/util';
+	import { getSteamID, validateSteamID } from '$lib/util';
 	import toast from 'svelte-french-toast';
 
 	let pack: MissionPack = {

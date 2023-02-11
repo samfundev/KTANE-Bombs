@@ -5,6 +5,7 @@
 	import type { MissionPackSelection } from '$lib/types';
 	export let data;
 
+	let factoryStatus: { [name: string]: string | null } = data.factoryStatus;
 	let missionNames: string[] = data.missionNames;
 	let authorNames: string[] = data.authorNames;
 	let solverNames: string[] = data.solverNames;
@@ -30,7 +31,7 @@
 {:else if section == 'missionpack'}
 	<MissionPackSection />
 {:else}
-	<CompletionSection {missionNames} {solverNames} />
+	<CompletionSection {missionNames} {solverNames} {factoryStatus} />
 {/if}
 
 <style>

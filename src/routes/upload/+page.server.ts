@@ -7,7 +7,8 @@ export const load: PageServerLoad = async function () {
 		select: {
 			name: true,
 			completions: true,
-			authors: true
+			authors: true,
+			factory: true
 		},
 		where: {
 			verified: true
@@ -22,6 +23,10 @@ export const load: PageServerLoad = async function () {
 	});
 
 	return {
+		factoryStatus: missions.reduce((result: any, current) => {
+			result[current.name] = current.factory;
+			return result;
+		}, {}),
 		missionNames: missions.map(mission => mission.name).sort(excludeArticleSort),
 		authorNames: missions
 			.map(mission => mission.authors)

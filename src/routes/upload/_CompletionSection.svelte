@@ -9,6 +9,7 @@
 
 	export let missionNames: string[];
 	export let solverNames: string[];
+	export let factoryStatus: { [name: string]: string | null };
 
 	let missionName: string = '';
 
@@ -72,6 +73,7 @@
 			return lines[lineIndex++];
 		}
 
+		let time = 0;
 		while (lineIndex < lines.length) {
 			let line = readLine().trim();
 			if (line.startsWith('[Tweaks] LFAEvent ')) {
@@ -86,14 +88,18 @@
 				const event = JSON.parse(json);
 				if (event.type === 'ROUND_START' && event.mission) {
 					let match = missionNames.find(name => name.toLowerCase() === event.mission.toLowerCase());
-					if (match !== undefined) missionName = match;
+					if (match !== undefined) {
+						missionName = match;
+						time = 0;
+					}
 				} else if (event.type === 'BOMB_SOLVE' && event.bombTime) {
 					let n = parseFloat(event.bombTime);
 					if (!isNaN(n)) {
 						n = Math.max(Math.round(n * 100) / 100, MIN_TIME);
+						if (factoryStatus[missionName] === 'Sequence') time += n;
+						else time = n;
 						parsedTimes.push(n);
-						// completion.time = n;
-						timeInput.setValue(n);
+						timeInput.setValue(time);
 					}
 				}
 			}
