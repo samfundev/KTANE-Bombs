@@ -43,13 +43,9 @@
 				<a class="block" href="/verify">Verify</a>
 			{/if}
 		{/if}
-		<div
-			style="margin-left: auto"
-			class="block info-tab"
-			bind:this={infoTab}
-			on:click={() => popup(infoMenu, infoTab, true, [8, 6])}>
-			Info
-			<HomeInfoMenu bind:div={infoMenu} on:click={() => preventDisappear(infoMenu)} />
+		<div style="margin-left: auto" class="block info-tab" bind:this={infoTab}>
+			<div on:click={() => popup(infoMenu, infoTab, true, [8, 6])}>Info</div>
+			<HomeInfoMenu bind:div={infoMenu} />
 		</div>
 
 		{#if user}

@@ -229,10 +229,9 @@ export function disappear(elem: HTMLElement) {
 export function preventDisappear(elem: HTMLElement) {
 	let classes = elem.classList;
 	let statString = Array.from(classes).find(c => c.startsWith('disappear-stat')) ?? '';
-	let stat = parseInt(statString?.substring(14) ?? '1');
 
 	classes.remove(statString);
-	classes.add(`disappear-stat${stat + 1}`);
+	classes.add('disappear-stat1');
 }
 
 export function popup(wnd: HTMLElement, obj: HTMLElement, relative = false, skew: number[] = [0, 0]) {

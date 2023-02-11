@@ -57,17 +57,24 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		}
 	});
 
+	function minimize(obj: any) {
+		Object.keys(obj).forEach(k => {
+			if (obj[k] == null) delete obj[k];
+		});
+	}
+
 	let missionPacks: {
 		name: string;
 		steamID: string;
 		verified: boolean;
 		dateAdded: number | null;
-		missions: (Mission & { variant: null | number })[];
+		missions: any[]; //(Mission & { variant: null | number })[];
 	}[] = [];
 	missionsObj.forEach(miss => {
 		let bombs: Bomb[] = [];
 		Object.assign(bombs, miss.bombs);
 		let pack = missionPacks.find(mp => mp.steamID == miss.missionPack?.steamId);
+		for (let i = 0; i < miss.completions.length; i++) minimize(miss.completions[i]);
 		let newMission = {
 			name: miss.name,
 			id: miss.id,
@@ -84,16 +91,19 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			dateAdded: miss.dateAdded,
 			variant: miss.variant
 		};
+		minimize(newMission);
 		if (pack) {
 			pack.missions.push(newMission);
 		} else {
-			missionPacks.push({
+			let p = {
 				name: miss.missionPack?.name ?? '',
 				steamID: miss.missionPack?.steamId ?? '',
 				verified: miss.missionPack?.verified ?? false,
 				dateAdded: miss.missionPack?.dateAdded ?? null,
 				missions: [newMission]
-			});
+			};
+			minimize(p);
+			missionPacks.push(p);
 		}
 	});
 
