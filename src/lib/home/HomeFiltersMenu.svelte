@@ -33,7 +33,15 @@
 		'Has Needy',
 		'Designed for TP'
 	];
-	let sortOptions = ['Alphabetical', 'Module Count', 'Bomb Time', 'Solves', 'Bomb Count', 'Rule Seeded Mods %'];
+	let sortOptions = [
+		'Alphabetical',
+		'Date Added',
+		'Module Count',
+		'Bomb Time',
+		'Solves',
+		'Bomb Count',
+		'Rule Seeded Mods %'
+	];
 	let limitDef: { [k: string]: number[] } = {
 		mods: [1, 600],
 		time: [1, 1800],

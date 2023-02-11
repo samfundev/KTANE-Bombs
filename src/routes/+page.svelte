@@ -1,11 +1,11 @@
 <script lang="ts">
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import HomeSearchBar from '$lib/home/HomeSearchBar.svelte';
-	import type { Mission } from '$lib/types';
+	import type { ID, Mission } from '$lib/types';
 	import type { RepoModule } from '$lib/repo';
 
 	export let data;
-	let missions: Mission[] = data.missions;
+	let missions: ID<Mission>[] = data.missions;
 	let missionCards: any = {};
 	let modules: Record<string, RepoModule> = data.modules;
 

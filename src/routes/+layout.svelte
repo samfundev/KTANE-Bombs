@@ -237,13 +237,13 @@
 		cursor: pointer;
 		padding: 0.2em 0.5em 0.115em 28px;
 		position: relative;
-		top: 5px;
 		margin-left: 0.2em;
 		vertical-align: bottom;
 		background-size: 20px 20px;
 		background-position: 4px center;
 		background-repeat: no-repeat;
 		align-self: flex-end;
+		margin-right: var(--gap);
 	}
 
 	:global(.hidden) {

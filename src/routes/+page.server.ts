@@ -8,6 +8,7 @@ export const load: PageServerLoad = async function () {
 			verified: true
 		},
 		select: {
+			id: true,
 			name: true,
 			authors: true,
 			bombs: true,
@@ -16,6 +17,7 @@ export const load: PageServerLoad = async function () {
 			factory: true,
 			timeMode: true,
 			strikeMode: true,
+			dateAdded: true,
 			completions: {
 				where: { verified: true }
 			}

@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { Bomb, Completion, HomeOptions, Mission, MustHave, Operation } from '$lib/types';
+	import { Bomb, Completion, HomeOptions, Mission, MustHave, Operation, type ID } from '$lib/types';
 	import {
 		evaluateLogicalStringSearch,
-		disappearAll,
 		popup,
 		titleCase,
 		getModule,
@@ -18,7 +17,7 @@
 	import type { RepoModule } from '$lib/repo';
 	import { TP_TEAM } from '$lib/const';
 
-	export let missions: Mission[];
+	export let missions: ID<Mission>[];
 	export let missionCards: { [name: string]: any } = {};
 	export let modules: Record<string, RepoModule>;
 	export let validSearchOptions: boolean[] = [];
@@ -176,15 +175,19 @@
 	}
 
 	function compare(
-		a: Mission,
-		b: Mission,
-		primary: (m: Mission) => number,
-		secondary: (m: Mission) => number | string
+		a: ID<Mission>,
+		b: ID<Mission>,
+		primary: (m: ID<Mission>) => number | null,
+		secondary: (m: ID<Mission>) => number | string | null
 	): boolean {
-		let diff = primary(a) - primary(b);
+		let prim = [primary(a), primary(b)];
+		let diff = prim[0] === null || prim[1] === null ? 0 : prim[0] - prim[1];
 		if (diff > 0) return true;
 		else if (diff < 0) return false;
-		else return secondary(a) > secondary(b);
+		else {
+			let sec = [secondary(a), secondary(b)];
+			return sec[0] === null || sec[1] === null ? false : sec[0] > sec[1];
+		}
 	}
 
 	function delayModulesCalculation(func: () => void, alt: () => void, time: number): boolean {
@@ -223,6 +226,18 @@
 					break;
 				case 'solves':
 					missions.sort((a, b) => (compare(a, b, numCompletions, timeSum) != reverse ? 1 : -1));
+					break;
+				case 'date-added':
+					missions.sort((a, b) =>
+						compare(
+							a,
+							b,
+							m => m.dateAdded,
+							m => m.id
+						) != reverse
+							? 1
+							: -1
+					);
 					break;
 				case 'bomb-count':
 					missions.sort((a, b) => (compare(a, b, m => m.bombs.length, timeSum) != reverse ? 1 : -1));
@@ -325,8 +340,10 @@
 			{/each}
 		</div>
 	</div>
-	<div class="tabs" bind:this={filterTab}>
-		<div class="popup-tab filter-tab" on:click={() => popup(filters, filterTab, false, [0, 5])}>Filters</div>
+	<div class="tabs">
+		<div bind:this={filterTab} class="popup-tab filter-tab" on:click={() => popup(filters, filterTab, false)}>
+			Filters
+		</div>
 	</div>
 </div>
 
@@ -361,8 +378,12 @@
 	}
 	.tabs {
 		position: absolute;
-		right: var(--gap);
-		bottom: var(--gap);
+		display: flex;
+		justify-content: right;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
 	}
 
 	:global(#bomb-search-field) {
