@@ -8,6 +8,21 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async function ({ params, locals }: ServerLoadEvent) {
 	const { mission } = params;
+	const missionToUpdate = mission?.startsWith('[[UPDATE]]')
+		? await client.mission.findFirst({
+				where: {
+					name: mission?.substring(11)
+				},
+				select: {
+					name: true,
+					completions: {
+						where: { verified: true }
+					},
+					dateAdded: true,
+					variant: true
+				}
+		  })
+		: null;
 	const missionResult = await client.mission.findFirst({
 		where: {
 			name: mission
@@ -19,9 +34,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			bombs: {
 				orderBy: { id: 'asc' }
 			},
-			completions: {
-				where: { verified: true }
-			},
+			completions: missionToUpdate === null ? { where: { verified: true } } : false,
 			designedForTP: true,
 			tpSolve: true,
 			factory: true,
@@ -43,14 +56,14 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		throw error(404, 'Mission not found.');
 	}
 
-	const variantId = missionResult.variant;
+	const variantId = missionToUpdate === null ? missionResult.variant : missionToUpdate.variant;
 	const variants =
 		variantId == null
 			? null
 			: await client.mission.findMany({
 					where: {
 						variant: variantId,
-						name: { not: missionResult.name }
+						name: { not: missionToUpdate === null ? missionResult.name : missionToUpdate.name }
 					},
 					select: {
 						name: true,
@@ -63,6 +76,11 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 
 	if (!missionResult.verified && !hasPermission(locals.user, Permission.VerifyMission)) {
 		throw forbidden(locals);
+	}
+
+	if (missionToUpdate !== null) {
+		missionResult.completions = missionToUpdate.completions;
+		missionResult.dateAdded = missionToUpdate.dateAdded;
 	}
 
 	return {
