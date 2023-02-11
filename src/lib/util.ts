@@ -396,3 +396,14 @@ export function getLogfileLinks(link: string): string[] {
 	}
 	return [''];
 }
+
+export function parseDate(dt: string): Date | null {
+	const d = new Date(dt);
+	return isNaN(d.getTime()) ? null : new Date(+d + (d.getTimezoneOffset() + 300) * 60000);
+}
+
+export function formatDate(dt: Date): string {
+	if (isNaN(dt?.getTime() ?? NaN)) return '';
+	const d = new Date(dt.getTime() - (dt.getTimezoneOffset() - 300) * 60000);
+	return d.toISOString().split('T')[0];
+}

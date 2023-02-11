@@ -122,6 +122,11 @@
 	input:disabled {
 		background-color: #888;
 	}
+
+	input[type="date"] {
+		background-color: lightgray;
+		color: black;
+	}
 	.hstack {
 		display: flex;
 		flex-direction: row;

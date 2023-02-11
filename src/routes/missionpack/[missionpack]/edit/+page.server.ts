@@ -37,6 +37,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			steamId: true,
 			name: true,
 			verified: true,
+			dateAdded: true,
 			id: true
 		}
 	});
@@ -79,6 +80,7 @@ export const actions: Actions = {
 			},
 			data: {
 				steamId: pack.steamId,
+				dateAdded: pack.dateAdded,
 				name: pack.name
 			}
 		});

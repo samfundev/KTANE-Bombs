@@ -22,6 +22,7 @@ const { PrismaClient } = pkg;
 				timeMode: mission.timeMode,
 				variant: mission.variant,
 				verified: mission.verified,
+				dateAdded: mission.dateAdded,
 				missionPack: pack.name
 			});
 			for (const completion of mission.completions) {

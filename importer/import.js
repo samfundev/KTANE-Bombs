@@ -13,10 +13,12 @@ const { PrismaClient } = pkg;
 			create: {
 				name: pack.name,
 				steamId: pack.steamID,
+				dateAdded: pack.dateAdded,
 				verified: pack.verified
 			},
 			update: {
 				steamId: pack.steamID,
+				dateAdded: pack.dateAdded,
 				verified: pack.verified
 			},
 			where: {
@@ -37,6 +39,7 @@ const { PrismaClient } = pkg;
 				timeMode: mission.timeMode,
 				variant: mission.variant,
 				verified: mission.verified,
+				dateAdded: mission.dateAdded,
 				missionPackId: missionPack.id
 			});
 			for (const completion of mission.completions) {
@@ -76,6 +79,7 @@ const { PrismaClient } = pkg;
 					timeMode: mission.timeMode,
 					variant: mission.variant,
 					verified: mission.verified,
+					dateAdded: mission.dateAdded,
 					missionPackId: mission.missionPackId
 				},
 				update: {
@@ -84,6 +88,7 @@ const { PrismaClient } = pkg;
 					factory: mission.factory,
 					variant: mission.variant,
 					verified: mission.verified,
+					dateAdded: mission.dateAdded,
 					missionPackId: mission.missionPackId
 				},
 				where: {

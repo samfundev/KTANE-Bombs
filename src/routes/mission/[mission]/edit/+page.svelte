@@ -8,9 +8,11 @@
 	import { Permission, type Completion, type ID, type Bomb, Pool, type MissionPackSelection } from '$lib/types';
 	import {
 		displayStringList,
+		formatDate,
 		formatTime,
 		getLogfileLinks,
 		hasPermission,
+		parseDate,
 		parseInteger,
 		parseList,
 		parseTime,
@@ -48,11 +50,17 @@
 
 	let modified = false;
 	let tpCompletion = false;
+	let date: Date | null = null;
+	if (mission.dateAdded !== null) {
+		date = new Date(0);
+		date.setUTCSeconds(mission.dateAdded);
+	}
 	$: {
 		let log = getLogfileLinks(logfile);
 		mission.logfile = log[0] === '' ? null : log[1];
 		tpCompletion = mission.completions.some(c => c.team[0] === TP_TEAM);
 		if (tpCompletion) mission.tpSolve = true;
+		mission.dateAdded = date === null ? null : Math.round(date.getTime() / 1000);
 		modified = !equal(mission, originalMission);
 	}
 
@@ -177,6 +185,14 @@
 		bind:value={mission.strikeMode}
 		options={[null, 'Local', 'Global']}
 		display={mode => mode ?? 'None'} />
+	<Input
+		type="date"
+		id="mission-date"
+		label="Date Added"
+		classes="light"
+		parse={parseDate}
+		display={formatDate}
+		bind:value={date} />
 	<Checkbox label="Designed for TP" id="designed-for-tp" bind:checked={mission.designedForTP} />
 </div>
 <div class="block">
@@ -187,7 +203,7 @@
 		forceValidate
 		bind:value={logfile} />
 	{#if mission.logfile !== null}
-		<a href={mission.logfile}>Original Logfile</a>
+		<a href={mission.logfile}>Logfile</a>
 	{/if}
 </div>
 {#if !mission.verified}

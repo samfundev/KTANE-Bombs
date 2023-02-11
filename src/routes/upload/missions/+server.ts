@@ -27,6 +27,7 @@ export async function POST({ request }: RequestEvent) {
 				designedForTP: mission.designedForTP,
 				missionPackId: mission.missionPack?.id,
 				logfile: mission.logfile,
+				dateAdded: mission.dateAdded,
 				verified: false
 			}
 		});

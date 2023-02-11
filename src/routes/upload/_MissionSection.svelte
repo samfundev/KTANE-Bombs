@@ -56,6 +56,7 @@
 					strikeMode: null,
 					missionPack: null,
 					replace: false,
+					dateAdded: Math.round(Date.now() / 1000),
 					logfile: parsedLogfileLink
 				};
 

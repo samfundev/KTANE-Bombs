@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Input from '$lib/controls/Input.svelte';
 
-	import { getSteamID, validateSteamID } from '$lib/util';
+	import { formatDate, getSteamID, parseDate, validateSteamID } from '$lib/util';
 	import equal from 'fast-deep-equal';
 	import { applyAction } from '$app/forms';
 	import type { EditMissionPack } from '../../_types';
@@ -19,7 +19,16 @@
 
 	setOriginalMission();
 
-	$: modified = !equal(pack, originalPack);
+	let modified = false;
+	let date: Date | null = null;
+	if (pack.dateAdded !== null) {
+		date = new Date(0);
+		date.setUTCSeconds(pack.dateAdded);
+	}
+	$: {
+		pack.dateAdded = date === null ? null : Math.round(date.getTime() / 1000);
+		modified = !equal(pack, originalPack);
+	}
 
 	async function saveChanges() {
 		const fData = new FormData();
@@ -66,6 +75,16 @@
 		instantFormat={false}
 		forceValidate
 		bind:value={pack.steamId} />
+	<div class="flex">
+		<Input
+			type="date"
+			id="pack-date"
+			label="Date Added"
+			classes="light"
+			parse={parseDate}
+			display={formatDate}
+			bind:value={date} />
+	</div>
 	<div class="actions">
 		<button on:click={deleteMissionPack}>Delete</button>
 	</div>

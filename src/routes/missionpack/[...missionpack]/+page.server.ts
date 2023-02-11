@@ -33,6 +33,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			},
 			steamId: true,
 			name: true,
+			dateAdded: true,
 			verified: true
 		}
 	});

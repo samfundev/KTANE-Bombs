@@ -6,7 +6,8 @@
 
 	let pack: MissionPack = {
 		name: '',
-		steamId: ''
+		steamId: '',
+		dateAdded: Math.round(Date.now() / 1000)
 	};
 
 	let invalid = false;

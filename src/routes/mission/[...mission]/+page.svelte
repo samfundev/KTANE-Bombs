@@ -29,6 +29,9 @@
 	const viewTitle =
 		'Pools view shows the actual module pools as defined by the mission author.\n' +
 		'Probabilities view shows probability that at least one instance of a module will be present on a bomb.';
+	let dateAdded = new Date(0);
+	dateAdded.setUTCSeconds(mission.dateAdded ?? 0);
+	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
 
 	function poolClass(mods: string[] = [], module: RepoModule | null = null): string {
 		let classes = '';
@@ -122,8 +125,11 @@
 			---
 		{/if}
 
-		{#if hasPermission($page.data.user, Permission.VerifyMission) && mission.logfile !== null}
-			<a class="logfile" href={mission.logfile}>Original Logfile</a>
+		{#if mission.dateAdded !== null}
+			<span class="date">{dateAdded.toLocaleDateString(undefined, dateOptions)}</span>
+		{/if}
+		{#if mission.logfile !== null}
+			<a class="logfile" href={mission.logfile}>Logfile</a>
 		{/if}
 	</div>
 	{#if hasPermission($page.data.user, Permission.VerifyMission)}
@@ -275,7 +281,8 @@
 	a {
 		color: var(--text-color);
 	}
-	a.logfile {
+	a.logfile,
+	.date {
 		margin-left: 20px;
 	}
 	a.variant {
