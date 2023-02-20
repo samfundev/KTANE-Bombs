@@ -340,7 +340,7 @@
 			{/each}
 		</div>
 	</div>
-	<div class="tabs">
+	<div id="controlTabs">
 		<div bind:this={filterTab} class="popup-tab filter-tab" on:click={() => popup(filters, filterTab, false)}>
 			Filters
 		</div>
@@ -376,7 +376,7 @@
 	.hstack.boxes {
 		gap: 7px;
 	}
-	.tabs {
+	#controlTabs {
 		position: absolute;
 		display: flex;
 		justify-content: right;
@@ -384,6 +384,12 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
+		user-select: none;
+		pointer-events: none;
+	}
+	#controlTabs * {
+		user-select: initial;
+		pointer-events: initial;
 	}
 
 	:global(#bomb-search-field) {
