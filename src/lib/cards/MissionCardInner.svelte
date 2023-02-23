@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Bomb } from '$lib/types';
 	import type { Mission } from '$lib/types';
-	import { formatTime, getSolveTypes, listify, pluralize } from '$lib/util';
+	import { formatTime, pluralize } from '$lib/util';
 
 	export let mission: Mission;
 

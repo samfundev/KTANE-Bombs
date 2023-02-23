@@ -2,6 +2,7 @@ import type * as client from '@prisma/client';
 import type { Bomb, FrontendUser, ID, Mission, Permission, Pool } from './types';
 import { redirect, error } from '@sveltejs/kit';
 import type { RepoModule } from './repo';
+import { TP_TEAM } from './const';
 
 export function formatTime(seconds: number, milliseconds = false): string {
 	let timeParts = [];
@@ -93,7 +94,9 @@ export function fixPools<T>(mission: T & { bombs: client.Bomb[] }): T & { bombs:
 export function getSolveTypes(mission: Mission) {
 	return {
 		normalSolve: mission.completions.some(completion => completion.team.length >= 2),
-		efmSolve: mission.completions.some(completion => completion.team.length == 1 && !completion.solo),
+		efmSolve: mission.completions.some(
+			completion => completion.team.length == 1 && !completion.solo && completion.team[0] !== TP_TEAM
+		),
 		soloSolve: mission.completions.some(completion => completion.solo)
 	};
 }
