@@ -22,19 +22,19 @@ export const load = async function ({ parent, locals }: any) {
 				name: true,
 				authors: true,
 				bombs: {
-					orderBy: {
-						id: 'asc'
-					}
+					orderBy: { id: 'asc' }
 				},
 				designedForTP: true,
 				factory: true,
 				timeMode: true,
 				strikeMode: true,
 				logfile: true,
+				dateAdded: true,
 				missionPack: {
 					select: {
 						id: true,
-						name: true
+						name: true,
+						dateAdded: true
 					}
 				}
 			}
@@ -52,7 +52,11 @@ export const load = async function ({ parent, locals }: any) {
 						}
 					} as MissionQueueItem;
 				})
-				.sort((a, b) => a.mission.id - b.mission.id)
+				.sort((a, b) =>
+					a.mission.dateAdded === null || b.mission.dateAdded === null
+						? a.mission.id - b.mission.id
+						: a.mission.dateAdded - b.mission.dateAdded
+				)
 		);
 	}
 
@@ -122,7 +126,11 @@ export const load = async function ({ parent, locals }: any) {
 						pack
 					} as MissionPackQueueItem;
 				})
-				.sort((a, b) => a.pack.id - b.pack.id)
+				.sort((a, b) =>
+					a.pack.dateAdded === null || b.pack.dateAdded === null
+						? a.pack.id - b.pack.id
+						: a.pack.dateAdded - b.pack.dateAdded
+				)
 		);
 	}
 

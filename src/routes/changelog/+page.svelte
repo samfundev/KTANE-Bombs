@@ -5,9 +5,9 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
-	<h3>22 February 2023</h3>
+	<h3>26 February 2023</h3>
 	<ul>
-		<li>Missions and Mission Packs now have a Date Added field. These will be updated slowly over time.</li>
+		<li>Missions and Mission Packs now have a Date Added field.</li>
 		<li>
 			When pasting a logfile during a Solve upload, mission name and time are filled in from the logfile info.
 			<ul>
@@ -19,15 +19,7 @@
 		</li>
 		<li>When uploading a mission, a logfile link is now required instead of a file upload.</li>
 		<li>Missions can now store a link to the logfile that defines its mission parameters.</li>
-		<li>
-			New sort option on the home page: Date Added
-			<ul>
-				<li>
-					Until the older missions can be updated, only the newest missions (ones uploaded since the switchover in
-					September 2022) will be sorted correctly.
-				</li>
-			</ul>
-		</li>
+		<li>New sort option on the home page: Date Added</li>
 		<li>A few minor bug fixes</li>
 	</ul>
 </div>
