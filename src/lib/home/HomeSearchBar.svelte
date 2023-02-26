@@ -310,7 +310,7 @@
 	});
 </script>
 
-<div class="search-bar">
+<div class="search-bar flex">
 	<div class="hstack controls">
 		<span>Results: {resultsText} of {missions.length}</span>
 		<LayoutSearchFilter
@@ -340,24 +340,28 @@
 			{/each}
 		</div>
 	</div>
-	<div id="controlTabs">
-		<div bind:this={filterTab} class="popup-tab filter-tab" on:click={() => popup(filters, filterTab, false)}>
+	<div class="flex control-tabs">
+		<div bind:this={filterTab} class="popup-tab filter-tab" on:click={() => popup(filters, filterTab, true, [-100, 0])}>
 			Filters
 		</div>
 	</div>
+	<HomeFiltersMenu
+		bind:div={filters}
+		on:click={() => preventDisappear(filters)}
+		on:update={homeOptionUpdate}
+		{modules} />
 </div>
-
-<HomeFiltersMenu bind:div={filters} on:click={() => preventDisappear(filters)} on:update={homeOptionUpdate} {modules} />
 
 <style>
 	.search-bar {
 		position: sticky;
 		background: var(--foreground);
 		top: calc(var(--stick-under-navbar) + 1px);
+	}
+	.search-bar > .hstack {
 		padding: 5px 0;
 	}
 	.search-bar > .hstack > span {
-		min-width: 100px;
 		margin-left: var(--gap);
 	}
 
@@ -376,20 +380,9 @@
 	.hstack.boxes {
 		gap: 7px;
 	}
-	#controlTabs {
-		position: absolute;
-		display: flex;
-		justify-content: right;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		user-select: none;
-		pointer-events: none;
-	}
-	#controlTabs * {
-		user-select: initial;
-		pointer-events: initial;
+	.control-tabs {
+		/* position: relative; */
+		top: 5px;
 	}
 
 	:global(#bomb-search-field) {
