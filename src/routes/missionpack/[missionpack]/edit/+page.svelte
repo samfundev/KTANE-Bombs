@@ -15,20 +15,12 @@
 
 	function setOriginalMission() {
 		originalPack = JSON.parse(JSON.stringify(pack));
+		originalPack.dateAdded = pack.dateAdded;
 	}
 
 	setOriginalMission();
 
-	let modified = false;
-	let date: Date | null = null;
-	if (pack.dateAdded !== null) {
-		date = new Date(0);
-		date.setUTCSeconds(pack.dateAdded);
-	}
-	$: {
-		pack.dateAdded = date === null ? null : Math.round(date.getTime() / 1000);
-		modified = !equal(pack, originalPack);
-	}
+	$: modified = !equal(pack, originalPack);
 
 	async function saveChanges() {
 		const fData = new FormData();
@@ -83,7 +75,7 @@
 			classes="light"
 			parse={parseDate}
 			display={formatDate}
-			bind:value={date} />
+			bind:value={pack.dateAdded} />
 	</div>
 	<div class="actions">
 		<button on:click={deleteMissionPack}>Delete</button>

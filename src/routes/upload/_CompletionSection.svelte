@@ -14,6 +14,7 @@
 	let missionName: string = '';
 
 	let completion: Completion = new Completion();
+	completion.dateAdded = new Date();
 
 	let valid: boolean = false;
 
@@ -108,7 +109,7 @@
 	}
 
 	function validateTime(time: number): string | boolean {
-		if (time == null) return 'Ivalid time';
+		if (time == null) return 'Invalid time';
 		else if (time > 0) return true;
 		else return 'Time must be ≥ 0.01s';
 	}

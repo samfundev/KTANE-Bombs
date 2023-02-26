@@ -22,7 +22,7 @@ export type ID<T> = T & { id: number };
 export interface MissionPack {
 	name: string;
 	steamId: string;
-	dateAdded: number | null;
+	dateAdded: Date | null;
 }
 
 export type MissionPackSelection = Pick<ID<MissionPack>, 'id' | 'name'>;
@@ -40,7 +40,7 @@ export class Mission {
 	strikeMode: string | null = null;
 	timeMode: string | null = null;
 	logfile: string | null = null;
-	dateAdded: number | null = null;
+	dateAdded: Date | null = null;
 }
 
 export class Bomb {
@@ -69,6 +69,7 @@ export class Completion {
 	old = false;
 	solo = false;
 	notes: string | null = null;
+	dateAdded: Date | null = null;
 }
 
 export class IndividualCompletion {

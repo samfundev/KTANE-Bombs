@@ -8,9 +8,8 @@
 	export let data;
 	export let pack: EditMissionPack = data.pack;
 
-	let dateAdded = new Date(0);
-	dateAdded.setUTCSeconds(pack.dateAdded ?? 0);
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+	// const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 </script>
 
 <svelte:head>
@@ -21,7 +20,7 @@
 	<div class="flex">
 		<span>{pluralize(pack.missions.length, 'Mission')}</span>
 		{#if pack.dateAdded !== null}
-			<span class="date">{dateAdded.toLocaleDateString(undefined, dateOptions)}</span>
+			<span class="date">{pack.dateAdded.toLocaleDateString(undefined, dateOptions)}</span>
 		{/if}
 		<a class="steam" href="https://steamcommunity.com/sharedfiles/filedetails/?id={pack.steamId}">Steam Workshop</a>
 	</div>

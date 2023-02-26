@@ -1,7 +1,7 @@
 import client from '$lib/client';
 import type { CompletionQueueItem, MissionQueueItem, QueueItem } from '$lib/types';
 import { Permission, type MissionPackQueueItem } from '$lib/types';
-import { fixPools, forbidden, hasAnyPermission, hasPermission, onlyUnique } from '$lib/util';
+import { dateAddedSort, fixPools, forbidden, hasAnyPermission, hasPermission, onlyUnique } from '$lib/util';
 
 export const load = async function ({ parent, locals }: any) {
 	const { user } = await parent();
@@ -52,11 +52,7 @@ export const load = async function ({ parent, locals }: any) {
 						}
 					} as MissionQueueItem;
 				})
-				.sort((a, b) =>
-					a.mission.dateAdded === null || b.mission.dateAdded === null
-						? a.mission.id - b.mission.id
-						: a.mission.dateAdded - b.mission.dateAdded
-				)
+				.sort((a, b) => dateAddedSort(a.mission, b.mission))
 		);
 	}
 
@@ -106,7 +102,7 @@ export const load = async function ({ parent, locals }: any) {
 						mission: fixPools(completion.mission)
 					} as CompletionQueueItem;
 				})
-				.sort((a, b) => a.completion.id - b.completion.id)
+				.sort((a, b) => dateAddedSort(a.completion, b.completion))
 		);
 	}
 
@@ -126,11 +122,7 @@ export const load = async function ({ parent, locals }: any) {
 						pack
 					} as MissionPackQueueItem;
 				})
-				.sort((a, b) =>
-					a.pack.dateAdded === null || b.pack.dateAdded === null
-						? a.pack.id - b.pack.id
-						: a.pack.dateAdded - b.pack.dateAdded
-				)
+				.sort((a, b) => dateAddedSort(a.pack, b.pack))
 		);
 	}
 

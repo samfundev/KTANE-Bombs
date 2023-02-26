@@ -5,7 +5,12 @@ const { PrismaClient } = pkg;
 (async function () {
 	const client = new PrismaClient();
 
-	const packs = JSON.parse(readFileSync('bombs.json').toString());
+	let packs = JSON.parse(readFileSync('bombs.json').toString());
+	for (let i = 0; i < packs.length; i++) {
+		if (packs[i].dateAdded != null) packs[i].dateAdded = new Date(packs[i].dateAdded);
+	}
+
+	packs.sort((a, b) => parseInt(a.id) - parseInt(b.id));
 	let missions = [];
 	let completions = [];
 	for (const pack of packs) {
@@ -13,12 +18,12 @@ const { PrismaClient } = pkg;
 			create: {
 				name: pack.name,
 				steamId: pack.steamID,
-				dateAdded: pack.dateAdded,
+				dateAdded: new Date(pack.dateAdded),
 				verified: pack.verified
 			},
 			update: {
 				steamId: pack.steamID,
-				dateAdded: pack.dateAdded,
+				dateAdded: new Date(pack.dateAdded),
 				verified: pack.verified
 			},
 			where: {
@@ -39,7 +44,7 @@ const { PrismaClient } = pkg;
 				timeMode: mission.timeMode,
 				variant: mission.variant,
 				verified: mission.verified,
-				dateAdded: mission.dateAdded,
+				dateAdded: mission.dateAdded == null ? null : new Date(mission.dateAdded),
 				missionPackId: missionPack.id
 			});
 			for (const completion of mission.completions) {
@@ -54,6 +59,7 @@ const { PrismaClient } = pkg;
 					notes: completion.notes,
 					missionId: mission.id,
 					missionName: mission.name,
+					dateAdded: completion.dateAdded == null ? null : new Date(completion.dateAdded),
 					verified: completion.verified
 				});
 			}
@@ -83,9 +89,12 @@ const { PrismaClient } = pkg;
 					missionPackId: mission.missionPackId
 				},
 				update: {
+					authors: mission.authors,
 					tpSolve: mission.tpSolve,
 					designedForTP: mission.designedForTP,
 					factory: mission.factory,
+					strikeMode: mission.strikeMode,
+					timeMode: mission.timeMode,
 					variant: mission.variant,
 					verified: mission.verified,
 					dateAdded: mission.dateAdded,
@@ -129,6 +138,7 @@ const { PrismaClient } = pkg;
 						mission: {
 							connect: { name: completion.missionName }
 						},
+						dateAdded: completion.dateAdded,
 						verified: completion.verified
 					}
 				})
@@ -147,6 +157,7 @@ const { PrismaClient } = pkg;
 						old: completion.old,
 						solo: completion.solo,
 						notes: completion.notes,
+						dateAdded: completion.dateAdded,
 						verified: completion.verified
 					}
 				})

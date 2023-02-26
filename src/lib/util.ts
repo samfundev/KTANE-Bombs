@@ -1,5 +1,5 @@
 import type * as client from '@prisma/client';
-import type { Bomb, FrontendUser, ID, Mission, Permission, Pool } from './types';
+import type { Bomb, FrontendUser, ID, Mission, Completion, MissionPack, Permission, Pool } from './types';
 import { redirect, error } from '@sveltejs/kit';
 import type { RepoModule } from './repo';
 import { TP_TEAM } from './const';
@@ -408,4 +408,9 @@ export function formatDate(dt: Date): string {
 	if (isNaN(dt?.getTime() ?? NaN)) return '';
 	const d = new Date(dt.getTime() - (dt.getTimezoneOffset() - 300) * 60000);
 	return d.toISOString().split('T')[0];
+}
+
+type DateSortable = ID<Mission> | ID<MissionPack> | ID<Completion>;
+export function dateAddedSort(a: DateSortable, b: DateSortable): number {
+	return a.dateAdded == null || b.dateAdded == null ? a.id - b.id : a.dateAdded.getTime() - b.dateAdded.getTime();
 }

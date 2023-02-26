@@ -1,6 +1,6 @@
 import client from '$lib/client';
-import { Bomb, Permission, type Mission } from '$lib/types';
-import { forbidden, hasPermission } from '$lib/util';
+import { Bomb, Permission } from '$lib/types';
+import { dateAddedSort, forbidden, hasPermission } from '$lib/util';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
@@ -48,6 +48,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			dateAdded: true,
 			missionPack: {
 				select: {
+					id: true,
 					verified: true,
 					name: true,
 					dateAdded: true,
@@ -64,16 +65,17 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 	}
 
 	let missionPacks: {
+		id: number;
 		name: string;
 		steamID: string;
 		verified: boolean;
-		dateAdded: number | null;
+		dateAdded: Date | null;
 		missions: any[]; //(Mission & { variant: null | number })[];
 	}[] = [];
 	missionsObj.forEach(miss => {
 		let bombs: Bomb[] = [];
 		Object.assign(bombs, miss.bombs);
-		let pack = missionPacks.find(mp => mp.steamID == miss.missionPack?.steamId);
+		let pack = missionPacks.find(mp => mp.name == miss.missionPack?.name);
 		for (let i = 0; i < miss.completions.length; i++) minimize(miss.completions[i]);
 		let newMission = {
 			name: miss.name,
@@ -96,6 +98,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			pack.missions.push(newMission);
 		} else {
 			let p = {
+				id: miss.missionPack?.id ?? 0,
 				name: miss.missionPack?.name ?? '',
 				steamID: miss.missionPack?.steamId ?? '',
 				verified: miss.missionPack?.verified ?? false,
@@ -110,6 +113,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 	const packs = await client.missionPack.findMany({
 		orderBy: { id: 'asc' },
 		select: {
+			id: true,
 			name: true,
 			steamId: true,
 			missions: true,
@@ -118,15 +122,20 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		}
 	});
 	packs.forEach(p => {
-		if (missionPacks.findIndex(mp => mp.name == p.name) < 0)
-			missionPacks.push({
+		if (missionPacks.findIndex(mp => mp.name == p.name) < 0) {
+			let pack = {
+				id: p.id,
 				name: p.name,
 				steamID: p.steamId,
 				verified: p.verified,
 				dateAdded: p.dateAdded ?? null,
 				missions: []
-			});
+			};
+			minimize(pack);
+			missionPacks.push(pack);
+		}
 	});
+	missionPacks.sort((a: any, b: any) => dateAddedSort(a, b));
 
 	return new Response(JSON.stringify(missionPacks));
 };

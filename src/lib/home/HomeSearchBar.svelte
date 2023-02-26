@@ -177,16 +177,16 @@
 	function compare(
 		a: ID<Mission>,
 		b: ID<Mission>,
-		primary: (m: ID<Mission>) => number | null,
-		secondary: (m: ID<Mission>) => number | string | null
+		primary: (m: ID<Mission>) => number | undefined,
+		secondary: (m: ID<Mission>) => number | string | undefined
 	): boolean {
 		let prim = [primary(a), primary(b)];
-		let diff = prim[0] === null || prim[1] === null ? 0 : prim[0] - prim[1];
+		let diff = prim[0] === undefined || prim[1] === undefined ? 0 : prim[0] - prim[1];
 		if (diff > 0) return true;
 		else if (diff < 0) return false;
 		else {
 			let sec = [secondary(a), secondary(b)];
-			return sec[0] === null || sec[1] === null ? false : sec[0] > sec[1];
+			return sec[0] === undefined || sec[1] === undefined ? false : sec[0] > sec[1];
 		}
 	}
 
@@ -232,7 +232,7 @@
 						compare(
 							a,
 							b,
-							m => m.dateAdded,
+							m => m.dateAdded?.getTime(),
 							m => m.id
 						) != reverse
 							? 1

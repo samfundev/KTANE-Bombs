@@ -40,6 +40,7 @@
 
 	function setOriginalMission() {
 		originalMission = JSON.parse(JSON.stringify(mission));
+		originalMission.dateAdded = mission.dateAdded;
 	}
 
 	for (const bomb of mission.bombs) {
@@ -50,17 +51,11 @@
 
 	let modified = false;
 	let tpCompletion = false;
-	let date: Date | null = null;
-	if (mission.dateAdded !== null) {
-		date = new Date(0);
-		date.setUTCSeconds(mission.dateAdded);
-	}
 	$: {
 		let log = getLogfileLinks(logfile);
 		mission.logfile = log[0] === '' ? null : log[1];
 		tpCompletion = mission.completions.some(c => c.team[0] === TP_TEAM);
 		if (tpCompletion) mission.tpSolve = true;
-		mission.dateAdded = date === null ? null : Math.round(date.getTime() / 1000);
 		modified = !equal(mission, originalMission);
 	}
 
@@ -192,7 +187,7 @@
 		classes="light"
 		parse={parseDate}
 		display={formatDate}
-		bind:value={date} />
+		bind:value={mission.dateAdded} />
 	<Checkbox label="Designed for TP" id="designed-for-tp" bind:checked={mission.designedForTP} />
 </div>
 <div class="block">
