@@ -15,8 +15,9 @@
 	function matchingSolve(item: CompletionQueueItem) {
 		return item.mission.completions.findIndex(
 			c =>
+				c.solo == item.completion.solo &&
 				JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
-				JSON.stringify(item.completion.team.slice(0, 1).concat(item.completion.team.slice(1).sort()))
+					JSON.stringify(item.completion.team.slice(0, 1).concat(item.completion.team.slice(1).sort()))
 		);
 	}
 

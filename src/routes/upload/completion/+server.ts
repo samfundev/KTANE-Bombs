@@ -28,8 +28,9 @@ export async function POST({ request }: RequestEvent) {
 
 	let equalSolves = mission.completions.filter(
 		c =>
+			c.solo == completion.solo &&
 			JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
-			JSON.stringify(completion.team.slice(0, 1).concat(completion.team.slice(1).sort()))
+				JSON.stringify(completion.team.slice(0, 1).concat(completion.team.slice(1).sort()))
 	);
 	if (equalSolves.some(s => s.verified == false))
 		//don't allow duplicate solve uploads that are already in the verify queue

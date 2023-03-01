@@ -120,8 +120,9 @@ const { PrismaClient } = pkg;
 		});
 		let equalSolve = comp.findIndex(
 			c =>
+				c.solo == completion.solo &&
 				JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
-				JSON.stringify(completion.team.slice(0, 1).concat(completion.team.slice(1).sort()))
+					JSON.stringify(completion.team.slice(0, 1).concat(completion.team.slice(1).sort()))
 		);
 
 		if (equalSolve < 0) {

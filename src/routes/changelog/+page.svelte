@@ -5,7 +5,7 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
-	<h3>26 February 2023</h3>
+	<h3>1 March 2023</h3>
 	<ul>
 		<li>Missions and Mission Packs now have a Date Added field.</li>
 		<li>
@@ -17,7 +17,7 @@
 				</li>
 			</ul>
 		</li>
-		<li>When uploading a mission, a logfile link is now required instead of a file upload.</li>
+		<li>When uploading a mission, a Logfile Analyzer link is now required instead of a file upload.</li>
 		<li>Missions can now store a link to the logfile that defines its mission parameters.</li>
 		<li>New sort option on the home page: Date Added</li>
 		<li>A few minor bug fixes</li>

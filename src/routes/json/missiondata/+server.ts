@@ -135,7 +135,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			missionPacks.push(pack);
 		}
 	});
-	missionPacks.sort((a: any, b: any) => dateAddedSort(a, b));
+	missionPacks.sort((a, b) => dateAddedSort(a, b));
 
 	return new Response(JSON.stringify(missionPacks));
 };
