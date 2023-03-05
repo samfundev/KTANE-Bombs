@@ -5,6 +5,7 @@ export type RepoModule = {
 	RuleSeedSupport: string | null;
 	Type: string;
 	Quirks: string | null;
+	SteamID: string;
 	X: number;
 	Y: number;
 };

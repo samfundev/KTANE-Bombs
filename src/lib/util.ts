@@ -414,3 +414,7 @@ type DateSortable = { id: number; dateAdded: Date | null };
 export function dateAddedSort(a: DateSortable, b: DateSortable): number {
 	return a.dateAdded == null || b.dateAdded == null ? a.id - b.id : a.dateAdded.getTime() - b.dateAdded.getTime();
 }
+
+export function extractSteamID(str: string) {
+	return str.match(/\d+/)?.[0] ?? '';
+}
