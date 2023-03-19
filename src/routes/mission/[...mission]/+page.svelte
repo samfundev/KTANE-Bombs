@@ -2,7 +2,6 @@
 	import { Permission, Pool, type Mission, type MissionPack } from '$lib/types';
 	import {
 		excludeArticleSort,
-		extractSteamID,
 		formatTime,
 		getModule,
 		getPersonColor,
@@ -20,6 +19,7 @@
 	import Select from '$lib/controls/Select.svelte';
 	import * as DeMiL from '$lib/demil';
 	import toast from 'svelte-french-toast';
+	import DeMiLErrorDialog from './_DeMiLErrorDialog.svelte';
 
 	type Variant = Pick<Mission, 'name' | 'completions' | 'tpSolve'>;
 	export let data;
@@ -35,11 +35,11 @@
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
 	// const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 
-	let demilClient: DeMiL.DeMiLClient;
-	let demilHelpState: DeMiL.CheckVersionResult | 'MissingModules' | 'ModuleCount' | 'MissionNotFound' | undefined;
+	let demilHelpState: 'Error' | 'InvalidVersion' | 'NotInstalled' | 'MissingModules' | 'MissionNotFound' | undefined;
 	let missingModules: RepoModule[];
-	let moduleCountError: DeMiL.StartMissionTooManyModulesResult;
-	const steamID = extractSteamID(mission.missionPack.steamId);
+	let demilErrorMessage: string;
+	let demilVersion: string | undefined;
+	const steamID = mission.missionPack.steamId;
 
 	function poolClass(mods: string[] = [], module: RepoModule | null = null): string {
 		let classes = '';
@@ -81,37 +81,40 @@
 		};
 	}
 
+	let demilClient = new DeMiL.DeMiLClient(8095);
 	async function startMission() {
 		demilHelpState = undefined;
 		try {
 			const missionResult = await demilClient.startMissionByName(mission.name, steamID);
+			demilVersion = !missionResult.IsVersionInRange ? missionResult.Version ?? '<2.1.0' : undefined;
 			if (missionResult.hasOwnProperty('MissingModules')) {
 				missingModules = (missionResult as DeMiL.StartMissionMissingModulesResult).MissingModules.map(mod =>
 					getModule(mod, modules)
 				);
 				demilHelpState = 'MissingModules';
 			} else if (missionResult.hasOwnProperty('MissionModulesCount')) {
-				moduleCountError = missionResult as DeMiL.StartMissionTooManyModulesResult;
-				demilHelpState = 'ModuleCount';
+				let moduleCountError = missionResult as DeMiL.StartMissionTooManyModulesResult;
+				demilErrorMessage = `Failed to start mission. A bomb that can support more modules is required. Current bombs only support up to ${moduleCountError.MaximumSupportedModulesCount} modules, and the mission has ${moduleCountError.MissionModulesCount} modules.`;
+				demilHelpState = 'Error';
+			} else if (missionResult.hasOwnProperty('MissionBombsCount')) {
+				let bombCountError = missionResult as DeMiL.StartMissionTooManyBombsResult;
+				demilErrorMessage = `A room that can support more bombs is required. Current rooms only support up to ${bombCountError.MaximumSupportedBombsCount} bombs, and the mission has ${bombCountError.MissionBombsCount} bombs.`;
+				demilHelpState = 'Error';
 			} else {
 				toast.success(`Started mission ${missionResult.MissionID}`);
 			}
 		} catch (e) {
 			console.error(e);
 			if (e instanceof TypeError) {
-				demilCheckVersionResult = DeMiL.CheckVersionResult.NOT_INSTALLED;
+				demilHelpState = 'NotInstalled';
 			} else if (e instanceof DeMiL.DeMiLError && e.message.match(/Mod with steamID \d+ not found/)) {
 				demilHelpState = 'MissionNotFound';
 			} else if (e instanceof Error) {
-				toast.error(e.message);
+				demilHelpState = 'Error';
+				demilErrorMessage = 'DeMiL threw an error: ' + e.message;
 			}
 		}
 	}
-
-	function pressDemilHelp() {
-		demilHelpState = demilCheckVersionResult;
-	}
-
 	sortBombs(mission, modules);
 
 	type BombFrac = {
@@ -142,18 +145,12 @@
 	function storeView() {
 		wrView.set(byPerc);
 	}
-	let demilCheckVersionResult: DeMiL.CheckVersionResult;
 	if (browser) {
 		byPerc = JSON.parse(localStorage.getItem('mission-pools-view') || JSON.stringify(viewOptions[0]));
 		wrView.subscribe(value => {
 			localStorage.setItem('mission-pools-view', JSON.stringify(value));
 		});
 		storeView();
-
-		demilClient = new DeMiL.DeMiLClient(8095);
-		(async () => {
-			demilCheckVersionResult = await demilClient.checkVersion();
-		})();
 	}
 </script>
 
@@ -176,18 +173,7 @@
 		{#if mission.logfile !== null}
 			<a class="logfile" href={mission.logfile}>Logfile</a>
 		{/if}
-		<button
-			class="start-mission"
-			on:click={startMission}
-			disabled={demilCheckVersionResult !== DeMiL.CheckVersionResult.OK}
-			>{demilCheckVersionResult === DeMiL.CheckVersionResult.OK
-				? 'Start Mission'
-				: demilCheckVersionResult === undefined
-				? '...'
-				: 'Cannot start mission'}</button>
-		{#if demilCheckVersionResult === DeMiL.CheckVersionResult.INVALID_VERSION || demilCheckVersionResult === DeMiL.CheckVersionResult.NOT_INSTALLED}
-			<button on:click={pressDemilHelp}>?</button>
-		{/if}
+		<button class="start-mission" on:click={startMission}>Start Mission</button>
 	</div>
 	{#if hasPermission($page.data.user, Permission.VerifyMission)}
 		<a href={$page.url.href + '/edit'} class="top-right">Edit</a>
@@ -212,51 +198,7 @@
 		{/if}
 	</div>
 {/if}
-{#if typeof demilHelpState !== 'undefined'}
-	<div class="block">
-		{#if demilHelpState === DeMiL.CheckVersionResult.NOT_INSTALLED}
-			<span
-				>You need to install <a
-					href="https://steamcommunity.com/sharedfiles/filedetails/?id=2930718104"
-					target="_blank"
-					rel="noopener noreferrer">DeMiL</a> to start a mission from this webpage.</span>
-		{/if}
-		{#if demilHelpState === DeMiL.CheckVersionResult.INVALID_VERSION}
-			<span
-				>Your <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2930718104">DeMiL</a> looks outdated.
-				Please try
-				<a href="https://help.steampowered.com/en/faqs/view/0C48-FCBD-DA71-93EB">verifying integrity of game files</a>.
-				If it still doesn't work, please contact t-chen#5876 in KTaNE discord server.</span>
-		{/if}
-		{#if demilHelpState === 'MissionNotFound'}
-			<span
-				>Mission pack is not installed. Download mission pack from <a
-					href="https://steamcommunity.com/sharedfiles/filedetails/?id={steamID}"
-					target="_blank"
-					rel="noopener noreferrer">Steam page</a
-				>.</span>
-		{/if}
-		{#if demilHelpState === 'MissingModules'}
-			<div>Failed to start mission. Missing modules (click to open steam page):</div>
-			<div class="missing-modules">
-				{#each missingModules as mod}
-					<div>
-						<a
-							href="https://steamcommunity.com/sharedfiles/filedetails/?id={mod.SteamID}"
-							target="_blank"
-							rel="noopener noreferrer">{mod.Name}</a>
-					</div>
-				{/each}
-			</div>
-		{/if}
-		{#if demilHelpState === 'ModuleCount'}
-			<span
-				>Failed to start mission. A bomb that can support more modules is required. Current bombs only support up to {moduleCountError.MaximumSupportedModulesCount}
-				modules, and the mission has {moduleCountError.MissionModulesCount}
-				modules.</span>
-		{/if}
-	</div>
-{/if}
+<DeMiLErrorDialog {demilHelpState} {steamID} {missingModules} {demilErrorMessage} {demilVersion} />
 <div class="main-content">
 	<div class="bombs">
 		<div class="block legend-bar flex">
@@ -481,13 +423,5 @@
 		color: var(--text-color);
 		top: var(--gap);
 		right: var(--gap);
-	}
-
-	.missing-modules {
-		display: flex;
-		flex-wrap: wrap;
-	}
-	.missing-modules > div {
-		margin-right: 32px;
 	}
 </style>
