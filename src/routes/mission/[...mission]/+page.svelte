@@ -17,6 +17,9 @@
 	import { writable } from 'svelte/store';
 	import { browser } from '$app/environment';
 	import Select from '$lib/controls/Select.svelte';
+	import * as DeMiL from '$lib/demil';
+	import toast from 'svelte-french-toast';
+	import DeMiLErrorDialog from './_DeMiLErrorDialog.svelte';
 
 	type Variant = Pick<Mission, 'name' | 'completions' | 'tpSolve'>;
 	export let data;
@@ -31,6 +34,12 @@
 		'Probabilities view shows probability that at least one instance of a module will be present on a bomb.';
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
 	// const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+
+	let demilHelpState: 'Error' | 'InvalidVersion' | 'NotInstalled' | 'MissingModules' | 'MissionNotFound' | undefined;
+	let missingModules: RepoModule[];
+	let demilErrorMessage: string;
+	let demilVersion: string | undefined;
+	const steamID = mission.missionPack.steamId;
 
 	function poolClass(mods: string[] = [], module: RepoModule | null = null): string {
 		let classes = '';
@@ -72,6 +81,40 @@
 		};
 	}
 
+	let demilClient = new DeMiL.DeMiLClient(8095);
+	async function startMission() {
+		demilHelpState = undefined;
+		try {
+			const missionResult = await demilClient.startMissionByName(mission.name, steamID);
+			demilVersion = !missionResult.IsVersionInRange ? missionResult.Version ?? '<2.1.0' : undefined;
+			if (missionResult.hasOwnProperty('MissingModules')) {
+				missingModules = (missionResult as DeMiL.StartMissionMissingModulesResult).MissingModules.map(mod =>
+					getModule(mod, modules)
+				);
+				demilHelpState = 'MissingModules';
+			} else if (missionResult.hasOwnProperty('MissionModulesCount')) {
+				let moduleCountError = missionResult as DeMiL.StartMissionTooManyModulesResult;
+				demilErrorMessage = `Failed to start mission. A bomb that can support more modules is required. Current bombs only support up to ${moduleCountError.MaximumSupportedModulesCount} modules, and the mission has ${moduleCountError.MissionModulesCount} modules.`;
+				demilHelpState = 'Error';
+			} else if (missionResult.hasOwnProperty('MissionBombsCount')) {
+				let bombCountError = missionResult as DeMiL.StartMissionTooManyBombsResult;
+				demilErrorMessage = `A room that can support more bombs is required. Current rooms only support up to ${bombCountError.MaximumSupportedBombsCount} bombs, and the mission has ${bombCountError.MissionBombsCount} bombs.`;
+				demilHelpState = 'Error';
+			} else {
+				toast.success(`Started mission ${missionResult.MissionID}`);
+			}
+		} catch (e) {
+			console.error(e);
+			if (e instanceof TypeError) {
+				demilHelpState = 'NotInstalled';
+			} else if (e instanceof DeMiL.DeMiLError && e.message.match(/Mod with steamID \d+ not found/)) {
+				demilHelpState = 'MissionNotFound';
+			} else if (e instanceof Error) {
+				demilHelpState = 'Error';
+				demilErrorMessage = 'DeMiL threw an error: ' + e.message;
+			}
+		}
+	}
 	sortBombs(mission, modules);
 
 	type BombFrac = {
@@ -130,6 +173,7 @@
 		{#if mission.logfile !== null}
 			<a class="logfile" href={mission.logfile}>Logfile</a>
 		{/if}
+		<button class="start-mission" on:click={startMission}>Start Mission</button>
 	</div>
 	{#if hasPermission($page.data.user, Permission.VerifyMission)}
 		<a href={$page.url.href + '/edit'} class="top-right">Edit</a>
@@ -154,6 +198,7 @@
 		{/if}
 	</div>
 {/if}
+<DeMiLErrorDialog {demilHelpState} {steamID} {missingModules} {demilErrorMessage} {demilVersion} />
 <div class="main-content">
 	<div class="bombs">
 		<div class="block legend-bar flex">
@@ -281,7 +326,8 @@
 		color: var(--text-color);
 	}
 	a.logfile,
-	.date {
+	.date,
+	.start-mission {
 		margin-left: 20px;
 	}
 	a.variant {

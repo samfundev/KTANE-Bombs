@@ -279,6 +279,7 @@ export function getModule(moduleID: string, modules: Record<string, RepoModule> 
 		RuleSeedSupport: null,
 		Type: moduleID.match(/needy/gi) ? 'Needy' : 'Regular',
 		Quirks: null,
+		SteamID: null,
 		X: 0,
 		Y: 0
 	};
