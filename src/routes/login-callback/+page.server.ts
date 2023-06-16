@@ -30,35 +30,41 @@ export const actions = {
 async function login(result: TokenRequestResult, cookies: Cookies, username: string | null = null) {
 	try {
 		const user = await OAuth.getUser(result.access_token);
+		//console.log(user)
 
+		let discordName = user.global_name != null ? user.username : `${user.username}#${user.discriminator}`;
+		let sheetUsername = user.global_name != null ? user.global_name : user.username;
+		//first login or username missing
 		if (username == null) {
 			const findUser = await client.user.findUnique({ where: { id: user.id } });
+			//first login
 			if (!findUser) {
 				const users = await client.user.findMany({ select: { username: true } });
 				return {
-					username: user.username,
+					username: sheetUsername,
 					firstTime: true,
-					takenUsernames: users.map(user => user.username),
+					takenUsernames: users.map(usr => usr.username),
 					result: result
 				};
 			}
 			username = findUser.username;
 		}
+		//update or create user in database
 		await client.user.upsert({
 			where: {
 				id: user.id
 			},
 			create: {
 				id: user.id,
-				username: username ?? user.username,
-				discordName: `${user.username}#${user.discriminator}`,
+				username: username ?? sheetUsername,
+				discordName: discordName,
 				accessToken: result.access_token,
 				refreshToken: result.refresh_token,
 				avatar: user.avatar ?? `${parseInt(user.discriminator) % 5}`
 			},
 			update: {
-				username: username ?? user.username,
-				discordName: `${user.username}#${user.discriminator}`,
+				username: username ?? sheetUsername,
+				discordName: discordName,
 				accessToken: result.access_token,
 				refreshToken: result.refresh_token,
 				avatar: user.avatar ?? `${parseInt(user.discriminator) % 5}`
@@ -74,7 +80,7 @@ async function login(result: TokenRequestResult, cookies: Cookies, username: str
 		return {
 			username: username,
 			firstTime: false,
-			takenUsernames: users.map(user => user.username),
+			takenUsernames: users.map(usr => usr.username),
 			result: result
 		};
 	}
