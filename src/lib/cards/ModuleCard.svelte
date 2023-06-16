@@ -10,7 +10,7 @@
 <div
 	class="module"
 	class:boss={module.BossStatus != undefined}
-	class:pseudoneedy={module.Quirks?.includes('PseudoNeedy')}
+	class:quirks={module.Quirks != undefined}
 	class:needy={module.Type == 'Needy'}>
 	{#if hasSpecialIcon(module.ModuleID)}
 		<div class="image {module.ModuleID}" />
