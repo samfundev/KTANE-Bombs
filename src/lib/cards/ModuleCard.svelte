@@ -21,7 +21,7 @@
 			style="object-position: -{module.X * 32}px -{module.Y * 32}px" />
 	{/if}
 	<span>{module.Name}</span>
-	{#if fraction < 0.02}
+	{#if fraction < 0.02 || (fraction >= 0.995 && fraction < 1)}
 		<b>{Math.round(fraction * 1000) / 10}%</b>
 	{:else if fraction < 1 || alwaysShow}
 		<b>{Math.round(fraction * 100)}%</b>

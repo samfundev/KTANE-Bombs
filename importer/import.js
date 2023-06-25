@@ -44,6 +44,7 @@ const { PrismaClient } = pkg;
 				timeMode: mission.timeMode,
 				variant: mission.variant,
 				verified: mission.verified,
+				logfile: mission.logfile,
 				dateAdded: mission.dateAdded == null ? null : new Date(mission.dateAdded),
 				missionPackId: missionPack.id
 			});
@@ -85,6 +86,7 @@ const { PrismaClient } = pkg;
 					timeMode: mission.timeMode,
 					variant: mission.variant,
 					verified: mission.verified,
+					logfile: mission.logfile,
 					dateAdded: mission.dateAdded,
 					missionPackId: mission.missionPackId
 				},
@@ -97,6 +99,7 @@ const { PrismaClient } = pkg;
 					timeMode: mission.timeMode,
 					variant: mission.variant,
 					verified: mission.verified,
+					logfile: mission.logfile,
 					dateAdded: mission.dateAdded,
 					missionPackId: mission.missionPackId
 				},
