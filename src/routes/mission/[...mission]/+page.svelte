@@ -154,6 +154,12 @@
 		{/if}
 	</div>
 {/if}
+{#if mission.notes !== null}
+	<div class="block">
+		<b>Notes</b>:
+		<span class="mission-notes">{mission.notes}</span>
+	</div>
+{/if}
 <div class="main-content">
 	<div class="bombs">
 		<div class="block legend-bar flex">
@@ -365,6 +371,10 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: calc(var(--gap) * 2);
+	}
+
+	.mission-notes {
+		white-space: pre;
 	}
 
 	.header {

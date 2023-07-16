@@ -41,6 +41,7 @@ export class Mission {
 	timeMode: string | null = null;
 	logfile: string | null = null;
 	dateAdded: Date | null = null;
+	notes: string | null = null;
 }
 
 export class Bomb {

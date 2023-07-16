@@ -46,6 +46,7 @@ const { PrismaClient } = pkg;
 				verified: mission.verified,
 				logfile: mission.logfile,
 				dateAdded: mission.dateAdded == null ? null : new Date(mission.dateAdded),
+				notes: mission.notes,
 				missionPackId: missionPack.id
 			});
 			for (const completion of mission.completions) {
@@ -88,6 +89,7 @@ const { PrismaClient } = pkg;
 					verified: mission.verified,
 					logfile: mission.logfile,
 					dateAdded: mission.dateAdded,
+					notes: mission.notes,
 					missionPackId: mission.missionPackId
 				},
 				update: {
@@ -101,6 +103,7 @@ const { PrismaClient } = pkg;
 					verified: mission.verified,
 					logfile: mission.logfile,
 					dateAdded: mission.dateAdded,
+					notes: mission.notes,
 					missionPackId: mission.missionPackId
 				},
 				where: {

@@ -41,6 +41,7 @@ model Mission {
   variant        Int?
   logfile        String?
   dateAdded      DateTime?
+  notes          String?
 
   missionPack   MissionPack? @relation(fields: [missionPackId], references: [id])
   missionPackId Int?

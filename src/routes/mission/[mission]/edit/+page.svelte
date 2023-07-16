@@ -201,6 +201,15 @@
 		<a href={mission.logfile}>Logfile</a>
 	{/if}
 </div>
+<div class="block">
+	<TextArea
+		id="mission-notes"
+		label="Notes"
+		autoExpand
+		display={val => val ?? ''}
+		bind:value={mission.notes}
+		parse={val => (val?.length > 0 ? val : null)} />
+</div>
 {#if !mission.verified}
 	<div class="block centered not-verified">This mission has not been verified.</div>
 {/if}

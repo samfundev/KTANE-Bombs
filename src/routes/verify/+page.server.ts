@@ -30,6 +30,7 @@ export const load = async function ({ parent, locals }: any) {
 				strikeMode: true,
 				logfile: true,
 				dateAdded: true,
+				notes: true,
 				missionPack: {
 					select: {
 						id: true,

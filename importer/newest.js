@@ -33,6 +33,7 @@ const { PrismaClient } = pkg;
 				variant: mission.variant,
 				verified: mission.verified,
 				dateAdded: mission.dateAdded == null ? null : new Date(mission.dateAdded),
+				notes: mission.notes,
 				missionPack: pack.name
 			});
 			for (const completion of mission.completions) {

@@ -46,6 +46,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			verified: true,
 			logfile: true,
 			dateAdded: true,
+			notes: true,
 			missionPack: {
 				select: {
 					id: true,
@@ -91,6 +92,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			verified: miss.verified,
 			logfile: miss.logfile,
 			dateAdded: miss.dateAdded,
+			notes: miss.notes,
 			variant: miss.variant
 		};
 		minimize(newMission);

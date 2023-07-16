@@ -57,6 +57,7 @@
 					missionPack: null,
 					replace: false,
 					dateAdded: new Date(),
+					notes: null,
 					logfile: parsedLogfileLink
 				};
 
