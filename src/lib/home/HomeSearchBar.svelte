@@ -67,28 +67,21 @@
 
 	function bombSearchFilter(name: string, searchText: string): boolean {
 		let text = searchText.toLowerCase();
-		let searchWhat = '';
+		let searchWhat: string[] = [];
 		let ms = missions.find(x => x.name == name) || missions[0];
 
-		if (searchOptions?.includes('mission')) searchWhat += ' ' + name.toLowerCase();
-		if (searchOptions?.includes('module'))
-			searchWhat +=
-				' ' +
-				modulesInMission[name]
-					.map(m => m.Name)
-					.join(' ')
-					.toLowerCase();
-		if (searchOptions?.includes('author')) searchWhat += ' ' + ms.authors.join(' ').toLowerCase();
-		if (searchOptions?.includes('solver'))
-			searchWhat +=
-				' ' +
-				ms.completions
-					.map((x: Completion) => x.team)
+		if (searchOptions?.includes('mission')) searchWhat.push(name.toLowerCase());
+		if (searchOptions?.includes('module')) searchWhat.push(...modulesInMission[name].map(m => m.Name.toLowerCase()));
+		if (searchOptions?.includes('author')) searchWhat.push(...ms.authors.map(a => a.toLowerCase()));
+		if (searchOptions?.includes('solver')) {
+			searchWhat.push(
+				...ms.completions
+					.map((x: Completion) => x.team.map(mem => mem.toLowerCase()))
 					.flat()
 					.filter(onlyUnique)
-					.join(' ')
-					.toLowerCase() +
-				(ms.tpSolve ? ' twitch plays' : '');
+			);
+			if (ms.tpSolve) searchWhat.push('twitch plays');
+		}
 
 		let textMatch = evaluateLogicalStringSearch(text, searchWhat);
 
