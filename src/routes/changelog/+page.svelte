@@ -5,10 +5,11 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
-	<h3>30 July 2023</h3>
+	<h3>23 August 2023</h3>
 	<ul>
 		<li>Maintainers can add notes to missions for additional info about the mission.</li>
 		<li>Login now handles Discord's new username system better.</li>
+		<li>Solves can now be marked as "old", meaning they were accepted under a previous version of the bomb.</li>
 		<li>A bug fixes regarding module color highlighting and searching on the home page.</li>
 	</ul>
 </div>

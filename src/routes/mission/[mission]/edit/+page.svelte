@@ -297,6 +297,7 @@
 							parse={parseTime} />
 						<Checkbox id="completion-solo-{ci}" sideLabel labelAfter label="Solo" bind:checked={completion.solo} />
 						<Checkbox id="completion-first-{ci}" sideLabel labelAfter label="First" bind:checked={completion.first} />
+						<Checkbox id="completion-old-{ci}" sideLabel labelAfter label="Old" bind:checked={completion.old} />
 					</div>
 					<Input
 						label="Team"
