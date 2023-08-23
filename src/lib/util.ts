@@ -117,15 +117,21 @@ export function isOnlyDigits(str: string): boolean {
 }
 
 function findMatchingBrackets(str: string, left: string, right: string): number[] {
-	const lPar = str.indexOf(left);
-	let lPar2 = str.indexOf(left, lPar + 2);
-	let rPar = str.indexOf(right, lPar + 2);
-	while (lPar >= 0 && lPar2 >= 0 && rPar >= 0 && lPar2 < rPar) {
-		lPar2 = str.indexOf(left, rPar + 2);
-		rPar = str.indexOf(right, rPar + 2);
+	let stack: number[] = [];
+	for (let i = 0; i < str.length; i++) {
+		let cl = str.substring(i, i + left.length);
+		let cr = str.substring(i, i + right.length);
+
+		if (cl == left) stack.push(i);
+		else if (cr == right) {
+			if (stack.length < 1) return [-1, -1];
+			else if (stack.length == 1) return [stack.pop() ?? -1, i];
+
+			stack.pop();
+		}
 	}
 
-	return [lPar, rPar];
+	return [-1, -1];
 }
 
 // logical operators supported: &&(and), ||(or), !!(not)
