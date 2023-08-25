@@ -30,7 +30,6 @@ export const actions = {
 async function login(result: TokenRequestResult, cookies: Cookies, username: string | null = null) {
 	try {
 		const user = await OAuth.getUser(result.access_token);
-		//console.log(user)
 
 		let discordName = user.global_name != null ? user.username : `${user.username}#${user.discriminator}`;
 		let sheetUsername = user.global_name != null ? user.global_name : user.username;
