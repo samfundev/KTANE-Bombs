@@ -36,6 +36,7 @@
 		<li>Having Logging appear on a bomb with an ALL_MODS pool.</li>
 		<li>Revealing module names using Profile Revealer.</li>
 		<li>Using mod settings to make a module significantly easier than default without reason.</li>
+		<li>Using a <a class="link" href="/restrictedmanuals">Restricted Manual</a>.</li>
 		<li>Using a manual not accessible on the repo.</li>
 		<li>Using any needy listed below when given the choice of needy.</li>
 		<ul>
@@ -74,3 +75,9 @@
 		</li>
 	</ul>
 </div>
+
+<style>
+	a.link {
+		color: var(--text-color);
+	}
+</style>
