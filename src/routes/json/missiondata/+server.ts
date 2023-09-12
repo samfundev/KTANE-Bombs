@@ -34,6 +34,8 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 					first: true,
 					notes: true,
 					old: true,
+					dateAdded: true,
+					uploadedBy: true,
 					solo: true
 				}
 			},
@@ -46,6 +48,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			verified: true,
 			logfile: true,
 			dateAdded: true,
+			uploadedBy: true,
 			notes: true,
 			missionPack: {
 				select: {
@@ -53,6 +56,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 					verified: true,
 					name: true,
 					dateAdded: true,
+					uploadedBy: true,
 					steamId: true
 				}
 			}
@@ -92,6 +96,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			verified: miss.verified,
 			logfile: miss.logfile,
 			dateAdded: miss.dateAdded,
+			uploadedBy: miss.uploadedBy,
 			notes: miss.notes,
 			variant: miss.variant
 		};
@@ -105,6 +110,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 				steamID: miss.missionPack?.steamId ?? '',
 				verified: miss.missionPack?.verified ?? false,
 				dateAdded: miss.missionPack?.dateAdded ?? null,
+				uploadedBy: miss.missionPack?.uploadedBy ?? null,
 				missions: [newMission]
 			};
 			minimize(p);
@@ -120,6 +126,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			steamId: true,
 			missions: true,
 			dateAdded: true,
+			uploadedBy: true,
 			verified: true
 		}
 	});
@@ -131,6 +138,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 				steamID: p.steamId,
 				verified: p.verified,
 				dateAdded: p.dateAdded ?? null,
+				uploadedby: p.uploadedBy,
 				missions: []
 			};
 			minimize(pack);

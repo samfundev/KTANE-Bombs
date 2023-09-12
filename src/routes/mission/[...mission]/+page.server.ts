@@ -43,6 +43,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			variant: true,
 			logfile: true,
 			dateAdded: true,
+			uploadedBy: true,
 			notes: true,
 			missionPack: {
 				select: {
@@ -55,6 +56,20 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 
 	if (missionResult === null) {
 		throw error(404, 'Mission not found.');
+	}
+	let verify = hasPermission(locals.user, Permission.VerifyMission);
+	if (!missionResult.verified && !verify) {
+		throw forbidden(locals);
+	}
+	let uploadedBy = missionResult.uploadedBy;
+	if (verify && uploadedBy) {
+		const uploadUser = await client.user.findUnique({
+			where: {
+				id: uploadedBy
+			}
+		});
+		if (uploadUser !== null)
+			uploadedBy = uploadUser.username;
 	}
 
 	const variantId = missionToUpdate === null ? missionResult.variant : missionToUpdate.variant;
@@ -75,17 +90,16 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 					}
 			  });
 
-	if (!missionResult.verified && !hasPermission(locals.user, Permission.VerifyMission)) {
-		throw forbidden(locals);
-	}
-
 	if (missionToUpdate !== null) {
 		missionResult.completions = missionToUpdate.completions;
 		missionResult.dateAdded = missionToUpdate.dateAdded;
 	}
 
 	return {
-		mission: missionResult,
+		mission: {
+			...missionResult,
+			uploadedBy: verify ? uploadedBy : null
+		},
 		variants,
 		modules: await getData()
 	};

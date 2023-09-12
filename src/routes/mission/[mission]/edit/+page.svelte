@@ -312,6 +312,14 @@
 						display={val => val ?? ''}
 						bind:value={completion.notes}
 						parse={val => (val?.length > 0 ? val : null)} />
+					<Input
+						type="date"
+						id="completion-date-{ci}"
+						label="Date Added"
+						classes="light"
+						parse={parseDate}
+						display={formatDate}
+						bind:value={completion.dateAdded} />
 					{#if hasPermission($page.data.user, Permission.VerifyCompletion)}
 						<div class="actions">
 							<button on:click={() => deleteCompletion(completion)}>Delete</button>

@@ -76,7 +76,7 @@ export function forbidden(locals: App.Locals) {
 	// If the user is not logged in, they might just need to login.
 	if (locals.user === null) return redirect(302, '/login');
 
-	return error(403, 'You do not have permission for to do that.');
+	return error(403, 'You do not have permission to do that.');
 }
 
 export function fixPools<T>(mission: T & { bombs: client.Bomb[] }): T & { bombs: ID<Bomb>[] } {

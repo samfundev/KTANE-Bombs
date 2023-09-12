@@ -2,7 +2,7 @@
 	import Input from '$lib/controls/Input.svelte';
 	import Select from '$lib/controls/Select.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
-	import { Bomb, Pool, type MissionPackSelection } from '$lib/types';
+	import { Bomb, Pool, type MissionPackSelection, type FrontendUser } from '$lib/types';
 	import { getLogfileLinks, reservedSearchStrings, validateLogfileLink } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
@@ -11,6 +11,7 @@
 	export let missionNames: string[];
 	export let authorNames: string[];
 	export let packs: MissionPackSelection[];
+	export let user: FrontendUser;
 
 	let invalid = false;
 	let logfileLink = '';
@@ -58,6 +59,7 @@
 					replace: false,
 					dateAdded: new Date(),
 					notes: null,
+					uploadedBy: user.id,
 					logfile: parsedLogfileLink
 				};
 

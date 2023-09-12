@@ -23,6 +23,9 @@
 			<span class="date">{pack.dateAdded.toLocaleDateString(undefined, dateOptions)}</span>
 		{/if}
 		<a class="steam" href="https://steamcommunity.com/sharedfiles/filedetails/?id={pack.steamId}">Steam Workshop</a>
+		{#if pack.uploadedBy}
+			<span>Uploaded by: <a href="/user/{encodeURIComponent(pack.uploadedBy)}">{pack.uploadedBy}</a></span>
+		{/if}
 	</div>
 	{#if hasPermission($page.data.user, Permission.VerifyMissionPack)}
 		<a href={$page.url.href + '/edit'} class="top-right">Edit</a>

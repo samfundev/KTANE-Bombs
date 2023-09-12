@@ -19,11 +19,13 @@ const { PrismaClient } = pkg;
 				name: pack.name,
 				steamId: pack.steamID,
 				dateAdded: new Date(pack.dateAdded),
+				uploadedBy: pack.uploadedBy,
 				verified: pack.verified
 			},
 			update: {
 				steamId: pack.steamID,
 				dateAdded: new Date(pack.dateAdded),
+				uploadedBy: pack.uploadedBy,
 				verified: pack.verified
 			},
 			where: {
@@ -46,6 +48,7 @@ const { PrismaClient } = pkg;
 				verified: mission.verified,
 				logfile: mission.logfile,
 				dateAdded: mission.dateAdded == null ? null : new Date(mission.dateAdded),
+				uploadedBy: mission.uploadedBy,
 				notes: mission.notes,
 				missionPackId: missionPack.id
 			});
@@ -62,6 +65,7 @@ const { PrismaClient } = pkg;
 					missionId: mission.id,
 					missionName: mission.name,
 					dateAdded: completion.dateAdded == null ? null : new Date(completion.dateAdded),
+					uploadedBy: completion.uploadedBy,
 					verified: completion.verified
 				});
 			}
@@ -89,6 +93,7 @@ const { PrismaClient } = pkg;
 					verified: mission.verified,
 					logfile: mission.logfile,
 					dateAdded: mission.dateAdded,
+					uploadedBy: mission.uploadedBy,
 					notes: mission.notes,
 					missionPackId: mission.missionPackId
 				},
@@ -103,6 +108,7 @@ const { PrismaClient } = pkg;
 					verified: mission.verified,
 					logfile: mission.logfile,
 					dateAdded: mission.dateAdded,
+					uploadedBy: mission.uploadedBy,
 					notes: mission.notes,
 					missionPackId: mission.missionPackId
 				},
@@ -146,6 +152,7 @@ const { PrismaClient } = pkg;
 							connect: { name: completion.missionName }
 						},
 						dateAdded: completion.dateAdded,
+						uploadedBy: completion.uploadedBy,
 						verified: completion.verified
 					}
 				})
@@ -165,6 +172,7 @@ const { PrismaClient } = pkg;
 						solo: completion.solo,
 						notes: completion.notes,
 						dateAdded: completion.dateAdded,
+						uploadedBy: completion.uploadedBy,
 						verified: completion.verified
 					}
 				})

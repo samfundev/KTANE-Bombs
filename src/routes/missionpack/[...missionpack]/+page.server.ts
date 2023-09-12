@@ -34,6 +34,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			steamId: true,
 			name: true,
 			dateAdded: true,
+			uploadedBy: true,
 			verified: true
 		}
 	});
@@ -41,10 +42,24 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 	if (pack === null) {
 		throw error(404, 'Mission pack not found.');
 	}
-
-	if (!pack.verified && !hasPermission(locals.user, Permission.VerifyMissionPack)) {
+	let verify = hasPermission(locals.user, Permission.VerifyMissionPack);
+	let uploadedBy = pack.uploadedBy;
+	if (!pack.verified && !verify) {
 		throw forbidden(locals);
 	}
+	if (verify && uploadedBy) {
+		const uploadUser = await client.user.findUnique({
+			where: {
+				id: uploadedBy
+			}
+		});
+		if (uploadUser !== null) uploadedBy = uploadUser.username;
+	}
 
-	return { pack };
+	return {
+		pack: {
+			...pack,
+			uploadedBy: verify ? uploadedBy : null
+		}
+	};
 };

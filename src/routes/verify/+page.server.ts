@@ -31,6 +31,7 @@ export const load = async function ({ parent, locals }: any) {
 				logfile: true,
 				dateAdded: true,
 				notes: true,
+				uploadedBy: true,
 				missionPack: {
 					select: {
 						id: true,

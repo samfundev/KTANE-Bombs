@@ -2,19 +2,21 @@
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import Input from '$lib/controls/Input.svelte';
-	import { Completion } from '$lib/types';
+	import { Completion, type FrontendUser } from '$lib/types';
 	import { formatTime, getLogfileLinks, parseTime } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import { TP_TEAM } from '$lib/const';
 
 	export let missionNames: string[];
 	export let solverNames: string[];
+	export let user: FrontendUser;
 	export let factoryStatus: { [name: string]: string | null };
 
 	let missionName: string = '';
 
 	let completion: Completion = new Completion();
 	completion.dateAdded = new Date();
+	completion.uploadedBy = user.id;
 
 	let valid: boolean = false;
 

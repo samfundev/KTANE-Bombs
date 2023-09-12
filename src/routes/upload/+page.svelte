@@ -2,7 +2,7 @@
 	import CompletionSection from './_CompletionSection.svelte';
 	import MissionPackSection from './_MissionPackSection.svelte';
 	import MissionSection from './_MissionSection.svelte';
-	import type { MissionPackSelection } from '$lib/types';
+	import type { FrontendUser, MissionPackSelection } from '$lib/types';
 	export let data;
 
 	let factoryStatus: { [name: string]: string | null } = data.factoryStatus;
@@ -10,6 +10,7 @@
 	let authorNames: string[] = data.authorNames;
 	let solverNames: string[] = data.solverNames;
 	let packs: MissionPackSelection[] = data.packs;
+	let user: FrontendUser = data.user;
 
 	let section: 'solve' | 'mission' | 'missionpack' = 'solve';
 </script>
@@ -27,11 +28,11 @@
 	</div>
 </div>
 {#if section == 'mission'}
-	<MissionSection {missionNames} {authorNames} {packs} />
+	<MissionSection {missionNames} {authorNames} {packs} {user} />
 {:else if section == 'missionpack'}
-	<MissionPackSection />
+	<MissionPackSection {user} />
 {:else}
-	<CompletionSection {missionNames} {solverNames} {factoryStatus} />
+	<CompletionSection {missionNames} {solverNames} {factoryStatus} {user} />
 {/if}
 
 <style>

@@ -30,7 +30,6 @@
 		'Pools view shows the actual module pools as defined by the mission author.\n' +
 		'Probabilities view shows probability that at least one instance of a module will be present on a bomb.';
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
-	// const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
 
 	function poolClass(mods: string[] = [], module: RepoModule | null = null): string {
 		let classes = '';
@@ -116,19 +115,25 @@
 </svelte:head>
 <div class="block relative">
 	<h1 class="header">{mission.name}</h1>
-	<div class="centered">
-		by {mission.authors.join(', ')} from
-		{#if mission.missionPack}
-			<a class="pack" href="/missionpack/{encodeURIComponent(mission.missionPack.name)}">{mission.missionPack.name}</a>
-		{:else}
-			---
-		{/if}
+	<div class="infobar flex">
+		<span>
+			by {mission.authors.join(', ')} from
+			{#if mission.missionPack}
+				<a class="pack" href="/missionpack/{encodeURIComponent(mission.missionPack.name)}"
+					>{mission.missionPack.name}</a>
+			{:else}
+				---
+			{/if}
+		</span>
 
 		{#if mission.dateAdded !== null}
 			<span class="date">{mission.dateAdded.toLocaleDateString(undefined, dateOptions)}</span>
 		{/if}
 		{#if mission.logfile !== null}
 			<a class="logfile" href={mission.logfile}>Logfile</a>
+		{/if}
+		{#if mission.uploadedBy}
+			<span>Uploaded by: <a href="/user/{encodeURIComponent(mission.uploadedBy)}">{mission.uploadedBy}</a></span>
 		{/if}
 	</div>
 	{#if hasPermission($page.data.user, Permission.VerifyMission)}
@@ -280,15 +285,18 @@
 	.not-verified {
 		color: red;
 	}
+	.infobar {
+		justify-content: center;
+		gap: 25px;
+	}
+	.date {
+		white-space: nowrap;
+	}
 	.centered {
 		text-align: center;
 	}
 	a {
 		color: var(--text-color);
-	}
-	a.logfile,
-	.date {
-		margin-left: 20px;
 	}
 	a.variant {
 		margin-top: calc(var(--gap) * 3);

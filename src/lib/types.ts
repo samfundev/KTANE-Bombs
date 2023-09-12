@@ -23,6 +23,7 @@ export interface MissionPack {
 	name: string;
 	steamId: string;
 	dateAdded: Date | null;
+	uploadedBy: string | null;
 }
 
 export type MissionPackSelection = Pick<ID<MissionPack>, 'id' | 'name'>;
@@ -42,6 +43,7 @@ export class Mission {
 	logfile: string | null = null;
 	dateAdded: Date | null = null;
 	notes: string | null = null;
+	uploadedBy: string | null = null;
 }
 
 export class Bomb {
@@ -71,6 +73,7 @@ export class Completion {
 	solo = false;
 	notes: string | null = null;
 	dateAdded: Date | null = null;
+	uploadedBy: string | null = null;
 }
 
 export class IndividualCompletion {
@@ -138,5 +141,6 @@ export interface Completer {
 export class MissionCompletion {
 	team: string[] = [];
 	solo = false;
+	dateAdded: Date | null = null;
 	mission: Pick<Mission, 'name'> = { name: '' };
 }

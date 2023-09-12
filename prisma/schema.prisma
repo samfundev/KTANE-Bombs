@@ -18,12 +18,13 @@ model User {
 }
 
 model MissionPack {
-  id        Int       @id @default(autoincrement())
-  name      String    @unique
-  steamId   String
-  missions  Mission[]
-  verified  Boolean   @default(true)
-  dateAdded DateTime?
+  id           Int       @id @default(autoincrement())
+  name         String    @unique
+  steamId      String
+  missions     Mission[]
+  verified     Boolean   @default(true)
+  dateAdded    DateTime?
+  uploadedBy   String?
 }
 
 model Mission {
@@ -42,6 +43,7 @@ model Mission {
   logfile        String?
   dateAdded      DateTime?
   notes          String?
+  uploadedBy     String?
 
   missionPack   MissionPack? @relation(fields: [missionPackId], references: [id])
   missionPackId Int?
@@ -60,15 +62,16 @@ model Bomb {
 }
 
 model Completion {
-  id        Int      @id @default(autoincrement())
-  proofs    String[]
-  time      Float
-  team      String[]
-  first     Boolean
-  old       Boolean
-  solo      Boolean
-  notes     String?
-  dateAdded DateTime?
+  id           Int      @id @default(autoincrement())
+  proofs       String[]
+  time         Float
+  team         String[]
+  first        Boolean
+  old          Boolean
+  solo         Boolean
+  notes        String?
+  dateAdded    DateTime?
+  uploadedBy   String?
 
   mission   Mission @relation(fields: [missionId], references: [id], onDelete: Cascade)
   missionId Int

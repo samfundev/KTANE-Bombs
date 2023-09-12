@@ -28,6 +28,7 @@ export async function POST({ request }: RequestEvent) {
 				missionPackId: mission.missionPack?.id,
 				logfile: mission.logfile,
 				dateAdded: mission.dateAdded,
+				uploadedBy : mission.uploadedBy,
 				verified: false
 			}
 		});

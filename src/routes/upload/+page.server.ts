@@ -1,8 +1,12 @@
 import client from '$lib/client';
-import { excludeArticleSort, onlyUnique, withoutArticle } from '$lib/util';
-import type { PageServerLoad } from './$types';
+import { excludeArticleSort, forbidden, onlyUnique, withoutArticle } from '$lib/util';
+import { redirect } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async function () {
+export const load = async function ({ parent }: any) {
+	const { user } = await parent();
+	if (user == null) {
+		throw redirect(302, '/login');
+	}
 	const missions = await client.mission.findMany({
 		select: {
 			name: true,
@@ -23,6 +27,7 @@ export const load: PageServerLoad = async function () {
 	});
 
 	return {
+		user,
 		factoryStatus: missions.reduce((result: any, current) => {
 			result[current.name] = current.factory;
 			return result;

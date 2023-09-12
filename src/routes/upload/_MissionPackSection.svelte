@@ -1,12 +1,15 @@
 <script lang="ts">
 	import Input from '$lib/controls/Input.svelte';
-	import type { MissionPack } from '$lib/types';
+	import type { FrontendUser, MissionPack } from '$lib/types';
 	import { getSteamID, validateSteamID } from '$lib/util';
 	import toast from 'svelte-french-toast';
+
+	export let user: FrontendUser;
 
 	let pack: MissionPack = {
 		name: '',
 		steamId: '',
+		uploadedBy: user.id,
 		dateAdded: new Date()
 	};
 

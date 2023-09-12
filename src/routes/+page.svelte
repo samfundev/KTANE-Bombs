@@ -7,7 +7,7 @@
 	export let data;
 	let missions: ID<Mission>[] = data.missions;
 	let missionCards: any = {};
-	let modules: Record<string, RepoModule> = data.modules;
+	let modules: Record<string, RepoModule> | null = data.modules;
 
 	let render = false;
 	let searchBar: HomeSearchBar;
@@ -28,7 +28,11 @@
 <div class="relative">
 	<h1 class="header">Challenge Bombs</h1>
 </div>
-<HomeSearchBar bind:this={searchBar} bind:missions bind:missionCards on:change={onChange} {modules} />
+{#if modules}
+	<HomeSearchBar bind:this={searchBar} bind:missions bind:missionCards on:change={onChange} {modules} />
+{:else}
+	<div class="block">Error fetching module info from the repo.</div>
+{/if}
 <div class="bombs mission-card-grid">
 	{#each missions as mission, index (mission.name)}
 		{#if render}

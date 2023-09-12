@@ -25,7 +25,9 @@ export const load: PageServerLoad = async function () {
 	});
 
 	return {
-		missions,
+		missions: missions.map(miss => {
+			return { ...miss, logfile: null, notes: null, uploadedBy: null };
+		}),
 		modules: await getData()
 	};
 };
