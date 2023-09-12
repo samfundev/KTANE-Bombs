@@ -27,14 +27,17 @@
 	let completions: MissionCompletion[] = data.completions;
 	let tpMissions: Mission[] = data.tpMissions;
 
+	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+	// let seeUnverif = $page.data.user !== null && $page.data.user.id == shownUser?.id || hasPermission($page.data.user, Permission.RenameUser);
+	let seeUnverif = $page.data.user !== null && $page.data.user.id == shownUser?.id;
 	let newUsername = username;
 	const oldUsername = username;
 	let tp = username === TP_TEAM;
 
 	let dialog: HTMLDialogElement;
 
-	const viewOptions = ['Alphabetical', 'By Role'];
-	let byRole = '';
+	const viewOptions = ['Alphabetical', 'By Role', 'Newest'];
+	let viewMode = '';
 
 	async function editName() {
 		let response = await fetch('/user/rename', {
@@ -70,6 +73,11 @@
 	let missionsNames: { [name: string]: MissionCompletion[] } = {};
 	// Sort completions
 	completions.sort((a, b) => withoutArticle(a.mission.name).localeCompare(withoutArticle(b.mission.name)));
+	let completionByNewest: MissionCompletion[] = Array(completions.length);
+	Object.assign(completionByNewest, completions);
+	completionByNewest.sort((a, b) =>
+		a.dateAdded == null || b.dateAdded == null ? 0 : b.dateAdded.getTime() - a.dateAdded.getTime()
+	);
 	if (tp) {
 		tpMissions.forEach(m => {
 			let name = m.name;
@@ -166,10 +174,10 @@
 		});
 	}
 
-	let wrView = writable(byRole);
+	let wrView = writable(viewMode);
 	let render = false;
 	if (browser) {
-		byRole = JSON.parse(localStorage.getItem('user-solves-view') || JSON.stringify(viewOptions[0]));
+		viewMode = JSON.parse(localStorage.getItem('user-solves-view') || JSON.stringify(viewOptions[0]));
 		wrView.subscribe(value => {
 			localStorage.setItem('user-solves-view', JSON.stringify(value));
 		});
@@ -177,7 +185,7 @@
 		render = true;
 	}
 	function storeView() {
-		wrView.set(byRole);
+		wrView.set(viewMode);
 	}
 </script>
 
@@ -194,6 +202,9 @@
 	<b class="block">Expert: {stats.expert}</b>
 	<b class="block">EFM: {stats.efm}</b>
 </div>
+<div class="block">
+	{seeUnverif}
+</div>
 <div class="block legend-bar flex">
 	<div class="legend flex">
 		{#if tp}
@@ -206,10 +217,26 @@
 			<span style="background-color: {getPersonColor(1, 0, false)}">EFM</span>
 		{/if}
 	</div>
-	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={byRole} on:change={storeView} />
+	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={viewMode} on:change={storeView} />
 </div>
 <div class="block"><h2>Solves</h2></div>
-{#if render && byRole == viewOptions[1]}
+{#if render && viewMode == viewOptions[2]}
+	<div class="solves role flex grow">
+		{#each completionByNewest as comp}
+			<a href="/mission/{encodeURIComponent(comp.mission.name)}">
+				<div
+					class="block flex newest"
+					class:tp-solve={tp}
+					style:background-color={getPersonColor(comp.team.length, comp.team.indexOf(username), comp.solo, tp)}>
+					<span class="mission-name">{comp.mission.name}</span>
+					{#if comp.dateAdded}
+						<span>{comp.dateAdded.toLocaleDateString(undefined, dateOptions)}</span>
+					{/if}
+				</div>
+			</a>
+		{/each}
+	</div>
+{:else if render && viewMode == viewOptions[1]}
 	{#each Object.entries(missionsNames) as [key, compList]}
 		{#if compList.length > 0}
 			{@const dist = selectDistinctSolveCount(key, stats)}
@@ -267,7 +294,7 @@
 		</Dialog>
 	</div>
 {/if}
-{#if shownUser !== null && $page.data.user !== null && hasPermission($page.data.user, Permission.ModifyPermissions)}
+{#if shownUser !== null && hasPermission($page.data.user, Permission.ModifyPermissions)}
 	<UserPermissions {shownUser} />
 {/if}
 
@@ -326,5 +353,9 @@
 	}
 	a.green {
 		background-color: var(--foreground);
+	}
+	.newest {
+		justify-content: space-between;
+		gap: 20px;
 	}
 </style>

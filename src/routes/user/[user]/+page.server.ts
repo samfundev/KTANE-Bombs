@@ -23,6 +23,7 @@ export const load = async function ({ params }: any) {
 		select: {
 			team: true,
 			solo: true,
+			dateAdded: true,
 			mission: {
 				select: {
 					name: true,
