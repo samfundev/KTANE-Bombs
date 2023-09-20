@@ -202,15 +202,6 @@
 
 <form class="block flex">
 	<div class="wideBox">
-		<Input
-			id="mission"
-			label="Mission"
-			options={missionNames}
-			validate={value => value !== null}
-			bind:invalid={missionInvalid}
-			bind:value={missionName} />
-	</div>
-	<div class="wideBox">
 		{#each proofs as proof, i}
 			<div class="dynamicBlock">
 				<Input
@@ -224,6 +215,15 @@
 					bind:value={proof.text} />
 			</div>
 		{/each}
+	</div>
+	<div class="wideBox">
+		<Input
+			id="mission"
+			label="Mission"
+			options={missionNames}
+			validate={value => value !== null}
+			bind:invalid={missionInvalid}
+			bind:value={missionName} />
 	</div>
 	<Input
 		bind:this={timeInput}

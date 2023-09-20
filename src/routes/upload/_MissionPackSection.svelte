@@ -31,9 +31,13 @@
 		})
 			.then(response => {
 				if (response.ok) {
-					toast.success(`Mission pack uploaded successfully!`);
+					response.text().then(text => {
+						toast.success(text);
+					});
 				} else {
-					toast.error(`Mission pack failed to upload.`);
+					response.text().then(text => {
+						toast.error(text);
+					});
 				}
 			})
 			.catch(() => toast.error('An error occurred.'));

@@ -7,6 +7,7 @@
 	import toast from 'svelte-french-toast';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import type { ReplaceableMission } from './_types';
+	import { text } from 'svelte/internal';
 
 	export let missionNames: string[];
 	export let authorNames: string[];
@@ -149,12 +150,14 @@
 			body: JSON.stringify(missions.filter((_, index) => selectedMissions[index]))
 		})
 			.then(response => {
-				const plural = Object.values(selectedMissions).filter(value => value).length > 1;
-				const word = `Mission${plural ? 's' : ''}`;
 				if (response.ok) {
-					toast.success(`${word} uploaded successfully!`);
+					response.text().then(text => {
+						toast.success(text);
+					});
 				} else {
-					toast.error(`${word} failed to upload.`);
+					response.text().then(text => {
+						toast.error(text);
+					});
 				}
 			})
 			.catch(() => toast.error('An error occurred.'));
