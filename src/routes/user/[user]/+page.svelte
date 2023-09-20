@@ -202,9 +202,6 @@
 	<b class="block">Expert: {stats.expert}</b>
 	<b class="block">EFM: {stats.efm}</b>
 </div>
-<div class="block">
-	{seeUnverif}
-</div>
 <div class="block legend-bar flex">
 	<div class="legend flex">
 		{#if tp}
