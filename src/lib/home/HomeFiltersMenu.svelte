@@ -26,6 +26,7 @@
 	let noList: string[] = [];
 	let hasOptions = [
 		'Has Team/EFM Solve',
+		'Has Solo Solve',
 		'Has TP Solve',
 		'Has Boss',
 		'Has Semi-Boss',
@@ -37,9 +38,9 @@
 		'Alphabetical',
 		'Date Added',
 		'Module Count',
-		'Bomb Time',
-		'Solves',
 		'Bomb Count',
+		'Solves',
+		'Total Time',
 		'Rule Seeded Mods %'
 	];
 	let limitDef: { [k: string]: number[] } = {
