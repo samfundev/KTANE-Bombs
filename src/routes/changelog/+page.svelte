@@ -5,9 +5,22 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
-	<h3>20 September 2023</h3>
+	<h3>24 September 2023</h3>
 	<ul>
-		<li>There is now a list of <a href="/restrictedmanuals">Restricted Manuals</a> that may not be used during a mission.</li>
+		<li>
+			There is now a list of <a href="/restrictedmanuals">Restricted Manuals</a> that may not be used during a mission.
+		</li>
+		<li>
+			Users must now be logged in to upload anything. Maintainers can look up who uploaded a solve, mission, or mission
+			pack.
+		</li>
+		<li>New way to view solves on a user page: by recently added ("Newest")</li>
+		<li>New filter on the homepage: "Has Solo Solve". Also the "Has Team/EFM Solve" no longer counts solos.</li>
+		<li>
+			When you upload a logflie as proof of a solve, the Mission Name and Time Remaining are filled in automatically. Be
+			sure to double-check the values it fills in.
+		</li>
+		<li>Impoved alert messages for when mission and mission pack uploads fail.</li>
 	</ul>
 </div>
 <div class="block update">
