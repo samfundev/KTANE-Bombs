@@ -13,8 +13,10 @@
 </div>
 <div class="block">
 	<p>
-		These manuals may <strong><u>not</u></strong> be used for any mission as they are considered too powerful.
-		This list is the result of voting and discussion by the sheet maintainers.
+		These manuals may <strong><u>not</u></strong> be used for any mission as they are considered too powerful. This list
+		is the result of voting and discussion by the sheet maintainers.<br />
+		On the <a href="https://ktane.timwi.de/">Manual Repo</a>, there is a checkbox in the Options menu that hides these
+		manuals when unchecked.
 	</p>
 	{#if manuals !== null}
 		<table>
@@ -50,5 +52,8 @@
 	}
 	tr.manual {
 		background-color: var(--contrast-block-background);
+	}
+	p a {
+		color: var(--text-color);
 	}
 </style>
