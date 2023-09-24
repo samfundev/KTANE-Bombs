@@ -49,9 +49,8 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 	}
 	if (verify && uploadedBy) {
 		const uploadUser = await client.user.findUnique({
-			where: {
-				id: uploadedBy
-			}
+			where: { id: uploadedBy },
+			select: { username: true }
 		});
 		if (uploadUser !== null) uploadedBy = uploadUser.username;
 	}

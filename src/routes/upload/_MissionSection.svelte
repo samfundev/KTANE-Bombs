@@ -7,12 +7,10 @@
 	import toast from 'svelte-french-toast';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import type { ReplaceableMission } from './_types';
-	import { text } from 'svelte/internal';
 
 	export let missionNames: string[];
 	export let authorNames: string[];
 	export let packs: MissionPackSelection[];
-	export let user: FrontendUser;
 
 	let invalid = false;
 	let logfileLink = '';

@@ -5,7 +5,7 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
-	<h3>24 September 2023</h3>
+	<h3>26 September 2023</h3>
 	<ul>
 		<li>
 			There is now a list of <a href="/restrictedmanuals">Restricted Manuals</a> that may not be used during a mission.

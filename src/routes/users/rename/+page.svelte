@@ -37,7 +37,7 @@
 </script>
 
 <svelte:head>
-	<title>Users</title>
+	<title>User Rename</title>
 </svelte:head>
 
 <h1 class="header">User Rename</h1>

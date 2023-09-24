@@ -9,7 +9,6 @@
 
 	export let missionNames: string[];
 	export let solverNames: string[];
-	export let user: FrontendUser;
 	export let factoryStatus: { [name: string]: string | null };
 
 	let missionName: string = '';

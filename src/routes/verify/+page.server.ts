@@ -89,6 +89,20 @@ export const load = async function ({ parent, locals }: any) {
 				}
 			}
 		});
+		for (let c = 0; c < completions.length; c++) {
+			let comp = completions[c];
+			if (comp.uploadedBy != null) {
+				const usr = await client.user.findUnique({
+					where: { id: comp.uploadedBy },
+					select: { username: true }
+				});
+				if (usr !== null) {
+					comp.uploadedBy = usr.username;
+					continue;
+				}
+			}
+			comp.uploadedBy = 'Unknown';
+		}
 
 		solverNames = vMissions
 			.map(mission => mission.completions.map(comp => comp.team))

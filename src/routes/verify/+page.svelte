@@ -77,6 +77,7 @@
 				</div>
 			{:else if item.type === 'completion'}
 				<CompletionCard completion={item.completion} />
+				<div class="block">Uploaded by:<br>{item.completion.uploadedBy}</div>
 				<MissionCard mission={item.mission} />
 			{:else if item.type === 'missionpack'}
 				<div class="block">
@@ -101,7 +102,7 @@
 	}
 
 	.item.completion {
-		grid-template-columns: 1fr 1fr auto;
+		grid-template-columns: 1fr .3fr 1fr auto;
 	}
 	.block.red {
 		color: red;

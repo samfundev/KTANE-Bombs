@@ -4,8 +4,6 @@
 	import { getSteamID, validateSteamID } from '$lib/util';
 	import toast from 'svelte-french-toast';
 
-	export let user: FrontendUser;
-
 	let pack: MissionPack = {
 		name: '',
 		steamId: '',

@@ -64,12 +64,10 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 	let uploadedBy = missionResult.uploadedBy;
 	if (verify && uploadedBy) {
 		const uploadUser = await client.user.findUnique({
-			where: {
-				id: uploadedBy
-			}
+			where: { id: uploadedBy },
+			select: { username: true }
 		});
-		if (uploadUser !== null)
-			uploadedBy = uploadUser.username;
+		if (uploadUser !== null) uploadedBy = uploadUser.username;
 	}
 
 	const variantId = missionToUpdate === null ? missionResult.variant : missionToUpdate.variant;
