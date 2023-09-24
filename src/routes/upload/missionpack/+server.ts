@@ -1,9 +1,14 @@
 import client from '$lib/client';
 import type { MissionPack } from '$lib/types';
+import { forbidden } from '$lib/util';
 import type { RequestEvent } from '@sveltejs/kit';
 
-export async function POST({ request }: RequestEvent) {
+export async function POST({ locals, request }: RequestEvent) {
+	if (locals.user == null) {
+		throw forbidden(locals);
+	}
 	const pack: MissionPack = await request.json();
+	pack.uploadedBy = locals.user.id;
 	let equalPack = await client.missionPack.findUnique({
 		where: {
 			name: pack.name

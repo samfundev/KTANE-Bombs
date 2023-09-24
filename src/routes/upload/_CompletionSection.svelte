@@ -16,7 +16,6 @@
 
 	let completion: Completion = new Completion();
 	completion.dateAdded = new Date();
-	completion.uploadedBy = user.id;
 
 	let valid: boolean = false;
 

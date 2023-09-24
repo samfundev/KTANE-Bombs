@@ -60,7 +60,7 @@
 					replace: false,
 					dateAdded: new Date(),
 					notes: null,
-					uploadedBy: user.id,
+					uploadedBy: null,
 					logfile: parsedLogfileLink
 				};
 

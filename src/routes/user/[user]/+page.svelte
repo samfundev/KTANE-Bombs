@@ -28,8 +28,6 @@
 	let tpMissions: Mission[] = data.tpMissions;
 
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
-	// let seeUnverif = $page.data.user !== null && $page.data.user.id == shownUser?.id || hasPermission($page.data.user, Permission.RenameUser);
-	let seeUnverif = $page.data.user !== null && $page.data.user.id == shownUser?.id;
 	let newUsername = username;
 	const oldUsername = username;
 	let tp = username === TP_TEAM;

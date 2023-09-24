@@ -1,10 +1,14 @@
 import client from '$lib/client';
 import type { Completion } from '$lib/types';
+import { forbidden } from '$lib/util';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 
-export async function POST({ request }: RequestEvent) {
+export async function POST({ locals, request }: RequestEvent) {
+	if (locals.user == null) {
+		throw forbidden(locals);
+	}
 	const { completion, missionName }: { completion: Completion; missionName: string } = await request.json();
-
+	completion.uploadedBy = locals.user.id;
 	if (completion.team.length != 1 && completion.solo) {
 		return new Response(undefined, { status: 406 });
 	}

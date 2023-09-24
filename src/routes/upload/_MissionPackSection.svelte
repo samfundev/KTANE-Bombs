@@ -9,7 +9,7 @@
 	let pack: MissionPack = {
 		name: '',
 		steamId: '',
-		uploadedBy: user.id,
+		uploadedBy: null,
 		dateAdded: new Date()
 	};
 

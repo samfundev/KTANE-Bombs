@@ -1,8 +1,12 @@
 import client from '$lib/client';
 import { error, type RequestEvent } from '@sveltejs/kit';
 import type { ReplaceableMission } from '../_types';
+import { forbidden } from '$lib/util';
 
-export async function POST({ request }: RequestEvent) {
+export async function POST({ locals, request }: RequestEvent) {
+	if (locals.user == null) {
+		throw forbidden(locals);
+	}
 	const missions: ReplaceableMission[] = await request.json();
 	if (missions.some(m => m.missionPack === null)) {
 		throw error(400, 'Mission pack is required.');
@@ -48,7 +52,7 @@ export async function POST({ request }: RequestEvent) {
 				missionPackId: mission.missionPack?.id,
 				logfile: mission.logfile,
 				dateAdded: mission.dateAdded,
-				uploadedBy: mission.uploadedBy,
+				uploadedBy: locals.user.id,
 				verified: false
 			}
 		});
