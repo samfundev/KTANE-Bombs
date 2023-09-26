@@ -74,7 +74,13 @@
 	let completionByNewest: MissionCompletion[] = Array(completions.length);
 	Object.assign(completionByNewest, completions);
 	completionByNewest.sort((a, b) =>
-		a.dateAdded == null || b.dateAdded == null ? 0 : b.dateAdded.getTime() - a.dateAdded.getTime()
+		a.dateAdded == null || b.dateAdded == null
+			? a.dateAdded == null && b.dateAdded == null
+				? a.mission.name.localeCompare(b.mission.name)
+				: a.dateAdded == null
+				? 1
+				: -1
+			: b.dateAdded.getTime() - a.dateAdded.getTime()
 	);
 	if (tp) {
 		tpMissions.forEach(m => {
