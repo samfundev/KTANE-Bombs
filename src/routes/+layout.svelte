@@ -81,6 +81,7 @@
 		--textbox-background: rgb(15, 15, 15);
 		--popup-background: #fafaff;
 		--contrast-block-background: rgb(220, 220, 220);
+		--accent-gray: #BBB;
 		--light-text-color: rgb(100, 100, 100);
 		--link-text-color: currentColor;
 		--link-visited-text-color: currentColor;
@@ -99,6 +100,7 @@
 			--textbox-background: lightgray;
 			--popup-background: rgb(50, 50, 50);
 			--contrast-block-background: rgb(50, 50, 50);
+			--accent-gray: #444;
 			--light-text-color: rgb(150, 150, 150);
 			--link-text-color: rgb(200, 200, 200);
 			--link-visited-text-color: rgb(130, 130, 130);

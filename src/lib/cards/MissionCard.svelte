@@ -10,6 +10,7 @@
 	export let id: string = '';
 	export let cardID: string = '';
 	export let card: any = null;
+	export let nolink: boolean = false;
 
 	const solveTypes = getSolveTypes(mission);
 
@@ -26,7 +27,7 @@
 {#if selectable}
 	<div class="selectable-card" bind:this={card} id={cardID}>
 		<input {id} type="checkbox" bind:checked={selected} />
-		<label for={id} class="mission selectable" class:selected>
+		<label for={id} class="mission selectable" class:selected class:nolink>
 			<MissionCardInner {mission} />
 		</label>
 	</div>
@@ -98,7 +99,7 @@
 		outline: var(--accent) 2px solid;
 	}
 
-	label {
+	label:not(.nolink) {
 		cursor: pointer;
 	}
 </style>

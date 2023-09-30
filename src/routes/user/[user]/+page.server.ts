@@ -1,18 +1,18 @@
 import client from '$lib/client';
 import { TP_TEAM } from '$lib/const';
 import { Permission } from '$lib/types';
-import { forbidden, hasPermission } from '$lib/util';
-import type { Mission } from '@prisma/client';
+import { fixPools, forbidden, hasPermission } from '$lib/util';
+import type { Completion, Mission } from '@prisma/client';
 import { error } from '@sveltejs/kit';
 
-export const load = async function ({ params }: any) {
+export const load = async function ({ parent, params }: any) {
+	const { user } = await parent(); //logged-in user
 	const tp = params.user === TP_TEAM;
-	const user = await client.user.findFirst({
+	const shownUser = await client.user.findFirst({
 		where: {
 			username: params.user
 		},
 		select: {
-			id: true,
 			avatar: true,
 			username: true,
 			permissions: true
@@ -24,6 +24,7 @@ export const load = async function ({ params }: any) {
 			team: true,
 			solo: true,
 			dateAdded: true,
+			first: true,
 			mission: {
 				select: {
 					name: true,
@@ -37,8 +38,84 @@ export const load = async function ({ params }: any) {
 			verified: true
 		}
 	});
-	if (!tp && user === null && completions.length === 0) {
+	if (!tp && shownUser === null && completions.length === 0) {
 		throw error(404);
+	}
+
+	const bestTimes = await client.mission.findMany({
+		select: {
+			completions: {
+				select: {
+					team: true,
+					solo: true,
+					dateAdded: true,
+					first: true,
+					time: true
+				},
+				where: {
+					team: { has: params.user },
+					verified: true
+				},
+				orderBy: { time: 'asc' },
+				take: 1
+			},
+			name: true,
+			id: true
+		}
+	});
+	let unverifSolves: any[] | null = null;
+	let unverifMissions: any[] | null = null;
+	let unverifPacks: any[] | null = null;
+	if (user !== null && user.username === params.user) {
+		unverifSolves = await client.completion.findMany({
+			where: {
+				verified: false,
+				team: { has: params.user }
+			},
+			include: {
+				mission: {
+					include: {
+						bombs: true,
+						completions: {
+							where: { verified: true }
+						}
+					}
+				}
+			},
+			orderBy: { dateAdded: 'desc' }
+		});
+		if (unverifSolves != null && unverifSolves.length < 1) unverifSolves = null;
+
+		unverifMissions = await client.mission.findMany({
+			where: {
+				verified: false,
+				uploadedBy: user.id
+			},
+			select: {
+				id: true,
+				name: true,
+				authors: true,
+				bombs: {
+					orderBy: { id: 'asc' }
+				},
+				designedForTP: true,
+				factory: true,
+				timeMode: true,
+				strikeMode: true,
+				dateAdded: true
+			},
+			orderBy: { dateAdded: 'desc' }
+		});
+		if (unverifMissions != null && unverifMissions.length < 1) unverifMissions = null;
+
+		unverifPacks = await client.missionPack.findMany({
+			where: {
+				verified: false,
+				uploadedBy: user.id
+			},
+			orderBy: { dateAdded: 'desc' }
+		});
+		if (unverifPacks != null && unverifPacks.length < 1) unverifPacks = null;
 	}
 
 	let completer = {
@@ -89,12 +166,24 @@ export const load = async function ({ params }: any) {
 			}
 		}
 	}
-
 	return {
 		username: params.user,
-		shownUser: user,
+		shownUser,
 		completions,
 		tpMissions,
+		unverifSolves,
+		unverifMissions:
+			unverifMissions === null
+				? null
+				: unverifMissions.map(miss => {
+						return {
+							...fixPools(miss),
+							completions: [],
+							tpSolve: false
+						};
+				  }),
+		unverifPacks,
+		bestTimes: bestTimes.filter(miss => miss.completions.length > 0 && miss.completions[0].team.includes(params.user)),
 		stats: {
 			distinct: completer.distinct.size,
 			defuser: completer.defuser.size,

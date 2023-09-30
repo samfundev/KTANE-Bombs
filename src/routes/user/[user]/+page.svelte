@@ -10,6 +10,9 @@
 	import { browser } from '$app/environment';
 	import { writable } from 'svelte/store';
 	import { TP_TEAM } from '$lib/const';
+	import type { Completion, MissionPack } from '@prisma/client';
+	import CompletionCard from '$lib/cards/CompletionCard.svelte';
+	import MissionCard from '$lib/cards/MissionCard.svelte';
 	export let data;
 
 	type SolveStats = {
@@ -26,6 +29,10 @@
 	let shownUser: FrontendUser | null = data.shownUser;
 	let completions: MissionCompletion[] = data.completions;
 	let tpMissions: Mission[] = data.tpMissions;
+	let unverifSolves: (Completion & { mission: Mission })[] | null = data.unverifSolves;
+	let unverifMissions: Mission[] | null = data.unverifMissions;
+	let unverifPacks: MissionPack[] | null = data.unverifPacks;
+	let bestTimes: Mission[] = data.bestTimes;
 
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
 	let newUsername = username;
@@ -206,6 +213,33 @@
 	<b class="block">Expert: {stats.expert}</b>
 	<b class="block">EFM: {stats.efm}</b>
 </div>
+
+{#if unverifSolves !== null}
+	<div class="block gray"><h4>Unverified Solves</h4></div>
+	{#each unverifSolves as comp}
+		<div class="unverif-item completion">
+			<CompletionCard completion={comp} />
+			<MissionCard mission={comp.mission} />
+		</div>
+	{/each}
+{/if}
+{#if unverifMissions !== null}
+	<div class="block gray"><h4>Unverified Missions</h4></div>
+	{#each unverifMissions as miss}
+		<MissionCard mission={miss} selectable nolink />
+	{/each}
+{/if}
+{#if unverifPacks !== null}
+	<div class="block gray"><h4>Unverified Mission Packs</h4></div>
+	{#each unverifPacks as pack}
+		<div class="block flex">
+			<a class="unverif-pack" href="https://steamcommunity.com/sharedfiles/filedetails/?id={pack.steamId}"
+				>{pack.name}</a>
+		</div>
+	{/each}
+{/if}
+
+<div class="block"><h2>Solves</h2></div>
 <div class="block legend-bar flex">
 	<div class="legend flex">
 		{#if tp}
@@ -220,7 +254,6 @@
 	</div>
 	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={viewMode} on:change={storeView} />
 </div>
-<div class="block"><h2>Solves</h2></div>
 {#if render && viewMode == viewOptions[2]}
 	<div class="solves role flex grow">
 		{#each completionByNewest as comp}
@@ -346,8 +379,11 @@
 		align-content: start;
 		white-space: nowrap;
 	}
-	a {
+	a:not(.unverif-pack) {
 		text-decoration: none;
+	}
+	a.unverif-pack {
+		color: var(--text-color);
 	}
 	a span.mission-name {
 		text-decoration: underline;
@@ -358,5 +394,14 @@
 	.newest {
 		justify-content: space-between;
 		gap: 20px;
+	}
+
+	.unverif-item.completion {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--gap);
+	}
+	.block.gray {
+		background-color: var(--accent-gray);
 	}
 </style>

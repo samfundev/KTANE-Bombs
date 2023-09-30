@@ -27,7 +27,6 @@ export const load = async function ({ parent }: any) {
 	});
 
 	return {
-		user,
 		factoryStatus: missions.reduce((result: any, current) => {
 			result[current.name] = current.factory;
 			return result;

@@ -10,7 +10,6 @@
 	let authorNames: string[] = data.authorNames;
 	let solverNames: string[] = data.solverNames;
 	let packs: MissionPackSelection[] = data.packs;
-	let user: FrontendUser = data.user;
 
 	let section: 'solve' | 'mission' | 'missionpack' = 'solve';
 </script>
@@ -28,11 +27,11 @@
 	</div>
 </div>
 {#if section == 'mission'}
-	<MissionSection {missionNames} {authorNames} {packs} {user} />
+	<MissionSection {missionNames} {authorNames} {packs} />
 {:else if section == 'missionpack'}
-	<MissionPackSection {user} />
+	<MissionPackSection />
 {:else}
-	<CompletionSection {missionNames} {solverNames} {factoryStatus} {user} />
+	<CompletionSection {missionNames} {solverNames} {factoryStatus} />
 {/if}
 
 <style>
