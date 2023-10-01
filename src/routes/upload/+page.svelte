@@ -5,8 +5,7 @@
 	import type { FrontendUser, MissionPackSelection } from '$lib/types';
 	export let data;
 
-	let factoryStatus: { [name: string]: string | null } = data.factoryStatus;
-	let missionNames: string[] = data.missionNames;
+	let missionInfo: { [name: string]: number } = data.missionInfo;
 	let authorNames: string[] = data.authorNames;
 	let solverNames: string[] = data.solverNames;
 	let packs: MissionPackSelection[] = data.packs;
@@ -27,11 +26,11 @@
 	</div>
 </div>
 {#if section == 'mission'}
-	<MissionSection {missionNames} {authorNames} {packs} />
+	<MissionSection missionNames={Object.keys(missionInfo)} {authorNames} {packs} />
 {:else if section == 'missionpack'}
 	<MissionPackSection />
 {:else}
-	<CompletionSection {missionNames} {solverNames} {factoryStatus} />
+	<CompletionSection {missionInfo} {solverNames} />
 {/if}
 
 <style>

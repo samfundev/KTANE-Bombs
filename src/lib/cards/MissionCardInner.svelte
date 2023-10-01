@@ -14,7 +14,7 @@
 <div class="mission-name">{mission.name}</div>
 <div class="stats">
 	{#if bombs.length > 1}
-		{bombs.length} B ·
+		{bombs.length} Bombs ·
 	{/if}
 	{pluralize(statBomb.modules, bombs.length > 1 ? 'Mod' : 'Module')} ·
 	{#if mission.timeMode === 'Global'}
@@ -23,16 +23,23 @@
 		{formatTime(bombs.map(bomb => bomb.time).reduce((a, b) => a + b, 0))} ·
 	{/if}
 	{#if mission.strikeMode === 'Global'}
-		{pluralize(Math.max(...bombs.map(bomb => bomb.strikes)), 'Strike')} ·
+		<span>{pluralize(Math.max(...bombs.map(bomb => bomb.strikes)), 'Strike')}</span> ·
 	{:else}
-		{pluralize(
-			bombs.map(bomb => bomb.strikes).reduce((a, b) => a + b, 0),
-			'Strike'
-		)} ·
+		<span
+			>{pluralize(
+				bombs.map(bomb => bomb.strikes).reduce((a, b) => a + b, 0),
+				'Strike'
+			)}</span> ·
 	{/if}
-	{pluralize(statBomb.widgets, 'Widget')}
+	<span>{pluralize(statBomb.widgets, 'Widget')}</span>
 	{#if mission.factory !== null}
 		· {mission.factory}
+		{#if mission.timeMode == 'Global'}
+			+ GTime
+		{/if}
+		{#if mission.strikeMode == 'Global'}
+			+ GStrk
+		{/if}
 	{/if}
 </div>
 
@@ -41,5 +48,8 @@
 		font-style: italic;
 		font-size: 85%;
 		color: var(--light-text-color);
+	}
+	.stats > span {
+		white-space: nowrap;
 	}
 </style>

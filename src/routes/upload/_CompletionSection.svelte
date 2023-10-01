@@ -7,10 +7,10 @@
 	import toast from 'svelte-french-toast';
 	import { TP_TEAM } from '$lib/const';
 
-	export let missionNames: string[];
+	export let missionInfo: { [name: string]: any };
 	export let solverNames: string[];
-	export let factoryStatus: { [name: string]: string | null };
 
+	let missionNames = Object.keys(missionInfo).sort((a, b) => a.localeCompare(b));
 	let missionName: string = '';
 
 	let completion: Completion = new Completion();
@@ -66,7 +66,7 @@
 		return [true, url.toString()];
 	}
 
-	function getTimes(text: string) {
+	function getInfo(text: string) {
 		let lineIndex = 0;
 		const lines = text.split('\n');
 
@@ -97,7 +97,8 @@
 					let n = parseFloat(event.bombTime);
 					if (!isNaN(n)) {
 						n = Math.max(Math.round(n * 100) / 100, MIN_TIME);
-						if (factoryStatus[missionName] === 'Sequence') time += n;
+						if (missionInfo[missionName]['factory'] === 'Sequence' && missionInfo[missionName]['timeMode'] !== 'Global')
+							time = Math.min(time + n, missionInfo[missionName]['time']);
 						else time = n;
 						parsedTimes.push(n);
 						timeInput.setValue(time);
@@ -105,11 +106,12 @@
 				}
 			}
 		}
-		// console.log(parsedTimes);
 	}
 
 	function validateTime(time: number): string | boolean {
+		let maxTime = missionName.length > 0 ? missionInfo[missionName]['time'] ?? Infinity : Infinity;
 		if (time == null) return 'Invalid time';
+		else if (time >= maxTime) return `Time must be < mission's given time (${formatTime(maxTime)})`;
 		else if (time > 0) return true;
 		else return 'Time must be ≥ 0.01s';
 	}
@@ -136,7 +138,7 @@
 						parsedLogfiles.push(links[0]);
 						fetch(links[0])
 							.then(v => v.text())
-							.then(f => getTimes(f));
+							.then(f => getInfo(f));
 					}
 				}
 			}
@@ -237,7 +239,8 @@
 		optionalOptions
 		required
 		bind:invalid={timerInvalid}
-		bind:value={completion.time} />
+		bind:value={completion.time}
+		disabled={missionName == null || missionName.length < 1} />
 	<div>
 		{#each team as member, index}
 			<div class="dynamicBlock">

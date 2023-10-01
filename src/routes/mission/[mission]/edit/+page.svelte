@@ -57,7 +57,7 @@
 		mission.logfile = log[0] === '' ? null : log[1];
 		tpCompletion = mission.completions.some(c => c.team[0] === TP_TEAM);
 		if (tpCompletion) mission.tpSolve = true;
-		modified = !equal(mission, originalMission);
+		modified = JSON.stringify(originalMission) !== JSON.stringify(mission);
 	}
 
 	function intnan0(val: number): boolean | string {

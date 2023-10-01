@@ -3,7 +3,7 @@
 	import Select from '$lib/controls/Select.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import { Bomb, Pool, type MissionPackSelection, type FrontendUser } from '$lib/types';
-	import { getLogfileLinks, reservedSearchStrings, validateLogfileLink, validateMissionID } from '$lib/util';
+	import { getLogfileLinks, pluralize, reservedSearchStrings, validateLogfileLink, validateMissionID } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import type { ReplaceableMission } from './_types';
@@ -12,12 +12,13 @@
 	export let authorNames: string[];
 	export let packs: MissionPackSelection[];
 
+	missionNames = missionNames.sort((a, b) => a.localeCompare(b));
 	let invalid = false;
 	let logfileLink = '';
 	let parsedLogfileLink = '';
 	let missions: ReplaceableMission[] = [];
 	let selectedMissions: Record<number, boolean> = {};
-	let missionNameQuirk: number[] = [];
+	let missionNameQuirk: { [name: string]: number } = {};
 	const EXISTS = 1;
 	const RESERVED = 2;
 
@@ -31,7 +32,7 @@
 	}
 
 	function parseMissions(text: string) {
-		let missions: ReplaceableMission[] = [];
+		let missionList: ReplaceableMission[] = [];
 		let mission: ReplaceableMission | null = null;
 		let bomb: Bomb | null = null;
 		let lineIndex = 0;
@@ -41,12 +42,13 @@
 			return lines[lineIndex++];
 		}
 
-		let modID: string[] = [];
 		while (lineIndex < lines.length) {
 			let line = readLine().trim();
 			let modIdMatch = line.match(/.*?(mod_.+)/);
-
-			if (modIdMatch !== null) modID.push(modIdMatch[1]);
+			if (modIdMatch !== null && mission !== null && !mission.ids.includes(modIdMatch[1])) {
+				mission.ids.push(modIdMatch[1]);
+				mission.inGameId = modIdMatch[1];
+			}
 
 			if (line === '[State] Enter GameplayState') {
 				mission = {
@@ -65,11 +67,11 @@
 					notes: null,
 					uploadedBy: null,
 					inGameId: null,
+					ids: [],
 					logfile: parsedLogfileLink
 				};
 
-				missions = [...missions, mission];
-				missionNameQuirk.push(0);
+				missionList = [...missionList, mission];
 			} else if (line.startsWith('[BombGenerator] Generator settings: ') && mission !== null) {
 				let match = line.match(/Time: (\d+), NumStrikes: (\d+)/);
 				if (match === null) throw new Error('This regex should always match');
@@ -106,8 +108,8 @@
 				mission.bombs.push(bomb);
 				if (mission.bombs.length > 1) {
 					if (mission.factory === null) mission.factory = 'Sequence';
-					mission.timeMode = 'Local';
-					mission.strikeMode = 'Local';
+					if (mission.timeMode === null) mission.timeMode = 'Local';
+					if (mission.strikeMode === null) mission.strikeMode = 'Local';
 				}
 			} else if (line.startsWith('[WidgetGenerator] Added widget: ') && bomb !== null) {
 				bomb.widgets++;
@@ -123,10 +125,11 @@
 				const event = JSON.parse(json);
 				if (event.type === 'ROUND_START') {
 					mission.name = event.mission;
+
 					if (reservedSearchStrings.some(str => mission?.name.includes(str))) {
-						missionNameQuirk[missionNameQuirk.length - 1] = RESERVED;
+						missionNameQuirk[mission.name] = RESERVED;
 					} else if (missionNames.some(n => n.toLowerCase() == mission?.name.toLowerCase())) {
-						missionNameQuirk[missionNameQuirk.length - 1] = EXISTS;
+						missionNameQuirk[mission.name] = EXISTS;
 						mission.replace = true;
 					}
 				}
@@ -134,16 +137,18 @@
 				const match = line.match(/Creating gamemode '(.+)'\./);
 				if (match === null) throw new Error('This regex should always match');
 
-				mission.factory = match[1].replace('Finite', 'Sequence');
+				if (match[1].includes('Finite')) mission.factory = 'Sequence';
+				else if (match[1].includes('Static')) mission.factory = 'Static';
+				if (match[1].includes('Global Time')) mission.timeMode = 'Global';
+				if (match[1].includes('Global Strikes')) mission.strikeMode = 'Global';
 			}
 		}
-		if (modID.length > 0 && mission !== null) mission.inGameId = modID[modID.length - 1];
 
-		missions.forEach(m => {
+		missionList.forEach(m => {
 			if (m.bombs.length < 2) m.factory = null;
 		});
 
-		return missions;
+		return missionList;
 	}
 
 	function sendMissions() {
@@ -188,14 +193,14 @@
 				<div class="flex">
 					<div class="flex column mission-holder">
 						<MissionCard {mission} selectable id={'missioncard' + i} bind:selected={selectedMissions[i]} />
-						{#if missionNameQuirk[i] > 0}
-							{#if missionNameQuirk[i] == EXISTS}
+						{#if missionNameQuirk[mission.name] > 0}
+							{#if missionNameQuirk[mission.name] == EXISTS}
 								<span class="block info">
 									<b>
 										This mission name already exists. Selecting this would replace the existing mission if accepted.
 									</b>
 								</span>
-							{:else if missionNameQuirk[i] == RESERVED}
+							{:else if missionNameQuirk[mission.name] == RESERVED}
 								<span class="block error">
 									<b>Mission name may not contain any of these strings exactly:</b>
 									{#each reservedSearchStrings as str, index}
@@ -229,6 +234,7 @@
 							id="mission-ingameid-{i}"
 							validate={validateMissionID}
 							display={val => val ?? ''}
+							options={mission.ids}
 							bind:value={mission.inGameId}
 							required={selectedMissions[i]} />
 						{#if mission.bombs.length > 1}

@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import { excludeArticleSort, forbidden, onlyUnique, withoutArticle } from '$lib/util';
+import { onlyUnique, withoutArticle } from '$lib/util';
 import { redirect } from '@sveltejs/kit';
 
 export const load = async function ({ parent }: any) {
@@ -12,7 +12,11 @@ export const load = async function ({ parent }: any) {
 			name: true,
 			completions: true,
 			authors: true,
-			factory: true
+			factory: true,
+			timeMode: true,
+			bombs: {
+				select: { time: true }
+			}
 		},
 		where: {
 			verified: true
@@ -26,12 +30,20 @@ export const load = async function ({ parent }: any) {
 		}
 	});
 
+	let infoInit: { [name: string]: any } = {};
 	return {
-		factoryStatus: missions.reduce((result: any, current) => {
-			result[current.name] = current.factory;
-			return result;
-		}, {}),
-		missionNames: missions.map(mission => mission.name).sort(excludeArticleSort),
+		missionInfo: missions.reduce((info: { [name: string]: any }, miss: any) => {
+			info[miss.name] = {};
+			info[miss.name]['factory'] = miss.factory;
+			info['timeMode'] = {};
+			info[miss.name]['timeMode'] = miss.timeMode;
+			info['time'] = {};
+			info[miss.name]['time'] =
+				miss.timeMode === 'Global'
+					? Math.max(miss.bombs.map((bomb: any) => bomb.time))
+					: miss.bombs.map((bomb: any) => bomb.time).reduce((a: number, b: number) => a + b, 0);
+			return info;
+		}, infoInit),
 		authorNames: missions
 			.map(mission => mission.authors)
 			.flat()
