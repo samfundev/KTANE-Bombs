@@ -11,14 +11,13 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		orderBy: { id: 'asc' },
 		select: {
 			name: true,
-			id: true,
 			authors: true,
 			bombs: {
 				orderBy: { id: 'asc' },
 				select: {
 					modules: true,
-					time: true,
 					strikes: true,
+					time: true,
 					widgets: true,
 					pools: true
 				}
@@ -26,39 +25,40 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			completions: {
 				orderBy: { id: 'asc' },
 				select: {
-					verified: true,
-					id: true,
-					proofs: true,
-					time: true,
-					team: true,
+					dateAdded: true,
 					first: true,
+					id: true,
 					notes: true,
 					old: true,
-					dateAdded: true,
+					proofs: true,
+					solo: true,
+					team: true,
+					time: true,
 					uploadedBy: true,
-					solo: true
+					verified: true
 				}
 			},
+			dateAdded: true,
 			designedForTP: true,
-			tpSolve: true,
 			factory: true,
+			id: true,
+			inGameId: true,
+			logfile: true,
+			notes: true,
 			strikeMode: true,
 			timeMode: true,
+			tpSolve: true,
+			uploadedBy: true,
 			variant: true,
 			verified: true,
-			logfile: true,
-			dateAdded: true,
-			uploadedBy: true,
-			inGameId: true,
-			notes: true,
 			missionPack: {
 				select: {
-					id: true,
-					verified: true,
 					name: true,
 					dateAdded: true,
+					id: true,
+					steamId: true,
 					uploadedBy: true,
-					steamId: true
+					verified: true
 				}
 			}
 		}
@@ -71,12 +71,12 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 	}
 
 	let missionPacks: {
-		id: number;
 		name: string;
+		dateAdded: Date | null;
+		id: number;
+		missions: any[];
 		steamID: string;
 		verified: boolean;
-		dateAdded: Date | null;
-		missions: any[]; //(Mission & { variant: null | number })[];
 	}[] = [];
 	missionsObj.forEach(miss => {
 		let bombs: Bomb[] = [];
@@ -85,35 +85,35 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		for (let i = 0; i < miss.completions.length; i++) minimize(miss.completions[i]);
 		let newMission = {
 			name: miss.name,
-			id: miss.id,
 			authors: miss.authors,
 			bombs: bombs,
 			completions: miss.completions,
-			tpSolve: miss.tpSolve,
+			dateAdded: miss.dateAdded,
 			designedForTP: miss.designedForTP,
 			factory: miss.factory,
+			id: miss.id,
+			inGameId: miss.inGameId,
+			logfile: miss.logfile,
+			notes: miss.notes,
 			strikeMode: miss.strikeMode,
 			timeMode: miss.timeMode,
-			verified: miss.verified,
-			logfile: miss.logfile,
-			dateAdded: miss.dateAdded,
+			tpSolve: miss.tpSolve,
 			uploadedBy: miss.uploadedBy,
-			inGameId: miss.inGameId,
-			notes: miss.notes,
-			variant: miss.variant
+			variant: miss.variant,
+			verified: miss.verified
 		};
 		minimize(newMission);
 		if (pack) {
 			pack.missions.push(newMission);
 		} else {
 			let p = {
-				id: miss.missionPack?.id ?? 0,
 				name: miss.missionPack?.name ?? '',
-				steamID: miss.missionPack?.steamId ?? '',
-				verified: miss.missionPack?.verified ?? false,
 				dateAdded: miss.missionPack?.dateAdded ?? null,
+				id: miss.missionPack?.id ?? 0,
+				missions: [newMission],
+				steamID: miss.missionPack?.steamId ?? '',
 				uploadedBy: miss.missionPack?.uploadedBy ?? null,
-				missions: [newMission]
+				verified: miss.missionPack?.verified ?? false
 			};
 			minimize(p);
 			missionPacks.push(p);
@@ -123,11 +123,11 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 	const packs = await client.missionPack.findMany({
 		orderBy: { id: 'asc' },
 		select: {
-			id: true,
 			name: true,
-			steamId: true,
-			missions: true,
 			dateAdded: true,
+			id: true,
+			missions: true,
+			steamId: true,
 			uploadedBy: true,
 			verified: true
 		}
@@ -135,13 +135,13 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 	packs.forEach(p => {
 		if (missionPacks.findIndex(mp => mp.name == p.name) < 0) {
 			let pack = {
-				id: p.id,
 				name: p.name,
-				steamID: p.steamId,
-				verified: p.verified,
 				dateAdded: p.dateAdded ?? null,
+				id: p.id,
+				missions: [],
+				steamID: p.steamId,
 				uploadedby: p.uploadedBy,
-				missions: []
+				verified: p.verified
 			};
 			minimize(pack);
 			missionPacks.push(pack);

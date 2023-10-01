@@ -5,6 +5,30 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>10 October 2023</h3>
+	<ul>
+		<li>Users can see their own unverified uploads on their user page (must be logged in).</li>
+		<li>User pages now feature Top Times and First Solves statistics.</li>
+		<li>
+			Ranks on the <a href="/solvers">Solvers</a> page are now equal for any users with equal Distinct and Total solve counts.
+		</li>
+		<li>
+			Mission ID is now required when uploading a mission.
+			<ul>
+				<li>
+					This is the string (of format "mod_missionPackId_missionId") that uniquely identifies the mission in Unity.
+				</li>
+				<li>
+					When uploading a mission, the logfile importer will attempt to find the mission ID in the logfile, but do
+					double-check the value it fills in because the format of logfiles is inconsistent on this matter.
+				</li>
+				<li>The mission ID is now present in the <a href="/json/missionsreduced">missions endpoint</a>.</li>
+			</ul>
+		</li>
+		<li>A few bug fixes on solve uploads.</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>26 September 2023</h3>
 	<ul>
 		<li>
