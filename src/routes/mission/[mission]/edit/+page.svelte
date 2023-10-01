@@ -16,7 +16,8 @@
 		parseInteger,
 		parseList,
 		parseTime,
-		validateLogfileLink
+		validateLogfileLink,
+		validateMissionID
 	} from '$lib/util';
 	import equal from 'fast-deep-equal';
 	import { sortBombs } from '../../_shared';
@@ -180,6 +181,16 @@
 		bind:value={mission.strikeMode}
 		options={[null, 'Local', 'Global']}
 		display={mode => mode ?? 'None'} />
+	<Input
+		classes="mission-id-edit"
+		name="Mission ID"
+		label="Mission ID"
+		id="mission-ingameid"
+		validate={validateMissionID}
+		parse={val => (val?.length > 0 ? val : null)}
+		display={val => val ?? ''}
+		bind:value={mission.inGameId}
+		forceValidate />
 	<Input
 		type="date"
 		id="mission-date"
@@ -477,5 +488,8 @@
 		box-shadow: var(--foreground) 0 0 10px;
 		color: #ddd;
 		background-color: rgb(15, 15, 15);
+	}
+	:global(input.mission-id-edit) {
+		width: 300px;
 	}
 </style>

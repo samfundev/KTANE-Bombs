@@ -49,6 +49,7 @@ const { PrismaClient } = pkg;
 				logfile: mission.logfile,
 				dateAdded: mission.dateAdded == null ? null : new Date(mission.dateAdded),
 				uploadedBy: mission.uploadedBy,
+				inGameId: mission.inGameId,
 				notes: mission.notes,
 				missionPackId: missionPack.id
 			});
@@ -94,6 +95,7 @@ const { PrismaClient } = pkg;
 					logfile: mission.logfile,
 					dateAdded: mission.dateAdded,
 					uploadedBy: mission.uploadedBy,
+					inGameId: mission.inGameId,
 					notes: mission.notes,
 					missionPackId: mission.missionPackId
 				},
@@ -109,6 +111,7 @@ const { PrismaClient } = pkg;
 					logfile: mission.logfile,
 					dateAdded: mission.dateAdded,
 					uploadedBy: mission.uploadedBy,
+					inGameId: mission.inGameId,
 					notes: mission.notes,
 					missionPackId: mission.missionPackId
 				},

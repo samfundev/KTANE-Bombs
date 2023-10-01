@@ -53,6 +53,7 @@ export async function POST({ locals, request }: RequestEvent) {
 				logfile: mission.logfile,
 				dateAdded: mission.dateAdded,
 				uploadedBy: locals.user.id,
+				inGameId: mission.inGameId,
 				verified: false
 			}
 		});

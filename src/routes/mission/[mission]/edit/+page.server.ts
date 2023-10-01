@@ -38,6 +38,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			logfile: true,
 			dateAdded: true,
 			notes: true,
+			inGameId: true,
 			missionPack: {
 				select: {
 					name: true,
@@ -80,7 +81,8 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 	return {
 		mission: {
 			...missionResult,
-			variantOf: firstVariant?.name ?? ''
+			variantOf: firstVariant?.name ?? '',
+			uploadedBy: null
 		},
 		missionNames: missions.map(m => m.name).sort(excludeArticleSort),
 		packs,
@@ -234,6 +236,7 @@ export const actions: Actions = {
 				logfile: mission.logfile,
 				dateAdded: mission.dateAdded,
 				notes: mission.notes,
+				inGameId: mission.inGameId,
 				variant: mission.variant
 			}
 		});

@@ -49,6 +49,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			logfile: true,
 			dateAdded: true,
 			uploadedBy: true,
+			inGameId: true,
 			notes: true,
 			missionPack: {
 				select: {
@@ -97,6 +98,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			logfile: miss.logfile,
 			dateAdded: miss.dateAdded,
 			uploadedBy: miss.uploadedBy,
+			inGameId: miss.inGameId,
 			notes: miss.notes,
 			variant: miss.variant
 		};

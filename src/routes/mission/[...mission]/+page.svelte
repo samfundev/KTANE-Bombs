@@ -115,6 +115,14 @@
 </svelte:head>
 <div class="block relative">
 	<h1 class="header">{mission.name}</h1>
+	<div class="infobar flex gray">
+		{#if mission.inGameId}
+			<span>{mission.inGameId}</span>
+		{/if}
+		{#if mission.uploadedBy}
+			<span>Uploaded by: <a href="/user/{encodeURIComponent(mission.uploadedBy)}">{mission.uploadedBy}</a></span>
+		{/if}
+	</div>
 	<div class="infobar flex">
 		<span>
 			by {mission.authors.join(', ')} from
@@ -131,9 +139,6 @@
 		{/if}
 		{#if mission.logfile !== null}
 			<a class="logfile" href={mission.logfile}>Logfile</a>
-		{/if}
-		{#if mission.uploadedBy}
-			<span>Uploaded by: <a href="/user/{encodeURIComponent(mission.uploadedBy)}">{mission.uploadedBy}</a></span>
 		{/if}
 	</div>
 	{#if hasPermission($page.data.user, Permission.VerifyMission)}
@@ -288,6 +293,10 @@
 	.infobar {
 		justify-content: center;
 		gap: 25px;
+	}
+	.infobar.gray {
+		opacity: 60%;
+		line-height: 1.5;
 	}
 	.date {
 		white-space: nowrap;

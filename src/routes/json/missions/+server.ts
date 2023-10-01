@@ -10,7 +10,9 @@ export async function GET() {
 			name: true,
 			authors: true,
 			bombs: true,
+			inGameId: true,
 			tpSolve: true,
+			designedForTP: true,
 			completions: {
 				where: {
 					verified: true
@@ -25,6 +27,8 @@ export async function GET() {
 					name: m.name,
 					authors: m.authors,
 					bombs: m.bombs,
+					missionId: m.inGameId,
+					designedForTP: m.designedForTP,
 					tpSolve: m.tpSolve,
 					completions: m.completions.length
 				};

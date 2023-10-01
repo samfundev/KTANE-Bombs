@@ -44,6 +44,7 @@ model Mission {
   dateAdded      DateTime?
   notes          String?
   uploadedBy     String?
+  inGameId       String?
 
   missionPack   MissionPack? @relation(fields: [missionPackId], references: [id])
   missionPackId Int?

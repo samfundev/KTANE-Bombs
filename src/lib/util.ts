@@ -378,6 +378,13 @@ export function validateLogfileLink(link: string): string | boolean {
 	return true;
 }
 
+export function validateMissionID(id: string): string | boolean {
+	if (id !== null && !id.match(/mod_(.+?)_(.+)/)) {
+		return 'format expected: mod_missionPackId_missionId';
+	}
+	return true;
+}
+
 export function getLogfileLinks(link: string): string[] {
 	let url: URL | null = null;
 	try {

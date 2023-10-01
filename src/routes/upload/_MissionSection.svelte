@@ -3,7 +3,7 @@
 	import Select from '$lib/controls/Select.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import { Bomb, Pool, type MissionPackSelection, type FrontendUser } from '$lib/types';
-	import { getLogfileLinks, reservedSearchStrings, validateLogfileLink } from '$lib/util';
+	import { getLogfileLinks, reservedSearchStrings, validateLogfileLink, validateMissionID } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import type { ReplaceableMission } from './_types';
@@ -41,8 +41,13 @@
 			return lines[lineIndex++];
 		}
 
+		let modID: string[] = [];
 		while (lineIndex < lines.length) {
 			let line = readLine().trim();
+			let modIdMatch = line.match(/.*?(mod_.+)/);
+
+			if (modIdMatch !== null) modID.push(modIdMatch[1]);
+
 			if (line === '[State] Enter GameplayState') {
 				mission = {
 					completions: [],
@@ -59,6 +64,7 @@
 					dateAdded: new Date(),
 					notes: null,
 					uploadedBy: null,
+					inGameId: null,
 					logfile: parsedLogfileLink
 				};
 
@@ -131,6 +137,7 @@
 				mission.factory = match[1].replace('Finite', 'Sequence');
 			}
 		}
+		if (modID.length > 0 && mission !== null) mission.inGameId = modID[modID.length - 1];
 
 		missions.forEach(m => {
 			if (m.bombs.length < 2) m.factory = null;
@@ -215,6 +222,14 @@
 							display={pack => (pack === null ? '' : pack.name)}
 							validate={pack => pack !== null}
 							instantFormat={false}
+							required={selectedMissions[i]} />
+						<Input
+							name="Mission ID"
+							label="Mission ID"
+							id="mission-ingameid-{i}"
+							validate={validateMissionID}
+							display={val => val ?? ''}
+							bind:value={mission.inGameId}
 							required={selectedMissions[i]} />
 						{#if mission.bombs.length > 1}
 							<div class="flex grow hspace">

@@ -11,6 +11,7 @@ export async function GET() {
 			name: true,
 			authors: true,
 			bombs: true,
+			inGameId: true,
 			designedForTP: true,
 			tpSolve: true,
 			completions: {
@@ -43,6 +44,7 @@ export async function GET() {
 					name: m.name,
 					authors: m.authors,
 					bombs: reducedBombs,
+					missionId: m.inGameId,
 					designedForTP: m.designedForTP,
 					moduleList: list,
 					tpSolve: m.tpSolve,

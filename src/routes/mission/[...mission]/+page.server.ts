@@ -44,6 +44,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			logfile: true,
 			dateAdded: true,
 			uploadedBy: true,
+			inGameId: true,
 			notes: true,
 			missionPack: {
 				select: {
@@ -96,7 +97,8 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 	return {
 		mission: {
 			...missionResult,
-			uploadedBy: verify ? uploadedBy : null
+			uploadedBy: verify ? uploadedBy : null,
+			inGameId: verify ? missionResult.inGameId : null
 		},
 		variants,
 		modules: await getData()

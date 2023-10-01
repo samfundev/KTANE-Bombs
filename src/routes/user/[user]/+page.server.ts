@@ -15,7 +15,8 @@ export const load = async function ({ parent, params }: any) {
 		select: {
 			avatar: true,
 			username: true,
-			permissions: true
+			permissions: true,
+			id: true
 		}
 	});
 
