@@ -70,8 +70,10 @@ export const load: PageServerLoad = async function () {
 	const sortedCompleters = Object.values(completers);
 	sortedCompleters.sort((a, b) => {
 		const distinct = b.distinct - a.distinct;
+		const totalDiff = total(b) - total(a);
 		if (distinct !== 0) return distinct;
-		return total(b) - total(a);
+		if (totalDiff !== 0) return totalDiff;
+		return a.name.localeCompare(b.name);
 	});
 
 	return {
