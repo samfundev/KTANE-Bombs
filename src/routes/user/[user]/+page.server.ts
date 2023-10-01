@@ -25,6 +25,7 @@ export const load = async function ({ parent, params }: any) {
 			solo: true,
 			dateAdded: true,
 			first: true,
+			time: true,
 			mission: {
 				select: {
 					name: true,
@@ -50,18 +51,22 @@ export const load = async function ({ parent, params }: any) {
 					solo: true,
 					dateAdded: true,
 					first: true,
-					time: true
+					time: true,
+					old: true,
+					mission: {
+						select: { name: true }
+					}
 				},
 				where: {
-					team: { has: params.user },
 					verified: true
 				},
-				orderBy: { time: 'asc' },
+				orderBy: { time: 'desc' },
 				take: 1
 			},
 			name: true,
 			id: true
-		}
+		},
+		orderBy: { name: 'asc' }
 	});
 	let unverifSolves: any[] | null = null;
 	let unverifMissions: any[] | null = null;
@@ -183,7 +188,9 @@ export const load = async function ({ parent, params }: any) {
 						};
 				  }),
 		unverifPacks,
-		bestTimes: bestTimes.filter(miss => miss.completions.length > 0 && miss.completions[0].team.includes(params.user)),
+		bestTimes: bestTimes
+			.filter(miss => miss.completions.length > 0 && miss.completions[0].team.includes(params.user))
+			.map(miss => miss.completions[0]),
 		stats: {
 			distinct: completer.distinct.size,
 			defuser: completer.defuser.size,

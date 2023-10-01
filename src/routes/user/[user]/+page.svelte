@@ -13,6 +13,7 @@
 	import type { Completion, MissionPack } from '@prisma/client';
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
+	import SingleCompletionCard from '$lib/cards/SingleCompletionCard.svelte';
 	export let data;
 
 	type SolveStats = {
@@ -32,9 +33,8 @@
 	let unverifSolves: (Completion & { mission: Mission })[] | null = data.unverifSolves;
 	let unverifMissions: Mission[] | null = data.unverifMissions;
 	let unverifPacks: MissionPack[] | null = data.unverifPacks;
-	let bestTimes: Mission[] = data.bestTimes;
+	let bestTimes: MissionCompletion[] = data.bestTimes;
 
-	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
 	let newUsername = username;
 	const oldUsername = username;
 	let tp = username === TP_TEAM;
@@ -89,6 +89,10 @@
 				: -1
 			: b.dateAdded.getTime() - a.dateAdded.getTime()
 	);
+
+	let firstTimes = completions.filter(comp => comp.first);
+	let displayAll = bestTimes.length > 0 || firstTimes.length > 0;
+
 	if (tp) {
 		tpMissions.forEach(m => {
 			let name = m.name;
@@ -185,18 +189,32 @@
 		});
 	}
 
-	let wrView = writable(viewMode);
 	let render = false;
+	let hideTopTimes = true;
+	let hideFirstSolves = true;
+	let wrView = writable(viewMode);
+	let wrHTT = writable(hideTopTimes);
+	let wrHFS = writable(hideFirstSolves);
 	if (browser) {
 		viewMode = JSON.parse(localStorage.getItem('user-solves-view') || JSON.stringify(viewOptions[0]));
 		wrView.subscribe(value => {
 			localStorage.setItem('user-solves-view', JSON.stringify(value));
 		});
-		storeView();
+		hideTopTimes = JSON.parse(localStorage.getItem('user-solves-hide-top') || JSON.stringify(true));
+		wrHTT.subscribe(value => {
+			localStorage.setItem('user-solves-hide-top', JSON.stringify(value));
+		});
+		hideFirstSolves = JSON.parse(localStorage.getItem('user-solves-hide-first') || JSON.stringify(true));
+		wrHFS.subscribe(value => {
+			localStorage.setItem('user-solves-hide-first', JSON.stringify(value));
+		});
+		storePref();
 		render = true;
 	}
-	function storeView() {
+	function storePref() {
 		wrView.set(viewMode);
+		wrHTT.set(hideTopTimes);
+		wrHFS.set(hideFirstSolves);
 	}
 </script>
 
@@ -252,22 +270,48 @@
 			<span style="background-color: {getPersonColor(1, 0, false)}">EFM</span>
 		{/if}
 	</div>
-	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={viewMode} on:change={storeView} />
+	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={viewMode} on:change={storePref} />
 </div>
+
+{#if bestTimes.length > 0}
+	<div
+		class="block flex toggleable"
+		on:click={() => {
+			hideTopTimes = !hideTopTimes;
+			storePref();
+		}}>
+		<h4>Top Times ({bestTimes.length})</h4>
+		<span class:hidden={!hideTopTimes}>(hidden)</span>
+	</div>
+	<div class="solves role flex grow" class:hidden={hideTopTimes}>
+		{#each bestTimes.sort((a, b) => (a.time == undefined || b.time == undefined ? 0 : b.time - a.time)) as comp}
+			<SingleCompletionCard {comp} {username} showTime />
+		{/each}
+	</div>
+{/if}
+
+{#if firstTimes.length > 0}
+	<div
+		class="block flex toggleable"
+		on:click={() => {
+			hideFirstSolves = !hideFirstSolves;
+			storePref();
+		}}>
+		<h4>First Solves ({firstTimes.length})</h4>
+		<span class:hidden={!hideFirstSolves}>(hidden)</span>
+	</div>
+	<div class="solves role flex grow" class:hidden={hideFirstSolves}>
+		{#each firstTimes as comp}
+			<SingleCompletionCard {comp} {username} />
+		{/each}
+	</div>
+{/if}
+
 {#if render && viewMode == viewOptions[2]}
+	<div class="block" class:hidden={!displayAll}><h4>All</h4></div>
 	<div class="solves role flex grow">
 		{#each completionByNewest as comp}
-			<a href="/mission/{encodeURIComponent(comp.mission.name)}">
-				<div
-					class="block flex newest"
-					class:tp-solve={tp}
-					style:background-color={getPersonColor(comp.team.length, comp.team.indexOf(username), comp.solo, tp)}>
-					<span class="mission-name">{comp.mission.name}</span>
-					{#if comp.dateAdded}
-						<span>{comp.dateAdded.toLocaleDateString(undefined, dateOptions)}</span>
-					{/if}
-				</div>
-			</a>
+			<SingleCompletionCard {comp} {username} />
 		{/each}
 	</div>
 {:else if render && viewMode == viewOptions[1]}
@@ -287,7 +331,7 @@
 					{@const solveCount = selectSolveCount(key, missions[comp.mission.name])}
 					<a href="/mission/{encodeURIComponent(comp.mission.name)}" class:green={key.includes('+')}>
 						<div
-							class="block"
+							class="block flex multisolve"
 							class:tp-solve={tp}
 							style:background-color={key.includes('+')
 								? '#00ff0044'
@@ -303,6 +347,7 @@
 		{/if}
 	{/each}
 {:else if render}
+	<div class="block" class:hidden={!displayAll}><h4>All</h4></div>
 	<div class="solves flex grow">
 		{#each Object.values(missions).sort((a, b) => a.name.localeCompare(b.name)) as mission}
 			<MissionCompletionCard {mission} {username} />
@@ -379,6 +424,17 @@
 		align-content: start;
 		white-space: nowrap;
 	}
+	.multisolve {
+		justify-content: space-between;
+	}
+	.toggleable {
+		cursor: pointer;
+		gap: 10px;
+	}
+	.toggleable > span {
+		opacity: 60%;
+	}
+
 	a:not(.unverif-pack) {
 		text-decoration: none;
 	}
@@ -390,10 +446,6 @@
 	}
 	a.green {
 		background-color: var(--foreground);
-	}
-	.newest {
-		justify-content: space-between;
-		gap: 20px;
 	}
 
 	.unverif-item.completion {

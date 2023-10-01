@@ -142,5 +142,8 @@ export class MissionCompletion {
 	team: string[] = [];
 	solo = false;
 	dateAdded: Date | null = null;
+	first = false;
+	time: number | undefined = undefined;
+	old: boolean | undefined = undefined;
 	mission: Pick<Mission, 'name'> = { name: '' };
 }
