@@ -2,6 +2,7 @@ import client from '$lib/client';
 import { Bomb, Permission } from '$lib/types';
 import { dateAddedSort, forbidden, hasPermission } from '$lib/util';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
+import { minimize } from '../_util';
 
 export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 	if (!hasPermission(locals.user, Permission.DownloadDatabase)) {
@@ -43,6 +44,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			factory: true,
 			id: true,
 			inGameId: true,
+			inGameName: true,
 			logfile: true,
 			notes: true,
 			strikeMode: true,
@@ -63,12 +65,6 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			}
 		}
 	});
-
-	function minimize(obj: any) {
-		Object.keys(obj).forEach(k => {
-			if (obj[k] == null) delete obj[k];
-		});
-	}
 
 	let missionPacks: {
 		name: string;
@@ -93,6 +89,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			factory: miss.factory,
 			id: miss.id,
 			inGameId: miss.inGameId,
+			inGameName: miss.inGameName,
 			logfile: miss.logfile,
 			notes: miss.notes,
 			strikeMode: miss.strikeMode,

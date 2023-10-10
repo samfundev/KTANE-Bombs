@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Input from '$lib/controls/Input.svelte';
-	import type { FrontendUser, MissionPack } from '$lib/types';
+	import type { MissionPack } from '$lib/types';
 	import { getSteamID, validateSteamID } from '$lib/util';
 	import toast from 'svelte-french-toast';
 

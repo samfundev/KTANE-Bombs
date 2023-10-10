@@ -1,6 +1,7 @@
 import client from '$lib/client';
 import { onlyUnique, withoutArticle } from '$lib/util';
 import type { Mission } from '$lib/types';
+import { minimize } from '../_util';
 
 export async function GET() {
 	const missionsObj = await client.mission.findMany({
@@ -12,6 +13,7 @@ export async function GET() {
 			authors: true,
 			bombs: true,
 			inGameId: true,
+			inGameName: true,
 			designedForTP: true,
 			tpSolve: true,
 			completions: {
@@ -40,16 +42,19 @@ export async function GET() {
 						time: b.time
 					};
 				});
-				return {
+				let mission = {
 					name: m.name,
 					authors: m.authors,
 					bombs: reducedBombs,
 					missionId: m.inGameId,
+					inGameName: m.inGameName,
 					designedForTP: m.designedForTP,
 					moduleList: list,
 					tpSolve: m.tpSolve,
 					completions: m.completions.length
 				};
+				minimize(mission);
+				return mission;
 			})
 			.sort((a, b) => {
 				return withoutArticle(a.name).localeCompare(withoutArticle(b.name));

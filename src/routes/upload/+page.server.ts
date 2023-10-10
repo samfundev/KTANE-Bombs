@@ -14,6 +14,7 @@ export const load = async function ({ parent }: any) {
 			authors: true,
 			factory: true,
 			timeMode: true,
+			inGameName: true,
 			bombs: {
 				select: { time: true }
 			}
@@ -34,10 +35,9 @@ export const load = async function ({ parent }: any) {
 	return {
 		missionInfo: missions.reduce((info: { [name: string]: any }, miss: any) => {
 			info[miss.name] = {};
+			info[miss.name]['ingame'] = miss.inGameName;
 			info[miss.name]['factory'] = miss.factory;
-			info['timeMode'] = {};
 			info[miss.name]['timeMode'] = miss.timeMode;
-			info['time'] = {};
 			info[miss.name]['time'] =
 				miss.timeMode === 'Global'
 					? Math.max(miss.bombs.map((bomb: any) => bomb.time))

@@ -39,6 +39,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			dateAdded: true,
 			notes: true,
 			inGameId: true,
+			inGameName: true,
 			missionPack: {
 				select: {
 					name: true,
@@ -237,6 +238,7 @@ export const actions: Actions = {
 				dateAdded: mission.dateAdded,
 				notes: mission.notes,
 				inGameId: mission.inGameId,
+				inGameName: mission.inGameName,
 				variant: mission.variant
 			}
 		});

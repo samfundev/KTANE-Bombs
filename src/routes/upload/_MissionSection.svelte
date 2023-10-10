@@ -2,17 +2,17 @@
 	import Input from '$lib/controls/Input.svelte';
 	import Select from '$lib/controls/Select.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
-	import { Bomb, Pool, type MissionPackSelection, type FrontendUser } from '$lib/types';
-	import { getLogfileLinks, pluralize, reservedSearchStrings, validateLogfileLink, validateMissionID } from '$lib/util';
+	import { Bomb, Pool, type MissionPackSelection } from '$lib/types';
+	import { getLogfileLinks, reservedSearchStrings, validateLogfileLink, validateMissionID } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import type { ReplaceableMission } from './_types';
 
-	export let missionNames: string[];
+	export let missionInfo: { [name: string]: any };
 	export let authorNames: string[];
 	export let packs: MissionPackSelection[];
 
-	missionNames = missionNames.sort((a, b) => a.localeCompare(b));
+	let missionNames = Object.keys(missionInfo).sort((a, b) => a.localeCompare(b));
 	let invalid = false;
 	let logfileLink = '';
 	let parsedLogfileLink = '';
@@ -45,8 +45,8 @@
 		while (lineIndex < lines.length) {
 			let line = readLine().trim();
 			let modIdMatch = line.match(/.*?(mod_.+)/);
-			if (modIdMatch !== null && mission !== null && !mission.ids.includes(modIdMatch[1])) {
-				mission.ids.push(modIdMatch[1]);
+			if (modIdMatch !== null && mission !== null) {
+				if (!mission.ids.includes(modIdMatch[1])) mission.ids.push(modIdMatch[1]);
 				mission.inGameId = modIdMatch[1];
 			}
 
@@ -67,6 +67,7 @@
 					notes: null,
 					uploadedBy: null,
 					inGameId: null,
+					inGameName: null,
 					ids: [],
 					logfile: parsedLogfileLink
 				};
@@ -128,9 +129,17 @@
 
 					if (reservedSearchStrings.some(str => mission?.name.includes(str))) {
 						missionNameQuirk[mission.name] = RESERVED;
-					} else if (missionNames.some(n => n.toLowerCase() == mission?.name.toLowerCase())) {
-						missionNameQuirk[mission.name] = EXISTS;
-						mission.replace = true;
+					} else {
+						let nameMatch = missionNames.find(
+							name =>
+								event.mission.toLowerCase() ===
+								(missionInfo[name]['ingame'] != null ? missionInfo[name]['ingame'] : name).toLowerCase()
+						);
+						if (nameMatch != undefined) {
+							mission.name = nameMatch;
+							missionNameQuirk[mission.name] = EXISTS;
+							mission.replace = true;
+						}
 					}
 				}
 			} else if (line.startsWith('[Factory] Creating gamemode') && mission !== null) {
@@ -235,6 +244,7 @@
 							validate={validateMissionID}
 							display={val => val ?? ''}
 							options={mission.ids}
+							optionalOptions
 							bind:value={mission.inGameId}
 							required={selectedMissions[i]} />
 						{#if mission.bombs.length > 1}

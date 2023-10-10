@@ -26,7 +26,7 @@
 	</div>
 </div>
 {#if section == 'mission'}
-	<MissionSection missionNames={Object.keys(missionInfo)} {authorNames} {packs} />
+	<MissionSection {missionInfo} {authorNames} {packs} />
 {:else if section == 'missionpack'}
 	<MissionPackSection />
 {:else}

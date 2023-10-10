@@ -45,6 +45,7 @@ export class Mission {
 	notes: string | null = null;
 	uploadedBy: string | null = null;
 	inGameId: string | null = null;
+	inGameName: string | null = null;
 }
 
 export class Bomb {

@@ -126,8 +126,6 @@
 		let percent =
 			(modulesInMission[msName].filter(m => (options.modules['EnabledList'] || []).includes(m.ModuleID)).length * 100) /
 			modulesInMission[msName].length;
-		// if (percent >= options.profPerc[0])
-		// 	console.log(msName + ": " + percent);
 		return percent;
 	}
 

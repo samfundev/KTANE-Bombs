@@ -2,7 +2,7 @@
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import Input from '$lib/controls/Input.svelte';
-	import { Completion, type FrontendUser } from '$lib/types';
+	import { Completion } from '$lib/types';
 	import { formatTime, getLogfileLinks, parseTime } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import { TP_TEAM } from '$lib/const';
@@ -88,7 +88,11 @@
 
 				const event = JSON.parse(json);
 				if (event.type === 'ROUND_START' && event.mission) {
-					let match = missionNames.find(name => name.toLowerCase() === event.mission.toLowerCase());
+					let match = missionNames.find(
+						name =>
+							event.mission.toLowerCase() ===
+							(missionInfo[name]['ingame'] != null ? missionInfo[name]['ingame'] : name).toLowerCase()
+					);
 					if (match !== undefined) {
 						missionName = match;
 						time = 0;
@@ -97,7 +101,11 @@
 					let n = parseFloat(event.bombTime);
 					if (!isNaN(n)) {
 						n = Math.max(Math.round(n * 100) / 100, MIN_TIME);
-						if (missionInfo[missionName]['factory'] === 'Sequence' && missionInfo[missionName]['timeMode'] !== 'Global')
+						if (
+							missionInfo[missionName] != undefined &&
+							missionInfo[missionName]['factory'] === 'Sequence' &&
+							missionInfo[missionName]['timeMode'] !== 'Global'
+						)
 							time = Math.min(time + n, missionInfo[missionName]['time']);
 						else time = n;
 						parsedTimes.push(n);
@@ -109,7 +117,8 @@
 	}
 
 	function validateTime(time: number): string | boolean {
-		let maxTime = missionName.length > 0 ? missionInfo[missionName]['time'] ?? Infinity : Infinity;
+		let maxTime =
+			missionName.length > 0 || missionInfo[missionName] == undefined ? Infinity : missionInfo[missionName]['time'];
 		if (time == null) return 'Invalid time';
 		else if (time >= maxTime) return `Time must be < mission's given time (${formatTime(maxTime)})`;
 		else if (time > 0) return true;

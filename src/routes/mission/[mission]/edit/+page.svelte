@@ -140,24 +140,34 @@
 <svelte:head>
 	<title>{mission.name}</title>
 </svelte:head>
-<div class="block flex grow relative">
-	<Input label="Name" id="mission-name" bind:value={mission.name} />
-	<Input label="Authors" id="mission-authors" bind:value={mission.authors} parse={parseList} />
-	<Input
-		label="Mission Pack"
-		id="mission-pack"
-		bind:value={mission.missionPack}
-		required
-		instantFormat={false}
-		options={packs}
-		display={pack => pack?.name}
-		validate={value => value !== null} />
-	<Input
-		id="mission-variant"
-		label="Variant of"
-		options={missionNames}
-		validate={value => value !== null}
-		bind:value={mission.variantOf} />
+<div class="block relative">
+	<div class="flex top-edit-controls">
+		<Input label="Name" id="mission-name" bind:value={mission.name} />
+		<Input label="Authors" id="mission-authors" bind:value={mission.authors} parse={parseList} />
+		<Input
+			label="Mission Pack"
+			id="mission-pack"
+			bind:value={mission.missionPack}
+			required
+			instantFormat={false}
+			options={packs}
+			display={pack => pack?.name}
+			validate={value => value !== null} />
+		<Input
+			id="mission-variant"
+			label="Variant of"
+			options={missionNames}
+			validate={value => value !== null}
+			bind:value={mission.variantOf} />
+	</div>
+	<div class="flex top-edit-controls">
+		<Input
+			id="mission-ingamename"
+			label="In-Game Name"
+			parse={val => (val?.trim().length > 0 ? val.trim() : null)}
+			display={val => val ?? ''}
+			bind:value={mission.inGameName} />
+	</div>
 	<div class="actions">
 		<button on:click={deleteMission}>Delete</button>
 	</div>
@@ -363,6 +373,9 @@
 </div>
 
 <style>
+	:global(.top-edit-controls > div) {
+		width: 24.5%;
+	}
 	.main-content {
 		display: grid;
 		grid-template-columns: 2fr 1fr;
