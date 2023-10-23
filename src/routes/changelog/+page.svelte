@@ -5,7 +5,7 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
-	<h3>10 October 2023</h3>
+	<h3>22 October 2023</h3>
 	<ul>
 		<li>Users can see their own unverified uploads on their user page (must be logged in).</li>
 		<li>User pages now feature Top Times and First Solves statistics.</li>
@@ -24,6 +24,10 @@
 				</li>
 				<li>The mission ID is now present in the <a href="/json/missionsreduced">missions endpoint</a>.</li>
 			</ul>
+		</li>
+		<li>
+			The in-game name of a mission (which may differ from what it's called on this site) is now in the
+			<a href="/json/missionsreduced">missions endpoint</a>.
 		</li>
 		<li>A few bug fixes on solve uploads.</li>
 	</ul>
