@@ -5,14 +5,21 @@
 	let completers: Completer[] = data.completers;
 	let ranks: { [name: string]: number } = {};
 	let rank = 1;
-	for (let c = 0; c < completers.length; c++) {
+	let tied = 1;
+
+	ranks[completers[0].name] = rank;
+	for (let c = 1; c < completers.length; c++) {
 		const comp = completers[c];
-		const prev = c > 0 ? completers[c - 1] : completers[0];
+		const prev = completers[c - 1];
 		if (
-			c > 0 &&
-			(prev.distinct != comp.distinct || prev.defuser + prev.expert + prev.efm != comp.defuser + comp.expert + comp.efm)
-		)
-			rank++;
+			comp.distinct === prev.distinct &&
+			comp.defuser + comp.expert + comp.efm === prev.defuser + prev.expert + prev.efm
+		) {
+			tied++; // Tied with previous
+		} else {
+			rank += tied; // New rank
+			tied = 1;
+		}
 		ranks[comp.name] = rank;
 	}
 </script>
