@@ -124,7 +124,10 @@
 
 	function percentFromEnabled(msName: string): number {
 		let percent =
-			(modulesInMission[msName].filter(m => (options.modules['EnabledList'] || []).includes(m.ModuleID)).length * 100) /
+			(modulesInMission[msName].filter(
+				m => (options.modules['EnabledList'] || []).includes(m.ModuleID) || m.Origin === 'Vanilla'
+			).length *
+				100) /
 			modulesInMission[msName].length;
 		return percent;
 	}

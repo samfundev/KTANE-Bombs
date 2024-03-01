@@ -279,9 +279,10 @@ export function getModule(moduleID: string, modules: Record<string, RepoModule> 
 		BossStatus: null,
 		ModuleID: moduleID,
 		Name: moduleID,
+		Origin: 'Mods',
+		Quirks: null,
 		RuleSeedSupport: null,
 		Type: moduleID.match(/needy/gi) ? 'Needy' : 'Regular',
-		Quirks: null,
 		X: 0,
 		Y: 0
 	};

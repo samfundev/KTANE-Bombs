@@ -2,9 +2,10 @@ export type RepoModule = {
 	BossStatus: string | null;
 	ModuleID: string;
 	Name: string;
+	Origin: string;
+	Quirks: string | null;
 	RuleSeedSupport: string | null;
 	Type: string;
-	Quirks: string | null;
 	X: number;
 	Y: number;
 };
