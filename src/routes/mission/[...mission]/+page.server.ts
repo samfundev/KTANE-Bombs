@@ -98,7 +98,8 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		mission: {
 			...missionResult,
 			uploadedBy: verify ? uploadedBy : null,
-			inGameId: verify ? missionResult.inGameId : null
+			inGameId: verify ? missionResult.inGameId : null,
+			inGameName: null
 		},
 		variants,
 		modules: await getData()

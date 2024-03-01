@@ -19,7 +19,6 @@
 		validateLogfileLink,
 		validateMissionID
 	} from '$lib/util';
-	import equal from 'fast-deep-equal';
 	import { sortBombs } from '../../_shared';
 	import type { EditMission } from './_types';
 	import { page } from '$app/stores';
