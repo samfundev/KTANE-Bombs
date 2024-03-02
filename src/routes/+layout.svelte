@@ -81,13 +81,16 @@
 		--textbox-background: rgb(15, 15, 15);
 		--popup-background: #fafaff;
 		--contrast-block-background: rgb(220, 220, 220);
-		--accent-gray: #BBB;
+		--accent-gray: #bbb;
 		--light-text-color: rgb(100, 100, 100);
 		--link-text-color: currentColor;
 		--link-visited-text-color: currentColor;
 		--blue-link-color: blue;
 		--blue-link-visited-color: rgb(156, 34, 232);
 		--accent: #bc421e;
+		--boss-color: #ffaaaa;
+		--needy-color: #9999ff;
+		--quirks-color: #aae8ff;
 		--stick-under-navbar: calc(1.25em + 4 * var(--gap) + 2px);
 	}
 
@@ -106,6 +109,9 @@
 			--link-visited-text-color: rgb(130, 130, 130);
 			--blue-link-color: rgb(85, 167, 255);
 			--blue-link-visited-color: rgb(174, 93, 240);
+			--boss-color: #762121;
+			--needy-color: #1e1e84;
+			--quirks-color: #216f86;
 		}
 		:global(.dark-invert) {
 			filter: invert(90%);
@@ -256,6 +262,16 @@
 
 	:global(label.help) {
 		cursor: help;
+	}
+
+	:global(:is(.module-card, .pool:not(.quirks)) .module.quirks, :is(.pool, .single).quirks, span.quirks) {
+		background-color: var(--quirks-color) !important;
+	}
+	:global(:is(.module-card, .pool:not(.boss)) .module.boss, :is(.pool, .single).boss, span.boss) {
+		background-color: var(--boss-color) !important;
+	}
+	:global(:is(.module-card, .pool:not(.needy)) .module.needy, :is(.pool, .single).needy, span.needy) {
+		background-color: var(--needy-color) !important;
 	}
 
 	:global(.mission-card-grid) {

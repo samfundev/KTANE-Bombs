@@ -317,21 +317,6 @@
 		gap: var(--gap);
 		align-content: start;
 	}
-	:global(.pool:not(.quirks) .module.quirks),
-	:is(.pool, .single).quirks,
-	span.quirks {
-		background-color: #00bbff55 !important;
-	}
-	:global(.pool:not(.boss) .module.boss),
-	:is(.pool, .single).boss,
-	span.boss {
-		background-color: #ff000055 !important;
-	}
-	:global(.pool:not(.needy) .module.needy),
-	:is(.pool, .single).needy,
-	span.needy {
-		background-color: #0000ff66 !important;
-	}
 	.pool.border {
 		border: 2px dashed var(--textbox-background);
 	}

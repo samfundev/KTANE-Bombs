@@ -7,7 +7,8 @@
 		getModule,
 		onlyUnique,
 		withoutArticle,
-		preventDisappear
+		preventDisappear,
+		logicalSearchTooltip
 	} from '$lib/util';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
@@ -36,11 +37,6 @@
 	let filterTab: HTMLDivElement;
 	let layoutSearch: LayoutSearchFilter;
 	const defaultSearchOptions = [true, false, false, false, false];
-	const searchTooltip =
-		'Logical operators supported: &&(and), ||(or), !!(not)\n' +
-		'Example: thing one && aaa || bbb && !!ccc\n' +
-		'Which means: ("thing one" AND "aaa") OR ("bbb" AND NOT "ccc")\n' +
-		'Brackets are supported too: [[ thing one || aaa ]] && [[ bbb || !!ccc ]]';
 
 	let options = new HomeOptions();
 	let dispatch = createEventDispatcher();
@@ -318,7 +314,7 @@
 		<LayoutSearchFilter
 			id="bomb-search-field"
 			label="Search:"
-			title={searchTooltip}
+			title={logicalSearchTooltip}
 			rows={1}
 			textArea
 			autoExpand

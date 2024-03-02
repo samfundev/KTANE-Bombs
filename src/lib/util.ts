@@ -425,3 +425,9 @@ type DateSortable = { id: number; dateAdded: Date | null };
 export function dateAddedSort(a: DateSortable, b: DateSortable): number {
 	return a.dateAdded == null || b.dateAdded == null ? a.id - b.id : a.dateAdded.getTime() - b.dateAdded.getTime();
 }
+
+export const logicalSearchTooltip =
+	'Logical operators supported: &&(and), ||(or), !!(not)\n' +
+	'Example: thing one && aaa || bbb && !!ccc\n' +
+	'Which means: ("thing one" AND "aaa") OR ("bbb" AND NOT "ccc")\n' +
+	'Brackets are supported too: [[ thing one || aaa ]] && [[ bbb || !!ccc ]]';

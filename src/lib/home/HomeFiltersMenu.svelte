@@ -152,6 +152,20 @@
 		});
 	}
 
+	function updateYesNoLists() {
+		noList = [];
+		if (profile['DisabledList']) {
+			Object.assign(noList, profile['DisabledList']);
+			noList = noList.map(m => getModule(m, modules).Name).sort(excludeArticleSort);
+		}
+		yesList = [];
+		if (profile['EnabledList']) {
+			Object.assign(yesList, profile['EnabledList']);
+			yesList = yesList.map(m => getModule(m, modules).Name).sort(excludeArticleSort);
+		}
+		profile = profile;
+	}
+
 	async function importProfile(files: FileList) {
 		if (!files.length) return;
 
@@ -195,18 +209,7 @@
 					if (p['EnabledList'])
 						profile['EnabledList'] = profile['EnabledList'].concat(p['EnabledList']).filter(onlyUnique);
 
-					noList = [];
-					if (profile['DisabledList']) {
-						Object.assign(noList, profile['DisabledList']);
-						noList = noList.map(m => getModule(m, modules).Name).sort(excludeArticleSort);
-					}
-					yesList = [];
-					if (profile['EnabledList']) {
-						Object.assign(yesList, profile['EnabledList']);
-						yesList = yesList.map(m => getModule(m, modules).Name).sort(excludeArticleSort);
-					}
-
-					profile == profile;
+					updateYesNoLists();
 					setOption();
 				} else {
 					profile['Name'] = name;
@@ -282,7 +285,7 @@
 		Object.assign(profile, JSON.parse(localStorage.getItem('imported-profile') || '{}'));
 		localSubscribe(profile, 'imported-profile');
 		operation = profile['Operation'] || Operation.Expert;
-		profile = profile;
+		updateYesNoLists();
 		setOption();
 	});
 </script>

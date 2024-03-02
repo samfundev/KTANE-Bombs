@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import ModuleCard from '$lib/cards/ModuleCard.svelte';
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
 	import type { RepoModule } from '$lib/repo.js';
 	import type { Bomb, ID, Mission } from '$lib/types.js';
-	import { evaluateLogicalStringSearch, getModule, onlyUnique } from '$lib/util.js';
+	import { evaluateLogicalStringSearch, getModule, logicalSearchTooltip, onlyUnique } from '$lib/util.js';
 
 	export let data;
 	type ShortMission = Pick<Mission, 'name' | 'bombs'>;
@@ -26,6 +27,24 @@
 			});
 	});
 
+	function popular() {
+		mods.sort((a, b) => (missionsOf[b[0]]?.length ?? 0) - (missionsOf[a[0]]?.length ?? 0));
+		mods = mods;
+		if (browser) {
+			document.querySelector('.sort-option.alphabetical')?.classList.remove('selected');
+			document.querySelector('.sort-option.popular')?.classList.add('selected');
+		}
+	}
+	function alphabetical() {
+		mods.sort((a, b) => {
+			return a[1].Name.localeCompare(b[1].Name);
+		});
+		mods = mods;
+		if (browser) {
+			document.querySelector('.sort-option.popular')?.classList.remove('selected');
+			document.querySelector('.sort-option.alphabetical')?.classList.add('selected');
+		}
+	}
 	function closeeAll() {
 		document.querySelectorAll('.missions-dropdown:not(.few)').forEach(el => {
 			el.classList.remove('expand');
@@ -36,9 +55,8 @@
 		let elem = document.querySelector(`.missions-dropdown.mod${modID.replace(/\s/g, '')}`);
 		elem?.classList.add('expand');
 	}
-	const mods = Object.entries(modules).sort((a, b) => {
-		return a[0].localeCompare(b[0]);
-	});
+	let mods = Object.entries(modules).filter(mod => mod[1].Type == 'Regular' || mod[1].Type == 'Needy');
+	alphabetical();
 	let resultsText: number = mods.length;
 
 	function moduleSearchFilter(name: string, searchText: string): boolean {
@@ -56,19 +74,29 @@
 <div class="block">
 	<h1 class="header">Modules</h1>
 </div>
-<div class="block flex row search-bar">
-	<span>Results: {resultsText} of {mods.length}</span>
-	<LayoutSearchFilter
-		id="module-search-field"
-		label="Search:"
-		rows={1}
-		textArea
-		autoExpand
-		bind:items={moduleRows}
-		bind:numResults={resultsText}
-		filterFunc={moduleSearchFilter}
-		classes="help" />
-	<button on:click={closeeAll}>Close All</button>
+<div class="top-bar flex column block">
+	<div class="legend flex">
+		<span class="boss">Boss/Semi-Boss</span>
+		<span class="needy">Needy</span>
+		<span class="quirks">Has Other Quirks</span>
+	</div>
+	<div class="flex row search-bar">
+		<span>Results: {resultsText} of {mods.length}</span>
+		<LayoutSearchFilter
+			id="module-search-field"
+			label="Search:"
+			rows={1}
+			textArea
+			autoExpand
+			title={logicalSearchTooltip}
+			bind:items={moduleRows}
+			bind:numResults={resultsText}
+			filterFunc={moduleSearchFilter}
+			classes="help" />
+		<button on:click={closeeAll}>Close All</button>
+		<span class="sort-option popular" on:click={popular}>Popular</span>
+		<span class="sort-option selected alphabetical" on:click={alphabetical}>Alphabetical</span>
+	</div>
 </div>
 <div class="flex column">
 	{#each mods as [modID, module]}
@@ -76,8 +104,8 @@
 			<div class="module-card flex column"><ModuleCard {module} /></div>
 			<div
 				class="missions-dropdown flex column mod{modID.replace(/\s/g, '')}"
-				class:expand={missionsOf[modID]?.length <= 4}
-				class:few={missionsOf[modID]?.length <= 4}
+				class:expand={!missionsOf[modID] || missionsOf[modID].length <= 4}
+				class:few={!missionsOf[modID] || missionsOf[modID].length <= 4}
 				on:click={() => reveal(modID)}>
 				<div class="">
 					<span>Missions: </span>
@@ -111,6 +139,13 @@
 		width: 250px;
 		justify-content: center;
 	}
+	:global(.module-card .module) {
+		height: 100%;
+	}
+	.top-bar {
+		position: sticky;
+		top: calc(var(--stick-under-navbar) + 1px);
+	}
 	.missions-dropdown {
 		background-color: var(--foreground);
 		width: 100%;
@@ -118,7 +153,7 @@
 		padding: var(--gap);
 	}
 	.missions-dropdown:not(.expand),
-	button {
+	.sort-option {
 		cursor: pointer;
 	}
 	.mission-list {
@@ -140,6 +175,20 @@
 	}
 	.bold {
 		font-weight: bold;
+	}
+	.legend {
+		justify-content: center;
+	}
+	.legend > span {
+		padding: var(--gap);
+	}
+	.sort-option:not(.selected) {
+		cursor: pointer;
+	}
+	.sort-option.selected {
+		text-decoration: underline;
+		font-weight: bold;
+		pointer-events: none;
 	}
 	:global(#module-search-field) {
 		width: 250px;
