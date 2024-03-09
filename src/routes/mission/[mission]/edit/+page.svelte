@@ -304,7 +304,12 @@
 		{#each mission.completions as completion, ci}
 			<div class="block flex column relative">
 				{#if shownComp[completion.id]}
-					<Input label="Proof" id="completion-proof" bind:value={completion.proofs} />
+					<TextArea
+						label="Proof"
+						id="completion-proof"
+						bind:value={completion.proofs}
+						parse={value => value.split(',').map(proof => proof.trim())}
+						display={list => list.join(',\n')} />
 					<div class="hstack">
 						<Input
 							label="Time"
