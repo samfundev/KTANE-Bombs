@@ -60,6 +60,7 @@
 		<ul><li>Modules that do nothing such as Literally Nothing do not count towards this total.</li></ul>
 		<li>It contains the module Logging.</li>
 		<li>It contains too many repeat modules.</li>
+		<li>It contains a module that doesn't have a manual on the <a href="https://ktane.timwi.de/">official repo</a>.</li>
 		<li>The mission's contents are too similar to those of another mission.</li>
 		<li>The mission name is the same as another's on this website.</li>
 		<li>The mission name is vulgar or offensive.</li>

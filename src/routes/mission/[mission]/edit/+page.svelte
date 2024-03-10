@@ -51,9 +51,13 @@
 
 	let modified = false;
 	let tpCompletion = false;
+	let nameIsSame = false;
 	$: {
 		let log = getLogfileLinks(logfile);
 		mission.logfile = log[0] === '' ? null : log[1];
+		nameIsSame = originalMission.name === mission.name;
+		if (!nameIsSame && mission.inGameName == null) mission.inGameName = originalMission.name;
+		if (mission.inGameName === mission.name) mission.inGameName = null;
 		tpCompletion = mission.completions.some(c => c.team[0] === TP_TEAM);
 		if (tpCompletion) mission.tpSolve = true;
 		modified = JSON.stringify(originalMission) !== JSON.stringify(mission);
@@ -141,7 +145,7 @@
 </svelte:head>
 <div class="block relative">
 	<div class="flex top-edit-controls">
-		<Input label="Name" id="mission-name" bind:value={mission.name} />
+		<Input label="Name" id="mission-name" bind:value={mission.name} validate={value => value.length > 0} />
 		<Input label="Authors" id="mission-authors" bind:value={mission.authors} parse={parseList} />
 		<Input
 			label="Mission Pack"
@@ -158,6 +162,11 @@
 			options={missionNames}
 			validate={value => value !== null}
 			bind:value={mission.variantOf} />
+	</div>
+	<div class:hidden={nameIsSame}>
+		<strong class="alert"
+			>If you rename the mission, make sure the In-Game Name reflects what the mission is called in its logfile (i.e.
+			what it's called in the binder).</strong>
 	</div>
 	<div class="flex top-edit-controls">
 		<Input
@@ -400,7 +409,8 @@
 		gap: var(--gap);
 	}
 
-	.not-verified {
+	.not-verified,
+	.alert {
 		color: red;
 	}
 	.centered {
