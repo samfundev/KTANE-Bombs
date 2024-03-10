@@ -5,6 +5,23 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>11 March 2024</h3>
+	<ul>
+		<li>
+			New <a href="/modules">Modules</a> page! Lists which missions contain each module, sortable by popularity or alphabetical.
+		</li>
+		<li>
+			Rank on the <a href="/solvers">Solvers</a> page now works like most leaderboards, ties in rank <i>X</i> mean that
+			no one holds rank <i>X + 1</i>.
+		</li>
+		<li>
+			Profile filter is now more accurate and correctly handles missions with vanilla modules. It assumes all experts
+			know all vanilla modules.
+		</li>
+		<li>Maintainers can now add proof links to an existing solve without resubmitting the whole solve.</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>22 October 2023</h3>
 	<ul>
 		<li>Users can see their own unverified uploads on their user page (must be logged in).</li>
