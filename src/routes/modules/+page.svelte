@@ -4,7 +4,13 @@
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
 	import type { RepoModule } from '$lib/repo.js';
 	import type { Bomb, ID, Mission } from '$lib/types.js';
-	import { evaluateLogicalStringSearch, getModule, logicalSearchTooltip, onlyUnique } from '$lib/util.js';
+	import {
+		allSpecialModules,
+		evaluateLogicalStringSearch,
+		getModule,
+		logicalSearchTooltip,
+		onlyUnique
+	} from '$lib/util.js';
 
 	export let data;
 	type ShortMission = Pick<Mission, 'name' | 'bombs'>;

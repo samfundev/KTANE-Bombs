@@ -288,15 +288,16 @@ export function getModule(moduleID: string, modules: Record<string, RepoModule> 
 	};
 }
 
+export const allSpecialModules = [
+	'ALL_NEEDY',
+	'ALL_SOLVABLE',
+	'ALL_VANILLA_SOLVABLE',
+	'ALL_VANILLA_NEEDY',
+	'ALL_MODS_SOLVABLE',
+	'ALL_MODS_NEEDY'
+];
 export function hasSpecialIcon(moduleID: string): boolean {
-	return [
-		'ALL_NEEDY',
-		'ALL_SOLVABLE',
-		'ALL_VANILLA_SOLVABLE',
-		'ALL_VANILLA_NEEDY',
-		'ALL_MODS_SOLVABLE',
-		'ALL_MODS_NEEDY'
-	].includes(moduleID);
+	return allSpecialModules.includes(moduleID);
 }
 
 export function getPersonColor(size: number, index: number, solo: boolean, tpSolve: boolean = false): string {
