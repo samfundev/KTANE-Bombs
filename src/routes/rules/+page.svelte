@@ -35,7 +35,10 @@
 		<li>Viewing the logfile of the bomb before it is solved.</li>
 		<li>Having Logging appear on a bomb with an ALL_MODS pool.</li>
 		<li>Revealing module names using Profile Revealer.</li>
-		<li>Using mod settings to make a module significantly easier than default without reason.</li>
+		<li>
+			Using mod settings to make a module easier than default, unless for accessibility reasons. An exception applies 
+			in the case of modules or module combinations which are provably impossible.
+		</li>
 		<li>Using a <a class="link" href="/restrictedmanuals">Restricted Manual</a>.</li>
 		<li>Using a manual not accessible on the repo.</li>
 		<li>Using any needy listed below when given the choice of needy.</li>
