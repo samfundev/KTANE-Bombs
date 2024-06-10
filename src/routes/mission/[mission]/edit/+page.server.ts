@@ -1,7 +1,7 @@
 import client from '$lib/client';
 import { getData } from '$lib/repo';
 import { Completion, Permission, type ID } from '$lib/types';
-import { excludeArticleSort, forbidden, hasPermission } from '$lib/util';
+import { excludeArticleSort, forbidden, hasPermission, properUrlEncode } from '$lib/util';
 import type { RequestEvent, ServerLoadEvent } from '@sveltejs/kit';
 import type { EditMission } from './_types';
 import { redirect, error } from '@sveltejs/kit';
@@ -243,7 +243,7 @@ export const actions: Actions = {
 			}
 		});
 
-		throw redirect(303, '/mission/' + encodeURIComponent(mission.name));
+		throw redirect(303, '/mission/' + properUrlEncode(mission.name));
 	}
 };
 

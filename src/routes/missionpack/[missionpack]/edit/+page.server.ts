@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import { Permission } from '$lib/types';
-import { forbidden, hasPermission } from '$lib/util';
+import { forbidden, hasPermission, properUrlEncode } from '$lib/util';
 import type { RequestEvent, ServerLoadEvent } from '@sveltejs/kit';
 import { redirect, error } from '@sveltejs/kit';
 import type { EditMissionPack } from '../../_types';
@@ -85,6 +85,6 @@ export const actions: Actions = {
 			}
 		});
 
-		throw redirect(303, '/missionpack/' + encodeURIComponent(pack.name));
+		throw redirect(303, '/missionpack/' + properUrlEncode(pack.name));
 	}
 };

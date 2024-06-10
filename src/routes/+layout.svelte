@@ -2,7 +2,7 @@
 	import { Permission } from '$lib/types';
 	import type { FrontendUser } from '$lib/types';
 	import UserCard from '$lib/cards/UserCard.svelte';
-	import { hasAnyPermission } from '$lib/util';
+	import { hasAnyPermission, properUrlEncode } from '$lib/util';
 	import { Toaster } from 'svelte-french-toast';
 	import { beforeNavigate } from '$app/navigation';
 	import { popup, preventDisappear } from '$lib/util';
@@ -51,7 +51,7 @@
 
 		{#if user}
 			<div>
-				<a href="/user/{encodeURIComponent(user.username)}">
+				<a href="/user/{properUrlEncode(user.username)}">
 					<UserCard {user} />
 				</a>
 			</div>

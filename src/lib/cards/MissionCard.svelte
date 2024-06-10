@@ -1,7 +1,7 @@
 <script lang="ts">
 	import MissionCardInner from './MissionCardInner.svelte';
 	import type { Mission } from '$lib/types';
-	import { getSolveTypes, listify } from '$lib/util';
+	import { getSolveTypes, listify, properUrlEncode } from '$lib/util';
 	import { TP_TEAM } from '$lib/const';
 
 	export let mission: Mission;
@@ -32,7 +32,7 @@
 		</label>
 	</div>
 {:else}
-	<a class="mission" bind:this={card} href="/mission/{encodeURIComponent(mission.name)}" id={cardID}>
+	<a class="mission" bind:this={card} href="/mission/{properUrlEncode(mission.name)}" id={cardID}>
 		<div />
 		<MissionCardInner {mission} />
 		<div class="indicator flex column" {title}>

@@ -4,7 +4,13 @@
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
 	import type { RepoModule } from '$lib/repo.js';
 	import type { Bomb, Mission } from '$lib/types.js';
-	import { evaluateLogicalStringSearch, getModule, logicalSearchTooltip, onlyUnique } from '$lib/util.js';
+	import {
+		evaluateLogicalStringSearch,
+		getModule,
+		logicalSearchTooltip,
+		onlyUnique,
+		properUrlEncode
+	} from '$lib/util.js';
 
 	export let data;
 	type ShortMission = Pick<Mission, 'name' | 'bombs'>;
@@ -125,7 +131,7 @@
 						<span>{missionsOf[modID].length}</span>
 						<div class="mission-list flex row wrap">
 							{#each missionsOf[modID].sort((a, b) => a.name.localeCompare(b.name)) as miss}
-								<a href="/mission/{encodeURIComponent(miss.name)}">{miss.name}</a>
+								<a href="/mission/{properUrlEncode(miss.name)}">{miss.name}</a>
 							{/each}
 						</div>
 						<div class="mission-list flex row short">

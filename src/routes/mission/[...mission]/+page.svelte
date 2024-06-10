@@ -7,7 +7,8 @@
 		getPersonColor,
 		hasPermission,
 		onlyUnique,
-		pluralize
+		pluralize,
+		properUrlEncode
 	} from '$lib/util';
 	import CompletionList from '$lib/comp/CompletionList.svelte';
 	import type { RepoModule } from '$lib/repo';
@@ -120,15 +121,14 @@
 			<span>{mission.inGameId}</span>
 		{/if}
 		{#if mission.uploadedBy}
-			<span>Uploaded by: <a href="/user/{encodeURIComponent(mission.uploadedBy)}">{mission.uploadedBy}</a></span>
+			<span>Uploaded by: <a href="/user/{properUrlEncode(mission.uploadedBy)}">{mission.uploadedBy}</a></span>
 		{/if}
 	</div>
 	<div class="infobar flex">
 		<span>
 			by {mission.authors.join(', ')} from
 			{#if mission.missionPack}
-				<a class="pack" href="/missionpack/{encodeURIComponent(mission.missionPack.name)}"
-					>{mission.missionPack.name}</a>
+				<a class="pack" href="/missionpack/{properUrlEncode(mission.missionPack.name)}">{mission.missionPack.name}</a>
 			{:else}
 				---
 			{/if}
@@ -239,7 +239,7 @@
 		<div class="block header">Solves</div>
 		<CompletionList {mission} />
 		{#each variants ?? [] as variant}
-			<a href="/mission/{encodeURIComponent(variant.name)}" class="block header variant">
+			<a href="/mission/{properUrlEncode(variant.name)}" class="block header variant">
 				{variant.name}
 			</a>
 			<CompletionList mission={variant} />

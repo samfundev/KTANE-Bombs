@@ -5,6 +5,18 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>10 June 2024</h3>
+	<ul>
+		<li>
+			Links on this site to users, missions, mission packs, and modules now encode apostrophes.<br />
+			User: <a href="/user/wow%20it%27s%20a%20person">wow it's a person</a><br />
+			Mission: <a href="/mission/Just%20Vibin%27">Just Vibin'</a><br />
+			Mission Pack: <a href="/missionpack/Axodeau%27s%20Random%20Missions">Axodeau's Random Missions</a><br />
+			Module: <a href="https://ktane.timwi.de/redirect/#Who%27s%20on%20Trunic">Who's on Trunic</a>
+		</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>9 May 2024</h3>
 	<ul>
 		<li>

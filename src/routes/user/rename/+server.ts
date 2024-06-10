@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import { Permission } from '$lib/types';
-import { forbidden, hasPermission } from '$lib/util';
+import { forbidden, hasPermission, properUrlEncode } from '$lib/util';
 import type { RequestHandler } from '@sveltejs/kit';
 import { redirect } from '@sveltejs/kit';
 
@@ -89,5 +89,5 @@ export const POST: RequestHandler = async function ({ locals, request }) {
 		});
 	}
 
-	throw redirect(301, `/user/${encodeURIComponent(username)}`);
+	throw redirect(301, `/user/${properUrlEncode(username)}`);
 };

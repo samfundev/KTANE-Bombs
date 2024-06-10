@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { TP_TEAM } from '$lib/const';
 	import type { MissionCompletion } from '$lib/types';
-	import { formatTime, getPersonColor, listify } from '$lib/util';
+	import { formatTime, getPersonColor, listify, properUrlEncode } from '$lib/util';
 
 	export let comp: MissionCompletion;
 	export let username: string;
@@ -11,7 +11,7 @@
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
 </script>
 
-<a href="/mission/{encodeURIComponent(comp.mission.name)}">
+<a href="/mission/{properUrlEncode(comp.mission.name)}">
 	<div
 		class="block flex full"
 		style:background-color={getPersonColor(comp.team.length, comp.team.indexOf(username), comp.solo, tp)}>

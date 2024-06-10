@@ -3,7 +3,7 @@
 	import Input from '$lib/controls/Input.svelte';
 	import Select from '$lib/controls/Select.svelte';
 	import { IndividualCompletion, Mission, MissionCompletion, Permission, type FrontendUser } from '$lib/types';
-	import { getPersonColor, hasPermission, pluralize, withoutArticle } from '$lib/util';
+	import { getPersonColor, hasPermission, pluralize, properUrlEncode, withoutArticle } from '$lib/util';
 	import UserPermissions from '../_UserPermissions.svelte';
 	import { page } from '$app/stores';
 	import MissionCompletionCard from '$lib/cards/MissionCompletionCard.svelte';
@@ -67,7 +67,7 @@
 		}
 
 		if (response.ok) {
-			location.href = `/user/${encodeURIComponent(newUsername)}`;
+			location.href = `/user/${properUrlEncode(newUsername)}`;
 			return;
 		}
 
@@ -329,7 +329,7 @@
 			<div class="solves role flex grow">
 				{#each compList.filter(filterUnique).sort((a, b) => a.mission.name.localeCompare(b.mission.name)) as comp}
 					{@const solveCount = selectSolveCount(key, missions[comp.mission.name])}
-					<a href="/mission/{encodeURIComponent(comp.mission.name)}" class:green={key.includes('+')}>
+					<a href="/mission/{properUrlEncode(comp.mission.name)}" class:green={key.includes('+')}>
 						<div
 							class="block flex multisolve"
 							class:tp-solve={tp}

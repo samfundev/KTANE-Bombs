@@ -435,3 +435,7 @@ export const logicalSearchTooltip =
 	'Example: thing one && aaa || bbb && !!ccc\n' +
 	'Which means: ("thing one" AND "aaa") OR ("bbb" AND NOT "ccc")\n' +
 	'Brackets are supported too: [[ thing one || aaa ]] && [[ bbb || !!ccc ]]';
+
+export function properUrlEncode(url: string): string {
+	return encodeURIComponent(url).replace(/'/g, "%27");
+}

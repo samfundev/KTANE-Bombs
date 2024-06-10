@@ -3,7 +3,7 @@
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import NoContent from '$lib/comp/NoContent.svelte';
-	import { formatTime } from '$lib/util';
+	import { formatTime, properUrlEncode } from '$lib/util';
 	export let data;
 	let queue: QueueItem[] = data.queue;
 	let solverNames: string[] = data.solverNames;
@@ -86,7 +86,7 @@
 				<MissionCard mission={item.mission} />
 			{:else if item.type === 'missionpack'}
 				<div class="block">
-					<a href="/missionpack/{encodeURIComponent(item.pack.name)}">{item.pack.name}</a>
+					<a href="/missionpack/{properUrlEncode(item.pack.name)}">{item.pack.name}</a>
 				</div>
 			{/if}
 			<div class="block flex content-width" style="align-items: center;">

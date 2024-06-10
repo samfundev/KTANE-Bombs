@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { TP_TEAM } from '$lib/const';
 	import type { Completer } from '$lib/types';
+	import { properUrlEncode } from '$lib/util.js';
 	export let data;
 	let completers: Completer[] = data.completers;
 	let ranks: { [name: string]: number } = {};
@@ -41,7 +42,7 @@
 	<b class="block">EFM</b>
 	{#each completers as completer}
 		<div class="block">{ranks[completer.name]}</div>
-		<div class="block"><a href="/user/{encodeURIComponent(completer.name)}">{completer.name}</a></div>
+		<div class="block"><a href="/user/{properUrlEncode(completer.name)}">{completer.name}</a></div>
 		<div class="block">{completer.distinct}</div>
 		<div class="block">{completer.defuser + completer.expert + completer.efm}</div>
 		<div class="block">{completer.defuser}</div>

@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import { Permission } from '$lib/types';
-import { forbidden, hasPermission } from '$lib/util';
+import { forbidden, hasPermission, properUrlEncode } from '$lib/util';
 import { redirect, type RequestEvent } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
@@ -52,6 +52,6 @@ export const actions: Actions = {
 			});
 		}
 
-		throw redirect(303, '/user/' + encodeURIComponent(newUsername));
+		throw redirect(303, '/user/' + properUrlEncode(newUsername));
 	}
 };

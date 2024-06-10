@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { FrontendUser } from '$lib/types';
 	import UserCard from '$lib/cards/UserCard.svelte';
+	import { properUrlEncode } from '$lib/util.js';
 	export let data;
 	let users: FrontendUser[] = data.users;
 
@@ -14,7 +15,7 @@
 
 <h1 class="header">Users</h1>
 {#each users as user}
-	<a href="/user/{encodeURIComponent(user.username)}">
+	<a href="/user/{properUrlEncode(user.username)}">
 		<UserCard {user} />
 	</a>
 {/each}

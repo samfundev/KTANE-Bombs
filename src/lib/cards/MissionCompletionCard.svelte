@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { TP_TEAM } from '$lib/const';
 	import type { IndividualCompletion } from '$lib/types';
-	import { getPersonColor, listify } from '$lib/util';
+	import { getPersonColor, listify, properUrlEncode } from '$lib/util';
 
 	export let mission: IndividualCompletion;
 	export let username: string;
@@ -14,7 +14,7 @@
 	const title = `${username} solved this mission ${listify(methods)}.`;
 </script>
 
-<a class="mission" href="/mission/{encodeURIComponent(mission.name)}">
+<a class="mission" href="/mission/{properUrlEncode(mission.name)}">
 	<div class="mission-name" class:green={mission.defuser && mission.expert && mission.efm}>
 		{mission.name}
 	</div>

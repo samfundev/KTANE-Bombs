@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Permission } from '$lib/types';
-	import { hasPermission, pluralize } from '$lib/util';
+	import { hasPermission, pluralize, properUrlEncode } from '$lib/util';
 	import { page } from '$app/stores';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import type { EditMissionPack } from '../_types';
@@ -24,7 +24,7 @@
 		{/if}
 		<a class="steam" href="https://steamcommunity.com/sharedfiles/filedetails/?id={pack.steamId}">Steam Workshop</a>
 		{#if pack.uploadedBy}
-			<span>Uploaded by: <a href="/user/{encodeURIComponent(pack.uploadedBy)}">{pack.uploadedBy}</a></span>
+			<span>Uploaded by: <a href="/user/{properUrlEncode(pack.uploadedBy)}">{pack.uploadedBy}</a></span>
 		{/if}
 	</div>
 	{#if hasPermission($page.data.user, Permission.VerifyMissionPack)}
