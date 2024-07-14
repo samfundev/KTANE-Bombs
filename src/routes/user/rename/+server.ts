@@ -1,4 +1,5 @@
 import client from '$lib/client';
+import auditClient from '$lib/auditlog';
 import { Permission } from '$lib/types';
 import { forbidden, hasPermission, properUrlEncode } from '$lib/util';
 import type { RequestHandler } from '@sveltejs/kit';
@@ -6,6 +7,8 @@ import { redirect } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async function ({ locals, request }) {
 	if (!hasPermission(locals.user, Permission.RenameUser)) forbidden(locals);
+	
+	const userClient = auditClient(locals.user)
 
 	const { oldUsername, username, nameExistsOK } = await request.json();
 
@@ -79,7 +82,7 @@ export const POST: RequestHandler = async function ({ locals, request }) {
 
 	if (user !== null && user !== undefined) {
 		// User
-		await client.user.update({
+		await userClient.user.update({
 			where: {
 				username: oldUsername
 			},
