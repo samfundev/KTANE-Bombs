@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import auditClient from '$lib/auditlog';
+import createAuditClient from '$lib/auditlog';
 import { Permission } from '$lib/types';
 import { forbidden, hasPermission, properUrlEncode } from '$lib/util';
 import type { RequestEvent, ServerLoadEvent } from '@sveltejs/kit';
@@ -56,12 +56,12 @@ export const actions: Actions = {
 			throw forbidden(locals);
 		}
 
-		const userClient = auditClient(locals.user)
+		const auditClient = createAuditClient(locals.user)
 
 		const fData = await request.formData();
 		const pack = JSON.parse(fData.get('pack')?.toString() ?? '');
 
-		await userClient.missionPack.delete({
+		await auditClient.missionPack.delete({
 			where: {
 				name: pack.name
 			}
@@ -75,12 +75,12 @@ export const actions: Actions = {
 			throw forbidden(locals);
 		}
 
-		const userClient = auditClient(locals.user)
+		const auditClient = createAuditClient(locals.user)
 
 		const fData = await request.formData();
 		const pack: EditMissionPack = JSON.parse(fData.get('pack')?.toString() ?? '');
 
-		await userClient.missionPack.update({
+		await auditClient.missionPack.update({
 			where: {
 				id: pack.id
 			},

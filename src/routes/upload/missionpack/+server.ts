@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import auditClient from '$lib/auditlog';
+import createAuditClient from '$lib/auditlog';
 import type { MissionPack } from '$lib/types';
 import { forbidden } from '$lib/util';
 import type { RequestEvent } from '@sveltejs/kit';
@@ -9,7 +9,7 @@ export async function POST({ locals, request }: RequestEvent) {
 		throw forbidden(locals);
 	}
 
-	const userClient = auditClient(locals.user)
+	const auditClient = createAuditClient(locals.user)
 
 	const pack: MissionPack = await request.json();
 	pack.uploadedBy = locals.user.id;
@@ -27,7 +27,7 @@ export async function POST({ locals, request }: RequestEvent) {
 			return new Response('Mission pack is already in the queue for verfication.', { status: 409 });
 		else return new Response('Duplicate mission pack not uploaded.', { status: 406 });
 	}
-	await userClient.missionPack.create({
+	await auditClient.missionPack.create({
 		data: {
 			...pack,
 			verified: false

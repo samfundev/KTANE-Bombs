@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import auditClient from '$lib/auditlog';
+import createAuditClient from '$lib/auditlog';
 import { getData } from '$lib/repo';
 import { Completion, Permission, type ID } from '$lib/types';
 import { excludeArticleSort, forbidden, hasPermission, properUrlEncode } from '$lib/util';
@@ -98,12 +98,12 @@ export const actions: Actions = {
 			throw forbidden(locals);
 		}
 
-		const userClient = auditClient(locals.user)
+		const auditClient = createAuditClient(locals.user)
 
 		const fData = await request.formData();
 		const mission = JSON.parse(fData.get('mission')?.toString() ?? '');
 
-		await userClient.mission.delete({
+		await auditClient.mission.delete({
 			where: {
 				name: mission.name
 			}
@@ -116,12 +116,12 @@ export const actions: Actions = {
 			throw forbidden(locals);
 		}
 
-		const userClient = auditClient(locals.user)
+		const auditClient = createAuditClient(locals.user)
 
 		const fData = await request.formData();
 		const completion: ID<Completion> = JSON.parse(fData.get('completion')?.toString() ?? '');
 
-		await userClient.completion.delete({
+		await auditClient.completion.delete({
 			where: {
 				id: completion.id
 			}
@@ -134,7 +134,7 @@ export const actions: Actions = {
 			throw forbidden(locals);
 		}
 
-		const userClient = auditClient(locals.user)
+		const auditClient = createAuditClient(locals.user)
 
 		const fData = await request.formData();
 		const mission: EditMission = JSON.parse(fData.get('mission')?.toString() ?? '');
@@ -167,7 +167,7 @@ export const actions: Actions = {
 				});
 				//if there is only one other, remove that one's variant ID too since you need at least 2 missions in a variant group
 				if (other.length == 1) {
-					await userClient.mission.update({
+					await auditClient.mission.update({
 						where: {
 							id: other[0].id
 						},
@@ -196,7 +196,7 @@ export const actions: Actions = {
 					});
 					let max = Math.max(...variants.map(v => v.variant ?? -1));
 					mission.variant = max + 1;
-					await userClient.mission.update({
+					await auditClient.mission.update({
 						where: {
 							id: selected.id
 						},
@@ -208,7 +208,7 @@ export const actions: Actions = {
 			}
 		}
 
-		await userClient.mission.update({
+		await auditClient.mission.update({
 			where: {
 				id: mission.id
 			},
@@ -263,9 +263,9 @@ export async function POST({ locals, request }: RequestEvent) {
 
 	const mission: EditMission = await request.json();
 
-	const userClient = auditClient(locals.user)
+	const auditClient = createAuditClient(locals.user)
 
-	await userClient.mission.update({
+	await auditClient.mission.update({
 		where: {
 			id: mission.id
 		},
@@ -295,9 +295,9 @@ export async function DELETE({ locals, request }: RequestEvent) {
 
 	const completion: ID<Completion> = await request.json();
 
-	const userClient = auditClient(locals.user)
+	const auditClient = createAuditClient(locals.user)
 
-	await userClient.completion.delete({
+	await auditClient.completion.delete({
 		where: {
 			id: completion.id
 		}

@@ -163,7 +163,7 @@ const auditOperations: {[id: string] : any} = {
 	}
 }
 
-function auditClient(user: FrontendUser | null) {
+function createAuditClient(user: FrontendUser | null) {
 	return client.$extends(
 		{
 			name: 'Audit Log',
@@ -235,4 +235,4 @@ function auditClient(user: FrontendUser | null) {
 	)
 }
 
-export default auditClient
+export default createAuditClient
