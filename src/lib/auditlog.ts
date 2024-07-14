@@ -189,21 +189,11 @@ function auditClient(user: FrontendUser | null) {
 							}
 						)
 					},
-					async forBomb(bombId: number) {
-						return await client.auditLog.findMany(
-							{
-								where: {
-									model: 'bomb',
-									recordId: bombId.toString()
-								}
-							}
-						)
-					},
 					async forCompletion(completionId: number) {
 						return await client.auditLog.findMany(
 							{
 								where: {
-									model: 'completion',
+									model: 'Completion',
 									recordId: completionId.toString()
 								}
 							}
@@ -213,7 +203,7 @@ function auditClient(user: FrontendUser | null) {
 						return await client.auditLog.findMany(
 							{
 								where: {
-									model: 'mission',
+									model: 'Mission',
 									recordId: missionId.toString()
 								}
 							}
@@ -223,8 +213,18 @@ function auditClient(user: FrontendUser | null) {
 						return await client.auditLog.findMany(
 							{
 								where: {
-									model: 'missionpack',
+									model: 'Missionpack',
 									recordId: missionPackId.toString()
+								}
+							}
+						)
+					},
+					async forUser(userId: string) {
+						return await client.auditLog.findMany(
+							{
+								where: {
+									model: 'User',
+									recordId: userId
 								}
 							}
 						)
