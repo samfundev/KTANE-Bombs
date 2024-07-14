@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import auditClient from '$lib/auditlog';
+import createAuditClient from '$lib/auditlog';
 import type { Completion } from '$lib/types';
 import { forbidden } from '$lib/util';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
@@ -9,7 +9,7 @@ export async function POST({ locals, request }: RequestEvent) {
 		throw forbidden(locals);
 	}
 	
-	const userClient = auditClient(locals.user)
+	const auditClient = createAuditClient(locals.user)
 
 	const { completion, missionName }: { completion: Completion; missionName: string } = await request.json();
 	completion.uploadedBy = locals.user.id;
@@ -44,7 +44,7 @@ export async function POST({ locals, request }: RequestEvent) {
 		//don't allow duplicate solve uploads that are already in the verify queue
 		return new Response(undefined, { status: 409 });
 
-	await userClient.completion.create({
+	await auditClient.completion.create({
 		data: {
 			...completion,
 			mission: {

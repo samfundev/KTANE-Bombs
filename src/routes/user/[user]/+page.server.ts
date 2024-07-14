@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import auditClient from '$lib/auditlog';
+import createAuditClient from '$lib/auditlog';
 import { TP_TEAM } from '$lib/const';
 import { Permission } from '$lib/types';
 import { fixPools, forbidden, hasPermission } from '$lib/util';
@@ -211,7 +211,7 @@ export const actions = {
 			return forbidden(locals);
 		}
 		
-		const userClient = auditClient(locals.user)
+		const auditClient = createAuditClient(locals.user)
 
 		const fData = await request.formData();
 		const body: Permission[] = JSON.parse(fData.get('perms')?.toString() ?? '');
@@ -219,7 +219,7 @@ export const actions = {
 		if (user === null || user === undefined) {
 			throw error(400);
 		}
-		await userClient.user.update({
+		await auditClient.user.update({
 			where: {
 				id: user
 			},

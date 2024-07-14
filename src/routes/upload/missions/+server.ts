@@ -1,5 +1,5 @@
 import client from '$lib/client'
-import auditClient from '$lib/auditlog';
+import createAuditClient from '$lib/auditlog';
 import { error, type RequestEvent } from '@sveltejs/kit';
 import type { ReplaceableMission } from '../_types';
 import { forbidden } from '$lib/util';
@@ -9,7 +9,7 @@ export async function POST({ locals, request }: RequestEvent) {
 		throw forbidden(locals);
 	}
 
-	const userClient = auditClient(locals.user)
+	const auditClient = createAuditClient(locals.user)
 
 	const missions: ReplaceableMission[] = await request.json();
 	if (missions.some(m => m.missionPack === null)) {
@@ -37,7 +37,7 @@ export async function POST({ locals, request }: RequestEvent) {
 			if (!context.includes('R')) context += 'R';
 		} else if (!context.includes('N')) context += 'N';
 
-		await userClient.mission.create({
+		await auditClient.mission.create({
 			data: {
 				name: missionName,
 				authors: mission.authors,
