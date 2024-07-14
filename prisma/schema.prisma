@@ -15,6 +15,7 @@ model User {
   accessToken  String
   refreshToken String
   permissions  Int[]
+  logs         AuditLog[]
 }
 
 model MissionPack {
@@ -79,4 +80,16 @@ model Completion {
   missionId Int
 
   verified Boolean @default(true)
+}
+
+model AuditLog {
+  id	Int @id @default(autoincrement())
+  userId String?
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  model String
+  recordId String
+  action String
+  timestamp DateTime @default(now())
+  before Json?
+  after Json?
 }

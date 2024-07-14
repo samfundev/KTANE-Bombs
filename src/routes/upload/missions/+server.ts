@@ -1,4 +1,5 @@
-import client from '$lib/client';
+import client from '$lib/client'
+import auditClient from '$lib/auditlog';
 import { error, type RequestEvent } from '@sveltejs/kit';
 import type { ReplaceableMission } from '../_types';
 import { forbidden } from '$lib/util';
@@ -7,6 +8,9 @@ export async function POST({ locals, request }: RequestEvent) {
 	if (locals.user == null) {
 		throw forbidden(locals);
 	}
+
+	const userClient = auditClient(locals.user)
+
 	const missions: ReplaceableMission[] = await request.json();
 	if (missions.some(m => m.missionPack === null)) {
 		throw error(400, 'Mission pack is required.');
@@ -33,7 +37,7 @@ export async function POST({ locals, request }: RequestEvent) {
 			if (!context.includes('R')) context += 'R';
 		} else if (!context.includes('N')) context += 'N';
 
-		await client.mission.create({
+		await userClient.mission.create({
 			data: {
 				name: missionName,
 				authors: mission.authors,

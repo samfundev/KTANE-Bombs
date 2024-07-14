@@ -1,4 +1,5 @@
 import client from '$lib/client';
+import auditClient from '$lib/auditlog';
 import { Permission } from '$lib/types';
 import { forbidden, hasPermission, properUrlEncode } from '$lib/util';
 import { redirect, type RequestEvent } from '@sveltejs/kit';
@@ -29,6 +30,8 @@ export const actions: Actions = {
 		if (!hasPermission(locals.user, Permission.RenameUser)) {
 			throw forbidden(locals);
 		}
+		
+		const userClient = auditClient(locals.user)
 
 		const fData = await request.formData();
 		const oldUsername: string = JSON.parse(fData.get('oldUsername')?.toString() ?? '');
@@ -42,7 +45,7 @@ export const actions: Actions = {
 
 		if (user !== null && user !== undefined) {
 			// User
-			await client.user.update({
+			await userClient.user.update({
 				where: {
 					username: oldUsername
 				},
