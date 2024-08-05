@@ -60,7 +60,7 @@
 		sortOption = 'published';
 		updateSearch();
 	}
-	function closeeAll() {
+	function closeAll() {
 		document.querySelectorAll('.missions-dropdown:not(.few)').forEach(el => {
 			el.classList.remove('expand');
 		});
@@ -109,7 +109,7 @@
 			bind:this={layoutSearch}
 			filterFunc={moduleSearchFilter}
 			classes="help" />
-		<button on:click={closeeAll}>Close All</button>
+		<button on:click={closeAll}>Close All</button>
 		<span class="sort-option alphabetical" class:selected={sortOption == 'alphabetical'} on:click={alphabetical}
 			>Alphabetical</span>
 		<span class="sort-option popular" class:selected={sortOption == 'popular'} on:click={popular}>Popular</span>

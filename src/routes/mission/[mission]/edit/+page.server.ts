@@ -1,12 +1,13 @@
 import client from '$lib/client';
 import createAuditClient from '$lib/auditlog';
-import { getData } from '$lib/repo';
+import { getData, RepoModule } from '$lib/repo';
 import { Completion, Permission, type ID } from '$lib/types';
 import { excludeArticleSort, forbidden, hasPermission, properUrlEncode } from '$lib/util';
 import type { RequestEvent, ServerLoadEvent } from '@sveltejs/kit';
 import type { EditMission } from './_types';
 import { redirect, error } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
+import { sortBombs } from '../../_shared';
 
 export const load: PageServerLoad = async function ({ params, locals }: ServerLoadEvent) {
 	if (!hasPermission(locals.user, Permission.VerifyMission)) {
@@ -98,7 +99,7 @@ export const actions: Actions = {
 			throw forbidden(locals);
 		}
 
-		const auditClient = createAuditClient(locals.user)
+		const auditClient = createAuditClient(locals.user);
 
 		const fData = await request.formData();
 		const mission = JSON.parse(fData.get('mission')?.toString() ?? '');
@@ -116,7 +117,7 @@ export const actions: Actions = {
 			throw forbidden(locals);
 		}
 
-		const auditClient = createAuditClient(locals.user)
+		const auditClient = createAuditClient(locals.user);
 
 		const fData = await request.formData();
 		const completion: ID<Completion> = JSON.parse(fData.get('completion')?.toString() ?? '');
@@ -134,11 +135,12 @@ export const actions: Actions = {
 			throw forbidden(locals);
 		}
 
-		const auditClient = createAuditClient(locals.user)
+		const auditClient = createAuditClient(locals.user);
 
 		const fData = await request.formData();
 		const mission: EditMission = JSON.parse(fData.get('mission')?.toString() ?? '');
 		const variantEdit: boolean = JSON.parse(fData.get('variantEdit')?.toString() ?? '');
+		const modules: Record<string, RepoModule> | null = await getData();
 
 		if (variantEdit && mission.variantOf != null) {
 			//find the mission that this edited mission is said to be a variant of
@@ -208,49 +210,102 @@ export const actions: Actions = {
 			}
 		}
 
-		await auditClient.mission.update({
-			where: {
-				id: mission.id
-			},
-			data: {
-				authors: mission.authors,
+		const beforeMission = await client.mission.findUnique({
+			where: { id: mission.id },
+			include: {
 				bombs: {
-					update: mission.bombs.map(bomb => ({
-						where: {
-							id: bomb.id
-						},
-						data: {
-							modules: bomb.modules,
-							time: bomb.time,
-							strikes: bomb.strikes,
-							widgets: bomb.widgets,
-							pools: JSON.parse(JSON.stringify(bomb.pools))
-						}
-					}))
+					orderBy: { id: 'asc' }
 				},
 				completions: {
-					update: mission.completions.map(completion => ({
-						where: {
-							id: completion.id
-						},
-						data: completion
-					}))
+					where: { verified: true },
+					select: client.$exclude('completion', ['missionId'])
 				},
-				factory: mission.factory,
-				timeMode: mission.timeMode,
-				strikeMode: mission.strikeMode,
-				missionPackId: mission.missionPack.id,
-				name: mission.name,
-				tpSolve: mission.tpSolve,
-				designedForTP: mission.designedForTP,
-				logfile: mission.logfile,
-				dateAdded: mission.dateAdded,
-				notes: mission.notes,
-				inGameId: mission.inGameId,
-				inGameName: mission.inGameName,
-				variant: mission.variant
+				missionPack: true
 			}
 		});
+		if (beforeMission) {
+			//bombs
+			sortBombs(mission, modules);
+			sortBombs(beforeMission, modules);
+			if (JSON.stringify(beforeMission.bombs) != JSON.stringify(mission.bombs)) {
+				await auditClient.mission.update({
+					where: {
+						id: mission.id
+					},
+					data: {
+						bombs: {
+							update: mission.bombs.map(bomb => ({
+								where: {
+									id: bomb.id
+								},
+								data: {
+									modules: bomb.modules,
+									time: bomb.time,
+									strikes: bomb.strikes,
+									widgets: bomb.widgets,
+									pools: JSON.parse(JSON.stringify(bomb.pools))
+								}
+							}))
+						}
+					}
+				});
+			}
+
+			//completions
+			beforeMission.completions.sort((a, b) => a.team.join('').localeCompare(b.team.join('')));
+			mission.completions.sort((a, b) => a.team.join('').localeCompare(b.team.join('')));
+			if (JSON.stringify(beforeMission.completions) != JSON.stringify(mission.completions)) {
+				await auditClient.mission.update({
+					where: {
+						id: mission.id
+					},
+					data: {
+						completions: {
+							update: mission.completions.map(completion => ({
+								where: {
+									id: completion.id
+								},
+								data: completion
+							}))
+						}
+					}
+				});
+			}
+
+			//missionpack
+			if (beforeMission.missionPack?.name !== mission.missionPack.name) {
+				await auditClient.mission.update({
+					where: {
+						id: mission.id
+					},
+					data: {
+						missionPackId: mission.missionPack.id
+					}
+				});
+			}
+
+			//everything else
+			await auditClient.mission.update({
+				where: {
+					id: mission.id
+				},
+				data: {
+					authors: mission.authors,
+					factory: mission.factory,
+					timeMode: mission.timeMode,
+					strikeMode: mission.strikeMode,
+					name: mission.name,
+					tpSolve: mission.tpSolve,
+					designedForTP: mission.designedForTP,
+					logfile: mission.logfile,
+					dateAdded: mission.dateAdded,
+					notes: mission.notes,
+					inGameId: mission.inGameId,
+					inGameName: mission.inGameName,
+					variant: mission.variant
+				}
+			});
+		}
 
 		throw redirect(303, '/mission/' + properUrlEncode(mission.name));
 	}
@@ -263,7 +318,7 @@ export async function POST({ locals, request }: RequestEvent) {
 
 	const mission: EditMission = await request.json();
 
-	const auditClient = createAuditClient(locals.user)
+	const auditClient = createAuditClient(locals.user);
 
 	await auditClient.mission.update({
 		where: {
@@ -295,7 +350,7 @@ export async function DELETE({ locals, request }: RequestEvent) {
 
 	const completion: ID<Completion> = await request.json();
 
-	const auditClient = createAuditClient(locals.user)
+	const auditClient = createAuditClient(locals.user);
 
 	await auditClient.completion.delete({
 		where: {

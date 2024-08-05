@@ -8,7 +8,7 @@ import { TP_TEAM } from '$lib/const';
 export const POST: RequestHandler = async function ({ locals, request }: RequestEvent) {
 	const { accept, item, replaceId }: { accept: boolean; item: QueueItem; replaceId: number } = await request.json();
 
-	const client = asUser(locals.user)
+	const client = asUser(locals.user);
 	switch (item.type) {
 		case 'mission':
 			if (!hasPermission(locals.user, Permission.VerifyMission)) {

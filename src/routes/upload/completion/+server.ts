@@ -8,8 +8,8 @@ export async function POST({ locals, request }: RequestEvent) {
 	if (locals.user == null) {
 		throw forbidden(locals);
 	}
-	
-	const auditClient = createAuditClient(locals.user)
+
+	const auditClient = createAuditClient(locals.user);
 
 	const { completion, missionName }: { completion: Completion; missionName: string } = await request.json();
 	completion.uploadedBy = locals.user.id;

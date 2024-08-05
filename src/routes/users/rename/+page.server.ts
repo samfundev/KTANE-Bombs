@@ -30,8 +30,8 @@ export const actions: Actions = {
 		if (!hasPermission(locals.user, Permission.RenameUser)) {
 			throw forbidden(locals);
 		}
-		
-		const auditClient = createAuditClient(locals.user)
+
+		const auditClient = createAuditClient(locals.user);
 
 		const fData = await request.formData();
 		const oldUsername: string = JSON.parse(fData.get('oldUsername')?.toString() ?? '');

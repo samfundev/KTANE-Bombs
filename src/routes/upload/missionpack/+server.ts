@@ -9,7 +9,7 @@ export async function POST({ locals, request }: RequestEvent) {
 		throw forbidden(locals);
 	}
 
-	const auditClient = createAuditClient(locals.user)
+	const auditClient = createAuditClient(locals.user);
 
 	const pack: MissionPack = await request.json();
 	pack.uploadedBy = locals.user.id;

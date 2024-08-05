@@ -61,7 +61,10 @@
 	<title>Verify Queue</title>
 </svelte:head>
 
-<h1 class="header">Verify Queue</h1>
+<div class="block top-bar">
+	<a class="audit-log" href="/auditlog">Audit Log</a>
+	<h1 class="header">Verify Queue</h1>
+</div>
 
 <div class="flex column">
 	{#each queue as item, index (item)}
@@ -111,5 +114,14 @@
 	}
 	:is(span, .block).red {
 		color: red;
+	}
+
+	.top-bar {
+		position: relative;
+	}
+	.audit-log {
+		position: absolute;
+		top: var(--gap);
+		left: var(--gap);
 	}
 </style>

@@ -56,7 +56,7 @@ export const actions: Actions = {
 			throw forbidden(locals);
 		}
 
-		const auditClient = createAuditClient(locals.user)
+		const auditClient = createAuditClient(locals.user);
 
 		const fData = await request.formData();
 		const pack = JSON.parse(fData.get('pack')?.toString() ?? '');
@@ -75,7 +75,7 @@ export const actions: Actions = {
 			throw forbidden(locals);
 		}
 
-		const auditClient = createAuditClient(locals.user)
+		const auditClient = createAuditClient(locals.user);
 
 		const fData = await request.formData();
 		const pack: EditMissionPack = JSON.parse(fData.get('pack')?.toString() ?? '');

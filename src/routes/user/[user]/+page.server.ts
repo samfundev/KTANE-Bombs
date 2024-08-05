@@ -210,8 +210,8 @@ export const actions = {
 		if (!hasPermission(locals.user, Permission.ModifyPermissions)) {
 			return forbidden(locals);
 		}
-		
-		const auditClient = createAuditClient(locals.user)
+
+		const auditClient = createAuditClient(locals.user);
 
 		const fData = await request.formData();
 		const body: Permission[] = JSON.parse(fData.get('perms')?.toString() ?? '');

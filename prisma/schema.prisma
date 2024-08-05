@@ -76,20 +76,21 @@ model Completion {
   dateAdded    DateTime?
   uploadedBy   String?
 
-  mission   Mission @relation(fields: [missionId], references: [id], onDelete: Cascade)
-  missionId Int
+  mission      Mission @relation(fields: [missionId], references: [id], onDelete: Cascade)
+  missionId    Int
 
-  verified Boolean @default(true)
+  verified     Boolean @default(true)
 }
 
 model AuditLog {
-  id	Int @id @default(autoincrement())
-  userId String?
-  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
-  model String
-  recordId String
-  action String
-  timestamp DateTime @default(now())
-  before Json?
-  after Json?
+  id	       Int @id @default(autoincrement())
+  userId     String?
+  user       User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  model      String
+  recordId   String
+  name       String
+  action     String
+  timestamp  DateTime @default(now())
+  before     Json?
+  after      Json?
 }

@@ -94,6 +94,7 @@
 		--needy-color: #9999ff;
 		--quirks-color: #aae8ff;
 		--stick-under-navbar: calc(1.25em + 4 * var(--gap) + 2px);
+		--page-content-width: min(calc(100vw - 4 * var(--gap)), 1150px);
 	}
 
 	@media (prefers-color-scheme: dark) {
@@ -317,7 +318,7 @@
 	}
 
 	.max-width {
-		width: min(calc(100vw - 4 * var(--gap)), 1150px);
+		width: var(--page-content-width);
 		margin: 0 auto;
 	}
 
