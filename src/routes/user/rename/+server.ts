@@ -7,8 +7,8 @@ import { redirect } from '@sveltejs/kit';
 
 export const POST: RequestHandler = async function ({ locals, request }) {
 	if (!hasPermission(locals.user, Permission.RenameUser)) forbidden(locals);
-	
-	const auditClient = createAuditClient(locals.user)
+
+	const auditClient = createAuditClient(locals.user);
 
 	const { oldUsername, username, nameExistsOK } = await request.json();
 

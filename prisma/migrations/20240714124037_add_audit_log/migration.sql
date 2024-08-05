@@ -5,6 +5,7 @@ CREATE TABLE "AuditLog" (
     "model" TEXT NOT NULL,
     "recordId" TEXT NOT NULL,
     "action" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "timestamp" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "before" JSONB,
     "after" JSONB,
