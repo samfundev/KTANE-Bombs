@@ -1,19 +1,16 @@
 import client from '$lib/client';
 import { FrontendUser } from '$lib/types';
+import { UNKNOWN_ITEM } from './const';
 
 function diff(beforeObject: any, afterObject: any) {
 	const before: { [id: string]: any } = {};
 	const after: { [id: string]: any } = {};
 	for (const key in afterObject) {
 		if (JSON.stringify(beforeObject[key]) != JSON.stringify(afterObject[key])) {
-			console.log(`key: ${key}`);
-			console.log(`before: ${beforeObject[key]}`);
-			console.log(`after: ${afterObject[key]}`);
 			before[key] = beforeObject[key];
 			after[key] = afterObject[key];
 		}
 	}
-	console.log('');
 	return [before, after];
 }
 
@@ -24,13 +21,17 @@ const auditTables: { [id: string]: any } = {
 	User: client.user
 };
 
-function findName(record: any, model: string): string {
-	if (model === 'Completion')
-		return (
-			(record.mission ? record.mission.name : 'Unknown') + '||' + (record.team ? record.team.join(', ') : 'Unknown')
-		);
-	else if (model === 'User') return record.username ?? 'Unknown';
-	return record.name ?? 'Unknown';
+async function findName(record: any, model: string): Promise<string> {
+	if (model === 'Completion') {
+		const comp = await client.completion.findUnique({
+			where: { id: record.id },
+			select: {
+				mission: { select: { name: true } }
+			}
+		});
+		return (comp ? comp.mission.name : UNKNOWN_ITEM) + '||' + (record.team ? record.team.join(', ') : 'Unknown');
+	} else if (model === 'User') return record.username ?? UNKNOWN_ITEM;
+	return record.name ?? UNKNOWN_ITEM;
 }
 
 const auditOperations: { [id: string]: any } = {
@@ -38,7 +39,7 @@ const auditOperations: { [id: string]: any } = {
 		const record = await modelObject.findFirst({ where: args.where });
 
 		const [before, after] = diff(record, args.data);
-		let name = findName(record, model);
+		let name = await findName(record, model);
 
 		if (Object.keys(before).length > 0 || Object.keys(after).length > 0)
 			await client.auditLog.create({
@@ -46,7 +47,7 @@ const auditOperations: { [id: string]: any } = {
 					userId: user.id,
 					model: model,
 					recordId: record.id.toString(),
-					name: name,
+					name,
 					action: 'update',
 					before: before,
 					after: after
@@ -57,14 +58,14 @@ const auditOperations: { [id: string]: any } = {
 	},
 	async delete(user: FrontendUser, modelObject: any, model: string, args: any, query: any) {
 		const record = await modelObject.findFirst({ where: args.where });
-		let name = findName(record, model);
+		let name = await findName(record, model);
 
 		await client.auditLog.create({
 			data: {
 				userId: user.id,
 				model: model,
 				recordId: record.id.toString(),
-				name: record.name,
+				name,
 				action: 'delete',
 				before: record
 			}
@@ -76,13 +77,13 @@ const auditOperations: { [id: string]: any } = {
 		const records = await modelObject.findMany({ where: args.where });
 
 		for (const record of records) {
-			let name = findName(record, model);
+			let name = await findName(record, model);
 			await client.auditLog.create({
 				data: {
 					userId: user.id,
 					model: model,
 					recordId: record.id.toString(),
-					name: record.name,
+					name,
 					action: 'delete',
 					before: record
 				}
@@ -96,7 +97,7 @@ const auditOperations: { [id: string]: any } = {
 
 		for (const record of records) {
 			const [before, after] = diff(record, args.data);
-			let name = findName(record, model);
+			let name = await findName(record, model);
 
 			if (Object.keys(before).length > 0 || Object.keys(after).length > 0)
 				await client.auditLog.create({
@@ -104,7 +105,7 @@ const auditOperations: { [id: string]: any } = {
 						userId: user.id,
 						model: model,
 						recordId: record.id.toString(),
-						name: record.name,
+						name,
 						action: 'update',
 						before: before,
 						after: after
@@ -116,14 +117,14 @@ const auditOperations: { [id: string]: any } = {
 	},
 	async create(user: FrontendUser, modelObject: any, model: string, args: any, query: any) {
 		const record = await query(args);
-		let name = findName(record, model);
+		let name = await findName(record, model);
 
 		await client.auditLog.create({
 			data: {
 				userId: user.id,
 				model: model,
 				recordId: record.id.toString(),
-				name: record.name,
+				name,
 				action: 'create'
 				// after: record
 			}
@@ -133,7 +134,7 @@ const auditOperations: { [id: string]: any } = {
 	},
 	async upsert(user: FrontendUser, modelObject: any, model: string, args: any, query: any) {
 		const record = await modelObject.findFirst({ where: args.where });
-		let name = findName(record, model);
+		let name = await findName(record, model);
 
 		if (record) {
 			//update
@@ -145,7 +146,7 @@ const auditOperations: { [id: string]: any } = {
 						userId: user.id,
 						model: model,
 						recordId: record.id.toString(),
-						name: record.name,
+						name,
 						action: 'update',
 						before: before,
 						after: after
@@ -216,7 +217,7 @@ function createAuditClient(user: FrontendUser | null) {
 				async forMissionPack(missionPackId: number) {
 					return await client.auditLog.findMany({
 						where: {
-							model: 'Missionpack',
+							model: 'MissionPack',
 							recordId: missionPackId.toString()
 						}
 					});

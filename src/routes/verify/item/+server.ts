@@ -1,14 +1,14 @@
-import asUser from '$lib/auditlog';
 import { Permission } from '$lib/types';
 import type { QueueItem } from '$lib/types';
 import { forbidden, hasPermission } from '$lib/util';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 import { TP_TEAM } from '$lib/const';
+import createAuditClient from '$lib/auditlog';
 
 export const POST: RequestHandler = async function ({ locals, request }: RequestEvent) {
 	const { accept, item, replaceId }: { accept: boolean; item: QueueItem; replaceId: number } = await request.json();
 
-	const client = asUser(locals.user);
+	const client = createAuditClient(locals.user);
 	switch (item.type) {
 		case 'mission':
 			if (!hasPermission(locals.user, Permission.VerifyMission)) {
