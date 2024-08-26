@@ -60,7 +60,11 @@
 		if (mission.inGameName === mission.name) mission.inGameName = null;
 		tpCompletion = mission.completions.some(c => c.team[0] === TP_TEAM);
 		if (tpCompletion) mission.tpSolve = true;
-		modified = JSON.stringify(originalMission) !== JSON.stringify(mission);
+		let noCompOrig = JSON.parse(JSON.stringify(originalMission));
+		let noCompMission = JSON.parse(JSON.stringify(mission));
+		noCompOrig.completions = undefined;
+		noCompMission.completions = undefined;
+		modified = JSON.stringify(noCompOrig) !== JSON.stringify(noCompMission);
 	}
 
 	function intnan0(val: number): boolean | string {
@@ -83,6 +87,22 @@
 		const result = await response.json();
 
 		applyAction(result);
+	}
+
+	async function saveCompletion(comp: ID<Completion>, index: number) {
+		const fData = new FormData();
+		fData.append('completion', JSON.stringify(comp));
+
+		const response = await fetch('?/editCompletion', {
+			method: 'POST',
+			body: fData
+		});
+		/** @type {import('@sveltejs/kit').ActionResult} */
+		const result = await response.json();
+
+		applyAction(result);
+		shownComp[comp.id] = false;
+		originalMission.completions[index] = JSON.parse(JSON.stringify(comp));
 	}
 
 	async function deleteMission() {
@@ -354,6 +374,11 @@
 						parse={parseDate}
 						display={formatDate}
 						bind:value={completion.dateAdded} />
+					<div class="hstack centered">
+						<button
+							on:click={() => saveCompletion(completion, ci)}
+							disabled={JSON.stringify(originalMission.completions[ci]) === JSON.stringify(completion)}>Save</button>
+					</div>
 					{#if hasPermission($page.data.user, Permission.VerifyCompletion)}
 						<div class="actions">
 							<button on:click={() => deleteCompletion(completion)}>Delete</button>
@@ -362,7 +387,9 @@
 				{:else}
 					<div class="relative">
 						<CompletionCard {completion} />
-						<button class="actions edit" on:click={() => showComp(completion.id)}>Edit</button>
+						{#if hasPermission($page.data.user, Permission.VerifyCompletion)}
+							<button class="actions edit" on:click={() => showComp(completion.id)}>Edit</button>
+						{/if}
 					</div>
 				{/if}
 			</div>
@@ -421,6 +448,9 @@
 		display: flex;
 		align-items: flex-end;
 		gap: 10px;
+	}
+	.hstack.centered {
+		justify-content: center;
 	}
 
 	.flex.hspace {

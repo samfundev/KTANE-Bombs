@@ -130,6 +130,34 @@ export const actions: Actions = {
 
 		return {};
 	},
+	editCompletion: async ({ locals, request }: RequestEvent) => {
+		if (!hasPermission(locals.user, Permission.VerifyCompletion)) {
+			throw forbidden(locals);
+		}
+
+		const auditClient = createAuditClient(locals.user);
+
+		const fData = await request.formData();
+		const completion: ID<Completion> = JSON.parse(fData.get('completion')?.toString() ?? '');
+
+		await auditClient.completion.update({
+			where: {
+				id: completion.id
+			},
+			data: {
+				proofs: completion.proofs,
+				time: completion.time,
+				solo: completion.solo,
+				first: completion.first,
+				old: completion.old,
+				team: completion.team,
+				notes: completion.notes,
+				dateAdded: completion.dateAdded
+			}
+		});
+
+		return {};
+	},
 	editMission: async ({ locals, request }: RequestEvent) => {
 		if (!hasPermission(locals.user, Permission.VerifyMission)) {
 			throw forbidden(locals);
@@ -245,27 +273,6 @@ export const actions: Actions = {
 									widgets: bomb.widgets,
 									pools: JSON.parse(JSON.stringify(bomb.pools))
 								}
-							}))
-						}
-					}
-				});
-			}
-
-			//completions
-			beforeMission.completions.sort((a, b) => a.team.join('').localeCompare(b.team.join('')));
-			mission.completions.sort((a, b) => a.team.join('').localeCompare(b.team.join('')));
-			if (JSON.stringify(beforeMission.completions) != JSON.stringify(mission.completions)) {
-				await auditClient.mission.update({
-					where: {
-						id: mission.id
-					},
-					data: {
-						completions: {
-							update: mission.completions.map(completion => ({
-								where: {
-									id: completion.id
-								},
-								data: completion
 							}))
 						}
 					}

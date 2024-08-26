@@ -108,7 +108,7 @@
 		<b>After</b>
 	</div>
 	{#each logs as log, index}
-		<div class="block number">{index + 1}</div>
+		<div class="block number">{logs.length - index}</div>
 		<div class="block">
 			{#if log.userId != null && !isOnlyDigits(log.userId)}
 				<a href="/user/{properUrlEncode(log.userId)}">{log.userId}</a>

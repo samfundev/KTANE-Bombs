@@ -51,7 +51,7 @@ export const load = async function ({ parent, locals }: any) {
 	}
 
 	const everything = await client.auditLog.findMany({
-		orderBy: { id: 'asc' }
+		orderBy: { id: 'desc' }
 	});
 
 	let logs: any[] = [];
