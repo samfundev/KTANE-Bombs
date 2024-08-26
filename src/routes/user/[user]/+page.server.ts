@@ -60,7 +60,10 @@ export const load = async function ({ parent, params }: any) {
 					}
 				},
 				where: {
-					verified: true
+					verified: true,
+					NOT: {
+						team: { has: TP_TEAM }
+					}
 				},
 				orderBy: { time: 'desc' },
 				take: 1
