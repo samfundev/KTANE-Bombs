@@ -63,6 +63,20 @@ export const load = async function ({ parent, locals }: any) {
 			linkable: nameInfo.linkable,
 			mission: nameInfo.mission
 		};
+		if (log.before) {
+			let before = JSON.parse(JSON.stringify(log.before));
+			if (before && typeof before.uploadedBy === 'string') {
+				const usr = await client.user.findUnique({
+					where: { id: before.uploadedBy },
+					select: { username: true }
+				});
+				if (usr !== null) {
+					before.uploadedBy = usr.username;
+					log.before = JSON.parse(JSON.stringify(before));
+				}
+			}
+		}
+
 		if (log.userId != null) {
 			const usr = await client.user.findUnique({
 				where: { id: log.userId },

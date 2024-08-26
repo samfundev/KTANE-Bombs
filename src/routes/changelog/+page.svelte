@@ -5,6 +5,13 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>29 August 2024</h3>
+	<ul>
+		<li>Twitch Plays can no longer claim "Top Times" on a user page.</li>
+		<li>A few backend updates for maintainers.</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>10 June 2024</h3>
 	<ul>
 		<li>
