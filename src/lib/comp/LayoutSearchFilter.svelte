@@ -18,6 +18,8 @@
 	export let numResults: number = 0;
 	export let showNoneForBlank: boolean = false;
 	export let searching: boolean = false;
+	export let showAll: boolean = true;
+	export let resultLimit: number = 50;
 
 	const dispatch = createEventDispatcher();
 	let searchField: HTMLInputElement | null;
@@ -41,7 +43,8 @@
 		Object.keys(items).forEach(item => {
 			if (showNoneForBlank && searchText.length == 0) items[item]?.classList.add('search-filtered-out');
 			else if (filterFunc(item, searchText)) {
-				items[item]?.classList.remove('search-filtered-out');
+				if (showAll || numResults < resultLimit) items[item]?.classList.remove('search-filtered-out');
+				else items[item]?.classList.add('search-filtered-out');
 				numResults++;
 			} else items[item]?.classList.add('search-filtered-out');
 		});

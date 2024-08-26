@@ -127,7 +127,7 @@ const { PrismaClient } = pkg;
 	await client.$transaction(missionQueries);
 
 	let completionQueries = [];
-	for (const [index, completion] of completions.entries()) {
+	for (const [_, completion] of completions.entries()) {
 		const comp = await client.completion.findMany({
 			where: {
 				mission: {

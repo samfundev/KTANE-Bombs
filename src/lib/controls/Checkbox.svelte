@@ -5,18 +5,19 @@
 	export let sideLabel: boolean = false;
 	export let labelAfter: boolean = false;
 	export let disabled: boolean = false;
+	export let title: string = '';
 </script>
 
 <div class:hstack={sideLabel}>
 	{#if !labelAfter}
-		<label for={id}>
+		<label {title} for={id}>
 			{label}
 			<slot />
 		</label>
 	{/if}
 	<input {id} type="checkbox" bind:checked {disabled} on:change />
 	{#if labelAfter}
-		<label for={id}>
+		<label {title} for={id}>
 			{label}
 			<slot />
 		</label>

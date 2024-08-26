@@ -1,0 +1,168 @@
+{
+	"AuditLog": [
+		{
+			"id": 146,
+			"userId": "688220820945895424",
+			"model": "MissionPack",
+			"recordId": "183",
+			"name": "rf",
+			"action": "create",
+			"timestamp": "2024-08-26T04:12:11.828Z"
+		},
+		{
+			"id": 147,
+			"userId": "688220820945895424",
+			"model": "MissionPack",
+			"recordId": "183",
+			"name": "rf",
+			"action": "update",
+			"timestamp": "2024-08-26T04:13:10.432Z",
+			"before": { "dateAdded": "2024-08-26T04:12:06.614Z" },
+			"after": { "dateAdded": "2024-08-20T12:00:00.000Z" }
+		},
+		{
+			"id": 148,
+			"userId": "688220820945895424",
+			"model": "MissionPack",
+			"recordId": "183",
+			"name": "rf",
+			"action": "update",
+			"timestamp": "2024-08-26T04:15:02.387Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 149,
+			"model": "MissionPack",
+			"recordId": "183",
+			"name": "rf",
+			"action": "delete",
+			"timestamp": "2024-08-26T04:15:38.763Z",
+			"before": {
+				"id": 183,
+				"name": "rf",
+				"steamId": "12345",
+				"verified": false,
+				"dateAdded": "2024-08-20T12:00:00.000Z",
+				"uploadedBy": "688220820945895424"
+			}
+		},
+		{
+			"id": 150,
+			"userId": "688220820945895424",
+			"model": "Mission",
+			"recordId": "1127",
+			"name": "The Yoloist",
+			"action": "create",
+			"timestamp": "2024-08-26T04:16:29.958Z"
+		},
+		{
+			"id": 151,
+			"userId": "688220820945895424",
+			"model": "Completion",
+			"recordId": "7633",
+			"name": "Series of Similarities||LuminoscityTim",
+			"action": "create",
+			"timestamp": "2024-08-26T04:17:10.550Z"
+		},
+		{
+			"id": 152,
+			"userId": "688220820945895424",
+			"model": "Mission",
+			"recordId": "1127",
+			"name": "The Yoloist",
+			"action": "delete",
+			"timestamp": "2024-08-26T05:28:24.132Z",
+			"before": {
+				"id": 1127,
+				"name": "The Yoloist",
+				"notes": null,
+				"authors": ["LuminoscityTim"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=251c07721ead29361e6f3ca3611059c526d0a3e5",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_bioplaysBombs_Yoloist",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2024-08-26T04:16:17.211Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "688220820945895424",
+				"designedForTP": false,
+				"missionPackId": 25
+			}
+		},
+		{
+			"id": 153,
+			"model": "MissionPack",
+			"recordId": "184",
+			"name": "rf",
+			"action": "create",
+			"timestamp": "2024-08-26T05:36:16.804Z"
+		},
+		{
+			"id": 154,
+			"model": "Completion",
+			"recordId": "5943",
+			"name": "Silence Madness||Macanek, Asmir",
+			"action": "update",
+			"timestamp": "2024-08-26T07:13:33.780Z",
+			"before": { "solo": false },
+			"after": { "solo": true }
+		},
+		{
+			"id": 155,
+			"userId": "688220820945895424",
+			"model": "Completion",
+			"recordId": "5943",
+			"name": "Silence Madness||Macanek, Asmir",
+			"action": "update",
+			"timestamp": "2024-08-26T07:13:46.165Z",
+			"before": { "solo": true },
+			"after": { "solo": false }
+		},
+		{
+			"id": 156,
+			"userId": "688220820945895424",
+			"model": "Completion",
+			"recordId": "436",
+			"name": "Silence Madness||Fish",
+			"action": "update",
+			"timestamp": "2024-08-26T07:13:52.405Z",
+			"before": { "solo": false },
+			"after": { "solo": true }
+		},
+		{
+			"id": 157,
+			"userId": "688220820945895424",
+			"model": "User",
+			"recordId": "688220820945895424",
+			"name": "LuminoscityTim",
+			"action": "update",
+			"timestamp": "2024-08-26T07:24:57.032Z",
+			"before": { "permissions": [0, 1, 2, 3, 4, 5] },
+			"after": { "permissions": [0, 1, 2, 3, 4] }
+		},
+		{
+			"id": 158,
+			"userId": "688220820945895424",
+			"model": "User",
+			"recordId": "688220820945895424",
+			"name": "LuminoscityTim",
+			"action": "update",
+			"timestamp": "2024-08-26T12:18:12.706Z",
+			"before": { "permissions": [0, 1, 2, 3, 4] },
+			"after": { "permissions": [0, 1, 2, 3, 4, 5] }
+		}
+	],
+	"User": [
+		{
+			"id": "688220820945895424",
+			"username": "LuminoscityTim",
+			"discordName": "luminoscity",
+			"avatar": "1e3ac96d5e44e6439107935cfa2f2aa1",
+			"permissions": [0, 1, 2, 3, 4, 5]
+		}
+	]
+}

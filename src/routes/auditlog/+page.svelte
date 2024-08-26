@@ -1,7 +1,17 @@
 <script lang="ts">
+	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
 	import { UNKNOWN_ITEM } from '$lib/const.js';
-	import { isOnlyDigits, onlyUnique, properUrlEncode } from '$lib/util.js';
+	import Checkbox from '$lib/controls/Checkbox.svelte';
+	import {
+		evaluateLogicalStringSearch,
+		isOnlyDigits,
+		logicalSearchTooltip,
+		onlyUnique,
+		properUrlEncode,
+		titleCase
+	} from '$lib/util.js';
 	import { AuditLog, Prisma } from '@prisma/client';
+	import { onMount } from 'svelte';
 
 	const dateOptions: Intl.DateTimeFormatOptions = {
 		year: 'numeric',
@@ -13,6 +23,24 @@
 
 	export let data;
 	let logs: (AuditLog & { linkable: boolean; mission: string | null })[] = data.logs;
+
+	let logRows: any = {};
+	let resultsText: number = logs.length;
+	let searchOptionBoxes = ['from user', 'mission', 'mission pack', 'solve', 'user', 'invert'];
+	let searchOptionTooltips = [
+		'Search for the user that made the change',
+		'Search for mission name',
+		'Search for mission pack name',
+		'Search for solve team or mission name for a solve',
+		'Search for edited users',
+		'Invert search'
+	];
+	let layoutSearch: LayoutSearchFilter;
+	let searchOptions: string[] = [];
+	let showAll = false;
+	const resultLimit = 50;
+	let validSearchOptions: boolean[] = Array(searchOptionBoxes.length).fill(false);
+	validSearchOptions[1] = validSearchOptions[2] = validSearchOptions[3] = true;
 
 	function pastTense(log: AuditLog): string {
 		if (
@@ -89,84 +117,177 @@
 			el.classList.remove('expand');
 		});
 	}
+
+	function logSearchFilter(name: string, searchText: string): boolean {
+		let text = searchText.toLowerCase();
+		let searchWhat: string[] = [];
+		let log = logs[parseInt(name)];
+		let model = log.model.toLocaleLowerCase();
+
+		if (
+			(searchOptions?.includes('mission') && model === 'mission') ||
+			(searchOptions?.includes('mission pack') && model === 'missionpack') ||
+			(searchOptions?.includes('user') && model === 'user')
+		) {
+			searchWhat.push(log.name.toLowerCase());
+		}
+		if (searchOptions?.includes('solve') && model === 'completion') {
+			searchWhat.push(log.name.toLowerCase());
+			if (log.mission) searchWhat.push(log.mission.toLowerCase());
+		}
+		if (searchOptions?.includes('from user')) {
+			if (log.userId) searchWhat.push(log.userId.toLowerCase());
+		}
+
+		let textMatch = evaluateLogicalStringSearch(text, searchWhat);
+
+		let optionMatch =
+			searchOptions.includes('from user') ||
+			searchOptions.includes(model) ||
+			(searchOptions.includes('solve') && model == 'completion') ||
+			(searchOptions.includes('mission pack') && model == 'missionpack');
+
+		return searchOptions.includes('invert') != (optionMatch && textMatch);
+	}
+	function setSearchOptions() {
+		let options = searchOptionBoxes.filter((_, idx) => {
+			return validSearchOptions[idx];
+		});
+		searchOptions = options;
+		searchOptionBoxes.forEach((o, i) => {
+			validSearchOptions[i] = options.includes(o);
+		});
+		layoutSearch.updateSearch();
+	}
+	onMount(() => {
+		setSearchOptions();
+	});
 </script>
 
 <svelte:head>
 	<title>Audit Log</title>
 </svelte:head>
 <h1 class="header">Audit Log</h1>
-<div class="block">
-	<button on:click={closeAll}>Close All</button>
+
+<div class="top-bar block">
+	<div class="hstack">
+		<span>Max {resultLimit} results shown</span>
+		<Checkbox
+			id="show-all-check"
+			on:change={() => {
+				layoutSearch.updateSearch();
+			}}
+			bind:checked={showAll}
+			label="Show All"
+			sideLabel
+			labelAfter />
+	</div>
+	<div class="flex row search-bar">
+		<span>Results: {resultsText} of {logs.length}</span>
+		<LayoutSearchFilter
+			id="log-search-field"
+			label="Search:"
+			rows={1}
+			textArea
+			autoExpand
+			title={logicalSearchTooltip}
+			bind:items={logRows}
+			bind:numResults={resultsText}
+			bind:this={layoutSearch}
+			filterFunc={logSearchFilter}
+			bind:showAll
+			{resultLimit}
+			classes="help" />
+		<button on:click={closeAll}>Close All</button>
+		{#each searchOptionBoxes as option, index}
+			<Checkbox
+				id="search-by-{option.replace(/ /g, '')}"
+				label={titleCase(option)}
+				sideLabel
+				labelAfter
+				title={searchOptionTooltips[index]}
+				on:change={setSearchOptions}
+				bind:checked={validSearchOptions[index]} />
+		{/each}
+		<!-- <span class="sort-option alphabetical" class:selected={sortOption == 'alphabetical'} on:click={alphabetical}
+		>Alphabetical</span>
+	<span class="sort-option popular" class:selected={sortOption == 'popular'} on:click={popular}>Popular</span>
+	<span class="sort-option published" class:selected={sortOption == 'published'} on:click={published}>Published</span> -->
+	</div>
 </div>
 
 <div class="table">
-	<div class="block" />
-	<b class="block">Description</b>
-	<div class="block table-headers">
-		<b>Item</b>
-		<b>Before</b>
-		<b>After</b>
+	<div class="table-row">
+		<div class="block" />
+		<b class="block">Description</b>
+		<div class="block table-headers">
+			<b>Item</b>
+			<b>Before</b>
+			<b>After</b>
+		</div>
 	</div>
 	{#each logs as log, index}
-		<div class="block number">{logs.length - index}</div>
-		<div class="block">
-			{#if log.userId != null && !isOnlyDigits(log.userId)}
-				<a href="/user/{properUrlEncode(log.userId)}">{log.userId}</a>
-			{:else}
-				{log.userId}
-			{/if}
-			<br />
-			{pastTense(log)}
-			{log.model.toLowerCase()} <br />
-			{#if log.model === 'Mission'}
-				{#if log.linkable}
-					<a href="/mission/{properUrlEncode(log.name)}">{shortName(log.name)}</a>
-				{:else}
-					{unlinkable(log.name)}
-				{/if}
-			{:else if log.model === 'MissionPack'}
-				{#if log.linkable}
-					<a href="/missionpack/{properUrlEncode(log.name)}">{shortName(log.name)}</a>
-				{:else}
-					{unlinkable(log.name)}
-				{/if}
-			{:else if log.model === 'Completion'}
-				<span title={log.name}>{shortTeam(log.name)}</span> on <br />
-				{#if log.linkable && log.mission != null}
-					<a href="/mission/{properUrlEncode(log.mission)}">{shortName(log.mission)}</a>
-				{:else}
-					{unlinkable(log.name)}
-				{/if}
-			{:else if log.model === 'User'}
-				{#if log.linkable}
-					<a href="/user/{properUrlEncode(log.name)}">{shortName(log.name)}</a>
-				{:else}
-					{unlinkable(log.name)}
-				{/if}
-			{/if}
-			<br />
-			{log.timestamp.toLocaleDateString(undefined, dateOptions)}
-		</div>
 		{@const display = displayLog(log.before, log.after)}
-		<div class="block dropdown d{index}" class:small={smallItem(display.full)} class:expand={smallItem(display.full)}>
-			<div class="short" on:click={() => reveal(index)}>
-				<div class="log-details">
-					{#each display.short as row}
-						<div title={row.item}>{shortItem(row.item)}</div>
-						<div>{row.before}</div>
-						<div>{row.after}</div>
-					{/each}
-				</div>
-				<strong>...</strong>
+		<div class="table-row" bind:this={logRows[index]}>
+			<div class="block number">{logs.length - index}</div>
+			<div class="block">
+				{#if log.userId != null && !isOnlyDigits(log.userId)}
+					<a href="/user/{properUrlEncode(log.userId)}">{log.userId}</a>
+				{:else}
+					{log.userId}
+				{/if}
+				<br />
+				{pastTense(log)}
+				{log.model.toLowerCase()} <br />
+				{#if log.model === 'Mission'}
+					{#if log.linkable}
+						<a href="/mission/{properUrlEncode(log.name)}">{shortName(log.name)}</a>
+					{:else}
+						{unlinkable(log.name)}
+					{/if}
+				{:else if log.model === 'MissionPack'}
+					{#if log.linkable}
+						<a href="/missionpack/{properUrlEncode(log.name)}">{shortName(log.name)}</a>
+					{:else}
+						{unlinkable(log.name)}
+					{/if}
+				{:else if log.model === 'Completion'}
+					<span title={log.name}>{shortTeam(log.name)}</span> on <br />
+					{#if log.linkable && log.mission != null}
+						<a href="/mission/{properUrlEncode(log.mission)}">{shortName(log.mission)}</a>
+					{:else}
+						{unlinkable(log.name)}
+					{/if}
+				{:else if log.model === 'User'}
+					{#if log.linkable}
+						<a href="/user/{properUrlEncode(log.name)}">{shortName(log.name)}</a>
+					{:else}
+						{unlinkable(log.name)}
+					{/if}
+				{/if}
+				<br />
+				{log.timestamp.toLocaleDateString(undefined, dateOptions)}
 			</div>
-			<div class="full">
-				<div class="contract" on:click={() => hide(index)} />
-				<div class="log-details">
-					{#each display.full as row}
-						<div title={row.item}>{shortItem(row.item)}</div>
-						<div>{row.before}</div>
-						<div>{row.after}</div>
-					{/each}
+			<div class="block dropdown d{index}" class:small={smallItem(display.full)} class:expand={smallItem(display.full)}>
+				<div class="short" on:click={() => reveal(index)}>
+					<div class="log-details">
+						{#each display.short as row}
+							<div title={row.item}>{shortItem(row.item)}</div>
+							<div>{row.before}</div>
+							<div>{row.after}</div>
+						{/each}
+					</div>
+					<strong>...</strong>
+				</div>
+				<div class="full">
+					<div class="contract" on:click={() => hide(index)} />
+					<div class="log-details">
+						{#each display.full as row}
+							<div title={row.item}>{shortItem(row.item)}</div>
+							<div>{row.before}</div>
+							<div>{row.after}</div>
+						{/each}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -177,6 +298,22 @@
 	:root {
 		--cell-width: calc((var(--page-content-width) - 240px) / 2 - var(--gap) - 120px);
 	}
+
+	.top-bar {
+		position: sticky;
+		top: calc(var(--stick-under-navbar) + 1px);
+	}
+	.search-bar {
+		gap: 12px;
+		align-items: center;
+		flex-wrap: wrap;
+		margin-top: var(--gap);
+	}
+	.hstack {
+		display: flex;
+		gap: 8px;
+	}
+
 	.number {
 		font-size: 10px;
 		padding: 1px;
@@ -192,15 +329,16 @@
 	.table-headers b {
 		text-align: left;
 	}
-	.table {
+	.table-row {
 		display: grid;
 		grid-template-columns: 30px 210px auto;
 		gap: var(--gap);
 		text-align: center;
 		width: 100%;
 		overflow: hidden;
+		margin: var(--gap) auto;
 	}
-	.table > div {
+	.table-row > div {
 		overflow-wrap: break-word;
 	}
 	.dropdown:not(.expand) {

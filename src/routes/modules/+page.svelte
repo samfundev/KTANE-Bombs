@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment';
 	import ModuleCard from '$lib/cards/ModuleCard.svelte';
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
+	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import type { RepoModule } from '$lib/repo.js';
 	import type { Bomb, Mission } from '$lib/types.js';
 	import {
@@ -19,6 +20,8 @@
 	let moduleRows: any = {};
 	let sortOption: 'alphabetical' | 'popular' | 'published' = 'alphabetical';
 	let layoutSearch: LayoutSearchFilter;
+	let showAll = false;
+	const resultLimit = 50;
 
 	let missionsOf: Record<string, ShortMission[]> = {};
 	missions.forEach(miss => {
@@ -35,10 +38,25 @@
 			});
 	});
 
+	function limitResults() {
+		let allRows = document.querySelectorAll('.module-row');
+		allRows.forEach(function (row) {
+			row.classList.remove('length-filtered-out');
+		});
+		console.log('showAll', showAll);
+		if (!showAll) {
+			let results = document.querySelectorAll('.module-row:not(.search-filtered-out)');
+			for (let i = resultLimit; i < results.length; i++) {
+				results[i].classList.add('length-filtered-out');
+			}
+		}
+	}
+
 	function updateSearch() {
 		if (browser) {
 			setTimeout(() => {
 				layoutSearch?.updateSearch();
+				limitResults();
 			}, 100);
 		}
 	}
@@ -90,10 +108,25 @@
 	<h1 class="header">Modules</h1>
 </div>
 <div class="top-bar flex column block">
-	<div class="legend flex">
-		<span class="boss">Boss/Semi-Boss</span>
-		<span class="needy">Needy</span>
-		<span class="quirks">Has Other Quirks</span>
+	<div class="flex">
+		<div class="hstack">
+			<span>Max {resultLimit} results shown</span>
+			<Checkbox
+				id="show-all-check"
+				on:change={() => {
+					updateSearch();
+				}}
+				bind:checked={showAll}
+				label="Show All"
+				sideLabel
+				labelAfter />
+		</div>
+
+		<div class="legend flex">
+			<span class="boss">Boss/Semi-Boss</span>
+			<span class="needy">Needy</span>
+			<span class="quirks">Has Other Quirks</span>
+		</div>
 	</div>
 	<div class="flex row search-bar">
 		<span>Results: {resultsText} of {mods.length}</span>
@@ -108,6 +141,7 @@
 			bind:numResults={resultsText}
 			bind:this={layoutSearch}
 			filterFunc={moduleSearchFilter}
+			on:input={limitResults}
 			classes="help" />
 		<button on:click={closeAll}>Close All</button>
 		<span class="sort-option alphabetical" class:selected={sortOption == 'alphabetical'} on:click={alphabetical}
@@ -118,7 +152,7 @@
 </div>
 <div class="flex column">
 	{#each mods as [modID, module]}
-		<div class="module-row flex row" bind:this={moduleRows[modID]}>
+		<div class="module-row flex row length-filtered-out" bind:this={moduleRows[modID]}>
 			<div class="module-card flex column"><ModuleCard {module} /></div>
 			<div
 				class="missions-dropdown flex column mod{modID.replace(/\s/g, '')}"
@@ -190,12 +224,21 @@
 	.search-bar {
 		gap: 20px;
 		align-items: center;
+		flex-wrap: wrap;
 	}
 	.bold {
 		font-weight: bold;
 	}
+	.hstack {
+		display: flex;
+		align-items: center;
+	}
+	.hstack > span {
+		margin-right: 8px;
+	}
 	.legend {
 		justify-content: center;
+		flex: 1;
 	}
 	.legend > span {
 		padding: var(--gap);
@@ -210,5 +253,8 @@
 	}
 	:global(#module-search-field) {
 		width: 250px;
+	}
+	.length-filtered-out {
+		display: none;
 	}
 </style>
