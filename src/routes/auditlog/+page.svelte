@@ -54,21 +54,8 @@
 		}
 		return log.action + (log.action.endsWith('e') ? 'd' : 'ed');
 	}
-	function shortName(str: string): string {
-		if (str.length > 24) return str.substring(0, 22) + ' ...';
-		else return str;
-	}
 	function unlinkable(str: string): string {
-		if (str === UNKNOWN_ITEM) return 'Unknown';
-		return shortName(str);
-	}
-	function shortTeam(str: string): string {
-		if (str.length > 23) return str.substring(0, 21) + '...';
-		else return str;
-	}
-	function shortItem(str: string): string {
-		if (str.length > 13) return str.substring(0, 11) + '...';
-		else return str;
+		return str === UNKNOWN_ITEM ? 'Unknown' : str;
 	}
 
 	type ItemDetails = { item: string; before: string; after: string };
@@ -241,28 +228,28 @@
 				{log.model.toLowerCase()} <br />
 				{#if log.model === 'Mission'}
 					{#if log.linkable}
-						<a href="/mission/{properUrlEncode(log.name)}">{shortName(log.name)}</a>
+						<a title={log.name} class="shorten" href="/mission/{properUrlEncode(log.name)}">{log.name}</a>
 					{:else}
-						{unlinkable(log.name)}
+						<span title={unlinkable(log.name)} class="shorten">{unlinkable(log.name)}</span>
 					{/if}
 				{:else if log.model === 'MissionPack'}
 					{#if log.linkable}
-						<a href="/missionpack/{properUrlEncode(log.name)}">{shortName(log.name)}</a>
+						<a title={log.name} class="shorten" href="/missionpack/{properUrlEncode(log.name)}">{log.name}</a>
 					{:else}
-						{unlinkable(log.name)}
+						<span title={unlinkable(log.name)} class="shorten">{unlinkable(log.name)}</span>
 					{/if}
 				{:else if log.model === 'Completion'}
-					<span title={log.name}>{shortTeam(log.name)}</span> on <br />
+					<span title={log.name} class="shorten">{log.name}</span> <span class="shorten">on</span> <br />
 					{#if log.linkable && log.mission != null}
-						<a href="/mission/{properUrlEncode(log.mission)}">{shortName(log.mission)}</a>
+						<a title={log.mission} class="shorten" href="/mission/{properUrlEncode(log.mission)}">{log.mission}</a>
 					{:else}
-						{unlinkable(log.name)}
+						<span title={unlinkable(log.name)} class="shorten">{unlinkable(log.name)}</span>
 					{/if}
 				{:else if log.model === 'User'}
 					{#if log.linkable}
-						<a href="/user/{properUrlEncode(log.name)}">{shortName(log.name)}</a>
+						<a title={log.name} class="shorten" href="/user/{properUrlEncode(log.name)}">{log.name}</a>
 					{:else}
-						{unlinkable(log.name)}
+						<span title={unlinkable(log.name)} class="shorten">{unlinkable(log.name)}</span>
 					{/if}
 				{/if}
 				<br />
@@ -272,7 +259,7 @@
 				<div class="short" on:click={() => reveal(index)}>
 					<div class="log-details">
 						{#each display.short as row}
-							<div title={row.item}>{shortItem(row.item)}</div>
+							<div title={row.item} class="shorten-detail">{row.item}</div>
 							<div>{row.before}</div>
 							<div>{row.after}</div>
 						{/each}
@@ -283,7 +270,7 @@
 					<div class="contract" on:click={() => hide(index)} />
 					<div class="log-details">
 						{#each display.full as row}
-							<div title={row.item}>{shortItem(row.item)}</div>
+							<div title={row.item} class="shorten-detail">{row.item}</div>
 							<div>{row.before}</div>
 							<div>{row.after}</div>
 						{/each}
@@ -312,6 +299,20 @@
 	.hstack {
 		display: flex;
 		gap: 8px;
+	}
+
+	.shorten {
+		max-width: 200px;
+	}
+	.shorten-detail {
+		max-width: 115px;
+	}
+	.shorten,
+	.shorten-detail {
+		display: inline-block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.number {

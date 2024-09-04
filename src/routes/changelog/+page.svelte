@@ -5,7 +5,7 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
-	<h3>29 August 2024</h3>
+	<h3>4 September 2024</h3>
 	<ul>
 		<li>Twitch Plays can no longer claim "Top Times" on a user page.</li>
 		<li><a href="/modules">Modules</a> page now limits the number of results by default.</li>
