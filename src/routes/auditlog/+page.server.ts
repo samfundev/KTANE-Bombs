@@ -1,5 +1,4 @@
 import client from '$lib/client';
-import { UNKNOWN_ITEM } from '$lib/const';
 import { Permission } from '$lib/types';
 import { forbidden, hasAnyPermission } from '$lib/util';
 
@@ -15,6 +14,9 @@ async function findName(log: any) {
 		});
 		if (comp != null) {
 			return { ...info, name: comp.team.join(', '), mission: comp.mission.name };
+		} else if (log.name.includes('||')) {
+			let splitName = log.name.split('||');
+			return { linkable: false, name: splitName.slice(1).join('||'), mission: splitName[0] };
 		}
 	} else if (log.model === 'User') {
 		const fetched = await client.user.findUnique({

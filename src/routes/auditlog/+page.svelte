@@ -242,6 +242,8 @@
 					<span title={log.name} class="shorten">{log.name}</span> <span class="shorten">on</span> <br />
 					{#if log.linkable && log.mission != null}
 						<a title={log.mission} class="shorten" href="/mission/{properUrlEncode(log.mission)}">{log.mission}</a>
+					{:else if log.mission != null}
+						<span title={unlinkable(log.mission)} class="shorten">{unlinkable(log.mission)}</span>
 					{:else}
 						<span title={unlinkable(log.name)} class="shorten">{unlinkable(log.name)}</span>
 					{/if}
