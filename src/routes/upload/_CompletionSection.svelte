@@ -184,6 +184,14 @@
 
 	function teamChange() {
 		if (team[0].text === TP_TEAM) tpSolve = true;
+		else {
+			for (let i = 0; i < team.length; i++) {
+				let matchedName = solverNames.find(name => team[i].text.toLowerCase() === name.toLowerCase());
+				if (matchedName != undefined && matchedName !== team[i].text) {
+					team[i].text = matchedName;
+				}
+			}
+		}
 	}
 
 	function upload() {
