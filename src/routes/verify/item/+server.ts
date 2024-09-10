@@ -56,6 +56,7 @@ export const POST: RequestHandler = async function ({ locals, request }: Request
 								missionPackId: item.mission.missionPack?.id,
 								name: name,
 								logfile: item.mission.logfile,
+								inGameId: item.mission.inGameId,
 								designedForTP: item.mission.designedForTP
 							}
 						});

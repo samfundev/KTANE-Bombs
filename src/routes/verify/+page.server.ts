@@ -32,6 +32,7 @@ export const load = async function ({ parent, locals }: any) {
 				dateAdded: true,
 				notes: true,
 				uploadedBy: true,
+				inGameId: true,
 				missionPack: {
 					select: {
 						id: true,

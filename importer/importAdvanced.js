@@ -35,7 +35,9 @@ const { PrismaClient } = pkg;
 	}
 	await client.$transaction(userQueries);
 
-	await client.auditLog.deleteMany({});
+	//uncomment to wipe out your local audit log first
+	//await client.auditLog.deleteMany({});
+
 	let logQueries = [];
 	logs.sort((a, b) => parseInt(a.id) - parseInt(b.id));
 	for (const log of logs) {

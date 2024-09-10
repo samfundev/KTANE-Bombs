@@ -733,6 +733,338 @@
 			"name": "Rip-Current||Benjamin, Bianca, denial140",
 			"action": "create",
 			"timestamp": "2024-09-08T08:09:43.585Z"
+		},
+		{
+			"id": 49,
+			"userId": "483182665776889856",
+			"model": "Completion",
+			"recordId": "60430",
+			"name": "P e d r o||Varunaxx",
+			"action": "create",
+			"timestamp": "2024-09-08T11:00:21.600Z"
+		},
+		{
+			"id": 50,
+			"userId": "391292544551485441",
+			"model": "Completion",
+			"recordId": "60431",
+			"name": "Dove||Chestnut",
+			"action": "create",
+			"timestamp": "2024-09-08T12:03:33.862Z"
+		},
+		{
+			"id": 51,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60424",
+			"name": "Arleen's Favorite 47||AzaFTW, Kangablue",
+			"action": "update",
+			"timestamp": "2024-09-08T12:43:56.877Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 52,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60424",
+			"name": "Arleen's Favorite 47||AzaFTW, Kangablue",
+			"action": "update",
+			"timestamp": "2024-09-08T12:44:18.652Z",
+			"before": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=9d722b054a76415af30c2aa4646330f70edd1759;bomb=KB9DK6",
+					"https://www.youtube.com/watch?v=cXG8oRWQJMk&t=2251s&ab_channel=Azie",
+					"https://www.youtube.com/watch?v=rt1K8SCyxTw&t=1779s&ab_channel=Kangablue"
+				]
+			},
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=9d722b054a76415af30c2aa4646330f70edd1759;bomb=KB9DK6",
+					"https://www.youtube.com/watch?v=cXG8oRWQJMk&ab_channel=Azie",
+					"https://www.youtube.com/watch?v=rt1K8SCyxTw&ab_channel=Kangablue"
+				]
+			}
+		},
+		{
+			"id": 53,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60425",
+			"name": "Beekeeper||Dicey",
+			"action": "update",
+			"timestamp": "2024-09-08T12:44:53.289Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 54,
+			"userId": "495546834010505216",
+			"model": "Mission",
+			"recordId": "10702",
+			"name": "[[UPDATE]] Draket's Paradise",
+			"action": "create",
+			"timestamp": "2024-09-08T14:05:21.978Z"
+		},
+		{
+			"id": 55,
+			"userId": "495546834010505216",
+			"model": "Mission",
+			"recordId": "10703",
+			"name": "Speedrun",
+			"action": "create",
+			"timestamp": "2024-09-08T14:12:03.513Z"
+		},
+		{
+			"id": 56,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60426",
+			"name": "P e d r o||aGood_Usernam3",
+			"action": "update",
+			"timestamp": "2024-09-08T21:22:37.856Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 57,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60427",
+			"name": "P e d r o||Megum",
+			"action": "update",
+			"timestamp": "2024-09-08T21:22:47.406Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 58,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60428",
+			"name": "Truly Hardcore||Dicey",
+			"action": "update",
+			"timestamp": "2024-09-08T21:23:05.226Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 59,
+			"userId": "292774728014364686",
+			"model": "User",
+			"recordId": "292774728014364686",
+			"name": "Espik",
+			"action": "update",
+			"timestamp": "2024-09-08T21:26:44.442Z",
+			"before": { "permissions": [0, 1, 2, 4, 3] },
+			"after": { "permissions": [0, 1, 2, 4, 3, 5] }
+		},
+		{
+			"id": 60,
+			"userId": "391292544551485441",
+			"model": "Completion",
+			"recordId": "60432",
+			"name": "Undefined 47||Chestnut",
+			"action": "create",
+			"timestamp": "2024-09-08T21:52:49.243Z"
+		},
+		{
+			"id": 61,
+			"userId": "488806494872272898",
+			"model": "Completion",
+			"recordId": "60433",
+			"name": "Needy Troubles||Men in Black",
+			"action": "create",
+			"timestamp": "2024-09-09T00:15:10.016Z"
+		},
+		{
+			"id": 62,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "60434",
+			"name": "Mario 🙁||Kugel",
+			"action": "create",
+			"timestamp": "2024-09-09T05:14:23.801Z"
+		},
+		{
+			"id": 63,
+			"userId": "208633883544125440",
+			"model": "Mission",
+			"recordId": "10704",
+			"name": "Press E To Explode",
+			"action": "create",
+			"timestamp": "2024-09-09T05:55:53.012Z"
+		},
+		{
+			"id": 64,
+			"userId": "208633883544125440",
+			"model": "Mission",
+			"recordId": "10705",
+			"name": "Rat's Nest",
+			"action": "create",
+			"timestamp": "2024-09-09T05:58:36.869Z"
+		},
+		{
+			"id": 65,
+			"userId": "337934133751840769",
+			"model": "Completion",
+			"recordId": "60435",
+			"name": "Quinquennial||Benjamin, Bianca, Burniel",
+			"action": "create",
+			"timestamp": "2024-09-09T09:55:30.177Z"
+		},
+		{
+			"id": 66,
+			"userId": "495546834010505216",
+			"model": "Completion",
+			"recordId": "60436",
+			"name": "Logic Madness||Megum",
+			"action": "create",
+			"timestamp": "2024-09-09T12:20:36.544Z"
+		},
+		{
+			"id": 67,
+			"userId": "649278621550116864",
+			"model": "Completion",
+			"recordId": "60437",
+			"name": "Snivy's Arrogance||Lily, Millie-Rose",
+			"action": "create",
+			"timestamp": "2024-09-09T16:00:27.468Z"
+		},
+		{
+			"id": 68,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "60438",
+			"name": "The Game Master||Kugel",
+			"action": "create",
+			"timestamp": "2024-09-09T23:40:25.629Z"
+		},
+		{
+			"id": 69,
+			"userId": "356080305087447040",
+			"model": "Completion",
+			"recordId": "60439",
+			"name": "Downright Foolhardy||aGood_Usernam3",
+			"action": "create",
+			"timestamp": "2024-09-10T02:32:57.452Z"
+		},
+		{
+			"id": 70,
+			"userId": "384957853116661760",
+			"model": "Mission",
+			"recordId": "10706",
+			"name": "Everyone hate mistakes III: Among Us",
+			"action": "create",
+			"timestamp": "2024-09-10T02:37:50.091Z"
+		},
+		{
+			"id": 71,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60429",
+			"name": "Rip-Current||Benjamin, Bianca, denial140",
+			"action": "update",
+			"timestamp": "2024-09-10T07:27:26.145Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 72,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60430",
+			"name": "P e d r o||Varunaxx",
+			"action": "update",
+			"timestamp": "2024-09-10T07:27:46.634Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 73,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60431",
+			"name": "Dove||Chestnut",
+			"action": "update",
+			"timestamp": "2024-09-10T07:28:02.695Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 74,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60432",
+			"name": "Undefined 47||Chestnut",
+			"action": "update",
+			"timestamp": "2024-09-10T07:28:28.421Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 75,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60433",
+			"name": "Needy Troubles||Men in Black",
+			"action": "update",
+			"timestamp": "2024-09-10T07:29:01.825Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 76,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60434",
+			"name": "Mario 🙁||Kugel",
+			"action": "update",
+			"timestamp": "2024-09-10T07:29:28.920Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 77,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60435",
+			"name": "Quinquennial||Benjamin, Bianca, Burniel",
+			"action": "update",
+			"timestamp": "2024-09-10T07:30:11.526Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 78,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60435",
+			"name": "Quinquennial||Benjamin, Bianca, Burniel",
+			"action": "update",
+			"timestamp": "2024-09-10T07:31:07.342Z",
+			"before": { "dateAdded": "2024-09-09T09:55:05.346Z" },
+			"after": { "dateAdded": "2024-09-08T04:00:00.000Z" }
+		},
+		{
+			"id": 79,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60436",
+			"name": "Logic Madness||Megum",
+			"action": "update",
+			"timestamp": "2024-09-10T07:32:09.752Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 80,
+			"userId": "337934133751840769",
+			"model": "Completion",
+			"recordId": "60440",
+			"name": "The Mountain||Benjamin, Bianca, Burniel",
+			"action": "create",
+			"timestamp": "2024-09-10T08:25:24.543Z"
 		}
 	],
 	"User": [
@@ -1654,7 +1986,7 @@
 			"username": "Espik",
 			"discordName": "espik",
 			"avatar": "c570958522c5fabcee4d6f20f1fa387e",
-			"permissions": [0, 1, 2, 4, 3]
+			"permissions": [0, 1, 2, 4, 3, 5]
 		},
 		{
 			"id": "294221057311899649",
@@ -2311,7 +2643,7 @@
 			"id": "485774478282981376",
 			"username": "weird",
 			"discordName": "weird_th",
-			"avatar": "bf1a53dcd7a317bd69ecb17e33492706",
+			"avatar": "7815a0c281e9c08dc73cbe774d3a69df",
 			"permissions": []
 		},
 		{
@@ -2586,7 +2918,7 @@
 			"id": "649278621550116864",
 			"username": "Lily",
 			"discordName": "lilyflair",
-			"avatar": "31f90def85b2c002a1f020fe95bf9291",
+			"avatar": "e16c0c3016dc2433d3aa8e04a888d6c1",
 			"permissions": []
 		},
 		{

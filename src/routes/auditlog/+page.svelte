@@ -49,8 +49,14 @@
 		) {
 			const statsBef = JSON.parse(JSON.stringify(log.before));
 			const statsAft = JSON.parse(JSON.stringify(log.after));
-			if (log.action === 'delete' && statsBef.verified === false) return 'rejected';
-			else if (log.action === 'update' && statsBef.verified === false && statsAft.verified === true) return 'accepted';
+			if (
+				log.action === 'delete' &&
+				statsBef.verified === false &&
+				!(log.model === 'Mission' && log.name.includes('[[UPDATE]]'))
+			) {
+				return 'rejected';
+			} else if (log.action === 'update' && statsBef.verified === false && statsAft.verified === true)
+				return 'accepted';
 		}
 		return log.action + (log.action.endsWith('e') ? 'd' : 'ed');
 	}
@@ -285,7 +291,7 @@
 
 <style>
 	:root {
-		--cell-width: calc((var(--page-content-width) - 240px) / 2 - var(--gap) - 120px);
+		--cell-width: calc((var(--page-content-width) - 240px) / 2 - 80px);
 	}
 
 	.top-bar {
@@ -328,6 +334,7 @@
 	.log-details {
 		display: grid;
 		grid-template-columns: 120px var(--cell-width) var(--cell-width);
+		column-gap: var(--gap);
 	}
 	.table-headers b {
 		text-align: left;
