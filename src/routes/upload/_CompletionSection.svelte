@@ -68,7 +68,7 @@
 
 	function getInfo(text: string) {
 		let lineIndex = 0;
-		const lines = text.split('\n');
+		const lines = text.split('\n').map(line => line.length > 20000 ? "" : line);
 
 		function readLine() {
 			return lines[lineIndex++];

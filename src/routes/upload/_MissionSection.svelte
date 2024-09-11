@@ -36,7 +36,7 @@
 		let mission: ReplaceableMission | null = null;
 		let bomb: Bomb | null = null;
 		let lineIndex = 0;
-		const lines = text.split('\n');
+		const lines = text.split('\n').map(line => line.length > 20000 ? "" : line);
 
 		function readLine() {
 			return lines[lineIndex++];
