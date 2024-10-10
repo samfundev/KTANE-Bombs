@@ -12,12 +12,14 @@
 
 <div class="completions">
 	{#each mission.completions as completion}
-		<CompletionCard {completion} />
+		{#if completion.team[0] !== TP_TEAM}
+			<CompletionCard {completion} />
+		{/if}
 	{:else}
 		<NoContent>No solves, <a href="/upload">be the first</a>!</NoContent>
 	{/each}
-	{#if mission.tpSolve && tpSolve === undefined}
-		<div class="block">Solved by <span class="tp-solve">{TP_TEAM}</span></div>
+	{#if mission.tpSolve}
+		<div class="block">Solved using <span class="tp-solve">{TP_TEAM}</span></div>
 	{/if}
 </div>
 
