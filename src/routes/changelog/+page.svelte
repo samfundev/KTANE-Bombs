@@ -5,10 +5,13 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
-	<h3>10 October 2024</h3>
+	<h3>12 October 2024</h3>
 	<ul>
 		<li>"Solved by Twitch Plays" is now "Solved using Twitch Plays".</li>
-		<li>TP solves submitted with times no longer appear in leaderboards. All TP solves are now shown as "Solved using Twitch Plays".</li>
+		<li>
+			TP solves submitted with times no longer appear in leaderboards. All TP solves are now shown as "Solved using
+			Twitch Plays".
+		</li>
 	</ul>
 </div>
 <div class="block update">

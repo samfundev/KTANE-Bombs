@@ -13,7 +13,7 @@
 <div class="completions">
 	{#each mission.completions as completion}
 		{#if completion.team[0] !== TP_TEAM}
-		    <!-- TP solves excluded from leaderboard by popular request -->
+			<!-- TP solves excluded from leaderboard by popular request -->
 			<CompletionCard {completion} />
 		{/if}
 	{:else}
