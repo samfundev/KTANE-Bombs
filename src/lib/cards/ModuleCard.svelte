@@ -15,11 +15,13 @@
 	href={`https://ktane.timwi.de/redirect/#${properUrlEncode(module.FileName ?? module.Name)}`}>
 	{#if hasSpecialIcon(module.ModuleID)}
 		<div class="image {module.ModuleID}" />
-	{:else}
+	{:else if (module.valid)}
 		<img
 			src="https://ktane.timwi.de/iconsprite"
 			alt={module.Name}
 			style="object-position: -{module.X * 32}px -{module.Y * 32}px" />
+	{:else}
+		<div class="image invalid" />
 	{/if}
 	<span>{module.Name}</span>
 	{#if fraction < 0.02 || (fraction >= 0.995 && fraction < 1)}
@@ -49,5 +51,13 @@
 		width: 32px;
 		object-fit: none;
 		image-rendering: crisp-edges;
+	}
+	.module > .image.invalid {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+	.module > .image.invalid::after {
+		content: '?';
 	}
 </style>

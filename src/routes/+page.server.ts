@@ -21,7 +21,8 @@ export const load: PageServerLoad = async function () {
 			completions: {
 				where: { verified: true }
 			}
-		}
+		},
+		orderBy: { dateAdded: 'desc' }
 	});
 
 	return {

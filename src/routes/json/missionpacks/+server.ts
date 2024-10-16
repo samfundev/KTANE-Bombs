@@ -83,7 +83,7 @@ export async function GET() {
 			name: miss.name,
 			authors: miss.authors,
 			bombs: bombs,
-			topcompletion: miss.completions.length > 0 ? miss.completions[0] : null,
+			topCompletion: miss.completions.length > 0 ? miss.completions[0] : null,
 			dateAdded: miss.dateAdded,
 			designedForTP: miss.designedForTP,
 			factory: miss.factory,
