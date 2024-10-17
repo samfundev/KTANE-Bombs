@@ -24,7 +24,7 @@
 <div class="block update">
 	<h3>11 October 2024</h3>
 	<ul>
-		<li>"Solved by Twitch Plays"is now "Solved using Twitch Plays".</li>
+		<li>"Solved by Twitch Plays" is now "Solved using Twitch Plays".</li>
 		<li>
 			TP solves submitted with times no longer appear in leaderboards. All TP solves are now shown as "Solved using
 			Twitch Plays".

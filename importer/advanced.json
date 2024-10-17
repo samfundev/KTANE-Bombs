@@ -9485,6 +9485,718 @@
 			"name": "Boss Soloing||denial140",
 			"action": "create",
 			"timestamp": "2024-10-15T03:03:20.451Z"
+		},
+		{
+			"id": 587,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60527",
+			"name": "Organisation Rush||Superstep",
+			"action": "update",
+			"timestamp": "2024-10-15T12:07:21.016Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 588,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60528",
+			"name": "Trademark||Kugel",
+			"action": "update",
+			"timestamp": "2024-10-15T12:07:48.675Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 589,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60529",
+			"name": "Maybe a Bomb||Yabbaguy",
+			"action": "update",
+			"timestamp": "2024-10-15T12:08:29.220Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 590,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60530",
+			"name": "ÜberKlax Endurance||NinjaBorn, Masked Mystery",
+			"action": "update",
+			"timestamp": "2024-10-15T12:09:57.097Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 591,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "59496",
+			"name": "Boss Module Endurance||denial140",
+			"action": "update",
+			"timestamp": "2024-10-15T12:10:27.953Z",
+			"before": {
+				"time": 10389.17,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=11c760ed4c688c928dbd5584f3e715f453858918;bomb=NZ4HE9"
+				]
+			},
+			"after": {
+				"time": 11151.18,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=8565460a4df85194266a88131cb871df28383986;bomb=ZI3WK3"
+				]
+			}
+		},
+		{
+			"id": 592,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60531",
+			"name": "Boss Module Endurance||denial140",
+			"action": "delete",
+			"timestamp": "2024-10-15T12:10:27.963Z",
+			"before": {
+				"id": 60531,
+				"old": false,
+				"solo": false,
+				"team": ["denial140"],
+				"time": 11151.18,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=8565460a4df85194266a88131cb871df28383986;bomb=ZI3WK3"
+				],
+				"verified": false,
+				"dateAdded": "2024-10-08T15:08:05.663Z",
+				"missionId": 9887,
+				"uploadedBy": "118831126239248397"
+			}
+		},
+		{
+			"id": 593,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60532",
+			"name": "Doringkloof||BladePL",
+			"action": "update",
+			"timestamp": "2024-10-15T12:13:09.712Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 594,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60534",
+			"name": "By Popular Demand||denial140, c12, Evo",
+			"action": "update",
+			"timestamp": "2024-10-15T12:14:23.281Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 595,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60535",
+			"name": "Eldoraigne||BladePL",
+			"action": "update",
+			"timestamp": "2024-10-15T12:14:40.416Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 596,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60536",
+			"name": "Boss Module Endurance||Boxpone, AzaFTW",
+			"action": "update",
+			"timestamp": "2024-10-15T12:17:14.521Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 597,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60537",
+			"name": "Irene||GreenPower, Guck, LeJusDOrange, Lucco",
+			"action": "update",
+			"timestamp": "2024-10-15T12:18:21.784Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 598,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60538",
+			"name": "The Easifier||upsilon",
+			"action": "update",
+			"timestamp": "2024-10-15T12:19:24.829Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 599,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "59828",
+			"name": "SoulOrg Endurance||upsilon",
+			"action": "update",
+			"timestamp": "2024-10-15T12:19:40.553Z",
+			"before": {
+				"time": 3600.92,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=8a83583e1434107b8e38cfb888ab09bb8e05d408",
+					"https://www.youtube.com/watch?v=LbXcdTb9Af8"
+				]
+			},
+			"after": {
+				"time": 3994.5,
+				"proofs": ["https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=445e658171cfe9879cee7dcb4792bf12d24d8db3"]
+			}
+		},
+		{
+			"id": 600,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60539",
+			"name": "SoulOrg Endurance||upsilon",
+			"action": "delete",
+			"timestamp": "2024-10-15T12:19:40.561Z",
+			"before": {
+				"id": 60539,
+				"old": false,
+				"solo": false,
+				"team": ["upsilon"],
+				"time": 3994.5,
+				"first": false,
+				"notes": null,
+				"proofs": ["https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=445e658171cfe9879cee7dcb4792bf12d24d8db3"],
+				"verified": false,
+				"dateAdded": "2024-10-10T05:16:53.259Z",
+				"missionId": 10460,
+				"uploadedBy": "690375957877620757"
+			}
+		},
+		{
+			"id": 601,
+			"userId": "486602438103531520",
+			"model": "Mission",
+			"recordId": "10591",
+			"name": "New Supersonic",
+			"action": "update",
+			"timestamp": "2024-10-15T12:20:58.561Z",
+			"before": { "logfile": "https://ktane.timwi.de/lfa#file=73be46637ce2134864a998286c2f66f9ab4836f6" },
+			"after": {
+				"bombs": {
+					"create": [
+						{
+							"time": 5400,
+							"pools": [
+								{ "count": 3, "modules": ["widgetry"] },
+								{ "count": 1, "modules": ["combinationLock"] },
+								{ "count": 1, "modules": ["hexabutton"] },
+								{ "count": 1, "modules": ["theNumber"] },
+								{ "count": 1, "modules": ["BigCircle"] },
+								{ "count": 1, "modules": ["burgerAlarm"] },
+								{ "count": 1, "modules": ["MorseAMaze"] },
+								{ "count": 1, "modules": ["Astrological"] },
+								{ "count": 1, "modules": ["kookyKeypadModule"] },
+								{ "count": 1, "modules": ["R4YUncoloredSwitches"] },
+								{ "count": 1, "modules": ["sevenWires"] },
+								{ "count": 1, "modules": ["phones"] },
+								{ "count": 1, "modules": ["GSTellMeWhen"] },
+								{ "count": 1, "modules": ["objectShows"] },
+								{ "count": 1, "modules": ["colors_maximization", "digit_sum"] },
+								{ "count": 1, "modules": ["MafiaModule"] },
+								{ "count": 1, "modules": ["mineseeker"] },
+								{ "count": 1, "modules": ["smbh"] },
+								{ "count": 1, "modules": ["ultraDigitalRootModule"] },
+								{ "count": 1, "modules": ["charge", "space_traders"] },
+								{ "count": 1, "modules": ["subway", "handTurkey"] },
+								{ "count": 1, "modules": ["Skewers"] },
+								{ "count": 1, "modules": ["TheDials"] },
+								{ "count": 2, "modules": ["Netherite"] },
+								{ "count": 3, "modules": ["burnt"] },
+								{ "count": 1, "modules": ["RGBSequences"] },
+								{ "count": 1, "modules": ["GSAccessCodes"] },
+								{ "count": 1, "modules": ["GSTernaryTiles"] },
+								{ "count": 1, "modules": ["KritConnectionDev"] },
+								{ "count": 1, "modules": ["unrelatedAnagrams"] },
+								{ "count": 1, "modules": ["cooking"] },
+								{ "count": 1, "modules": ["Sink"] },
+								{ "count": 1, "modules": ["PerplexingWiresModule"] },
+								{ "count": 1, "modules": ["GL_nokiaModule"] },
+								{ "count": 3, "modules": ["macroMemory"] },
+								{ "count": 1, "modules": ["templatemodule", "encryptcore"] },
+								{ "count": 1, "modules": ["BlackHoleModule"] },
+								{ "count": 1, "modules": ["WhiteHoleModule"] },
+								{ "count": 1, "modules": ["CuttingOrder", "voltaicMorseModule"] },
+								{ "count": 1, "modules": ["alcoholicRampageModule", "antichamber"] }
+							],
+							"modules": 47,
+							"strikes": 6,
+							"widgets": 0
+						}
+					]
+				},
+				"logfile": "https://ktane.timwi.de/lfa#file=1036272e20c48fb7c21b88280440a18c6c577347"
+			}
+		},
+		{
+			"id": 602,
+			"userId": "486602438103531520",
+			"model": "Mission",
+			"recordId": "10774",
+			"name": "[[UPDATE]] New Supersonic",
+			"action": "delete",
+			"timestamp": "2024-10-15T12:20:58.587Z",
+			"before": {
+				"id": 10774,
+				"name": "[[UPDATE]] New Supersonic",
+				"notes": null,
+				"authors": ["eXish"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=1036272e20c48fb7c21b88280440a18c6c577347",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_eXishMissions_newsupersonic",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2024-10-12T20:53:42.887Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "208633883544125440",
+				"designedForTP": false,
+				"missionPackId": 419
+			}
+		},
+		{
+			"id": 603,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "60591",
+			"name": "Sweet 16||BladePL",
+			"action": "create",
+			"timestamp": "2024-10-15T13:56:23.070Z"
+		},
+		{
+			"id": 604,
+			"userId": "732019628615663698",
+			"model": "Mission",
+			"recordId": "10777",
+			"name": "Simplest Challenge",
+			"action": "create",
+			"timestamp": "2024-10-15T15:18:46.079Z"
+		},
+		{
+			"id": 605,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "60592",
+			"name": "Centurion||BladePL",
+			"action": "create",
+			"timestamp": "2024-10-15T15:50:52.039Z"
+		},
+		{
+			"id": 606,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60540",
+			"name": "17 Again||Men in Black",
+			"action": "update",
+			"timestamp": "2024-10-15T20:19:25.203Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 607,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60542",
+			"name": "Fang's 47||Awesome7285, weird, denial140, Sierra",
+			"action": "update",
+			"timestamp": "2024-10-15T20:20:16.715Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 608,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60543",
+			"name": "Irene||BladePL",
+			"action": "update",
+			"timestamp": "2024-10-15T20:21:01.128Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 609,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60544",
+			"name": "Nostalgia Critic||weird",
+			"action": "update",
+			"timestamp": "2024-10-15T20:21:29.751Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 610,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60546",
+			"name": "Reasonable||Men in Black, Kugel",
+			"action": "update",
+			"timestamp": "2024-10-15T20:22:02.001Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 611,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60547",
+			"name": "Undefined 47||tactualdwarf519, GreatQuestion",
+			"action": "update",
+			"timestamp": "2024-10-15T20:22:38.771Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 612,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60567",
+			"name": "Oompa Loompa Boon Poppycock||BladePL",
+			"action": "update",
+			"timestamp": "2024-10-15T20:23:00.997Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 613,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60568",
+			"name": "Amduscias||weird",
+			"action": "update",
+			"timestamp": "2024-10-15T20:23:24.453Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 614,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60569",
+			"name": "Gotta Be Fast||BladePL",
+			"action": "update",
+			"timestamp": "2024-10-15T20:23:52.492Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 615,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60570",
+			"name": "Eldoraigne||Termet",
+			"action": "update",
+			"timestamp": "2024-10-15T20:24:10.663Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 616,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60571",
+			"name": "Olievenhoutbosch||BladePL",
+			"action": "update",
+			"timestamp": "2024-10-15T20:24:32.476Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 617,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60572",
+			"name": "Olievenhoutbosch||Termet, c12",
+			"action": "update",
+			"timestamp": "2024-10-15T20:24:51.486Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 618,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60573",
+			"name": "Wire Madness||Dani was here",
+			"action": "update",
+			"timestamp": "2024-10-15T20:39:47.830Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 619,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60574",
+			"name": "15 Minutes of Fame||denial140",
+			"action": "update",
+			"timestamp": "2024-10-15T20:39:59.794Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 620,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60575",
+			"name": "Pocket Change||Umbra Moruka, Termet, AzaFTW",
+			"action": "update",
+			"timestamp": "2024-10-15T20:40:15.509Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 621,
+			"userId": "349646830012727296",
+			"model": "Completion",
+			"recordId": "60593",
+			"name": "Switch Madness||tactualdwarf519",
+			"action": "create",
+			"timestamp": "2024-10-16T05:11:25.768Z"
+		},
+		{
+			"id": 622,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "60594",
+			"name": "Ruby's Favourite 47||Kugel",
+			"action": "create",
+			"timestamp": "2024-10-16T08:31:01.394Z"
+		},
+		{
+			"id": 623,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "60595",
+			"name": "Russian Roulette||Kugel",
+			"action": "create",
+			"timestamp": "2024-10-16T09:38:11.062Z"
+		},
+		{
+			"id": 624,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "60596",
+			"name": "This Isn't Just A Mission, This Is An M&S Mission||Sierra",
+			"action": "create",
+			"timestamp": "2024-10-16T11:05:44.903Z"
+		},
+		{
+			"id": 625,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "60597",
+			"name": "17 Again||BladePL",
+			"action": "create",
+			"timestamp": "2024-10-16T15:39:35.943Z"
+		},
+		{
+			"id": 626,
+			"userId": "688220820945895424",
+			"model": "Mission",
+			"recordId": "10687",
+			"name": "Would You Rather (Multicolored Squares Edition)",
+			"action": "update",
+			"timestamp": "2024-10-16T17:52:39.178Z",
+			"before": { "factory": "Sequence" },
+			"after": { "factory": "Static" }
+		},
+		{
+			"id": 627,
+			"userId": "349646830012727296",
+			"model": "Completion",
+			"recordId": "60598",
+			"name": "Keypad Madness||tactualdwarf519",
+			"action": "create",
+			"timestamp": "2024-10-16T21:50:23.310Z"
+		},
+		{
+			"id": 628,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60576",
+			"name": "Sky's the Minimum||Dicey",
+			"action": "update",
+			"timestamp": "2024-10-17T12:07:40.576Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 629,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60577",
+			"name": "Asmir's 47||_Play_",
+			"action": "update",
+			"timestamp": "2024-10-17T12:07:59.250Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 630,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60578",
+			"name": "No-Needy Centurion||BladePL",
+			"action": "update",
+			"timestamp": "2024-10-17T12:08:16.071Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 631,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60579",
+			"name": "Olievenhoutbosch||Termet",
+			"action": "update",
+			"timestamp": "2024-10-17T12:08:35.523Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 632,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60580",
+			"name": "Color Square Madness||tactualdwarf519",
+			"action": "update",
+			"timestamp": "2024-10-17T12:09:05.000Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 633,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60469",
+			"name": "Centurion||c12",
+			"action": "update",
+			"timestamp": "2024-10-17T12:10:12.687Z",
+			"before": {
+				"time": 340.52,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=bc6640140fcfb301c74e811462fd9db4efc21823;bomb=744MJ0"
+				]
+			},
+			"after": {
+				"time": 1076.3,
+				"proofs": ["https://ktane.timwi.de/lfa#file=adf292b8632d2e8ab865ce6201e1ebb9ed4c6fca"]
+			}
+		},
+		{
+			"id": 634,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60581",
+			"name": "Centurion||c12",
+			"action": "delete",
+			"timestamp": "2024-10-17T12:10:12.703Z",
+			"before": {
+				"id": 60581,
+				"old": false,
+				"solo": false,
+				"team": ["c12"],
+				"time": 1076.3,
+				"first": false,
+				"notes": null,
+				"proofs": ["https://ktane.timwi.de/lfa#file=adf292b8632d2e8ab865ce6201e1ebb9ed4c6fca"],
+				"verified": false,
+				"dateAdded": "2024-10-13T05:01:42.671Z",
+				"missionId": 9861,
+				"uploadedBy": "1257537901265162271"
+			}
+		},
+		{
+			"id": 635,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60582",
+			"name": "Doringkloof||Srećko",
+			"action": "update",
+			"timestamp": "2024-10-17T12:10:43.852Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 636,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60584",
+			"name": "c12 is feeling lucky||c12, denial140, Sierra",
+			"action": "update",
+			"timestamp": "2024-10-17T12:11:43.896Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 637,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60586",
+			"name": "Pythagoras||Sierra",
+			"action": "update",
+			"timestamp": "2024-10-17T12:12:38.083Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 638,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60587",
+			"name": ":((=||nameless",
+			"action": "update",
+			"timestamp": "2024-10-17T12:12:55.215Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 639,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60588",
+			"name": "Blank Madness||tactualdwarf519",
+			"action": "update",
+			"timestamp": "2024-10-17T12:13:29.564Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 640,
+			"userId": "486602438103531520",
+			"model": "Completion",
+			"recordId": "60589",
+			"name": "Aeneid||Sierra",
+			"action": "update",
+			"timestamp": "2024-10-17T12:14:44.953Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
 		}
 	],
 	"User": [
@@ -11604,7 +12316,7 @@
 			"id": "725302560432324637",
 			"username": "Cookina",
 			"discordName": "momentcookie",
-			"avatar": "014e820d394dedbc6f193dbc30f28a96",
+			"avatar": "1c8ac0fc0f5565743ac591dcc12e2a57",
 			"permissions": []
 		},
 		{

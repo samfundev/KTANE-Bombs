@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import { Bomb } from '$lib/types';
-import { dateAddedSort } from '$lib/util';
+import { dateAddedSort, getSolveTypes } from '$lib/util';
 import { minimize } from '../_util';
 import { TP_TEAM } from '$lib/const';
 
@@ -39,8 +39,7 @@ export async function GET() {
 				},
 				orderBy: {
 					time: 'desc'
-				},
-				take: 1
+				}
 			},
 			dateAdded: true,
 			designedForTP: true,
@@ -79,6 +78,8 @@ export async function GET() {
 		Object.assign(bombs, miss.bombs);
 		let pack = missionPacks.find(mp => mp.name == miss.missionPack?.name);
 		for (let i = 0; i < miss.completions.length; i++) minimize(miss.completions[i]);
+		const solveTypes = getSolveTypes(miss);
+
 		let newMission = {
 			name: miss.name,
 			authors: miss.authors,
@@ -94,7 +95,10 @@ export async function GET() {
 			strikeMode: miss.strikeMode,
 			timeMode: miss.timeMode,
 			tpSolve: miss.tpSolve,
-			variant: miss.variant
+			variant: miss.variant,
+			teamSolve: solveTypes.normalSolve,
+			efmSolve: solveTypes.efmSolve,
+			soloSolve: solveTypes.soloSolve
 		};
 		minimize(newMission);
 		if (pack) {
