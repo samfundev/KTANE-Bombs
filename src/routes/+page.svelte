@@ -35,7 +35,7 @@
 {/if}
 <div class="bombs mission-card-grid">
 	{#each missions as mission, index (mission.name)}
-		{#if render}
+		{#if render || modules === null}
 			<MissionCard
 				{mission}
 				id={'mission-input-' + index}

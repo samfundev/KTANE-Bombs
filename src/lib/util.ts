@@ -287,7 +287,8 @@ export function getModule(moduleID: string, modules: Record<string, RepoModule> 
 		TranslationOf: null,
 		Type: moduleID.match(/needy/gi) ? 'Needy' : 'Regular',
 		X: 0,
-		Y: 0
+		Y: 0,
+		valid: false
 	};
 }
 

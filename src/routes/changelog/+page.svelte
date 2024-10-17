@@ -5,6 +5,23 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>18 October 2024</h3>
+	<ul>
+		<li>New endpoint <a href="/json/missionpacks">Mission Packs</a></li>
+		<li>
+			Previous endpoint <a href="/json/missions">Missions</a> includes new info about each mission:
+			<ul>
+				<li>Factory</li>
+				<li>Logfile link</li>
+				<li>Strike Mode</li>
+				<li>Time Mode</li>
+			</ul>
+		</li>
+		<li>"Solved using Twitch Plays" entries on mission pages now have logfile links.</li>
+		<li>Fixed pages that depend on the manual repo when it's not reachable.</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>11 October 2024</h3>
 	<ul>
 		<li>"Solved by Twitch Plays" is now "Solved using Twitch Plays".</li>

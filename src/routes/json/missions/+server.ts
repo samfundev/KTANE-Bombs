@@ -1,4 +1,5 @@
 import client from '$lib/client';
+import { TP_TEAM } from '$lib/const';
 import { withoutArticle } from '$lib/util';
 import { minimize } from '../_util';
 
@@ -15,9 +16,18 @@ export async function GET() {
 			inGameName: true,
 			tpSolve: true,
 			designedForTP: true,
+			factory: true,
+			logfile: true,
+			strikeMode: true,
+			timeMode: true,
 			completions: {
 				where: {
-					verified: true
+					AND: {
+						NOT: {
+							team: { has: TP_TEAM }
+						},
+						verified: true
+					}
 				}
 			}
 		}
@@ -32,6 +42,10 @@ export async function GET() {
 					missionId: m.inGameId,
 					inGameName: m.inGameName,
 					designedForTP: m.designedForTP,
+					factory: m.factory,
+					logfile: m.logfile,
+					strikeMode: m.strikeMode,
+					timeMode: m.timeMode,
 					tpSolve: m.tpSolve,
 					completions: m.completions.length
 				};
