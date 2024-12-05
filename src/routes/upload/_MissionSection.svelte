@@ -36,7 +36,7 @@
 		let mission: ReplaceableMission | null = null;
 		let bomb: Bomb | null = null;
 		let lineIndex = 0;
-		const lines = text.split('\n').map(line => line.length > 20000 ? "" : line);
+		const lines = text.split('\n').map(line => (line.length > 20000 ? '' : line));
 
 		function readLine() {
 			return lines[lineIndex++];
@@ -44,7 +44,8 @@
 
 		while (lineIndex < lines.length) {
 			let line = readLine().trim();
-			let modIdMatch = line.match(/.*?(mod_.+)/);
+			let modIdMatch =
+				line.match(/.*?(mod_.+_.+)/) && !line.match(/.*?(mod_toc_.+)/) ? line.match(/.*?(mod_.+)/) : null;
 			if (modIdMatch !== null && mission !== null) {
 				if (!mission.ids.includes(modIdMatch[1])) mission.ids.push(modIdMatch[1]);
 				mission.inGameId = modIdMatch[1];
@@ -246,6 +247,8 @@
 							options={mission.ids}
 							optionalOptions
 							bind:value={mission.inGameId}
+							placeholder="mod_missionPackId_missionId"
+							instantFormat={false}
 							required={selectedMissions[i]} />
 						{#if mission.bombs.length > 1}
 							<div class="flex grow hspace">

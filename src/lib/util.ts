@@ -385,8 +385,11 @@ export function validateLogfileLink(link: string): string | boolean {
 }
 
 export function validateMissionID(id: string): string | boolean {
-	if (id !== null && !id.match(/mod_(.+?)_(.+)/)) {
-		return 'format expected: mod_missionPackId_missionId';
+	if (id === null || !id.match(/mod_(.+?)_(.+)/)) {
+		return 'This is the mission ID string from Unity. Format expected: mod_missionPackId_missionId';
+	}
+	if (id.match(/mod_toc_(.+)/i)) {
+		return 'That ID is invalid';
 	}
 	return true;
 }

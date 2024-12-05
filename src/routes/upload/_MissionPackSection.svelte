@@ -11,15 +11,23 @@
 		dateAdded: new Date()
 	};
 
-	let invalid = false;
+	let idInvalid = false;
+	let nameInvalid = false;
 	let valid = false;
 	let inputtedId = '';
 	$: {
 		pack.steamId = getSteamID(inputtedId);
-		valid = !invalid && pack.name.length > 0 && pack.steamId.length > 0;
+		valid = !idInvalid && !nameInvalid && pack.name.length > 0 && pack.steamId.length > 0;
+	}
+
+	function validateMissionPackName(str: string): string | boolean {
+		if (str.toLowerCase() === 'toc') return 'That name is not allowed';
+		else if (str.trim().length < 1) return 'Name must not be blank';
+		return true;
 	}
 
 	function upload() {
+		pack.name = pack.name.trim();
 		fetch('/upload/missionpack', {
 			method: 'POST',
 			headers: {
@@ -43,13 +51,19 @@
 </script>
 
 <div class="block flex grow">
-	<Input label="Name" id="pack-name" required bind:value={pack.name} />
+	<Input
+		label="Name"
+		id="pack-name"
+		validate={validateMissionPackName}
+		required
+		bind:invalid={nameInvalid}
+		bind:value={pack.name} />
 	<Input
 		label="Steam ID / Workshop URL"
 		id="pack-steam-id"
 		validate={validateSteamID}
 		required
-		bind:invalid
+		bind:invalid={idInvalid}
 		bind:value={inputtedId} />
 </div>
 <div class="block">
