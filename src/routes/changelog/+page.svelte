@@ -5,6 +5,12 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>15 December 2024</h3>
+	<ul>
+		<li>Improved logfile parsing for Mission ID string. Now ignores <code>mod_toc_*</code> text.</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>18 October 2024</h3>
 	<ul>
 		<li>New endpoint <a href="/json/missionpacks">Mission Packs</a></li>

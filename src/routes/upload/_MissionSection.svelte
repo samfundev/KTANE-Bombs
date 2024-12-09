@@ -185,7 +185,20 @@
 </script>
 
 <div class="block flex column">
-	<div>Select a logfile that contains the mission to upload.</div>
+	<div>Paste a logfile link that contains the mission to upload.</div>
+	<div>To obtain a perfect logfile containing all the info the site needs:</div>
+	<ol>
+		<li>Open the mission in the game, wait for all modules to load.</li>
+		<li>
+			Detonate the bomb. Using the <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1419312202"
+				>command line</a> <code>detonate</code> command is prefered because it doesn't create strikes in the logfile, but
+			you can also strike out on the bomb to generate an acceptable logfile.
+		</li>
+		<li>
+			Use the <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1358839759">logfile upload hotkey</a> to obtain
+			the logfile link.
+		</li>
+	</ol>
 	<Input
 		label="Logfile link:"
 		id="logfile-link"
