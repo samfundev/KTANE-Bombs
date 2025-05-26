@@ -8,7 +8,8 @@
 		onlyUnique,
 		withoutArticle,
 		preventDisappear,
-		logicalSearchTooltip
+		logicalSearchTooltip,
+		isSpecialAllModule
 	} from '$lib/util';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
@@ -121,7 +122,9 @@
 	function percentFromEnabled(msName: string): number {
 		let percent =
 			(modulesInMission[msName].filter(
-				m => (options.modules['EnabledList'] || []).includes(m.ModuleID) || m.Origin === 'Vanilla'
+				m => (options.modules['EnabledList'] || []).includes(m.ModuleID)
+					|| m.Origin === 'Vanilla'
+					|| isSpecialAllModule(m.ModuleID)
 			).length *
 				100) /
 			modulesInMission[msName].length;

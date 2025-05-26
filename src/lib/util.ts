@@ -300,7 +300,7 @@ export const allSpecialModules = [
 	'ALL_MODS_SOLVABLE',
 	'ALL_MODS_NEEDY'
 ];
-export function hasSpecialIcon(moduleID: string): boolean {
+export function isSpecialAllModule(moduleID: string): boolean {
 	return allSpecialModules.includes(moduleID);
 }
 

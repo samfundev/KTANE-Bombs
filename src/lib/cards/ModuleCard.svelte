@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { RepoModule } from '$lib/repo';
-	import { hasSpecialIcon, properUrlEncode } from '$lib/util';
+	import { isSpecialAllModule, properUrlEncode } from '$lib/util';
 
 	export let module: RepoModule;
 	export let fraction: number = 1;
@@ -13,7 +13,7 @@
 	class:quirks={module.Quirks != undefined}
 	class:needy={module.Type == 'Needy'}
 	href={`https://ktane.timwi.de/redirect/#${properUrlEncode(module.FileName ?? module.Name)}`}>
-	{#if hasSpecialIcon(module.ModuleID)}
+	{#if isSpecialAllModule(module.ModuleID)}
 		<div class="image {module.ModuleID}" />
 	{:else if (module.valid)}
 		<img
