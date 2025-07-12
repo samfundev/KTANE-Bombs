@@ -67,17 +67,17 @@ export class Pool {
 	}
 }
 
-export class Completion {
-	proofs: string[] = [];
-	time = 0;
-	team: string[] = [];
-	first = false;
-	old = false;
-	solo = false;
-	notes: string | null = null;
-	dateAdded: Date | null = null;
-	uploadedBy: string | null = null;
-}
+export type Completion = {
+	proofs: string[];
+	time: number;
+	team: string[];
+	first: boolean;
+	old: boolean;
+	solo: boolean;
+	notes: string | null;
+	dateAdded: Date | null;
+	uploadedBy: string | null;
+};
 
 export class IndividualCompletion {
 	name: string = '';

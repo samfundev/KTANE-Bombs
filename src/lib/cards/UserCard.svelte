@@ -3,9 +3,13 @@
 	import type { FrontendUser } from '$lib/types';
 	import { checkIfImageExists } from '$lib/util';
 
-	export let user: FrontendUser;
+	interface Props {
+		user: FrontendUser;
+	}
 
-	let imageExists = false;
+	let { user }: Props = $props();
+
+	let imageExists = $state(false);
 	let alternate = Math.max(0, parseInt(user.id.slice(-2)) % 5);
 
 	if (user.avatar.length > 1 && browser)

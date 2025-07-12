@@ -5,13 +5,13 @@
 	import Input from '$lib/controls/Input.svelte';
 	import { applyAction } from '$app/forms';
 
-	export let data;
+	let { data } = $props();
 	let users: FrontendUser[] = data.users;
 
 	// Sort users
-	let newUsername = '';
-	let oldUsername = '';
-	let dialog: HTMLDialogElement;
+	let newUsername = $state('');
+	let oldUsername = $state('');
+	let dialog = $state() as HTMLDialogElement;
 
 	async function editName() {
 		const fData = new FormData();
@@ -49,14 +49,18 @@
 	<div class="relative">
 		<UserCard {user} />
 		<div class="actions">
-			<button on:click={() => showRename(user.username)}>Rename Only</button>
+			<button onclick={() => showRename(user.username)}>Rename Only</button>
 		</div>
 	</div>
 {/each}
 <Dialog bind:dialog>
 	<div class="flex column content-width">
 		<h2>Rename Only</h2>
-		<form on:submit|preventDefault={() => editName()}>
+		<form
+			onsubmit={e => {
+				e.preventDefault();
+				editName();
+			}}>
 			<Input
 				id="username"
 				label="Username"

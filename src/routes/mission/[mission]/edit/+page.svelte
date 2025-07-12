@@ -21,25 +21,25 @@
 	} from '$lib/util';
 	import { sortBombs } from '../../_shared';
 	import type { EditCompletion, EditMission } from './_types';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { applyAction } from '$app/forms';
 	import { TP_TEAM } from '$lib/const';
 	import TextArea from '$lib/controls/TextArea.svelte';
 	import { onMount } from 'svelte';
-	import { Season } from '@prisma/client';
+	import type { PageProps } from './$types';
 
-	export let data;
+	let { data }: PageProps = $props();
 
-	let mission: EditMission & { verified: boolean } = data.mission;
+	let mission: EditMission & { verified: boolean } = $state(data.mission);
 	let missionNames: string[] = data.missionNames;
 	let packs: MissionPackSelection[] = data.packs;
 	let modules: Record<string, RepoModule> | null = data.modules;
 	let seasons: { name: string }[] = [{ name: '' }, ...data.seasons];
-	let logfile = mission.logfile ?? '';
+	let logfile = $derived(mission.logfile ?? '');
 
 	sortBombs(mission, modules);
 
-	let originalMission: EditMission;
+	let originalMission = $state() as EditMission;
 
 	function setOriginalMission() {
 		originalMission = JSON.parse(JSON.stringify(mission));
@@ -52,10 +52,10 @@
 	mission.completions.sort((a, b) => b.time - a.time);
 	setOriginalMission();
 
-	let modified = false;
-	let tpCompletion = false;
-	let nameIsSame = false;
-	$: {
+	let modified = $state(false);
+	let tpCompletion = $state(false);
+	let nameIsSame = $state(false);
+	$effect(() => {
 		let log = getLogfileLinks(logfile);
 		mission.logfile = log[0] === '' ? null : log[1];
 		nameIsSame = originalMission.name === mission.name;
@@ -68,7 +68,7 @@
 		noCompOrig.completions = undefined;
 		noCompMission.completions = undefined;
 		modified = JSON.stringify(noCompOrig) !== JSON.stringify(noCompMission);
-	}
+	});
 
 	function intnan0(val: number): boolean | string {
 		return isNaN(val) ? 'int' : val >= 0 ? true : '≥0';
@@ -84,7 +84,10 @@
 
 		const response = await fetch('?/editMission', {
 			method: 'POST',
-			body: fData
+			body: fData,
+			headers: {
+				'x-sveltekit-action': 'true'
+			}
 		});
 		/** @type {import('@sveltejs/kit').ActionResult} */
 		const result = await response.json();
@@ -98,7 +101,10 @@
 
 		const response = await fetch('?/editCompletion', {
 			method: 'POST',
-			body: fData
+			body: fData,
+			headers: {
+				'x-sveltekit-action': 'true'
+			}
 		});
 		/** @type {import('@sveltejs/kit').ActionResult} */
 		const result = await response.json();
@@ -115,7 +121,10 @@
 
 		const response = await fetch('?/deleteMission', {
 			method: 'POST',
-			body: fData
+			body: fData,
+			headers: {
+				'x-sveltekit-action': 'true'
+			}
 		});
 
 		/** @type {import('@sveltejs/kit').ActionResult} */
@@ -131,7 +140,10 @@
 
 		const response = await fetch('?/deleteCompletion', {
 			method: 'POST',
-			body: fData
+			body: fData,
+			headers: {
+				'x-sveltekit-action': 'true'
+			}
 		});
 
 		mission.completions = mission.completions.filter(comp => completion.id !== comp.id);
@@ -152,10 +164,12 @@
 		mission = mission;
 	}
 
-	let shownComp = mission.completions.reduce((result: { [id: string]: boolean }, curr) => {
-		result[curr.id] = false;
-		return result;
-	}, {});
+	let shownComp = $state(
+		mission.completions.reduce((result: { [id: string]: boolean }, curr) => {
+			result[curr.id] = false;
+			return result;
+		}, {})
+	);
 	function showComp(id: number) {
 		shownComp[id] = !shownComp[id];
 	}
@@ -200,7 +214,7 @@
 			bind:value={mission.inGameName} />
 	</div>
 	<div class="actions">
-		<button on:click={deleteMission}>Delete</button>
+		<button onclick={deleteMission}>Delete</button>
 	</div>
 </div>
 <div class="block flex hspace">
@@ -223,7 +237,7 @@
 		options={[null, 'Local', 'Global']}
 		display={mode => mode ?? 'None'} />
 	<Input
-		classes="mission-id-edit"
+		class="mission-id-edit"
 		name="Mission ID"
 		label="Mission ID"
 		id="mission-ingameid"
@@ -236,7 +250,7 @@
 		type="date"
 		id="mission-date"
 		label="Date Added"
-		classes="light"
+		class="light"
 		parse={parseDate}
 		display={formatDate}
 		bind:value={mission.dateAdded} />
@@ -309,7 +323,7 @@
 						<Input
 							label="Count"
 							id="pool-count-{bomb.id}-{index}"
-							classes="pool-count"
+							class="pool-count"
 							parse={parseInteger}
 							validate={intnan1}
 							required
@@ -317,17 +331,17 @@
 						<Input
 							label="Modules (comma-separated)"
 							id="pool-modules-{bomb.id}-{index}"
-							classes="pool-modules"
+							class="pool-modules"
 							parse={parseList}
 							display={displayStringList}
 							instantFormat={false}
 							validate={value => value != null}
 							required
 							bind:value={pool.modules} />
-						<div class="delete-pool dark-invert" on:click={() => deletePool(bomb, index)}></div>
+						<div class="delete-pool dark-invert" onclick={() => deletePool(bomb, index)}></div>
 					</div>
 				{/each}
-				<button class="add-pool" on:click={() => addPool(bomb)}>Add</button>
+				<button class="add-pool" onclick={() => addPool(bomb)}>Add</button>
 			</div>
 		{/each}
 	</div>
@@ -373,7 +387,7 @@
 						type="date"
 						id="completion-date-{ci}"
 						label="Date Added"
-						classes="light"
+						class="light"
 						parse={parseDate}
 						display={formatDate}
 						bind:value={completion.dateAdded} />
@@ -385,19 +399,19 @@
 						options={seasons.map(s => s.name)} />
 					<div class="hstack centered">
 						<button
-							on:click={() => saveCompletion(completion, ci)}
+							onclick={() => saveCompletion(completion, ci)}
 							disabled={JSON.stringify(originalMission.completions[ci]) === JSON.stringify(completion)}>Save</button>
 					</div>
-					{#if hasPermission($page.data.user, Permission.VerifyCompletion)}
+					{#if hasPermission(page.data.user, Permission.VerifyCompletion)}
 						<div class="actions">
-							<button on:click={() => deleteCompletion(completion)}>Delete</button>
+							<button onclick={() => deleteCompletion(completion)}>Delete</button>
 						</div>
 					{/if}
 				{:else}
 					<div class="relative">
 						<CompletionCard {completion} />
-						{#if hasPermission($page.data.user, Permission.VerifyCompletion)}
-							<button class="actions edit" on:click={() => showComp(completion.id)}>Edit</button>
+						{#if hasPermission(page.data.user, Permission.VerifyCompletion)}
+							<button class="actions edit" onclick={() => showComp(completion.id)}>Edit</button>
 						{/if}
 					</div>
 				{/if}
@@ -417,7 +431,7 @@
 <div class="bottom-center flex" class:visible={modified}>
 	<div class="save-changes block flex">
 		There are unsaved changes.
-		<button on:click={saveChanges}>Save</button>
+		<button onclick={saveChanges}>Save</button>
 	</div>
 </div>
 
@@ -538,7 +552,9 @@
 		transform: translateY(100%);
 		pointer-events: none;
 		opacity: 0;
-		transition: transform 0.4s, opacity 0.4s;
+		transition:
+			transform 0.4s,
+			opacity 0.4s;
 		transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
 	}
 

@@ -4,13 +4,25 @@
 	import { getSolveTypes, listify, properUrlEncode } from '$lib/util';
 	import { TP_TEAM } from '$lib/const';
 
-	export let mission: Mission;
-	export let selectable: boolean = false;
-	export let selected: boolean = false;
-	export let id: string = '';
-	export let cardID: string = '';
-	export let card: any = null;
-	export let nolink: boolean = false;
+	interface Props {
+		mission: Mission;
+		selectable?: boolean;
+		selected?: boolean;
+		id?: string;
+		cardID?: string;
+		card?: any;
+		nolink?: boolean;
+	}
+
+	let {
+		mission,
+		selectable = false,
+		selected = $bindable(),
+		id = '',
+		cardID = '',
+		card = $bindable(),
+		nolink = false
+	}: Props = $props();
 
 	const solveTypes = getSolveTypes(mission);
 

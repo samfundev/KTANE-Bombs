@@ -2,32 +2,55 @@
 	import { browser } from '$app/environment';
 	import Input from '$lib/controls/Input.svelte';
 	import TextArea from '$lib/controls/TextArea.svelte';
-	import { createEventDispatcher, onMount } from 'svelte';
 
-	export let id: string;
-	export let label: string = 'Find:';
-	export let items: { [name: string]: any };
-	export let filterFunc: (itemKey: string, text: string) => boolean;
-	export let searchText: string = '';
-	export let rawSearchText: string = '';
-	export let title: string = '';
-	export let textArea: boolean = false;
-	export let rows: number = 2;
-	export let classes: string = '';
-	export let autoExpand: boolean = false;
-	export let numResults: number = 0;
-	export let showNoneForBlank: boolean = false;
-	export let searching: boolean = false;
-	export let showAll: boolean = true;
-	export let resultLimit: number = 50;
+	interface Props {
+		id: string;
+		label?: string;
+		items: { [name: string]: any };
+		filterFunc: (itemKey: string, text: string) => boolean;
+		searchText?: string;
+		rawSearchText?: string;
+		title?: string;
+		textArea?: boolean;
+		rows?: number;
+		class?: string;
+		autoExpand?: boolean;
+		numResults?: number;
+		showNoneForBlank?: boolean;
+		searching?: boolean;
+		showAll?: boolean;
+		resultLimit?: number;
+		onchange?: () => void;
+		oninput?: () => void;
+	}
 
-	const dispatch = createEventDispatcher();
+	let {
+		id,
+		label = 'Find:',
+		items = $bindable(),
+		filterFunc,
+		searchText = $bindable(''),
+		rawSearchText = $bindable(''),
+		title = '',
+		textArea = false,
+		rows = 2,
+		class: classes = '',
+		autoExpand = false,
+		numResults = $bindable(0),
+		showNoneForBlank = false,
+		searching = $bindable(false),
+		showAll = $bindable(true),
+		resultLimit = 50,
+		onchange = () => {},
+		oninput = () => {}
+	}: Props = $props();
+
 	let searchField: HTMLInputElement | null;
 
 	function clearSearch() {
 		rawSearchText = '';
 		updateSearch();
-		dispatch('change');
+		onchange();
 		searchField?.focus();
 	}
 
@@ -49,7 +72,7 @@
 			} else items[item]?.classList.add('search-filtered-out');
 		});
 		searching = false;
-		dispatch('input');
+		oninput();
 	}
 
 	if (browser) searchField = <HTMLInputElement>document.getElementById(id);
@@ -63,9 +86,9 @@
 			{title}
 			labelClass="help"
 			sideLabel
-			classes="search-field help {classes}"
-			on:input={updateSearch}
-			on:change
+			class="search-field help {classes}"
+			oninput={updateSearch}
+			{onchange}
 			{autoExpand}
 			{rows}
 			bind:value={rawSearchText} />
@@ -76,12 +99,12 @@
 			{title}
 			labelClass="help"
 			sideLabel
-			classes="search-field help {classes}"
-			on:input={updateSearch}
-			on:change
+			class="search-field help {classes}"
+			oninput={updateSearch}
+			{onchange}
 			bind:value={rawSearchText} />
 	{/if}
-	<div class="search-field-clear dark-invert" on:click={clearSearch}></div>
+	<div class="search-field-clear dark-invert" onclick={clearSearch}></div>
 </div>
 
 <style>

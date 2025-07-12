@@ -1,19 +1,18 @@
 <script lang="ts">
 	import { Permission } from '$lib/types';
 	import { currSeason, formatUTCDate, hasPermission, parseUTCDate, pastSeason } from '$lib/util.js';
-	import { page } from '$app/stores';
-	import { Season } from '@prisma/client';
+	import { page } from '$app/state';
+	import type { Season } from '@prisma/client';
 	import toast from 'svelte-french-toast';
 	import Input from '$lib/controls/Input.svelte';
 	import Dialog from '$lib/controls/Dialog.svelte';
 
-	export let data;
-	export let seasons: Season[] = data.seasons || [];
-	export let currentSeasonName: string = data.currentSeasonName;
+	let { data } = $props();
+	let { seasons, currentSeasonName } = data;
 
-	let dialog: HTMLDialogElement;
-	let seasonName: string = '';
-	let [seasonStart, seasonEnd, missionsStart, missionsEnd] = getNextQuarterRange();
+	let dialog: HTMLDialogElement | undefined = $state();
+	let seasonName: string = $state('');
+	let [seasonStart, seasonEnd, missionsStart, missionsEnd] = $state(getNextQuarterRange());
 
 	function uniqueSeasonName(value: string) {
 		return seasons.some(s => s.name.toUpperCase() === value.toUpperCase()) ? 'Name already exists.' : true;
@@ -73,7 +72,7 @@
 
 			if (response.ok) {
 				toast.success(`Season "${seasonName.trim()}" added successfully!`);
-				dialog.close();
+				dialog?.close();
 			}
 
 			seasonName = '';
@@ -90,20 +89,24 @@
 	<h1 class="header">Seasons</h1>
 	<a href="/seasoninfo" class="top-left">Info</a>
 
-	{#if hasPermission($page.data.user, Permission.ManageSeasons)}
+	{#if hasPermission(page.data.user, Permission.ManageSeasons)}
 		<div class="actions">
-			<button on:click={() => dialog.showModal()}>Create New Season</button>
+			<button onclick={() => dialog?.showModal()}>Create New Season</button>
 		</div>
 	{/if}
 </div>
 
-{#if hasPermission($page.data.user, Permission.ManageSeasons)}
+{#if hasPermission(page.data.user, Permission.ManageSeasons)}
 	<Dialog bind:dialog>
 		<div class="flex column content-width">
 			<h2>Create New Season</h2>
-			<form on:submit|preventDefault={() => addSeason()}>
+			<form
+				onsubmit={e => {
+					e.preventDefault();
+					addSeason();
+				}}>
 				<Input
-					classes="new-season"
+					class="new-season"
 					id="season-name"
 					label="Season Name"
 					bind:value={seasonName}
@@ -112,7 +115,7 @@
 					validate={uniqueSeasonName} />
 				<Input
 					type="datetime-local"
-					classes="new-season"
+					class="new-season"
 					id="season-start"
 					label="Start Date (UTC time)"
 					parse={parseUTCDate}
@@ -121,7 +124,7 @@
 					bind:value={seasonStart} />
 				<Input
 					type="datetime-local"
-					classes="new-season"
+					class="new-season"
 					id="season-end"
 					label="End Date (UTC time)"
 					parse={parseUTCDate}
@@ -163,7 +166,8 @@
 				<div
 					class="season-legend"
 					class:past={pastSeason(season, currentSeasonName)}
-					class:current={currSeason(season, currentSeasonName)} />
+					class:current={currSeason(season, currentSeasonName)}>
+				</div>
 			</div>
 		</div>
 	</a>

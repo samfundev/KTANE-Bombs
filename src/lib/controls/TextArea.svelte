@@ -1,31 +1,44 @@
 <script lang="ts">
-	import { onMount, createEventDispatcher } from 'svelte';
+	import { onMount } from 'svelte';
+	import type { HTMLTextareaAttributes } from 'svelte/elements';
 
-	export let id: string;
-	export let value: any;
-	export let label: string = '';
-	export let placeholder: string = '';
-	export let classes: string = '';
-	export let labelClass: string = '';
-	export let title: string = '';
-	export let required: boolean = false;
-	export let sideLabel: boolean = false;
-	export let autoExpand: boolean = false;
-	export let rows: number = 2;
-	export let instantFormat: boolean = true;
-	export let options: any[] | null = null;
-	export let display = (value: any) => value.toString();
-	export let parse = (value: string): any => value;
-	export let validate = (_value: any): boolean | string => true;
+	type Props = {
+		value: any;
+		label?: string;
+		labelClass?: string;
+		sideLabel?: boolean;
+		autoExpand?: boolean;
+		instantFormat?: boolean;
+		options?: any[] | null;
+		display?: any;
+		parse?: any;
+		validate?: any;
+		children?: import('svelte').Snippet;
+	} & HTMLTextareaAttributes;
 
-	const dispatch = createEventDispatcher();
-	let text_area: HTMLTextAreaElement;
-	let displayValue = display(value);
-	$: {
+	let {
+		value = $bindable(),
+		label = '',
+		class: classes = '',
+		labelClass = '',
+		sideLabel = false,
+		autoExpand = false,
+		instantFormat = true,
+		options = null,
+		display = (value: any) => value.toString(),
+		parse = (value: string): any => value,
+		validate = (_value: any): boolean | string => true,
+		children,
+		...props
+	}: Props = $props();
+
+	let text_area = $state() as HTMLTextAreaElement;
+	let displayValue = $state(display(value));
+	$effect(() => {
 		if (instantFormat) displayValue = display(value);
-	}
+	});
 
-	let error = '';
+	let error = $state('');
 
 	const handleInput = (e: Event & { currentTarget: EventTarget & HTMLTextAreaElement }) => {
 		displayValue = e.currentTarget.value;
@@ -46,7 +59,7 @@
 
 		if (handleValidity(newValue)) value = newValue;
 		if (autoExpand) autoSetHeight();
-		dispatch('input');
+		props.oninput?.(e);
 	};
 
 	function autoSetHeight() {
@@ -56,7 +69,7 @@
 
 	function handleValidity(value: any) {
 		const validity = validate(value);
-		if (required) {
+		if (props.required) {
 			text_area.setCustomValidity(typeof validity === 'string' ? validity : validity ? '' : 'Invalid value.');
 			text_area.reportValidity();
 		}
@@ -76,32 +89,28 @@
 </script>
 
 <div class={sideLabel ? 'hstack' : 'vstack'}>
-	<label for={id} {title} class={labelClass}>
+	<label for={props.id} title={props.title} class={labelClass}>
 		{label}
-		<slot />
+		{@render children?.()}
 	</label>
 	<textarea
-		{id}
-		{placeholder}
-		{title}
 		class={classes}
 		class:autoresize={autoExpand}
-		{required}
-		{rows}
 		bind:this={text_area}
 		value={displayValue}
-		on:input={handleInput}
-		on:change={() => {
+		{...props}
+		oninput={handleInput}
+		onchange={e => {
 			if (error === '') {
 				displayValue = display(value);
 			}
-			dispatch('change');
+			props.onchange?.(e);
 		}}></textarea>
 	{#if error}
 		<div style="color: rgb(255, 80, 80);">{error}</div>
 	{/if}
 	{#if options}
-		<datalist id={id + '-list'}>
+		<datalist id={props.id + '-list'}>
 			{#each options as option}
 				<option value={display(option)}></option>
 			{/each}

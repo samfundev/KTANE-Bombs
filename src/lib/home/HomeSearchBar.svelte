@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Bomb, Completion, HomeOptions, Mission, MustHave, Operation, type ID } from '$lib/types';
+	import { Bomb, type Completion, HomeOptions, Mission, MustHave, Operation, type ID } from '$lib/types';
 	import {
 		evaluateLogicalStringSearch,
 		popup,
@@ -13,18 +13,31 @@
 	} from '$lib/util';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
-	import { onMount, createEventDispatcher } from 'svelte';
+	import { onMount } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import HomeFiltersMenu from './HomeFiltersMenu.svelte';
 	import type { RepoModule } from '$lib/repo';
 	import { TP_TEAM } from '$lib/const';
 
-	export let missions: ID<Mission>[];
-	export let missionCards: { [name: string]: any } = {};
-	export let modules: Record<string, RepoModule>;
-	export let validSearchOptions: boolean[] = [];
-	export let searchOptionBoxes = ['mission', 'module', 'author', 'solver', 'invert'];
-	export let resultsText = missions.length;
+	interface Props {
+		missions: ID<Mission>[];
+		missionCards?: { [name: string]: any };
+		modules: Record<string, RepoModule>;
+		validSearchOptions?: boolean[];
+		searchOptionBoxes?: any;
+		resultsText?: any;
+		onchange?: () => void;
+	}
+
+	let {
+		missions = $bindable(),
+		missionCards = $bindable({}),
+		modules,
+		validSearchOptions = $bindable([false, false, false, false, false]),
+		searchOptionBoxes = ['mission', 'module', 'author', 'solver', 'invert'],
+		resultsText = $bindable(missions.length),
+		onchange = () => {}
+	}: Props = $props();
 
 	let sortOrder: string = '';
 	let reverse: boolean = false;
@@ -33,14 +46,13 @@
 	let lStore: { [k: string]: Writable<any | null> } = {};
 	let searchOptions: string[];
 	let searchField: HTMLInputElement | null;
-	let searchText: string;
-	let filters: HTMLDivElement;
-	let filterTab: HTMLDivElement;
-	let layoutSearch: LayoutSearchFilter;
+	let searchText: string = $state('');
+	let filters: HTMLDivElement | null = $state(null);
+	let filterTab = $state() as HTMLDivElement;
+	let layoutSearch = $state() as LayoutSearchFilter;
 	const defaultSearchOptions = [true, false, false, false, false];
 
 	let options = new HomeOptions();
-	let dispatch = createEventDispatcher();
 
 	function localSubscribe(item: any, key: string) {
 		let wr = writable(item);
@@ -197,7 +209,7 @@
 			setTimeout(() => {
 				if (Object.keys(modulesInMission).length == missions.length) func();
 				else alt();
-				dispatch('change');
+				onchange();
 			}, time);
 			return false;
 		} else {
@@ -207,13 +219,13 @@
 	}
 
 	function defaultSort() {
-		missions.sort((a, b) =>
+		missions = missions.toSorted((a, b) =>
 			withoutArticle(a.name.toLowerCase()).localeCompare(withoutArticle(b.name.toLowerCase())) > 0 != reverse ? 1 : -1
 		);
 	}
 
-	function homeOptionUpdate(event: any) {
-		Object.assign(options, event.detail.op);
+	function homeOptionUpdate(op: HomeOptions) {
+		Object.assign(options, op);
 		// console.log(options);
 		if (sortOrder != options.sortOrder || reverse != options.checks['sort-reverse']) {
 			sortOrder = options.sortOrder;
@@ -221,16 +233,16 @@
 			let fastSort = true;
 			switch (sortOrder) {
 				case 'total-time':
-					missions.sort((a, b) => (compare(a, b, timeSum, modSum) != reverse ? 1 : -1));
+					missions = missions.toSorted((a, b) => (compare(a, b, timeSum, modSum) != reverse ? 1 : -1));
 					break;
 				case 'module-count':
-					missions.sort((a, b) => (compare(a, b, modSum, timeSum) != reverse ? 1 : -1));
+					missions = missions.toSorted((a, b) => (compare(a, b, modSum, timeSum) != reverse ? 1 : -1));
 					break;
 				case 'solves':
-					missions.sort((a, b) => (compare(a, b, numCompletions, timeSum) != reverse ? 1 : -1));
+					missions = missions.toSorted((a, b) => (compare(a, b, numCompletions, timeSum) != reverse ? 1 : -1));
 					break;
 				case 'date-added':
-					missions.sort((a, b) =>
+					missions = missions.toSorted((a, b) =>
 						compare(
 							a,
 							b,
@@ -242,12 +254,12 @@
 					);
 					break;
 				case 'bomb-count':
-					missions.sort((a, b) => (compare(a, b, m => m.bombs.length, timeSum) != reverse ? 1 : -1));
+					missions = missions.toSorted((a, b) => (compare(a, b, m => m.bombs.length, timeSum) != reverse ? 1 : -1));
 					break;
 				case 'rule-seeded-mods-%':
 					fastSort = delayModulesCalculation(
 						() => {
-							missions.sort((a, b) => (ruleSeedPercent(a) > ruleSeedPercent(b) != reverse ? 1 : -1));
+							missions = missions.toSorted((a, b) => (ruleSeedPercent(a) > ruleSeedPercent(b) != reverse ? 1 : -1));
 						},
 						defaultSort,
 						100
@@ -256,7 +268,9 @@
 				case 'expert-match':
 					fastSort = delayModulesCalculation(
 						() => {
-							missions.sort((a, b) => (percentFromEnabled(a.name) > percentFromEnabled(b.name) != reverse ? 1 : -1));
+							missions = missions.toSorted((a, b) =>
+								percentFromEnabled(a.name) > percentFromEnabled(b.name) != reverse ? 1 : -1
+							);
 						},
 						defaultSort,
 						100
@@ -266,7 +280,7 @@
 					defaultSort();
 					break;
 			}
-			if (fastSort) dispatch('change');
+			if (fastSort) onchange();
 		}
 		updateSearch();
 	}
@@ -325,8 +339,8 @@
 			bind:rawSearchText={searchText}
 			bind:items={missionCards}
 			filterFunc={bombSearchFilter}
-			classes="help"
-			on:change={storeSearchText}
+			class="help"
+			onchange={storeSearchText}
 			bind:numResults={resultsText}
 			bind:this={layoutSearch} />
 
@@ -337,21 +351,17 @@
 					label={titleCase(option)}
 					sideLabel
 					labelAfter
-					on:change={setSearchOptions}
+					onchange={setSearchOptions}
 					bind:checked={validSearchOptions[index]} />
 			{/each}
 		</div>
 	</div>
 	<div class="flex control-tabs">
-		<div bind:this={filterTab} class="popup-tab filter-tab" on:click={() => popup(filters, filterTab, true, [-100, 0])}>
+		<div bind:this={filterTab} class="popup-tab filter-tab" onclick={() => popup(filters, filterTab, true, [-100, 0])}>
 			Filters
 		</div>
 	</div>
-	<HomeFiltersMenu
-		bind:div={filters}
-		on:click={() => preventDisappear(filters)}
-		on:update={homeOptionUpdate}
-		{modules} />
+	<HomeFiltersMenu bind:div={filters} onclick={() => preventDisappear(filters)} onupdate={homeOptionUpdate} {modules} />
 </div>
 
 <style>

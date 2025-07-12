@@ -5,8 +5,12 @@
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import type { EditMissionPack } from '../_types';
 
-	export let data;
-	export let pack: EditMissionPack = data.pack;
+	interface Props {
+		data: any;
+		pack?: EditMissionPack;
+	}
+
+	let { data, pack = data.pack }: Props = $props();
 
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
 	// const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };

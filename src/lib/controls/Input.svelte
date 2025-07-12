@@ -1,35 +1,53 @@
 <script lang="ts">
-	import { onMount, createEventDispatcher } from 'svelte';
+	import { onMount } from 'svelte';
+	import type { HTMLInputAttributes } from 'svelte/elements';
 
-	export let name: string = '';
-	export let id: string;
-	export let value: any;
-	export let label: string = '';
-	export let type: string = 'text';
-	export let placeholder: string = '';
-	export let classes: string = '';
-	export let labelClass: string = '';
-	export let title: string = '';
-	export let required: boolean = false;
-	export let sideLabel: boolean = false;
-	export let instantFormat: boolean = true;
-	export let options: any[] | null = null;
-	export let optionalOptions: boolean = false;
-	export let disabled: boolean = false;
-	export let display = (value: any) => value.toString();
-	export let parse = (value: string): any => value;
-	export let validate = (_value: any): boolean | string => true;
-	export let invalid: boolean = false;
-	export let forceValidate: boolean = false;
+	type Props = {
+		value: any;
+		label?: string;
+		class?: string;
+		labelClass?: string;
+		title?: string;
+		sideLabel?: boolean;
+		instantFormat?: boolean;
+		options?: any[] | null;
+		optionalOptions?: boolean;
+		display?: any;
+		parse?: any;
+		validate?: any;
+		invalid?: boolean;
+		forceValidate?: boolean;
+		children?: import('svelte').Snippet;
+		oninput?: () => void;
+	} & HTMLInputAttributes;
 
-	const dispatch = createEventDispatcher();
-	let input: HTMLInputElement;
-	let displayValue = display(value);
-	$: {
+	let {
+		value = $bindable(),
+		label = '',
+		class: classes = '',
+		labelClass = '',
+		title = '',
+		sideLabel = false,
+		instantFormat = true,
+		options = $bindable(null),
+		optionalOptions = false,
+		display = (value: any) => value.toString(),
+		parse = (value: string): any => value,
+		validate = (_value: any): boolean | string => true,
+		invalid = $bindable(false),
+		forceValidate = false,
+		children,
+		oninput = () => {},
+		...props
+	}: Props = $props();
+
+	let input = $state() as HTMLInputElement;
+	let displayValue = $state(display(value));
+	$effect(() => {
 		if (instantFormat) displayValue = display(value);
-	}
+	});
 
-	let error = '';
+	let error = $state('');
 	export const setValue = (val: any) => {
 		value = val;
 		displayValue = display(value);
@@ -52,7 +70,7 @@
 		}
 
 		if (handleValidity(newValue)) value = newValue;
-		dispatch('input');
+		oninput();
 	}
 	const handleInput = (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
 		displayValue = e.currentTarget.value;
@@ -61,7 +79,7 @@
 
 	function handleValidity(value: any, showErrors: boolean = true): boolean {
 		const validity = validate(value);
-		if (required || forceValidate) {
+		if (props.required || forceValidate) {
 			input.setCustomValidity(typeof validity === 'string' ? validity : validity ? '' : 'Invalid value');
 		}
 
@@ -75,33 +93,28 @@
 </script>
 
 <div class={sideLabel ? 'hstack' : 'vstack'}>
-	<label for={id} {title} class={labelClass}>
+	<label for={props.id} {title} class={labelClass}>
 		{label}
-		<slot />
+		{@render children?.()}
 	</label>
 	<input
-		{name}
-		{id}
-		{type}
-		{disabled}
-		{placeholder}
+		{...props}
 		class={classes}
-		{required}
 		bind:this={input}
-		list={id + '-list'}
+		list={props.id + '-list'}
 		value={displayValue}
-		on:input={handleInput}
-		on:change={() => {
+		oninput={handleInput}
+		onchange={e => {
 			if (error === '') {
 				displayValue = display(value);
 			}
-			dispatch('change');
+			props.onchange?.(e);
 		}} />
 	{#if error}
 		<div style="color: rgb(255, 80, 80);">{error}</div>
 	{/if}
 	{#if options}
-		<datalist id={id + '-list'}>
+		<datalist id={props.id + '-list'}>
 			{#each options as option}
 				<option value={display(option)}></option>
 			{/each}
@@ -123,7 +136,7 @@
 		background-color: #888;
 	}
 
-	input[type="date"] {
+	input[type='date'] {
 		background-color: lightgray;
 		color: black;
 	}

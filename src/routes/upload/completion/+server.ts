@@ -66,6 +66,7 @@ export async function POST({ locals, request }: RequestEvent) {
 		}
 	});
 
-	if (equalSolves.length > 0) return new Response(undefined, { status: 202 }); //replacing an existing solve
+	if (equalSolves.length > 0)
+		return new Response(undefined, { status: 202 }); //replacing an existing solve
 	else return new Response(undefined);
 }

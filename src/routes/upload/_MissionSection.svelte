@@ -8,17 +8,21 @@
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import type { ReplaceableMission } from './_types';
 
-	export let missionInfo: { [name: string]: any };
-	export let authorNames: string[];
-	export let packs: MissionPackSelection[];
+	interface Props {
+		missionInfo: { [name: string]: any };
+		authorNames: string[];
+		packs: MissionPackSelection[];
+	}
+
+	let { missionInfo, authorNames, packs }: Props = $props();
 
 	let missionNames = Object.keys(missionInfo).sort((a, b) => a.localeCompare(b));
-	let invalid = false;
-	let logfileLink = '';
+	let invalid = $state(false);
+	let logfileLink = $state('');
 	let parsedLogfileLink = '';
-	let missions: ReplaceableMission[] = [];
-	let selectedMissions: Record<number, boolean> = {};
-	let missionNameQuirk: { [name: string]: number } = {};
+	let missions: ReplaceableMission[] = $state([]);
+	let selectedMissions: Record<number, boolean> = $state({});
+	let missionNameQuirk: { [name: string]: number } = $state({});
 	const EXISTS = 1;
 	const RESERVED = 2;
 
@@ -206,11 +210,15 @@
 		bind:value={logfileLink}
 		required
 		validate={validateLogfileLink} />
-	<div><button disabled={invalid} on:click={readLogfile}>Get Mission Info</button></div>
+	<div><button disabled={invalid} onclick={readLogfile}>Get Mission Info</button></div>
 </div>
 {#if missions.length !== 0}
 	<div class="block">Select one or more missions from the logfile.</div>
-	<form on:submit|preventDefault={sendMissions}>
+	<form
+		onsubmit={e => {
+			e.preventDefault();
+			sendMissions();
+		}}>
 		<div class="missions flex column">
 			{#each missions as mission, i (mission)}
 				<div class="flex">
