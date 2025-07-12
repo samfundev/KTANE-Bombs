@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import { FrontendUser } from '$lib/types';
+import type { FrontendUser } from '$lib/types';
 import { UNKNOWN_ITEM } from './const';
 
 function diff(beforeObject: any, afterObject: any) {

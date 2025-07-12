@@ -14,14 +14,14 @@
 	class:needy={module.Type == 'Needy'}
 	href={`https://ktane.timwi.de/redirect/#${properUrlEncode(module.FileName ?? module.Name)}`}>
 	{#if hasSpecialIcon(module.ModuleID)}
-		<div class="image {module.ModuleID}" />
+		<div class="image {module.ModuleID}"></div>
 	{:else if (module.valid)}
 		<img
 			src="https://ktane.timwi.de/iconsprite"
 			alt={module.Name}
 			style="object-position: -{module.X * 32}px -{module.Y * 32}px" />
 	{:else}
-		<div class="image invalid" />
+		<div class="image invalid"></div>
 	{/if}
 	<span>{module.Name}</span>
 	{#if fraction < 0.02 || (fraction >= 0.995 && fraction < 1)}

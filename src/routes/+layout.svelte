@@ -20,7 +20,7 @@
 	beforeNavigate(({ from, to, cancel }) => {
 		// If we're navigating to the same route, use browser navigation instead
 		// This saves us from having to make our pages reactive to the data variable
-		if (to !== null && from?.routeId === to.routeId) {
+		if (to !== null && from?.route.id === to.route.id) {
 			cancel();
 			location.href = to.url.href;
 		}
@@ -60,7 +60,7 @@
 			<a class="block" rel="external" href="/login">Login</a>
 		{/if}
 	</div>
-	<div class="loader" class:visible={$navigating} />
+	<div class="loader" class:visible={$navigating}></div>
 </div>
 <div class="flex column max-width padding">
 	<slot />

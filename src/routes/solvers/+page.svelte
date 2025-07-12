@@ -33,7 +33,7 @@
 	<a href="/user/Twitch%20Plays">{TP_TEAM}</a>
 </h1>
 <div class="table">
-	<b class="block" />
+	<b class="block"></b>
 	<b class="block">Name</b>
 	<b class="block" title="Number of distinct missions solved.">Distinct</b>
 	<b class="block" title="Number of missions solved (including duplicates).">Total</b>

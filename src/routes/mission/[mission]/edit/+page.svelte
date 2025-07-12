@@ -321,7 +321,7 @@
 							validate={value => value != null}
 							required
 							bind:value={pool.modules} />
-						<div class="delete-pool dark-invert" on:click={() => deletePool(bomb, index)} />
+						<div class="delete-pool dark-invert" on:click={() => deletePool(bomb, index)}></div>
 					</div>
 				{/each}
 				<button class="add-pool" on:click={() => addPool(bomb)}>Add</button>

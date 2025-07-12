@@ -10,7 +10,7 @@
 		properUrlEncode,
 		titleCase
 	} from '$lib/util.js';
-	import { AuditLog, Prisma } from '@prisma/client';
+	import { type AuditLog, Prisma } from '@prisma/client';
 	import { onMount } from 'svelte';
 
 	const dateOptions: Intl.DateTimeFormatOptions = {
@@ -211,7 +211,7 @@
 
 <div class="table">
 	<div class="table-row">
-		<div class="block" />
+		<div class="block"></div>
 		<b class="block">Description</b>
 		<div class="block table-headers">
 			<b>Item</b>
@@ -275,7 +275,7 @@
 					<strong>...</strong>
 				</div>
 				<div class="full">
-					<div class="contract" on:click={() => hide(index)} />
+					<div class="contract" on:click={() => hide(index)}></div>
 					<div class="log-details">
 						{#each display.full as row}
 							<div title={row.item} class="shorten-detail">{row.item}</div>

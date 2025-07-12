@@ -81,7 +81,7 @@
 			on:change
 			bind:value={rawSearchText} />
 	{/if}
-	<div class="search-field-clear dark-invert" on:click={clearSearch} />
+	<div class="search-field-clear dark-invert" on:click={clearSearch}></div>
 </div>
 
 <style>

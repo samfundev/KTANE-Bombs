@@ -33,7 +33,7 @@
 	</div>
 {:else}
 	<a class="mission" bind:this={card} href="/mission/{properUrlEncode(mission.name)}" id={cardID}>
-		<div />
+		<div></div>
 		<MissionCardInner {mission} />
 		<div class="indicator flex column" {title}>
 			{#if solveTypes.normalSolve}
@@ -49,7 +49,7 @@
 				<span style="background-color: #00ffff; color:#000">S</span>
 			{/if}
 		</div>
-		<div />
+		<div></div>
 	</a>
 {/if}
 
