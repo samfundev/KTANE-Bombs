@@ -44,7 +44,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 	});
 
 	if (pack === null) {
-		throw error(404, 'Mission pack not found.');
+		error(404, 'Mission pack not found.');
 	}
 
 	return { pack };
@@ -67,7 +67,7 @@ export const actions: Actions = {
 			}
 		});
 
-		throw redirect(303, '/');
+		redirect(303, '/');
 	},
 
 	editMissionPack: async ({ locals, request }: RequestEvent) => {
@@ -91,6 +91,6 @@ export const actions: Actions = {
 			}
 		});
 
-		throw redirect(303, '/missionpack/' + properUrlEncode(pack.name));
+		redirect(303, '/missionpack/' + properUrlEncode(pack.name));
 	}
 };

@@ -7,7 +7,7 @@ import { redirect, error } from '@sveltejs/kit';
 
 export const load = async function load({ url, cookies }: any) {
 	const code = url.searchParams.get('code');
-	if (code === null) throw error(406);
+	if (code === null) error(406);
 
 	const result = await OAuth.tokenRequest({
 		code,
@@ -86,7 +86,8 @@ async function login(result: TokenRequestResult, cookies: Cookies, username: str
 	cookies.set('token', result.access_token, {
 		secure: true,
 		httpOnly: true,
-		maxAge: 2629800
+		maxAge: 2629800,
+		path: '/'
 	});
-	throw redirect(302, '/');
+	redirect(302, '/');
 }
