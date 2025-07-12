@@ -103,7 +103,7 @@
 	{#if options}
 		<datalist id={id + '-list'}>
 			{#each options as option}
-				<option value={display(option)} />
+				<option value={display(option)}></option>
 			{/each}
 		</datalist>
 	{/if}

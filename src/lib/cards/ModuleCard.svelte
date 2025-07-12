@@ -21,7 +21,7 @@
 			alt={module.Name}
 			style="object-position: -{module.X * 32}px -{module.Y * 32}px" />
 	{:else}
-		<div class="image invalid" />
+		<div class="image invalid"></div>
 	{/if}
 	<span>{module.Name}</span>
 	{#if fraction < 0.02 || (fraction >= 0.995 && fraction < 1)}

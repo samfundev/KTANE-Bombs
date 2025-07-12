@@ -23,7 +23,7 @@
 			{/each}
 		</div>
 		{#if completion.notes !== null}
-			<div class="note" bind:this={noteIcon} on:click={() => popup(note, noteIcon, true)} title={completion.notes} />
+			<div class="note" bind:this={noteIcon} on:click={() => popup(note, noteIcon, true)} title={completion.notes}></div>
 			<div bind:this={note} on:click={() => preventDisappear(note)} class="popup disappear disappear-stat0 hidden">
 				<span class="popup-text">{completion.notes}</span>
 			</div>

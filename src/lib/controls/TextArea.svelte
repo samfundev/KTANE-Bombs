@@ -96,14 +96,14 @@
 				displayValue = display(value);
 			}
 			dispatch('change');
-		}} />
+		}}></textarea>
 	{#if error}
 		<div style="color: rgb(255, 80, 80);">{error}</div>
 	{/if}
 	{#if options}
 		<datalist id={id + '-list'}>
 			{#each options as option}
-				<option value={display(option)} />
+				<option value={display(option)}></option>
 			{/each}
 		</datalist>
 	{/if}

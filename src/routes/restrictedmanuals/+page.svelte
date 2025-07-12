@@ -20,24 +20,26 @@
 	</p>
 	{#if manuals !== null}
 		<table>
-			{#each manuals as manual}
-				<tr class="manual">
-					<td>{manual.Language ?? ''}</td>
-					<td>
-						{manual.Name}
-						{#if manual.TranslatedName}
-							<br />({manual.TranslatedName})
-						{/if}
-					</td>
-					<td>
-						{#if manual.Descriptor}
-							<strong>{manual.Descriptor}</strong><br />
-						{/if}
-						{manual.Author ?? ''}
-					</td>
-				</tr>
-				<tr><td /><td /><td /></tr>
-			{/each}
+			<tbody>
+				{#each manuals as manual}
+					<tr class="manual">
+						<td>{manual.Language ?? ''}</td>
+						<td>
+							{manual.Name}
+							{#if manual.TranslatedName}
+								<br />({manual.TranslatedName})
+							{/if}
+						</td>
+						<td>
+							{#if manual.Descriptor}
+								<strong>{manual.Descriptor}</strong><br />
+							{/if}
+							{manual.Author ?? ''}
+						</td>
+					</tr>
+					<tr><td></td><td></td><td></td></tr>
+				{/each}
+			</tbody>
 		</table>
 	{/if}
 </div>
