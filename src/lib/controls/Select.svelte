@@ -1,16 +1,28 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+	import type { HTMLSelectAttributes } from 'svelte/elements';
 
-	export let id: string;
-	export let value: any;
-	export let label: string;
-	export let options: any[];
-	export let title: string = '';
-	export let labelClass: string = '';
-	export let display = (obj: any) => obj.toString();
-	export let sideLabel: boolean = false;
+	type Props = {
+		value: any;
+		label: string;
+		options: any[];
+		title?: string;
+		labelClass?: string;
+		display?: any;
+		sideLabel?: boolean;
+		children?: import('svelte').Snippet;
+	} & HTMLSelectAttributes;
 
-	const dispatch = createEventDispatcher();
+	let {
+		value = $bindable(),
+		label,
+		options,
+		title = '',
+		labelClass = '',
+		display = (obj: any) => obj.toString(),
+		sideLabel = false,
+		children,
+		...props
+	}: Props = $props();
 
 	const handleInput = (e: Event & { currentTarget: EventTarget & HTMLSelectElement }) => {
 		let newValue = e.currentTarget.value;
@@ -20,16 +32,16 @@
 				return;
 			}
 		}
-		dispatch('input');
+		props.oninput?.(e);
 	};
 </script>
 
 <div class={sideLabel ? 'hstack' : 'vstack'}>
-	<label for={id} {title} class={labelClass}>
+	<label for={props.id} {title} class={labelClass}>
 		{label}
-		<slot />
+		{@render children?.()}
 	</label>
-	<select {id} on:change on:input={handleInput}>
+	<select {...props} oninput={handleInput}>
 		{#each options as option}
 			<option selected={option === value}>{display(option)}</option>
 		{/each}

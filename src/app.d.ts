@@ -2,7 +2,7 @@
 
 declare namespace App {
 	interface Locals {
-		user: import('$lib/types').FrontendUser | null;
+		user: import('$lib/types.svelte').FrontendUser | null;
 		token: string | null;
 	}
 

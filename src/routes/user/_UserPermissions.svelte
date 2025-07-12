@@ -1,10 +1,15 @@
 <script lang="ts">
-	import { Permission, type FrontendUser } from '$lib/types';
+	import { Permission, type FrontendUser } from '$lib/types.svelte';
 	import { applyAction } from '$app/forms';
+	import { SvelteSet } from 'svelte/reactivity';
 
-	export let shownUser: FrontendUser;
+	interface Props {
+		shownUser: FrontendUser;
+	}
 
-	const permissions: Record<string, number> = {};
+	let { shownUser = $bindable() }: Props = $props();
+
+	const permissions: Record<string, number> = $state({});
 	for (const [name, value] of Object.entries(Permission)) {
 		if (typeof value === 'string') {
 			continue;
@@ -12,7 +17,7 @@
 
 		permissions[name] = value;
 	}
-	let newPermissions = new Set(shownUser.permissions);
+	let newPermissions = $state(new SvelteSet(shownUser.permissions));
 
 	function togglePermission(permission: number) {
 		if (newPermissions.has(permission)) {
@@ -20,13 +25,12 @@
 		} else {
 			newPermissions.add(permission);
 		}
-
-		newPermissions = newPermissions;
 	}
 
-	$: modified =
+	let modified = $derived(
 		shownUser.permissions.length != newPermissions.size ||
-		shownUser.permissions.some(permission => !newPermissions.has(permission));
+			shownUser.permissions.some(permission => !newPermissions.has(permission))
+	);
 
 	async function saveChanges() {
 		const fData = new FormData();
@@ -47,9 +51,9 @@
 <div class="block flex column content-width">
 	<div class="flex">
 		{#each Object.entries(permissions) as [name, value]}
-			<input type="checkbox" id={name} checked={newPermissions.has(value)} on:change={() => togglePermission(value)} />
+			<input type="checkbox" id={name} checked={newPermissions.has(value)} onchange={() => togglePermission(value)} />
 			<label for={name}>{name}</label>
 		{/each}
 	</div>
-	<button disabled={!modified} on:click={saveChanges}>Save Changes</button>
+	<button disabled={!modified} onclick={saveChanges}>Save Changes</button>
 </div>

@@ -1,5 +1,5 @@
-import { Permission } from '$lib/types';
-import type { QueueItem } from '$lib/types';
+import { Permission } from '$lib/types.svelte';
+import type { QueueItem } from '$lib/types.svelte';
 import { forbidden, hasPermission } from '$lib/util';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 import { TP_TEAM } from '$lib/const';

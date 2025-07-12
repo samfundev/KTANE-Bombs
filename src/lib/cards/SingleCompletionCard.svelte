@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { TP_TEAM } from '$lib/const';
-	import type { MissionCompletion } from '$lib/types';
+	import type { MissionCompletion } from '$lib/types.svelte';
 	import { formatTime, getPersonColor, listify, properUrlEncode } from '$lib/util';
 
-	export let comp: MissionCompletion;
-	export let username: string;
-	export let showTime: boolean = false;
+	interface Props {
+		comp: MissionCompletion;
+		username: string;
+		showTime?: boolean;
+	}
+
+	let { comp, username, showTime = false }: Props = $props();
 
 	let tp = username === TP_TEAM;
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };

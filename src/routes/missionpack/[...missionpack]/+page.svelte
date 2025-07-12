@@ -1,12 +1,16 @@
 <script lang="ts">
-	import { Permission } from '$lib/types';
+	import { Permission } from '$lib/types.svelte';
 	import { hasPermission, pluralize, properUrlEncode } from '$lib/util';
 	import { page } from '$app/stores';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import type { EditMissionPack } from '../_types';
 
-	export let data;
-	export let pack: EditMissionPack = data.pack;
+	interface Props {
+		data: any;
+		pack?: EditMissionPack;
+	}
+
+	let { data, pack = data.pack }: Props = $props();
 
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
 	// const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };

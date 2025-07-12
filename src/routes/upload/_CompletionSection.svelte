@@ -2,32 +2,52 @@
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import Input from '$lib/controls/Input.svelte';
-	import { Completion } from '$lib/types';
+	import type { Completion } from '$lib/types.svelte';
 	import { formatTime, getLogfileLinks, parseTime } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import { TP_TEAM } from '$lib/const';
 
-	export let missionInfo: { [name: string]: any };
-	export let solverNames: string[];
+	interface Props {
+		missionInfo: { [name: string]: any };
+		solverNames: string[];
+	}
+
+	let { missionInfo, solverNames }: Props = $props();
 
 	let missionNames = Object.keys(missionInfo).sort((a, b) => a.localeCompare(b));
-	let missionName: string = '';
+	let missionName: string = $state('');
 
-	let completion: Completion = new Completion();
+	let completion: Completion = $state({
+		proofs: [],
+		time: 0,
+		team: [],
+		first: false,
+		old: false,
+		solo: false,
+		notes: null,
+		dateAdded: null,
+		uploadedBy: null
+	});
 	completion.dateAdded = new Date();
 
-	let valid: boolean = false;
+	let missionInvalid = $state(false);
+	let timerInvalid = $state(false);
 
-	let missionInvalid = false;
-	let timerInvalid = false;
+	let valid: boolean = $derived(
+		!missionInvalid &&
+			missionName !== '' &&
+			completion.proofs.length !== 0 &&
+			completion.team.length !== 0 &&
+			!timerInvalid
+	);
 
-	let team = [{ invalid: false, text: '' }];
-	let proofs = [{ invalid: false, text: '' }];
-	let tpSolve = false;
+	let team = $state([{ invalid: false, text: '' }]);
+	let proofs = $state([{ invalid: false, text: '' }]);
+	let tpSolve = $state(false);
 	const MIN_TIME = 0.01;
-	let parsedTimes: number[] = [MIN_TIME];
+	let parsedTimes: number[] = $state([MIN_TIME]);
 	let parsedLogfiles: string[] = [];
-	let timeInput: Input;
+	let timeInput = $state() as Input;
 
 	function dynamicBoxes(inputList: any[]) {
 		let max = inputList.length - 1;
@@ -155,25 +175,20 @@
 		return outTeam;
 	}
 
-	$: {
+	$effect(() => {
 		dynamicBoxes(proofs);
 		completion.proofs = parseTeam(proofs, parseURL);
 
 		dynamicBoxes(team);
-		completion.team = parseTeam(team, null);
+		const newTeam = parseTeam(team, null);
 
-		if (completion.team.length > 1) {
+		if (newTeam.length > 1) {
 			completion.solo = false;
 			tpSolve = false;
 		}
 
-		valid =
-			!missionInvalid &&
-			missionName !== '' &&
-			completion.proofs.length !== 0 &&
-			completion.team.length !== 0 &&
-			!timerInvalid;
-	}
+		completion.team = newTeam;
+	});
 
 	function tpChange() {
 		if (tpSolve) {
@@ -268,7 +283,7 @@
 					optionalOptions={true}
 					options={solverNames}
 					disabled={tpSolve}
-					on:change={teamChange}
+					onchange={teamChange}
 					bind:value={member.text} />
 			</div>
 		{/each}
@@ -276,7 +291,7 @@
 	<Checkbox
 		id="solo"
 		label="Solo"
-		classes="help"
+		class="help"
 		title="A solo solve is done entirely from memory, without using any experts, manuals, notes, or external tools. Video evidence must be provided for solo solves."
 		bind:checked={completion.solo}
 		disabled={tpSolve || completion.team.length > 1} />
@@ -284,12 +299,12 @@
 		id="tpSolve"
 		label="TP Solve"
 		bind:checked={tpSolve}
-		on:change={tpChange}
+		onchange={tpChange}
 		disabled={completion.solo || completion.team.length > 1} />
 </form>
 <CompletionCard {completion} />
 <div class="block">
-	<button on:click={upload} disabled={!valid}>Upload</button>
+	<button onclick={upload} disabled={!valid}>Upload</button>
 </div>
 
 <style>

@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import { getData } from '$lib/repo';
-import { Permission } from '$lib/types';
+import { Permission } from '$lib/types.svelte';
 import { forbidden, hasPermission } from '$lib/util';
 import type { ServerLoadEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
@@ -21,7 +21,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 					dateAdded: true,
 					variant: true
 				}
-		  })
+			})
 		: null;
 	const missionResult = await client.mission.findFirst({
 		where: {
@@ -87,7 +87,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 						},
 						tpSolve: true
 					}
-			  });
+				});
 
 	if (missionToUpdate !== null) {
 		missionResult.completions = missionToUpdate.completions;

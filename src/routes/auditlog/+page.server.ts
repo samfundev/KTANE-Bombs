@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import { Permission } from '$lib/types';
+import { Permission } from '$lib/types.svelte';
 import { forbidden, hasAnyPermission } from '$lib/util';
 
 async function findName(log: any) {

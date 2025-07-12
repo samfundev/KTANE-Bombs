@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { TP_TEAM } from '$lib/const';
-	import type { Completer } from '$lib/types';
+	import type { Completer } from '$lib/types.svelte.js';
 	import { properUrlEncode } from '$lib/util.js';
-	export let data;
+	let { data } = $props();
 	let completers: Completer[] = data.completers;
-	let ranks: { [name: string]: number } = {};
+	let ranks: { [name: string]: number } = $state({});
 	let rank = 1;
 	let tied = 1;
 

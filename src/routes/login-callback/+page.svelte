@@ -4,11 +4,21 @@
 	import { applyAction } from '$app/forms';
 	import type { ActionResult } from '@sveltejs/kit';
 
-	export let data;
-	export let oauthResult: TokenRequestResult = data.result;
-	export let username: string = data.username;
-	export let takenUsernames: string[] = data.takenUsernames;
-	export let firstTime: boolean = data.firstTime;
+	interface Props {
+		data: any;
+		oauthResult?: TokenRequestResult;
+		username?: string;
+		takenUsernames?: string[];
+		firstTime?: boolean;
+	}
+
+	let {
+		data,
+		oauthResult = data.result,
+		username = $bindable(data.username),
+		takenUsernames = data.takenUsernames,
+		firstTime = data.firstTime
+	}: Props = $props();
 
 	function trimName(str: string): any {
 		return str.trim();
@@ -24,10 +34,10 @@
 		return nameTaken(val)
 			? 'Name is taken'
 			: val.length > 50
-			? '50 characters max'
-			: /\S/.test(val)
-			? true
-			: 'Cannot be blank';
+				? '50 characters max'
+				: /\S/.test(val)
+					? true
+					: 'Cannot be blank';
 	}
 
 	async function submit() {
@@ -75,7 +85,12 @@
 			Someone already has that username, please select another.
 		{/if}
 	</div>
-	<form on:submit|preventDefault={submit} method="POST">
+	<form
+		onsubmit={e => {
+			e.preventDefault();
+			submit();
+		}}
+		method="POST">
 		<Input
 			name="username"
 			id="username"

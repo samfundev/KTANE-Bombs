@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Permission, Pool, type Mission, type MissionPack } from '$lib/types';
+	import { Permission, Pool, type Mission, type MissionPack } from '$lib/types.svelte';
 	import {
 		excludeArticleSort,
 		formatTime,
@@ -20,13 +20,17 @@
 	import Select from '$lib/controls/Select.svelte';
 
 	type Variant = Pick<Mission, 'name' | 'completions' | 'tpSolve'>;
-	export let data;
-	export let mission: Mission & { missionPack: MissionPack; verified: boolean } = data.mission;
-	export let variants: Variant[] | null = data.variants;
-	export let modules: Record<string, RepoModule> | null = data.modules;
+	interface Props {
+		data: any;
+		mission?: Mission & { missionPack: MissionPack; verified: boolean };
+		variants?: Variant[] | null;
+		modules?: Record<string, RepoModule> | null;
+	}
+
+	let { data, mission = data.mission, variants = data.variants, modules = data.modules }: Props = $props();
 
 	const viewOptions = ['Pools', 'Probabilities'];
-	let byPerc = '';
+	let byPerc = $state('');
 	const viewTitle =
 		'Pools view shows the actual module pools as defined by the mission author.\n' +
 		'Probabilities view shows probability that at least one instance of a module will be present on a bomb.';
@@ -186,7 +190,7 @@
 				sideLabel
 				options={viewOptions}
 				bind:value={byPerc}
-				on:change={storeView} />
+				onchange={storeView} />
 		</div>
 		{#each mission.bombs as bomb, bIdx}
 			<div class="block">

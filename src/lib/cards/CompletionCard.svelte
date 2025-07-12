@@ -1,13 +1,17 @@
 <script lang="ts">
 	import { TP_TEAM } from '$lib/const';
-	import type { Completion } from '$lib/types';
+	import type { Completion } from '$lib/types.svelte';
 	import { classifyLink, formatTime, getPersonColor, popup, preventDisappear } from '$lib/util';
 
-	export let completion: Completion;
+	interface Props {
+		completion: Completion;
+	}
 
-	$: tp = completion.team[0] === TP_TEAM;
-	let note: HTMLDivElement;
-	let noteIcon: HTMLDivElement;
+	let { completion }: Props = $props();
+
+	let tp = $derived(completion.team[0] === TP_TEAM);
+	let note = $state() as HTMLDivElement;
+	let noteIcon = $state() as HTMLDivElement;
 </script>
 
 <div class="completion">
@@ -23,8 +27,8 @@
 			{/each}
 		</div>
 		{#if completion.notes !== null}
-			<div class="note" bind:this={noteIcon} on:click={() => popup(note, noteIcon, true)} title={completion.notes}></div>
-			<div bind:this={note} on:click={() => preventDisappear(note)} class="popup disappear disappear-stat0 hidden">
+			<div class="note" bind:this={noteIcon} onclick={() => popup(note, noteIcon, true)} title={completion.notes}></div>
+			<div bind:this={note} onclick={() => preventDisappear(note)} class="popup disappear disappear-stat0 hidden">
 				<span class="popup-text">{completion.notes}</span>
 			</div>
 		{/if}

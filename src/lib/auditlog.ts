@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import type { FrontendUser } from '$lib/types';
+import type { FrontendUser } from '$lib/types.svelte';
 import { UNKNOWN_ITEM } from './const';
 
 function diff(beforeObject: any, afterObject: any) {

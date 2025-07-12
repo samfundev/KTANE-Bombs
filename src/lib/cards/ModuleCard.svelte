@@ -2,9 +2,13 @@
 	import type { RepoModule } from '$lib/repo';
 	import { hasSpecialIcon, properUrlEncode } from '$lib/util';
 
-	export let module: RepoModule;
-	export let fraction: number = 1;
-	export let alwaysShow: boolean = false;
+	interface Props {
+		module: RepoModule;
+		fraction?: number;
+		alwaysShow?: boolean;
+	}
+
+	let { module, fraction = 1, alwaysShow = false }: Props = $props();
 </script>
 
 <a

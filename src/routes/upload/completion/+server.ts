@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import createAuditClient from '$lib/auditlog';
-import type { Completion } from '$lib/types';
+import type { Completion } from '$lib/types.svelte';
 import { forbidden } from '$lib/util';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 
@@ -57,6 +57,7 @@ export async function POST({ locals, request }: RequestEvent) {
 		}
 	});
 
-	if (equalSolves.length > 0) return new Response(undefined, { status: 202 }); //replacing an existing solve
+	if (equalSolves.length > 0)
+		return new Response(undefined, { status: 202 }); //replacing an existing solve
 	else return new Response(undefined);
 }

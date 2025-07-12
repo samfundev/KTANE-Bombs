@@ -4,7 +4,7 @@
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import type { RepoModule } from '$lib/repo.js';
-	import type { Bomb, Mission } from '$lib/types.js';
+	import type { Bomb, Mission } from '$lib/types.svelte.js';
 	import {
 		evaluateLogicalStringSearch,
 		getModule,
@@ -13,17 +13,17 @@
 		properUrlEncode
 	} from '$lib/util.js';
 
-	export let data;
+	let { data } = $props();
 	type ShortMission = Pick<Mission, 'name' | 'bombs'>;
 	let missions: ShortMission[] = data.missions;
 	let modules: Record<string, RepoModule> = data.modules;
-	let moduleRows: any = {};
-	let sortOption: 'alphabetical' | 'popular' | 'published' = 'alphabetical';
-	let layoutSearch: LayoutSearchFilter;
-	let showAll = false;
+	let moduleRows: any = $state({});
+	let sortOption: 'alphabetical' | 'popular' | 'published' = $state('alphabetical');
+	let layoutSearch: LayoutSearchFilter = $state();
+	let showAll = $state(false);
 	const resultLimit = 50;
 
-	let missionsOf: Record<string, ShortMission[]> = {};
+	let missionsOf: Record<string, ShortMission[]> = $state({});
 	missions.forEach(miss => {
 		miss.bombs
 			.map((b: Bomb) => b.pools.map(p => p.modules.filter(onlyUnique)))
@@ -88,9 +88,9 @@
 		let elem = document.querySelector(`.missions-dropdown.mod${modID.replace(/\s/g, '')}`);
 		elem?.classList.add('expand');
 	}
-	let mods = Object.entries(modules).filter(mod => mod[1].Type == 'Regular' || mod[1].Type == 'Needy');
+	let mods = $state(Object.entries(modules).filter(mod => mod[1].Type == 'Regular' || mod[1].Type == 'Needy'));
 	alphabetical();
-	let resultsText: number = mods.length;
+	let resultsText: number = $state(mods.length);
 
 	function moduleSearchFilter(name: string, searchText: string): boolean {
 		let text = searchText.toLowerCase();
@@ -113,7 +113,7 @@
 			<span>Max {resultLimit} results shown</span>
 			<Checkbox
 				id="show-all-check"
-				on:change={() => {
+				onchange={() => {
 					updateSearch();
 				}}
 				bind:checked={showAll}
@@ -141,13 +141,13 @@
 			bind:numResults={resultsText}
 			bind:this={layoutSearch}
 			filterFunc={moduleSearchFilter}
-			on:input={limitResults}
-			classes="help" />
-		<button on:click={closeAll}>Close All</button>
-		<span class="sort-option alphabetical" class:selected={sortOption == 'alphabetical'} on:click={alphabetical}
+			oninput={limitResults}
+			class="help" />
+		<button onclick={closeAll}>Close All</button>
+		<span class="sort-option alphabetical" class:selected={sortOption == 'alphabetical'} onclick={alphabetical}
 			>Alphabetical</span>
-		<span class="sort-option popular" class:selected={sortOption == 'popular'} on:click={popular}>Popular</span>
-		<span class="sort-option published" class:selected={sortOption == 'published'} on:click={published}>Published</span>
+		<span class="sort-option popular" class:selected={sortOption == 'popular'} onclick={popular}>Popular</span>
+		<span class="sort-option published" class:selected={sortOption == 'published'} onclick={published}>Published</span>
 	</div>
 </div>
 <div class="flex column">
@@ -158,18 +158,18 @@
 				class="missions-dropdown flex column mod{modID.replace(/\s/g, '')}"
 				class:expand={!missionsOf[modID] || missionsOf[modID].length <= 4}
 				class:few={!missionsOf[modID] || missionsOf[modID].length <= 4}
-				on:click={() => reveal(modID)}>
+				onclick={() => reveal(modID)}>
 				<div>
 					<span>Missions: </span>
 					{#if missionsOf[modID]}
 						<span>{missionsOf[modID].length}</span>
 						<div class="mission-list flex row wrap">
-							{#each missionsOf[modID].sort((a, b) => a.name.localeCompare(b.name)) as miss}
+							{#each missionsOf[modID].toSorted((a, b) => a.name.localeCompare(b.name)) as miss}
 								<a href="/mission/{properUrlEncode(miss.name)}">{miss.name}</a>
 							{/each}
 						</div>
 						<div class="mission-list flex row short">
-							{#each missionsOf[modID].sort((a, b) => a.name.localeCompare(b.name)).slice(0, 4) as miss}
+							{#each missionsOf[modID].toSorted((a, b) => a.name.localeCompare(b.name)).slice(0, 4) as miss}
 								<span>{miss.name}</span>
 							{/each}
 							{#if missionsOf[modID].length > 4}

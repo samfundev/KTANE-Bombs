@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import { Bomb } from '$lib/types';
+import { Bomb } from '$lib/types.svelte';
 import { dateAddedSort, getSolveTypes } from '$lib/util';
 import { minimize } from '../_util';
 import { TP_TEAM } from '$lib/const';

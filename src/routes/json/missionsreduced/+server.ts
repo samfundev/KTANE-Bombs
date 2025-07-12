@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import { onlyUnique, withoutArticle } from '$lib/util';
-import type { Mission } from '$lib/types';
+import type { Mission } from '$lib/types.svelte';
 import { minimize } from '../_util';
 
 export async function GET() {

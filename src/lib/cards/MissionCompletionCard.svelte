@@ -1,10 +1,14 @@
 <script lang="ts">
 	import { TP_TEAM } from '$lib/const';
-	import type { IndividualCompletion } from '$lib/types';
+	import type { IndividualCompletion } from '$lib/types.svelte';
 	import { getPersonColor, listify, properUrlEncode } from '$lib/util';
 
-	export let mission: IndividualCompletion;
-	export let username: string;
+	interface Props {
+		mission: IndividualCompletion;
+		username: string;
+	}
+
+	let { mission, username }: Props = $props();
 	const methods = [
 		mission.defuser ? 'as a Defuser' : null,
 		mission.expert ? 'as an Expert' : null,

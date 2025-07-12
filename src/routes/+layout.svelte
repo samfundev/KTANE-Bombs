@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Permission } from '$lib/types';
-	import type { FrontendUser } from '$lib/types';
+	import { Permission } from '$lib/types.svelte.js';
+	import type { FrontendUser } from '$lib/types.svelte.js';
 	import UserCard from '$lib/cards/UserCard.svelte';
 	import { hasAnyPermission, properUrlEncode } from '$lib/util';
 	import { Toaster } from 'svelte-french-toast';
@@ -10,13 +10,13 @@
 	import { disappearAll } from '$lib/util';
 	import { onMount } from 'svelte';
 	import HomeInfoMenu from '$lib/home/HomeInfoMenu.svelte';
-	import { navigating } from '$app/stores';
+	import { navigating } from '$app/state';
 
-	export let data;
+	let { data, children } = $props();
 	const user: FrontendUser | null = data.user;
 
-	let infoMenu: HTMLDivElement;
-	let infoTab: HTMLDivElement;
+	let infoMenu = $state() as HTMLDivElement;
+	let infoTab = $state() as HTMLDivElement;
 	beforeNavigate(({ from, to, cancel }) => {
 		// If we're navigating to the same route, use browser navigation instead
 		// This saves us from having to make our pages reactive to the data variable
@@ -45,7 +45,7 @@
 			{/if}
 		{/if}
 		<div style="margin-left: auto" class="block info-tab" bind:this={infoTab}>
-			<div on:click={() => popup(infoMenu, infoTab, true, [8, 6])}>Info</div>
+			<div onclick={() => popup(infoMenu, infoTab, true, [8, 6])}>Info</div>
 			<HomeInfoMenu bind:div={infoMenu} />
 		</div>
 
@@ -60,10 +60,10 @@
 			<a class="block" rel="external" href="/login">Login</a>
 		{/if}
 	</div>
-	<div class="loader" class:visible={$navigating}></div>
+	<div class="loader" class:visible={navigating.complete !== null}></div>
 </div>
 <div class="flex column max-width padding">
-	<slot />
+	{@render children?.()}
 </div>
 
 <Toaster
@@ -108,7 +108,7 @@
 			--contrast-block-background: rgb(50, 50, 50);
 			--accent-gray: #444;
 			--light-text-color: rgb(150, 150, 150);
-			--link-text-color: currentColor
+			--link-text-color: currentColor;
 			--link-visited-text-color: rgb(200, 200, 200);
 			--blue-link-color: rgb(85, 167, 255);
 			--blue-link-visited-color: rgb(174, 93, 240);
@@ -335,9 +335,21 @@
 		transition: height 0.25s 0.25s;
 	}
 	@keyframes l16 {
-		0%   {background-position:-150% 0,-150% 0}
-		66%  {background-position: 250% 0,-150% 0}
-		100% {background-position: 250% 0, 250% 0}
+		0% {
+			background-position:
+				-150% 0,
+				-150% 0;
+		}
+		66% {
+			background-position:
+				250% 0,
+				-150% 0;
+		}
+		100% {
+			background-position:
+				250% 0,
+				250% 0;
+		}
 	}
 
 	.loader.visible {

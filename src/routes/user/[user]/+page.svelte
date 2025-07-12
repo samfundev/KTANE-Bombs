@@ -2,7 +2,7 @@
 	import Dialog from '$lib/controls/Dialog.svelte';
 	import Input from '$lib/controls/Input.svelte';
 	import Select from '$lib/controls/Select.svelte';
-	import { IndividualCompletion, Mission, MissionCompletion, Permission, type FrontendUser } from '$lib/types';
+	import { IndividualCompletion, Mission, MissionCompletion, Permission, type FrontendUser } from '$lib/types.svelte';
 	import { getPersonColor, hasPermission, pluralize, properUrlEncode, withoutArticle } from '$lib/util';
 	import UserPermissions from '../_UserPermissions.svelte';
 	import { page } from '$app/stores';
@@ -14,7 +14,7 @@
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import SingleCompletionCard from '$lib/cards/SingleCompletionCard.svelte';
-	export let data;
+	let { data } = $props();
 
 	type SolveStats = {
 		distinct: number;
@@ -27,7 +27,7 @@
 
 	let stats: SolveStats = data.stats;
 	let username: string = data.username;
-	let shownUser: FrontendUser | null = data.shownUser;
+	let shownUser: FrontendUser | null = $state(data.shownUser);
 	let completions: MissionCompletion[] = data.completions;
 	let tpMissions: Mission[] = data.tpMissions;
 	let unverifSolves: (Completion & { mission: Mission })[] | null = data.unverifSolves;
@@ -35,14 +35,14 @@
 	let unverifPacks: MissionPack[] | null = data.unverifPacks;
 	let bestTimes: MissionCompletion[] = data.bestTimes;
 
-	let newUsername = username;
+	let newUsername = $state(username);
 	const oldUsername = username;
 	let tp = username === TP_TEAM;
 
-	let dialog: HTMLDialogElement;
+	let dialog = $state() as HTMLDialogElement;
 
 	const viewOptions = ['Alphabetical', 'By Role', 'Newest'];
-	let viewMode = '';
+	let viewMode = $state('');
 
 	async function editName() {
 		let response = await fetch('/user/rename', {
@@ -74,8 +74,8 @@
 		alert('Failed to edit name.');
 	}
 
-	let missions: { [name: string]: IndividualCompletion } = {};
-	let missionsNames: { [name: string]: MissionCompletion[] } = {};
+	let missions: { [name: string]: IndividualCompletion } = $state({});
+	let missionsNames: { [name: string]: MissionCompletion[] } = $state({});
 	// Sort completions
 	completions.sort((a, b) => withoutArticle(a.mission.name).localeCompare(withoutArticle(b.mission.name)));
 	let completionByNewest: MissionCompletion[] = Array(completions.length);
@@ -85,8 +85,8 @@
 			? a.dateAdded == null && b.dateAdded == null
 				? a.mission.name.localeCompare(b.mission.name)
 				: a.dateAdded == null
-				? 1
-				: -1
+					? 1
+					: -1
 			: b.dateAdded.getTime() - a.dateAdded.getTime()
 	);
 
@@ -189,9 +189,9 @@
 		});
 	}
 
-	let render = false;
-	let hideTopTimes = true;
-	let hideFirstSolves = true;
+	let render = $state(false);
+	let hideTopTimes = $state(true);
+	let hideFirstSolves = $state(true);
 	let wrView = writable(viewMode);
 	let wrHTT = writable(hideTopTimes);
 	let wrHFS = writable(hideFirstSolves);
@@ -270,13 +270,13 @@
 			<span style="background-color: {getPersonColor(1, 0, false)}">EFM</span>
 		{/if}
 	</div>
-	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={viewMode} on:change={storePref} />
+	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={viewMode} onchange={storePref} />
 </div>
 
 {#if bestTimes.length > 0}
 	<div
 		class="block flex toggleable"
-		on:click={() => {
+		onclick={() => {
 			hideTopTimes = !hideTopTimes;
 			storePref();
 		}}>
@@ -293,7 +293,7 @@
 {#if firstTimes.length > 0}
 	<div
 		class="block flex toggleable"
-		on:click={() => {
+		onclick={() => {
 			hideFirstSolves = !hideFirstSolves;
 			storePref();
 		}}>
@@ -356,11 +356,15 @@
 {/if}
 {#if hasPermission($page.data.user, Permission.RenameUser)}
 	<div class="block flex column content-width">
-		<button on:click={() => dialog.showModal()}>Edit Name</button>
+		<button onclick={() => dialog.showModal()}>Edit Name</button>
 		<Dialog bind:dialog>
 			<div class="flex column content-width">
 				<h2>Edit Name</h2>
-				<form on:submit|preventDefault={() => editName()}>
+				<form
+					onsubmit={e => {
+						e.preventDefault();
+						editName();
+					}}>
 					<Input
 						id="username"
 						label="Username"
@@ -374,7 +378,7 @@
 	</div>
 {/if}
 {#if shownUser !== null && hasPermission($page.data.user, Permission.ModifyPermissions)}
-	<UserPermissions {shownUser} />
+	<UserPermissions bind:shownUser />
 {/if}
 
 <style>

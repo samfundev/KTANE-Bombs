@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import { Permission } from '$lib/types';
+import { Permission } from '$lib/types.svelte';
 import { forbidden, hasPermission } from '$lib/util';
 import type { ServerLoadEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';

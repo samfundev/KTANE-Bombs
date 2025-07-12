@@ -1,16 +1,16 @@
 <script lang="ts">
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import HomeSearchBar from '$lib/home/HomeSearchBar.svelte';
-	import type { ID, Mission } from '$lib/types';
+	import type { ID, Mission } from '$lib/types.svelte.js';
 	import type { RepoModule } from '$lib/repo';
 
-	export let data;
-	let missions: ID<Mission>[] = data.missions;
-	let missionCards: any = {};
+	let { data } = $props();
+	let missions: ID<Mission>[] = $state.raw(data.missions);
+	let missionCards: any = $state({});
 	let modules: Record<string, RepoModule> | null = data.modules;
 
-	let render = false;
-	let searchBar: HomeSearchBar;
+	let render = $state(false);
+	let searchBar = $state() as HomeSearchBar;
 
 	function onChange() {
 		if (!render)
@@ -29,7 +29,7 @@
 	<h1 class="header">Challenge Bombs</h1>
 </div>
 {#if modules}
-	<HomeSearchBar bind:this={searchBar} bind:missions bind:missionCards on:change={onChange} {modules} />
+	<HomeSearchBar bind:this={searchBar} bind:missions bind:missionCards onchange={onChange} {modules} />
 {:else}
 	<div class="block">Error fetching module info from the repo.</div>
 {/if}

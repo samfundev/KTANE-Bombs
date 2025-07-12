@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import { TP_TEAM } from '$lib/const';
-import type { Completer } from '$lib/types';
+import type { Completer } from '$lib/types.svelte';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async function () {

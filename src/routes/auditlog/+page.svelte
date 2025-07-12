@@ -21,11 +21,11 @@
 		minute: '2-digit'
 	};
 
-	export let data;
+	let { data } = $props();
 	let logs: (AuditLog & { linkable: boolean; mission: string | null })[] = data.logs;
 
-	let logRows: any = {};
-	let resultsText: number = logs.length;
+	let logRows: any = $state({});
+	let resultsText: number = $state(logs.length);
 	let searchOptionBoxes = ['from user', 'mission', 'mission pack', 'solve', 'user', 'invert'];
 	let searchOptionTooltips = [
 		'Search for the user that made the change',
@@ -35,11 +35,11 @@
 		'Search for edited users',
 		'Invert search'
 	];
-	let layoutSearch: LayoutSearchFilter;
+	let layoutSearch: LayoutSearchFilter = $state();
 	let searchOptions: string[] = [];
-	let showAll = false;
+	let showAll = $state(false);
 	const resultLimit = 50;
-	let validSearchOptions: boolean[] = Array(searchOptionBoxes.length).fill(false);
+	let validSearchOptions: boolean[] = $state(Array(searchOptionBoxes.length).fill(false));
 	validSearchOptions[1] = validSearchOptions[2] = validSearchOptions[3] = true;
 
 	function pastTense(log: AuditLog): string {
@@ -167,7 +167,7 @@
 		<span>Max {resultLimit} results shown</span>
 		<Checkbox
 			id="show-all-check"
-			on:change={() => {
+			onchange={() => {
 				layoutSearch.updateSearch();
 			}}
 			bind:checked={showAll}
@@ -190,8 +190,8 @@
 			filterFunc={logSearchFilter}
 			bind:showAll
 			{resultLimit}
-			classes="help" />
-		<button on:click={closeAll}>Close All</button>
+			class="help" />
+		<button onclick={closeAll}>Close All</button>
 		{#each searchOptionBoxes as option, index}
 			<Checkbox
 				id="search-by-{option.replace(/ /g, '')}"
@@ -199,13 +199,13 @@
 				sideLabel
 				labelAfter
 				title={searchOptionTooltips[index]}
-				on:change={setSearchOptions}
+				onchange={setSearchOptions}
 				bind:checked={validSearchOptions[index]} />
 		{/each}
-		<!-- <span class="sort-option alphabetical" class:selected={sortOption == 'alphabetical'} on:click={alphabetical}
+		<!-- <span class="sort-option alphabetical" class:selected={sortOption == 'alphabetical'} onclick={alphabetical}
 		>Alphabetical</span>
-	<span class="sort-option popular" class:selected={sortOption == 'popular'} on:click={popular}>Popular</span>
-	<span class="sort-option published" class:selected={sortOption == 'published'} on:click={published}>Published</span> -->
+	<span class="sort-option popular" class:selected={sortOption == 'popular'} onclick={popular}>Popular</span>
+	<span class="sort-option published" class:selected={sortOption == 'published'} onclick={published}>Published</span> -->
 	</div>
 </div>
 
@@ -264,7 +264,7 @@
 				{log.timestamp.toLocaleDateString(undefined, dateOptions)}
 			</div>
 			<div class="block dropdown d{index}" class:small={smallItem(display.full)} class:expand={smallItem(display.full)}>
-				<div class="short" on:click={() => reveal(index)}>
+				<div class="short" onclick={() => reveal(index)}>
 					<div class="log-details">
 						{#each display.short as row}
 							<div title={row.item} class="shorten-detail">{row.item}</div>
@@ -275,7 +275,7 @@
 					<strong>...</strong>
 				</div>
 				<div class="full">
-					<div class="contract" on:click={() => hide(index)}></div>
+					<div class="contract" onclick={() => hide(index)}></div>
 					<div class="log-details">
 						{#each display.full as row}
 							<div title={row.item} class="shorten-detail">{row.item}</div>

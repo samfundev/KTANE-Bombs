@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import { Bomb, Permission } from '$lib/types';
+import { Bomb, Permission } from '$lib/types.svelte';
 import { dateAddedSort, forbidden, hasPermission } from '$lib/util';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 import { minimize } from '../_util';

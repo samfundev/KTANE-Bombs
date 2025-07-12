@@ -3,27 +3,32 @@
 	import Input from '$lib/controls/Input.svelte';
 	import RadioButton from '$lib/controls/RadioButton.svelte';
 	import type { RepoModule } from '$lib/repo';
-	import { HomeOptions, MustHave, Operation } from '$lib/types';
+	import { HomeOptions, MustHave, Operation } from '$lib/types.svelte';
 	import { excludeArticleSort, getModule, parseInteger } from '$lib/util';
-	import { onMount, createEventDispatcher } from 'svelte';
+	import { onMount } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 
-	export let modules: Record<string, RepoModule>;
-	export let div: HTMLDivElement | null = null;
+	interface Props {
+		modules: Record<string, RepoModule>;
+		div?: HTMLDivElement | null;
+		onclick?: () => void;
+		onupdate?: (options: HomeOptions) => void;
+	}
 
-	const dispatch = createEventDispatcher();
+	let { modules, div = $bindable(null), onclick = () => {}, onupdate = () => {} }: Props = $props();
+
 	let lStore: { [k: string]: Writable<any | null> } = {};
-	let checks: { [k: string]: boolean } = {};
-	let sortOrder: string = '';
-	let operation = Operation.Combined;
-	let profile: { [s: string]: any } = {};
-	let mustHaves: { [k: string]: MustHave } = {};
-	let limits: { [k: string]: number[] } = {};
-	let files: FileList;
-	let fileInput: HTMLInputElement;
+	let checks: { [k: string]: boolean } = $state({});
+	let sortOrder: string = $state('');
+	let operation = $state(Operation.Combined);
+	let profile: { [s: string]: any } = $state({});
+	let mustHaves: { [k: string]: MustHave } = $state({});
+	let limits: { [k: string]: number[] } = $state({});
+	let files = $state() as FileList;
+	let fileInput = $state() as HTMLInputElement;
 	let filesValid = true;
-	let yesList: string[] = [];
-	let noList: string[] = [];
+	let yesList: string[] = $state([]);
+	let noList: string[] = $state([]);
 	let hasOptions = [
 		'Has Team/EFM Solve',
 		'Has Solo Solve',
@@ -113,10 +118,8 @@
 		Object.assign(op.widgets, limits['widg']);
 		Object.assign(op.numBombs, limits['bmbs']);
 		Object.assign(op.profPerc, limits['prof']);
-		Object.assign(op.modules, profile);
-		dispatch('update', {
-			op: op
-		});
+		Object.assign(op.modules, $state.snapshot(profile));
+		onupdate(op);
 	}
 
 	function removeNonRegNeedyMods(list: string[]) {
@@ -290,11 +293,11 @@
 	});
 </script>
 
-<div class="popup disappear disappear-stat0 hidden" id="options" on:click bind:this={div}>
+<div class="popup disappear disappear-stat0 hidden" id="options" {onclick} bind:this={div}>
 	<div class="hstack center">
 		<button
 			class="defaults"
-			on:click={() => {
+			onclick={() => {
 				setDefaults();
 				setOption();
 			}}>Reset to Defaults</button>
@@ -309,20 +312,20 @@
 					name="option-mcl"
 					id="option-mcl"
 					bind:value={limits['mods'][0]}
-					classes="limits"
+					class="limits"
 					parse={parseInteger}
 					validate={intnan}
-					on:change={setOption} />
+					onchange={setOption} />
 				<span class="through"></span>
 				<Input
 					required
 					name="option-mcu"
 					id="option-mcu"
 					bind:value={limits['mods'][1]}
-					classes="limits"
+					class="limits"
 					parse={parseInteger}
 					validate={intnan}
-					on:change={setOption} />
+					onchange={setOption} />
 			</div>
 			<div class="vspace"></div>
 			<span>Time (minutes)</span>
@@ -332,20 +335,20 @@
 					name="option-tml"
 					id="option-tml"
 					bind:value={limits['time'][0]}
-					classes="limits"
+					class="limits"
 					parse={parseInteger}
 					validate={intnan}
-					on:change={setOption} />
+					onchange={setOption} />
 				<span class="through"></span>
 				<Input
 					required
 					name="option-tmu"
 					id="option-tmu"
 					bind:value={limits['time'][1]}
-					classes="limits"
+					class="limits"
 					parse={parseInteger}
 					validate={intnan}
-					on:change={setOption} />
+					onchange={setOption} />
 			</div>
 			<div class="vspace"></div>
 			<span>Strikes</span>
@@ -355,20 +358,20 @@
 					name="option-stkl"
 					id="option-stkl"
 					bind:value={limits['strk'][0]}
-					classes="limits"
+					class="limits"
 					parse={parseInteger}
 					validate={intnan}
-					on:change={setOption} />
+					onchange={setOption} />
 				<span class="through"></span>
 				<Input
 					required
 					name="option-stku"
 					id="option-stku"
 					bind:value={limits['strk'][1]}
-					classes="limits"
+					class="limits"
 					parse={parseInteger}
 					validate={intnan}
-					on:change={setOption} />
+					onchange={setOption} />
 			</div>
 			<div class="vspace"></div>
 			<span>Widgets</span>
@@ -378,20 +381,20 @@
 					name="option-wdgl"
 					id="option-wdgl"
 					bind:value={limits['widg'][0]}
-					classes="limits"
+					class="limits"
 					parse={parseInteger}
 					validate={intnan}
-					on:change={setOption} />
+					onchange={setOption} />
 				<span class="through"></span>
 				<Input
 					required
 					name="option-wdgu"
 					id="option-wdgu"
 					bind:value={limits['widg'][1]}
-					classes="limits"
+					class="limits"
 					parse={parseInteger}
 					validate={intnan}
-					on:change={setOption} />
+					onchange={setOption} />
 			</div>
 			<div class="vspace"></div>
 			<span>Bombs</span>
@@ -401,20 +404,20 @@
 					name="option-bmsl"
 					id="option-bmsl"
 					bind:value={limits['bmbs'][0]}
-					classes="limits"
+					class="limits"
 					parse={parseInteger}
 					validate={intnan}
-					on:change={setOption} />
+					onchange={setOption} />
 				<span class="through"></span>
 				<Input
 					required
 					name="option-bmsu"
 					id="option-bmsu"
 					bind:value={limits['bmbs'][1]}
-					classes="limits"
+					class="limits"
 					parse={parseInteger}
 					validate={intnan}
-					on:change={setOption} />
+					onchange={setOption} />
 			</div>
 			<div class="vspace"></div>
 			<Checkbox
@@ -423,7 +426,7 @@
 				bind:checked={checks['persist-searchtext']}
 				sideLabel
 				labelAfter
-				on:change={setOption} />
+				onchange={setOption} />
 		</div>
 		<div class="center-divider"></div>
 		<div>
@@ -441,7 +444,7 @@
 									sideLabel
 									name="option-{dashOp}"
 									bind:group={mustHaves[dashOp]}
-									on:change={setOption} />
+									onchange={setOption} />
 							</td>
 							<td>
 								<RadioButton
@@ -451,7 +454,7 @@
 									sideLabel
 									name="option-{dashOp}"
 									bind:group={mustHaves[dashOp]}
-									on:change={setOption} /></td>
+									onchange={setOption} /></td>
 							<td>
 								<RadioButton
 									id="option-{dashOp}-either"
@@ -460,7 +463,7 @@
 									sideLabel
 									name="option-{dashOp}"
 									bind:group={mustHaves[dashOp]}
-									on:change={setOption} /></td>
+									onchange={setOption} /></td>
 						</tr>
 					{/each}
 				</tbody>
@@ -474,7 +477,7 @@
 					bind:checked={checks['sort-reverse']}
 					sideLabel
 					labelAfter
-					on:change={setOption} />
+					onchange={setOption} />
 			</div>
 			{#each sortOptions as op}
 				<RadioButton
@@ -485,7 +488,7 @@
 					labelAfter
 					name={'option-sort-order'}
 					bind:group={sortOrder}
-					on:change={setSortOrder} />
+					onchange={setSortOrder} />
 			{/each}
 			{#if profile['Operation'] != undefined && operation != Operation.Defuser}
 				<RadioButton
@@ -496,7 +499,7 @@
 					labelAfter
 					name={'option-sort-order'}
 					bind:group={sortOrder}
-					on:change={setSortOrder} />
+					onchange={setSortOrder} />
 			{/if}
 		</div>
 	</div>
@@ -511,9 +514,9 @@
 			accept=".json"
 			bind:files
 			bind:this={fileInput}
-			on:change={() => importProfile(files)} />
+			onchange={() => importProfile(files)} />
 		<button
-			on:click={() => {
+			onclick={() => {
 				fileInput.value = '';
 				fileInput.click();
 			}}>
@@ -524,7 +527,7 @@
 			{/if}
 		</button>
 		{#if profile['Operation'] != undefined}
-			<button on:click={clearProfile}>Clear</button>
+			<button onclick={clearProfile}>Clear</button>
 		{/if}
 		<a href="https://ktane.timwi.de/More/Profile%20Editor.html" target="_blank">Profile Editor</a>
 		{#if profile['Operation'] != undefined && profile['Operation'] != Operation.Defuser}
@@ -535,10 +538,10 @@
 					name="profile-percentage"
 					id="profile-percentage"
 					bind:value={limits['prof'][0]}
-					classes="percent"
+					class="percent"
 					parse={parseInteger}
 					validate={percent}
-					on:change={setOption} />
+					onchange={setOption} />
 				<span><b>%</b> from profile</span>
 			</div>
 		{/if}

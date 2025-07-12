@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import createAuditClient from '$lib/auditlog';
-import type { MissionPack } from '$lib/types';
+import type { MissionPack } from '$lib/types.svelte';
 import { forbidden } from '$lib/util';
 import type { RequestEvent } from '@sveltejs/kit';
 

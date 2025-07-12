@@ -1,6 +1,6 @@
 import client from '$lib/client';
-import type { CompletionQueueItem, MissionQueueItem, QueueItem } from '$lib/types';
-import { Permission, type MissionPackQueueItem } from '$lib/types';
+import type { CompletionQueueItem, MissionQueueItem, QueueItem } from '$lib/types.svelte';
+import { Permission, type MissionPackQueueItem } from '$lib/types.svelte';
 import { dateAddedSort, fixPools, forbidden, hasAnyPermission, hasPermission, onlyUnique } from '$lib/util';
 
 export const load = async function ({ parent, locals }: any) {

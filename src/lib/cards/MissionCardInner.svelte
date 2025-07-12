@@ -1,12 +1,16 @@
 <script lang="ts">
-	import { Bomb } from '$lib/types';
-	import type { Mission } from '$lib/types';
+	import { Bomb } from '$lib/types.svelte';
+	import type { Mission } from '$lib/types.svelte';
 	import { formatTime, pluralize } from '$lib/util';
 
-	export let mission: Mission;
+	interface Props {
+		mission: Mission;
+	}
+
+	let { mission }: Props = $props();
 
 	const bombs = mission.bombs;
-	const statBomb = new Bomb();
+	const statBomb = $state(new Bomb());
 	statBomb.modules = bombs.map(bomb => bomb.modules).reduce((a, b) => a + b, 0);
 	statBomb.widgets = Math.max(...bombs.map(bomb => bomb.widgets));
 </script>

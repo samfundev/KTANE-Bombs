@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { FrontendUser } from '$lib/types';
+	import type { FrontendUser } from '$lib/types.svelte.js';
 	import UserCard from '$lib/cards/UserCard.svelte';
 	import { properUrlEncode } from '$lib/util.js';
-	export let data;
+	let { data } = $props();
 	let users: FrontendUser[] = data.users;
 
 	// Sort users

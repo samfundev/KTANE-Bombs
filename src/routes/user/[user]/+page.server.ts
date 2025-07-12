@@ -1,7 +1,7 @@
 import client from '$lib/client';
 import createAuditClient from '$lib/auditlog';
 import { TP_TEAM } from '$lib/const';
-import { Permission } from '$lib/types';
+import { Permission } from '$lib/types.svelte';
 import { fixPools, forbidden, hasPermission } from '$lib/util';
 import type { Completion, Mission } from '@prisma/client';
 import { error } from '@sveltejs/kit';
@@ -191,7 +191,7 @@ export const load = async function ({ parent, params }: any) {
 							completions: [],
 							tpSolve: false
 						};
-				  }),
+					}),
 		unverifPacks,
 		bestTimes: bestTimes
 			.filter(miss => miss.completions.length > 0 && miss.completions[0].team.includes(params.user))

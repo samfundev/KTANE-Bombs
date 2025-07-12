@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { CompletionQueueItem, QueueItem } from '$lib/types';
+	import type { CompletionQueueItem, QueueItem } from '$lib/types.svelte.js';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import NoContent from '$lib/comp/NoContent.svelte';
 	import { formatTime, properUrlEncode } from '$lib/util';
-	export let data;
-	let queue: QueueItem[] = data.queue;
+	let { data } = $props();
+	let queue: QueueItem[] = $state(data.queue);
 	let solverNames: string[] = data.solverNames;
 
 	function uniqueNames(names: string[]): string[] {
@@ -93,8 +93,8 @@
 				</div>
 			{/if}
 			<div class="block flex content-width" style="align-items: center;">
-				<button on:click={() => verify(item, true)}>Accept</button>
-				<button on:click={() => verify(item, false)}>Reject</button>
+				<button onclick={() => verify(item, true)}>Accept</button>
+				<button onclick={() => verify(item, false)}>Reject</button>
 			</div>
 		</div>
 	{:else}
@@ -112,7 +112,7 @@
 	.item.completion {
 		grid-template-columns: 1fr 0.3fr 1fr auto;
 	}
-	:is(span, .block).red {
+	:is(:global(span, .block)).red {
 		color: red;
 	}
 

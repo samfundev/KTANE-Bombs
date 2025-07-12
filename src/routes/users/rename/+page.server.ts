@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import createAuditClient from '$lib/auditlog';
-import { Permission } from '$lib/types';
+import { Permission } from '$lib/types.svelte';
 import { forbidden, hasPermission, properUrlEncode } from '$lib/util';
 import { redirect, type RequestEvent } from '@sveltejs/kit';
 import type { Actions } from './$types';

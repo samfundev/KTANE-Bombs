@@ -1,5 +1,5 @@
 import type * as client from '@prisma/client';
-import type { Bomb, FrontendUser, ID, Mission, Completion, MissionPack, Permission, Pool } from './types';
+import type { Bomb, FrontendUser, ID, Mission, Completion, MissionPack, Permission, Pool } from './types.svelte';
 import { redirect, error } from '@sveltejs/kit';
 import type { RepoModule } from './repo';
 import { TP_TEAM } from './const';
@@ -309,11 +309,11 @@ export function getPersonColor(size: number, index: number, solo: boolean, tpSol
 		? solo
 			? '#00ffff'
 			: tpSolve
-			? '#9146ff'
-			: 'hsl(300, 100%, 75%)'
+				? '#9146ff'
+				: 'hsl(300, 100%, 75%)'
 		: index === 0
-		? 'hsl(210, 100%, 65%)'
-		: 'hsl(0, 100%, 70%)';
+			? 'hsl(210, 100%, 65%)'
+			: 'hsl(0, 100%, 70%)';
 }
 
 export function onlyUnique(item: any, pos: number, self: any[]): boolean {
@@ -441,7 +441,7 @@ export const logicalSearchTooltip =
 	'Brackets are supported too: [[ thing one || aaa ]] && [[ bbb || !!ccc ]]';
 
 export function properUrlEncode(url: string): string {
-	return encodeURIComponent(url).replace(/'/g, "%27");
+	return encodeURIComponent(url).replace(/'/g, '%27');
 }
 
 export function classifyLink(link: string): string {

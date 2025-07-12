@@ -1,5 +1,5 @@
 import type { RepoModule } from '$lib/repo';
-import type { Mission } from '$lib/types';
+import type { Mission } from '$lib/types.svelte';
 import { getModule, withoutArticle } from '$lib/util';
 
 export function sortBombs(mission: Mission, modules: Record<string, RepoModule> | null) {

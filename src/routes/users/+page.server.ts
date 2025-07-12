@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import type { RequestHandler } from '@sveltejs/kit';
-import { Permission } from '$lib/types';
+import { Permission } from '$lib/types.svelte';
 import { hasPermission } from '$lib/util';
 
 export const load = async function ({ parent }: any) {
