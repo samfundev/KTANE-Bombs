@@ -299,7 +299,7 @@
 				setOption();
 			}}>Reset to Defaults</button>
 	</div>
-	<div class="vspace" />
+	<div class="vspace"></div>
 	<div class="hstack columns">
 		<div>
 			<span>Module Count</span>
@@ -313,7 +313,7 @@
 					parse={parseInteger}
 					validate={intnan}
 					on:change={setOption} />
-				<span class="through" />
+				<span class="through"></span>
 				<Input
 					required
 					name="option-mcu"
@@ -324,7 +324,7 @@
 					validate={intnan}
 					on:change={setOption} />
 			</div>
-			<div class="vspace" />
+			<div class="vspace"></div>
 			<span>Time (minutes)</span>
 			<div class="flex">
 				<Input
@@ -336,7 +336,7 @@
 					parse={parseInteger}
 					validate={intnan}
 					on:change={setOption} />
-				<span class="through" />
+				<span class="through"></span>
 				<Input
 					required
 					name="option-tmu"
@@ -347,7 +347,7 @@
 					validate={intnan}
 					on:change={setOption} />
 			</div>
-			<div class="vspace" />
+			<div class="vspace"></div>
 			<span>Strikes</span>
 			<div class="flex">
 				<Input
@@ -359,7 +359,7 @@
 					parse={parseInteger}
 					validate={intnan}
 					on:change={setOption} />
-				<span class="through" />
+				<span class="through"></span>
 				<Input
 					required
 					name="option-stku"
@@ -370,7 +370,7 @@
 					validate={intnan}
 					on:change={setOption} />
 			</div>
-			<div class="vspace" />
+			<div class="vspace"></div>
 			<span>Widgets</span>
 			<div class="flex">
 				<Input
@@ -382,7 +382,7 @@
 					parse={parseInteger}
 					validate={intnan}
 					on:change={setOption} />
-				<span class="through" />
+				<span class="through"></span>
 				<Input
 					required
 					name="option-wdgu"
@@ -393,7 +393,7 @@
 					validate={intnan}
 					on:change={setOption} />
 			</div>
-			<div class="vspace" />
+			<div class="vspace"></div>
 			<span>Bombs</span>
 			<div class="flex">
 				<Input
@@ -405,7 +405,7 @@
 					parse={parseInteger}
 					validate={intnan}
 					on:change={setOption} />
-				<span class="through" />
+				<span class="through"></span>
 				<Input
 					required
 					name="option-bmsu"
@@ -416,7 +416,7 @@
 					validate={intnan}
 					on:change={setOption} />
 			</div>
-			<div class="vspace" />
+			<div class="vspace"></div>
 			<Checkbox
 				id="option-persist-searchtext"
 				label="Persist Query"
@@ -425,45 +425,47 @@
 				labelAfter
 				on:change={setOption} />
 		</div>
-		<div class="center-divider" />
+		<div class="center-divider"></div>
 		<div>
 			<table>
-				{#each hasOptions as op, index}
-					{@const dashOp = toDashed(op)}
-					<tr>
-						<td class="row-header nowrap">{op}</td>
-						<td>
-							<RadioButton
-								id="option-{dashOp}-yes"
-								label="Yes"
-								value={MustHave.Yes}
-								sideLabel
-								name="option-{dashOp}"
-								bind:group={mustHaves[dashOp]}
-								on:change={setOption} />
-						</td>
-						<td>
-							<RadioButton
-								id="option-{dashOp}-no"
-								label="No"
-								value={MustHave.No}
-								sideLabel
-								name="option-{dashOp}"
-								bind:group={mustHaves[dashOp]}
-								on:change={setOption} /></td>
-						<td>
-							<RadioButton
-								id="option-{dashOp}-either"
-								label="Either"
-								value={MustHave.Either}
-								sideLabel
-								name="option-{dashOp}"
-								bind:group={mustHaves[dashOp]}
-								on:change={setOption} /></td>
-					</tr>
-				{/each}
+				<tbody>
+					{#each hasOptions as op, index}
+						{@const dashOp = toDashed(op)}
+						<tr>
+							<td class="row-header nowrap">{op}</td>
+							<td>
+								<RadioButton
+									id="option-{dashOp}-yes"
+									label="Yes"
+									value={MustHave.Yes}
+									sideLabel
+									name="option-{dashOp}"
+									bind:group={mustHaves[dashOp]}
+									on:change={setOption} />
+							</td>
+							<td>
+								<RadioButton
+									id="option-{dashOp}-no"
+									label="No"
+									value={MustHave.No}
+									sideLabel
+									name="option-{dashOp}"
+									bind:group={mustHaves[dashOp]}
+									on:change={setOption} /></td>
+							<td>
+								<RadioButton
+									id="option-{dashOp}-either"
+									label="Either"
+									value={MustHave.Either}
+									sideLabel
+									name="option-{dashOp}"
+									bind:group={mustHaves[dashOp]}
+									on:change={setOption} /></td>
+						</tr>
+					{/each}
+				</tbody>
 			</table>
-			<div class="vspace" />
+			<div class="vspace"></div>
 			<div class="hstack">
 				<span class="row-header nowrap">Sort by:</span>
 				<Checkbox
@@ -498,7 +500,7 @@
 			{/if}
 		</div>
 	</div>
-	<div class="vspace" />
+	<div class="vspace"></div>
 	<div class="hstack gap">
 		<span title={opExplain} class="opexplain">Profile Filter:</span>
 		<input
@@ -542,33 +544,35 @@
 		{/if}
 	</div>
 	{#if profile['Operation'] != undefined}
-		<div class="vspace" />
+		<div class="vspace"></div>
 		<div class="hstack gap wrap">
 			<span><b>Profile:</b> {profile['Name']}</span>
 			<span><b>Type:</b> {Operation[operation]}</span>
 		</div>
 		<table>
-			<tr><th><u>Yes</u></th><th><u>No</u></th></tr>
-			<tr>
-				<td class="top">
-					<div class="module-list">
-						{#if profile['EnabledList']}
-							{#each yesList as mod}
-								{mod}<br />
-							{/each}
-						{/if}
-					</div>
-				</td>
-				<td class="top">
-					<div class="module-list">
-						{#if profile['DisabledList']}
-							{#each noList as mod}
-								{mod}<br />
-							{/each}
-						{/if}
-					</div>
-				</td>
-			</tr>
+			<tbody>
+				<tr><th><u>Yes</u></th><th><u>No</u></th></tr>
+				<tr>
+					<td class="top">
+						<div class="module-list">
+							{#if profile['EnabledList']}
+								{#each yesList as mod}
+									{mod}<br />
+								{/each}
+							{/if}
+						</div>
+					</td>
+					<td class="top">
+						<div class="module-list">
+							{#if profile['DisabledList']}
+								{#each noList as mod}
+									{mod}<br />
+								{/each}
+							{/if}
+						</div>
+					</td>
+				</tr>
+			</tbody>
 		</table>
 	{:else if 'Name' in profile}
 		{Object.keys(profile)}
