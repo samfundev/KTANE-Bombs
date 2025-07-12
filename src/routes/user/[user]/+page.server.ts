@@ -42,7 +42,7 @@ export const load = async function ({ parent, params }: any) {
 		}
 	});
 	if (!tp && shownUser === null && completions.length === 0) {
-		throw error(404);
+		error(404);
 	}
 
 	const bestTimes = await client.mission.findMany({
@@ -220,7 +220,7 @@ export const actions = {
 		const body: Permission[] = JSON.parse(fData.get('perms')?.toString() ?? '');
 		const user = fData.get('user')?.toString();
 		if (user === null || user === undefined) {
-			throw error(400);
+			error(400);
 		}
 		await auditClient.user.update({
 			where: {

@@ -5,7 +5,8 @@ export const GET: RequestHandler = function GET({ cookies }) {
 	cookies.set('token', '', {
 		secure: true,
 		httpOnly: true,
-		maxAge: 0
+		maxAge: 0,
+		path: '/'
 	});
-	throw redirect(302, '/');
+	redirect(302, '/');
 };

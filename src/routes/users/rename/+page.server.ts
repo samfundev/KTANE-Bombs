@@ -55,6 +55,6 @@ export const actions: Actions = {
 			});
 		}
 
-		throw redirect(303, '/user/' + properUrlEncode(newUsername));
+		redirect(303, '/user/' + properUrlEncode(newUsername));
 	}
 };

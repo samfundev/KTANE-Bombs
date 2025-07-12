@@ -52,7 +52,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 	});
 
 	if (missionResult === null) {
-		throw error(404, 'Mission not found.');
+		error(404, 'Mission not found.');
 	}
 
 	const packs = await client.missionPack.findMany({
@@ -110,7 +110,7 @@ export const actions: Actions = {
 			}
 		});
 
-		throw redirect(303, '/');
+		redirect(303, '/');
 	},
 	deleteCompletion: async ({ locals, request }: RequestEvent) => {
 		if (!hasPermission(locals.user, Permission.VerifyCompletion)) {
@@ -314,7 +314,7 @@ export const actions: Actions = {
 			});
 		}
 
-		throw redirect(303, '/mission/' + properUrlEncode(mission.name));
+		redirect(303, '/mission/' + properUrlEncode(mission.name));
 	}
 };
 
