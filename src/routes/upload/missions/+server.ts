@@ -13,7 +13,7 @@ export async function POST({ locals, request }: RequestEvent) {
 
 	const missions: ReplaceableMission[] = await request.json();
 	if (missions.some(m => m.missionPack === null)) {
-		throw error(400, 'Mission pack is required.');
+		error(400, 'Mission pack is required.');
 	}
 
 	let context = '';

@@ -5,7 +5,7 @@ import { redirect } from '@sveltejs/kit';
 export const load = async function ({ parent }: any) {
 	const { user } = await parent();
 	if (user == null) {
-		throw redirect(302, '/login');
+		redirect(302, '/login');
 	}
 	const missions = await client.mission.findMany({
 		select: {

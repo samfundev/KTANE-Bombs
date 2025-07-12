@@ -7,5 +7,5 @@ export const GET: RequestHandler = function GET() {
 		scope: scope
 	});
 
-	throw redirect(302, url);
+	redirect(302, url);
 };

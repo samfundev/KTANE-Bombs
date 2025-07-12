@@ -92,5 +92,5 @@ export const POST: RequestHandler = async function ({ locals, request }) {
 		});
 	}
 
-	throw redirect(301, `/user/${properUrlEncode(username)}`);
+	redirect(301, `/user/${properUrlEncode(username)}`);
 };

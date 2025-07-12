@@ -40,7 +40,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 	});
 
 	if (pack === null) {
-		throw error(404, 'Mission pack not found.');
+		error(404, 'Mission pack not found.');
 	}
 	let verify = hasPermission(locals.user, Permission.VerifyMissionPack);
 	let uploadedBy = pack.uploadedBy;
