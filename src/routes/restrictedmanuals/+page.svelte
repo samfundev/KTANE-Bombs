@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { RepoManual } from '$lib/repo.js';
 
-	export let data;
+	let { data } = $props();
 	let manuals: RepoManual[] | null = data.manuals;
 </script>
 

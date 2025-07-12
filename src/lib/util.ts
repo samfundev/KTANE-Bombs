@@ -309,11 +309,11 @@ export function getPersonColor(size: number, index: number, solo: boolean, tpSol
 		? solo
 			? '#00ffff'
 			: tpSolve
-			? '#9146ff'
-			: 'hsl(300, 100%, 75%)'
+				? '#9146ff'
+				: 'hsl(300, 100%, 75%)'
 		: index === 0
-		? 'hsl(210, 100%, 65%)'
-		: 'hsl(0, 100%, 70%)';
+			? 'hsl(210, 100%, 65%)'
+			: 'hsl(0, 100%, 70%)';
 }
 
 export function onlyUnique(item: any, pos: number, self: any[]): boolean {

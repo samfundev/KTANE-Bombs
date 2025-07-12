@@ -3,7 +3,7 @@
 	import MissionPackSection from './_MissionPackSection.svelte';
 	import MissionSection from './_MissionSection.svelte';
 	import type { FrontendUser, MissionPackSelection } from '$lib/types';
-	export let data;
+	let { data } = $props();
 
 	let missionInfo: { [name: string]: number } = data.missionInfo;
 	let authorNames: string[] = data.authorNames;
@@ -11,7 +11,7 @@
 	let packs: MissionPackSelection[] = data.packs;
 	let currentSeasonId : number | null = data.currentSeasonId;
 
-	let section: 'solve' | 'mission' | 'missionpack' = 'solve';
+	let section: 'solve' | 'mission' | 'missionpack' = $state('solve');
 </script>
 
 <svelte:head>
@@ -20,9 +20,9 @@
 
 <h1 class="header">Upload</h1>
 <div class="section-selector flex grow">
-	<div class="block" class:selected={section == 'solve'} on:click={() => (section = 'solve')}>Solve</div>
-	<div class="block" class:selected={section == 'mission'} on:click={() => (section = 'mission')}>Mission</div>
-	<div class="block" class:selected={section == 'missionpack'} on:click={() => (section = 'missionpack')}>
+	<div class="block" class:selected={section == 'solve'} onclick={() => (section = 'solve')}>Solve</div>
+	<div class="block" class:selected={section == 'mission'} onclick={() => (section = 'mission')}>Mission</div>
+	<div class="block" class:selected={section == 'missionpack'} onclick={() => (section = 'missionpack')}>
 		Mission Pack
 	</div>
 </div>

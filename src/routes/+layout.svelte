@@ -10,14 +10,14 @@
 	import { disappearAll } from '$lib/util';
 	import { onMount } from 'svelte';
 	import HomeInfoMenu from '$lib/home/HomeInfoMenu.svelte';
-	import { navigating } from '$app/stores';
+	import { navigating } from '$app/state';
 
-	export let data;
+	let { data, children } = $props();
 	const user: FrontendUser | null = data.user;
 
-	let infoMenu: HTMLDivElement;
-	let infoTab: HTMLDivElement;
-	let navbar: HTMLDivElement;
+	let infoMenu = $state() as HTMLDivElement;
+	let infoTab = $state() as HTMLDivElement;
+	let navbar = $state() as HTMLDivElement;
 	beforeNavigate(({ from, to, cancel }) => {
 		// If we're navigating to the same route, use browser navigation instead
 		// This saves us from having to make our pages reactive to the data variable
@@ -30,10 +30,7 @@
 	const updateNavbarHeight = () => {
 		if (!navbar) return;
 		const h = navbar.offsetHeight;
-		document.documentElement.style.setProperty(
-			'--stick-under-navbar',
-			`${h}px`
-		);
+		document.documentElement.style.setProperty('--stick-under-navbar', `${h}px`);
 	};
 
 	onMount(() => {
@@ -60,7 +57,7 @@
 		{/if}
 		<a class="block" href="/season">Seasons</a>
 		<div style="margin-left: auto" class="block info-tab" bind:this={infoTab}>
-			<div class="info-button" on:click={() => popup(infoMenu, infoTab, true, [8, 6])}>Info</div>
+			<div class="info-button" onclick={() => popup(infoMenu, infoTab, true, [8, 6])}>Info</div>
 			<HomeInfoMenu bind:div={infoMenu} />
 		</div>
 
@@ -75,10 +72,10 @@
 			<a class="block" rel="external" href="/login">Login</a>
 		{/if}
 	</div>
-	<div class="loader" class:visible={$navigating}></div>
+	<div class="loader" class:visible={navigating.complete !== null}></div>
 </div>
 <div class="flex column max-width padding">
-	<slot />
+	{@render children?.()}
 </div>
 
 <Toaster
@@ -108,7 +105,7 @@
 		--boss-color: #ffaaaa;
 		--needy-color: #9999ff;
 		--quirks-color: #aae8ff;
-		--block-separator: #EEEEFF;
+		--block-separator: #eeeeff;
 		--stick-under-navbar: calc(1.25em + 4 * var(--gap) + 2px);
 		--page-content-width: min(calc(100vw - 4 * var(--gap)), 1150px);
 	}
@@ -124,14 +121,14 @@
 			--contrast-block-background: rgb(50, 50, 50);
 			--accent-gray: #444;
 			--light-text-color: rgb(150, 150, 150);
-			--link-text-color: currentColor
+			--link-text-color: currentColor;
 			--link-visited-text-color: rgb(200, 200, 200);
 			--blue-link-color: rgb(85, 167, 255);
 			--blue-link-visited-color: rgb(174, 93, 240);
 			--boss-color: #762121;
 			--needy-color: #1e1e84;
 			--quirks-color: #216f86;
-			--block-separator: #1A1A22;
+			--block-separator: #1a1a22;
 		}
 		:global(.dark-invert) {
 			filter: invert(90%);
@@ -358,9 +355,21 @@
 		transition: height 0.25s 0.25s;
 	}
 	@keyframes l16 {
-		0%   {background-position:-150% 0,-150% 0}
-		66%  {background-position: 250% 0,-150% 0}
-		100% {background-position: 250% 0, 250% 0}
+		0% {
+			background-position:
+				-150% 0,
+				-150% 0;
+		}
+		66% {
+			background-position:
+				250% 0,
+				-150% 0;
+		}
+		100% {
+			background-position:
+				250% 0,
+				250% 0;
+		}
 	}
 
 	.loader.visible {

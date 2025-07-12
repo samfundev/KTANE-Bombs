@@ -2,9 +2,13 @@
 	import type { RepoModule } from '$lib/repo';
 	import { isSpecialAllModule, properUrlEncode } from '$lib/util';
 
-	export let module: RepoModule;
-	export let fraction: number = 1;
-	export let alwaysShow: boolean = false;
+	interface Props {
+		module: RepoModule;
+		fraction?: number;
+		alwaysShow?: boolean;
+	}
+
+	let { module, fraction = 1, alwaysShow = false }: Props = $props();
 </script>
 
 <a
@@ -14,7 +18,7 @@
 	class:needy={module.Type == 'Needy'}
 	href={`https://ktane.timwi.de/redirect/#${properUrlEncode(module.FileName ?? module.Name)}`}>
 	{#if isSpecialAllModule(module.ModuleID)}
-		<div class="image {module.ModuleID}" />
+		<div class="image {module.ModuleID}"></div>
 	{:else if module.valid}
 		<img
 			src="https://ktane.timwi.de/iconsprite"
@@ -39,12 +43,24 @@
 		padding: var(--gap);
 	}
 
-	:global(.image.ALL_SOLVABLE) { background-image: url('$lib/img/icon/ALL_SOLVABLE.png'); }
-	:global(.image.ALL_NEEDY) { background-image: url('$lib/img/icon/ALL_NEEDY.png'); }
-	:global(.image.ALL_VANILLA_SOLVABLE) { background-image: url('$lib/img/icon/ALL_VANILLA_SOLVABLE.png'); }
-	:global(.image.ALL_VANILLA_NEEDY) { background-image: url('$lib/img/icon/ALL_VANILLA_NEEDY.png'); }
-	:global(.image.ALL_MODS_SOLVABLE) { background-image: url('$lib/img/icon/ALL_MODS_SOLVABLE.png'); }
-	:global(.image.ALL_MODS_NEEDY) { background-image: url('$lib/img/icon/ALL_MODS_NEEDY.png'); }
+	:global(.image.ALL_SOLVABLE) {
+		background-image: url('$lib/img/icon/ALL_SOLVABLE.png');
+	}
+	:global(.image.ALL_NEEDY) {
+		background-image: url('$lib/img/icon/ALL_NEEDY.png');
+	}
+	:global(.image.ALL_VANILLA_SOLVABLE) {
+		background-image: url('$lib/img/icon/ALL_VANILLA_SOLVABLE.png');
+	}
+	:global(.image.ALL_VANILLA_NEEDY) {
+		background-image: url('$lib/img/icon/ALL_VANILLA_NEEDY.png');
+	}
+	:global(.image.ALL_MODS_SOLVABLE) {
+		background-image: url('$lib/img/icon/ALL_MODS_SOLVABLE.png');
+	}
+	:global(.image.ALL_MODS_NEEDY) {
+		background-image: url('$lib/img/icon/ALL_MODS_NEEDY.png');
+	}
 	.module > .image,
 	.module > img {
 		height: 32px;

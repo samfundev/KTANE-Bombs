@@ -218,7 +218,7 @@ export const load = async function ({ parent, params }: any) {
 							completions: [],
 							tpSolve: false
 						};
-				  }),
+					}),
 		unverifPacks,
 		bestTimes: bestTimes
 			.filter(miss => miss.completions.length > 0 && miss.completions[0].team.includes(params.user))

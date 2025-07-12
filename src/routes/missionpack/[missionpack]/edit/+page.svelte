@@ -7,11 +7,11 @@
 	import type { EditMissionPack } from '../../_types';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 
-	export let data;
+	let { data } = $props();
 
-	let pack: EditMissionPack = data.pack;
+	let pack: EditMissionPack = $state(data.pack);
 
-	let originalPack: EditMissionPack;
+	let originalPack: EditMissionPack = $state();
 
 	function setOriginalMission() {
 		originalPack = JSON.parse(JSON.stringify(pack));
@@ -20,7 +20,7 @@
 
 	setOriginalMission();
 
-	$: modified = !equal(pack, originalPack);
+	let modified = $derived(!equal(pack, originalPack));
 
 	async function saveChanges() {
 		const fData = new FormData();
@@ -72,13 +72,13 @@
 			type="date"
 			id="pack-date"
 			label="Date Added"
-			classes="light"
+			class="light"
 			parse={parseDate}
 			display={formatDate}
 			bind:value={pack.dateAdded} />
 	</div>
 	<div class="actions">
-		<button on:click={deleteMissionPack}>Delete</button>
+		<button onclick={deleteMissionPack}>Delete</button>
 	</div>
 </div>
 <div class="main-content mission-card-grid">
@@ -89,7 +89,7 @@
 <div class="bottom-center flex" class:visible={modified}>
 	<div class="save-changes block flex">
 		There are unsaved changes.
-		<button on:click={saveChanges}>Save</button>
+		<button onclick={saveChanges}>Save</button>
 	</div>
 </div>
 
@@ -109,7 +109,9 @@
 		transform: translateY(100%);
 		pointer-events: none;
 		opacity: 0;
-		transition: transform 0.4s, opacity 0.4s;
+		transition:
+			transform 0.4s,
+			opacity 0.4s;
 		transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
 	}
 

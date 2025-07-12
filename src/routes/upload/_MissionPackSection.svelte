@@ -4,21 +4,20 @@
 	import { getSteamID, validateSteamID } from '$lib/util';
 	import toast from 'svelte-french-toast';
 
-	let pack: MissionPack = {
+	let pack: MissionPack = $state({
 		name: '',
 		steamId: '',
 		uploadedBy: null,
 		dateAdded: new Date()
-	};
+	});
 
-	let idInvalid = false;
-	let nameInvalid = false;
-	let valid = false;
-	let inputtedId = '';
-	$: {
+	let idInvalid = $state(false);
+	let nameInvalid = $state(false);
+	let valid = $derived(!idInvalid && !nameInvalid && pack.name.length > 0 && pack.steamId.length > 0);
+	let inputtedId = $state('');
+	$effect(() => {
 		pack.steamId = getSteamID(inputtedId);
-		valid = !idInvalid && !nameInvalid && pack.name.length > 0 && pack.steamId.length > 0;
-	}
+	});
 
 	function validateMissionPackName(str: string): string | boolean {
 		if (str.toLowerCase() === 'toc') return 'That name is not allowed';
@@ -73,7 +72,7 @@
 	{/if}
 </div>
 <div class="block">
-	<button on:click={upload} disabled={!valid}>Upload</button>
+	<button onclick={upload} disabled={!valid}>Upload</button>
 </div>
 
 <style>

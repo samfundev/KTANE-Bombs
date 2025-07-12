@@ -5,14 +5,18 @@
 	import type { Mission } from '$lib/types';
 	import { classifyLink } from '$lib/util';
 
-	export let mission: Pick<Mission, 'completions' | 'tpSolve'>;
+	interface Props {
+		mission: Pick<Mission, 'completions' | 'tpSolve'>;
+	}
+
+	let { mission }: Props = $props();
 	let tpSolve = mission.completions.find(c => c.team[0] === TP_TEAM);
 
-	$: mission.completions.sort((a, b) => b.time - a.time);
+	let sortedCompletions = $derived(mission.completions.toSorted((a, b) => b.time - a.time));
 </script>
 
 <div class="completions">
-	{#each mission.completions as completion}
+	{#each sortedCompletions as completion}
 		{#if completion.team[0] !== TP_TEAM}
 			<!-- TP solves excluded from leaderboard by popular request -->
 			<CompletionCard {completion} />

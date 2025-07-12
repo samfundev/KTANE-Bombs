@@ -7,13 +7,14 @@
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import { Season } from '$lib/types';
 	import TextArea from '$lib/controls/TextArea.svelte';
+	import type { PageProps } from './$types';
 
-	export let data;
+	let { data }: PageProps = $props();
 
-	let season: Season = data.season;
+	let season: Season = $state(data.season);
 	let seasons: Pick<Season, 'name'>[] = data.seasons;
 
-	let originalSeason: Season;
+	let originalSeason = $state() as Season;
 
 	function uniqueSeasonName(value: string) {
 		return seasons.some(s => s.name.toUpperCase() === value.toUpperCase() && value != originalSeason.name)
@@ -29,7 +30,7 @@
 
 	setOriginalSeason();
 
-	$: modified = !equal(season, originalSeason);
+	let modified = $derived(!equal(season, originalSeason));
 
 	async function saveChanges() {
 		const fData = new FormData();
@@ -69,7 +70,7 @@
 	<Input id="season-name" label="Season Name" bind:value={season.name} required validate={uniqueSeasonName} />
 	<Input
 		type="datetime-local"
-		classes="new-season-light"
+		class="new-season-light"
 		id="season-start"
 		label="Start Date (UTC time)"
 		parse={parseUTCDate}
@@ -78,7 +79,7 @@
 		bind:value={season.start} />
 	<Input
 		type="datetime-local"
-		classes="new-season-light"
+		class="new-season-light"
 		id="season-end"
 		label="End Date (UTC time)"
 		parse={parseUTCDate}
@@ -86,7 +87,7 @@
 		required
 		bind:value={season.end} />
 	<TextArea
-		classes="new-season-light"
+		class="new-season-light"
 		id="season-notes"
 		label="Notes"
 		autoExpand
@@ -95,13 +96,13 @@
 		parse={val => (val?.length > 0 ? val : null)} />
 
 	<div class="actions">
-		<button on:click={deleteSeason}>Delete</button>
+		<button onclick={deleteSeason}>Delete</button>
 	</div>
 </div>
 <div class="bottom-center flex" class:visible={modified}>
 	<div class="save-changes block flex">
 		There are unsaved changes.
-		<button on:click={saveChanges}>Save</button>
+		<button onclick={saveChanges}>Save</button>
 	</div>
 </div>
 

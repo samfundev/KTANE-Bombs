@@ -1,26 +1,36 @@
 <script lang="ts">
-	export let id: string;
-	export let name: string;
-	export let value: any;
-	export let label: string = '';
-	export let group: any = '';
-	export let sideLabel: boolean = false;
-	export let labelAfter: boolean = false;
-	export let disabled: boolean = false;
+	import type { HTMLInputAttributes } from 'svelte/elements';
+
+	type Props = {
+		label?: string;
+		group?: any;
+		sideLabel?: boolean;
+		labelAfter?: boolean;
+		children?: import('svelte').Snippet;
+	} & HTMLInputAttributes;
+
+	let {
+		label = '',
+		group = $bindable(''),
+		sideLabel = false,
+		labelAfter = false,
+		children,
+		...props
+	}: Props = $props();
 </script>
 
 <div class:hstack={sideLabel}>
 	{#if !labelAfter}
-		<label for={id}>
+		<label for={props.id}>
 			{label}
-			<slot />
+			{@render children?.()}
 		</label>
 	{/if}
-	<input {id} type="radio" bind:group {name} {value} {disabled} on:change />
+	<input {...props} type="radio" bind:group />
 	{#if labelAfter}
-		<label for={id}>
+		<label for={props.id}>
 			{label}
-			<slot />
+			{@render children?.()}
 		</label>
 	{/if}
 </div>

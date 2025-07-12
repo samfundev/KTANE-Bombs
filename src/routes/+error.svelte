@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	export let status: number = $page.status;
-	export let error: App.Error | null = $page.error;
-	export let path: string = $page.url?.pathname;
+	interface Props {
+		status?: number;
+		error?: App.Error | null;
+		path?: string;
+	}
+
+	let { status = $page.status, error = $page.error, path = $bindable($page.url?.pathname) }: Props = $props();
 
 	const user: { username: string } | null = $page.data.user;
 

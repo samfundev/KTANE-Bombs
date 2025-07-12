@@ -1,26 +1,38 @@
 <script lang="ts">
-	export let id: string;
-	export let checked: any = false;
-	export let label: string = '';
-	export let sideLabel: boolean = false;
-	export let labelAfter: boolean = false;
-	export let disabled: boolean = false;
-	export let title: string = '';
-	export let classes: string = '';
+	import type { HTMLInputAttributes } from 'svelte/elements';
+
+	type Props = {
+		checked?: boolean;
+		label?: string;
+		sideLabel?: boolean;
+		labelAfter?: boolean;
+		class?: string;
+		children?: import('svelte').Snippet;
+	} & HTMLInputAttributes;
+
+	let {
+		checked = $bindable(false),
+		label = '',
+		sideLabel = false,
+		labelAfter = false,
+		class: classes = '',
+		children,
+		...props
+	}: Props = $props();
 </script>
 
 <div class:hstack={sideLabel}>
 	{#if !labelAfter}
-		<label class={classes} {title} for={id}>
+		<label class={classes} title={props.title} for={props.id}>
 			{label}
-			<slot />
+			{@render children?.()}
 		</label>
 	{/if}
-	<input class={classes} {title} {id} type="checkbox" bind:checked {disabled} on:change />
+	<input class={classes} type="checkbox" bind:checked {...props} />
 	{#if labelAfter}
-		<label class={classes} {title} for={id}>
+		<label class={classes} title={props.title} for={props.id}>
 			{label}
-			<slot />
+			{@render children?.()}
 		</label>
 	{/if}
 </div>

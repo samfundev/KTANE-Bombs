@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { type Completer, type ID, Permission, Season } from '$lib/types';
 	import { properUrlEncode, hasPermission } from '$lib/util.js';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { applyAction } from '$app/forms';
-	export let data;
-	export let season: Season = data.season;
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
+	let { season } = data;
 	let completers: Completer[] = data.seasonCompleters;
-	let ranks: { [name: string]: number } = {};
+	let ranks: { [name: string]: number } = $state({});
 	let rank = 1;
 	let tied = 1;
 	const dateOptions: Intl.DateTimeFormatOptions = {
@@ -47,8 +49,8 @@
 			<strong>Ends:</strong> {season.end.toLocaleTimeString(undefined, dateOptions)}
 		</span>
 	</div>
-	{#if hasPermission($page.data.user, Permission.ManageSeasons)}
-		<a href={$page.url.href + '/edit'} class="top-right">Edit</a>
+	{#if hasPermission(page.data.user, Permission.ManageSeasons)}
+		<a href={page.url.href + '/edit'} class="top-right">Edit</a>
 	{/if}
 </div>
 
@@ -60,7 +62,7 @@
 {/if}
 
 <div class="table">
-	<b class="block" />
+	<b class="block"></b>
 	<b class="block">Name</b>
 	<b class="block" title="Number of distinct missions solved.">Distinct</b>
 	<b class="block" title="Number of missions solved (including duplicates).">Total</b>

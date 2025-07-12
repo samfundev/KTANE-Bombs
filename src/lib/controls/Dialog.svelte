@@ -1,5 +1,10 @@
 <script lang="ts">
-	export let dialog: HTMLDialogElement | undefined = undefined;
+	interface Props {
+		dialog?: HTMLDialogElement | undefined;
+		children?: import('svelte').Snippet;
+	}
+
+	let { dialog = $bindable(undefined), children }: Props = $props();
 
 	function onClick(event: Event) {
 		if (event.target === dialog) {
@@ -8,9 +13,9 @@
 	}
 </script>
 
-<dialog bind:this={dialog} on:click={onClick}>
+<dialog bind:this={dialog} onclick={onClick}>
 	<div>
-		<slot />
+		{@render children?.()}
 	</div>
 </dialog>
 

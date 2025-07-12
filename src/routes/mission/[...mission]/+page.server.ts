@@ -21,7 +21,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 					dateAdded: true,
 					variant: true
 				}
-		  })
+			})
 		: null;
 	const missionResult = await client.mission.findFirst({
 		where: {
@@ -87,7 +87,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 						},
 						tpSolve: true
 					}
-			  });
+				});
 
 	if (missionToUpdate !== null) {
 		missionResult.completions = missionToUpdate.completions;

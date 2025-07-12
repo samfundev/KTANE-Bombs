@@ -1,8 +1,14 @@
 <script lang="ts">
-	export let div: HTMLDivElement | null = null;
+	import type { SvelteHTMLElements } from 'svelte/elements';
+
+	type Props = {
+		div?: HTMLDivElement | null;
+	} & SvelteHTMLElements['div'];
+
+	let { div = $bindable(), ...props }: Props = $props();
 </script>
 
-<div class="popup disappear disappear-stat0 hidden" id="about-menu" on:click bind:this={div}>
+<div {...props} class="popup disappear disappear-stat0 hidden" id="about-menu" bind:this={div}>
 	<div class="flex column">
 		<a href="/rules">Rules</a>
 		<a href="/restrictedmanuals">Restricted Manuals</a>

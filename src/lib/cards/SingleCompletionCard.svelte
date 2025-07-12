@@ -3,10 +3,14 @@
 	import { type MissionCompletion } from '$lib/types';
 	import { formatTime, getPersonColor, currSeason, pastSeason, properUrlEncode } from '$lib/util';
 
-	export let comp: MissionCompletion;
-	export let username: string;
-	export let showTime: boolean = false;
-	export let currentSeasonName: string = '';
+	interface Props {
+		comp: MissionCompletion;
+		username: string;
+		showTime?: boolean;
+		currentSeasonName: string;
+	}
+
+	let { comp, username, showTime = false, currentSeasonName = '' }: Props = $props();
 
 	let tp = username === TP_TEAM;
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -24,7 +28,8 @@
 			<div
 				class="season-solve"
 				class:current-season-solve={currSeason(comp.season, currentSeasonName)}
-				class:past-season-solve={pastSeason(comp.season, currentSeasonName)} />
+				class:past-season-solve={pastSeason(comp.season, currentSeasonName)}>
+			</div>
 			<span
 				class="mission-name"
 				class:current-season-solve={currSeason(comp.season, currentSeasonName)}
