@@ -15,7 +15,7 @@
 	href={`https://ktane.timwi.de/redirect/#${properUrlEncode(module.FileName ?? module.Name)}`}>
 	{#if isSpecialAllModule(module.ModuleID)}
 		<div class="image {module.ModuleID}" />
-	{:else if (module.valid)}
+	{:else if module.valid}
 		<img
 			src="https://ktane.timwi.de/iconsprite"
 			alt={module.Name}
