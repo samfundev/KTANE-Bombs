@@ -46,14 +46,18 @@ async function findName(log: any) {
 	return { ...info, linkable: false, name: log.name };
 }
 
-export const load = async function ({ parent, locals }: any) {
+export const load = async function ({ parent, locals, url }: any) {
 	const { user } = await parent();
 	if (!hasAnyPermission(user, Permission.VerifyMission, Permission.VerifyCompletion, Permission.VerifyMissionPack)) {
 		throw forbidden(locals);
 	}
 
+	const fetchAll = url.searchParams.get('all') === 'true';
+	const count = await client.auditLog.count();
+
 	const everything = await client.auditLog.findMany({
-		orderBy: { id: 'desc' }
+		orderBy: { id: 'desc' },
+		take: fetchAll ? undefined : 3000
 	});
 
 	let logs: any[] = [];
@@ -92,6 +96,7 @@ export const load = async function ({ parent, locals }: any) {
 	}
 
 	return {
-		logs
+		logs,
+		count
 	};
 };

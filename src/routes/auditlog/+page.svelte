@@ -23,6 +23,7 @@
 
 	let { data } = $props();
 	let logs: (AuditLog & { linkable: boolean; mission: string | null })[] = data.logs;
+	let logCount: number = data.count;
 
 	let logRows: any = $state({});
 	let resultsText: number = $state(logs.length);
@@ -163,8 +164,8 @@
 <h1 class="header">Audit Log</h1>
 
 <div class="top-bar block">
-	<div class="hstack">
-		<span>Max {resultLimit} results shown</span>
+	<div class="hstack show-all">
+		<span>Max {resultLimit} results shown ({logs.length} entries fetched)</span>
 		<Checkbox
 			id="show-all-check"
 			onchange={() => {
@@ -174,6 +175,9 @@
 			label="Show All"
 			sideLabel
 			labelAfter />
+		{#if logs.length <= 3000}
+			<a href="/auditlog?all=true"><button>Fetch All {logCount} Entries</button></a>
+		{/if}
 	</div>
 	<div class="flex row search-bar">
 		<span>Results: {resultsText} of {logs.length}</span>
@@ -222,7 +226,7 @@
 	{#each logs as log, index}
 		{@const display = displayLog(log.before, log.after)}
 		<div class="table-row" bind:this={logRows[index]}>
-			<div class="block number">{logs.length - index}</div>
+			<div class="block number">{logCount - index}</div>
 			<div class="block">
 				{#if log.userId != null && !isOnlyDigits(log.userId)}
 					<a href="/user/{properUrlEncode(log.userId)}">{log.userId}</a>
@@ -298,15 +302,18 @@
 		position: sticky;
 		top: calc(var(--stick-under-navbar) + 1px);
 	}
+
 	.search-bar {
 		gap: 12px;
 		align-items: center;
 		flex-wrap: wrap;
 		margin-top: var(--gap);
 	}
-	.hstack {
+	div.show-all.hstack {
 		display: flex;
-		gap: 8px;
+		gap: 20px;
+		align-items: center;
+		margin-bottom: 10px;
 	}
 
 	.shorten {
@@ -341,7 +348,7 @@
 	}
 	.table-row {
 		display: grid;
-		grid-template-columns: 30px 210px auto;
+		grid-template-columns: 32px 210px auto;
 		gap: var(--gap);
 		text-align: center;
 		width: 100%;
