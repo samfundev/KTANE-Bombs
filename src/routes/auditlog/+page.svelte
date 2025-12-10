@@ -355,7 +355,7 @@
 		cursor: pointer;
 	}
 	.dropdown:not(.expand) div.full,
-	.dropdown.expand div.short {
+	.dropdown.expand button.short {
 		display: none;
 	}
 	.dropdown div.full {

@@ -80,7 +80,7 @@
 				</div>
 			{:else if item.type === 'completion'}
 				<CompletionCard completion={item.completion} />
-				<div class="block">
+				<div class="block completion-uploaded-by">
 					Uploaded by:<br />{item.completion.uploadedBy}
 					{#if matchingSolve(item) >= 0}
 						<br /><span class="red">Resubmission</span>
@@ -114,6 +114,10 @@
 	}
 	:is(:global(span, .block)).red {
 		color: red;
+	}
+
+	.completion-uploaded-by {
+		word-break: break-all;
 	}
 
 	.top-bar {

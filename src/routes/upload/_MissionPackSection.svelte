@@ -65,6 +65,18 @@
 		bind:invalid={idInvalid}
 		bind:value={inputtedId} />
 </div>
+<div class="block flex">
+	<div>{pack.name}</div>
+	{#if pack.name.length > 0 && pack.steamId.length > 0}
+		<a class="unverif-pack" href="https://steamcommunity.com/sharedfiles/filedetails/?id={pack.steamId}">Steam Link</a>
+	{/if}
+</div>
 <div class="block">
 	<button onclick={upload} disabled={!valid}>Upload</button>
 </div>
+
+<style>
+	.unverif-pack {
+		margin-left: 10px;
+	}
+</style>

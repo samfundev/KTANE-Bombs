@@ -184,7 +184,7 @@
 				bind:value={byPerc} />
 		</div>
 		{#each mission.bombs as bomb, bIdx}
-			<div class="block">
+			<div class="block bomb-header">
 				{pluralize(bomb.modules, 'Module')} · {formatTime(bomb.time)} · {pluralize(bomb.strikes, 'Strike')} · {pluralize(
 					bomb.widgets,
 					'Widget'
@@ -277,6 +277,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--gap);
+	}
+
+	.bomb-header {
+		background-color: var(--block-separator);
 	}
 
 	.designed-for-tp {

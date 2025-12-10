@@ -96,9 +96,6 @@
 		color: var(--text-color);
 		text-decoration: none;
 	}
-	.info-tab {
-		cursor: pointer;
-	}
 
 	.max-width {
 		width: var(--page-content-width);
