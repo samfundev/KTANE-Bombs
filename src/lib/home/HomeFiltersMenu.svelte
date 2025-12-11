@@ -11,11 +11,10 @@
 	interface Props {
 		modules: Record<string, RepoModule>;
 		div?: HTMLDivElement | null;
-		onclick?: () => void;
 		onupdate?: (options: HomeOptions) => void;
 	}
 
-	let { modules, div = $bindable(null), onclick = () => {}, onupdate = () => {} }: Props = $props();
+	let { modules, div = $bindable(null), onupdate = () => {} }: Props = $props();
 
 	let lStore: { [k: string]: Writable<any | null> } = {};
 	let checks: { [k: string]: boolean } = $state({});
@@ -293,7 +292,7 @@
 	});
 </script>
 
-<div class="popup disappear disappear-stat0 hidden" id="options" {onclick} bind:this={div}>
+<div class="popup disappear disappear-stat0 hidden" id="options" bind:this={div}>
 	<div class="hstack center">
 		<button
 			class="defaults"
