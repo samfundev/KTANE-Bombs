@@ -28,7 +28,7 @@
 		</div>
 		{#if completion.notes !== null}
 			<div class="note" bind:this={noteIcon} onclick={() => popup(note, noteIcon, true)} title={completion.notes}></div>
-			<div bind:this={note} onclick={() => preventDisappear(note)} class="popup disappear disappear-stat0 hidden">
+			<div bind:this={note} class="popup disappear disappear-stat0 hidden">
 				<span class="popup-text">{completion.notes}</span>
 			</div>
 		{/if}

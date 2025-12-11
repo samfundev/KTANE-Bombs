@@ -7,7 +7,6 @@
 		getModule,
 		onlyUnique,
 		withoutArticle,
-		preventDisappear,
 		logicalSearchTooltip,
 		isSpecialAllModule
 	} from '$lib/util';
@@ -361,7 +360,7 @@
 			Filters
 		</div>
 	</div>
-	<HomeFiltersMenu bind:div={filters} onclick={() => preventDisappear(filters)} onupdate={homeOptionUpdate} {modules} />
+	<HomeFiltersMenu bind:div={filters} onupdate={homeOptionUpdate} {modules} />
 </div>
 
 <style>

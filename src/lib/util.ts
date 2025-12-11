@@ -199,7 +199,9 @@ export function getWindowHeight(): number {
 	);
 }
 
-export function disappearAll() {
+export function disappearAll(event: MouseEvent) {
+	if (event.target instanceof HTMLElement && event.target.closest('.popup')) return;
+
 	const toHide = document.getElementsByClassName('disappear');
 
 	for (let i = 0; i < toHide.length; i++) {
@@ -235,7 +237,7 @@ export function disappear(elem: HTMLElement) {
 	}
 }
 
-export function preventDisappear(elem: HTMLElement) {
+function preventDisappear(elem: HTMLElement) {
 	let classes = elem.classList;
 	let statString = Array.from(classes).find(c => c.startsWith('disappear-stat')) ?? '';
 
