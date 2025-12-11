@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { TP_TEAM } from '$lib/const';
 	import type { Completion } from '$lib/types.svelte';
-	import { classifyLink, formatTime, getPersonColor, popup, preventDisappear } from '$lib/util';
+	import { classifyLink, formatTime, getPersonColor, popup } from '$lib/util';
 
 	interface Props {
 		completion: Completion;
@@ -28,7 +28,7 @@
 		</div>
 		{#if completion.notes !== null}
 			<div class="note" bind:this={noteIcon} onclick={() => popup(note, noteIcon, true)} title={completion.notes}></div>
-			<div bind:this={note} onclick={() => preventDisappear(note)} class="popup disappear disappear-stat0 hidden">
+			<div bind:this={note} class="popup disappear disappear-stat0 hidden">
 				<span class="popup-text">{completion.notes}</span>
 			</div>
 		{/if}

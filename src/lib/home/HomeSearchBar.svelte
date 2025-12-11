@@ -7,7 +7,6 @@
 		getModule,
 		onlyUnique,
 		withoutArticle,
-		preventDisappear,
 		logicalSearchTooltip
 	} from '$lib/util';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
@@ -357,7 +356,7 @@
 			Filters
 		</div>
 	</div>
-	<HomeFiltersMenu bind:div={filters} onclick={() => preventDisappear(filters)} onupdate={homeOptionUpdate} {modules} />
+	<HomeFiltersMenu bind:div={filters} onupdate={homeOptionUpdate} {modules} />
 </div>
 
 <style>

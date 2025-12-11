@@ -6,8 +6,7 @@
 	import { hasAnyPermission, properUrlEncode } from '$lib/util';
 	import { Toaster } from 'svelte-french-toast';
 	import { beforeNavigate } from '$app/navigation';
-	import { popup, preventDisappear } from '$lib/util';
-	import { browser } from '$app/environment';
+	import { popup } from '$lib/util';
 	import { disappearAll } from '$lib/util';
 	import { onMount } from 'svelte';
 	import HomeInfoMenu from '$lib/home/HomeInfoMenu.svelte';
@@ -27,7 +26,7 @@
 		}
 	});
 	onMount(() => {
-		document.onclick = () => disappearAll();
+		document.onclick = disappearAll;
 		return () => {
 			document.onclick = null;
 		};
