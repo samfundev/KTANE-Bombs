@@ -274,15 +274,15 @@
 </div>
 
 {#if bestTimes.length > 0}
-	<div
-		class="block flex toggleable"
+	<button
+		class="reset block flex toggleable"
 		onclick={() => {
 			hideTopTimes = !hideTopTimes;
 			storePref();
 		}}>
 		<h4>Top Times ({bestTimes.length})</h4>
 		<span class:hidden={!hideTopTimes}>(hidden)</span>
-	</div>
+	</button>
 	<div class="solves role flex grow" class:hidden={hideTopTimes}>
 		{#each bestTimes.sort((a, b) => (a.time == undefined || b.time == undefined ? 0 : b.time - a.time)) as comp}
 			<SingleCompletionCard {comp} {username} showTime />
@@ -291,15 +291,15 @@
 {/if}
 
 {#if firstTimes.length > 0}
-	<div
-		class="block flex toggleable"
+	<button
+		class="reset block flex toggleable"
 		onclick={() => {
 			hideFirstSolves = !hideFirstSolves;
 			storePref();
 		}}>
 		<h4>First Solves ({firstTimes.length})</h4>
 		<span class:hidden={!hideFirstSolves}>(hidden)</span>
-	</div>
+	</button>
 	<div class="solves role flex grow" class:hidden={hideFirstSolves}>
 		{#each firstTimes as comp}
 			<SingleCompletionCard {comp} {username} />

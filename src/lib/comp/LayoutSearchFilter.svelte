@@ -104,7 +104,7 @@
 			{onchange}
 			bind:value={rawSearchText} />
 	{/if}
-	<div class="search-field-clear dark-invert" onclick={clearSearch}></div>
+	<button class="reset search-field-clear dark-invert" onclick={clearSearch} aria-label="Clear search"></button>
 </div>
 
 <style>

@@ -69,16 +69,23 @@ button {
 	border-radius: 5px;
 	font-size: inherit;
 
-	&:hover {
-		background-color: hsl(14, 72%, 38%);
+	&:not(.reset) {
+		&:hover {
+			background-color: hsl(14, 72%, 38%);
+		}
+
+		&:active {
+			background-color: hsl(14, 72%, 33%);
+		}
+
+		&:disabled {
+			opacity: 0.5;
+		}
 	}
 
-	&:active {
-		background-color: hsl(14, 72%, 33%);
-	}
-
-	&:disabled {
-		opacity: 0.5;
+	&:where(.reset) {
+		all: unset;
+		cursor: pointer;
 	}
 }
 
