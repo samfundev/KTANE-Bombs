@@ -20,11 +20,12 @@
 
 <h1 class="header">Upload</h1>
 <div class="section-selector flex grow">
-	<div class="block" class:selected={section == 'solve'} onclick={() => (section = 'solve')}>Solve</div>
-	<div class="block" class:selected={section == 'mission'} onclick={() => (section = 'mission')}>Mission</div>
-	<div class="block" class:selected={section == 'missionpack'} onclick={() => (section = 'missionpack')}>
+	<button class="block reset" class:selected={section == 'solve'} onclick={() => (section = 'solve')}>Solve</button>
+	<button class="block reset" class:selected={section == 'mission'} onclick={() => (section = 'mission')}
+		>Mission</button>
+	<button class="block reset" class:selected={section == 'missionpack'} onclick={() => (section = 'missionpack')}>
 		Mission Pack
-	</div>
+	</button>
 </div>
 {#if section == 'mission'}
 	<MissionSection {missionInfo} {authorNames} {packs} />

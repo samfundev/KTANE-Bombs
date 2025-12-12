@@ -47,7 +47,7 @@
 	let searchField: HTMLInputElement | null;
 	let searchText: string = $state('');
 	let filters: HTMLDivElement | null = $state(null);
-	let filterTab = $state() as HTMLDivElement;
+	let filterTab = $state() as HTMLButtonElement;
 	let layoutSearch = $state() as LayoutSearchFilter;
 	const defaultSearchOptions = [true, false, false, false, false];
 
@@ -356,9 +356,12 @@
 		</div>
 	</div>
 	<div class="flex control-tabs">
-		<div bind:this={filterTab} class="popup-tab filter-tab" onclick={() => popup(filters, filterTab, true, [-100, 0])}>
+		<button
+			bind:this={filterTab}
+			class="reset popup-tab filter-tab"
+			onclick={() => popup(filters, filterTab, true, [-100, 0])}>
 			Filters
-		</div>
+		</button>
 	</div>
 	<HomeFiltersMenu bind:div={filters} onupdate={homeOptionUpdate} {modules} />
 </div>

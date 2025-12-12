@@ -144,18 +144,20 @@
 			oninput={limitResults}
 			class="help" />
 		<button onclick={closeAll}>Close All</button>
-		<span class="sort-option alphabetical" class:selected={sortOption == 'alphabetical'} onclick={alphabetical}
-			>Alphabetical</span>
-		<span class="sort-option popular" class:selected={sortOption == 'popular'} onclick={popular}>Popular</span>
-		<span class="sort-option published" class:selected={sortOption == 'published'} onclick={published}>Published</span>
+		<button class="reset sort-option alphabetical" class:selected={sortOption == 'alphabetical'} onclick={alphabetical}
+			>Alphabetical</button>
+		<button class="reset sort-option popular" class:selected={sortOption == 'popular'} onclick={popular}
+			>Popular</button>
+		<button class="reset sort-option published" class:selected={sortOption == 'published'} onclick={published}
+			>Published</button>
 	</div>
 </div>
 <div class="flex column">
 	{#each mods as [modID, module]}
 		<div class="module-row flex row length-filtered-out" bind:this={moduleRows[modID]}>
 			<div class="module-card flex column"><ModuleCard {module} /></div>
-			<div
-				class="missions-dropdown flex column mod{modID.replace(/\s/g, '')}"
+			<button
+				class="reset missions-dropdown flex column mod{modID.replace(/\s/g, '')}"
 				class:expand={!missionsOf[modID] || missionsOf[modID].length <= 4}
 				class:few={!missionsOf[modID] || missionsOf[modID].length <= 4}
 				onclick={() => reveal(modID)}>
@@ -180,7 +182,7 @@
 						<span>0</span>
 					{/if}
 				</div>
-			</div>
+			</button>
 		</div>
 	{/each}
 </div>

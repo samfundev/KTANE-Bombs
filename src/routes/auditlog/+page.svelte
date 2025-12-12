@@ -282,7 +282,7 @@
 				{log.timestamp.toLocaleDateString(undefined, dateOptions)}
 			</div>
 			<div class="block dropdown d{index}" class:small={smallItem(display.full)} class:expand={smallItem(display.full)}>
-				<div class="short" onclick={() => reveal(index)}>
+				<button class="reset short" onclick={() => reveal(index)}>
 					<div class="log-details">
 						{#each display.short as row}
 							<div title={row.item} class="shorten-detail">{row.item}</div>
@@ -291,9 +291,9 @@
 						{/each}
 					</div>
 					<strong>...</strong>
-				</div>
+				</button>
 				<div class="full">
-					<div class="contract" onclick={() => hide(index)}></div>
+					<button class="reset contract" onclick={() => hide(index)} aria-label="Hide Details"></button>
 					<div class="log-details">
 						{#each display.full as row}
 							<div title={row.item} class="shorten-detail">{row.item}</div>

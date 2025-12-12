@@ -57,7 +57,7 @@
 		{/if}
 		<a class="block" href="/season">Seasons</a>
 		<div style="margin-left: auto" class="block info-tab" bind:this={infoTab}>
-			<div class="info-button" onclick={() => popup(infoMenu, infoTab, true, [8, 6])}>Info</div>
+			<button class="reset info-button" onclick={() => popup(infoMenu, infoTab, true, [8, 6])}>Info</button>
 			<HomeInfoMenu bind:div={infoMenu} />
 		</div>
 
