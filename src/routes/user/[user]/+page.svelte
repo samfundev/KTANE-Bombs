@@ -14,6 +14,7 @@
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import SingleCompletionCard from '$lib/cards/SingleCompletionCard.svelte';
+	import { onMount } from 'svelte';
 	let { data } = $props();
 
 	type SolveStats = {
@@ -192,30 +193,19 @@
 	let render = $state(false);
 	let hideTopTimes = $state(true);
 	let hideFirstSolves = $state(true);
-	let wrView = writable(viewMode);
-	let wrHTT = writable(hideTopTimes);
-	let wrHFS = writable(hideFirstSolves);
-	if (browser) {
+
+	onMount(() => {
 		viewMode = JSON.parse(localStorage.getItem('user-solves-view') || JSON.stringify(viewOptions[0]));
-		wrView.subscribe(value => {
-			localStorage.setItem('user-solves-view', JSON.stringify(value));
-		});
 		hideTopTimes = JSON.parse(localStorage.getItem('user-solves-hide-top') || JSON.stringify(true));
-		wrHTT.subscribe(value => {
-			localStorage.setItem('user-solves-hide-top', JSON.stringify(value));
-		});
 		hideFirstSolves = JSON.parse(localStorage.getItem('user-solves-hide-first') || JSON.stringify(true));
-		wrHFS.subscribe(value => {
-			localStorage.setItem('user-solves-hide-first', JSON.stringify(value));
-		});
-		storePref();
 		render = true;
-	}
-	function storePref() {
-		wrView.set(viewMode);
-		wrHTT.set(hideTopTimes);
-		wrHFS.set(hideFirstSolves);
-	}
+	});
+
+	$effect(() => {
+		localStorage.setItem('user-solves-view', JSON.stringify(viewMode));
+		localStorage.setItem('user-solves-hide-top', JSON.stringify(hideTopTimes));
+		localStorage.setItem('user-solves-hide-first', JSON.stringify(hideFirstSolves));
+	});
 </script>
 
 <svelte:head>
@@ -270,16 +260,11 @@
 			<span style="background-color: {getPersonColor(1, 0, false)}">EFM</span>
 		{/if}
 	</div>
-	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={viewMode} onchange={storePref} />
+	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={viewMode} />
 </div>
 
 {#if bestTimes.length > 0}
-	<button
-		class="reset block flex toggleable"
-		onclick={() => {
-			hideTopTimes = !hideTopTimes;
-			storePref();
-		}}>
+	<button class="reset block flex toggleable" onclick={() => (hideTopTimes = !hideTopTimes)}>
 		<h4>Top Times ({bestTimes.length})</h4>
 		<span class:hidden={!hideTopTimes}>(hidden)</span>
 	</button>
@@ -291,12 +276,7 @@
 {/if}
 
 {#if firstTimes.length > 0}
-	<button
-		class="reset block flex toggleable"
-		onclick={() => {
-			hideFirstSolves = !hideFirstSolves;
-			storePref();
-		}}>
+	<button class="reset block flex toggleable" onclick={() => (hideFirstSolves = !hideFirstSolves)}>
 		<h4>First Solves ({firstTimes.length})</h4>
 		<span class:hidden={!hideFirstSolves}>(hidden)</span>
 	</button>

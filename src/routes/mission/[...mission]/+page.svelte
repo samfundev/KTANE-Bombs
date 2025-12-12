@@ -18,6 +18,7 @@
 	import { writable } from 'svelte/store';
 	import { browser } from '$app/environment';
 	import Select from '$lib/controls/Select.svelte';
+	import { onMount } from 'svelte';
 
 	type Variant = Pick<Mission, 'name' | 'completions' | 'tpSolve'>;
 	interface Props {
@@ -102,17 +103,8 @@
 		bombFrac.push({ mods, pools: fPools });
 	});
 
-	let wrView = writable(byPerc);
-	function storeView() {
-		wrView.set(byPerc);
-	}
-	if (browser) {
-		byPerc = JSON.parse(localStorage.getItem('mission-pools-view') || JSON.stringify(viewOptions[0]));
-		wrView.subscribe(value => {
-			localStorage.setItem('mission-pools-view', JSON.stringify(value));
-		});
-		storeView();
-	}
+	onMount(() => (byPerc = JSON.parse(localStorage.getItem('mission-pools-view') || JSON.stringify(viewOptions[0]))));
+	$effect(() => localStorage.setItem('mission-pools-view', JSON.stringify(byPerc)));
 </script>
 
 <svelte:head>
@@ -189,8 +181,7 @@
 				title={viewTitle}
 				sideLabel
 				options={viewOptions}
-				bind:value={byPerc}
-				onchange={storeView} />
+				bind:value={byPerc} />
 		</div>
 		{#each mission.bombs as bomb, bIdx}
 			<div class="block">

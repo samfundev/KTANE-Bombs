@@ -25,6 +25,7 @@
 	import { applyAction } from '$app/forms';
 	import { TP_TEAM } from '$lib/const';
 	import TextArea from '$lib/controls/TextArea.svelte';
+	import { SvelteSet } from 'svelte/reactivity';
 
 	let { data } = $props();
 
@@ -34,8 +35,6 @@
 	let modules: Record<string, RepoModule> | null = data.modules;
 	let logfile = $derived(mission.logfile ?? '');
 
-	sortBombs(mission, modules);
-
 	let originalMission = $state() as EditMission;
 
 	function setOriginalMission() {
@@ -43,10 +42,14 @@
 		originalMission.dateAdded = mission.dateAdded;
 	}
 
-	for (const bomb of mission.bombs) {
-		bomb.pools.sort((a, b) => a.modules.join().localeCompare(b.modules.join()));
-	}
-	mission.completions.sort((a, b) => b.time - a.time);
+	$effect(() => {
+		sortBombs(mission, modules);
+		for (const bomb of mission.bombs) {
+			bomb.pools.sort((a, b) => a.modules.join().localeCompare(b.modules.join()));
+		}
+		mission.completions.sort((a, b) => b.time - a.time);
+	});
+
 	setOriginalMission();
 
 	let modified = $state(false);
@@ -107,7 +110,7 @@
 		const result = await response.json();
 
 		applyAction(result);
-		shownComp[comp.id] = false;
+		shownComp.delete(comp.id);
 		originalMission.completions[index] = JSON.parse(JSON.stringify(comp));
 	}
 
@@ -161,14 +164,9 @@
 		mission = mission;
 	}
 
-	let shownComp = $state(
-		mission.completions.reduce((result: { [id: string]: boolean }, curr) => {
-			result[curr.id] = false;
-			return result;
-		}, {})
-	);
+	let shownComp = new SvelteSet();
 	function showComp(id: number) {
-		shownComp[id] = !shownComp[id];
+		shownComp.add(id);
 	}
 
 	missionNames.unshift('');
@@ -349,7 +347,7 @@
 		<div class="block header">Solves</div>
 		{#each mission.completions as completion, ci}
 			<div class="block flex column relative">
-				{#if shownComp[completion.id]}
+				{#if shownComp.has(completion.id)}
 					<TextArea
 						label="Proof"
 						id="completion-proof"

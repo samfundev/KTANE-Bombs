@@ -12,6 +12,7 @@
 		onlyUnique,
 		properUrlEncode
 	} from '$lib/util.js';
+	import { onMount, untrack } from 'svelte';
 
 	let { data } = $props();
 	type ShortMission = Pick<Mission, 'name' | 'bombs'>;
@@ -90,7 +91,7 @@
 	}
 	let mods = $state(Object.entries(modules).filter(mod => mod[1].Type == 'Regular' || mod[1].Type == 'Needy'));
 	alphabetical();
-	let resultsText: number = $state(mods.length);
+	let resultsText: number = $state(untrack(() => mods.length));
 
 	function moduleSearchFilter(name: string, searchText: string): boolean {
 		let text = searchText.toLowerCase();
