@@ -338,7 +338,10 @@
 							validate={value => value != null}
 							required
 							bind:value={pool.modules} />
-						<div class="delete-pool dark-invert" onclick={() => deletePool(bomb, index)}></div>
+						<button
+							class="reset delete-pool dark-invert"
+							onclick={() => deletePool(bomb, index)}
+							aria-label="Delete Pool"></button>
 					</div>
 				{/each}
 				<button class="add-pool" onclick={() => addPool(bomb)}>Add</button>

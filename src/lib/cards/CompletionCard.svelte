@@ -11,7 +11,7 @@
 
 	let tp = $derived(completion.team[0] === TP_TEAM);
 	let note = $state() as HTMLDivElement;
-	let noteIcon = $state() as HTMLDivElement;
+	let noteIcon = $state() as HTMLButtonElement;
 </script>
 
 <div class="completion">
@@ -27,7 +27,12 @@
 			{/each}
 		</div>
 		{#if completion.notes !== null}
-			<div class="note" bind:this={noteIcon} onclick={() => popup(note, noteIcon, true)} title={completion.notes}></div>
+			<button
+				class="note reset"
+				bind:this={noteIcon}
+				onclick={() => popup(note, noteIcon, true)}
+				title={completion.notes}
+				aria-label="Notes"></button>
 			<div bind:this={note} class="popup disappear disappear-stat0 hidden">
 				<span class="popup-text">{completion.notes}</span>
 			</div>
