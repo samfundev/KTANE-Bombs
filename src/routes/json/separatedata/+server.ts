@@ -3,7 +3,7 @@ import { Permission, Season } from '$lib/types';
 import { forbidden, hasPermission } from '$lib/util';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 import { minimize } from '../_util';
-import { AuditLog, User } from '@prisma/client';
+import type { AuditLog, User } from '@prisma/client';
 
 export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 	if (!hasPermission(locals.user, Permission.DownloadDatabase)) {
