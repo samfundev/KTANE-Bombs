@@ -26,6 +26,7 @@ export async function GET() {
 					notes: true,
 					proofs: true,
 					solo: true,
+					season: true,
 					team: true,
 					time: true
 				},

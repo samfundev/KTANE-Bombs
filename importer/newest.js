@@ -45,6 +45,7 @@ const { PrismaClient } = pkg;
 					first: completion.first,
 					old: completion.old,
 					solo: completion.solo,
+					season: completion.season,
 					notes: completion.notes,
 					missionName: mission.name,
 					dateAdded: completion.dateAdded == null ? null : new Date(completion.dateAdded),

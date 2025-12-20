@@ -9,6 +9,7 @@
 
 	export let missionInfo: { [name: string]: any };
 	export let solverNames: string[];
+	export let currentSeasonName: string | null;
 
 	let missionNames = Object.keys(missionInfo).sort((a, b) => a.localeCompare(b));
 	let missionName: string = '';
@@ -24,6 +25,7 @@
 	let team = [{ invalid: false, text: '' }];
 	let proofs = [{ invalid: false, text: '' }];
 	let tpSolve = false;
+	let seasonSolve = false;
 	const MIN_TIME = 0.01;
 	let parsedTimes: number[] = [MIN_TIME];
 	let parsedLogfiles: string[] = [];
@@ -182,6 +184,16 @@
 		} else team = [{ invalid: false, text: '' }];
 	}
 
+	function seasonChange() {
+    		if (seasonSolve) {
+    			tpSolve = false;
+    			completion.season = currentSeasonName;
+    		}
+    		else{
+                completion.season = null;
+    		}
+    	}
+
 	function teamChange() {
 		if (team[0].text === TP_TEAM) tpSolve = true;
 		else {
@@ -282,10 +294,18 @@
 		disabled={tpSolve || completion.team.length > 1} />
 	<Checkbox
 		id="tpSolve"
-		label="TP Solve"
+		label="TP"
 		bind:checked={tpSolve}
 		on:change={tpChange}
 		disabled={completion.solo || completion.team.length > 1} />
+	<Checkbox
+    	id="seasonSolve"
+    	label="Season"
+    	classes="help"
+    	title="A season solve has extra requirements explained in the info tab."
+    	bind:checked={seasonSolve}
+    	on:change={seasonChange}
+    	disabled={tpSolve} />
 </form>
 <CompletionCard {completion} />
 <div class="block">

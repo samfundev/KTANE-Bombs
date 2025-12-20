@@ -44,6 +44,7 @@
 				<a class="block" href="/verify">Verify</a>
 			{/if}
 		{/if}
+		<a class="block" href="/season">Season</a>
 		<div style="margin-left: auto" class="block info-tab" bind:this={infoTab}>
 			<div on:click={() => popup(infoMenu, infoTab, true, [8, 6])}>Info</div>
 			<HomeInfoMenu bind:div={infoMenu} />

@@ -357,5 +357,6 @@ namespace bombdata
 		public bool first { get; set; }
 		public bool old { get; set; }
 		public bool solo { get; set; }
+		public string? season { get; set; }
 	}
 }

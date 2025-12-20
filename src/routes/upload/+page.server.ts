@@ -32,6 +32,19 @@ export const load = async function ({ parent }: any) {
 	});
 
 	let infoInit: { [name: string]: any } = {};
+
+	let currentSeasonName;
+	try {
+		const currentSeason = await client.seasons.findFirst({
+			orderBy: {
+				id: 'desc'
+			}
+		});
+		currentSeasonName = currentSeason?.seasonName ?? null;
+	} catch (error) {
+		currentSeasonName = " ";
+	}
+
 	return {
 		missionInfo: missions.reduce((info: { [name: string]: any }, miss: any) => {
 			info[miss.name] = {};
@@ -56,6 +69,7 @@ export const load = async function ({ parent }: any) {
 			.sort(),
 		packs: packs.sort((a, b) => {
 			return withoutArticle(a.name).localeCompare(withoutArticle(b.name));
-		})
+		}),
+		currentSeasonName: currentSeasonName
 	};
 };

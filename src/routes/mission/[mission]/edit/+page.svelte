@@ -25,6 +25,7 @@
 	import { applyAction } from '$app/forms';
 	import { TP_TEAM } from '$lib/const';
 	import TextArea from '$lib/controls/TextArea.svelte';
+	import { onMount } from 'svelte';
 
 	export let data;
 
@@ -33,6 +34,7 @@
 	let packs: MissionPackSelection[] = data.packs;
 	let modules: Record<string, RepoModule> | null = data.modules;
 	let logfile = mission.logfile ?? '';
+	let seasonOptions: Array<{ value: string | null, label: string }> = [];
 
 	sortBombs(mission, modules);
 
@@ -158,6 +160,25 @@
 	}
 
 	missionNames.unshift('');
+
+	async function loadSeasons(): Promise<void> {
+        try {
+            const response = await fetch('/season/get');
+            if (response.ok) {
+                let seasons: Array<{ id: number, seasonName: string }> = await response.json();
+                seasonOptions = ['',
+                    ...seasons.map((s: { seasonName: string }) => s.seasonName)
+                ];
+            }
+        } catch (error) {
+            console.error('Error loading seasons:', error);
+        }
+    }
+
+    onMount(() => {
+        loadSeasons();
+    });
+
 </script>
 
 <svelte:head>
@@ -374,6 +395,12 @@
 						parse={parseDate}
 						display={formatDate}
 						bind:value={completion.dateAdded} />
+					<Select
+                        label="Season"
+                        id="completion-season-{ci}"
+                        bind:value={completion.season}
+                        options={seasonOptions}
+                    />
 					<div class="hstack centered">
 						<button
 							on:click={() => saveCompletion(completion, ci)}

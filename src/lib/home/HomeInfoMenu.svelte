@@ -9,6 +9,7 @@
 		<a href="/modules">Modules</a>
 		<a href="https://github.com/samfundev/KTANE-Bombs/issues">GitHub</a>
 		<a href="/changelog">What’s New?</a>
+		<a href="/seasoninfo">Season</a>
 	</div>
 </div>
 
