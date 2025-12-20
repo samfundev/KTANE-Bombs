@@ -65,12 +65,13 @@
 	<p>These rules need to be followed for season 1 solves</p>
 	<ul>
 		<li>Experts and EFM can only use notepads with no extra functionalities other than taking notes,
-		    non-restricted repository(LINK) manuals and calculators for basic arithmetic. Any other tool is not allowed.</li>
+		    non-restricted <a href="https://ktane.timwi.de/">repository</a> manuals and calculators for basic arithmetic.
+		     Any other tool is not allowed.</li>
 		<li>The following bombs are also allowed for season 1 solves:</li>
         <ul>
-            <li>Easy challenge</li>
-            <li>Centurion</li>
-            <li>One-Souvenir Army</li>
+            <li><a href="https://bombs.samfun.dev/mission/Easy%20Challenge">Easy Challenge</a></li>
+            <li><a href="https://bombs.samfun.dev/mission/Centurion">Centurion</a></li>
+            <li><a href="https://bombs.samfun.dev/mission/One-Souvenir%20Army">One-Souvenir Army</a></li>
         </ul>
 	</ul>
 </div>
@@ -79,8 +80,8 @@
 	<h2>FAQ</h2>
 
 	<ul>
-		<li>Are the extra functionalities in the Text Field Calculator(LINK), such as variable saving,
-		    allowed for season 1 solves?</li>
+		<li>Are the extra functionalities in the <a href="https://files.timwi.de/Tools/Calculator.html">Text Field
+		    Calculator</a>, such as variable saving, allowed for season 1 solves?</li>
         <ul>
             <li>No. The TFC can be used for note taking and basic arithmetic (addition, subtraction, multiplication,
                 division and powers), but no extra functionalities are allowed.</li>
