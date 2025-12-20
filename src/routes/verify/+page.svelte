@@ -82,6 +82,9 @@
 				<CompletionCard completion={item.completion} />
 				<div class="block">
 					Uploaded by:<br />{item.completion.uploadedBy}
+					{#if item.completion.season}
+					    <br /><span class="orange">{item.completion.season}</span>
+					{/if}
 					{#if matchingSolve(item) >= 0}
 						<br /><span class="red">Resubmission</span>
 					{/if}
@@ -115,6 +118,10 @@
 	:is(span, .block).red {
 		color: red;
 	}
+
+	:is(span, .block).orange {
+    	color: orange;
+    }
 
 	.top-bar {
 		position: relative;

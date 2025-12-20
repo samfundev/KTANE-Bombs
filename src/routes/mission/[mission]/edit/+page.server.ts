@@ -148,6 +148,7 @@ export const actions: Actions = {
 				proofs: completion.proofs,
 				time: completion.time,
 				solo: completion.solo,
+				season: completion.season,
 				first: completion.first,
 				old: completion.old,
 				team: completion.team,

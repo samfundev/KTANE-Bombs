@@ -2,13 +2,29 @@
 	import { TP_TEAM } from '$lib/const';
 	import type { MissionCompletion } from '$lib/types';
 	import { formatTime, getPersonColor, listify, properUrlEncode } from '$lib/util';
+	import { onMount } from 'svelte';
 
 	export let comp: MissionCompletion;
 	export let username: string;
 	export let showTime: boolean = false;
 
 	let tp = username === TP_TEAM;
+	let currentSeasonName = '';
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+
+	async function getCurrentSeason() {
+        const response = await fetch('/season/get');
+        if (response.ok) {
+            const seasons = await response.json();
+            const currentSeason = seasons.length > 0 ? seasons[seasons.length - 1] : null;
+            currentSeasonName = currentSeason?.seasonName ?? null;
+        }
+    }
+
+    onMount(() => {
+        getCurrentSeason();
+    });
+
 </script>
 
 <a href="/mission/{properUrlEncode(comp.mission.name)}">
@@ -19,7 +35,12 @@
 			<span class="time" class:first={comp.first} class:old={comp.old} title={formatTime(comp.time, true)}
 				>{formatTime(comp.time)}</span>
 		{/if}
-		<span class="mission-name">{comp.mission.name}</span>
+		<span
+          class="mission-name"
+          style="{comp.season === currentSeasonName ? 'color: #6F42C1; font-weight: bold;' : ''}"
+        >
+          {comp.mission.name}
+        </span>
 		{#if comp.dateAdded}
 			<span>{comp.dateAdded.toLocaleDateString(undefined, dateOptions)}</span>
 		{/if}

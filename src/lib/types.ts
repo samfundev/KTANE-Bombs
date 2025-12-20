@@ -14,7 +14,8 @@ export enum Permission {
 	VerifyCompletion = 2,
 	VerifyMissionPack = 3,
 	RenameUser = 4,
-	DownloadDatabase = 5
+	DownloadDatabase = 5,
+	ManageSeasons = 6
 }
 
 export type ID<T> = T & { id: number };
@@ -73,6 +74,7 @@ export class Completion {
 	first = false;
 	old = false;
 	solo = false;
+	season : string | null = null;
 	notes: string | null = null;
 	dateAdded: Date | null = null;
 	uploadedBy: string | null = null;
@@ -143,6 +145,7 @@ export interface Completer {
 export class MissionCompletion {
 	team: string[] = [];
 	solo = false;
+	season: string | null = null;
 	dateAdded: Date | null = null;
 	first = false;
 	time: number | undefined = undefined;
