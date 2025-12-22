@@ -25,7 +25,6 @@ export const load = async function ({ parent, params }: any) {
 		select: {
 			team: true,
 			solo: true,
-			season: true,
 			dateAdded: true,
 			first: true,
 			time: true,
@@ -52,7 +51,6 @@ export const load = async function ({ parent, params }: any) {
 				select: {
 					team: true,
 					solo: true,
-					season: true,
 					dateAdded: true,
 					first: true,
 					time: true,

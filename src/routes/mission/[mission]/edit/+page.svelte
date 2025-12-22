@@ -20,12 +20,13 @@
 		validateMissionID
 	} from '$lib/util';
 	import { sortBombs } from '../../_shared';
-	import type { EditMission } from './_types';
+	import type { EditCompletion, EditMission } from './_types';
 	import { page } from '$app/stores';
 	import { applyAction } from '$app/forms';
 	import { TP_TEAM } from '$lib/const';
 	import TextArea from '$lib/controls/TextArea.svelte';
 	import { onMount } from 'svelte';
+	import { Season } from '@prisma/client';
 
 	export let data;
 
@@ -33,8 +34,8 @@
 	let missionNames: string[] = data.missionNames;
 	let packs: MissionPackSelection[] = data.packs;
 	let modules: Record<string, RepoModule> | null = data.modules;
+	let seasons: {name: string}[] = [{name: ""}, ...data.seasons];
 	let logfile = mission.logfile ?? '';
-	let seasonOptions: Array<{ value: string | null, label: string }> = [];
 
 	sortBombs(mission, modules);
 
@@ -91,7 +92,7 @@
 		applyAction(result);
 	}
 
-	async function saveCompletion(comp: ID<Completion>, index: number) {
+	async function saveCompletion(comp: EditCompletion, index: number) {
 		const fData = new FormData();
 		fData.append('completion', JSON.stringify(comp));
 
@@ -160,25 +161,6 @@
 	}
 
 	missionNames.unshift('');
-
-	async function loadSeasons(): Promise<void> {
-        try {
-            const response = await fetch('/season/get');
-            if (response.ok) {
-                let seasons: Array<{ id: number, seasonName: string }> = await response.json();
-                seasonOptions = ['',
-                    ...seasons.map((s: { seasonName: string }) => s.seasonName)
-                ];
-            }
-        } catch (error) {
-            console.error('Error loading seasons:', error);
-        }
-    }
-
-    onMount(() => {
-        loadSeasons();
-    });
-
 </script>
 
 <svelte:head>
@@ -396,11 +378,11 @@
 						display={formatDate}
 						bind:value={completion.dateAdded} />
 					<Select
-                        label="Season"
-                        id="completion-season-{ci}"
-                        bind:value={completion.season}
-                        options={seasonOptions}
-                    />
+						label="Season"
+						id="completion-season-{ci}"
+						bind:value={completion.seasonName}
+						display={s => s ? s : ""}
+						options={seasons.map(s => s.name)} />
 					<div class="hstack centered">
 						<button
 							on:click={() => saveCompletion(completion, ci)}

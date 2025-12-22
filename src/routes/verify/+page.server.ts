@@ -87,6 +87,11 @@ export const load = async function ({ parent, locals }: any) {
 							where: { verified: true }
 						}
 					}
+				},
+				season: {
+					select: {
+						name: true
+					}
 				}
 			}
 		});

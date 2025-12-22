@@ -429,6 +429,15 @@ export function formatDate(dt: Date): string {
 	return d.toISOString().split('T')[0];
 }
 
+export function parseUTCDate(dt: string): Date | null {
+	return new Date(dt);
+}
+
+export function formatUTCDate(dt: Date): string {
+	if (isNaN(dt?.getTime() ?? NaN)) return '';
+	return dt.toISOString().split('Z')[0];
+}
+
 type DateSortable = { id: number; dateAdded: Date | null };
 export function dateAddedSort(a: DateSortable, b: DateSortable): number {
 	return a.dateAdded == null || b.dateAdded == null ? a.id - b.id : a.dateAdded.getTime() - b.dateAdded.getTime();

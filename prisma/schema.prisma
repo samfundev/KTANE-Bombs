@@ -75,7 +75,8 @@ model Completion {
   notes        String?
   dateAdded    DateTime?
   uploadedBy   String?
-  season       String?
+  season       Season? @relation(fields: [seasonId], references: [id], onDelete: SetNull)
+  seasonId     Int?
 
   mission      Mission @relation(fields: [missionId], references: [id], onDelete: Cascade)
   missionId    Int
@@ -96,7 +97,11 @@ model AuditLog {
   after      Json?
 }
 
-model Seasons{
-  id          Int     @id @default(autoincrement())
-  seasonName  String
+model Season {
+  id           Int     @id @default(autoincrement())
+  name         String  @unique
+  start        DateTime
+  end          DateTime
+  notes        String?
+  completions  Completion[]
 }

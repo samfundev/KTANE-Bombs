@@ -74,7 +74,6 @@ export class Completion {
 	first = false;
 	old = false;
 	solo = false;
-	season : string | null = null;
 	notes: string | null = null;
 	dateAdded: Date | null = null;
 	uploadedBy: string | null = null;
@@ -125,7 +124,7 @@ export interface MissionQueueItem {
 
 export interface CompletionQueueItem {
 	type: 'completion';
-	completion: ID<Completion>;
+	completion: ID<Completion> & { season: Season };
 	mission: Omit<ID<Mission>, 'completions'> & { completions: ID<Completion>[] };
 }
 
@@ -151,4 +150,11 @@ export class MissionCompletion {
 	time: number | undefined = undefined;
 	old: boolean | undefined = undefined;
 	mission: Pick<Mission, 'name'> = { name: '' };
+}
+
+export class Season {
+	name: string = "";
+	start: Date = new Date();
+	end: Date = new Date();
+	notes: string | null = null;
 }

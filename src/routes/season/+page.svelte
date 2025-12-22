@@ -1,278 +1,150 @@
 <script lang="ts">
-	import { TP_TEAM } from '$lib/const';
-	import { type Completer, Permission } from '$lib/types';
-	import { properUrlEncode, hasPermission } from '$lib/util.js';
-	import { onMount } from 'svelte';
-    import { page } from '$app/stores';
+	import { Permission } from '$lib/types';
+	import { formatUTCDate, hasPermission, parseUTCDate } from '$lib/util.js';
+	import { page } from '$app/stores';
+	import { Season } from '@prisma/client';
+	import toast from 'svelte-french-toast';
+	import Input from '$lib/controls/Input.svelte';
+	import Dialog from '$lib/controls/Dialog.svelte';
+
 	export let data;
-	const seasons: Array<{ id: number, seasonName: string }> = data.seasons || [];
-    const currentSeason = data.currentSeason;
-    const seasonCompleters: Record<string, Completer[]> = data.seasonCompleters || {};
-	let ranks: { [name: string]: number } = {};
-	let rank = 1;
-	let tied = 1;
-	let selectedSeasonName: string = currentSeason?.seasonName || '';
-    let completers: Completer[] = seasonCompleters[selectedSeasonName] || [];
-    let seasonName: string = '';
-    let showSuccessPopup: boolean = false;
-    let successMessage: string = '';
-    let seasonsList: Array<{ id: number, seasonName: string }> = [];
-    let selectedSeasonId: number | null = null;
-    let showDeletePopup: boolean = false;
-    let seasonToDelete: string = '';
+	export let seasons: Season[] = data.seasons || [];
 
-    $: {
-        completers = seasonCompleters[selectedSeasonName] || [];
+	let dialog: HTMLDialogElement;
+	let seasonName: string = '';
+	let [seasonStart, seasonEnd] = getNextQuarterRange();
+	// console.log(seasonStart.toISOString());
+	// console.log(seasonEnd.toISOString());
 
-        if (completers.length > 0) {
-            recalculateRanks(completers);
-        }
-    }
+	function uniqueSeasonName(value: string) {
+		return seasons.some(s => s.name.toUpperCase() === value.toUpperCase()) ? 'Name already exists.' : true;
+	}
 
-    function handleSeasonChange(event: Event): void {
-        const target = event.target as HTMLSelectElement;
-        selectedSeasonName = target.value;
-    }
+	function getNextQuarterRange(fromDate: Date = new Date()): [Date, Date] {
+		let from = new Date(fromDate);
+		from.setUTCDate(from.getUTCDate() - 1);
+		const year = from.getUTCFullYear();
 
-    function recalculateRanks(completersArray: Completer[]): void {
-        ranks = {};
-        rank = 1;
-        tied = 1;
+		const quarterStarts = [
+			new Date(Date.UTC(year, 0, 1, 0, 0, 0, 0)), // Jan 1
+			new Date(Date.UTC(year, 3, 1, 0, 0, 0, 0)), // Apr 1
+			new Date(Date.UTC(year, 6, 1, 0, 0, 0, 0)), // Jul 1
+			new Date(Date.UTC(year, 9, 1, 0, 0, 0, 0)) // Oct 1
+		];
 
-        if (completersArray.length > 0) {
-            ranks[completersArray[0].name] = rank;
-            for (let c = 1; c < completersArray.length; c++) {
-                const comp = completersArray[c];
-                const prev = completersArray[c - 1];
-                if (
-                    comp.distinct === prev.distinct &&
-                    comp.defuser + comp.expert + comp.efm === prev.defuser + prev.expert + prev.efm
-                ) {
-                    tied++; // Tied with previous
-                } else {
-                    rank += tied; // New rank
-                    tied = 1;
-                }
-                ranks[comp.name] = rank;
-            }
-        }
-    }
+		let start: Date | undefined;
 
-    async function addSeason() {
-        if (!seasonName.trim()) return;
+		for (const candidate of quarterStarts) {
+			if (candidate.getTime() > from.getTime()) {
+				start = candidate;
+				break;
+			}
+		}
 
-        try {
-            const response = await fetch('/season/new', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ seasonName: seasonName.trim() })
-            });
+		// If none remain this year, use Jan 1 of next year
+		if (!start) {
+			start = new Date(Date.UTC(year + 1, 0, 1, 0, 0, 0, 0));
+		}
 
-            if(response.ok){
-                successMessage = `Season "${seasonName.trim()}" added successfully!`;
-                showSuccessPopup = true;
-                await loadSeasons();
-            }
+		// End = start + 3 months, minus 1 minute
+		const end = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth() + 3, 1, 0, 0, 0, 0));
+		end.setUTCMinutes(end.getUTCMinutes() - 1);
 
-            seasonName = '';
-        } catch (error) {
-          console.error('Error adding season:', error);
-        }
-    }
+		return [start, end];
+	}
 
-    function closePopup(): void {
-        showSuccessPopup = false;
-    }
+	async function addSeason() {
+		if (!seasonName.trim()) return;
 
-    async function loadSeasons(): Promise<void> {
-        try {
-            const response = await fetch('/season/get');
-            if (response.ok) {
-                seasonsList = await response.json();
-            }
-        } catch (error) {
-            console.error('Error loading seasons:', error);
-        }
-    }
+		try {
+			const response = await fetch('/season/new', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					seasonName: seasonName.trim(),
+					start: seasonStart,
+					end: seasonEnd
+				})
+			});
 
-    async function deleteSelectedSeason(): Promise<void> {
-        if (!selectedSeasonId) return;
-        closeDeletePopup();
-        try {
-            const response = await fetch(`/season/delete/${selectedSeasonId}`, {
-                method: 'DELETE'
-            });
+			if (response.ok) {
+				toast.success(`Season "${seasonName.trim()}" added successfully!`);
+				dialog.close();
+			}
 
-            if (response.ok) {
-                await loadSeasons();
-                selectedSeasonId = null;
-            }
-        } catch (error) {
-            console.error('Error deleting season:', error);
-        }
-    }
-
-    function confirmDelete(): void {
-        if (!selectedSeasonId) return;
-
-        const season = seasonsList.find(s => s.id === selectedSeasonId);
-        if (season) {
-            seasonToDelete = season.seasonName;
-            showDeletePopup = true;
-        }
-    }
-
-    function closeDeletePopup(): void {
-        showDeletePopup = false;
-    }
-
-    onMount(async () => {
-        if (completers.length > 0) {
-            recalculateRanks(completers);
-        }
-        await loadSeasons();
-    });
+			seasonName = '';
+		} catch (error) {
+			console.error('Error adding season:', error);
+		}
+	}
 </script>
 
 <svelte:head>
-	<title>Season</title>
+	<title>Seasons</title>
 </svelte:head>
-<h1 class="header">
-	Season
-	<div class="season-selector">
-        <select
-            id="season-select"
-            bind:value={selectedSeasonName}
-            on:change={handleSeasonChange}
-        >
-            {#each seasons as season}
-                <option value={season.seasonName} selected={season.seasonName === currentSeason?.seasonName}>
-                    {season.seasonName}
-                </option>
-            {:else}
-                <option value="" disabled>No seasons available</option>
-            {/each}
-        </select>
+<div class="block relative">
+	<h1 class="header">Seasons</h1>
 
-
-    {#if hasPermission($page.data.user, Permission.ManageSeasons)}
-        <div style="margin-left: auto; display: flex; gap: 10px; align-items: center;">
-            <input
-              type="text"
-              bind:value={seasonName}
-              placeholder="Start new season"
-              on:keypress={(e) => e.key === 'Enter' && addSeason()}
-              style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 4px;"
-            />
-            <button
-              on:click={addSeason}
-              disabled={!seasonName.trim()}
-              style="padding: 1px 2px; font-size: 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;"
-            >
-              Add
-            </button>
-        </div>
-    {/if}
-
-    {#if showSuccessPopup}
-        <div class="popup-overlay" on:click={closePopup}>
-            <div class="popup" on:click|stopPropagation>
-                <div class="popup-content">
-                    <p>{successMessage}</p>
-                </div>
-                <div class="popup-footer">
-                    <button on:click={closePopup} class="btn-ok">OK</button>
-                </div>
-            </div>
-        </div>
-    {/if}
-
-    <br>
-
-    {#if hasPermission($page.data.user, Permission.ManageSeasons)}
-        <div style="display: flex; gap: 10px; align-items: center;">
-            <select
-                bind:value={selectedSeasonId}
-                style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 4px; min-width: 200px;"
-            >
-                <option value={null} disabled selected>Select season to delete</option>
-                {#each seasonsList as season}
-                    <option value={season.id}>{season.seasonName}</option>
-                {/each}
-            </select>
-            <button
-                on:click={confirmDelete}
-                disabled={!selectedSeasonId}
-                style="padding: 1px 2px; font-size: 20px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;"
-            >
-                Delete
-            </button>
-        </div>
-    {/if}
-
-    {#if showDeletePopup}
-    <div class="popup-overlay" on:click={closeDeletePopup}>
-        <div class="popup" on:click|stopPropagation>
-            <div class="popup-content">
-                <p>Are you sure you want to delete season <strong>"{seasonToDelete}"</strong>?</p>
-                <p class="warning-text">This action cannot be undone!</p>
-            </div>
-            <div class="popup-footer">
-                <button on:click={closeDeletePopup} class="btn-cancel" style="background: #6c757d; margin-right: 10px;">Cancel</button>
-                <button on:click={deleteSelectedSeason} class="btn-confirm" style="background: #dc3545;">Delete</button>
-            </div>
-        </div>
-    </div>
-    {/if}
-
-    </div>
-</h1>
-
-<div class="table">
-	<b class="block" />
-	<b class="block">Name</b>
-	<b class="block" title="Number of distinct missions solved.">Distinct</b>
-	<b class="block" title="Number of missions solved (including duplicates).">Total</b>
-	<b class="block">Defuser</b>
-	<b class="block">Expert</b>
-	<b class="block">EFM</b>
-	{#each completers as completer}
-		<div class="block">{ranks[completer.name]}</div>
-		<div class="block"><a href="/user/{properUrlEncode(completer.name)}">{completer.name}</a></div>
-		<div class="block">{completer.distinct}</div>
-		<div class="block">{completer.defuser + completer.expert + completer.efm}</div>
-		<div class="block">{completer.defuser}</div>
-		<div class="block">{completer.expert}</div>
-		<div class="block">{completer.efm}</div>
-	{/each}
+	{#if hasPermission($page.data.user, Permission.ManageSeasons)}
+		<div class="actions">
+			<button on:click={() => dialog.showModal()}>Create New Season</button>
+		</div>
+	{/if}
 </div>
 
-<style>
-	.table {
-		display: grid;
-		grid-template-columns: min-content min-content auto auto auto auto auto;
-		gap: var(--gap);
-		text-align: center;
-	}
-	.header {
-		position: relative;
-	}
-	.header a {
-		position: absolute;
-		font-size: 12pt;
-		line-height: 2.2;
-		color: #9146ff;
-		left: 10px;
-	}
+{#if hasPermission($page.data.user, Permission.ManageSeasons)}
+	<Dialog bind:dialog>
+		<div class="flex column content-width">
+			<h2>Create New Season</h2>
+			<form on:submit|preventDefault={() => addSeason()}>
+				<Input
+					classes="new-season"
+					id="season-name"
+					label="Season Name"
+					bind:value={seasonName}
+					required
+					placeholder="Cool Name"
+					validate={uniqueSeasonName} />
+				<Input
+					type="datetime-local"
+					classes="new-season"
+					id="season-start"
+					label="Start Date (UTC time)"
+					parse={parseUTCDate}
+					display={formatUTCDate}
+					required
+					bind:value={seasonStart} />
+				<Input
+					type="datetime-local"
+					classes="new-season"
+					id="season-end"
+					label="End Date (UTC time)"
+					parse={parseUTCDate}
+					display={formatUTCDate}
+					required
+					bind:value={seasonEnd} />
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+	</Dialog>
+{/if}
 
-	.table b.block {
-		position: sticky;
-		top: var(--stick-under-navbar);
+{#each seasons as season, index}
+	<div class="block">
+		<div class="flex">
+			<h3>{index + 1}</h3>
+			<a href="/season/{season.name}"><h3>{season.name}</h3></a>
+		</div>
+	</div>
+{/each}
+
+<style>
+	:global(input.new-season) {
+		background-color: #eee;
+		color: #000;
 	}
-	.table .block {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
+	.flex {
+		gap: 15px;
 	}
 
 	a {

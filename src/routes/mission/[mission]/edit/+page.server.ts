@@ -1,7 +1,7 @@
 import client from '$lib/client';
 import createAuditClient from '$lib/auditlog';
 import { getData, RepoModule } from '$lib/repo';
-import { Completion, Permission, type ID } from '$lib/types';
+import { Completion, Permission, Season, type ID } from '$lib/types';
 import { excludeArticleSort, forbidden, hasPermission, properUrlEncode } from '$lib/util';
 import type { RequestEvent, ServerLoadEvent } from '@sveltejs/kit';
 import type { EditMission } from './_types';
@@ -29,7 +29,22 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			},
 			completions: {
 				where: { verified: true },
-				select: client.$exclude('completion', ['missionId'])
+				select: {
+					season: {
+						select: {
+							name: true
+						}
+					},
+					id: true,
+					proofs: true,
+					time: true,
+					solo: true,
+					first: true,
+					old: true,
+					team: true,
+					notes: true,
+					dateAdded: true
+				}
 			},
 			designedForTP: true,
 			tpSolve: true,
@@ -54,6 +69,8 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 	if (missionResult === null) {
 		throw error(404, 'Mission not found.');
 	}
+
+	missionResult.completions.forEach(comp => comp.seasonName = comp.season?.name)
 
 	const packs = await client.missionPack.findMany({
 		select: {
@@ -81,6 +98,13 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		}
 	});
 
+	const seasons = await client.season.findMany({
+		select: {
+			name: true
+		},
+		orderBy: { id: 'asc' }
+	});
+
 	return {
 		mission: {
 			...missionResult,
@@ -89,7 +113,8 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		},
 		missionNames: missions.map(m => m.name).sort(excludeArticleSort),
 		packs,
-		modules: await getData()
+		modules: await getData(),
+		seasons
 	};
 };
 
@@ -138,7 +163,15 @@ export const actions: Actions = {
 		const auditClient = createAuditClient(locals.user);
 
 		const fData = await request.formData();
-		const completion: ID<Completion> = JSON.parse(fData.get('completion')?.toString() ?? '');
+		const completion: EditCompletion = JSON.parse(fData.get('completion')?.toString() ?? '');
+		const seasonResult = await client.season.findFirst({
+			where: {
+				name: completion.seasonName
+			},
+			select: {
+				id: true
+			}
+		});
 
 		await auditClient.completion.update({
 			where: {
@@ -148,7 +181,7 @@ export const actions: Actions = {
 				proofs: completion.proofs,
 				time: completion.time,
 				solo: completion.solo,
-				season: completion.season,
+				seasonId: seasonResult ? seasonResult.id : null,
 				first: completion.first,
 				old: completion.old,
 				team: completion.team,
