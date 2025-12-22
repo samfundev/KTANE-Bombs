@@ -33,16 +33,16 @@ export const load = async function ({ parent }: any) {
 
 	let infoInit: { [name: string]: any } = {};
 
-	let currentSeasonName;
+	let currentSeasonId;
 	try {
-		const currentSeason = await client.seasons.findFirst({
+		const currentSeason = await client.season.findFirst({
 			orderBy: {
 				id: 'desc'
 			}
 		});
-		currentSeasonName = currentSeason?.seasonName ?? null;
+		currentSeasonId = currentSeason?.id ?? null;
 	} catch (error) {
-		currentSeasonName = " ";
+		currentSeasonId = null;
 	}
 
 	return {
@@ -70,6 +70,6 @@ export const load = async function ({ parent }: any) {
 		packs: packs.sort((a, b) => {
 			return withoutArticle(a.name).localeCompare(withoutArticle(b.name));
 		}),
-		currentSeasonName: currentSeasonName
+		currentSeasonId
 	};
 };

@@ -11,7 +11,11 @@ export async function POST({ locals, request }: RequestEvent) {
 
 	const auditClient = createAuditClient(locals.user);
 
-	const { completion, missionName }: { completion: Completion; missionName: string } = await request.json();
+	const {
+		completion,
+		missionName,
+		seasonId
+	}: { completion: Completion; missionName: string; seasonId: number | undefined } = await request.json();
 	completion.uploadedBy = locals.user.id;
 	if (completion.team.length != 1 && completion.solo) {
 		return new Response(undefined, { status: 406 });
@@ -50,6 +54,11 @@ export async function POST({ locals, request }: RequestEvent) {
 			mission: {
 				connect: {
 					id: mission.id
+				}
+			},
+			season: {
+				connect: {
+					id: seasonId
 				}
 			},
 			first: false, // This will be set to the correct value once the completion is verified.

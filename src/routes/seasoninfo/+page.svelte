@@ -3,10 +3,10 @@
 </script>
 
 <svelte:head>
-	<title>Season</title>
+	<title>Season Info</title>
 </svelte:head>
 
-<h1 class="header">Season</h1>
+<h1 class="header">Season Info</h1>
 
 <div class="block">
 	Participation in seasons is optional. If you intend to only submit your solves to the global leaderboard you can

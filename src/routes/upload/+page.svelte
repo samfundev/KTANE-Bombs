@@ -9,7 +9,7 @@
 	let authorNames: string[] = data.authorNames;
 	let solverNames: string[] = data.solverNames;
 	let packs: MissionPackSelection[] = data.packs;
-	let currentSeasonName : string | null = data.currentSeasonName;
+	let currentSeasonId : number | null = data.currentSeasonId;
 
 	let section: 'solve' | 'mission' | 'missionpack' = 'solve';
 </script>
@@ -31,7 +31,7 @@
 {:else if section == 'missionpack'}
 	<MissionPackSection />
 {:else}
-	<CompletionSection {missionInfo} {solverNames} {currentSeasonName} />
+	<CompletionSection {missionInfo} {solverNames} {currentSeasonId} />
 {/if}
 
 <style>

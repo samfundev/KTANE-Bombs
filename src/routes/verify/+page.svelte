@@ -83,7 +83,7 @@
 				<div class="block">
 					Uploaded by:<br />{item.completion.uploadedBy}
 					{#if item.completion.season}
-					    <br /><span class="orange">{item.completion.season}</span>
+						<br /><span class="green">Season</span>
 					{/if}
 					{#if matchingSolve(item) >= 0}
 						<br /><span class="red">Resubmission</span>
@@ -119,9 +119,9 @@
 		color: red;
 	}
 
-	:is(span, .block).orange {
-    	color: orange;
-    }
+	:is(span, .block).green {
+		color: #009c0a;
+	}
 
 	.top-bar {
 		position: relative;
