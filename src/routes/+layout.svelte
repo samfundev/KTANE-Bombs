@@ -46,7 +46,7 @@
 		{/if}
 		<a class="block" href="/season">Seasons</a>
 		<div style="margin-left: auto" class="block info-tab" bind:this={infoTab}>
-			<div on:click={() => popup(infoMenu, infoTab, true, [8, 6])}>Info</div>
+			<div class="info-button" on:click={() => popup(infoMenu, infoTab, true, [8, 6])}>Info</div>
 			<HomeInfoMenu bind:div={infoMenu} />
 		</div>
 
@@ -94,6 +94,7 @@
 		--boss-color: #ffaaaa;
 		--needy-color: #9999ff;
 		--quirks-color: #aae8ff;
+		--block-separator: #EEEEFF;
 		--stick-under-navbar: calc(1.25em + 4 * var(--gap) + 2px);
 		--page-content-width: min(calc(100vw - 4 * var(--gap)), 1150px);
 	}
@@ -116,6 +117,7 @@
 			--boss-color: #762121;
 			--needy-color: #1e1e84;
 			--quirks-color: #216f86;
+			--block-separator: #1A1A22;
 		}
 		:global(.dark-invert) {
 			filter: invert(90%);
@@ -314,7 +316,7 @@
 		color: var(--text-color);
 		text-decoration: none;
 	}
-	.info-tab {
+	.info-button {
 		cursor: pointer;
 	}
 

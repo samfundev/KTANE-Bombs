@@ -80,7 +80,7 @@
 				</div>
 			{:else if item.type === 'completion'}
 				<CompletionCard completion={item.completion} />
-				<div class="block">
+				<div class="block completion-uploaded-by">
 					Uploaded by:<br />{item.completion.uploadedBy}
 					{#if item.completion.season}
 						<br /><span class="green">Season</span>
@@ -118,9 +118,12 @@
 	:is(span, .block).red {
 		color: red;
 	}
-
 	:is(span, .block).green {
 		color: #009c0a;
+	}
+
+	.completion-uploaded-by {
+		word-break: break-all;
 	}
 
 	.top-bar {
