@@ -358,7 +358,7 @@
 	.search-bar {
 		position: sticky;
 		background: var(--foreground);
-		top: calc(var(--stick-under-navbar) + 1px);
+		top: var(--stick-under-navbar);
 	}
 	.search-bar > .hstack {
 		padding: 5px 0;

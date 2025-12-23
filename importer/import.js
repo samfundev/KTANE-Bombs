@@ -13,6 +13,8 @@ const { PrismaClient } = pkg;
 	packs.sort((a, b) => parseInt(a.id) - parseInt(b.id));
 	let missions = [];
 	let completions = [];
+	let seasons = new Set();
+	console.log('Parsing missions and mission packs');
 	for (const pack of packs) {
 		const missionPack = await client.missionPack.upsert({
 			create: {
@@ -61,7 +63,7 @@ const { PrismaClient } = pkg;
 					time: completion.time,
 					team: completion.team,
 					first: completion.first,
-					season: completion.season,
+					seasonName: completion.season ? completion.season.name : null,
 					old: completion.old,
 					solo: completion.solo,
 					notes: completion.notes,
@@ -71,12 +73,15 @@ const { PrismaClient } = pkg;
 					uploadedBy: completion.uploadedBy,
 					verified: completion.verified
 				});
+				if (completion.season)
+					seasons.add(completion.season.name);
 			}
 		}
 	}
 	missions.sort((a, b) => parseInt(a.id) - parseInt(b.id));
 	completions.sort((a, b) => parseInt(a.id) - parseInt(b.id));
 
+	console.log('Creating missions');
 	let missionQueries = [];
 	for (const mission of missions) {
 		missionQueries.push(
@@ -127,6 +132,28 @@ const { PrismaClient } = pkg;
 	}
 	await client.$transaction(missionQueries);
 
+	console.log('Creating seasons');
+	let seasonQueries = [];
+	for (const season of seasons) {
+		seasonQueries.push(
+			client.season.upsert({
+				create: {
+					name: season,
+					start: new Date(),
+					end: new Date()
+				},
+				update: {
+					name: season
+				},
+				where: {
+					name: season
+				}
+			})
+		);
+	}
+	await client.$transaction(seasonQueries);
+
+	console.log('Creating solves');
 	let completionQueries = [];
 	for (const [_, completion] of completions.entries()) {
 		const comp = await client.completion.findMany({
@@ -158,6 +185,9 @@ const { PrismaClient } = pkg;
 						notes: completion.notes,
 						mission: {
 							connect: { name: completion.missionName }
+						},
+						season: completion.seasonName == null ? undefined : {
+							connect: { name: completion.seasonName }
 						},
 						dateAdded: completion.dateAdded,
 						uploadedBy: completion.uploadedBy,
