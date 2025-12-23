@@ -98132,6 +98132,1151 @@
 			"timestamp": "2025-12-21T12:06:35.974Z",
 			"before": { "verified": false },
 			"after": { "verified": true }
+		},
+		{
+			"id": 7500,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63350",
+			"name": "Fnuuy||BladePL",
+			"action": "create",
+			"timestamp": "2025-12-21T13:24:28.566Z"
+		},
+		{
+			"id": 7501,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "63351",
+			"name": "Tenth Day of Christmas||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2025-12-21T15:20:50.853Z"
+		},
+		{
+			"id": 7502,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "63352",
+			"name": "Eleventh Day of Christmas||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2025-12-21T15:21:28.747Z"
+		},
+		{
+			"id": 7503,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "63353",
+			"name": "Twelfth Day of Christmas||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2025-12-21T15:22:35.021Z"
+		},
+		{
+			"id": 7504,
+			"userId": "566568608755613731",
+			"model": "Completion",
+			"recordId": "63354",
+			"name": "Baka, Baka, Baka||Dani was here",
+			"action": "create",
+			"timestamp": "2025-12-21T16:06:23.032Z"
+		},
+		{
+			"id": 7505,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "62934",
+			"name": "Modder Marathon 2||Megum, Termet, AzaFTW",
+			"action": "update",
+			"timestamp": "2025-12-21T17:48:48.951Z",
+			"before": { "old": false },
+			"after": { "old": true }
+		},
+		{
+			"id": 7506,
+			"userId": "292774728014364686",
+			"model": "User",
+			"recordId": "356080305087447040",
+			"name": "aGood_Usernam3",
+			"action": "update",
+			"timestamp": "2025-12-21T17:50:47.312Z",
+			"before": { "permissions": [] },
+			"after": { "permissions": [1, 2, 3] }
+		},
+		{
+			"id": 7507,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11023",
+			"name": "Flyer's 49th Problem",
+			"action": "update",
+			"timestamp": "2025-12-21T18:26:13.004Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7508,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11042",
+			"name": "Multifandom II",
+			"action": "update",
+			"timestamp": "2025-12-21T18:26:16.519Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7509,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11043",
+			"name": "Recrumbled Toraiarupakku II",
+			"action": "update",
+			"timestamp": "2025-12-21T18:26:18.787Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7510,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11045",
+			"name": "Rainbows & Unicorns",
+			"action": "update",
+			"timestamp": "2025-12-21T18:26:23.210Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7511,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11051",
+			"name": "The Endless Accumulation",
+			"action": "update",
+			"timestamp": "2025-12-21T18:26:25.254Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7512,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11052",
+			"name": "\"New\" Faces",
+			"action": "update",
+			"timestamp": "2025-12-21T18:26:26.251Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7513,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11053",
+			"name": "From Earth To Space",
+			"action": "update",
+			"timestamp": "2025-12-21T18:26:29.175Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7514,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11054",
+			"name": "From 1 To 11",
+			"action": "update",
+			"timestamp": "2025-12-21T18:26:29.721Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7515,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11055",
+			"name": "The Soloing Sideral9999 experience",
+			"action": "update",
+			"timestamp": "2025-12-21T18:26:32.190Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7516,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11057",
+			"name": "AMM's Flashbacks",
+			"action": "update",
+			"timestamp": "2025-12-21T18:26:32.943Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7517,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11057",
+			"name": "AMM's Flashbacks",
+			"action": "delete",
+			"timestamp": "2025-12-21T18:28:05.173Z",
+			"before": {
+				"id": 11057,
+				"name": "AMM's Flashbacks",
+				"notes": null,
+				"authors": ["rand06"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=176fe5480e6c941ff6cb3f2d58f84ea678fed613",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_rand06missions_ammflash",
+				"timeMode": null,
+				"verified": true,
+				"dateAdded": "2025-09-28T12:51:12.533Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "569550498462564354",
+				"designedForTP": true,
+				"missionPackId": 616
+			}
+		},
+		{
+			"id": 7518,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11085",
+			"name": "[[UPDATE]] AMM's Flashbacks",
+			"action": "create",
+			"timestamp": "2025-12-21T18:28:12.018Z"
+		},
+		{
+			"id": 7519,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11085",
+			"name": "[[UPDATE]] AMM's Flashbacks",
+			"action": "update",
+			"timestamp": "2025-12-21T18:28:48.262Z",
+			"before": { "name": "[[UPDATE]] AMM's Flashbacks", "dateAdded": "2025-12-21T18:27:23.036Z", "inGameName": null },
+			"after": {
+				"name": "AMM's Flashbacks",
+				"dateAdded": "2025-09-28T04:00:00.000Z",
+				"inGameName": "[[UPDATE]] AMM's Flashbacks"
+			}
+		},
+		{
+			"id": 7520,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11058",
+			"name": "Things Sometimes Don't Quite Go to Plan",
+			"action": "update",
+			"timestamp": "2025-12-21T18:29:03.545Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7521,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11060",
+			"name": "Explosives Without Borders",
+			"action": "update",
+			"timestamp": "2025-12-21T18:29:11.175Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7522,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11061",
+			"name": "Luigi Horse",
+			"action": "update",
+			"timestamp": "2025-12-21T18:29:16.733Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7523,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11062",
+			"name": "BETTER JUDGEMENT",
+			"action": "update",
+			"timestamp": "2025-12-21T18:29:17.588Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7524,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11063",
+			"name": "Chronoclasm",
+			"action": "update",
+			"timestamp": "2025-12-21T18:29:18.520Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7525,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11070",
+			"name": "This Is Me",
+			"action": "update",
+			"timestamp": "2025-12-21T18:29:27.793Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7526,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11071",
+			"name": "Almost Too Easy",
+			"action": "update",
+			"timestamp": "2025-12-21T18:29:28.716Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7527,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11072",
+			"name": "Super Collider",
+			"action": "update",
+			"timestamp": "2025-12-21T18:29:29.659Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7528,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "10998",
+			"name": "Modder Marathon 2",
+			"action": "update",
+			"timestamp": "2025-12-21T18:29:40.255Z",
+			"before": { "logfile": "https://ktane.timwi.de/lfa#file=4038e60342bbbafbd2fc2a88ad13ede4293c77e0" },
+			"after": {
+				"bombs": {
+					"create": [
+						{
+							"time": 510,
+							"pools": [
+								{ "count": 1, "modules": ["xelDcode"] },
+								{ "count": 1, "modules": ["xelNegation"] },
+								{ "count": 1, "modules": ["xelBrownBricks"] },
+								{ "count": 1, "modules": ["xelSymmetriesOfASquare"] },
+								{ "count": 1, "modules": ["xelAnotherKeypadModule"] },
+								{ "count": 1, "modules": ["xelDialtones"] },
+								{ "count": 1, "modules": ["xelWhackTheCops"] },
+								{ "count": 1, "modules": ["xelBrokenKaraoke"] },
+								{ "count": 1, "modules": ["xelBMachine"] }
+							],
+							"modules": 9,
+							"strikes": 3,
+							"widgets": 5
+						},
+						{
+							"time": 340,
+							"pools": [
+								{ "count": 1, "modules": ["theCodeModule"] },
+								{ "count": 1, "modules": ["lgndZoni"] },
+								{ "count": 1, "modules": ["lgndLEDMath"] },
+								{ "count": 1, "modules": ["lgndColoredKeys"] },
+								{ "count": 1, "modules": ["lgndHiddenColors"] },
+								{ "count": 1, "modules": ["lgndHyperactiveNumbers"] }
+							],
+							"modules": 6,
+							"strikes": 3,
+							"widgets": 5
+						},
+						{
+							"time": 1140,
+							"pools": [
+								{ "count": 1, "modules": ["Amnesia"] },
+								{ "count": 1, "modules": ["TheCalculator"] },
+								{ "count": 1, "modules": ["PixelArt"] },
+								{ "count": 1, "modules": ["SpotTheDifference"] },
+								{ "count": 1, "modules": ["RecursivePassword"] },
+								{ "count": 1, "modules": ["SimonSmiles"] },
+								{ "count": 1, "modules": ["RGBSequences"] },
+								{ "count": 1, "modules": ["CuttingOrder"] },
+								{ "count": 1, "modules": ["Indentation"] },
+								{ "count": 1, "modules": ["Chalices"] },
+								{ "count": 1, "modules": ["jupiter"] },
+								{ "count": 1, "modules": ["Patterns"] },
+								{ "count": 1, "modules": ["SecretSanta"] }
+							],
+							"modules": 13,
+							"strikes": 4,
+							"widgets": 5
+						},
+						{
+							"time": 440,
+							"pools": [
+								{ "count": 1, "modules": ["TheGamepadModule"] },
+								{ "count": 1, "modules": ["CheapCheckoutModule"] },
+								{ "count": 1, "modules": ["CreationModule"] },
+								{ "count": 1, "modules": ["SkewedSlotsModule"] },
+								{ "count": 1, "modules": ["MinesweeperModule"] },
+								{ "count": 1, "modules": ["SynchronizationModule"] }
+							],
+							"modules": 6,
+							"strikes": 3,
+							"widgets": 5
+						},
+						{
+							"time": 450,
+							"pools": [
+								{ "count": 1, "modules": ["subways"] },
+								{ "count": 1, "modules": ["calendar"] },
+								{ "count": 1, "modules": ["equations"] },
+								{ "count": 1, "modules": ["characterShift"] },
+								{ "count": 1, "modules": ["boggle"] },
+								{ "count": 1, "modules": ["bases"] },
+								{ "count": 1, "modules": ["bridges"] }
+							],
+							"modules": 7,
+							"strikes": 3,
+							"widgets": 5
+						},
+						{
+							"time": 1320,
+							"pools": [
+								{ "count": 1, "modules": ["Amnesia"] },
+								{ "count": 1, "modules": ["ChickenNuggets"] },
+								{ "count": 1, "modules": ["OneDimensionalMaze"] },
+								{ "count": 1, "modules": ["BackdoorHacking"] },
+								{ "count": 1, "modules": ["ThreeDimensionalChess"] },
+								{ "count": 1, "modules": ["DoublePitch"] },
+								{ "count": 1, "modules": ["FollowMe"] },
+								{ "count": 1, "modules": ["TheKanyeEncounter"] },
+								{ "count": 1, "modules": ["MssngvWls"] },
+								{ "count": 1, "modules": ["Telepathy"] },
+								{ "count": 1, "modules": ["Mazery"] },
+								{ "count": 1, "modules": ["Paperweights"] },
+								{ "count": 1, "modules": ["ReadingBetweentheLines"] }
+							],
+							"modules": 13,
+							"strikes": 4,
+							"widgets": 5
+						},
+						{
+							"time": 750,
+							"pools": [
+								{ "count": 1, "modules": ["quantumPasswords"] },
+								{ "count": 1, "modules": ["mazeSwap"] },
+								{ "count": 1, "modules": ["serialWires"] },
+								{ "count": 1, "modules": ["patternRecognition"] },
+								{ "count": 1, "modules": ["cityPlanning"] },
+								{ "count": 1, "modules": ["alarming"] },
+								{ "count": 1, "modules": ["pip-Nado"] },
+								{ "count": 1, "modules": ["twelvetrap"] }
+							],
+							"modules": 8,
+							"strikes": 3,
+							"widgets": 5
+						}
+					]
+				},
+				"logfile": "https://ktane.timwi.de/lfa#file=13cc720cea6215269a166aa1db776241bb2b2646"
+			}
+		},
+		{
+			"id": 7529,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11077",
+			"name": "[[UPDATE]] Modder Marathon 2",
+			"action": "delete",
+			"timestamp": "2025-12-21T18:29:40.286Z",
+			"before": {
+				"id": 11077,
+				"name": "[[UPDATE]] Modder Marathon 2",
+				"notes": null,
+				"authors": ["Megum"],
+				"factory": "Sequence",
+				"logfile": "https://ktane.timwi.de/lfa#file=13cc720cea6215269a166aa1db776241bb2b2646",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_ModderMarathon_2",
+				"timeMode": "Local",
+				"verified": false,
+				"dateAdded": "2025-11-23T15:44:55.238Z",
+				"inGameName": null,
+				"strikeMode": "Local",
+				"uploadedBy": "495546834010505216",
+				"designedForTP": false,
+				"missionPackId": 625
+			}
+		},
+		{
+			"id": 7530,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11081",
+			"name": "Snuggly: The Prequel",
+			"action": "update",
+			"timestamp": "2025-12-21T18:29:47.702Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7531,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11082",
+			"name": "Modder Marathon 9",
+			"action": "update",
+			"timestamp": "2025-12-21T18:29:50.722Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7532,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11083",
+			"name": "The Brilliant Behemoth",
+			"action": "update",
+			"timestamp": "2025-12-21T18:29:51.380Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7533,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11084",
+			"name": "Alphabetical Annihilation",
+			"action": "update",
+			"timestamp": "2025-12-21T18:29:52.103Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7534,
+			"userId": "495546834010505216",
+			"model": "Completion",
+			"recordId": "63355",
+			"name": "Modder Marathon 2||Megum",
+			"action": "create",
+			"timestamp": "2025-12-21T18:39:51.851Z"
+		},
+		{
+			"id": 7535,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11049",
+			"name": "Modder Marathon 7",
+			"action": "update",
+			"timestamp": "2025-12-21T19:33:31.117Z",
+			"before": {},
+			"after": {
+				"bombs": {
+					"update": [
+						{
+							"data": {
+								"time": 510,
+								"pools": [
+									{ "count": 1, "modules": ["blindArrows"] },
+									{ "count": 1, "modules": ["kataBurnout"] },
+									{ "count": 1, "modules": ["soundDesign"] },
+									{ "count": 1, "modules": ["kataStripedKeys"] },
+									{ "count": 1, "modules": ["kataWireOrdering"] },
+									{ "count": 1, "modules": ["kataZenerCards"] }
+								],
+								"modules": 6,
+								"strikes": 3,
+								"widgets": 5
+							},
+							"where": { "id": 15493 }
+						},
+						{
+							"data": {
+								"time": 900,
+								"pools": [
+									{ "count": 1, "modules": ["arithmelogic"] },
+									{ "count": 1, "modules": ["digitString"] },
+									{ "count": 1, "modules": ["forgetThis"] },
+									{ "count": 1, "modules": ["qFunctions"] },
+									{ "count": 1, "modules": ["qSwedishMaze"] },
+									{ "count": 1, "modules": ["malfunctions"] },
+									{ "count": 1, "modules": ["theTriangleButton"] }
+								],
+								"modules": 7,
+								"strikes": 3,
+								"widgets": 5
+							},
+							"where": { "id": 15494 }
+						},
+						{
+							"data": {
+								"time": 1890,
+								"pools": [
+									{ "count": 1, "modules": ["BitmapsModule"] },
+									{ "count": 1, "modules": ["BlindAlleyModule"] },
+									{ "count": 1, "modules": ["BrailleModule"] },
+									{ "count": 1, "modules": ["TheBulbModule"] },
+									{ "count": 1, "modules": ["TheClockModule"] },
+									{ "count": 1, "modules": ["ColorBrailleModule"] },
+									{ "count": 1, "modules": ["ColoredSquaresModule"] },
+									{ "count": 1, "modules": ["ColoredSwitchesModule"] },
+									{ "count": 1, "modules": ["CoordinatesModule"] },
+									{ "count": 1, "modules": ["DividedSquaresModule"] },
+									{ "count": 1, "modules": ["DoubleOhModule"] },
+									{ "count": 1, "modules": ["GrayButtonModule"] },
+									{ "count": 1, "modules": ["TheHypercubeModule"] },
+									{ "count": 1, "modules": ["lasers"] },
+									{ "count": 1, "modules": ["LightCycleModule"] },
+									{ "count": 1, "modules": ["literalMaze"] },
+									{ "count": 1, "modules": ["NavyButtonModule"] },
+									{ "count": 1, "modules": ["SimonSpinsModule"] }
+								],
+								"modules": 18,
+								"strikes": 5,
+								"widgets": 5
+							},
+							"where": { "id": 15495 }
+						},
+						{
+							"data": {
+								"time": 880,
+								"pools": [
+									{ "count": 1, "modules": ["ballDial"] },
+									{ "count": 1, "modules": ["curlyWires"] },
+									{ "count": 1, "modules": ["delumination"] },
+									{ "count": 1, "modules": ["diamonds"] },
+									{ "count": 1, "modules": ["mixometer"] },
+									{ "count": 1, "modules": ["powerButton"] },
+									{ "count": 1, "modules": ["quadrecta"] },
+									{ "count": 1, "modules": ["scattershot"] },
+									{ "count": 1, "modules": ["someButtons"] },
+									{ "count": 1, "modules": ["stackedDeck"] }
+								],
+								"modules": 10,
+								"strikes": 4,
+								"widgets": 5
+							},
+							"where": { "id": 15496 }
+						},
+						{
+							"data": {
+								"time": 1200,
+								"pools": [
+									{ "count": 1, "modules": ["bengoTalk"] },
+									{ "count": 1, "modules": ["coloredCube"] },
+									{ "count": 1, "modules": ["decoloredCube"] },
+									{ "count": 1, "modules": ["rgbChess"] },
+									{ "count": 1, "modules": ["rhythmMaze"] },
+									{ "count": 1, "modules": ["riftRoulette"] },
+									{ "count": 1, "modules": ["supermarketScramble"] }
+								],
+								"modules": 7,
+								"strikes": 4,
+								"widgets": 5
+							},
+							"where": { "id": 15497 }
+						},
+						{
+							"data": {
+								"time": 2520,
+								"pools": [
+									{ "count": 1, "modules": ["BlackHoleModule"] },
+									{ "count": 1, "modules": ["BlueButtonModule"] },
+									{ "count": 1, "modules": ["CornersModule"] },
+									{ "count": 1, "modules": ["CursedDoubleOhModule"] },
+									{ "count": 1, "modules": ["DividedSquaresModule"] },
+									{ "count": 1, "modules": ["GridlockModule"] },
+									{ "count": 1, "modules": ["HexamazeModule"] },
+									{ "count": 1, "modules": ["NotXRayModule"] },
+									{ "count": 1, "modules": ["OddOneOutModule"] },
+									{ "count": 1, "modules": ["PatternCubeModule"] },
+									{ "count": 1, "modules": ["SetModule"] },
+									{ "count": 1, "modules": ["SimonShoutsModule"] },
+									{ "count": 1, "modules": ["SimonSpeaksModule"] },
+									{ "count": 1, "modules": ["SuperlogicModule"] },
+									{ "count": 1, "modules": ["TennisModule"] },
+									{ "count": 1, "modules": ["WireAssociationModule"] },
+									{ "count": 1, "modules": ["XRayModule"] },
+									{ "count": 1, "modules": ["YellowButtonModule"] }
+								],
+								"modules": 18,
+								"strikes": 5,
+								"widgets": 5
+							},
+							"where": { "id": 15498 }
+						},
+						{
+							"data": {
+								"time": 960,
+								"pools": [
+									{ "count": 1, "modules": ["burglarAlarm"] },
+									{ "count": 1, "modules": ["cooking"] },
+									{ "count": 1, "modules": ["CruelKeypads"] },
+									{ "count": 1, "modules": ["logicalButtonsModule"] },
+									{ "count": 1, "modules": ["ShoddyChessModule"] },
+									{ "count": 1, "modules": ["SimonShapesModule"] },
+									{ "count": 1, "modules": ["SplittingTheLootModule"] }
+								],
+								"modules": 7,
+								"strikes": 3,
+								"widgets": 5
+							},
+							"where": { "id": 15499 }
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 7536,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11065",
+			"name": "Modder Marathon 8",
+			"action": "update",
+			"timestamp": "2025-12-21T19:33:51.400Z",
+			"before": {},
+			"after": {
+				"bombs": {
+					"update": [
+						{
+							"data": {
+								"time": 600,
+								"pools": [
+									{ "count": 1, "modules": ["GreenLevers"] },
+									{ "count": 1, "modules": ["PolybiusSquare"] },
+									{ "count": 1, "modules": ["RedLevers"] },
+									{ "count": 1, "modules": ["settingCharges"] },
+									{ "count": 1, "modules": ["SymbolPad"] },
+									{ "count": 1, "modules": ["wordCount"] },
+									{ "count": 1, "modules": ["YellowLevers"] }
+								],
+								"modules": 7,
+								"strikes": 3,
+								"widgets": 5
+							},
+							"where": { "id": 15555 }
+						},
+						{
+							"data": {
+								"time": 810,
+								"pools": [
+									{ "count": 1, "modules": ["ColorfulInsanity"] },
+									{ "count": 1, "modules": ["ColorfulMadness"] },
+									{ "count": 1, "modules": ["FlashMemory"] },
+									{ "count": 1, "modules": ["PartyTime"] },
+									{ "count": 1, "modules": ["ShapesBombs"] },
+									{ "count": 1, "modules": ["TenButtonColorCode"] },
+									{ "count": 1, "modules": ["Wavetapping"] }
+								],
+								"modules": 7,
+								"strikes": 3,
+								"widgets": 5
+							},
+							"where": { "id": 15556 }
+						},
+						{
+							"data": {
+								"time": 1500,
+								"pools": [
+									{ "count": 1, "modules": ["beans"] },
+									{ "count": 1, "modules": ["bigBean"] },
+									{ "count": 1, "modules": ["boomdas"] },
+									{ "count": 1, "modules": ["diffusion"] },
+									{ "count": 1, "modules": ["flippingTriangles"] },
+									{ "count": 1, "modules": ["fractalMaze"] },
+									{ "count": 1, "modules": ["metamem"] },
+									{ "count": 1, "modules": ["papasPizzeria"] },
+									{ "count": 1, "modules": ["primeTime"] },
+									{ "count": 1, "modules": ["rasterPrime"] },
+									{ "count": 1, "modules": ["regrettablerelay"] },
+									{ "count": 1, "modules": ["slippingTriangles"] },
+									{ "count": 1, "modules": ["triamonds"] }
+								],
+								"modules": 13,
+								"strikes": 5,
+								"widgets": 5
+							},
+							"where": { "id": 15557 }
+						},
+						{
+							"data": {
+								"time": 1470,
+								"pools": [
+									{ "count": 1, "modules": ["amazingHexabuttons"] },
+									{ "count": 1, "modules": ["blankCard"] },
+									{ "count": 1, "modules": ["brownHexabuttons"] },
+									{ "count": 1, "modules": ["digitalDials"] },
+									{ "count": 1, "modules": ["forgetEnigma"] },
+									{ "count": 1, "modules": ["greenCipher"] },
+									{ "count": 1, "modules": ["shapesAndColors"] },
+									{ "count": 1, "modules": ["simpleHexabuttons"] },
+									{ "count": 1, "modules": ["turingMachine"] },
+									{ "count": 1, "modules": ["violetCipher"] }
+								],
+								"modules": 10,
+								"strikes": 4,
+								"widgets": 5
+							},
+							"where": { "id": 15558 }
+						},
+						{
+							"data": {
+								"time": 460,
+								"pools": [
+									{ "count": 1, "modules": ["airStrikes"] },
+									{ "count": 1, "modules": ["zhStrokes"] },
+									{ "count": 1, "modules": ["digitalClock"] },
+									{ "count": 1, "modules": ["pwGenerator"] },
+									{ "count": 1, "modules": ["RAM"] },
+									{ "count": 1, "modules": ["toolmods"] }
+								],
+								"modules": 6,
+								"strikes": 4,
+								"widgets": 5
+							},
+							"where": { "id": 15559 }
+						},
+						{
+							"data": {
+								"time": 1640,
+								"pools": [
+									{ "count": 1, "modules": ["deckOfManyThings"] },
+									{ "count": 1, "modules": ["forgetThemAll"] },
+									{ "count": 1, "modules": ["giantsDrink"] },
+									{ "count": 1, "modules": ["graphicMemory"] },
+									{ "count": 1, "modules": ["luckyDice"] },
+									{ "count": 1, "modules": ["maze3"] },
+									{ "count": 1, "modules": ["modkit"] },
+									{ "count": 1, "modules": ["necronomicon"] },
+									{ "count": 1, "modules": ["oldFogey"] },
+									{ "count": 1, "modules": ["raidingTemples"] },
+									{ "count": 1, "modules": ["sevenDeadlySins"] }
+								],
+								"modules": 11,
+								"strikes": 4,
+								"widgets": 5
+							},
+							"where": { "id": 15560 }
+						},
+						{
+							"data": {
+								"time": 2220,
+								"pools": [
+									{ "count": 1, "modules": ["chilliBeans"] },
+									{ "count": 1, "modules": ["complexity"] },
+									{ "count": 1, "modules": ["drippingTriangles"] },
+									{ "count": 1, "modules": ["kugelblitz"] },
+									{ "count": 1, "modules": ["longBeans"] },
+									{ "count": 1, "modules": ["notnot"] },
+									{ "count": 1, "modules": ["oneLine"] },
+									{ "count": 1, "modules": ["pandemoniumCipher"] },
+									{ "count": 1, "modules": ["parity"] },
+									{ "count": 1, "modules": ["theSpeaker"] },
+									{ "count": 1, "modules": ["synesthesia"] },
+									{ "count": 1, "modules": ["tetriamonds"] },
+									{ "count": 1, "modules": ["trippingTriangles"] }
+								],
+								"modules": 13,
+								"strikes": 5,
+								"widgets": 5
+							},
+							"where": { "id": 15561 }
+						},
+						{
+							"data": {
+								"time": 540,
+								"pools": [
+									{ "count": 1, "modules": ["punctuationMarks"] },
+									{ "count": 1, "modules": ["coloredMaze"] },
+									{ "count": 1, "modules": ["bigegg"] },
+									{ "count": 1, "modules": ["encryptionBingo"] },
+									{ "count": 1, "modules": ["fruits"] },
+									{ "count": 1, "modules": ["moduleMovements"] },
+									{ "count": 1, "modules": ["wackGameOfLife"] }
+								],
+								"modules": 7,
+								"strikes": 4,
+								"widgets": 5
+							},
+							"where": { "id": 15562 }
+						},
+						{
+							"data": {
+								"time": 2100,
+								"pools": [
+									{ "count": 1, "modules": ["theColoredFan"] },
+									{ "count": 1, "modules": ["gotLegs"] },
+									{ "count": 1, "modules": ["notTheFan"] },
+									{ "count": 1, "modules": ["pinkSudoku"] },
+									{ "count": 1, "modules": ["purpleSudoku"] },
+									{ "count": 1, "modules": ["sudokuCipher"] }
+								],
+								"modules": 6,
+								"strikes": 3,
+								"widgets": 5
+							},
+							"where": { "id": 15563 }
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 7537,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11022",
+			"name": "Flyer's 47th Renewed Wrath",
+			"action": "delete",
+			"timestamp": "2025-12-21T19:41:03.314Z",
+			"before": {
+				"id": 11022,
+				"name": "Flyer's 47th Renewed Wrath",
+				"notes": null,
+				"authors": ["VFlyer"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=3f332bcb68d8f0535cd903ad460c3df221873fd4",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_missionpack_VFlyer_mission47thWrathRenew",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2025-07-23T22:15:42.582Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "198971491398713345",
+				"designedForTP": false,
+				"missionPackId": 432
+			}
+		},
+		{
+			"id": 7538,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11049",
+			"name": "Modder Marathon 7",
+			"action": "update",
+			"timestamp": "2025-12-21T19:52:08.905Z",
+			"before": { "logfile": "https://ktane.timwi.de/lfa#file=e7435c4792ae3216b60fbc75c26b37b5e53b32e5" },
+			"after": { "logfile": "https://ktane.timwi.de/lfa#file=88a2250dc196f82933939e94bd3106653319846b" }
+		},
+		{
+			"id": 7539,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11065",
+			"name": "Modder Marathon 8",
+			"action": "update",
+			"timestamp": "2025-12-21T19:52:52.251Z",
+			"before": { "logfile": "https://ktane.timwi.de/lfa#file=68a349d6250ac7c73d95a1f00b98de9b4e27d2ed" },
+			"after": { "logfile": "https://ktane.timwi.de/lfa#file=4e8958d2546c3af7e45fb2219c290163222b1026" }
+		},
+		{
+			"id": 7540,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11059",
+			"name": "[[UPDATE]] CommRUniturion",
+			"action": "update",
+			"timestamp": "2025-12-21T19:55:01.738Z",
+			"before": {},
+			"after": {
+				"bombs": {
+					"update": [
+						{
+							"data": {
+								"time": 9000,
+								"pools": [
+									{ "count": 1, "modules": ["1x1x1RubiksCube"] },
+									{ "count": 1, "modules": ["abuttoningMazes"] },
+									{ "count": 1, "modules": ["airStrikes"] },
+									{ "count": 1, "modules": ["amazingHexabuttons"] },
+									{ "count": 1, "modules": ["Binary"] },
+									{ "count": 1, "modules": ["booleanVennModule"] },
+									{ "count": 1, "modules": ["colorOneTwo"] },
+									{ "count": 1, "modules": ["cruelStars"] },
+									{ "count": 1, "modules": ["CursedDoubleOhModule"] },
+									{ "count": 1, "modules": ["xelDcrypt"] },
+									{ "count": 1, "modules": ["gerrymandering"] },
+									{ "count": 1, "modules": ["GTACheats"] },
+									{ "count": 1, "modules": ["hangover"] },
+									{ "count": 1, "modules": ["KritHoldUps"] },
+									{ "count": 1, "modules": ["hyperlink"] },
+									{ "count": 1, "modules": ["indigoCipher"] },
+									{ "count": 1, "modules": ["inupiaqNumerals"] },
+									{ "count": 1, "modules": ["xelJohnsonSolids"] },
+									{ "count": 1, "modules": ["KeypadMaze"] },
+									{ "count": 1, "modules": ["lightspeed"] },
+									{ "count": 1, "modules": ["KritMicroModules"] },
+									{ "count": 1, "modules": ["Mischboozl"] },
+									{ "count": 1, "modules": ["misorderedKeys"] },
+									{ "count": 1, "modules": ["moddle"] },
+									{ "count": 1, "modules": ["monsplodeCards"] },
+									{ "count": 1, "modules": ["notX01"] },
+									{ "count": 1, "modules": ["papasPizzeria"] },
+									{ "count": 1, "modules": ["parallel_mazes"] },
+									{ "count": 1, "modules": ["PatternCubeModule"] },
+									{ "count": 1, "modules": ["PickupIdentification"] },
+									{ "count": 1, "modules": ["planetX"] },
+									{ "count": 1, "modules": ["PointlessMachines"] },
+									{ "count": 1, "modules": ["regretbFiltering"] },
+									{ "count": 1, "modules": ["MusicRhythms"] },
+									{ "count": 1, "modules": ["SetModule"] },
+									{ "count": 1, "modules": ["SimonSpinsModule"] },
+									{ "count": 1, "modules": ["simonStops"] },
+									{ "count": 1, "modules": ["SlowMathModule"] },
+									{ "count": 1, "modules": ["sqlCruel"] },
+									{ "count": 1, "modules": ["Tangrams"] },
+									{ "count": 1, "modules": ["GSTeaSet"] },
+									{ "count": 1, "modules": ["Towers"] },
+									{ "count": 1, "modules": ["TV"] },
+									{ "count": 1, "modules": ["uranus"] },
+									{ "count": 1, "modules": ["WanderModule"] },
+									{ "count": 1, "modules": ["xradar"] },
+									{ "count": 1, "modules": ["zeroResistance"] }
+								],
+								"modules": 47,
+								"strikes": 12,
+								"widgets": 5
+							},
+							"where": { "id": 15545 }
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 7541,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "63356",
+			"name": "Almost Too Easy||Kugel",
+			"action": "create",
+			"timestamp": "2025-12-21T21:44:26.355Z"
+		},
+		{
+			"id": 7542,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "10370",
+			"name": "Colored Colors",
+			"action": "update",
+			"timestamp": "2025-12-21T23:13:19.549Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 7543,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63340",
+			"name": "Colored Colors||Twitch Plays",
+			"action": "update",
+			"timestamp": "2025-12-21T23:13:19.560Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7544,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63316",
+			"name": "Divorce Papers: A Bored Ape Odyssey||BladePL",
+			"action": "update",
+			"timestamp": "2025-12-22T16:41:15.481Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7545,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63317",
+			"name": "Year of the Snake Challenge||BladePL",
+			"action": "update",
+			"timestamp": "2025-12-22T16:41:55.370Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7546,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63356",
+			"name": "Almost Too Easy||Kugel",
+			"action": "update",
+			"timestamp": "2025-12-22T17:10:36.233Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 7547,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63357",
+			"name": "Inferno||Termet",
+			"action": "create",
+			"timestamp": "2025-12-22T21:06:20.192Z"
+		},
+		{
+			"id": 7548,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63358",
+			"name": "Coffee Break||Termet",
+			"action": "create",
+			"timestamp": "2025-12-22T22:15:58.885Z"
+		},
+		{
+			"id": 7549,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63359",
+			"name": "An Idol mk2||Termet",
+			"action": "create",
+			"timestamp": "2025-12-22T23:17:50.078Z"
+		},
+		{
+			"id": 7550,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "63360",
+			"name": "Centurion||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2025-12-23T03:58:07.889Z"
+		},
+		{
+			"id": 7551,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63361",
+			"name": "Shredinator||Termet",
+			"action": "create",
+			"timestamp": "2025-12-23T07:02:30.655Z"
+		},
+		{
+			"id": 7552,
+			"userId": "661400019513114626",
+			"model": "Completion",
+			"recordId": "63362",
+			"name": "Asmir's 47||Gwendolyn",
+			"action": "create",
+			"timestamp": "2025-12-23T07:02:46.341Z"
+		},
+		{
+			"id": 7553,
+			"userId": "234733182442799104",
+			"model": "Completion",
+			"recordId": "63363",
+			"name": "Intro to Modded KTANE||Danielstigman, miki2003pl",
+			"action": "create",
+			"timestamp": "2025-12-23T12:10:07.359Z"
 		}
 	],
 	"User": [
@@ -99829,7 +100974,7 @@
 			"username": "aGood_Usernam3",
 			"discordName": "agood_usernam3",
 			"avatar": "a9fac0094b4622588b960a94a7691a67",
-			"permissions": []
+			"permissions": [1, 2, 3]
 		},
 		{
 			"id": "356164886658678794",
@@ -100788,7 +101933,7 @@
 			"id": "661400019513114626",
 			"username": "gwendolyn",
 			"discordName": "gwendolyn1717",
-			"avatar": "86350f6431edbafc4ddd96755fb85e5b",
+			"avatar": "32173a0b56c0ab63b1be17e61e4cad8d",
 			"permissions": []
 		},
 		{

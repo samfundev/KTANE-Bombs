@@ -17,6 +17,7 @@
 
 	let infoMenu: HTMLDivElement;
 	let infoTab: HTMLDivElement;
+	let navbar: HTMLDivElement;
 	beforeNavigate(({ from, to, cancel }) => {
 		// If we're navigating to the same route, use browser navigation instead
 		// This saves us from having to make our pages reactive to the data variable
@@ -25,15 +26,28 @@
 			location.href = to.url.href;
 		}
 	});
+
+	const updateNavbarHeight = () => {
+		if (!navbar) return;
+		const h = navbar.offsetHeight;
+		document.documentElement.style.setProperty(
+			'--stick-under-navbar',
+			`${h}px`
+		);
+	};
+
 	onMount(() => {
 		document.onclick = () => disappearAll();
+		updateNavbarHeight();
+		window.addEventListener('resize', updateNavbarHeight);
 		return () => {
 			document.onclick = null;
+			window.removeEventListener('resize', updateNavbarHeight);
 		};
 	});
 </script>
 
-<div class="navbar-background">
+<div class="navbar-background" bind:this={navbar}>
 	<div class="navbar max-width">
 		<a class="block" href="/">Home</a>
 		<a class="block" href="/solvers">Solvers</a>
@@ -310,6 +324,12 @@
 		gap: var(--gap);
 		font-size: 125%;
 		white-space: nowrap;
+	}
+	@media screen and (max-width: 900px) {
+		.navbar.max-width {
+			width: unset;
+			flex-wrap: wrap;
+		}
 	}
 
 	.navbar a {

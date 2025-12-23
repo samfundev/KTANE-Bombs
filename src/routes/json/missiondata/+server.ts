@@ -33,7 +33,11 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 					old: true,
 					proofs: true,
 					solo: true,
-					season: true,
+					season: {
+						select: {
+							name: true
+						}
+					},
 					team: true,
 					time: true,
 					uploadedBy: true,

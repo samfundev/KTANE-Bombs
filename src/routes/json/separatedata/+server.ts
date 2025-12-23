@@ -1,6 +1,6 @@
 import client from '$lib/client';
-import { Bomb, Permission } from '$lib/types';
-import { dateAddedSort, forbidden, hasPermission } from '$lib/util';
+import { Permission, Season } from '$lib/types';
+import { forbidden, hasPermission } from '$lib/util';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
 import { minimize } from '../_util';
 import { AuditLog, User } from '@prisma/client';
@@ -24,9 +24,21 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		}
 	});
 
-	let logs: { AuditLog: AuditLog[]; User: User[] } = {
+	const seasonResults = await client.season.findMany({
+		orderBy: { id: 'asc' },
+		select: {
+			id: true,
+			name: true,
+			start: true,
+			end: true,
+			notes: true
+		}
+	});
+
+	let logs: { AuditLog: AuditLog[]; User: User[]; Season: Season[] } = {
 		AuditLog: [],
-		User: []
+		User: [],
+		Season: []
 	};
 	logResults.forEach(log => {
 		let newLog = JSON.parse(JSON.stringify(log));
@@ -37,6 +49,11 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		let newUser = JSON.parse(JSON.stringify(log));
 		minimize(newUser);
 		logs.User.push(newUser);
+	});
+	seasonResults.forEach(log => {
+		let newSeason = JSON.parse(JSON.stringify(log));
+		minimize(newSeason);
+		logs.Season.push(newSeason);
 	});
 
 	return new Response(JSON.stringify(logs));

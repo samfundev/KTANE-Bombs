@@ -196,7 +196,7 @@
 	}
 	.top-bar {
 		position: sticky;
-		top: calc(var(--stick-under-navbar) + 1px);
+		top: var(--stick-under-navbar);
 	}
 	.missions-dropdown {
 		background-color: var(--foreground);

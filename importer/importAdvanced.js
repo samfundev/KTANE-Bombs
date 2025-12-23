@@ -8,7 +8,9 @@ const { PrismaClient } = pkg;
 	let data = JSON.parse(readFileSync('advanced.json').toString());
 	let logs = data.AuditLog;
 	let users = data.User;
+	let seasons = data.Season;
 
+	console.log('Creating users');
 	let userQueries = [];
 	users.sort((a, b) => a.id.localeCompare(b.id));
 	for (const user of users) {
@@ -38,6 +40,7 @@ const { PrismaClient } = pkg;
 	//uncomment to wipe out your local audit log first
 	//await client.auditLog.deleteMany({});
 
+	console.log('Creating audit logs');
 	let logQueries = [];
 	logs.sort((a, b) => parseInt(a.id) - parseInt(b.id));
 	for (const log of logs) {
@@ -62,4 +65,27 @@ const { PrismaClient } = pkg;
 		);
 	}
 	await client.$transaction(logQueries);
+	
+	console.log('Updating seasons');
+	let seasonQueries = [];
+	seasons.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+	for (const season of seasons) {
+		let seasonData = {
+			// omit id
+			name: season.name,
+			start: season.start,
+			end: season.end,
+			notes: season.notes
+		};
+		seasonQueries.push(
+			client.season.upsert({
+				create: seasonData,
+				update: seasonData,
+				where: {
+					name: seasonData.name
+				}
+			})
+		);
+	}
+	await client.$transaction(seasonQueries);
 })();

@@ -5,6 +5,16 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>30 Dec 2025</h3>
+	<ul>
+		<li>Added <a href="/season">Seasons!</a></li>
+		<li>Added <a href="/seasoninfo">Seasons Info</a>.</li>
+		<li>New visual contrast on bomb headers on <a href="/mission/Redundancy%20Prime">mission pages</a>.</li>
+		<li>New mission pack render block on <a href="/upload">upload</a> page.</li>
+		<li>A few layout fixes for narrow screens.</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>15 April 2025</h3>
 	<ul>
 		<li>Updated <a href="/rules">rule</a> about Logging and Sword of Damocles.</li>

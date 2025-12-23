@@ -84,6 +84,7 @@
 </svelte:head>
 <div class="block relative">
 	<h1 class="header">Seasons</h1>
+	<a href="/seasoninfo" class="top-left">Info</a>
 
 	{#if hasPermission($page.data.user, Permission.ManageSeasons)}
 		<div class="actions">
@@ -149,5 +150,11 @@
 
 	a {
 		color: var(--text-color);
+	}
+	.top-left {
+		position: absolute;
+		color: var(--text-color);
+		top: var(--gap);
+		left: var(--gap);
 	}
 </style>
