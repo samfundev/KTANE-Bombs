@@ -42,18 +42,32 @@ async function findName(log: any) {
 		if (pack != null) {
 			return { ...info, name: pack.name };
 		}
+	} else if (log.model === 'Season') {
+		const season = await client.season.findUnique({
+			where: { id: parseInt(log.recordId) },
+			select: { name: true }
+		});
+		if (season != null) {
+			return { ...info, name: season.name };
+		}
 	}
 	return { ...info, linkable: false, name: log.name };
 }
 
-export const load = async function ({ parent, locals }: any) {
+export const load = async function ({ parent, locals, url }: any) {
 	const { user } = await parent();
 	if (!hasAnyPermission(user, Permission.VerifyMission, Permission.VerifyCompletion, Permission.VerifyMissionPack)) {
 		throw forbidden(locals);
 	}
 
+	const fetchLimit = url.searchParams.get('limit');
+	let limit: number = parseInt(fetchLimit);
+	if (isNaN(limit)) limit = 2000;
+	const count = await client.auditLog.count();
+
 	const everything = await client.auditLog.findMany({
-		orderBy: { id: 'desc' }
+		orderBy: { id: 'desc' },
+		take: limit === 0 ? undefined : limit
 	});
 
 	let logs: any[] = [];
@@ -92,6 +106,8 @@ export const load = async function ({ parent, locals }: any) {
 	}
 
 	return {
-		logs
+		logs,
+		count,
+		limit
 	};
 };

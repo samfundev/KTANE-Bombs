@@ -23,16 +23,19 @@
 
 	export let data;
 	let logs: (AuditLog & { linkable: boolean; mission: string | null })[] = data.logs;
+	let logCount: number = data.count;
+	let fetchLimit: number = data.limit;
 
 	let logRows: any = {};
 	let resultsText: number = logs.length;
-	let searchOptionBoxes = ['from user', 'mission', 'mission pack', 'solve', 'user', 'invert'];
+	let searchOptionBoxes = ['from user', 'mission', 'mission pack', 'solve', 'user', 'season', 'invert'];
 	let searchOptionTooltips = [
 		'Search for the user that made the change',
 		'Search for mission name',
 		'Search for mission pack name',
 		'Search for solve team or mission name for a solve',
 		'Search for edited users',
+		'Search for edited seasons',
 		'Invert search'
 	];
 	let layoutSearch: LayoutSearchFilter;
@@ -40,11 +43,14 @@
 	let showAll = false;
 	const resultLimit = 50;
 	let validSearchOptions: boolean[] = Array(searchOptionBoxes.length).fill(false);
-	validSearchOptions[1] = validSearchOptions[2] = validSearchOptions[3] = true;
+	validSearchOptions[1] = validSearchOptions[2] = validSearchOptions[3] = validSearchOptions[5] = true;
 
 	function pastTense(log: AuditLog): string {
 		if (
-			(log.model === 'Mission' || log.model === 'MissionPack' || log.model === 'Completion') &&
+			(log.model === 'Mission' ||
+				log.model === 'MissionPack' ||
+				log.model === 'Completion' ||
+				log.model === 'Season') &&
 			(log.action === 'delete' || log.action === 'update')
 		) {
 			const statsBef = JSON.parse(JSON.stringify(log.before));
@@ -128,6 +134,10 @@
 			searchWhat.push(log.name.toLowerCase());
 			if (log.mission) searchWhat.push(log.mission.toLowerCase());
 		}
+		if (searchOptions?.includes('season') && model === 'season') {
+			searchWhat.push(log.name.toLowerCase());
+			if (log.mission) searchWhat.push(log.mission.toLowerCase());
+		}
 		if (searchOptions?.includes('from user')) {
 			if (log.userId) searchWhat.push(log.userId.toLowerCase());
 		}
@@ -163,8 +173,8 @@
 <h1 class="header">Audit Log</h1>
 
 <div class="top-bar block">
-	<div class="hstack">
-		<span>Max {resultLimit} results shown</span>
+	<div class="hstack show-all">
+		<span>Max {resultLimit} results shown ({logs.length} entries fetched)</span>
 		<Checkbox
 			id="show-all-check"
 			on:change={() => {
@@ -174,6 +184,10 @@
 			label="Show All"
 			sideLabel
 			labelAfter />
+		{#if logs.length <= fetchLimit}
+			<a href="/auditlog?limit=4000"><button>4000 Entries</button></a>
+			<a href="/auditlog?limit=0"><button>All {logCount} Entries</button></a>
+		{/if}
 	</div>
 	<div class="flex row search-bar">
 		<span>Results: {resultsText} of {logs.length}</span>
@@ -192,20 +206,18 @@
 			{resultLimit}
 			classes="help" />
 		<button on:click={closeAll}>Close All</button>
-		{#each searchOptionBoxes as option, index}
-			<Checkbox
-				id="search-by-{option.replace(/ /g, '')}"
-				label={titleCase(option)}
-				sideLabel
-				labelAfter
-				title={searchOptionTooltips[index]}
-				on:change={setSearchOptions}
-				bind:checked={validSearchOptions[index]} />
-		{/each}
-		<!-- <span class="sort-option alphabetical" class:selected={sortOption == 'alphabetical'} on:click={alphabetical}
-		>Alphabetical</span>
-	<span class="sort-option popular" class:selected={sortOption == 'popular'} on:click={popular}>Popular</span>
-	<span class="sort-option published" class:selected={sortOption == 'published'} on:click={published}>Published</span> -->
+		<div class="flex search-options">
+			{#each searchOptionBoxes as option, index}
+				<Checkbox
+					id="search-by-{option.replace(/ /g, '')}"
+					label={titleCase(option)}
+					sideLabel
+					labelAfter
+					title={searchOptionTooltips[index]}
+					on:change={setSearchOptions}
+					bind:checked={validSearchOptions[index]} />
+			{/each}
+		</div>
 	</div>
 </div>
 
@@ -222,7 +234,7 @@
 	{#each logs as log, index}
 		{@const display = displayLog(log.before, log.after)}
 		<div class="table-row" bind:this={logRows[index]}>
-			<div class="block number">{logs.length - index}</div>
+			<div class="block number">{logCount - index}</div>
 			<div class="block">
 				{#if log.userId != null && !isOnlyDigits(log.userId)}
 					<a href="/user/{properUrlEncode(log.userId)}">{log.userId}</a>
@@ -256,6 +268,12 @@
 				{:else if log.model === 'User'}
 					{#if log.linkable}
 						<a title={log.name} class="shorten" href="/user/{properUrlEncode(log.name)}">{log.name}</a>
+					{:else}
+						<span title={unlinkable(log.name)} class="shorten">{unlinkable(log.name)}</span>
+					{/if}
+				{:else if log.model === 'Season'}
+					{#if log.linkable}
+						<a title={log.name} class="shorten" href="/season/{properUrlEncode(log.name)}">{log.name}</a>
 					{:else}
 						<span title={unlinkable(log.name)} class="shorten">{unlinkable(log.name)}</span>
 					{/if}
@@ -298,15 +316,27 @@
 		position: sticky;
 		top: calc(var(--stick-under-navbar) + 1px);
 	}
+	.flex.search-options {
+		column-gap: 12px;
+		row-gap: 5px;
+		flex-wrap: wrap;
+		max-width: 560px;
+	}
+
 	.search-bar {
 		gap: 12px;
 		align-items: center;
 		flex-wrap: wrap;
 		margin-top: var(--gap);
 	}
-	.hstack {
+	.search-bar > * {
+		white-space: nowrap;
+	}
+	div.show-all.hstack {
 		display: flex;
-		gap: 8px;
+		gap: 20px;
+		align-items: center;
+		margin-bottom: 10px;
 	}
 
 	.shorten {
@@ -339,9 +369,12 @@
 	.table-headers b {
 		text-align: left;
 	}
+	.table {
+		min-width: 800px;
+	}
 	.table-row {
 		display: grid;
-		grid-template-columns: 30px 210px auto;
+		grid-template-columns: 32px 210px auto;
 		gap: var(--gap);
 		text-align: center;
 		width: 100%;
@@ -351,6 +384,17 @@
 	.table-row > div {
 		overflow-wrap: break-word;
 	}
+	@media screen and (max-width: 900px) {
+		.table-row > .block {
+			overflow-wrap: unset;
+		}
+		.table-headers,
+		.log-details {
+			grid-template-columns: 120px 200px 200px;
+		}
+	}
+
+	.top-bar button,
 	.dropdown:not(.expand) {
 		cursor: pointer;
 	}
@@ -377,5 +421,6 @@
 		display: inline-block;
 		vertical-align: middle;
 		cursor: pointer;
+		user-select: none;
 	}
 </style>

@@ -62,8 +62,8 @@
 		updateSearch();
 	}
 
-	function bombSearchFilter(name: string, searchText: string): boolean {
-		let text = searchText.toLowerCase();
+	function bombSearchFilter(name: string, query: string): boolean {
+		let text = query.toLowerCase();
 		let searchWhat: string[] = [];
 		let ms = missions.find(x => x.name == name) || missions[0];
 
