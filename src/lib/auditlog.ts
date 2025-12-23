@@ -18,6 +18,7 @@ const auditTables: { [id: string]: any } = {
 	Completion: client.completion,
 	Mission: client.mission,
 	MissionPack: client.missionPack,
+	Season: client.season,
 	User: client.user
 };
 
