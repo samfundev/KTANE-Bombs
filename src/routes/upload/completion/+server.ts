@@ -2,7 +2,7 @@ import client from '$lib/client';
 import createAuditClient from '$lib/auditlog';
 import type { Completion } from '$lib/types';
 import { forbidden } from '$lib/util';
-import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
+import type { RequestEvent } from '@sveltejs/kit';
 
 export async function POST({ locals, request }: RequestEvent) {
 	if (locals.user == null) {
@@ -56,7 +56,7 @@ export async function POST({ locals, request }: RequestEvent) {
 					id: mission.id
 				}
 			},
-			season: {
+			season: seasonId == undefined ? undefined : {
 				connect: {
 					id: seasonId
 				}

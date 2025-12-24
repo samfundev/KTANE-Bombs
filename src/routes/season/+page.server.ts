@@ -10,10 +10,26 @@ export const load: PageServerLoad = async function () {
 			end: true,
 			notes: true
 		},
-		orderBy: { id: 'asc' }
+		orderBy: { id: 'desc' }
 	});
 
+	const now = new Date();
+	const currentSeason = await client.season.findFirst({
+		where: {
+			start: { lte: now },
+			end: { gte: now }
+		},
+		select: {
+			name: true
+		},
+		orderBy: {
+			id: 'desc'
+		}
+	});
+	const currentSeasonName = currentSeason?.name ?? '';
+
 	return {
-		seasons
+		seasons,
+		currentSeasonName
 	};
 };

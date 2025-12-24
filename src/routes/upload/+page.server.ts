@@ -33,17 +33,20 @@ export const load = async function ({ parent }: any) {
 
 	let infoInit: { [name: string]: any } = {};
 
-	let currentSeasonId;
-	try {
-		const currentSeason = await client.season.findFirst({
-			orderBy: {
-				id: 'desc'
-			}
-		});
-		currentSeasonId = currentSeason?.id ?? null;
-	} catch (error) {
-		currentSeasonId = null;
-	}
+	const now = new Date();
+	const currentSeason = await client.season.findFirst({
+		where: {
+			start: { lte: now },
+			end: { gte: now }
+		},
+		select: {
+			id: true
+		},
+		orderBy: {
+			id: 'desc'
+		}
+	});
+	const currentSeasonId = currentSeason?.id ?? null;
 
 	return {
 		missionInfo: missions.reduce((info: { [name: string]: any }, miss: any) => {

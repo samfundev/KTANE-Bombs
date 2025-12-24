@@ -40,10 +40,10 @@
 <div class="block relative">
 	<h1 class="header">{season.name}</h1>
 	<div class="infobar flex">
-		<span>
+		<span title="Times shown in your local time zone.">
 			<strong>Starts:</strong> {season.start.toLocaleTimeString(undefined, dateOptions)}
 		</span>
-		<span>
+		<span title="Times shown in your local time zone.">
 			<strong>Ends:</strong> {season.end.toLocaleTimeString(undefined, dateOptions)}
 		</span>
 	</div>
@@ -102,6 +102,9 @@
 	.infobar {
 		justify-content: center;
 		gap: 25px;
+	}
+	.infobar > span {
+		cursor: help;
 	}
 
 	.season-notes {

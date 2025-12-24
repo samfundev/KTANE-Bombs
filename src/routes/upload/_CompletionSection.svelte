@@ -6,22 +6,22 @@
 	import { formatTime, getLogfileLinks, parseTime } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import { TP_TEAM } from '$lib/const';
-	
+
 	export let missionInfo: { [name: string]: any };
 	export let solverNames: string[];
 	export let currentSeasonId: number | null;
-	
+
 	let missionNames = Object.keys(missionInfo).sort((a, b) => a.localeCompare(b));
 	let missionName: string = '';
-	
+
 	let completion: Completion = new Completion();
 	completion.dateAdded = new Date();
-	
+
 	let valid: boolean = false;
-	
+
 	let missionInvalid = false;
 	let timerInvalid = false;
-	
+
 	let team = [{ invalid: false, text: '' }];
 	let proofs = [{ invalid: false, text: '' }];
 	let tpSolve = false;
@@ -30,7 +30,7 @@
 	let parsedTimes: number[] = [MIN_TIME];
 	let parsedLogfiles: string[] = [];
 	let timeInput: Input;
-	
+
 	function dynamicBoxes(inputList: any[]) {
 		let max = inputList.length - 1;
 		for (let i = 0; i < max; i++) {
@@ -47,13 +47,13 @@
 			inputList.pop();
 		}
 	}
-	
+
 	function parseURL(text: string): any[] {
 		if (text === '') {
 			return [true, ''];
 		}
 		let url: URL | null = null;
-		
+
 		try {
 			url = new URL(text);
 		} catch (e: any) {
@@ -67,33 +67,33 @@
 		}
 		return [true, url.toString()];
 	}
-	
+
 	function getInfo(text: string) {
 		let lineIndex = 0;
 		const lines = text.split('\n').map(line => (line.length > 20000 ? '' : line));
-		
+
 		function readLine() {
 			return lines[lineIndex++];
 		}
-		
+
 		let time = 0;
 		while (lineIndex < lines.length) {
 			let line = readLine().trim();
 			if (line.startsWith('[Tweaks] LFAEvent ')) {
 				const match = line.match(/LFAEvent (\d+)/);
 				if (match === null) throw new Error('This regex should always match');
-				
+
 				let json = '';
 				for (let i = 0; i < parseInt(match[1]); i++) {
 					json += readLine();
 				}
-				
+
 				const event = JSON.parse(json);
 				if (event.type === 'ROUND_START' && event.mission) {
 					let match = missionNames.find(
-					name =>
-					event.mission.toLowerCase() ===
-					(missionInfo[name]['ingame'] != null ? missionInfo[name]['ingame'] : name).toLowerCase()
+						name =>
+							event.mission.toLowerCase() ===
+							(missionInfo[name]['ingame'] != null ? missionInfo[name]['ingame'] : name).toLowerCase()
 					);
 					if (match !== undefined) {
 						missionName = match;
@@ -104,11 +104,11 @@
 					if (!isNaN(n)) {
 						n = Math.max(Math.round(n * 100) / 100, MIN_TIME);
 						if (
-						missionInfo[missionName] != undefined &&
-						missionInfo[missionName]['factory'] === 'Sequence' &&
-						missionInfo[missionName]['timeMode'] !== 'Global'
+							missionInfo[missionName] != undefined &&
+							missionInfo[missionName]['factory'] === 'Sequence' &&
+							missionInfo[missionName]['timeMode'] !== 'Global'
 						)
-						time = Math.min(time + n, missionInfo[missionName]['time']);
+							time = Math.min(time + n, missionInfo[missionName]['time']);
 						else time = n;
 						parsedTimes.push(n);
 						timeInput.setValue(time);
@@ -117,21 +117,21 @@
 			}
 		}
 	}
-	
+
 	function validateTime(time: number): string | boolean {
 		let maxTime =
-		missionName.length > 0 || missionInfo[missionName] == undefined ? Infinity : missionInfo[missionName]['time'];
+			missionName.length > 0 || missionInfo[missionName] == undefined ? Infinity : missionInfo[missionName]['time'];
 		if (time == null) return 'Invalid time';
 		else if (time >= maxTime) return `Time must be < mission's given time (${formatTime(maxTime)})`;
 		else if (time > 0) return true;
 		else return 'Time must be ≥ 0.01s';
 	}
-	
+
 	function validateURL(text: any): string | boolean {
 		let funcReturn = parseURL(text);
 		return !funcReturn[0] ? funcReturn[1] : '';
 	}
-	
+
 	function parseTeam(teamList: any[], func: Function | null): string[] {
 		let outTeam: string[] = [];
 		for (let i = 0; i < teamList.length - 1; i++) {
@@ -148,48 +148,46 @@
 					if (links[0] !== '' && !parsedLogfiles.includes(links[0])) {
 						parsedLogfiles.push(links[0]);
 						fetch(links[0])
-						.then(v => v.text())
-						.then(f => getInfo(f));
+							.then(v => v.text())
+							.then(f => getInfo(f));
 					}
 				}
 			}
 		}
 		return outTeam;
 	}
-	
+
 	$: {
 		dynamicBoxes(proofs);
 		completion.proofs = parseTeam(proofs, parseURL);
-		
+
 		dynamicBoxes(team);
 		completion.team = parseTeam(team, null);
-		
+
 		if (completion.team.length > 1) {
 			completion.solo = false;
 			tpSolve = false;
 		}
-		
-		valid =
-		!missionInvalid &&
-		missionName !== '' &&
-		completion.proofs.length !== 0 &&
-		completion.team.length !== 0 &&
-		!timerInvalid;
-	}
-	
-	function tpChange() {
-		if (tpSolve) {
-			completion.solo = false;
-			team = [{ invalid: false, text: TP_TEAM }];
-		} else team = [{ invalid: false, text: '' }];
-	}
-	
-	function seasonChange() {
 		if (seasonSolve) {
 			tpSolve = false;
 		}
+
+		valid =
+			!missionInvalid &&
+			missionName !== '' &&
+			completion.proofs.length !== 0 &&
+			completion.team.length !== 0 &&
+			!timerInvalid;
 	}
-	
+
+	function tpChange() {
+		if (tpSolve) {
+			completion.solo = false;
+			seasonSolve = false;
+			team = [{ invalid: false, text: TP_TEAM }];
+		} else team = [{ invalid: false, text: '' }];
+	}
+
 	function teamChange() {
 		if (team[0].text === TP_TEAM) tpSolve = true;
 		else {
@@ -201,7 +199,7 @@
 			}
 		}
 	}
-	
+
 	function upload() {
 		fetch('/upload/completion', {
 			method: 'POST',
@@ -210,98 +208,101 @@
 			},
 			body: JSON.stringify({ completion, missionName, seasonId: seasonSolve ? currentSeasonId : undefined })
 		})
-		.then(response => {
-			if (response.status == 202) {
-				toast.success('Solve REPLACEMENT uploaded successfully!');
-			} else if (response.status == 409) {
-				toast.error('Solve already exists in the verify queue.');
-			} else if (response.ok) {
-				toast.success('Solve uploaded successfully!');
-			} else {
-				toast.error('Solve failed to upload.');
-			}
-		})
-		.catch(() => toast.error('An error occurred.'));
+			.then(response => {
+				if (response.status == 202) {
+					toast.success('Solve REPLACEMENT uploaded successfully!');
+				} else if (response.status == 409) {
+					toast.error('Solve already exists in the verify queue.');
+				} else if (response.ok) {
+					toast.success('Solve uploaded successfully!');
+				} else {
+					toast.error('Solve failed to upload.');
+				}
+			})
+			.catch(() => toast.error('An error occurred.'));
 	}
 </script>
 
 <form class="block flex">
 	<div class="wideBox">
 		{#each proofs as proof, i}
-		<div class="dynamicBlock">
-			<Input
-			id="proof-{i}"
-			type="url"
-			label="Proof #{i + 1}"
-			placeholder="https://ktane.timwi.de"
-			validate={validateURL}
-			forceValidate={true}
-			bind:invalid={proof.invalid}
-			bind:value={proof.text} />
-		</div>
+			<div class="dynamicBlock">
+				<Input
+					id="proof-{i}"
+					type="url"
+					label="Proof #{i + 1}"
+					placeholder="https://ktane.timwi.de"
+					validate={validateURL}
+					forceValidate={true}
+					bind:invalid={proof.invalid}
+					bind:value={proof.text} />
+			</div>
 		{/each}
 	</div>
 	<div class="wideBox">
 		<Input
-		id="mission"
-		label="Mission"
-		options={missionNames}
-		validate={value => value !== null}
-		bind:invalid={missionInvalid}
-		bind:value={missionName} />
+			id="mission"
+			label="Mission"
+			options={missionNames}
+			validate={value => value !== null}
+			bind:invalid={missionInvalid}
+			bind:value={missionName} />
 	</div>
 	<Input
-	bind:this={timeInput}
-	id="time"
-	type="text"
-	parse={parseTime}
-	validate={validateTime}
-	display={value => formatTime(value, value % 1 != 0)}
-	instantFormat={false}
-	label="Time Remaining"
-	placeholder="1:23:45.67"
-	bind:options={parsedTimes}
-	optionalOptions
-	required
-	bind:invalid={timerInvalid}
-	bind:value={completion.time}
-	disabled={missionName == null || missionName.length < 1} />
+		bind:this={timeInput}
+		id="time"
+		type="text"
+		parse={parseTime}
+		validate={validateTime}
+		display={value => formatTime(value, value % 1 != 0)}
+		instantFormat={false}
+		label="Time Remaining"
+		placeholder="1:23:45.67"
+		bind:options={parsedTimes}
+		optionalOptions
+		required
+		bind:invalid={timerInvalid}
+		bind:value={completion.time}
+		disabled={missionName == null || missionName.length < 1} />
 	<div>
 		{#each team as member, index}
-		<div class="dynamicBlock">
-			<Input
-			id="member-{index}"
-			type="text"
-			label={index == 0 ? 'Defuser' : 'Expert'}
-			optionalOptions={true}
-			options={solverNames}
-			disabled={tpSolve}
-			on:change={teamChange}
-			bind:value={member.text} />
-		</div>
+			<div class="dynamicBlock">
+				<Input
+					id="member-{index}"
+					type="text"
+					label={index == 0 ? 'Defuser' : 'Expert'}
+					optionalOptions={true}
+					options={solverNames}
+					disabled={tpSolve}
+					on:change={teamChange}
+					bind:value={member.text} />
+			</div>
 		{/each}
 	</div>
 	<Checkbox
-	id="solo"
-	label="Solo"
-	classes="help"
-	title="A solo solve is done entirely from memory, without using any experts, manuals, notes, or external tools. Video evidence must be provided for solo solves."
-	bind:checked={completion.solo}
-	disabled={tpSolve || completion.team.length > 1} />
+		id="solo"
+		label="Solo"
+		classes="help"
+		title="A solo solve is done entirely from memory, without using any experts, manuals, notes, or external tools. Video evidence must be provided for solo solves."
+		bind:checked={completion.solo}
+		disabled={tpSolve || completion.team.length > 1} />
 	<Checkbox
-	id="tpSolve"
-	label="TP"
-	bind:checked={tpSolve}
-	on:change={tpChange}
-	disabled={completion.solo || completion.team.length > 1} />
-	<Checkbox
-	id="seasonSolve"
-	label="Season"
-	classes="help"
-	title="A season solve has extra requirements explained in the info tab."
-	bind:checked={seasonSolve}
-	on:change={seasonChange}
-	disabled={tpSolve} />
+		id="tpSolve"
+		label="TP"
+		bind:checked={tpSolve}
+		on:change={tpChange}
+		classes="help"
+		title="Solved using Twitch Plays."
+		disabled={completion.solo || completion.team.length > 1 || seasonSolve} />
+	{#if currentSeasonId != null}
+		<Checkbox
+			id="seasonSolve"
+			label="Season"
+			classes="help"
+			title="A season solve has extra requirements explained in the info tab."
+			bind:checked={seasonSolve}
+			disabled={tpSolve} />
+	{/if}
 </form>
 <CompletionCard {completion} />
 <div class="block">

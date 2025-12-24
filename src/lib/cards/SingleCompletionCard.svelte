@@ -1,30 +1,15 @@
 <script lang="ts">
 	import { TP_TEAM } from '$lib/const';
-	import type { MissionCompletion } from '$lib/types';
-	import { formatTime, getPersonColor, listify, properUrlEncode } from '$lib/util';
-	import { onMount } from 'svelte';
+	import { type MissionCompletion } from '$lib/types';
+	import { formatTime, getPersonColor, currSeason, pastSeason, properUrlEncode } from '$lib/util';
 
 	export let comp: MissionCompletion;
 	export let username: string;
 	export let showTime: boolean = false;
+	export let currentSeasonName: string = '';
 
 	let tp = username === TP_TEAM;
-	let currentSeasonName = '';
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
-
-	async function getCurrentSeason() {
-        const response = await fetch('/season/get');
-        if (response.ok) {
-            const seasons = await response.json();
-            const currentSeason = seasons.length > 0 ? seasons[seasons.length - 1] : null;
-            currentSeasonName = currentSeason?.seasonName ?? null;
-        }
-    }
-
-    onMount(() => {
-        getCurrentSeason();
-    });
-
 </script>
 
 <a href="/mission/{properUrlEncode(comp.mission.name)}">
@@ -35,12 +20,18 @@
 			<span class="time" class:first={comp.first} class:old={comp.old} title={formatTime(comp.time, true)}
 				>{formatTime(comp.time)}</span>
 		{/if}
-		<span
-          class="mission-name"
-          style="{comp.season === currentSeasonName ? 'color: #6F42C1; font-weight: bold;' : ''}"
-        >
-          {comp.mission.name}
-        </span>
+		<div class="flex name-box">
+			<div
+				class="season-solve"
+				class:current-season-solve={currSeason(comp.season, currentSeasonName)}
+				class:past-season-solve={pastSeason(comp.season, currentSeasonName)} />
+			<span
+				class="mission-name"
+				class:current-season-solve={currSeason(comp.season, currentSeasonName)}
+				class:past-season-solve={pastSeason(comp.season, currentSeasonName)}>
+				{comp.mission.name}
+			</span>
+		</div>
 		{#if comp.dateAdded}
 			<span>{comp.dateAdded.toLocaleDateString(undefined, dateOptions)}</span>
 		{/if}
@@ -48,6 +39,30 @@
 </a>
 
 <style>
+	.flex.name-box {
+		align-items: center;
+	}
+	div.season-solve {
+		display: inline-block;
+		width: 14px;
+		height: 16px;
+	}
+	.current-season-solve {
+		font-weight: bold;
+	}
+	.season-solve.current-season-solve {
+		background: url('$lib/img/S-fancy.svg');
+		background-repeat: no-repeat;
+	}
+	.past-season-solve {
+		font-weight: bold;
+	}
+	.season-solve.past-season-solve {
+		background: url('$lib/img/S-angular.svg');
+		height: 14px;
+		width: 16px;
+		background-repeat: no-repeat;
+	}
 	.full {
 		justify-content: space-between;
 		gap: 20px;
