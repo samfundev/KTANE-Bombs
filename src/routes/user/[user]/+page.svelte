@@ -29,6 +29,7 @@
 	let username: string = data.username;
 	let shownUser: FrontendUser | null = data.shownUser;
 	let completions: MissionCompletion[] = data.completions;
+	let currentSeasonName: string = data.currentSeasonName;
 	let tpMissions: Mission[] = data.tpMissions;
 	let unverifSolves: (Completion & { mission: Mission })[] | null = data.unverifSolves;
 	let unverifMissions: Mission[] | null = data.unverifMissions;
@@ -268,6 +269,15 @@
 			<span style="background-color: {getPersonColor(2, 0, false)}">Defuser</span>
 			<span style="background-color: {getPersonColor(2, 1, false)}">Expert</span>
 			<span style="background-color: {getPersonColor(1, 0, false)}">EFM</span>
+			<span>&nbsp;</span>
+			<div class="flex season-legend">
+				<div class="current" />
+				<span>Season</span>
+			</div>
+			<div class="flex season-legend">
+				<div class="past" />
+				<span>Past&nbsp;Season</span>
+			</div>
 		{/if}
 	</div>
 	<Select id="view-select" label="View:" sideLabel options={viewOptions} bind:value={viewMode} on:change={storePref} />
@@ -285,7 +295,7 @@
 	</div>
 	<div class="solves role flex grow" class:hidden={hideTopTimes}>
 		{#each bestTimes.sort((a, b) => (a.time == undefined || b.time == undefined ? 0 : b.time - a.time)) as comp}
-			<SingleCompletionCard {comp} {username} showTime />
+			<SingleCompletionCard {comp} {username} {currentSeasonName} showTime />
 		{/each}
 	</div>
 {/if}
@@ -302,18 +312,20 @@
 	</div>
 	<div class="solves role flex grow" class:hidden={hideFirstSolves}>
 		{#each firstTimes as comp}
-			<SingleCompletionCard {comp} {username} />
+			<SingleCompletionCard {comp} {username} {currentSeasonName} />
 		{/each}
 	</div>
 {/if}
 
+<!-- Newest -->
 {#if render && viewMode == viewOptions[2]}
 	<div class="block" class:hidden={!displayAll}><h4>All</h4></div>
 	<div class="solves role flex grow">
 		{#each completionByNewest as comp}
-			<SingleCompletionCard {comp} {username} />
+			<SingleCompletionCard {comp} {username} {currentSeasonName} />
 		{/each}
 	</div>
+	<!-- By Role -->
 {:else if render && viewMode == viewOptions[1]}
 	{#each Object.entries(missionsNames) as [key, compList]}
 		{#if compList.length > 0}
@@ -346,6 +358,7 @@
 			</div>
 		{/if}
 	{/each}
+	<!-- Alphabetical -->
 {:else if render}
 	<div class="block" class:hidden={!displayAll}><h4>All</h4></div>
 	<div class="solves flex grow">
@@ -408,6 +421,33 @@
 	}
 	.legend .green {
 		color: var(--text-color);
+	}
+	@media (prefers-color-scheme: dark) {
+		.season-legend {
+			background-color: #ddd;
+			color: #000;
+		}
+	}
+	.season-legend {
+		border: 1px solid #888;
+		align-items: center;
+		font-weight: bold;
+		padding: 0 3px;
+	}
+	.season-legend div {
+		display: inline-block;
+		width: 16px;
+		height: 18px;
+	}
+	.season-legend .current {
+		background: url('$lib/img/S-fancy.svg');
+		background-repeat: no-repeat;
+	}
+	.season-legend .past {
+		background: url('$lib/img/S-angular.svg');
+		height: 16px;
+		width: 18px;
+		background-repeat: no-repeat;
 	}
 
 	.solves > a {

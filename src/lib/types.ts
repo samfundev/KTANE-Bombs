@@ -144,7 +144,7 @@ export interface Completer {
 export class MissionCompletion {
 	team: string[] = [];
 	solo = false;
-	season: string | null = null;
+	season: Pick<Season, 'name'> | null = { name: '' };
 	dateAdded: Date | null = null;
 	first = false;
 	time: number | undefined = undefined;

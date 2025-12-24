@@ -1,5 +1,5 @@
 import type * as client from '@prisma/client';
-import type { Bomb, FrontendUser, ID, Mission, Completion, MissionPack, Permission, Pool } from './types';
+import type { Bomb, FrontendUser, ID, Mission, Permission, Pool, Season } from './types';
 import { redirect, error } from '@sveltejs/kit';
 import type { RepoModule } from './repo';
 import { TP_TEAM } from './const';
@@ -450,7 +450,7 @@ export const logicalSearchTooltip =
 	'Brackets are supported too: [[ thing one || aaa ]] && [[ bbb || !!ccc ]]';
 
 export function properUrlEncode(url: string): string {
-	return encodeURIComponent(url).replace(/'/g, "%27");
+	return encodeURIComponent(url).replace(/'/g, '%27');
 }
 
 export function classifyLink(link: string): string {
@@ -475,4 +475,11 @@ export function classifyLink(link: string): string {
 		return 'Log';
 	}
 	return 'Link';
+}
+
+export function currSeason(season: Pick<Season, 'name'> | null, currentSeasonName: string): boolean {
+	return season?.name === currentSeasonName;
+}
+export function pastSeason(season: Pick<Season, 'name'> | null, currentSeasonName: string): boolean {
+	return season != null && season.name !== currentSeasonName;
 }

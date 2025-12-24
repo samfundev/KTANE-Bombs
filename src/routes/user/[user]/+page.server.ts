@@ -3,7 +3,7 @@ import createAuditClient from '$lib/auditlog';
 import { TP_TEAM } from '$lib/const';
 import { Permission } from '$lib/types';
 import { fixPools, forbidden, hasPermission } from '$lib/util';
-import type { Completion, Mission } from '@prisma/client';
+import type { Mission } from '@prisma/client';
 import { error } from '@sveltejs/kit';
 
 export const load = async function ({ parent, params }: any) {
@@ -34,6 +34,11 @@ export const load = async function ({ parent, params }: any) {
 					id: true,
 					variant: true
 				}
+			},
+			season: {
+				select: {
+					name: true
+				}
 			}
 		},
 		where: {
@@ -57,6 +62,11 @@ export const load = async function ({ parent, params }: any) {
 					old: true,
 					mission: {
 						select: { name: true }
+					},
+					season: {
+						select: {
+							name: true
+						}
 					}
 				},
 				where: {
@@ -176,10 +186,27 @@ export const load = async function ({ parent, params }: any) {
 			}
 		}
 	}
+
+	const now = new Date();
+	const currentSeason = await client.season.findFirst({
+		where: {
+			start: { lte: now },
+			end: { gte: now }
+		},
+		select: {
+			name: true
+		},
+		orderBy: {
+			id: 'desc'
+		}
+	});
+	const currentSeasonName = currentSeason?.name ?? '';
+
 	return {
 		username: params.user,
 		shownUser,
 		completions,
+		currentSeasonName,
 		tpMissions,
 		unverifSolves,
 		unverifMissions:

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Permission } from '$lib/types';
-	import { formatUTCDate, hasPermission, parseUTCDate } from '$lib/util.js';
+	import { currSeason, formatUTCDate, hasPermission, parseUTCDate, pastSeason } from '$lib/util.js';
 	import { page } from '$app/stores';
 	import { Season } from '@prisma/client';
 	import toast from 'svelte-french-toast';
@@ -9,12 +9,11 @@
 
 	export let data;
 	export let seasons: Season[] = data.seasons || [];
+	export let currentSeasonName: string = data.currentSeasonName;
 
 	let dialog: HTMLDialogElement;
 	let seasonName: string = '';
 	let [seasonStart, seasonEnd] = getNextQuarterRange();
-	// console.log(seasonStart.toISOString());
-	// console.log(seasonEnd.toISOString());
 
 	function uniqueSeasonName(value: string) {
 		return seasons.some(s => s.name.toUpperCase() === value.toUpperCase()) ? 'Name already exists.' : true;
@@ -131,12 +130,20 @@
 {/if}
 
 {#each seasons as season, index}
-	<div class="block">
-		<div class="flex">
-			<h3>{index + 1}</h3>
-			<a href="/season/{season.name}"><h3>{season.name}</h3></a>
+	<a class="plain" href="/season/{season.name}">
+		<div class="block">
+			<div class="flex season-box">
+				<div class="flex">
+					<h3 class="plain">{seasons.length - index}</h3>
+					<h3>{season.name}</h3>
+				</div>
+				<div
+					class="season-legend"
+					class:past={pastSeason(season, currentSeasonName)}
+					class:current={currSeason(season, currentSeasonName)} />
+			</div>
 		</div>
-	</div>
+	</a>
 {/each}
 
 <style>
@@ -144,8 +151,43 @@
 		background-color: #eee;
 		color: #000;
 	}
+	h3 {
+		font-size: 24px;
+		text-decoration: underline;
+		margin: 12px 0;
+	}
+	a.plain,
+	h3.plain {
+		text-decoration: none;
+	}
 	.flex {
 		gap: 15px;
+	}
+	.flex.season-box {
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.season-legend {
+		display: inline-block;
+		width: 32px;
+		height: 35px;
+	}
+	@media (prefers-color-scheme: dark) {
+		.season-legend {
+			filter: invert(1);
+		}
+	}
+	.season-legend.current {
+		background: url('$lib/img/S-fancy.svg');
+		background-repeat: no-repeat;
+	}
+	.season-legend.past {
+		background: url('$lib/img/S-angular.svg');
+		height: 18px;
+		width: 20px;
+		background-repeat: no-repeat;
+		margin-right: 8px;
 	}
 
 	a {
