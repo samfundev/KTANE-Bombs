@@ -1,10 +1,7 @@
 import { readFileSync } from 'fs';
-import pkg from '@prisma/client';
-const { PrismaClient } = pkg;
+import client from '../src/lib/client';
 
 (async function () {
-	const client = new PrismaClient();
-
 	let data = JSON.parse(readFileSync('advanced.json').toString());
 	let logs = data.AuditLog;
 	let users = data.User;

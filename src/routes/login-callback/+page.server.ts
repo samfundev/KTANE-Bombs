@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import OAuth, { scope } from '$lib/oauth';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { Prisma } from '$lib/generated/prisma/client';
 import type { Cookies } from '@sveltejs/kit';
 import type { TokenRequestResult } from 'discord-oauth2';
 import { redirect, error } from '@sveltejs/kit';
@@ -70,7 +70,7 @@ async function login(result: TokenRequestResult, cookies: Cookies, username: str
 			}
 		});
 	} catch (e) {
-		if (!(e instanceof PrismaClientKnownRequestError && e.code === 'P2002')) {
+		if (!(e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002')) {
 			throw e;
 		}
 		// Conflict happened on username, the user needs to pick another.

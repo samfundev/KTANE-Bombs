@@ -10,7 +10,7 @@
 		properUrlEncode,
 		titleCase
 	} from '$lib/util.js';
-	import { type AuditLog, Prisma } from '@prisma/client';
+	import { type AuditLog, Prisma } from '$lib/generated/prisma/client';
 	import { onMount } from 'svelte';
 
 	const dateOptions: Intl.DateTimeFormatOptions = {

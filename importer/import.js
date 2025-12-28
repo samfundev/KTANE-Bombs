@@ -1,10 +1,7 @@
 import { readFileSync } from 'fs';
-import pkg from '@prisma/client';
-const { PrismaClient } = pkg;
+import client from '../src/lib/client';
 
 (async function () {
-	const client = new PrismaClient();
-
 	let packs = JSON.parse(readFileSync('bombs.json').toString());
 	for (let i = 0; i < packs.length; i++) {
 		if (packs[i].dateAdded != null) packs[i].dateAdded = new Date(packs[i].dateAdded);
