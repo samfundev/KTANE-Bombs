@@ -280,7 +280,7 @@ export const actions: Actions = {
 				},
 				completions: {
 					where: { verified: true },
-					select: client.$exclude('completion', ['missionId'])
+					omit: { missionId: true }
 				},
 				missionPack: true
 			}

@@ -3,7 +3,7 @@ import createAuditClient from '$lib/auditlog';
 import { TP_TEAM } from '$lib/const';
 import { Permission } from '$lib/types';
 import { fixPools, forbidden, hasPermission } from '$lib/util';
-import type { Mission } from '@prisma/client';
+import type { Mission } from '$lib/generated/prisma/client';
 import { error } from '@sveltejs/kit';
 
 export const load = async function ({ parent, params }: any) {

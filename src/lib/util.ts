@@ -1,4 +1,4 @@
-import type * as client from '@prisma/client';
+import type * as client from '$lib/generated/prisma/client';
 import type { Bomb, FrontendUser, ID, Mission, Permission, Pool, Season } from './types';
 import { redirect, error } from '@sveltejs/kit';
 import type { RepoModule } from './repo';

@@ -1,15 +1,13 @@
-// Fix for `npm run build` not working.
-// See: https://github.com/prisma/prisma/pull/4920#issuecomment-927334909
-import pkg from '@prisma/client';
-import { withExclude } from 'prisma-exclude';
+import { config } from 'dotenv';
+import findConfig from 'find-config';
+import { PrismaClient } from './generated/prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
 
-let client: pkg.PrismaClient;
+config({ path: findConfig('.env') });
 
-if (process.env.NODE_ENV === 'production') {
-	const { PrismaClient: PrismaClientProd } = pkg;
-	client = new PrismaClientProd();
-} else {
-	client = new pkg.PrismaClient();
-}
+const adapter = new PrismaPg({
+	connectionString: process.env.DATABASE_URL
+});
+const client = new PrismaClient({ adapter });
 
-export default withExclude(client);
+export default client;
