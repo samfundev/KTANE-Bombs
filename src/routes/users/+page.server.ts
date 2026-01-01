@@ -1,5 +1,4 @@
 import client from '$lib/client';
-import type { RequestHandler } from '@sveltejs/kit';
 import { Permission } from '$lib/types';
 import { hasPermission } from '$lib/util';
 

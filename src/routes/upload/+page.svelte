@@ -2,7 +2,7 @@
 	import CompletionSection from './_CompletionSection.svelte';
 	import MissionPackSection from './_MissionPackSection.svelte';
 	import MissionSection from './_MissionSection.svelte';
-	import type { FrontendUser, MissionPackSelection } from '$lib/types';
+	import type { MissionPackSelection } from '$lib/types';
 	let { data } = $props();
 
 	let missionInfo: { [name: string]: number } = data.missionInfo;

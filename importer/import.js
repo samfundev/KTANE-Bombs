@@ -152,7 +152,7 @@ import client from '../src/lib/client';
 
 	console.log('Creating solves');
 	let completionQueries = [];
-	for (const [_, completion] of completions.entries()) {
+	for (const completion of completions) {
 		const comp = await client.completion.findMany({
 			where: {
 				mission: {

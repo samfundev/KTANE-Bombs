@@ -15,8 +15,6 @@
 	import { page } from '$app/stores';
 	import { sortBombs } from '../_shared';
 	import ModuleCard from '$lib/cards/ModuleCard.svelte';
-	import { writable } from 'svelte/store';
-	import { browser } from '$app/environment';
 	import Select from '$lib/controls/Select.svelte';
 	import { onMount } from 'svelte';
 

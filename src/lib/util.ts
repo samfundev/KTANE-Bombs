@@ -117,10 +117,10 @@ export function isOnlyDigits(str: string): boolean {
 }
 
 function findMatchingBrackets(str: string, left: string, right: string): number[] {
-	let stack: number[] = [];
+	const stack: number[] = [];
 	for (let i = 0; i < str.length; i++) {
-		let cl = str.substring(i, i + left.length);
-		let cr = str.substring(i, i + right.length);
+		const cl = str.substring(i, i + left.length);
+		const cr = str.substring(i, i + right.length);
 
 		if (cl == left) stack.push(i);
 		else if (cr == right) {
@@ -140,11 +140,11 @@ function findMatchingBrackets(str: string, left: string, right: string): number[
 // brackets are supported too: [[ thing one || aaa ]] && [[ bbb || !!ccc ]]
 export const reservedSearchStrings = ['[[', ']]', '&&', '||', '!!'];
 export function evaluateLogicalStringSearch(expression: string, searchWhat: string[]): boolean {
-	let left = reservedSearchStrings[0];
-	let right = reservedSearchStrings[1];
-	let aand = reservedSearchStrings[2];
-	let oor = reservedSearchStrings[3];
-	let nnot = reservedSearchStrings[4];
+	const left = reservedSearchStrings[0];
+	const right = reservedSearchStrings[1];
+	const aand = reservedSearchStrings[2];
+	const oor = reservedSearchStrings[3];
+	const nnot = reservedSearchStrings[4];
 	const expr = expression.trim();
 	let exprAfter = expr;
 
@@ -205,13 +205,13 @@ export function disappearAll(event: MouseEvent) {
 	const toHide = document.getElementsByClassName('disappear');
 
 	for (let i = 0; i < toHide.length; i++) {
-		let classes = toHide[i].classList;
+		const classes = toHide[i].classList;
 		if (classes.contains('hidden')) continue;
-		let statString = Array.from(classes).find(c => c.startsWith('disappear-stat')) ?? '';
-		let stat = parseInt(statString?.substring(14) ?? '1');
+		const statString = Array.from(classes).find(c => c.startsWith('disappear-stat')) ?? '';
+		const stat = parseInt(statString?.substring(14) ?? '1');
 		if (stat == 0) {
 			for (let i = 0; i < toHide.length; i++) {
-				let cl = toHide[i].classList;
+				const cl = toHide[i].classList;
 				if (!cl.contains('hidden')) {
 					cl.add('hidden');
 					cl.remove(Array.from(cl).find(c => c.startsWith('disappear-stat')) ?? '');
@@ -225,10 +225,10 @@ export function disappearAll(event: MouseEvent) {
 	}
 }
 export function disappear(elem: HTMLElement) {
-	let classes = elem.classList;
+	const classes = elem.classList;
 	if (classes.contains('hidden')) return;
-	let statString = Array.from(classes).find(c => c.startsWith('disappear-stat')) ?? '';
-	let stat = parseInt(statString?.substring(14) ?? '1');
+	const statString = Array.from(classes).find(c => c.startsWith('disappear-stat')) ?? '';
+	const stat = parseInt(statString?.substring(14) ?? '1');
 	if (stat == 0) {
 		classes.add('hidden');
 	} else {
@@ -238,8 +238,8 @@ export function disappear(elem: HTMLElement) {
 }
 
 function preventDisappear(elem: HTMLElement) {
-	let classes = elem.classList;
-	let statString = Array.from(classes).find(c => c.startsWith('disappear-stat')) ?? '';
+	const classes = elem.classList;
+	const statString = Array.from(classes).find(c => c.startsWith('disappear-stat')) ?? '';
 
 	classes.remove(statString);
 	classes.add('disappear-stat1');
@@ -347,7 +347,7 @@ export function excludeArticleSort(a: string, b: string): number {
 }
 
 export function getSteamID(str: string): string {
-	let trimmed = str.trim();
+	const trimmed = str.trim();
 	if (isOnlyDigits(trimmed)) return trimmed;
 
 	let url: URL | null = null;
@@ -371,7 +371,7 @@ export function getSteamID(str: string): string {
 }
 
 export function validateSteamID(str: string): string | boolean {
-	let id = getSteamID(str);
+	const id = getSteamID(str);
 	if (id === '') {
 		return 'Invalid Steam Workshop URL or Workshop ID.';
 	}
@@ -379,7 +379,7 @@ export function validateSteamID(str: string): string | boolean {
 }
 
 export function validateLogfileLink(link: string): string | boolean {
-	let url = getLogfileLinks(link);
+	const url = getLogfileLinks(link);
 	if (url[0] === '') {
 		return 'Invalid Logfile Analyzer link';
 	}
@@ -404,17 +404,17 @@ export function getLogfileLinks(link: string): string[] {
 		return [''];
 	}
 
-	let host = url.hostname.toLowerCase();
-	let path = url.pathname.toLowerCase();
+	const host = url.hostname.toLowerCase();
+	const path = url.pathname.toLowerCase();
 	if (
 		host.includes('ktane.timwi.de') &&
 		(path.includes('more/logfile') || path.includes('lfa')) &&
 		url.hash.includes('file=')
 	) {
-		let start = url.hash.indexOf('file=') + 5;
+		const start = url.hash.indexOf('file=') + 5;
 		let end = url.hash.slice(start).search(/[^a-zA-Z0-9]/) + start;
 		if (end < start) end = url.hash.length;
-		let fileId = url.hash.slice(start, end);
+		const fileId = url.hash.slice(start, end);
 		return ['https://ktane.timwi.de/Logfiles/' + fileId + '.txt', 'https://ktane.timwi.de/lfa#file=' + fileId];
 	}
 	return [''];
@@ -463,8 +463,8 @@ export function classifyLink(link: string): string {
 		return 'Link';
 	}
 
-	let host = url.hostname.toLowerCase();
-	let path = url.pathname.toLowerCase();
+	const host = url.hostname.toLowerCase();
+	const path = url.pathname.toLowerCase();
 	if (
 		host.includes('youtube.com') ||
 		host.includes('youtu.be') ||

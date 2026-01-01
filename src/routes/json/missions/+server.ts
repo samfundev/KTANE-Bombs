@@ -32,10 +32,10 @@ export async function GET() {
 			}
 		}
 	});
-	let result = JSON.stringify(
+	const result = JSON.stringify(
 		missions
 			.map(m => {
-				let mission = {
+				const mission = {
 					name: m.name,
 					authors: m.authors,
 					bombs: m.bombs,

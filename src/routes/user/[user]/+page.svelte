@@ -7,8 +7,6 @@
 	import UserPermissions from '../_UserPermissions.svelte';
 	import { page } from '$app/stores';
 	import MissionCompletionCard from '$lib/cards/MissionCompletionCard.svelte';
-	import { browser } from '$app/environment';
-	import { writable } from 'svelte/store';
 	import { TP_TEAM } from '$lib/const';
 	import type { Completion, MissionPack } from '$lib/generated/prisma/client';
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';

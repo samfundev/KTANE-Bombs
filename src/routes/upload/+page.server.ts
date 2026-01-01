@@ -31,7 +31,7 @@ export const load = async function ({ parent }: any) {
 		}
 	});
 
-	let infoInit: { [name: string]: any } = {};
+	const infoInit: { [name: string]: any } = {};
 
 	const now = new Date();
 	const currentSeason = await client.season.findFirst({

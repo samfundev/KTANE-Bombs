@@ -35,23 +35,23 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		}
 	});
 
-	let logs: { AuditLog: AuditLog[]; User: User[]; Season: Season[] } = {
+	const logs: { AuditLog: AuditLog[]; User: User[]; Season: Season[] } = {
 		AuditLog: [],
 		User: [],
 		Season: []
 	};
 	logResults.forEach(log => {
-		let newLog = JSON.parse(JSON.stringify(log));
+		const newLog = JSON.parse(JSON.stringify(log));
 		minimize(newLog);
 		logs.AuditLog.push(newLog);
 	});
 	userResults.forEach(log => {
-		let newUser = JSON.parse(JSON.stringify(log));
+		const newUser = JSON.parse(JSON.stringify(log));
 		minimize(newUser);
 		logs.User.push(newUser);
 	});
 	seasonResults.forEach(log => {
-		let newSeason = JSON.parse(JSON.stringify(log));
+		const newSeason = JSON.parse(JSON.stringify(log));
 		minimize(newSeason);
 		logs.Season.push(newSeason);
 	});

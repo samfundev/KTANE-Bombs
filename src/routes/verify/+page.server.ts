@@ -97,7 +97,7 @@ export const load = async function ({ parent, locals }: any) {
 			}
 		});
 		for (let c = 0; c < completions.length; c++) {
-			let comp = completions[c];
+			const comp = completions[c];
 			if (comp.uploadedBy != null) {
 				const usr = await client.user.findUnique({
 					where: { id: comp.uploadedBy },

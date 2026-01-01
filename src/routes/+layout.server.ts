@@ -1,3 +1,3 @@
-export const load = async ({ cookies, request, resolve, locals }: any) => {
+export const load = async ({ locals }: any) => {
 	return { user: locals.user };
 };

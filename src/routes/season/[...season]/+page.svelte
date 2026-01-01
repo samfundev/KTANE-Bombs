@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { type Completer, Permission, Season } from '$lib/types';
+	import { type Completer, Permission } from '$lib/types';
 	import { properUrlEncode, hasPermission } from '$lib/util.js';
 	import { page } from '$app/state';
-	import { applyAction } from '$app/forms';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();

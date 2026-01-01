@@ -67,7 +67,7 @@
 </div>
 
 <div class="flex column">
-	{#each queue as item, index (item)}
+	{#each queue as item (item)}
 		<div class="item {item.type}">
 			{#if item.type === 'mission'}
 				<div>

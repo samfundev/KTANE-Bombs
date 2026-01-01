@@ -38,7 +38,7 @@ export async function POST({ locals, request }: RequestEvent) {
 		return new Response(undefined, { status: 406 });
 	}
 
-	let equalSolves = mission.completions.filter(
+	const equalSolves = mission.completions.filter(
 		c =>
 			c.solo == completion.solo &&
 			JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
