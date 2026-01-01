@@ -206,7 +206,7 @@ export const actions: Actions = {
 
 		if (variantEdit && mission.variantOf != null) {
 			//find the mission that this edited mission is said to be a variant of
-			let selected = await client.mission.findFirst({
+			const selected = await client.mission.findFirst({
 				where: {
 					name: mission.variantOf
 				},
@@ -218,7 +218,7 @@ export const actions: Actions = {
 			//clean broken variant group
 			if (mission.variant != null) {
 				//find other missions with the edited mission's variant ID
-				let other = await client.mission.findMany({
+				const other = await client.mission.findMany({
 					where: {
 						variant: mission.variant,
 						NOT: {
@@ -248,7 +248,7 @@ export const actions: Actions = {
 				//found one
 				if (!selected.variant) {
 					//the found one isn't in a variant group, calculate new variant ID
-					let variants = await client.mission.findMany({
+					const variants = await client.mission.findMany({
 						where: {
 							NOT: {
 								variant: null
@@ -258,7 +258,7 @@ export const actions: Actions = {
 							variant: true
 						}
 					});
-					let max = Math.max(...variants.map(v => v.variant ?? -1));
+					const max = Math.max(...variants.map(v => v.variant ?? -1));
 					mission.variant = max + 1;
 					await auditClient.mission.update({
 						where: {

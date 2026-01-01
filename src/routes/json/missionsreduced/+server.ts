@@ -24,17 +24,17 @@ export async function GET() {
 		}
 	});
 
-	let missions: Mission[] = [];
+	const missions: Mission[] = [];
 	Object.assign(missions, missionsObj);
 
-	let result = JSON.stringify(
+	const result = JSON.stringify(
 		missions
 			.map(m => {
-				let list = m.bombs
+				const list = m.bombs
 					.map(b => b.pools.map(p => p.modules))
 					.flat(2)
 					.filter(onlyUnique);
-				let reducedBombs = m.bombs.map(b => {
+				const reducedBombs = m.bombs.map(b => {
 					return {
 						modules: b.modules,
 						strikes: b.strikes,
@@ -42,7 +42,7 @@ export async function GET() {
 						time: b.time
 					};
 				});
-				let mission = {
+				const mission = {
 					name: m.name,
 					authors: m.authors,
 					bombs: reducedBombs,

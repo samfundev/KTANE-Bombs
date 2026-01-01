@@ -3,7 +3,7 @@ import { Permission } from '$lib/types';
 import { forbidden, hasAnyPermission } from '$lib/util';
 
 async function findName(log: any) {
-	let info = { linkable: true, mission: null };
+	const info = { linkable: true, mission: null };
 	if (log.model === 'Completion') {
 		const comp = await client.completion.findUnique({
 			where: { id: parseInt(log.recordId) },
@@ -15,7 +15,7 @@ async function findName(log: any) {
 		if (comp != null) {
 			return { ...info, name: comp.team.join(', '), mission: comp.mission.name };
 		} else if (log.name.includes('||')) {
-			let splitName = log.name.split('||');
+			const splitName = log.name.split('||');
 			return { linkable: false, name: splitName.slice(1).join('||'), mission: splitName[0] };
 		}
 	} else if (log.model === 'User') {
@@ -70,17 +70,17 @@ export const load = async function ({ parent, locals, url }: any) {
 		take: limit === 0 ? undefined : limit
 	});
 
-	let logs: any[] = [];
+	const logs: any[] = [];
 	for (let i = 0; i < everything.length; i++) {
-		let nameInfo = await findName(everything[i]);
-		let log = {
+		const nameInfo = await findName(everything[i]);
+		const log = {
 			...everything[i],
 			name: nameInfo.name,
 			linkable: nameInfo.linkable,
 			mission: nameInfo.mission
 		};
 		if (log.before) {
-			let before = JSON.parse(JSON.stringify(log.before));
+			const before = JSON.parse(JSON.stringify(log.before));
 			if (before && typeof before.uploadedBy === 'string') {
 				const usr = await client.user.findUnique({
 					where: { id: before.uploadedBy },

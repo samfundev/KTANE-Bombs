@@ -67,7 +67,7 @@ export async function GET() {
 		}
 	});
 
-	let missionPacks: {
+	const missionPacks: {
 		name: string;
 		dateAdded: Date | null;
 		id: number;
@@ -75,13 +75,13 @@ export async function GET() {
 		steamID: string;
 	}[] = [];
 	missionsObj.forEach(miss => {
-		let bombs: Bomb[] = [];
+		const bombs: Bomb[] = [];
 		Object.assign(bombs, miss.bombs);
-		let pack = missionPacks.find(mp => mp.name == miss.missionPack?.name);
+		const pack = missionPacks.find(mp => mp.name == miss.missionPack?.name);
 		for (let i = 0; i < miss.completions.length; i++) minimize(miss.completions[i]);
 		const solveTypes = getSolveTypes(miss);
 
-		let newMission = {
+		const newMission = {
 			name: miss.name,
 			authors: miss.authors,
 			bombs: bombs,
@@ -105,7 +105,7 @@ export async function GET() {
 		if (pack) {
 			pack.missions.push(newMission);
 		} else {
-			let p = {
+			const p = {
 				name: miss.missionPack?.name ?? '',
 				dateAdded: miss.missionPack?.dateAdded ?? null,
 				id: miss.missionPack?.id ?? 0,
@@ -118,7 +118,7 @@ export async function GET() {
 	});
 
 	missionPacks.sort((a, b) => dateAddedSort(a, b));
-	let finalPacks: any[] = [];
+	const finalPacks: any[] = [];
 	for (let p = 0; p < missionPacks.length; p++) {
 		finalPacks.push(missionPacks[p]);
 		delete finalPacks[finalPacks.length - 1].id;

@@ -71,7 +71,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		}
 	});
 
-	let missionPacks: {
+	const missionPacks: {
 		name: string;
 		dateAdded: Date | null;
 		id: number;
@@ -80,11 +80,11 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		verified: boolean;
 	}[] = [];
 	missionsObj.forEach(miss => {
-		let bombs: Bomb[] = [];
+		const bombs: Bomb[] = [];
 		Object.assign(bombs, miss.bombs);
-		let pack = missionPacks.find(mp => mp.name == miss.missionPack?.name);
+		const pack = missionPacks.find(mp => mp.name == miss.missionPack?.name);
 		for (let i = 0; i < miss.completions.length; i++) minimize(miss.completions[i]);
-		let newMission = {
+		const newMission = {
 			name: miss.name,
 			authors: miss.authors,
 			bombs: bombs,
@@ -108,7 +108,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		if (pack) {
 			pack.missions.push(newMission);
 		} else {
-			let p = {
+			const p = {
 				name: miss.missionPack?.name ?? '',
 				dateAdded: miss.missionPack?.dateAdded ?? null,
 				id: miss.missionPack?.id ?? 0,
@@ -136,7 +136,7 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 	});
 	packs.forEach(p => {
 		if (missionPacks.findIndex(mp => mp.name == p.name) < 0) {
-			let pack = {
+			const pack = {
 				name: p.name,
 				dateAdded: p.dateAdded ?? null,
 				id: p.id,

@@ -31,8 +31,8 @@ async function login(result: TokenRequestResult, cookies: Cookies, username: str
 	try {
 		const user = await OAuth.getUser(result.access_token);
 
-		let discordName = user.global_name != null ? user.username : `${user.username}#${user.discriminator}`;
-		let sheetUsername = user.global_name != null ? user.global_name : user.username;
+		const discordName = user.global_name != null ? user.username : `${user.username}#${user.discriminator}`;
+		const sheetUsername = user.global_name != null ? user.global_name : user.username;
 		//first login or username missing
 		if (username == null) {
 			const findUser = await client.user.findUnique({ where: { id: user.id } });

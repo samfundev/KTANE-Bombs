@@ -18,8 +18,8 @@ export async function POST({ locals, request }: RequestEvent) {
 
 	let context = '';
 	for (const mission of missions) {
-		let missionName = (mission.replace ? '[[UPDATE]] ' : '') + mission.name;
-		let equalMission = await client.mission.findUnique({
+		const missionName = (mission.replace ? '[[UPDATE]] ' : '') + mission.name;
+		const equalMission = await client.mission.findUnique({
 			where: {
 				name: missionName
 			},
@@ -63,7 +63,7 @@ export async function POST({ locals, request }: RequestEvent) {
 		});
 	}
 
-	let text = [];
+	const text = [];
 	for (let i = 0; i < context.length; i++) {
 		const char = context[i];
 		text.push(char == 'N' ? 'New Mission' : 'Mission UPDATE');

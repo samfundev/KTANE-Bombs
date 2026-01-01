@@ -1,10 +1,9 @@
 <script lang="ts">
 	import Input from '$lib/controls/Input.svelte';
 
-	import { formatDate, formatUTCDate, getSteamID, parseDate, parseUTCDate, validateSteamID } from '$lib/util';
+	import { formatUTCDate, parseUTCDate } from '$lib/util';
 	import equal from 'fast-deep-equal';
 	import { applyAction } from '$app/forms';
-	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import { Season } from '$lib/types';
 	import TextArea from '$lib/controls/TextArea.svelte';
 	import type { PageProps } from './$types';

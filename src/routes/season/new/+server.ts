@@ -1,5 +1,4 @@
 import { json, type RequestHandler } from '@sveltejs/kit';
-import client from '$lib/client';
 import { forbidden, hasPermission } from '$lib/util';
 import { Permission } from '$lib/types';
 import createAuditClient from '$lib/auditlog';

@@ -1,6 +1,4 @@
 import { readFileSync } from 'fs';
-import pkg from '@prisma/client';
-const { PrismaClient } = pkg;
 
 (async function () {
 	const showOnlyVerified = false;

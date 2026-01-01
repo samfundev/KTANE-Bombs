@@ -13,7 +13,7 @@ export async function POST({ locals, request }: RequestEvent) {
 
 	const pack: MissionPack = await request.json();
 	pack.uploadedBy = locals.user.id;
-	let equalPack = await client.missionPack.findUnique({
+	const equalPack = await client.missionPack.findUnique({
 		where: {
 			name: pack.name
 		},

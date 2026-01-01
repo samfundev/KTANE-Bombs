@@ -58,7 +58,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 	if (missionResult === null) {
 		error(404, 'Mission not found.');
 	}
-	let verify = hasPermission(locals.user, Permission.VerifyMission);
+	const verify = hasPermission(locals.user, Permission.VerifyMission);
 	if (!missionResult.verified && !verify) {
 		throw forbidden(locals);
 	}

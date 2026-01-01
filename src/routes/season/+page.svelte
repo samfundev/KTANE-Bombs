@@ -2,7 +2,6 @@
 	import { Permission } from '$lib/types';
 	import { currSeason, formatUTCDate, hasPermission, parseUTCDate, pastSeason } from '$lib/util.js';
 	import { page } from '$app/state';
-	import type { Season } from '@prisma/client';
 	import toast from 'svelte-french-toast';
 	import Input from '$lib/controls/Input.svelte';
 	import Dialog from '$lib/controls/Dialog.svelte';

@@ -138,7 +138,7 @@ export const load = async function ({ parent, params }: any) {
 		if (unverifPacks != null && unverifPacks.length < 1) unverifPacks = null;
 	}
 
-	let completer = {
+	const completer = {
 		distinct: new Set(),
 		defuser: new Set(),
 		defuserOnly: new Set(),

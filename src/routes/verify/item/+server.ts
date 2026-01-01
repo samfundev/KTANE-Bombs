@@ -17,9 +17,9 @@ export const POST: RequestHandler = async function ({ locals, request }: Request
 
 			if (accept) {
 				if (item.mission.name.startsWith('[[UPDATE]] ')) {
-					let name = item.mission.name.substring(11);
+					const name = item.mission.name.substring(11);
 					//find mission to be updated
-					let selected = await client.mission.findFirst({
+					const selected = await client.mission.findFirst({
 						where: {
 							name: {
 								equals: name,

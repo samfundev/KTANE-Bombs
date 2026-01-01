@@ -12,7 +12,7 @@
 		onlyUnique,
 		properUrlEncode
 	} from '$lib/util.js';
-	import { onMount, untrack } from 'svelte';
+	import { untrack } from 'svelte';
 
 	let { data } = $props();
 	type ShortMission = Pick<Mission, 'name' | 'bombs'>;

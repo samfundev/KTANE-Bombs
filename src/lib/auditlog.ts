@@ -40,7 +40,7 @@ const auditOperations: { [id: string]: any } = {
 		const record = await modelObject.findFirst({ where: args.where });
 
 		const [before, after] = diff(record, args.data);
-		let name = await findName(record, model);
+		const name = await findName(record, model);
 
 		if (Object.keys(before).length > 0 || Object.keys(after).length > 0)
 			await client.auditLog.create({
@@ -59,7 +59,7 @@ const auditOperations: { [id: string]: any } = {
 	},
 	async delete(user: FrontendUser, modelObject: any, model: string, args: any, query: any) {
 		const record = await modelObject.findFirst({ where: args.where });
-		let name = await findName(record, model);
+		const name = await findName(record, model);
 
 		await client.auditLog.create({
 			data: {
@@ -78,7 +78,7 @@ const auditOperations: { [id: string]: any } = {
 		const records = await modelObject.findMany({ where: args.where });
 
 		for (const record of records) {
-			let name = await findName(record, model);
+			const name = await findName(record, model);
 			await client.auditLog.create({
 				data: {
 					userId: user.id,
@@ -98,7 +98,7 @@ const auditOperations: { [id: string]: any } = {
 
 		for (const record of records) {
 			const [before, after] = diff(record, args.data);
-			let name = await findName(record, model);
+			const name = await findName(record, model);
 
 			if (Object.keys(before).length > 0 || Object.keys(after).length > 0)
 				await client.auditLog.create({
@@ -118,7 +118,7 @@ const auditOperations: { [id: string]: any } = {
 	},
 	async create(user: FrontendUser, modelObject: any, model: string, args: any, query: any) {
 		const record = await query(args);
-		let name = await findName(record, model);
+		const name = await findName(record, model);
 
 		await client.auditLog.create({
 			data: {
@@ -135,7 +135,7 @@ const auditOperations: { [id: string]: any } = {
 	},
 	async upsert(user: FrontendUser, modelObject: any, model: string, args: any, query: any) {
 		const record = await modelObject.findFirst({ where: args.where });
-		let name = await findName(record, model);
+		const name = await findName(record, model);
 
 		if (record) {
 			//update

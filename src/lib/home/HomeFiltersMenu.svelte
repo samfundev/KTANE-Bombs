@@ -250,7 +250,7 @@
 		hasOptions.forEach(x => {
 			mustHaves[toDashed(x)] = MustHave.Either;
 		});
-		Object.keys(limitDef).forEach((x, i) => {
+		Object.keys(limitDef).forEach(x => {
 			limits[x] = limitDef[x].length > 1 ? [limitDef[x][0], limitDef[x][1]] : [limitDef[x][0]];
 		});
 		profile = {};
@@ -485,18 +485,18 @@
 					value={toDashed(op)}
 					sideLabel
 					labelAfter
-					name={'option-sort-order'}
+					name="option-sort-order"
 					bind:group={sortOrder}
 					onchange={setSortOrder} />
 			{/each}
 			{#if profile['Operation'] != undefined && operation != Operation.Defuser}
 				<RadioButton
-					id={'option-sort-expertmatch'}
+					id="option-sort-expertmatch"
 					label="Mods from profile %"
 					value="expert-match"
 					sideLabel
 					labelAfter
-					name={'option-sort-order'}
+					name="option-sort-order"
 					bind:group={sortOrder}
 					onchange={setSortOrder} />
 			{/if}
