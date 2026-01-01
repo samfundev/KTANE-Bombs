@@ -34,7 +34,7 @@
 	let missionNames: string[] = data.missionNames;
 	let packs: MissionPackSelection[] = data.packs;
 	let modules: Record<string, RepoModule> | null = data.modules;
-	let seasons: {name: string}[] = [{name: ""}, ...data.seasons];
+	let seasons: { name: string }[] = [{ name: '' }, ...data.seasons];
 	let logfile = mission.logfile ?? '';
 
 	sortBombs(mission, modules);
@@ -381,7 +381,7 @@
 						label="Season"
 						id="completion-season-{ci}"
 						bind:value={completion.seasonName}
-						display={s => s ? s : ""}
+						display={s => (s ? s : '')}
 						options={seasons.map(s => s.name)} />
 					<div class="hstack centered">
 						<button

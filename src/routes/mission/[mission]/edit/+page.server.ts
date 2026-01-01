@@ -70,7 +70,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		throw error(404, 'Mission not found.');
 	}
 
-	missionResult.completions.forEach(comp => comp.seasonName = comp.season?.name)
+	missionResult.completions.forEach(comp => (comp.seasonName = comp.season?.name ?? ''));
 
 	const packs = await client.missionPack.findMany({
 		select: {

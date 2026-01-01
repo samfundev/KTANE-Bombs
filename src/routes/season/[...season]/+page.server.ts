@@ -27,6 +27,9 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 					team: true,
 					solo: true,
 					seasonId: true
+				},
+				where: {
+					verified: true
 				}
 			}
 		}

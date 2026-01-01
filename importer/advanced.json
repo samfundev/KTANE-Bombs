@@ -99277,6 +99277,2110 @@
 			"name": "Intro to Modded KTANE||Danielstigman, miki2003pl",
 			"action": "create",
 			"timestamp": "2025-12-23T12:10:07.359Z"
+		},
+		{
+			"id": 7554,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63364",
+			"name": "Crazyturion||BladePL",
+			"action": "create",
+			"timestamp": "2025-12-23T15:07:11.945Z"
+		},
+		{
+			"id": 7555,
+			"userId": "622198629670584330",
+			"model": "Completion",
+			"recordId": "63365",
+			"name": "BlvdBroken's Bomb of Bangers (Easy)||EricB",
+			"action": "create",
+			"timestamp": "2025-12-23T15:27:54.838Z"
+		},
+		{
+			"id": 7556,
+			"userId": "877179000684941383",
+			"model": "Completion",
+			"recordId": "63366",
+			"name": "The Soloing Sideral9999 experience||Sideral",
+			"action": "create",
+			"timestamp": "2025-12-23T22:25:29.585Z"
+		},
+		{
+			"id": 7557,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "63367",
+			"name": "Freedom||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2025-12-24T02:44:16.755Z"
+		},
+		{
+			"id": 7558,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63368",
+			"name": "Acrux||Termet",
+			"action": "create",
+			"timestamp": "2025-12-24T03:05:15.622Z"
+		},
+		{
+			"id": 7559,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63369",
+			"name": "Climactic Collection||Termet",
+			"action": "create",
+			"timestamp": "2025-12-24T03:59:47.280Z"
+		},
+		{
+			"id": 7560,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63318",
+			"name": "Happy Hour||FourAndAHalf, Penne, IHateLife",
+			"action": "update",
+			"timestamp": "2025-12-24T10:13:08.228Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7561,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63319",
+			"name": "Tachturion (Easy)||Termet",
+			"action": "update",
+			"timestamp": "2025-12-24T10:13:23.223Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7562,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63320",
+			"name": "Silent||Deaf, Kavinkul, Fish, eXish",
+			"action": "update",
+			"timestamp": "2025-12-24T10:14:18.613Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7563,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63321",
+			"name": "Vepar||BladePL",
+			"action": "update",
+			"timestamp": "2025-12-24T10:14:38.076Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7564,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63322",
+			"name": "Tricycle: Unhinged: Rehinged||BladePL",
+			"action": "update",
+			"timestamp": "2025-12-24T10:15:11.550Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7565,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63323",
+			"name": "jjjjjjjjjj||EricB",
+			"action": "update",
+			"timestamp": "2025-12-24T10:15:29.395Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7566,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63326",
+			"name": "Situations When Dealing With A Fast Maturing Catgirl||Termet",
+			"action": "update",
+			"timestamp": "2025-12-24T10:20:09.081Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7567,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63327",
+			"name": "One Module References Many [Others]||Termet",
+			"action": "update",
+			"timestamp": "2025-12-24T10:20:59.637Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7568,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63328",
+			"name": "They're Ready So Quickly!||BladePL",
+			"action": "update",
+			"timestamp": "2025-12-24T10:21:25.003Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7569,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63329",
+			"name": "Extraction (Pt. 3)||Termet",
+			"action": "update",
+			"timestamp": "2025-12-24T10:21:55.067Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7570,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63370",
+			"name": "BOTM Feb22||BladePL",
+			"action": "create",
+			"timestamp": "2025-12-24T12:52:02.194Z"
+		},
+		{
+			"id": 7571,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "63371",
+			"name": "Things||Twitch Plays",
+			"action": "create",
+			"timestamp": "2025-12-24T16:00:46.895Z"
+		},
+		{
+			"id": 7572,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "63372",
+			"name": "Almost Too Easy||Twitch Plays",
+			"action": "create",
+			"timestamp": "2025-12-24T16:48:42.130Z"
+		},
+		{
+			"id": 7573,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63330",
+			"name": "3 Concepts in 1||AzaFTW, Sierra, Termet",
+			"action": "update",
+			"timestamp": "2025-12-24T16:54:44.375Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7574,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63331",
+			"name": "Vapula||BladePL",
+			"action": "update",
+			"timestamp": "2025-12-24T16:55:39.580Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7575,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63332",
+			"name": "2005 Toyota Camry||BladePL",
+			"action": "update",
+			"timestamp": "2025-12-24T16:56:01.700Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7576,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63333",
+			"name": "jjjjjjjjjj||Yabbaguy",
+			"action": "update",
+			"timestamp": "2025-12-24T16:57:15.469Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7577,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63334",
+			"name": "47||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2025-12-24T17:00:53.847Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7578,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63335",
+			"name": "Color Square Madness||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2025-12-24T17:01:05.785Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7579,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11020",
+			"name": "Things",
+			"action": "update",
+			"timestamp": "2025-12-24T17:44:08.937Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 7580,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63371",
+			"name": "Things||Twitch Plays",
+			"action": "update",
+			"timestamp": "2025-12-24T17:44:08.978Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7581,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11071",
+			"name": "Almost Too Easy",
+			"action": "update",
+			"timestamp": "2025-12-24T17:44:11.519Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 7582,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63372",
+			"name": "Almost Too Easy||Twitch Plays",
+			"action": "update",
+			"timestamp": "2025-12-24T17:44:11.530Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7583,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "9851",
+			"name": "Crazyturion",
+			"action": "update",
+			"timestamp": "2025-12-24T17:45:16.776Z",
+			"before": {},
+			"after": {
+				"bombs": {
+					"update": [
+						{
+							"data": {
+								"time": 14400,
+								"pools": [
+									{ "count": 1, "modules": ["spwiz3DMaze"] },
+									{ "count": 1, "modules": ["AnagramsModule"] },
+									{ "count": 1, "modules": ["BartendingModule"] },
+									{ "count": 1, "modules": ["BlackHoleModule"] },
+									{ "count": 1, "modules": ["TheBlackPage"] },
+									{ "count": 1, "modules": ["BrailleModule"] },
+									{ "count": 1, "modules": ["britishSlang"] },
+									{ "count": 1, "modules": ["TheBulbModule"] },
+									{ "count": 1, "modules": ["Chalices"] },
+									{ "count": 1, "modules": ["ChessModule"] },
+									{ "count": 1, "modules": ["ChordQualities"] },
+									{ "count": 1, "modules": ["CosmicModule"] },
+									{ "count": 1, "modules": ["cube"] },
+									{ "count": 1, "modules": ["CursedDoubleOhModule"] },
+									{ "count": 1, "modules": ["digitString"] },
+									{ "count": 1, "modules": ["digitalDials"] },
+									{ "count": 1, "modules": ["dimensionDisruption"] },
+									{ "count": 1, "modules": ["dungeon"] },
+									{ "count": 1, "modules": ["EncryptedMorse"] },
+									{ "count": 1, "modules": ["europeanTravel"] },
+									{ "count": 1, "modules": ["fencing"] },
+									{ "count": 1, "modules": ["FollowTheLeaderModule"] },
+									{ "count": 1, "modules": ["GridlockModule"] },
+									{ "count": 1, "modules": ["hangover"] },
+									{ "count": 1, "modules": ["harmonySequence"] },
+									{ "count": 1, "modules": ["hereditaryBaseNotationModule"] },
+									{ "count": 1, "modules": ["HexamazeModule"] },
+									{ "count": 1, "modules": ["hillCycle"] },
+									{ "count": 1, "modules": ["KritHoldUps"] },
+									{ "count": 1, "modules": ["homophones"] },
+									{ "count": 1, "modules": ["HumanResourcesModule"] },
+									{ "count": 1, "modules": ["TheHypercubeModule"] },
+									{ "count": 1, "modules": ["ingredients"] },
+									{ "count": 1, "modules": ["jewelVault"] },
+									{ "count": 1, "modules": ["KanjiModule"] },
+									{ "count": 1, "modules": ["KudosudokuModule"] },
+									{ "count": 1, "modules": ["LEGOModule"] },
+									{ "count": 1, "modules": ["LetterKeys"] },
+									{ "count": 1, "modules": ["lightspeed"] },
+									{ "count": 1, "modules": ["Logic"] },
+									{ "count": 1, "modules": ["logicGates"] },
+									{ "count": 1, "modules": ["lgndLombaxCubes"] },
+									{ "count": 1, "modules": ["MafiaModule"] },
+									{ "count": 1, "modules": ["MahjongModule"] },
+									{ "count": 1, "modules": ["maintenance"] },
+									{ "count": 1, "modules": ["matrix"] },
+									{ "count": 1, "modules": ["mazematics"] },
+									{ "count": 1, "modules": ["miiIdentification"] },
+									{ "count": 1, "modules": ["MinesweeperModule"] },
+									{ "count": 1, "modules": ["moduleListening"] },
+									{ "count": 1, "modules": ["moon"] },
+									{ "count": 1, "modules": ["MouseInTheMaze"] },
+									{ "count": 1, "modules": ["R4YMultiColoredSwitches"] },
+									{ "count": 1, "modules": ["murder"] },
+									{ "count": 1, "modules": ["necronomicon"] },
+									{ "count": 1, "modules": ["neutralization"] },
+									{ "count": 1, "modules": ["newline"] },
+									{ "count": 1, "modules": ["NonogramModule"] },
+									{ "count": 1, "modules": ["OnlyConnectModule"] },
+									{ "count": 1, "modules": ["passportControl"] },
+									{ "count": 1, "modules": ["PatternCubeModule"] },
+									{ "count": 1, "modules": ["PointOfOrderModule"] },
+									{ "count": 1, "modules": ["rgbMaze"] },
+									{ "count": 1, "modules": ["MusicRhythms"] },
+									{ "count": 1, "modules": ["robotProgramming"] },
+									{ "count": 1, "modules": ["romanArtModule"] },
+									{ "count": 1, "modules": ["rubiksClock"] },
+									{ "count": 1, "modules": ["RubiksCubeModule"] },
+									{ "count": 1, "modules": ["SetModule"] },
+									{ "count": 1, "modules": ["qSchlagDenBomb"] },
+									{ "count": 1, "modules": ["ShapesBombs"] },
+									{ "count": 1, "modules": ["shellGame"] },
+									{ "count": 1, "modules": ["shikaku"] },
+									{ "count": 1, "modules": ["SillySlots"] },
+									{ "count": 1, "modules": ["SimonSendsModule"] },
+									{ "count": 1, "modules": ["SimonSingsModule"] },
+									{ "count": 1, "modules": ["SimonSpeaksModule"] },
+									{ "count": 1, "modules": ["simonsOnFirst"] },
+									{ "count": 1, "modules": ["simonsStages"] },
+									{ "count": 1, "modules": ["SkewedSlotsModule"] },
+									{ "count": 1, "modules": ["skyrim"] },
+									{ "count": 1, "modules": ["sonicKnuckles"] },
+									{ "count": 1, "modules": ["sphere"] },
+									{ "count": 1, "modules": ["stockMarket"] },
+									{ "count": 1, "modules": ["sun"] },
+									{ "count": 1, "modules": ["SuperlogicModule"] },
+									{ "count": 1, "modules": ["switchModule"] },
+									{ "count": 1, "modules": ["TenButtonColorCode"] },
+									{ "count": 1, "modules": ["TennisModule"] },
+									{ "count": 1, "modules": ["TextField"] },
+									{ "count": 1, "modules": ["turtleRobot"] },
+									{ "count": 1, "modules": ["TheUltracubeModule"] },
+									{ "count": 1, "modules": ["unfairCipher"] },
+									{ "count": 1, "modules": ["valves"] },
+									{ "count": 1, "modules": ["wastemanagement"] },
+									{ "count": 1, "modules": ["Wavetapping"] },
+									{ "count": 1, "modules": ["wire"] },
+									{ "count": 1, "modules": ["WirePlacementModule"] },
+									{ "count": 1, "modules": ["thewitness"] },
+									{ "count": 1, "modules": ["WordScrambleModule"] },
+									{ "count": 1, "modules": ["WordSearchModule"] }
+								],
+								"modules": 101,
+								"strikes": 10,
+								"widgets": 5
+							},
+							"where": { "id": 13352 }
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 7584,
+			"userId": "495546834010505216",
+			"model": "Completion",
+			"recordId": "63373",
+			"name": "Happenstances That Might Occur Frequently While Listening To The Fifth Mambo||Megum",
+			"action": "create",
+			"timestamp": "2025-12-24T21:51:01.942Z"
+		},
+		{
+			"id": 7585,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63336",
+			"name": "Decimator||Termet",
+			"action": "update",
+			"timestamp": "2025-12-25T12:05:06.674Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7586,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63337",
+			"name": "Cambrian||BladePL",
+			"action": "update",
+			"timestamp": "2025-12-25T12:05:33.716Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7587,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63338",
+			"name": "Reaper||Termet",
+			"action": "update",
+			"timestamp": "2025-12-25T12:06:04.962Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7588,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63339",
+			"name": "Axodeau's Assorted Favourites 2||BladePL",
+			"action": "update",
+			"timestamp": "2025-12-25T12:06:35.661Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7589,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63324",
+			"name": "Easy Challenge||Swiftfall, log",
+			"action": "update",
+			"timestamp": "2025-12-25T21:30:07.163Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7590,
+			"userId": "622198629670584330",
+			"model": "Completion",
+			"recordId": "63374",
+			"name": "Dantalion||EricB",
+			"action": "create",
+			"timestamp": "2025-12-26T00:49:33.410Z"
+		},
+		{
+			"id": 7591,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "63375",
+			"name": "Great Berate's Endurance Challenge||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2025-12-26T06:10:42.101Z"
+		},
+		{
+			"id": 7592,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63376",
+			"name": "Climactic Collection||Poke",
+			"action": "create",
+			"timestamp": "2025-12-26T12:47:27.109Z"
+		},
+		{
+			"id": 7593,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11061",
+			"name": "Luigi Horse",
+			"action": "update",
+			"timestamp": "2025-12-26T21:50:30.747Z",
+			"before": {},
+			"after": {
+				"bombs": {
+					"update": [
+						{
+							"data": {
+								"time": 2700,
+								"pools": [
+									{ "count": 1, "modules": ["punctuationMarks"] },
+									{ "count": 1, "modules": ["OneHundredAndOneDalmatiansModule"] },
+									{ "count": 1, "modules": ["OneDimensionalMaze"] },
+									{ "count": 1, "modules": ["AquariumModule"] },
+									{ "count": 1, "modules": ["BombItModule"] },
+									{ "count": 1, "modules": ["caesarCycle"] },
+									{ "count": 1, "modules": ["candyLand"] },
+									{ "count": 1, "modules": ["carries"] },
+									{ "count": 1, "modules": ["ChessModule"] },
+									{ "count": 1, "modules": ["TheClockModule"] },
+									{ "count": 1, "modules": ["Color Decoding"] },
+									{ "count": 1, "modules": ["graphModule"] },
+									{ "count": 1, "modules": ["CrackboxModule"] },
+									{ "count": 1, "modules": ["cursorMazeModule"] },
+									{ "count": 1, "modules": ["Devilish"] },
+									{ "count": 1, "modules": ["diffusion"] },
+									{ "count": 1, "modules": ["digitalRoot"] },
+									{ "count": 1, "modules": ["doofenshmirtzEvilIncModule"] },
+									{ "count": 1, "modules": ["double_on"] },
+									{ "count": 1, "modules": ["evenOrOdd"] },
+									{ "count": 1, "modules": ["factoring"] },
+									{ "count": 1, "modules": ["FindTheInvisibleCowModule"] },
+									{ "count": 1, "modules": ["FittingInModule"] },
+									{ "count": 1, "modules": ["flyswatting"] },
+									{ "count": 1, "modules": ["gerrymandering"] },
+									{ "count": 1, "modules": ["GridMatching"] },
+									{ "count": 1, "modules": ["HexamazeModule"] },
+									{ "count": 1, "modules": ["HigherOrLower"] },
+									{ "count": 1, "modules": ["housecleaningModule"] },
+									{ "count": 1, "modules": ["Indentation"] },
+									{ "count": 1, "modules": ["insaIlo"] },
+									{ "count": 1, "modules": ["karnaugh"] },
+									{ "count": 1, "modules": ["ladderLottery"] },
+									{ "count": 1, "modules": ["leds"] },
+									{ "count": 1, "modules": ["letters"] },
+									{ "count": 1, "modules": ["literalMaze"] },
+									{ "count": 1, "modules": ["luckyDice"] },
+									{ "count": 1, "modules": ["matchematics"] },
+									{ "count": 1, "modules": ["Mazery"] },
+									{ "count": 1, "modules": ["mercury"] },
+									{ "count": 1, "modules": ["mirror"] },
+									{ "count": 1, "modules": ["mischmodul"] },
+									{ "count": 1, "modules": ["newline"] },
+									{ "count": 1, "modules": ["NotMemory"] },
+									{ "count": 1, "modules": ["NotButton"] },
+									{ "count": 1, "modules": ["NotWiresword"] },
+									{ "count": 1, "modules": ["numpath"] },
+									{ "count": 1, "modules": ["organizationModule"] },
+									{ "count": 1, "modules": ["Password"] },
+									{ "count": 1, "modules": ["Petroglyph"] },
+									{ "count": 1, "modules": ["Playfair"] },
+									{ "count": 1, "modules": ["GSPuzzleBattle"] },
+									{ "count": 1, "modules": ["q&a"] },
+									{ "count": 1, "modules": ["rgbCombination"] },
+									{ "count": 1, "modules": ["Semaphore"] },
+									{ "count": 1, "modules": ["sevenDeadlySins"] },
+									{ "count": 1, "modules": ["shapesAndColors"] },
+									{ "count": 1, "modules": ["shiftedMaze"] },
+									{ "count": 1, "modules": ["SimonShapesModule"] },
+									{ "count": 1, "modules": ["SimonSpeaksModule"] },
+									{ "count": 1, "modules": ["SmallfontModule"] },
+									{ "count": 1, "modules": ["stockSquares"] },
+									{ "count": 1, "modules": ["swish"] },
+									{ "count": 1, "modules": ["Tangrams"] },
+									{ "count": 1, "modules": ["TentsModule"] },
+									{ "count": 1, "modules": ["UNO"] },
+									{ "count": 1, "modules": ["USACycle"] },
+									{ "count": 1, "modules": ["valuedKeysModule"] },
+									{ "count": 1, "modules": ["visual_impairment"] },
+									{ "count": 1, "modules": ["Words"] },
+									{ "count": 1, "modules": ["zoomModule"] }
+								],
+								"modules": 71,
+								"strikes": 5,
+								"widgets": 5
+							},
+							"where": { "id": 15547 }
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 7594,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11061",
+			"name": "Luigi Horse",
+			"action": "update",
+			"timestamp": "2025-12-26T21:50:55.165Z",
+			"before": { "logfile": "https://ktane.timwi.de/lfa#file=08066d9c6422b60a2926c5c25366e6eaece0fc73" },
+			"after": { "logfile": "https://ktane.timwi.de/lfa#file=a77ee3aa8589c1d13018aa75b827b424ae037ed4" }
+		},
+		{
+			"id": 7595,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63293",
+			"name": "Remix 1||Termet",
+			"action": "update",
+			"timestamp": "2025-12-26T21:51:51.463Z",
+			"before": { "time": 996.63 },
+			"after": { "time": 1534.63 }
+		},
+		{
+			"id": 7596,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "63377",
+			"name": "Super Collider||_Play_",
+			"action": "create",
+			"timestamp": "2025-12-27T12:40:12.517Z"
+		},
+		{
+			"id": 7597,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "63378",
+			"name": "Vanilla Mix||Twitch Plays",
+			"action": "create",
+			"timestamp": "2025-12-27T17:41:44.790Z"
+		},
+		{
+			"id": 7598,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63379",
+			"name": "Arcturian||Termet",
+			"action": "create",
+			"timestamp": "2025-12-28T07:22:39.789Z"
+		},
+		{
+			"id": 7599,
+			"userId": "1043099159084929024",
+			"model": "Completion",
+			"recordId": "63380",
+			"name": "Great Berate Practice||Srećko",
+			"action": "create",
+			"timestamp": "2025-12-28T10:55:45.967Z"
+		},
+		{
+			"id": 7600,
+			"userId": "329366208014974977",
+			"model": "Completion",
+			"recordId": "63381",
+			"name": "The Pigeon||miki2003pl, Danielstigman",
+			"action": "create",
+			"timestamp": "2025-12-28T13:00:15.279Z"
+		},
+		{
+			"id": 7601,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11037",
+			"name": "Vanilla Mix",
+			"action": "update",
+			"timestamp": "2025-12-28T16:59:29.205Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 7602,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63378",
+			"name": "Vanilla Mix||Twitch Plays",
+			"action": "update",
+			"timestamp": "2025-12-28T16:59:29.234Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7603,
+			"userId": "1043099159084929024",
+			"model": "Completion",
+			"recordId": "63382",
+			"name": ":((=||Srećko",
+			"action": "create",
+			"timestamp": "2025-12-28T17:00:06.717Z"
+		},
+		{
+			"id": 7604,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63383",
+			"name": "Turion||Termet",
+			"action": "create",
+			"timestamp": "2025-12-28T17:16:42.644Z"
+		},
+		{
+			"id": 7605,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11085",
+			"name": "AMM's Flashbacks",
+			"action": "update",
+			"timestamp": "2025-12-28T17:19:33.871Z",
+			"before": { "designedForTP": false },
+			"after": { "designedForTP": true }
+		},
+		{
+			"id": 7606,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63384",
+			"name": "Pandora||Termet",
+			"action": "create",
+			"timestamp": "2025-12-28T18:55:28.040Z"
+		},
+		{
+			"id": 7607,
+			"userId": "996401106819235840",
+			"model": "Completion",
+			"recordId": "63385",
+			"name": "ÜberKlax Endurance||ghdyo1",
+			"action": "create",
+			"timestamp": "2025-12-28T22:35:29.224Z"
+		},
+		{
+			"id": 7608,
+			"userId": "76052829285916672",
+			"model": "User",
+			"recordId": "688220820945895424",
+			"name": "LuminoscityTim",
+			"action": "update",
+			"timestamp": "2025-12-29T00:01:33.047Z",
+			"before": { "permissions": [5, 3, 1] },
+			"after": { "permissions": [5, 3, 1, 6] }
+		},
+		{
+			"id": 7609,
+			"userId": "688220820945895424",
+			"model": "Season",
+			"recordId": "1",
+			"name": "The Beginning",
+			"action": "create",
+			"timestamp": "2025-12-29T00:02:06.700Z"
+		},
+		{
+			"id": 7610,
+			"userId": "688220820945895424",
+			"model": "Season",
+			"recordId": "1",
+			"name": "The Beginning",
+			"action": "update",
+			"timestamp": "2025-12-29T00:03:04.347Z",
+			"before": { "start": "2026-01-01T00:00:00.000Z" },
+			"after": { "start": "2025-12-02T00:00:00.000Z" }
+		},
+		{
+			"id": 7611,
+			"userId": "688220820945895424",
+			"model": "Season",
+			"recordId": "1",
+			"name": "The Beginning",
+			"action": "update",
+			"timestamp": "2025-12-29T00:03:28.230Z",
+			"before": { "start": "2025-12-02T00:00:00.000Z" },
+			"after": { "start": "2026-01-01T00:00:00.000Z" }
+		},
+		{
+			"id": 7612,
+			"userId": "265294329709330432",
+			"model": "Mission",
+			"recordId": "11086",
+			"name": "This module consists of",
+			"action": "create",
+			"timestamp": "2025-12-29T07:26:41.683Z"
+		},
+		{
+			"id": 7613,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63251",
+			"name": "Eh... Not So Bad?||Poke",
+			"action": "update",
+			"timestamp": "2025-12-29T12:28:25.420Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7614,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63274",
+			"name": "Medium-Popular Demand||Poke",
+			"action": "update",
+			"timestamp": "2025-12-29T12:28:26.204Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7615,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63235",
+			"name": "Impostorous||Poke, Penne, FourAndAHalf",
+			"action": "update",
+			"timestamp": "2025-12-29T12:28:59.658Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7616,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63312",
+			"name": "BOTM Mar22||Poke",
+			"action": "update",
+			"timestamp": "2025-12-29T12:29:06.561Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7617,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63325",
+			"name": "Player's Choice||Poke",
+			"action": "update",
+			"timestamp": "2025-12-29T12:29:08.549Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7618,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63342",
+			"name": "Nothing To Spare: Quickly Now!||Srećko",
+			"action": "update",
+			"timestamp": "2025-12-29T12:29:15.289Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7619,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63345",
+			"name": "ÜberKlax Endurance (Cruel)||Termet",
+			"action": "update",
+			"timestamp": "2025-12-29T12:29:18.186Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7620,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63349",
+			"name": "Hydra||DrkL",
+			"action": "update",
+			"timestamp": "2025-12-29T12:31:02.576Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7621,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63348",
+			"name": "Intro to Modded KTANE||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2025-12-29T12:31:07.952Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7622,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63351",
+			"name": "Tenth Day of Christmas||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2025-12-29T12:31:15.774Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7623,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63352",
+			"name": "Eleventh Day of Christmas||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2025-12-29T12:31:17.718Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7624,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63341",
+			"name": "Baka, Baka, Baka||AzaFTW, Termet",
+			"action": "update",
+			"timestamp": "2025-12-29T12:31:26.498Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7625,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63354",
+			"name": "Baka, Baka, Baka||Dani was here",
+			"action": "update",
+			"timestamp": "2025-12-29T12:31:28.426Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7626,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63362",
+			"name": "Asmir's 47||Gwendolyn",
+			"action": "update",
+			"timestamp": "2025-12-29T12:31:48.178Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7627,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63363",
+			"name": "Intro to Modded KTANE||Danielstigman, miki2003pl",
+			"action": "update",
+			"timestamp": "2025-12-29T12:32:37.749Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7628,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63361",
+			"name": "Shredinator||Termet",
+			"action": "update",
+			"timestamp": "2025-12-29T12:32:40.118Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7629,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63358",
+			"name": "Coffee Break||Termet",
+			"action": "update",
+			"timestamp": "2025-12-29T12:32:43.713Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7630,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63386",
+			"name": "Axodorion EFM||BladePL",
+			"action": "create",
+			"timestamp": "2025-12-30T11:52:44.779Z"
+		},
+		{
+			"id": 7631,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "63387",
+			"name": "modsaremanycolors||Twitch Plays",
+			"action": "create",
+			"timestamp": "2025-12-30T13:51:19.344Z"
+		},
+		{
+			"id": 7632,
+			"userId": "453728831048646666",
+			"model": "MissionPack",
+			"recordId": "631",
+			"name": "Broken Minds Apart",
+			"action": "create",
+			"timestamp": "2025-12-30T15:54:54.434Z"
+		},
+		{
+			"id": 7633,
+			"userId": "453728831048646666",
+			"model": "Mission",
+			"recordId": "11087",
+			"name": "Crescendo of a Descent",
+			"action": "create",
+			"timestamp": "2025-12-30T15:58:53.460Z"
+		},
+		{
+			"id": 7634,
+			"userId": "453728831048646666",
+			"model": "Mission",
+			"recordId": "11088",
+			"name": "Purged Dreams",
+			"action": "create",
+			"timestamp": "2025-12-30T15:59:14.144Z"
+		},
+		{
+			"id": 7635,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63388",
+			"name": "Forget Madness||BladePL",
+			"action": "create",
+			"timestamp": "2025-12-30T16:49:48.869Z"
+		},
+		{
+			"id": 7636,
+			"userId": "667939964448931842",
+			"model": "Completion",
+			"recordId": "63389",
+			"name": "Possibly Impossible||IHateLife, Penne, Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2025-12-30T18:26:49.648Z"
+		},
+		{
+			"id": 7637,
+			"userId": "495546834010505216",
+			"model": "MissionPack",
+			"recordId": "632",
+			"name": "Megum's Mission",
+			"action": "create",
+			"timestamp": "2025-12-30T18:40:08.399Z"
+		},
+		{
+			"id": 7638,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11087",
+			"name": "Crescendo of a Descent",
+			"action": "delete",
+			"timestamp": "2025-12-30T19:04:34.565Z",
+			"before": {
+				"id": 11087,
+				"name": "Crescendo of a Descent",
+				"notes": null,
+				"authors": ["Kilo Bites"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=7770ae4d619c20801f520a57eb9e41b2124ac2f6",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_brokenMindsApart_Crescendo of a Descent",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2025-12-30T15:58:16.216Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "453728831048646666",
+				"designedForTP": true,
+				"missionPackId": 631
+			}
+		},
+		{
+			"id": 7639,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11089",
+			"name": "Crescendo of a Descent",
+			"action": "create",
+			"timestamp": "2025-12-30T19:08:09.841Z"
+		},
+		{
+			"id": 7640,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11089",
+			"name": "Crescendo of a Descent",
+			"action": "update",
+			"timestamp": "2025-12-30T19:13:19.202Z",
+			"before": {},
+			"after": {
+				"bombs": {
+					"update": [
+						{
+							"data": {
+								"time": 16200,
+								"pools": [
+									{ "count": 1, "modules": ["4d_maze"] },
+									{ "count": 1, "modules": ["BinaryJuggle"] },
+									{ "count": 1, "modules": ["binaryTango"] },
+									{ "count": 1, "modules": ["BlueButtonModule"] },
+									{ "count": 1, "modules": ["BlueHuffmanCipherModule"] },
+									{ "count": 1, "modules": ["ceruleanMaze"] },
+									{ "count": 1, "modules": ["TheCloseButton"] },
+									{ "count": 1, "modules": ["CrazyMazeModule"] },
+									{ "count": 1, "modules": ["cursorMazeModule"] },
+									{ "count": 1, "modules": ["DimensionKingModule"] },
+									{ "count": 1, "modules": ["ksmDreamcipher"] },
+									{ "count": 1, "modules": ["driverUpdates"] },
+									{ "count": 1, "modules": ["enaCipher"] },
+									{ "count": 1, "modules": ["faceOff"] },
+									{ "count": 1, "modules": ["face_perception"] },
+									{ "count": 1, "modules": ["faultyrgbMaze"] },
+									{ "count": 1, "modules": ["fractalMaze"] },
+									{ "count": 1, "modules": ["greatVoid"] },
+									{ "count": 1, "modules": ["hexNull"] },
+									{ "count": 1, "modules": ["hexOS"] },
+									{ "count": 1, "modules": ["holographicMemory"] },
+									{ "count": 1, "modules": ["holyCode"] },
+									{ "count": 1, "modules": ["hyperlink"] },
+									{ "count": 1, "modules": ["identificationCrisis"] },
+									{ "count": 1, "modules": ["identifrac"] },
+									{ "count": 1, "modules": ["juxtacolourFlash"] },
+									{ "count": 1, "modules": ["markscript"] },
+									{ "count": 1, "modules": ["mathem"] },
+									{ "count": 1, "modules": ["matrixMapping"] },
+									{ "count": 1, "modules": ["mysticmaze"] },
+									{ "count": 1, "modules": ["NotDoubleOhModule"] },
+									{ "count": 1, "modules": ["notMorsematics"] },
+									{ "count": 1, "modules": ["NotPerspectivePegsModule"] },
+									{ "count": 1, "modules": ["TheOctadecayotton"] },
+									{ "count": 1, "modules": ["PointlessMachines"] },
+									{ "count": 1, "modules": ["PokemonSpriteCipherModule"] },
+									{ "count": 1, "modules": ["RebootingM-Os"] },
+									{ "count": 1, "modules": ["rgbArithmetic"] },
+									{ "count": 1, "modules": ["RubiksCubeModule"] },
+									{ "count": 1, "modules": ["MazeSickening"] },
+									{ "count": 1, "modules": ["SmallfontModule"] },
+									{ "count": 1, "modules": ["SnackAttack"] },
+									{ "count": 1, "modules": ["TriconModule"] },
+									{ "count": 1, "modules": ["tripleTermModule"] },
+									{ "count": 1, "modules": ["triskaideka"] },
+									{ "count": 2, "modules": ["TheTwinModule"] },
+									{ "count": 1, "modules": ["TwodokuModule"] },
+									{ "count": 1, "modules": ["undertunneling"] },
+									{ "count": 1, "modules": ["VoronoiMazeModule"] },
+									{ "count": 1, "modules": ["wordpath"] },
+									{ "count": 1, "modules": ["xring"] },
+									{ "count": 1, "modules": ["xrotor"] },
+									{ "count": 1, "modules": ["YellowButtonModule"] },
+									{ "count": 1, "modules": ["YellowHuffmanCipherModule"] }
+								],
+								"modules": 55,
+								"strikes": 10,
+								"widgets": 5
+							},
+							"where": { "id": 15678 }
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 7641,
+			"userId": "495546834010505216",
+			"model": "Mission",
+			"recordId": "11090",
+			"name": "Alphabet Madness",
+			"action": "create",
+			"timestamp": "2025-12-30T19:53:41.249Z"
+		},
+		{
+			"id": 7642,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11088",
+			"name": "Purged Dreams",
+			"action": "update",
+			"timestamp": "2025-12-30T20:12:40.144Z",
+			"before": {},
+			"after": {
+				"bombs": {
+					"update": [
+						{
+							"data": {
+								"time": 16200,
+								"pools": [
+									{ "count": 1, "modules": ["twelvetrap"] },
+									{ "count": 1, "modules": ["4dTunnels"] },
+									{ "count": 1, "modules": ["GSAdventurePlan"] },
+									{ "count": 1, "modules": ["airStrikes"] },
+									{ "count": 1, "modules": ["alarming"] },
+									{ "count": 1, "modules": ["ArithmeticCipherModule"] },
+									{ "count": 1, "modules": ["bamboozledAgain"] },
+									{ "count": 1, "modules": ["binary_memory"] },
+									{ "count": 1, "modules": ["crimsonCipher"] },
+									{ "count": 1, "modules": ["cruelCandyLand"] },
+									{ "count": 1, "modules": ["cruelColourFlash"] },
+									{ "count": 1, "modules": ["CruelKeypads"] },
+									{ "count": 1, "modules": ["cruelWordSearchModule"] },
+									{ "count": 1, "modules": ["devilishEggs"] },
+									{ "count": 1, "modules": ["xelDialtones"] },
+									{ "count": 1, "modules": ["diffusion"] },
+									{ "count": 1, "modules": ["echolocation"] },
+									{ "count": 1, "modules": ["encryptedMemoryModule"] },
+									{ "count": 1, "modules": ["enaCipher"] },
+									{ "count": 1, "modules": ["face_perception"] },
+									{ "count": 1, "modules": ["xelFaceRecognition"] },
+									{ "count": 1, "modules": ["FootoverModule"] },
+									{ "count": 1, "modules": ["graphicMemory"] },
+									{ "count": 1, "modules": ["hexNull"] },
+									{ "count": 1, "modules": ["holographicMemory"] },
+									{ "count": 1, "modules": ["identificationCrisis"] },
+									{ "count": 1, "modules": ["LempelZivCipherModule"] },
+									{ "count": 1, "modules": ["malfunctions"] },
+									{ "count": 1, "modules": ["mastermindRestrictedCruel"] },
+									{ "count": 1, "modules": ["notMorsematics"] },
+									{ "count": 1, "modules": ["TheOctadecayotton"] },
+									{ "count": 1, "modules": ["hexaterminals"] },
+									{ "count": 1, "modules": ["PokemonSpriteCipherModule"] },
+									{ "count": 1, "modules": ["rainHellModule"] },
+									{ "count": 1, "modules": ["RedHuffmanCipherModule"] },
+									{ "count": 1, "modules": ["rgbArithmetic"] },
+									{ "count": 1, "modules": ["rgbChess"] },
+									{ "count": 1, "modules": ["rgbhypermaze"] },
+									{ "count": 1, "modules": ["RibbitProgrammingModule"] },
+									{ "count": 1, "modules": ["riggingTheOdds"] },
+									{ "count": 1, "modules": ["rngCrystal"] },
+									{ "count": 1, "modules": ["TheSequencyclopedia"] },
+									{ "count": 1, "modules": ["soulscream"] },
+									{ "count": 1, "modules": ["spectreMaze"] },
+									{ "count": 1, "modules": ["stupidSlots"] },
+									{ "count": 1, "modules": ["MazeSuffering"] },
+									{ "count": 1, "modules": ["superparsing"] },
+									{ "count": 1, "modules": ["Torment"] },
+									{ "count": 1, "modules": ["turingMachineNightmare"] },
+									{ "count": 2, "modules": ["TheTwinModule"] },
+									{ "count": 1, "modules": ["TwodokuModule"] },
+									{ "count": 1, "modules": ["uncolourFlash"] },
+									{ "count": 1, "modules": ["unfairsRevengeCruel"] },
+									{ "count": 1, "modules": ["VarietyModule"] }
+								],
+								"modules": 55,
+								"strikes": 10,
+								"widgets": 5
+							},
+							"where": { "id": 15677 }
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 7643,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "10673",
+			"name": "modsaremanycolors",
+			"action": "update",
+			"timestamp": "2025-12-31T03:07:25.608Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 7644,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63387",
+			"name": "modsaremanycolors||Twitch Plays",
+			"action": "update",
+			"timestamp": "2025-12-31T03:07:25.619Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7645,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11059",
+			"name": "[[UPDATE]] CommRUniturion",
+			"action": "update",
+			"timestamp": "2025-12-31T04:05:20.699Z",
+			"before": { "logfile": "https://ktane.timwi.de/lfa#file=fae2631dd11a5ff75817dcf626fc4d7b9a390ddf" },
+			"after": { "logfile": "https://ktane.timwi.de/lfa#file=3c4a0a64f9f7a184ace5271155547bf60b9daa3b" }
+		},
+		{
+			"id": 7646,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11080",
+			"name": "Ufoencounter’s 47",
+			"action": "update",
+			"timestamp": "2025-12-31T05:09:44.844Z",
+			"before": {},
+			"after": {
+				"bombs": {
+					"update": [
+						{
+							"data": {
+								"time": 8100,
+								"pools": [
+									{ "count": 1, "modules": ["punctuationMarks"] },
+									{ "count": 1, "modules": ["TheOneTwoThreeGame"] },
+									{ "count": 1, "modules": ["AngelHernandezModule"] },
+									{ "count": 1, "modules": ["ArrowTalk"] },
+									{ "count": 1, "modules": ["babaIsWho", "EarthboundModule"] },
+									{ "count": 1, "modules": ["bagSearch"] },
+									{ "count": 1, "modules": ["bakery"] },
+									{ "count": 1, "modules": ["BartendingModule"] },
+									{ "count": 1, "modules": ["GSBlindfoldedYahtzee"] },
+									{ "count": 1, "modules": ["bridges"] },
+									{ "count": 1, "modules": ["chilliBeans"] },
+									{ "count": 1, "modules": ["ChordQualities"] },
+									{ "count": 1, "modules": ["Color Decoding"] },
+									{ "count": 1, "modules": ["coolBeans"] },
+									{ "count": 1, "modules": ["deckOfManyThings"] },
+									{ "count": 1, "modules": ["eightTilesPanic"] },
+									{ "count": 1, "modules": ["FaultyBackgrounds"] },
+									{ "count": 1, "modules": ["faultyrgbMaze"] },
+									{ "count": 1, "modules": ["FloorLights"] },
+									{ "count": 1, "modules": ["forgetEnigma"] },
+									{ "count": 1, "modules": ["grimmModule"] },
+									{ "count": 1, "modules": ["ironLung"] },
+									{ "count": 1, "modules": ["jobApplication"] },
+									{ "count": 1, "modules": ["krazyTalk"] },
+									{ "count": 1, "modules": ["londonUnderground"] },
+									{ "count": 1, "modules": ["matchmaker"] },
+									{ "count": 1, "modules": ["Mazery"] },
+									{ "count": 1, "modules": ["theMidnightMotoristModule"] },
+									{ "count": 1, "modules": ["MissionIdentification"] },
+									{ "count": 1, "modules": ["MssngvWls"] },
+									{ "count": 1, "modules": ["NotComplicatedWires"] },
+									{ "count": 1, "modules": ["NotLaundry"] },
+									{ "count": 1, "modules": ["NotMaze"] },
+									{ "count": 1, "modules": ["NotWireSequence"] },
+									{ "count": 1, "modules": ["InvertedBigButton"] },
+									{ "count": 1, "modules": ["perspecticoloredCube"] },
+									{ "count": 1, "modules": ["retirement"] },
+									{ "count": 1, "modules": ["saturn"] },
+									{ "count": 1, "modules": ["scattershot"] },
+									{ "count": 1, "modules": ["scratchOff"] },
+									{ "count": 1, "modules": ["solveShift"] },
+									{ "count": 1, "modules": ["spongebobPatrick"] },
+									{ "count": 1, "modules": ["TwodokuModule"] },
+									{ "count": 1, "modules": ["UfoSatellites"] },
+									{ "count": 1, "modules": ["WanderModule"] },
+									{ "count": 1, "modules": ["Wendithapn"] },
+									{ "count": 1, "modules": ["widdershins"] }
+								],
+								"modules": 47,
+								"strikes": 5,
+								"widgets": 5
+							},
+							"where": { "id": 15628 }
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 7647,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11080",
+			"name": "Ufoencounter’s 47",
+			"action": "update",
+			"timestamp": "2025-12-31T05:09:44.883Z",
+			"before": { "logfile": "https://ktane.timwi.de/lfa#file=865af2e62f211299e162b2d9b0cc43fc42600d43" },
+			"after": { "logfile": "https://ktane.timwi.de/lfa#file=f130fbe90b1f63dbab48a65b7927faa02f597c4b" }
+		},
+		{
+			"id": 7648,
+			"userId": "118831126239248397",
+			"model": "MissionPack",
+			"recordId": "632",
+			"name": "Megum's Mission",
+			"action": "update",
+			"timestamp": "2025-12-31T08:34:56.289Z",
+			"before": { "name": "Megum's Mission" },
+			"after": { "name": "Megum's Missions" }
+		},
+		{
+			"id": 7649,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63344",
+			"name": "Killer Bees||BladePL",
+			"action": "update",
+			"timestamp": "2025-12-31T08:45:04.130Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7650,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63347",
+			"name": "Solo Madness||Termet",
+			"action": "update",
+			"timestamp": "2025-12-31T08:45:50.329Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7651,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63350",
+			"name": "Fnuuy||BladePL",
+			"action": "update",
+			"timestamp": "2025-12-31T08:45:57.225Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7652,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63353",
+			"name": "Twelfth Day of Christmas||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2025-12-31T08:47:41.940Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7653,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63355",
+			"name": "Modder Marathon 2||Megum",
+			"action": "update",
+			"timestamp": "2025-12-31T08:47:47.326Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7654,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63357",
+			"name": "Inferno||Termet",
+			"action": "update",
+			"timestamp": "2025-12-31T08:48:01.156Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7655,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "62604",
+			"name": "Centurion||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2025-12-31T08:49:45.414Z",
+			"before": { "time": 662, "proofs": ["https://www.youtube.com/watch?v=K_lmgUtbxaE"] },
+			"after": {
+				"time": 1576.67,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=1305f2977770c5df867884f8523c64137020ff9e;bomb=TC7PI3",
+					"https://youtu.be/9021Uh1QwKI"
+				]
+			}
+		},
+		{
+			"id": 7656,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63360",
+			"name": "Centurion||Jawly_Gaming",
+			"action": "delete",
+			"timestamp": "2025-12-31T08:49:45.425Z",
+			"before": {
+				"id": 63360,
+				"old": false,
+				"solo": false,
+				"team": ["Jawly_Gaming"],
+				"time": 1576.67,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=1305f2977770c5df867884f8523c64137020ff9e;bomb=TC7PI3",
+					"https://youtu.be/9021Uh1QwKI"
+				],
+				"seasonId": null,
+				"verified": false,
+				"dateAdded": "2025-12-23T03:01:45.879Z",
+				"missionId": 9861,
+				"uploadedBy": "815044769884536904"
+			}
+		},
+		{
+			"id": 7657,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63382",
+			"name": ":((=||Srećko",
+			"action": "update",
+			"timestamp": "2025-12-31T08:55:12.209Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7658,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63385",
+			"name": "ÜberKlax Endurance||ghdyo1",
+			"action": "update",
+			"timestamp": "2025-12-31T08:55:14.282Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7659,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63365",
+			"name": "BlvdBroken's Bomb of Bangers (Easy)||EricB",
+			"action": "update",
+			"timestamp": "2025-12-31T08:55:25.962Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7660,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63373",
+			"name": "Happenstances That Might Occur Frequently While Listening To The Fifth Mambo||Megum",
+			"action": "update",
+			"timestamp": "2025-12-31T08:56:39.265Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7661,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63374",
+			"name": "Dantalion||EricB",
+			"action": "update",
+			"timestamp": "2025-12-31T08:56:43.652Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7662,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63375",
+			"name": "Great Berate's Endurance Challenge||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2025-12-31T08:56:45.033Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7663,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63376",
+			"name": "Climactic Collection||Poke",
+			"action": "update",
+			"timestamp": "2025-12-31T08:56:52.129Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7664,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63368",
+			"name": "Acrux||Termet",
+			"action": "update",
+			"timestamp": "2025-12-31T08:57:03.713Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7665,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63367",
+			"name": "Freedom||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2025-12-31T08:57:05.464Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7666,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63380",
+			"name": "Great Berate Practice||Srećko",
+			"action": "update",
+			"timestamp": "2025-12-31T08:57:16.935Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7667,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63379",
+			"name": "Arcturian||Termet",
+			"action": "update",
+			"timestamp": "2025-12-31T08:57:23.508Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7668,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63381",
+			"name": "The Pigeon||miki2003pl, Danielstigman",
+			"action": "update",
+			"timestamp": "2025-12-31T08:58:29.620Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7669,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63384",
+			"name": "Pandora||Termet",
+			"action": "update",
+			"timestamp": "2025-12-31T08:59:49.704Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7670,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63384",
+			"name": "Pandora||Termet",
+			"action": "update",
+			"timestamp": "2025-12-31T09:00:05.513Z",
+			"before": { "proofs": ["https://ktane.timwi.de/More/Logfile%20Analyzer.html#bomb=PG1AZ6"], "seasonId": null },
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=d9fae3a2bef80dbda9f55451d01324bb5536a6fc;bomb=PG1AZ6"
+				],
+				"seasonId": 1
+			}
+		},
+		{
+			"id": 7671,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63388",
+			"name": "Forget Madness||BladePL",
+			"action": "update",
+			"timestamp": "2025-12-31T09:00:43.486Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7672,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63389",
+			"name": "Possibly Impossible||IHateLife, Penne, Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2025-12-31T09:00:44.559Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7673,
+			"userId": "313375148927483905",
+			"model": "Completion",
+			"recordId": "63390",
+			"name": "Boss Module Endurance||FourAndAHalf, Stan, IHateLife",
+			"action": "create",
+			"timestamp": "2025-12-31T10:28:54.790Z"
+		},
+		{
+			"id": 7674,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63384",
+			"name": "Pandora||Termet",
+			"action": "update",
+			"timestamp": "2025-12-31T10:37:11.385Z",
+			"before": { "seasonId": 1 },
+			"after": { "seasonId": null }
+		},
+		{
+			"id": 7675,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11085",
+			"name": "AMM's Flashbacks",
+			"action": "update",
+			"timestamp": "2025-12-31T13:39:57.072Z",
+			"before": {},
+			"after": {
+				"bombs": {
+					"update": [
+						{
+							"data": {
+								"time": 21600,
+								"pools": [
+									{ "count": 1, "modules": ["AMessage"] },
+									{ "count": 1, "modules": ["amm041292"] },
+									{ "count": 1, "modules": ["answerSmashModule"] },
+									{ "count": 1, "modules": ["AnsweringCanBeFun"] },
+									{ "count": 1, "modules": ["bamboozledAgain"] },
+									{ "count": 1, "modules": ["bombDiffusal"] },
+									{ "count": 1, "modules": ["BoozleageModule"] },
+									{ "count": 1, "modules": ["TheCloseButton"] },
+									{ "count": 1, "modules": ["Coinage"] },
+									{ "count": 1, "modules": ["ConnectedMonitorsModule"] },
+									{ "count": 1, "modules": ["dandysFloors"] },
+									{ "count": 1, "modules": ["GSDirectingButtons"] },
+									{ "count": 1, "modules": ["dumbWaiters"] },
+									{ "count": 1, "modules": ["EncryptedEquationsModule"] },
+									{ "count": 1, "modules": ["enaCipher"] },
+									{ "count": 1, "modules": ["flashingCircles"] },
+									{ "count": 1, "modules": ["geneticSequence"] },
+									{ "count": 1, "modules": ["GuessWho"] },
+									{ "count": 1, "modules": ["harmonySequence"] },
+									{ "count": 1, "modules": ["hexOrbits"] },
+									{ "count": 1, "modules": ["hexOS"] },
+									{ "count": 1, "modules": ["hieroglyphics"] },
+									{ "count": 1, "modules": ["inselectables"] },
+									{ "count": 1, "modules": ["jewelVault"] },
+									{ "count": 1, "modules": ["KatakanaModule"] },
+									{ "count": 1, "modules": ["lightspeed"] },
+									{ "count": 1, "modules": ["lgndLombaxCubes"] },
+									{ "count": 1, "modules": ["LongWords"] },
+									{ "count": 1, "modules": ["mastermindRestrictedCruel"] },
+									{ "count": 1, "modules": ["melodySequencer"] },
+									{ "count": 1, "modules": ["SquaresOfMisery"] },
+									{ "count": 1, "modules": ["neptune"] },
+									{ "count": 1, "modules": ["NonogramModule"] },
+									{ "count": 1, "modules": ["obamaGroceryStore"] },
+									{ "count": 1, "modules": ["TheOctadecayotton"] },
+									{ "count": 1, "modules": ["patternRecognition"] },
+									{ "count": 1, "modules": ["perceptron"] },
+									{ "count": 1, "modules": ["Phosphorescence"] },
+									{ "count": 1, "modules": ["PlacementRouletteModule"] },
+									{ "count": 1, "modules": ["PointlessMachines"] },
+									{ "count": 1, "modules": ["powModule"] },
+									{ "count": 1, "modules": ["KritRadio"] },
+									{ "count": 1, "modules": ["RebootingM-Os"] },
+									{ "count": 1, "modules": ["regretbFiltering"] },
+									{ "count": 1, "modules": ["RuleOfThreeModule"] },
+									{ "count": 1, "modules": ["ScramboozledEggainModule"] },
+									{ "count": 1, "modules": ["semamorse"] },
+									{ "count": 1, "modules": ["TheSequencyclopedia"] },
+									{ "count": 1, "modules": ["settingCharges"] },
+									{ "count": 1, "modules": ["shaker"] },
+									{ "count": 1, "modules": ["shapesAndColors"] },
+									{ "count": 1, "modules": ["MazeSickening"] },
+									{ "count": 1, "modules": ["SimonShoutsModule"] },
+									{ "count": 1, "modules": ["solarReorder"] },
+									{ "count": 1, "modules": ["spectreMaze"] },
+									{ "count": 1, "modules": ["sphere"] },
+									{ "count": 1, "modules": ["StableTimeSignatures"] },
+									{ "count": 1, "modules": ["startingLine"] },
+									{ "count": 1, "modules": ["theSwan"] },
+									{ "count": 1, "modules": ["synapseCipher"] },
+									{ "count": 1, "modules": ["synesthesia"] },
+									{ "count": 1, "modules": ["GSTeaSet"] },
+									{ "count": 1, "modules": ["TortureModule"] },
+									{ "count": 1, "modules": ["turingMachine"] },
+									{ "count": 1, "modules": ["TwoBits"] }
+								],
+								"modules": 65,
+								"strikes": 10,
+								"widgets": 5
+							},
+							"where": { "id": 15667 }
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 7676,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11085",
+			"name": "AMM's Flashbacks",
+			"action": "update",
+			"timestamp": "2025-12-31T13:40:11.327Z",
+			"before": { "logfile": "https://ktane.timwi.de/lfa#file=176fe5480e6c941ff6cb3f2d58f84ea678fed613" },
+			"after": { "logfile": "https://ktane.timwi.de/lfa#file=69085324b640d9b7bd9319b6eb9cbf646ba309c3" }
+		},
+		{
+			"id": 7677,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11049",
+			"name": "Modder Marathon 7",
+			"action": "update",
+			"timestamp": "2025-12-31T13:48:25.332Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7678,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11085",
+			"name": "AMM's Flashbacks",
+			"action": "update",
+			"timestamp": "2025-12-31T13:48:27.492Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7679,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "10490",
+			"name": "CommRUniturion",
+			"action": "update",
+			"timestamp": "2025-12-31T13:48:29.970Z",
+			"before": {
+				"authors": ["Megum", "rand06"],
+				"logfile": "https://ktane.timwi.de/lfa#file=0749171e00a110d9edba31321e9291612dec23ed"
+			},
+			"after": {
+				"bombs": {
+					"create": [
+						{
+							"time": 9000,
+							"pools": [
+								{ "count": 1, "modules": ["1x1x1RubiksCube"] },
+								{ "count": 1, "modules": ["abuttoningMazes"] },
+								{ "count": 1, "modules": ["airStrikes"] },
+								{ "count": 1, "modules": ["amazingHexabuttons"] },
+								{ "count": 1, "modules": ["Binary"] },
+								{ "count": 1, "modules": ["booleanVennModule"] },
+								{ "count": 1, "modules": ["colorOneTwo"] },
+								{ "count": 1, "modules": ["cruelStars"] },
+								{ "count": 1, "modules": ["CursedDoubleOhModule"] },
+								{ "count": 1, "modules": ["xelDcrypt"] },
+								{ "count": 1, "modules": ["gerrymandering"] },
+								{ "count": 1, "modules": ["GTACheats"] },
+								{ "count": 1, "modules": ["hangover"] },
+								{ "count": 1, "modules": ["KritHoldUps"] },
+								{ "count": 1, "modules": ["hyperlink"] },
+								{ "count": 1, "modules": ["indigoCipher"] },
+								{ "count": 1, "modules": ["inupiaqNumerals"] },
+								{ "count": 1, "modules": ["xelJohnsonSolids"] },
+								{ "count": 1, "modules": ["KeypadMaze"] },
+								{ "count": 1, "modules": ["lightspeed"] },
+								{ "count": 1, "modules": ["KritMicroModules"] },
+								{ "count": 1, "modules": ["Mischboozl"] },
+								{ "count": 1, "modules": ["misorderedKeys"] },
+								{ "count": 1, "modules": ["moddle"] },
+								{ "count": 1, "modules": ["monsplodeCards"] },
+								{ "count": 1, "modules": ["notX01"] },
+								{ "count": 1, "modules": ["papasPizzeria"] },
+								{ "count": 1, "modules": ["parallel_mazes"] },
+								{ "count": 1, "modules": ["PatternCubeModule"] },
+								{ "count": 1, "modules": ["PickupIdentification"] },
+								{ "count": 1, "modules": ["planetX"] },
+								{ "count": 1, "modules": ["PointlessMachines"] },
+								{ "count": 1, "modules": ["regretbFiltering"] },
+								{ "count": 1, "modules": ["MusicRhythms"] },
+								{ "count": 1, "modules": ["SetModule"] },
+								{ "count": 1, "modules": ["SimonSpinsModule"] },
+								{ "count": 1, "modules": ["simonStops"] },
+								{ "count": 1, "modules": ["SlowMathModule"] },
+								{ "count": 1, "modules": ["sqlCruel"] },
+								{ "count": 1, "modules": ["Tangrams"] },
+								{ "count": 1, "modules": ["GSTeaSet"] },
+								{ "count": 1, "modules": ["Towers"] },
+								{ "count": 1, "modules": ["TV"] },
+								{ "count": 1, "modules": ["uranus"] },
+								{ "count": 1, "modules": ["WanderModule"] },
+								{ "count": 1, "modules": ["xradar"] },
+								{ "count": 1, "modules": ["zeroResistance"] }
+							],
+							"modules": 47,
+							"strikes": 12,
+							"widgets": 5
+						}
+					]
+				},
+				"authors": ["Megum"],
+				"logfile": "https://ktane.timwi.de/lfa#file=3c4a0a64f9f7a184ace5271155547bf60b9daa3b"
+			}
+		},
+		{
+			"id": 7680,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11059",
+			"name": "[[UPDATE]] CommRUniturion",
+			"action": "delete",
+			"timestamp": "2025-12-31T13:48:31.433Z",
+			"before": {
+				"id": 11059,
+				"name": "[[UPDATE]] CommRUniturion",
+				"notes": null,
+				"authors": ["Megum"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=3c4a0a64f9f7a184ace5271155547bf60b9daa3b",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_MegumsMissions_ComRUniturion",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2025-10-09T18:51:37.429Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "495546834010505216",
+				"designedForTP": false,
+				"missionPackId": 471
+			}
+		},
+		{
+			"id": 7681,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11065",
+			"name": "Modder Marathon 8",
+			"action": "update",
+			"timestamp": "2025-12-31T13:48:36.772Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7682,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11080",
+			"name": "Ufoencounter’s 47",
+			"action": "update",
+			"timestamp": "2025-12-31T13:48:41.623Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7683,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "10490",
+			"name": "CommRUniturion",
+			"action": "update",
+			"timestamp": "2025-12-31T13:49:03.390Z",
+			"before": { "dateAdded": "2024-04-09T18:49:32.079Z" },
+			"after": { "dateAdded": "2025-10-10T04:00:00.000Z" }
+		},
+		{
+			"id": 7684,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "59496",
+			"name": "Boss Module Endurance||denial140",
+			"action": "update",
+			"timestamp": "2025-12-31T13:50:47.552Z",
+			"before": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=fb7129ec972a66a41cd22fe3427d7c240c2f0620;bomb=V53BX6"
+				],
+				"seasonId": null
+			},
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=fb7129ec972a66a41cd22fe3427d7c240c2f0620;bomb=V53BX6",
+					"test"
+				],
+				"seasonId": 1
+			}
+		},
+		{
+			"id": 7685,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "59496",
+			"name": "Boss Module Endurance||denial140",
+			"action": "update",
+			"timestamp": "2025-12-31T13:51:40.215Z",
+			"before": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=fb7129ec972a66a41cd22fe3427d7c240c2f0620;bomb=V53BX6",
+					"test"
+				],
+				"seasonId": 1
+			},
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=fb7129ec972a66a41cd22fe3427d7c240c2f0620;bomb=V53BX6",
+					""
+				],
+				"seasonId": null
+			}
+		},
+		{
+			"id": 7686,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11085",
+			"name": "AMM's Flashbacks",
+			"action": "update",
+			"timestamp": "2025-12-31T16:51:33.386Z",
+			"before": { "notes": null },
+			"after": {
+				"notes": "The Octadecayotton is set to 6 dimensions\nhexOS has octOS enabled, but will revert to ordinary hexOS on a strike"
+			}
+		},
+		{
+			"id": 7687,
+			"userId": "208633883544125440",
+			"model": "Mission",
+			"recordId": "11091",
+			"name": "Event Roulette",
+			"action": "create",
+			"timestamp": "2026-01-01T01:17:04.942Z"
+		},
+		{
+			"id": 7688,
+			"userId": "150650873884704769",
+			"model": "Completion",
+			"recordId": "63391",
+			"name": "Easy Challenge||AzaFTW",
+			"action": "create",
+			"timestamp": "2026-01-01T02:10:06.595Z"
+		},
+		{
+			"id": 7689,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63392",
+			"name": "Easy Challenge||Lyph, denial140",
+			"action": "create",
+			"timestamp": "2026-01-01T02:48:15.983Z"
+		},
+		{
+			"id": 7690,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "63393",
+			"name": "Praetorian New Ones||Kugel",
+			"action": "create",
+			"timestamp": "2026-01-01T03:28:28.666Z"
+		},
+		{
+			"id": 7691,
+			"userId": "313375148927483905",
+			"model": "Completion",
+			"recordId": "63394",
+			"name": "Easy Challenge||FourAndAHalf, Penne",
+			"action": "create",
+			"timestamp": "2026-01-01T04:19:08.177Z"
+		},
+		{
+			"id": 7692,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "63395",
+			"name": "Easy Challenge||Kugel",
+			"action": "create",
+			"timestamp": "2026-01-01T04:27:04.565Z"
+		},
+		{
+			"id": 7693,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63396",
+			"name": "Easy Challenge||Termet",
+			"action": "create",
+			"timestamp": "2026-01-01T12:08:58.521Z"
+		},
+		{
+			"id": 7694,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63397",
+			"name": "Easy Challenge||BladePL",
+			"action": "create",
+			"timestamp": "2026-01-01T12:30:39.154Z"
 		}
 	],
 	"User": [
@@ -99290,7 +101394,7 @@
 		{
 			"id": "1001601842356158524",
 			"username": "TheDarkSid4r",
-			"discordName": "TheDarkSid4r#8125",
+			"discordName": "unrulyjuli4",
 			"avatar": "19993ba04421a4dd78e8466dd0a71e42",
 			"permissions": []
 		},
@@ -99698,7 +101802,7 @@
 			"id": "1341924464144945296",
 			"username": "Blizzus",
 			"discordName": "blizzus11",
-			"avatar": "303f80ddeb0fca9b822a3a019b1e93ee",
+			"avatar": "1d219151d170ce15a5b063addd792cae",
 			"permissions": []
 		},
 		{
@@ -100938,7 +103042,7 @@
 			"id": "350998699050139648",
 			"username": "Cirax856",
 			"discordName": "cirax856",
-			"avatar": "36c0ab96ceb04caea0a294d0152c23d5",
+			"avatar": "e8492e33afd5eee6a182d72fc194387f",
 			"permissions": []
 		},
 		{
@@ -101351,7 +103455,7 @@
 			"id": "453728831048646666",
 			"username": "Kilo Bites",
 			"discordName": "kilocloudvii",
-			"avatar": "e092bc0bcb13f129886f2865e37cba7d",
+			"avatar": "de9ff4baed56bf2a8ac2fc6059849a3f",
 			"permissions": []
 		},
 		{
@@ -101919,7 +104023,7 @@
 			"id": "649278621550116864",
 			"username": "Lily",
 			"discordName": "lilyflair",
-			"avatar": "ca0679b400b16beb27fde96b5d9a42a5",
+			"avatar": "2c22a0b7787610e32c194771f5e41fd1",
 			"permissions": []
 		},
 		{
@@ -102025,7 +104129,7 @@
 			"username": "LuminoscityTim",
 			"discordName": "luminoscity",
 			"avatar": "1e3ac96d5e44e6439107935cfa2f2aa1",
-			"permissions": [5, 3, 1]
+			"permissions": [5, 3, 1, 6]
 		},
 		{
 			"id": "688404105982771247",
@@ -102199,14 +104303,14 @@
 			"id": "723461428069269594",
 			"username": "CalinRares",
 			"discordName": "calinrares",
-			"avatar": "61f8c4bb920bffe1e9ab01ac9f44c1fd",
+			"avatar": "b04179de025697a9f4413e7259fda87e",
 			"permissions": []
 		},
 		{
 			"id": "725302560432324637",
 			"username": "Cookina",
 			"discordName": "momentcookie",
-			"avatar": "e05331244aa2b8200f7f53211afae359",
+			"avatar": "5571ce753d817d7ccca565ed38c277c4",
 			"permissions": []
 		},
 		{
@@ -102361,7 +104465,7 @@
 			"id": "769759393888993289",
 			"username": "Penne",
 			"discordName": "n0rmie_",
-			"avatar": "6b8e79306365c13447868325233e5f6e",
+			"avatar": "fb52371008bcb41061b4adcda2ec756a",
 			"permissions": []
 		},
 		{
@@ -102494,7 +104598,7 @@
 			"id": "836147273418670101",
 			"username": "Jafary_human",
 			"discordName": "jafary_human",
-			"avatar": "848b701a3cd1fab1e41551bfe75253df",
+			"avatar": "fd0cd1866fcc2ca05573a5780066bcf2",
 			"permissions": []
 		},
 		{
@@ -102693,7 +104797,7 @@
 			"id": "996401106819235840",
 			"username": "ghdyo1",
 			"discordName": "ghdyo1",
-			"avatar": "19b7cc4ab5f167723cc41bca3cb75669",
+			"avatar": "658acd73e5f8b2fc1e8b1bd924a4be7f",
 			"permissions": []
 		},
 		{
@@ -102703,5 +104807,8 @@
 			"avatar": "fd8d3fc46be9ef5f8af236c6051bfbfa",
 			"permissions": []
 		}
+	],
+	"Season": [
+		{ "id": 1, "name": "The Beginning", "start": "2026-01-01T00:00:00.000Z", "end": "2026-03-31T23:59:00.000Z" }
 	]
 }
