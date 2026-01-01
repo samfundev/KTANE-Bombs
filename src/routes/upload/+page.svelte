@@ -9,7 +9,7 @@
 	let authorNames: string[] = data.authorNames;
 	let solverNames: string[] = data.solverNames;
 	let packs: MissionPackSelection[] = data.packs;
-	let currentSeasonId : number | null = data.currentSeasonId;
+	let currentSeasonId: number | null = data.currentSeasonId;
 
 	let section: 'solve' | 'mission' | 'missionpack' = $state('solve');
 </script>

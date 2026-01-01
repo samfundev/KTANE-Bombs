@@ -56,11 +56,14 @@ export async function POST({ locals, request }: RequestEvent) {
 					id: mission.id
 				}
 			},
-			season: seasonId == undefined ? undefined : {
-				connect: {
-					id: seasonId
-				}
-			},
+			season:
+				seasonId == undefined
+					? undefined
+					: {
+							connect: {
+								id: seasonId
+							}
+						},
 			first: false, // This will be set to the correct value once the completion is verified.
 			verified: false
 		}

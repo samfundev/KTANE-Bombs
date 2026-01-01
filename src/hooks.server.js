@@ -18,10 +18,10 @@ export async function handle({ event, resolve }) {
 						avatar: true,
 						permissions: true
 					}
-			  })
+				})
 			: null;
 	}
 	const response = await resolve(event);
-	response.headers.set("Access-Control-Allow-Origin", "*");
+	response.headers.set('Access-Control-Allow-Origin', '*');
 	return response;
 }

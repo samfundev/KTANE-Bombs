@@ -8,7 +8,7 @@
 	let rank = 1;
 	let tied = 1;
 
-	if(completers.length > 0) ranks[completers[0].name] = rank;
+	if (completers.length > 0) ranks[completers[0].name] = rank;
 	for (let c = 1; c < completers.length; c++) {
 		const comp = completers[c];
 		const prev = completers[c - 1];
