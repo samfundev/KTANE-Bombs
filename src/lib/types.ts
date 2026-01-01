@@ -153,7 +153,7 @@ export class MissionCompletion {
 }
 
 export class Season {
-	name: string = "";
+	name: string = '';
 	start: Date = new Date();
 	end: Date = new Date();
 	notes: string | null = null;

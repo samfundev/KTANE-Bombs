@@ -28,9 +28,7 @@
 	const message =
 		status >= 500
 			? `Looks like ${path} ran into a problem while loading the page, automatically solving page.`
-			: `@${user?.username ?? 'User'}, that command for ${path} (${
-					Math.abs(hashCode(path)) % 100
-			  }) is invalid.`;
+			: `@${user?.username ?? 'User'}, that command for ${path} (${Math.abs(hashCode(path)) % 100}) is invalid.`;
 </script>
 
 <div class="block" style="padding: var(--big-gap);">

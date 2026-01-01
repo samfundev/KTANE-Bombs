@@ -43,10 +43,12 @@
 	<h1 class="header">{season.name}</h1>
 	<div class="infobar flex">
 		<span title="Times shown in your local time zone.">
-			<strong>Starts:</strong> {season.start.toLocaleTimeString(undefined, dateOptions)}
+			<strong>Starts:</strong>
+			{season.start.toLocaleTimeString(undefined, dateOptions)}
 		</span>
 		<span title="Times shown in your local time zone.">
-			<strong>Ends:</strong> {season.end.toLocaleTimeString(undefined, dateOptions)}
+			<strong>Ends:</strong>
+			{season.end.toLocaleTimeString(undefined, dateOptions)}
 		</span>
 	</div>
 	{#if hasPermission(page.data.user, Permission.ManageSeasons)}

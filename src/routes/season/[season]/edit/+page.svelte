@@ -121,7 +121,9 @@
 		transform: translateY(100%);
 		pointer-events: none;
 		opacity: 0;
-		transition: transform 0.4s, opacity 0.4s;
+		transition:
+			transform 0.4s,
+			opacity 0.4s;
 		transition-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
 	}
 

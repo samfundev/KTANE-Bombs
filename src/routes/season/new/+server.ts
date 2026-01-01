@@ -15,7 +15,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 		throw forbidden(locals);
 	}
 	try {
-		const { seasonName, start, end  } = await request.json() as RequestBody;
+		const { seasonName, start, end } = (await request.json()) as RequestBody;
 
 		if (!seasonName?.trim()) {
 			return json({ error: 'Season name is required' }, { status: 400 });
