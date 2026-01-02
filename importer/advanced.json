@@ -101381,6 +101381,748 @@
 			"name": "Easy Challenge||BladePL",
 			"action": "create",
 			"timestamp": "2026-01-01T12:30:39.154Z"
+		},
+		{
+			"id": 7695,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63343",
+			"name": "Bad Beginning||BladePL",
+			"action": "update",
+			"timestamp": "2026-01-01T13:42:28.200Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7696,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63359",
+			"name": "An Idol mk2||Termet",
+			"action": "update",
+			"timestamp": "2026-01-01T13:42:55.194Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7697,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63364",
+			"name": "Crazyturion||BladePL",
+			"action": "update",
+			"timestamp": "2026-01-01T13:44:28.854Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7698,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63369",
+			"name": "Climactic Collection||Termet",
+			"action": "update",
+			"timestamp": "2026-01-01T13:45:06.400Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7699,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63370",
+			"name": "BOTM Feb22||BladePL",
+			"action": "update",
+			"timestamp": "2026-01-01T13:45:47.625Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7700,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63377",
+			"name": "Super Collider||_Play_",
+			"action": "update",
+			"timestamp": "2026-01-01T13:47:09.348Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 7701,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63383",
+			"name": "Turion||Termet",
+			"action": "update",
+			"timestamp": "2026-01-01T13:48:11.767Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7702,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63386",
+			"name": "Axodorion EFM||BladePL",
+			"action": "update",
+			"timestamp": "2026-01-01T13:48:46.556Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7703,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63390",
+			"name": "Boss Module Endurance||FourAndAHalf, Stan, IHateLife",
+			"action": "update",
+			"timestamp": "2026-01-01T13:48:56.224Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7704,
+			"userId": "836147273418670101",
+			"model": "Completion",
+			"recordId": "63398",
+			"name": "Easy Challenge||Jafary_human",
+			"action": "create",
+			"timestamp": "2026-01-01T14:14:01.448Z"
+		},
+		{
+			"id": 7705,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "63399",
+			"name": "Easy Challenge||_Play_",
+			"action": "create",
+			"timestamp": "2026-01-01T15:04:03.942Z"
+		},
+		{
+			"id": 7706,
+			"userId": "998723698452332544",
+			"model": "Completion",
+			"recordId": "63400",
+			"name": "Easy Challenge||ufoencounter14",
+			"action": "create",
+			"timestamp": "2026-01-01T16:39:35.097Z"
+		},
+		{
+			"id": 7707,
+			"userId": "732019628615663698",
+			"model": "Mission",
+			"recordId": "11092",
+			"name": "[[UPDATE]] Nightmare Mode: Savor the Moment",
+			"action": "create",
+			"timestamp": "2026-01-01T18:20:27.756Z"
+		},
+		{
+			"id": 7708,
+			"userId": "566568608755613731",
+			"model": "Completion",
+			"recordId": "63401",
+			"name": "The Pigeon||Dani was here",
+			"action": "create",
+			"timestamp": "2026-01-01T20:34:44.569Z"
+		},
+		{
+			"id": 7709,
+			"userId": "996401106819235840",
+			"model": "Completion",
+			"recordId": "63402",
+			"name": "Modder Marathon||ghdyo1",
+			"action": "create",
+			"timestamp": "2026-01-01T21:06:51.133Z"
+		},
+		{
+			"id": 7710,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63403",
+			"name": "Nothing to Spare: Made in China||Termet",
+			"action": "create",
+			"timestamp": "2026-01-01T21:47:16.105Z"
+		},
+		{
+			"id": 7711,
+			"userId": "265294329709330432",
+			"model": "Completion",
+			"recordId": "63404",
+			"name": "Easy Challenge||Blan",
+			"action": "create",
+			"timestamp": "2026-01-02T06:40:43.083Z"
+		},
+		{
+			"id": 7712,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "60495",
+			"name": "Easy Challenge||AzaFTW",
+			"action": "update",
+			"timestamp": "2026-01-02T06:53:03.779Z",
+			"before": { "time": 514, "proofs": ["https://www.youtube.com/watch?v=WkWOu7_3ZV8"] },
+			"after": {
+				"time": 1091.98,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=fdb9b723d05ea73d1c640afb78e3c31059c9645f;bomb=XH6HS8",
+					"https://youtu.be/fitFIgUwd10"
+				]
+			}
+		},
+		{
+			"id": 7713,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63391",
+			"name": "Easy Challenge||AzaFTW",
+			"action": "delete",
+			"timestamp": "2026-01-02T06:53:03.791Z",
+			"before": {
+				"id": 63391,
+				"old": false,
+				"solo": false,
+				"team": ["AzaFTW"],
+				"time": 1091.98,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=fdb9b723d05ea73d1c640afb78e3c31059c9645f;bomb=XH6HS8",
+					"https://youtu.be/fitFIgUwd10"
+				],
+				"seasonId": 1,
+				"verified": false,
+				"dateAdded": "2026-01-01T02:09:36.112Z",
+				"missionId": 9636,
+				"uploadedBy": "150650873884704769"
+			}
+		},
+		{
+			"id": 7714,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "60495",
+			"name": "Easy Challenge||AzaFTW",
+			"action": "update",
+			"timestamp": "2026-01-02T06:54:05.808Z",
+			"before": { "seasonId": null },
+			"after": { "seasonId": 1 }
+		},
+		{
+			"id": 7715,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63394",
+			"name": "Easy Challenge||FourAndAHalf, Penne",
+			"action": "update",
+			"timestamp": "2026-01-02T07:45:56.527Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7716,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63392",
+			"name": "Easy Challenge||Lyph, denial140",
+			"action": "update",
+			"timestamp": "2026-01-02T07:46:00.679Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7717,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "54844",
+			"name": "Easy Challenge||Kugel",
+			"action": "update",
+			"timestamp": "2026-01-02T08:13:09.218Z",
+			"before": {
+				"time": 1132,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=a20ee593a701d559a82357f505a101d5caa7de18;bomb=0F6FD0"
+				]
+			},
+			"after": {
+				"time": 1123.96,
+				"proofs": [
+					"https://ktane.timwi.de/lfa#file=d2251acce0aeff8b1d1840c69b78510920f2aca2",
+					"https://www.youtube.com/watch?v=N_OdX9ZPBck"
+				]
+			}
+		},
+		{
+			"id": 7718,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63395",
+			"name": "Easy Challenge||Kugel",
+			"action": "delete",
+			"timestamp": "2026-01-02T08:13:09.229Z",
+			"before": {
+				"id": 63395,
+				"old": false,
+				"solo": false,
+				"team": ["Kugel"],
+				"time": 1123.96,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://ktane.timwi.de/lfa#file=d2251acce0aeff8b1d1840c69b78510920f2aca2",
+					"https://www.youtube.com/watch?v=N_OdX9ZPBck"
+				],
+				"seasonId": 1,
+				"verified": false,
+				"dateAdded": "2026-01-01T04:21:51.732Z",
+				"missionId": 9636,
+				"uploadedBy": "459108669636739072"
+			}
+		},
+		{
+			"id": 7719,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "54844",
+			"name": "Easy Challenge||Kugel",
+			"action": "update",
+			"timestamp": "2026-01-02T08:14:54.326Z",
+			"before": {
+				"time": 1123.96,
+				"proofs": [
+					"https://ktane.timwi.de/lfa#file=d2251acce0aeff8b1d1840c69b78510920f2aca2",
+					"https://www.youtube.com/watch?v=N_OdX9ZPBck"
+				],
+				"seasonId": null
+			},
+			"after": {
+				"time": 1132.29,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=a20ee593a701d559a82357f505a101d5caa7de18",
+					"https://ktane.timwi.de/lfa#file=d2251acce0aeff8b1d1840c69b78510920f2aca2",
+					"https://www.youtube.com/watch?v=N_OdX9ZPBck"
+				],
+				"seasonId": 1
+			}
+		},
+		{
+			"id": 7720,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63394",
+			"name": "Easy Challenge||FourAndAHalf, Penne",
+			"action": "update",
+			"timestamp": "2026-01-02T08:20:59.972Z",
+			"before": { "seasonId": 1 },
+			"after": { "seasonId": null }
+		},
+		{
+			"id": 7721,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "62845",
+			"name": "Easy Challenge||Jafary_human",
+			"action": "update",
+			"timestamp": "2026-01-02T08:27:35.233Z",
+			"before": { "proofs": ["https://youtu.be/GBCIpmiUVbo?si=pQEAcXWkJLtrYrs1"], "seasonId": null },
+			"after": {
+				"proofs": ["https://youtu.be/GBCIpmiUVbo?si=pQEAcXWkJLtrYrs1", "https://www.youtube.com/watch?v=4tMltcZB1W0"],
+				"seasonId": 1
+			}
+		},
+		{
+			"id": 7722,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63398",
+			"name": "Easy Challenge||Jafary_human",
+			"action": "delete",
+			"timestamp": "2026-01-02T08:27:42.137Z",
+			"before": {
+				"id": 63398,
+				"old": false,
+				"solo": false,
+				"team": ["Jafary_human"],
+				"time": 374,
+				"first": false,
+				"notes": null,
+				"proofs": ["https://youtu.be/4tMltcZB1W0"],
+				"seasonId": 1,
+				"verified": false,
+				"dateAdded": "2026-01-01T14:11:59.198Z",
+				"missionId": 9636,
+				"uploadedBy": "836147273418670101"
+			}
+		},
+		{
+			"id": 7723,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63175",
+			"name": "Easy Challenge||ufoencounter14",
+			"action": "update",
+			"timestamp": "2026-01-02T08:35:18.619Z",
+			"before": {
+				"time": 150.01,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=8af9effc8fc5857ea59fadd171479f365d2f7cc4;bomb=ZT0TL8"
+				]
+			},
+			"after": {
+				"time": 482.58,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=6991fdb06e9d0a50bcd52243ba2ebf49a1ff4640;bomb=WP2VQ2",
+					"https://www.youtube.com/watch?v=7NlWPS1vDV0"
+				]
+			}
+		},
+		{
+			"id": 7724,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63400",
+			"name": "Easy Challenge||ufoencounter14",
+			"action": "delete",
+			"timestamp": "2026-01-02T08:35:20.102Z",
+			"before": {
+				"id": 63400,
+				"old": false,
+				"solo": false,
+				"team": ["ufoencounter14"],
+				"time": 482.58,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=6991fdb06e9d0a50bcd52243ba2ebf49a1ff4640;bomb=WP2VQ2",
+					"https://www.youtube.com/watch?v=7NlWPS1vDV0"
+				],
+				"seasonId": 1,
+				"verified": false,
+				"dateAdded": "2026-01-01T16:37:48.919Z",
+				"missionId": 9636,
+				"uploadedBy": "998723698452332544"
+			}
+		},
+		{
+			"id": 7725,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63175",
+			"name": "Easy Challenge||ufoencounter14",
+			"action": "update",
+			"timestamp": "2026-01-02T08:35:50.860Z",
+			"before": { "seasonId": null },
+			"after": { "seasonId": 1 }
+		},
+		{
+			"id": 7726,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "54912",
+			"name": "Easy Challenge||Blan",
+			"action": "update",
+			"timestamp": "2026-01-02T08:43:10.880Z",
+			"before": {
+				"time": 393,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=96b731f941e5e65f91e92c5967d71aaaa8271302;bomb=DD0EE9"
+				]
+			},
+			"after": {
+				"time": 917.62,
+				"proofs": [
+					"https://ktane.timwi.de/lfa#file=fa068fc3b4023adb50ec9aba670d5d281bbeeb4a",
+					"https://www.youtube.com/watch?v=pjL6rU8xU2E"
+				]
+			}
+		},
+		{
+			"id": 7727,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63404",
+			"name": "Easy Challenge||Blan",
+			"action": "delete",
+			"timestamp": "2026-01-02T08:43:10.902Z",
+			"before": {
+				"id": 63404,
+				"old": false,
+				"solo": false,
+				"team": ["Blan"],
+				"time": 917.62,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://ktane.timwi.de/lfa#file=fa068fc3b4023adb50ec9aba670d5d281bbeeb4a",
+					"https://www.youtube.com/watch?v=pjL6rU8xU2E"
+				],
+				"seasonId": 1,
+				"verified": false,
+				"dateAdded": "2026-01-02T05:32:29.034Z",
+				"missionId": 9636,
+				"uploadedBy": "265294329709330432"
+			}
+		},
+		{
+			"id": 7728,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "54912",
+			"name": "Easy Challenge||Blan",
+			"action": "update",
+			"timestamp": "2026-01-02T08:43:29.437Z",
+			"before": { "seasonId": null },
+			"after": { "seasonId": 1 }
+		},
+		{
+			"id": 7729,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "59329",
+			"name": "Easy Challenge||_Play_",
+			"action": "update",
+			"timestamp": "2026-01-02T08:57:14.664Z",
+			"before": {
+				"time": 1000.45,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=dbfde2dc53cb9e4c17e85d815b8c89202dfd9c5e;bomb=FB4BX3"
+				]
+			},
+			"after": {
+				"time": 1353.22,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=9e36505d5dbc81795170ee2e7c1f29fedb7a34df;bomb=7N7EE6",
+					"https://youtu.be/C8orUhJYP0w"
+				]
+			}
+		},
+		{
+			"id": 7730,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63399",
+			"name": "Easy Challenge||_Play_",
+			"action": "delete",
+			"timestamp": "2026-01-02T08:57:15.109Z",
+			"before": {
+				"id": 63399,
+				"old": false,
+				"solo": false,
+				"team": ["_Play_"],
+				"time": 1353.22,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=9e36505d5dbc81795170ee2e7c1f29fedb7a34df;bomb=7N7EE6",
+					"https://youtu.be/C8orUhJYP0w"
+				],
+				"seasonId": 1,
+				"verified": false,
+				"dateAdded": "2026-01-01T03:44:56.974Z",
+				"missionId": 9636,
+				"uploadedBy": "455035517872898050"
+			}
+		},
+		{
+			"id": 7731,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "61754",
+			"name": "Easy Challenge||BladePL",
+			"action": "update",
+			"timestamp": "2026-01-02T08:57:19.678Z",
+			"before": {
+				"time": 1477.94,
+				"proofs": ["https://ktane.timwi.de/lfa#file=acc400537d79d948008cf1649538f31bfe6ba072"]
+			},
+			"after": {
+				"time": 1565.18,
+				"proofs": [
+					"https://ktane.timwi.de/lfa#file=ad9c670f12b9da60a7827d7001649fd81ccc3ae0",
+					"https://youtu.be/UL1yqvbc-aY"
+				]
+			}
+		},
+		{
+			"id": 7732,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63397",
+			"name": "Easy Challenge||BladePL",
+			"action": "delete",
+			"timestamp": "2026-01-02T08:57:19.911Z",
+			"before": {
+				"id": 63397,
+				"old": false,
+				"solo": false,
+				"team": ["BladePL"],
+				"time": 1565.18,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://ktane.timwi.de/lfa#file=ad9c670f12b9da60a7827d7001649fd81ccc3ae0",
+					"https://youtu.be/UL1yqvbc-aY"
+				],
+				"seasonId": 1,
+				"verified": false,
+				"dateAdded": "2026-01-01T12:26:35.085Z",
+				"missionId": 9636,
+				"uploadedBy": "705094454717186119"
+			}
+		},
+		{
+			"id": 7733,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "63405",
+			"name": "Centurion||Jawly_Gaming, DrkL",
+			"action": "create",
+			"timestamp": "2026-01-02T09:14:32.002Z"
+		},
+		{
+			"id": 7734,
+			"userId": "313375148927483905",
+			"model": "Completion",
+			"recordId": "63406",
+			"name": "\"New\" Faces||FourAndAHalf, Penne",
+			"action": "create",
+			"timestamp": "2026-01-02T10:30:42.751Z"
+		},
+		{
+			"id": 7735,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63407",
+			"name": "Brainer Power||Termet",
+			"action": "create",
+			"timestamp": "2026-01-02T10:38:26.281Z"
+		},
+		{
+			"id": 7736,
+			"userId": "329366208014974977",
+			"model": "Completion",
+			"recordId": "63408",
+			"name": "Shredinator||miki2003pl",
+			"action": "create",
+			"timestamp": "2026-01-02T10:58:17.926Z"
+		},
+		{
+			"id": 7737,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63394",
+			"name": "Easy Challenge||FourAndAHalf, Penne",
+			"action": "update",
+			"timestamp": "2026-01-02T11:08:33.936Z",
+			"before": { "seasonId": null },
+			"after": { "seasonId": 1 }
+		},
+		{
+			"id": 7738,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "59329",
+			"name": "Easy Challenge||_Play_",
+			"action": "update",
+			"timestamp": "2026-01-02T11:12:29.834Z",
+			"before": { "seasonId": null },
+			"after": { "seasonId": 1 }
+		},
+		{
+			"id": 7739,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "61754",
+			"name": "Easy Challenge||BladePL",
+			"action": "update",
+			"timestamp": "2026-01-02T11:12:37.732Z",
+			"before": { "seasonId": null },
+			"after": { "seasonId": 1 }
+		},
+		{
+			"id": 7740,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63405",
+			"name": "Centurion||Jawly_Gaming, DrkL",
+			"action": "delete",
+			"timestamp": "2026-01-02T11:16:06.799Z",
+			"before": {
+				"id": 63405,
+				"old": false,
+				"solo": false,
+				"team": ["Jawly_Gaming", "DrkL"],
+				"time": 4.91,
+				"first": false,
+				"notes": null,
+				"proofs": ["https://ktane.timwi.de/lfa#file=53604ae23c737cc159a49c93e02cfab123a3478b"],
+				"seasonId": null,
+				"verified": false,
+				"dateAdded": "2026-01-02T09:13:36.910Z",
+				"missionId": 9861,
+				"uploadedBy": "815044769884536904"
+			}
+		},
+		{
+			"id": 7741,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "59658",
+			"name": "Easy Challenge||denial140",
+			"action": "update",
+			"timestamp": "2026-01-02T13:50:52.734Z",
+			"before": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=7791560aa06f0bc117482055854b9b6129c2cd29;bomb=NF2EP3",
+					"https://youtu.be/1nBCttITYvo"
+				],
+				"seasonId": null
+			},
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=7791560aa06f0bc117482055854b9b6129c2cd29;bomb=NF2EP3",
+					"https://youtu.be/1nBCttITYvo",
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=4ce3972e5daadb5fc450e77317cd6ed61d6e13b3",
+					"https://youtu.be/WJurdbQ-W-8"
+				],
+				"seasonId": 1
+			}
+		},
+		{
+			"id": 7742,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "63409",
+			"name": "Nothing to Spare: Made in China||_Play_",
+			"action": "create",
+			"timestamp": "2026-01-02T14:52:33.957Z"
+		},
+		{
+			"id": 7743,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63410",
+			"name": "Nicoturion||Termet",
+			"action": "create",
+			"timestamp": "2026-01-02T16:09:11.572Z"
+		},
+		{
+			"id": 7744,
+			"userId": "705507300634263653",
+			"model": "MissionPack",
+			"recordId": "633",
+			"name": "Possessed's Volatile Missions",
+			"action": "create",
+			"timestamp": "2026-01-02T18:12:06.859Z"
+		},
+		{
+			"id": 7745,
+			"userId": "779013250367881216",
+			"model": "Completion",
+			"recordId": "63411",
+			"name": "An Idol||GoodHood",
+			"action": "create",
+			"timestamp": "2026-01-02T18:15:30.034Z"
 		}
 	],
 	"User": [

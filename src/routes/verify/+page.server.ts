@@ -90,6 +90,7 @@ export const load = async function ({ parent, locals }: any) {
 				},
 				season: {
 					select: {
+						id: true,
 						name: true
 					}
 				}

@@ -116,7 +116,8 @@ export const POST: RequestHandler = async function ({ locals, request }: Request
 							team: item.completion.team,
 							time: item.completion.time,
 							solo: item.completion.solo,
-							proofs: item.completion.proofs
+							proofs: item.completion.proofs,
+							seasonId: item.completion.season?.id,
 						}
 					});
 					await client.completion.delete({ where: { id: item.completion.id } });

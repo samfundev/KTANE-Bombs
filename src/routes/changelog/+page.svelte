@@ -5,6 +5,18 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>2 Jan 2026</h3>
+	<ul>
+		<li>Fix verification of resubmitted season solves.</li>
+	</ul>
+</div>
+<div class="block update">
+	<h3>1 Jan 2026</h3>
+	<ul>
+		<li>Fix unverified season solves showing up on season leaderboard.</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>30 Dec 2025</h3>
 	<ul>
 		<li>
