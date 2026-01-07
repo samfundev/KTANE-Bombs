@@ -1,7 +1,6 @@
 import client from '$lib/client';
-import { TP_TEAM } from '$lib/const';
-import { Permission, type Completer } from '$lib/types';
-import { Actions, error, redirect, RequestEvent, ServerLoadEvent } from '@sveltejs/kit';
+import { type Completer } from '$lib/types';
+import { error, ServerLoadEvent } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async function ({ params, locals }: ServerLoadEvent) {
@@ -15,7 +14,10 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			name: true,
 			start: true,
 			end: true,
+			missionsStart: true,
+			missionsEnd: true,
 			notes: true,
+			whitelist: true,
 			completions: {
 				select: {
 					mission: {
@@ -90,10 +92,32 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		if (totalDiff !== 0) return totalDiff;
 		return a.name.localeCompare(b.name);
 	});
-	// console.log(sortedCompleters);
+
+	let missionList = await client.mission.findMany({
+		where: {
+			OR: [
+				{
+					dateAdded: {
+						gte: seasonResult.missionsStart,
+						lte: seasonResult.missionsEnd
+					},
+					verified: true
+				},
+				{
+					id: { in: seasonResult.whitelist },
+					verified: true
+				}
+			]
+		},
+		select: {
+			name: true
+		},
+		orderBy: { dateAdded: 'asc' }
+	});
 
 	return {
 		seasonCompleters: sortedCompleters,
-		season: seasonResult
+		season: seasonResult,
+		missionList
 	};
 };

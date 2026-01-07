@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { type Completer, type ID, Permission, Season } from '$lib/types';
+	import { type Completer, Permission, Season } from '$lib/types';
 	import { properUrlEncode, hasPermission } from '$lib/util.js';
 	import { page } from '$app/stores';
-	import { applyAction } from '$app/forms';
+	import { Mission } from '@prisma/client';
 	export let data;
 	export let season: Season = data.season;
 	let completers: Completer[] = data.seasonCompleters;
+	let missionList: Pick<Mission, 'name'>[] = data.missionList;
 	let ranks: { [name: string]: number } = {};
 	let rank = 1;
 	let tied = 1;
@@ -41,10 +42,12 @@
 	<h1 class="header">{season.name}</h1>
 	<div class="infobar flex">
 		<span title="Times shown in your local time zone.">
-			<strong>Starts:</strong> {season.start.toLocaleTimeString(undefined, dateOptions)}
+			<strong>Starts:</strong>
+			{season.start.toLocaleTimeString(undefined, dateOptions)}
 		</span>
 		<span title="Times shown in your local time zone.">
-			<strong>Ends:</strong> {season.end.toLocaleTimeString(undefined, dateOptions)}
+			<strong>Ends:</strong>
+			{season.end.toLocaleTimeString(undefined, dateOptions)}
 		</span>
 	</div>
 	{#if hasPermission($page.data.user, Permission.ManageSeasons)}
@@ -57,6 +60,16 @@
 		<b>Notes</b>:
 		<span class="season-notes">{season.notes}</span>
 	</div>
+{/if}
+
+{#if missionList.length > 0}
+	<div class="block title"><b>Allowed Missions</b></div>
+	<div class="missions">
+		{#each missionList as mission}
+			<a class="mission block" href="/mission/{properUrlEncode(mission.name)}">{mission.name}</a>
+		{/each}
+	</div>
+	<div class="block title"><b>Leaderboard</b></div>
 {/if}
 
 <div class="table">
@@ -88,6 +101,10 @@
 	.header {
 		position: relative;
 	}
+	.title.block {
+		background-color: var(--block-separator);
+		text-align: center;
+	}
 
 	.table b.block {
 		position: sticky;
@@ -97,6 +114,17 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+	}
+
+	.missions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--gap);
+		align-content: start;
+	}
+	.mission {
+		padding: var(--gap) 8px;
+		flex-grow: 1;
 	}
 
 	.infobar {

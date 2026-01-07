@@ -156,5 +156,8 @@ export class Season {
 	name: string = "";
 	start: Date = new Date();
 	end: Date = new Date();
+	missionsStart: Date = new Date();
+	missionsEnd: Date = new Date();
 	notes: string | null = null;
+	whitelist: number[] = [];
 }

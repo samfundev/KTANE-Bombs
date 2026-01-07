@@ -5,6 +5,12 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>7 Jan 2026</h3>
+	<ul>
+		<li>Add list of allowed missions to <a href="/season/The%20Beginning">seasons</a>.</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>2 Jan 2026</h3>
 	<ul>
 		<li>Fix verification of resubmitted season solves.</li>

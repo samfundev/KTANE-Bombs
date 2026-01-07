@@ -13,13 +13,13 @@
 
 	let dialog: HTMLDialogElement;
 	let seasonName: string = '';
-	let [seasonStart, seasonEnd] = getNextQuarterRange();
+	let [seasonStart, seasonEnd, missionsStart, missionsEnd] = getNextQuarterRange();
 
 	function uniqueSeasonName(value: string) {
 		return seasons.some(s => s.name.toUpperCase() === value.toUpperCase()) ? 'Name already exists.' : true;
 	}
 
-	function getNextQuarterRange(fromDate: Date = new Date()): [Date, Date] {
+	function getNextQuarterRange(fromDate: Date = new Date()): [Date, Date, Date, Date] {
 		let from = new Date(fromDate);
 		from.setUTCDate(from.getUTCDate() - 1);
 		const year = from.getUTCFullYear();
@@ -48,8 +48,11 @@
 		// End = start + 3 months, minus 1 minute
 		const end = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth() + 3, 1, 0, 0, 0, 0));
 		end.setUTCMinutes(end.getUTCMinutes() - 1);
+		const missionsStart = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth() - 3, 1, 0, 0, 0, 0));
+		const missionsEnd = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), 1, 0, 0, 0, 0));
+		missionsEnd.setUTCMinutes(missionsEnd.getUTCMinutes() - 1);
 
-		return [start, end];
+		return [start, end, missionsStart, missionsEnd];
 	}
 
 	async function addSeason() {
@@ -62,7 +65,9 @@
 				body: JSON.stringify({
 					seasonName: seasonName.trim(),
 					start: seasonStart,
-					end: seasonEnd
+					end: seasonEnd,
+					missionsStart: missionsStart,
+					missionsEnd: missionsEnd
 				})
 			});
 
@@ -123,6 +128,24 @@
 					display={formatUTCDate}
 					required
 					bind:value={seasonEnd} />
+				<Input
+					type="datetime-local"
+					classes="new-season"
+					id="season-missions-start"
+					label="Mission List Start Date (UTC time)"
+					parse={parseUTCDate}
+					display={formatUTCDate}
+					required
+					bind:value={missionsStart} />
+				<Input
+					type="datetime-local"
+					classes="new-season"
+					id="season-missions-end"
+					label="Mission List End Date (UTC time)"
+					parse={parseUTCDate}
+					display={formatUTCDate}
+					required
+					bind:value={missionsEnd} />
 				<button type="submit">Submit</button>
 			</form>
 		</div>

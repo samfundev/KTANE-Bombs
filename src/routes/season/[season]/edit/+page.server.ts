@@ -20,8 +20,11 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			id: true,
 			name: true,
 			start: true,
+			missionsStart: true,
+			missionsEnd: true,
 			end: true,
-			notes: true
+			notes: true,
+			whitelist: true
 		}
 	});
 
@@ -35,10 +38,19 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		},
 		orderBy: { id: 'asc' }
 	});
-	
+
+	const missions = await client.mission.findMany({
+		select: {
+			id: true,
+			name: true
+		},
+		orderBy: { dateAdded: 'asc' }
+	});
+
 	return {
 		season: seasonResult,
-		seasons
+		seasons,
+		missions
 	};
 };
 
@@ -80,7 +92,10 @@ export const actions: Actions = {
 				name: season.name,
 				start: season.start,
 				end: season.end,
-				notes: season.notes
+				missionsStart: season.missionsStart,
+				missionsEnd: season.missionsEnd,
+				notes: season.notes,
+				whitelist: season.whitelist
 			}
 		});
 

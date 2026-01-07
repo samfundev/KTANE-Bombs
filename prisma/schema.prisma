@@ -98,10 +98,13 @@ model AuditLog {
 }
 
 model Season {
-  id           Int     @id @default(autoincrement())
-  name         String  @unique
-  start        DateTime
-  end          DateTime
-  notes        String?
-  completions  Completion[]
+  id             Int     @id @default(autoincrement())
+  name           String  @unique
+  start          DateTime
+  end            DateTime
+  missionsStart  DateTime @default(now())
+  missionsEnd    DateTime @default(now())
+  notes          String?
+  completions    Completion[]
+  whitelist      Int[] @default([])
 }
