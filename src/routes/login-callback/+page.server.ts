@@ -1,19 +1,15 @@
 import client from '$lib/client';
-import OAuth, { scope } from '$lib/oauth';
+import OAuth from '$lib/oauth';
 import { Prisma } from '$lib/generated/prisma/client';
 import type { Cookies } from '@sveltejs/kit';
-import type { TokenRequestResult } from 'discord-oauth2';
+import type { RESTPostOAuth2AccessTokenResult } from '@discordjs/core';
 import { redirect, error } from '@sveltejs/kit';
 
 export const load = async function load({ url, cookies }: any) {
 	const code = url.searchParams.get('code');
 	if (code === null) error(406);
 
-	const result = await OAuth.tokenRequest({
-		code,
-		grantType: 'authorization_code',
-		scope: scope
-	});
+	const result = await OAuth.tokenRequest(code);
 
 	return await login(result, cookies);
 };
@@ -23,11 +19,11 @@ export const actions = {
 		const fData = await request.formData();
 		const username = JSON.parse(fData.get('username'));
 		const result = JSON.parse(fData.get('result'));
-		return await login(<TokenRequestResult>result, cookies, username);
+		return await login(<RESTPostOAuth2AccessTokenResult>result, cookies, username);
 	}
 };
 
-async function login(result: TokenRequestResult, cookies: Cookies, username: string | null = null) {
+async function login(result: RESTPostOAuth2AccessTokenResult, cookies: Cookies, username: string | null = null) {
 	try {
 		const user = await OAuth.getUser(result.access_token);
 
@@ -74,7 +70,6 @@ async function login(result: TokenRequestResult, cookies: Cookies, username: str
 			throw e;
 		}
 		// Conflict happened on username, the user needs to pick another.
-		const user = await OAuth.getUser(result.access_token);
 		const users = await client.user.findMany({ select: { username: true } });
 		return {
 			username: username,

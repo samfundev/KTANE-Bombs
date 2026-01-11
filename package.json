@@ -35,11 +35,11 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@discordjs/core": "^2.4.0",
 		"@prisma/adapter-pg": "^7.2.0",
 		"@prisma/client": "^7.2.0",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"cookie": "^0.5.0",
-		"discord-oauth2": "^2.11.0",
 		"svelte-french-toast": "2.0.0-alpha.0"
 	}
 }
