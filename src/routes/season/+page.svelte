@@ -97,7 +97,7 @@
 
 {#if hasPermission(page.data.user, Permission.ManageSeasons)}
 	<Dialog bind:dialog>
-		<div class="flex column content-width">
+		<div class="flex column new-season-dialog">
 			<h2>Create New Season</h2>
 			<form
 				onsubmit={e => {
@@ -132,7 +132,7 @@
 					bind:value={seasonEnd} />
 				<Input
 					type="datetime-local"
-					classes="new-season"
+					class="new-season"
 					id="season-missions-start"
 					label="Mission List Start Date (UTC time)"
 					parse={parseUTCDate}
@@ -141,7 +141,7 @@
 					bind:value={missionsStart} />
 				<Input
 					type="datetime-local"
-					classes="new-season"
+					class="new-season"
 					id="season-missions-end"
 					label="Mission List End Date (UTC time)"
 					parse={parseUTCDate}
@@ -176,6 +176,9 @@
 	:global(input.new-season) {
 		background-color: #eee;
 		color: #000;
+	}
+	.new-season-dialog {
+		width: 400px;
 	}
 	h3 {
 		font-size: 24px;

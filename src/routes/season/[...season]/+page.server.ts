@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import { type Completer } from '$lib/types';
-import { error, ServerLoadEvent } from '@sveltejs/kit';
+import { error, type ServerLoadEvent } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async function ({ params }: ServerLoadEvent) {

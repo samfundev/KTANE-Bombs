@@ -102678,6 +102678,575 @@
 				],
 				"seasonId": 1
 			}
+		},
+		{
+			"id": 7795,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63437",
+			"name": "Flamingo||Termet",
+			"action": "create",
+			"timestamp": "2026-01-07T15:58:38.653Z"
+		},
+		{
+			"id": 7796,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63438",
+			"name": "Global Thermonuclear War||BladePL",
+			"action": "create",
+			"timestamp": "2026-01-07T18:40:11.146Z"
+		},
+		{
+			"id": 7797,
+			"userId": "688220820945895424",
+			"model": "Season",
+			"recordId": "1",
+			"name": "The Beginning",
+			"action": "update",
+			"timestamp": "2026-01-07T20:21:26.591Z",
+			"before": {
+				"whitelist": [],
+				"missionsEnd": "2026-01-07T20:08:51.641Z",
+				"missionsStart": "2026-01-07T20:08:51.641Z"
+			},
+			"after": {
+				"whitelist": [9636, 9700, 9861],
+				"missionsEnd": "2025-12-31T23:59:00.000Z",
+				"missionsStart": "2025-10-01T00:00:00.000Z"
+			}
+		},
+		{
+			"id": 7798,
+			"userId": "569550498462564354",
+			"model": "Completion",
+			"recordId": "63439",
+			"name": "Final Exam||rand06, _Play_, Termet, Megum",
+			"action": "create",
+			"timestamp": "2026-01-07T22:24:04.833Z"
+		},
+		{
+			"id": 7799,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63440",
+			"name": "Luigi Horse||denial140",
+			"action": "create",
+			"timestamp": "2026-01-07T23:31:10.759Z"
+		},
+		{
+			"id": 7800,
+			"userId": "1072513008145809442",
+			"model": "Completion",
+			"recordId": "63441",
+			"name": "Easy Challenge||snfct",
+			"action": "create",
+			"timestamp": "2026-01-08T10:05:53.190Z"
+		},
+		{
+			"id": 7801,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "60592",
+			"name": "Centurion||BladePL",
+			"action": "update",
+			"timestamp": "2026-01-08T13:30:23.449Z",
+			"before": {
+				"time": 106.18,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=1842afeb320fa65b8b64aaf5a6fb270c7d3aa710;bomb=Z39ID4"
+				],
+				"seasonId": null
+			},
+			"after": {
+				"time": 2099.33,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=73e4822d9e6231f3b00c440f1058d41a56ee5368;bomb=9P6TC0",
+					"https://youtu.be/okO435iUxdw"
+				],
+				"seasonId": 1
+			}
+		},
+		{
+			"id": 7802,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63423",
+			"name": "Centurion||BladePL",
+			"action": "delete",
+			"timestamp": "2026-01-08T13:30:23.464Z",
+			"before": {
+				"id": 63423,
+				"old": false,
+				"solo": false,
+				"team": ["BladePL"],
+				"time": 2099.33,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=73e4822d9e6231f3b00c440f1058d41a56ee5368;bomb=9P6TC0",
+					"https://youtu.be/okO435iUxdw"
+				],
+				"seasonId": 1,
+				"verified": false,
+				"dateAdded": "2026-01-04T12:33:53.709Z",
+				"missionId": 9861,
+				"uploadedBy": "705094454717186119"
+			}
+		},
+		{
+			"id": 7803,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "60669",
+			"name": "Centurion||Termet",
+			"action": "update",
+			"timestamp": "2026-01-08T13:31:55.133Z",
+			"before": {
+				"time": 147.31,
+				"proofs": ["https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=f977ce8cf80ae2c4924297c17bd7798ee610c982"],
+				"seasonId": null
+			},
+			"after": {
+				"time": 1309.92,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=ae296a8cd2b8794442b8d0d8e6605328132e194b;bomb=WD9UB5"
+				]
+			}
+		},
+		{
+			"id": 7804,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63425",
+			"name": "Centurion||Termet",
+			"action": "delete",
+			"timestamp": "2026-01-08T13:31:55.141Z",
+			"before": {
+				"id": 63425,
+				"old": false,
+				"solo": false,
+				"team": ["Termet"],
+				"time": 1309.92,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=ae296a8cd2b8794442b8d0d8e6605328132e194b;bomb=WD9UB5"
+				],
+				"seasonId": null,
+				"verified": false,
+				"dateAdded": "2026-01-04T23:14:48.528Z",
+				"missionId": 9861,
+				"uploadedBy": "1131645350554390560"
+			}
+		},
+		{
+			"id": 7805,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "60669",
+			"name": "Centurion||Termet",
+			"action": "update",
+			"timestamp": "2026-01-08T13:32:46.324Z",
+			"before": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=ae296a8cd2b8794442b8d0d8e6605328132e194b;bomb=WD9UB5"
+				],
+				"seasonId": null
+			},
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=ae296a8cd2b8794442b8d0d8e6605328132e194b;bomb=WD9UB5",
+					"https://www.youtube.com/watch?v=pauC248ZY3I"
+				],
+				"seasonId": 1
+			}
+		},
+		{
+			"id": 7806,
+			"userId": "292774728014364686",
+			"model": "Completion",
+			"recordId": "58964",
+			"name": "No-Needy Centurion||Espik",
+			"action": "update",
+			"timestamp": "2026-01-08T13:34:16.056Z",
+			"before": { "proofs": ["https://ktane.timwi.de/lfa#file=97e44a439bf65430cfe9b22d892fc66da7e739d6"] },
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/lfa#file=97e44a439bf65430cfe9b22d892fc66da7e739d6",
+					"https://www.youtube.com/watch?v=ODK260xIojo"
+				]
+			}
+		},
+		{
+			"id": 7807,
+			"userId": "292774728014364686",
+			"model": "Completion",
+			"recordId": "58979",
+			"name": "Inhumane||Espik",
+			"action": "update",
+			"timestamp": "2026-01-08T13:34:53.699Z",
+			"before": { "proofs": ["https://ktane.timwi.de/lfa#file=733bb89233a828724db6e5f8842062c2376e1a26"] },
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/lfa#file=733bb89233a828724db6e5f8842062c2376e1a26",
+					"https://www.youtube.com/watch?v=pK8gczU2YUk"
+				]
+			}
+		},
+		{
+			"id": 7808,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "54846",
+			"name": "Easy Challenge||Megum",
+			"action": "update",
+			"timestamp": "2026-01-08T14:06:26.590Z",
+			"before": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=43dc02fdfee69d17c5ea1c51f29b337024e3bdc3;bomb=T36ZE0"
+				],
+				"seasonId": null
+			},
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=43dc02fdfee69d17c5ea1c51f29b337024e3bdc3;bomb=T36ZE0",
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=bcdfbe558f58669405a8dc1f8542f35d6f682879;bomb=KP5QR6",
+					"https://youtu.be/iOMZ-aDIT74"
+				],
+				"seasonId": 1
+			}
+		},
+		{
+			"id": 7809,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63431",
+			"name": "Easy Challenge||Megum",
+			"action": "delete",
+			"timestamp": "2026-01-08T14:07:14.739Z",
+			"before": {
+				"id": 63431,
+				"old": false,
+				"solo": false,
+				"team": ["Megum"],
+				"time": 1200.86,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://youtu.be/iOMZ-aDIT74",
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=bcdfbe558f58669405a8dc1f8542f35d6f682879;bomb=KP5QR6"
+				],
+				"seasonId": 1,
+				"verified": false,
+				"dateAdded": "2026-01-05T21:57:46.905Z",
+				"missionId": 9636,
+				"uploadedBy": "495546834010505216"
+			}
+		},
+		{
+			"id": 7810,
+			"userId": "313375148927483905",
+			"model": "Completion",
+			"recordId": "63442",
+			"name": "Almost Too Easy||FourAndAHalf, Penne, IHateLife",
+			"action": "create",
+			"timestamp": "2026-01-08T16:25:26.374Z"
+		},
+		{
+			"id": 7811,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63443",
+			"name": "One-Souvenir Army||BladePL",
+			"action": "create",
+			"timestamp": "2026-01-08T18:53:53.863Z"
+		},
+		{
+			"id": 7812,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "63444",
+			"name": "Praetorian New Ones||Infusion",
+			"action": "create",
+			"timestamp": "2026-01-08T21:19:24.489Z"
+		},
+		{
+			"id": 7813,
+			"userId": "234733182442799104",
+			"model": "Mission",
+			"recordId": "11100",
+			"name": "Hard Challenge",
+			"action": "create",
+			"timestamp": "2026-01-08T21:42:26.412Z"
+		},
+		{
+			"id": 7814,
+			"userId": "594991798045114389",
+			"model": "Completion",
+			"recordId": "63445",
+			"name": "Easy Challenge||Ayeka, Masked Mystery",
+			"action": "create",
+			"timestamp": "2026-01-09T00:48:22.568Z"
+		},
+		{
+			"id": 7815,
+			"userId": "292774728014364686",
+			"model": "Completion",
+			"recordId": "63446",
+			"name": "Easy Challenge||Espik",
+			"action": "create",
+			"timestamp": "2026-01-09T02:03:22.837Z"
+		},
+		{
+			"id": 7816,
+			"userId": "292774728014364686",
+			"model": "Completion",
+			"recordId": "63447",
+			"name": "Centurion||Espik",
+			"action": "create",
+			"timestamp": "2026-01-09T02:04:15.925Z"
+		},
+		{
+			"id": 7817,
+			"userId": "292774728014364686",
+			"model": "MissionPack",
+			"recordId": "631",
+			"name": "Broken Minds Apart",
+			"action": "update",
+			"timestamp": "2026-01-09T02:04:48.009Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7818,
+			"userId": "292774728014364686",
+			"model": "MissionPack",
+			"recordId": "632",
+			"name": "Megum's Missions",
+			"action": "update",
+			"timestamp": "2026-01-09T02:04:48.263Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7819,
+			"userId": "292774728014364686",
+			"model": "MissionPack",
+			"recordId": "633",
+			"name": "Possessed's Volatile Missions",
+			"action": "update",
+			"timestamp": "2026-01-09T02:04:48.799Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 7820,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "63448",
+			"name": "Nothing to Spare: Made in China||Kugel",
+			"action": "create",
+			"timestamp": "2026-01-09T02:39:42.344Z"
+		},
+		{
+			"id": 7821,
+			"userId": "118831126239248397",
+			"model": "MissionPack",
+			"recordId": "630",
+			"name": "Ufoencounter's 47",
+			"action": "update",
+			"timestamp": "2026-01-09T11:52:03.327Z",
+			"before": { "name": "Ufoencounter's 47" },
+			"after": { "name": "Ufo's Road to Enlightenment" }
+		},
+		{
+			"id": 7822,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63449",
+			"name": "Quickly Now!: No Time For Reads!||Termet",
+			"action": "create",
+			"timestamp": "2026-01-09T14:07:00.093Z"
+		},
+		{
+			"id": 7823,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63450",
+			"name": "Repetition (47 Take)||Termet",
+			"action": "create",
+			"timestamp": "2026-01-09T16:04:55.843Z"
+		},
+		{
+			"id": 7824,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63451",
+			"name": "Almost Too Easy||BladePL",
+			"action": "create",
+			"timestamp": "2026-01-09T16:23:08.866Z"
+		},
+		{
+			"id": 7825,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63452",
+			"name": "Hotel California||Termet",
+			"action": "create",
+			"timestamp": "2026-01-09T19:13:12.288Z"
+		},
+		{
+			"id": 7826,
+			"userId": "998723698452332544",
+			"model": "Mission",
+			"recordId": "11101",
+			"name": "Situations When Hunting for that $1 NYC Pizza",
+			"action": "create",
+			"timestamp": "2026-01-09T21:54:11.105Z"
+		},
+		{
+			"id": 7827,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63436",
+			"name": "CommRUniturion||Megum",
+			"action": "update",
+			"timestamp": "2026-01-10T00:59:48.757Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 7828,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63440",
+			"name": "Luigi Horse||denial140",
+			"action": "update",
+			"timestamp": "2026-01-10T01:06:09.614Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 7829,
+			"userId": "234733182442799104",
+			"model": "Completion",
+			"recordId": "63453",
+			"name": "Step Up||Danielstigman, miki2003pl",
+			"action": "create",
+			"timestamp": "2026-01-10T03:20:08.975Z"
+		},
+		{
+			"id": 7830,
+			"userId": "234733182442799104",
+			"model": "Completion",
+			"recordId": "63454",
+			"name": "Oompa Loompa Boon Poppycock||Danielstigman, miki2003pl",
+			"action": "create",
+			"timestamp": "2026-01-10T03:20:44.589Z"
+		},
+		{
+			"id": 7831,
+			"userId": "234733182442799104",
+			"model": "Completion",
+			"recordId": "63455",
+			"name": "Doringkloof||Danielstigman, miki2003pl",
+			"action": "create",
+			"timestamp": "2026-01-10T03:21:14.098Z"
+		},
+		{
+			"id": 7832,
+			"userId": "234733182442799104",
+			"model": "Completion",
+			"recordId": "63456",
+			"name": "High Life||Danielstigman, miki2003pl, YourokahnTMF",
+			"action": "create",
+			"timestamp": "2026-01-10T03:22:35.579Z"
+		},
+		{
+			"id": 7833,
+			"userId": "234733182442799104",
+			"model": "Completion",
+			"recordId": "63457",
+			"name": "4H||Danielstigman, miki2003pl, YourokahnTMF",
+			"action": "create",
+			"timestamp": "2026-01-10T03:23:13.547Z"
+		},
+		{
+			"id": 7834,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63458",
+			"name": "Cunning Linguist||BladePL",
+			"action": "create",
+			"timestamp": "2026-01-10T11:29:43.832Z"
+		},
+		{
+			"id": 7835,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63459",
+			"name": "Soaring Ordinance #17||BladePL",
+			"action": "create",
+			"timestamp": "2026-01-10T13:15:23.582Z"
+		},
+		{
+			"id": 7836,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63460",
+			"name": "Gotta Be Fast||Termet",
+			"action": "create",
+			"timestamp": "2026-01-10T13:43:32.816Z"
+		},
+		{
+			"id": 7837,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63461",
+			"name": "Gotta Be Fast||denial140",
+			"action": "create",
+			"timestamp": "2026-01-10T14:18:40.871Z"
+		},
+		{
+			"id": 7838,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63462",
+			"name": "Raven||Termet",
+			"action": "create",
+			"timestamp": "2026-01-10T15:50:32.557Z"
+		},
+		{
+			"id": 7839,
+			"userId": "569550498462564354",
+			"model": "Completion",
+			"recordId": "63463",
+			"name": "Year of the Snake Challenge||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-01-10T22:55:29.927Z"
+		},
+		{
+			"id": 7840,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11004",
+			"name": "Year of the Snake Challenge",
+			"action": "update",
+			"timestamp": "2026-01-10T23:19:20.135Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 7841,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63463",
+			"name": "Year of the Snake Challenge||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-01-10T23:19:20.152Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
 		}
 	],
 	"User": [
@@ -103141,7 +103710,7 @@
 		{
 			"id": "1457124130359873579",
 			"username": "Infusion",
-			"discordName": "infusion_72846",
+			"discordName": "infusion_478",
 			"avatar": "18ca7fe05aff868d2d4f1aab937e6ce1",
 			"permissions": []
 		},
@@ -103496,6 +104065,13 @@
 			"permissions": []
 		},
 		{
+			"id": "210584679546486785",
+			"username": "Crystal The Clown",
+			"discordName": "crystalleonhardt",
+			"avatar": "1d6932d6c25e457f96c06222f12ca839",
+			"permissions": []
+		},
+		{
 			"id": "211319688280539138",
 			"username": "GiveMeHeals",
 			"discordName": "givemeheals",
@@ -103521,6 +104097,13 @@
 			"username": "Trixelit",
 			"discordName": "trixelit",
 			"avatar": "9e59a65918753ca436775f69e7669fcf",
+			"permissions": []
+		},
+		{
+			"id": "214191763454164992",
+			"username": "griffin104",
+			"discordName": "griffin104",
+			"avatar": "4c6caac692feb3188b48fe436d92a8a0",
 			"permissions": []
 		},
 		{
@@ -103708,8 +104291,8 @@
 		{
 			"id": "246431713897611264",
 			"username": "YouCanNotKnow",
-			"discordName": "aaaaa!!#0778",
-			"avatar": "bcd408b8bf58e190d20e90317f4da83b",
+			"discordName": "aaaaa1212",
+			"avatar": "65d62474705a486c4807afb688baf2aa",
 			"permissions": []
 		},
 		{
@@ -105040,7 +105623,7 @@
 			"id": "518995430990676008",
 			"username": "FcbdaBoss",
 			"discordName": "fcbdaboss",
-			"avatar": "a804976f0d18a9be89473ca5b2ddf2b1",
+			"avatar": "5ff758e905abfe6b147d6458fb717ff5",
 			"permissions": [3, 2, 1, 4]
 		},
 		{
@@ -105242,8 +105825,8 @@
 		{
 			"id": "608722372547313674",
 			"username": "aestivus",
-			"discordName": "vernus#0511",
-			"avatar": "1c1cba6271da811f83c105af4095f13c",
+			"discordName": "umeja",
+			"avatar": "46f6276f460eb84d59c5590c62de86b6",
 			"permissions": []
 		},
 		{
@@ -105769,7 +106352,7 @@
 			"id": "769759393888993289",
 			"username": "Penne",
 			"discordName": "n0rmie_",
-			"avatar": "fb52371008bcb41061b4adcda2ec756a",
+			"avatar": "fc5d02d92f9762f380d3292bec44b976",
 			"permissions": []
 		},
 		{
@@ -105839,7 +106422,7 @@
 			"id": "815044769884536904",
 			"username": "Jawly_Gaming",
 			"discordName": "jawly_gaming",
-			"avatar": "1a7a7e4e299f2b581fd84a64138ef5bd",
+			"avatar": "fc6c36357e910d1612d41c6d43026394",
 			"permissions": []
 		},
 		{
@@ -106113,6 +106696,14 @@
 		}
 	],
 	"Season": [
-		{ "id": 1, "name": "The Beginning", "start": "2026-01-01T00:00:00.000Z", "end": "2026-03-31T23:59:00.000Z" }
+		{
+			"id": 1,
+			"name": "The Beginning",
+			"start": "2026-01-01T00:00:00.000Z",
+			"end": "2026-03-31T23:59:00.000Z",
+			"missionsStart": "2025-10-01T00:00:00.000Z",
+			"missionsEnd": "2025-12-31T23:59:00.000Z",
+			"whitelistNames": ["Easy Challenge", "One-Souvenir Army", "Centurion"]
+		}
 	]
 }

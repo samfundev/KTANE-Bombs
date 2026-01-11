@@ -38,32 +38,39 @@ import client from '../src/lib/client';
 	//await client.auditLog.deleteMany({});
 
 	console.log('Creating audit logs');
-	let logQueries = [];
 	logs.sort((a, b) => parseInt(a.id) - parseInt(b.id));
-	for (const log of logs) {
-		const user = await client.user.findFirst({
-			where: { id: log.userId },
-			select: { id: true }
-		});
-		let logData = {
-			model: log.model,
-			recordId: log.recordId,
-			name: log.name,
-			action: log.action,
-			timestamp: log.timestamp,
-			before: log.before,
-			after: log.after
-		};
-		if (user) logData.userId = log.userId;
-		logQueries.push(
-			client.auditLog.create({
-				data: logData
-			})
-		);
-	}
-	await client.$transaction(logQueries);
-	
+	await client.$transaction(
+		async tx => {
+			for (const log of logs) {
+				const user = await client.user.findFirst({
+					where: { id: log.userId },
+					select: { id: true }
+				});
+				let logData = {
+					model: log.model,
+					recordId: log.recordId,
+					name: log.name,
+					action: log.action,
+					timestamp: log.timestamp,
+					before: log.before,
+					after: log.after
+				};
+				if (user) logData.userId = log.userId;
+				await tx.auditLog.create({
+					data: logData
+				});
+			}
+		},
+		{ timeout: 120000 }
+	);
+
 	console.log('Updating seasons');
+	const missions = await client.mission.findMany({
+		select: {
+			id: true,
+			name: true
+		}
+	});
 	let seasonQueries = [];
 	seasons.sort((a, b) => parseInt(a.id) - parseInt(b.id));
 	for (const season of seasons) {
@@ -72,7 +79,13 @@ import client from '../src/lib/client';
 			name: season.name,
 			start: season.start,
 			end: season.end,
-			notes: season.notes
+			missionsStart: season.missionsStart,
+			missionsEnd: season.missionsEnd,
+			notes: season.notes,
+			whitelist: season.whitelistNames.map(name => {
+				const mission = missions.find(m => m.name === name);
+				return mission ? mission.id : null;
+			}).filter(id => id !== null)
 		};
 		seasonQueries.push(
 			client.season.upsert({

@@ -10,7 +10,8 @@
 		properUrlEncode,
 		titleCase
 	} from '$lib/util.js';
-	import { type AuditLog, Prisma } from '$lib/generated/prisma/client';
+	import type { AuditLog } from '$lib/generated/prisma/client';
+	import type { JsonValue } from '$lib/generated/prisma/internal/prismaNamespace.js';
 	import { onMount } from 'svelte';
 
 	const dateOptions: Intl.DateTimeFormatOptions = {
@@ -43,7 +44,9 @@
 	let showAll = $state(false);
 	const resultLimit = 50;
 	let validSearchOptions: boolean[] = $state(Array(searchOptionBoxes.length).fill(false));
-	validSearchOptions[1] = validSearchOptions[2] = validSearchOptions[3] = validSearchOptions[5] = true;
+	for (let i of [1, 2, 3, 5]) {
+		validSearchOptions[i] = true;
+	}
 
 	function pastTense(log: AuditLog): string {
 		if (
@@ -75,7 +78,7 @@
 	function smallItem(item: ItemDetails[]) {
 		return item.length < 4 && item.every(itm => itm.before.length < CELL_LIM && itm.after.length < CELL_LIM);
 	}
-	function displayLog(before: Prisma.JsonValue, after: Prisma.JsonValue) {
+	function displayLog(before: JsonValue, after: JsonValue) {
 		let beforeStr = JSON.stringify(before); //before, undefined, 1);
 		let beforeStats = JSON.parse(beforeStr);
 		let beforeKeys = Object.keys(beforeStats ?? {});
@@ -204,7 +207,7 @@
 			filterFunc={logSearchFilter}
 			bind:showAll
 			{resultLimit}
-			classes="help" />
+			class="help" />
 		<button onclick={closeAll}>Close All</button>
 		<div class="flex search-options">
 			{#each searchOptionBoxes as option, index}
@@ -399,7 +402,7 @@
 		cursor: pointer;
 	}
 	.dropdown:not(.expand) div.full,
-	.dropdown.expand div.short {
+	.dropdown.expand button.short {
 		display: none;
 	}
 	.dropdown div.full {

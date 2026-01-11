@@ -24,15 +24,36 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		}
 	});
 
-	const seasonResults = await client.season.findMany({
+	let seasonResults = await client.season.findMany({
 		orderBy: { id: 'asc' },
 		select: {
 			id: true,
 			name: true,
 			start: true,
 			end: true,
-			notes: true
+			missionsStart: true,
+			missionsEnd: true,
+			notes: true,
+			whitelist: true
 		}
+	});
+
+	const missions = await client.mission.findMany({
+		select: {
+			id: true,
+			name: true
+		}
+	});
+	let seasons = seasonResults.map(s => {
+		const names = s.whitelist.map(missionId => {
+			const mission = missions.find(m => m.id === missionId);
+			return mission ? mission.name : `Unknown Mission (${missionId})`;
+		});
+		return {
+			...s,
+			whitelist: undefined,
+			whitelistNames: names
+		};
 	});
 
 	const logs: { AuditLog: AuditLog[]; User: User[]; Season: Season[] } = {
@@ -45,13 +66,13 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		minimize(newLog);
 		logs.AuditLog.push(newLog);
 	});
-	userResults.forEach(log => {
-		const newUser = JSON.parse(JSON.stringify(log));
+	userResults.forEach(user => {
+		const newUser = JSON.parse(JSON.stringify(user));
 		minimize(newUser);
 		logs.User.push(newUser);
 	});
-	seasonResults.forEach(log => {
-		const newSeason = JSON.parse(JSON.stringify(log));
+	seasons.forEach(season => {
+		const newSeason = JSON.parse(JSON.stringify(season));
 		minimize(newSeason);
 		logs.Season.push(newSeason);
 	});

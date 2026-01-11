@@ -33,12 +33,17 @@
 	let modified = $derived(JSON.stringify(season) !== JSON.stringify(originalSeason));
 	let whitelist: string[] = $state([]);
 
+	function updateWhitelist() {
+		season.whitelist = season.whitelist.filter(id => missions.some(m => m.id === id));
+		whitelist = missions.filter(m => season.whitelist.includes(m.id)).map(m => m.name);
+	}
+
 	function removeMission() {
 		if (missionToAdd?.id && season.whitelist.includes(missionToAdd.id)) {
 			season.whitelist = season.whitelist.filter(id => id !== missionToAdd.id);
 			season = season;
 		}
-		whitelist = missions.filter(m => season.whitelist.includes(m.id)).map(m => m.name);
+		updateWhitelist();
 	}
 
 	function addMission() {
@@ -47,7 +52,7 @@
 			season.whitelist.sort((a, b) => a - b);
 			season = season;
 		}
-		whitelist = missions.filter(m => season.whitelist.includes(m.id)).map(m => m.name);
+		updateWhitelist();
 	}
 	addMission();
 
@@ -107,7 +112,7 @@
 		bind:value={season.end} />
 	<Input
 		type="datetime-local"
-		classes="new-season-light"
+		class="new-season-light"
 		id="season-missionsstart"
 		label="Mission List Start Date (UTC time)"
 		parse={parseUTCDate}
@@ -116,7 +121,7 @@
 		bind:value={season.missionsStart} />
 	<Input
 		type="datetime-local"
-		classes="new-season-light"
+		class="new-season-light"
 		id="season-missionsend"
 		label="Mission List End Date (UTC time)"
 		parse={parseUTCDate}
@@ -138,8 +143,8 @@
 			display={val => val?.name ?? ''}
 			options={missionNames}
 			bind:value={missionToAdd} />
-		<button class="add" disabled={!missionToAdd} on:click={addMission}>Add</button>
-		<button class="remove" disabled={!missionToAdd} on:click={removeMission}>Remove</button>
+		<button class="add" disabled={!missionToAdd} onclick={addMission}>Add</button>
+		<button class="remove" disabled={!missionToAdd} onclick={removeMission}>Remove</button>
 	</div>
 	<strong class="whitelist-title">Mission Whitelist</strong>
 	<ul>

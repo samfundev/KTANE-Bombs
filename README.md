@@ -18,6 +18,9 @@ Run `npx prisma generate` to generate the prisma client.
 
 Run `npx prisma migrate dev` to set up the database.
 
+`cd importer` and run `npx tsx import.js` and `npx tsx importAdvanced.js` to fill your database
+To wipe out your database before importing, run `npx prisma migrate reset`
+
 To start a development server:
 ```bash
 npm run dev

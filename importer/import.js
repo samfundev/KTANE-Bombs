@@ -70,64 +70,67 @@ import client from '../src/lib/client';
 					uploadedBy: completion.uploadedBy,
 					verified: completion.verified
 				});
-				if (completion.season)
-					seasons.add(completion.season.name);
+				if (completion.season) seasons.add(completion.season.name);
 			}
 		}
 	}
 	missions.sort((a, b) => parseInt(a.id) - parseInt(b.id));
 	completions.sort((a, b) => parseInt(a.id) - parseInt(b.id));
 
+	//uncomment to wipe out your local missions table first
+	//await client.mission.deleteMany({});
+
 	console.log('Creating missions');
-	let missionQueries = [];
-	for (const mission of missions) {
-		missionQueries.push(
-			client.mission.upsert({
-				create: {
-					name: mission.name,
-					authors: mission.authors,
-					bombs: {
-						create: mission.bombs
+	await client.$transaction(
+		async tx => {
+			for (const mission of missions) {
+				await tx.mission.upsert({
+					create: {
+						name: mission.name,
+						authors: mission.authors,
+						bombs: {
+							create: mission.bombs
+						},
+						tpSolve: mission.tpSolve,
+						designedForTP: mission.designedForTP,
+						factory: mission.factory,
+						strikeMode: mission.strikeMode,
+						timeMode: mission.timeMode,
+						variant: mission.variant,
+						verified: mission.verified,
+						logfile: mission.logfile,
+						dateAdded: mission.dateAdded,
+						uploadedBy: mission.uploadedBy,
+						inGameId: mission.inGameId,
+						inGameName: mission.inGameName,
+						notes: mission.notes,
+						missionPackId: mission.missionPackId
 					},
-					tpSolve: mission.tpSolve,
-					designedForTP: mission.designedForTP,
-					factory: mission.factory,
-					strikeMode: mission.strikeMode,
-					timeMode: mission.timeMode,
-					variant: mission.variant,
-					verified: mission.verified,
-					logfile: mission.logfile,
-					dateAdded: mission.dateAdded,
-					uploadedBy: mission.uploadedBy,
-					inGameId: mission.inGameId,
-					inGameName: mission.inGameName,
-					notes: mission.notes,
-					missionPackId: mission.missionPackId
-				},
-				update: {
-					authors: mission.authors,
-					tpSolve: mission.tpSolve,
-					designedForTP: mission.designedForTP,
-					factory: mission.factory,
-					strikeMode: mission.strikeMode,
-					timeMode: mission.timeMode,
-					variant: mission.variant,
-					verified: mission.verified,
-					logfile: mission.logfile,
-					dateAdded: mission.dateAdded,
-					uploadedBy: mission.uploadedBy,
-					inGameId: mission.inGameId,
-					inGameName: mission.inGameName,
-					notes: mission.notes,
-					missionPackId: mission.missionPackId
-				},
-				where: {
-					name: mission.name
-				}
-			})
-		);
-	}
-	await client.$transaction(missionQueries);
+					update: {
+						authors: mission.authors,
+						tpSolve: mission.tpSolve,
+						designedForTP: mission.designedForTP,
+						factory: mission.factory,
+						strikeMode: mission.strikeMode,
+						timeMode: mission.timeMode,
+						variant: mission.variant,
+						verified: mission.verified,
+						logfile: mission.logfile,
+						dateAdded: mission.dateAdded,
+						uploadedBy: mission.uploadedBy,
+						inGameId: mission.inGameId,
+						inGameName: mission.inGameName,
+						notes: mission.notes,
+						missionPackId: mission.missionPackId
+					},
+					where: {
+						name: mission.name
+					}
+				});
+			}
+		},
+		{ timeout: 120000 }
+	);
 
 	console.log('Creating seasons');
 	let seasonQueries = [];
@@ -150,69 +153,68 @@ import client from '../src/lib/client';
 	}
 	await client.$transaction(seasonQueries);
 
-	console.log('Creating solves');
-	let completionQueries = [];
-	for (const completion of completions) {
-		const comp = await client.completion.findMany({
-			where: {
-				mission: {
-					name: completion.missionName
-				},
-				team: { has: completion.team[0] }
-			}
-		});
-		let equalSolve = comp.findIndex(
-			c =>
-				c.solo == completion.solo &&
-				JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
-					JSON.stringify(completion.team.slice(0, 1).concat(completion.team.slice(1).sort()))
-		);
+	//uncomment to wipe out your local completions table first
+	//await client.completion.deleteMany({});
 
-		if (equalSolve < 0) {
-			completionQueries.push(
-				client.completion.create({
-					data: {
-						proofs: completion.proofs,
-						time: completion.time,
-						team: completion.team,
-						first: completion.first,
-						season: completion.season,
-						old: completion.old,
-						solo: completion.solo,
-						notes: completion.notes,
-						mission: {
-							connect: { name: completion.missionName }
-						},
-						season: completion.seasonName == null ? undefined : {
-							connect: { name: completion.seasonName }
-						},
-						dateAdded: completion.dateAdded,
-						uploadedBy: completion.uploadedBy,
-						verified: completion.verified
-					}
-				})
-			);
-		} else {
-			completionQueries.push(
-				client.completion.update({
+	console.log('Creating solves');
+	await client.$transaction(
+		async tx => {
+			for (const completion of completions) {
+				const comp = await client.completion.findMany({
 					where: {
-						id: comp[equalSolve].id
-					},
-					data: {
-						proofs: completion.proofs,
-						time: completion.time,
-						team: completion.team,
-						first: completion.first,
-						old: completion.old,
-						solo: completion.solo,
-						notes: completion.notes,
-						dateAdded: completion.dateAdded,
-						uploadedBy: completion.uploadedBy,
-						verified: completion.verified
+						mission: {
+							name: completion.missionName
+						},
+						team: { has: completion.team[0] }
 					}
-				})
-			);
-		}
-	}
-	await client.$transaction(completionQueries);
+				});
+				let equalSolve = comp.findIndex(
+					c =>
+						c.solo == completion.solo &&
+						JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
+							JSON.stringify(completion.team.slice(0, 1).concat(completion.team.slice(1).sort()))
+				);
+
+				if (equalSolve < 0) {
+					await tx.completion.create({
+						data: {
+							proofs: completion.proofs,
+							time: completion.time,
+							team: completion.team,
+							first: completion.first,
+							old: completion.old,
+							solo: completion.solo,
+							notes: completion.notes,
+							mission: {
+								connect: { name: completion.missionName }
+							},
+							season: completion.seasonName == null ? undefined : { connect: { name: completion.seasonName } },
+							dateAdded: completion.dateAdded,
+							uploadedBy: completion.uploadedBy,
+							verified: completion.verified
+						}
+					});
+				} else {
+					await tx.completion.update({
+						where: {
+							id: comp[equalSolve].id
+						},
+						data: {
+							proofs: completion.proofs,
+							time: completion.time,
+							team: completion.team,
+							first: completion.first,
+							old: completion.old,
+							solo: completion.solo,
+							notes: completion.notes,
+							dateAdded: completion.dateAdded,
+							uploadedBy: completion.uploadedBy,
+							verified: completion.verified
+						}
+					});
+				}
+			}
+		},
+		{ timeout: 120000 }
+	);
 })();

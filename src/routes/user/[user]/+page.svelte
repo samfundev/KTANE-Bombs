@@ -259,11 +259,11 @@
 			<span style="background-color: {getPersonColor(1, 0, false)}">EFM</span>
 			<span>&nbsp;</span>
 			<div class="flex season-legend">
-				<div class="current" />
+				<div class="current"></div>
 				<span>Season</span>
 			</div>
 			<div class="flex season-legend">
-				<div class="past" />
+				<div class="past"></div>
 				<span>Past&nbsp;Season</span>
 			</div>
 		{/if}
