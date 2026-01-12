@@ -27,7 +27,7 @@
 	{:else}
 		<div class="image invalid"></div>
 	{/if}
-	<span>{module.Name}</span>
+	{module.Name}
 	{#if fraction < 0.02 || (fraction >= 0.995 && fraction < 1)}
 		<b>{Math.round(fraction * 1000) / 10}%</b>
 	{:else if fraction < 1 || alwaysShow}

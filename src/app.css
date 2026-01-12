@@ -201,19 +201,19 @@ h1.header {
 	cursor: help;
 }
 
-:is(.module-card, .pool:not(.quirks)) .module.quirks,
+:is(.module-row, .pool:not(.quirks)) .module.quirks,
 :is(.pool, .single).quirks,
 span.quirks {
 	background-color: var(--quirks-color) !important;
 }
 
-:is(.module-card, .pool:not(.boss)) .module.boss,
+:is(.module-row, .pool:not(.boss)) .module.boss,
 :is(.pool, .single).boss,
 span.boss {
 	background-color: var(--boss-color) !important;
 }
 
-:is(.module-card, .pool:not(.needy)) .module.needy,
+:is(.module-row, .pool:not(.needy)) .module.needy,
 :is(.pool, .single).needy,
 span.needy {
 	background-color: var(--needy-color) !important;

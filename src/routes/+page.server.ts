@@ -25,10 +25,27 @@ export const load: PageServerLoad = async function () {
 		orderBy: { dateAdded: 'desc' }
 	});
 
+	const modules = (await getData()) ?? {};
+	const simpleModules = {};
+	for (const [key, module] of Object.entries(modules)) {
+		simpleModules[key] = {
+			ModuleID: module.ModuleID,
+			Name: module.Name,
+			Published: module.Published,
+			Type: module.Type,
+			X: module.X,
+			Y: module.Y,
+			valid: module.valid,
+			BossStatus: module.BossStatus,
+			Quirks: module.Quirks,
+			FileName: module.FileName
+		};
+	}
+
 	return {
 		missions: missions.map(miss => {
 			return { ...miss, logfile: null, notes: null, uploadedBy: null, inGameId: null, inGameName: null };
 		}),
-		modules: await getData()
+		modules: simpleModules
 	};
 };

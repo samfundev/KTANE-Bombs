@@ -4,40 +4,19 @@
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import type { RepoModule } from '$lib/repo.js';
-	import type { Bomb, Mission } from '$lib/types';
-	import {
-		evaluateLogicalStringSearch,
-		getModule,
-		logicalSearchTooltip,
-		onlyUnique,
-		properUrlEncode
-	} from '$lib/util.js';
+	import { evaluateLogicalStringSearch, getModule, logicalSearchTooltip, properUrlEncode } from '$lib/util.js';
 	import { untrack } from 'svelte';
+	import { SvelteSet } from 'svelte/reactivity';
 
 	let { data } = $props();
-	type ShortMission = Pick<Mission, 'name' | 'bombs'>;
-	let missions: ShortMission[] = data.missions;
+	let missionsOf = data.missionsOf;
 	let modules: Record<string, RepoModule> = data.modules;
 	let moduleRows: any = $state({});
 	let sortOption: 'alphabetical' | 'popular' | 'published' = $state('alphabetical');
 	let layoutSearch: LayoutSearchFilter = $state();
 	let showAll = $state(false);
 	const resultLimit = 50;
-
-	let missionsOf: Record<string, ShortMission[]> = $state({});
-	missions.forEach(miss => {
-		miss.bombs
-			.map((b: Bomb) => b.pools.map(p => p.modules.filter(onlyUnique)))
-			.flat(2)
-			.map((m: string) => getModule(m, modules))
-			.forEach((mod: RepoModule) => {
-				if (missionsOf[mod.ModuleID] == undefined) {
-					missionsOf[mod.ModuleID] = [miss];
-				} else if (!missionsOf[mod.ModuleID].some(mission => mission.name === miss.name)) {
-					missionsOf[mod.ModuleID].push(miss);
-				}
-			});
-	});
+	const modsRevealed = new SvelteSet<string>();
 
 	function limitResults() {
 		let allRows = document.querySelectorAll('.module-row');
@@ -80,14 +59,10 @@
 		updateSearch();
 	}
 	function closeAll() {
-		document.querySelectorAll('.missions-dropdown:not(.few)').forEach(el => {
-			el.classList.remove('expand');
-		});
+		modsRevealed.clear();
 	}
 	function reveal(modID: string) {
-		//if (missionsOf[modID]) console.log(missionsOf[modID].map(miss => miss.name));
-		let elem = document.querySelector(`.missions-dropdown.mod${modID.replace(/\s/g, '')}`);
-		elem?.classList.add('expand');
+		modsRevealed.add(modID);
 	}
 	let mods = $state(Object.entries(modules).filter(mod => mod[1].Type == 'Regular' || mod[1].Type == 'Needy'));
 	alphabetical();
@@ -154,48 +129,35 @@
 	</div>
 </div>
 <div class="flex column">
-	{#each mods as [modID, module]}
+	{#each mods as [modID, module] (modID)}
 		<div class="module-row flex row length-filtered-out" bind:this={moduleRows[modID]}>
-			<div class="module-card flex column"><ModuleCard {module} /></div>
+			<ModuleCard {module} />
 			<button
-				class="reset missions-dropdown flex column mod{modID.replace(/\s/g, '')}"
+				class="reset missions-dropdown mod{modID.replace(/\s/g, '')}"
 				class:expand={!missionsOf[modID] || missionsOf[modID].length <= 4}
-				class:few={!missionsOf[modID] || missionsOf[modID].length <= 4}
 				onclick={() => reveal(modID)}>
-				<div>
-					<span>Missions: </span>
-					{#if missionsOf[modID]}
-						<span>{missionsOf[modID].length}</span>
-						<div class="mission-list flex row wrap">
-							{#each missionsOf[modID].toSorted((a, b) => a.name.localeCompare(b.name)) as miss}
-								<a href="/mission/{properUrlEncode(miss.name)}">{miss.name}</a>
-							{/each}
-						</div>
-						<div class="mission-list flex row short">
-							{#each missionsOf[modID].toSorted((a, b) => a.name.localeCompare(b.name)).slice(0, 4) as miss}
-								<span>{miss.name}</span>
-							{/each}
-							{#if missionsOf[modID].length > 4}
-								<div class="bold">...</div>
-							{/if}
-						</div>
-					{:else}
-						<span>0</span>
-					{/if}
-				</div>
+				Missions: {missionsOf[modID] ? missionsOf[modID].length : 0}
+				{#if missionsOf[modID]}
+					{@const revealed = modsRevealed.has(modID)}
+					{@const missions = revealed ? missionsOf[modID] : missionsOf[modID].slice(0, 4)}
+					<div class="mission-list flex row" class:wrap={revealed} inert={missionsOf[modID].length > 4 && !revealed}>
+						{#each missions as miss (miss)}
+							<a href="/mission/{properUrlEncode(miss)}">{miss}</a>
+						{/each}
+						{#if !revealed && missionsOf[modID].length > 4}
+							<div class="bold">...</div>
+						{/if}
+					</div>
+				{/if}
 			</button>
 		</div>
 	{/each}
 </div>
 
 <style>
-	.module-card {
+	:global(.module-row .module) {
 		background-color: var(--foreground);
 		width: 308px;
-		justify-content: center;
-	}
-	:global(.module-card .module) {
-		height: 100%;
 	}
 	.top-bar {
 		position: sticky;
@@ -216,13 +178,6 @@
 	}
 	.mission-list.wrap {
 		flex-wrap: wrap;
-	}
-	.missions-dropdown:not(.expand) .mission-list.wrap,
-	.missions-dropdown.expand .mission-list.short {
-		display: none;
-	}
-	.mission-list > span {
-		text-decoration: underline;
 	}
 	.search-bar {
 		gap: 20px;
