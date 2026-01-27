@@ -8,6 +8,7 @@
 	let missions: ID<Mission>[] = $state.raw(data.missions);
 	let missionCards: any = $state({});
 	let modules: Record<string, RepoModule> | null = data.modules;
+	let seasonMissions: string[] = data.seasonMissions;
 
 	let render = $state(false);
 	let searchBar = $state() as HomeSearchBar;
@@ -29,7 +30,7 @@
 	<h1 class="header">Challenge Bombs</h1>
 </div>
 {#if modules}
-	<HomeSearchBar bind:this={searchBar} bind:missions bind:missionCards onchange={onChange} {modules} />
+	<HomeSearchBar bind:this={searchBar} bind:missions bind:missionCards onchange={onChange} {modules} {seasonMissions} />
 {:else}
 	<div class="block">Error fetching module info from the repo.</div>
 {/if}

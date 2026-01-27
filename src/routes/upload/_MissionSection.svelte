@@ -3,7 +3,7 @@
 	import Select from '$lib/controls/Select.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import { Bomb, Pool, type MissionPackSelection } from '$lib/types';
-	import { getLogfileLinks, reservedSearchStrings, validateLogfileLink, validateMissionID } from '$lib/util';
+	import { getLogfileLinks, parseList, reservedSearchStrings, validateLogfileLink, validateMissionID } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import type { ReplaceableMission } from './_types';
@@ -248,6 +248,7 @@
 							id="mission-authors-{i}"
 							options={authorNames}
 							optionalOptions={true}
+							parse={parseList}
 							bind:value={mission.authors} />
 						<Input
 							name="Mission Pack"

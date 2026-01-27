@@ -27,7 +27,6 @@ export default {
 		});
 	},
 	async getUser(accessToken: string) {
-		console.log('getUser called', accessToken);
 		const rest = new REST({ version: '10', authPrefix: 'Bearer' }).setToken(accessToken);
 		const api = new API(rest);
 		return await api.users.getCurrent();

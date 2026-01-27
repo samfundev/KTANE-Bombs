@@ -36,7 +36,8 @@
 		'Has Semi-Boss',
 		'Has PseudoNeedy',
 		'Has Needy',
-		'Designed for TP'
+		'Designed for TP',
+		'Current Season'
 	];
 	let sortOptions = [
 		'Alphabetical',

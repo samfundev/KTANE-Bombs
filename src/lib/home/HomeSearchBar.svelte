@@ -22,6 +22,7 @@
 		missions: ID<Mission>[];
 		missionCards?: { [name: string]: any };
 		modules: Record<string, RepoModule>;
+		seasonMissions: string[];
 		validSearchOptions?: boolean[];
 		searchOptionBoxes?: any;
 		resultsText?: any;
@@ -32,6 +33,7 @@
 		missions = $bindable(),
 		missionCards = $bindable({}),
 		modules,
+		seasonMissions,
 		validSearchOptions = $bindable([false, false, false, false, false]),
 		searchOptionBoxes = ['mission', 'module', 'author', 'solver', 'invert'],
 		resultsText = $bindable(missions.length),
@@ -115,6 +117,7 @@
 				!meetsHave(numSolos(ms) > 0, options.mustHave['has-solo-solve']) ||
 				!meetsHave(ms.tpSolve, options.mustHave['has-tp-solve']) ||
 				!meetsHave(ms.designedForTP, options.mustHave['designed-for-tp']) ||
+				!meetsHave(seasonMissions.includes(name), options.mustHave['current-season']) ||
 				!meetsHave(specialsInMission[name]['boss'].length > 0, options.mustHave['has-boss']) ||
 				!meetsHave(specialsInMission[name]['semi'].length > 0, options.mustHave['has-semi-boss']) ||
 				!meetsHave(specialsInMission[name]['psdn'].length > 0, options.mustHave['has-pseudoneedy']) ||

@@ -16,7 +16,7 @@ Inside that file set `DATABASE_URL` to point to your Postgres DB.
 
 Run `npx prisma generate` to generate the prisma client.
 
-Run `npx prisma migrate dev` to set up the database.
+Run `npx prisma migrate reset` to set up the database.
 
 `cd importer` and run `npx tsx import.js` and `npx tsx importAdvanced.js` to fill your database
 To wipe out your database before importing, run `npx prisma migrate reset`

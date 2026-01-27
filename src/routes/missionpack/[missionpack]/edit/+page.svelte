@@ -20,7 +20,7 @@
 
 	setOriginalMission();
 
-	let modified = $derived(!equal(pack, originalPack));
+	let modified = $derived(JSON.stringify(pack) !== JSON.stringify(originalPack));
 
 	async function saveChanges() {
 		const fData = new FormData();

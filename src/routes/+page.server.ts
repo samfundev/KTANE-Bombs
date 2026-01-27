@@ -42,10 +42,48 @@ export const load: PageServerLoad = async function () {
 		};
 	}
 
+	const now = new Date();
+	const currentSeason = await client.season.findFirst({
+		where: {
+			start: { lte: now },
+			end: { gte: now }
+		},
+		select: {
+			missionsStart: true,
+			missionsEnd: true,
+			whitelist: true
+		},
+		orderBy: {
+			id: 'desc'
+		}
+	});
+	let seasonMissionsResult: {name: string}[] = !currentSeason ? [] : await client.mission.findMany({
+		where: {
+			OR: [
+				{
+					dateAdded: {
+						gte: currentSeason.missionsStart,
+						lte: currentSeason.missionsEnd
+					},
+					verified: true
+				},
+				{
+					id: { in: currentSeason.whitelist },
+					verified: true
+				}
+			]
+		},
+		select: {
+			name: true
+		},
+		orderBy: { dateAdded: 'asc' }
+	});
+
 	return {
 		missions: missions.map(miss => {
 			return { ...miss, logfile: null, notes: null, uploadedBy: null, inGameId: null, inGameName: null };
 		}),
-		modules: simpleModules
+		modules: simpleModules,
+		seasonMissions: seasonMissionsResult.map(m => m.name)
 	};
 };
