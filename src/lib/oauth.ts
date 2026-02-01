@@ -11,7 +11,7 @@ export default {
 	generateAuthUrl() {
 		return oauth.generateAuthorizationURL({
 			client_id: process.env.VITE_DISCORD_CLIENT_ID!,
-			redirect_uri: process.env.VITE_DISCORD_REDIRECT_URI!,
+			redirect_uri: process.env.VITE_DISCORD_REDIRECT_URL!,
 			scope: scope.join(' '),
 			response_type: 'code',
 			prompt: 'consent'
@@ -22,7 +22,7 @@ export default {
 			code,
 			client_id: process.env.VITE_DISCORD_CLIENT_ID!,
 			client_secret: process.env.VITE_DISCORD_CLIENT_SECRET!,
-			redirect_uri: process.env.VITE_DISCORD_REDIRECT_URI!,
+			redirect_uri: process.env.VITE_DISCORD_REDIRECT_URL!,
 			grant_type: 'authorization_code'
 		});
 	},
