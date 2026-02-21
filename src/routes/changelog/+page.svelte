@@ -5,6 +5,12 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>21 Feb 2026</h3>
+	<ul>
+		<li>Fix duplicate module pools on mission uploads.</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>30 Jan 2026</h3>
 	<ul>
 		<li>Major update to the underlying code.</li>

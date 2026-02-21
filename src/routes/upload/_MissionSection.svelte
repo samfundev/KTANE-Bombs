@@ -92,6 +92,7 @@
 				match = readLine().match(/(\d+) Pools:/);
 				if (match === null) throw new Error('This regex should always match');
 				let pools = parseInt(match[1]);
+
 				for (let i = 0; i < pools; i++) {
 					match = readLine().match(/\[(.+)\] Count: (\d+)(?:, Sources: (.+))?/);
 					if (match === null) throw new Error('This regex should always match');
@@ -110,6 +111,19 @@
 						bomb.modules += count;
 					}
 				}
+
+				// Replace duplicate pools with condensed version
+				const poolMap = new Map<string, Pool>();
+				for (const pool of bomb.pools) {
+					const key = JSON.stringify([...pool.modules].sort());
+
+					if (poolMap.has(key)) {
+						poolMap.get(key)!.count += pool.count;
+					} else {
+						poolMap.set(key, new Pool([...pool.modules], pool.count));
+					}
+				}
+				bomb.pools = Array.from(poolMap.values());
 
 				mission.bombs.push(bomb);
 				if (mission.bombs.length > 1) {
