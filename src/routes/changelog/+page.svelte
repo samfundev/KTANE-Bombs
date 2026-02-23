@@ -5,6 +5,12 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>23 Feb 2026</h3>
+	<ul>
+		<li>Separate Team and EFM filters on the home page.</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>21 Feb 2026</h3>
 	<ul>
 		<li>Fix duplicate module pools on mission uploads.</li>

@@ -29,7 +29,8 @@
 	let yesList: string[] = $state([]);
 	let noList: string[] = $state([]);
 	let hasOptions = [
-		'Has Team/EFM Solve',
+		'Has Team Solve',
+		'Has EFM Solve',
 		'Has Solo Solve',
 		'Has TP Solve',
 		'Has Boss',

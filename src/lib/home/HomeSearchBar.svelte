@@ -113,8 +113,9 @@
 				widg > options.widgets[1] ||
 				ms.bombs.length < options.numBombs[0] ||
 				ms.bombs.length > options.numBombs[1] ||
-				!meetsHave(numCompletions(ms, false, false) > 0, options.mustHave['has-team/efm-solve']) ||
-				!meetsHave(numSolos(ms) > 0, options.mustHave['has-solo-solve']) ||
+				!meetsHave(numCompletions(ms, true, false, false, false) > 0, options.mustHave['has-team-solve']) ||
+				!meetsHave(numCompletions(ms, false, true, false, false) > 0, options.mustHave['has-efm-solve']) ||
+				!meetsHave(numCompletions(ms, false, false, false, true) > 0, options.mustHave['has-solo-solve']) ||
 				!meetsHave(ms.tpSolve, options.mustHave['has-tp-solve']) ||
 				!meetsHave(ms.designedForTP, options.mustHave['designed-for-tp']) ||
 				!meetsHave(seasonMissions.includes(name), options.mustHave['current-season']) ||
@@ -179,15 +180,22 @@
 		return rs.filter(x => x).length / rs.length;
 	}
 
-	function numCompletions(m: Mission, countTP: boolean = true, countSolo: boolean = true) {
+	function numCompletions(
+		m: Mission,
+		countTeam: boolean = true,
+		countEFM: boolean = true,
+		countTP: boolean = true,
+		countSolo: boolean = true
+	) {
 		return (
-			m.completions.filter(c => c.team[0] != TP_TEAM && (countSolo || c.team.length > 1 || !c.solo)).length +
-			(countTP && m.tpSolve ? 1 : 0)
+			m.completions.filter(
+				c =>
+					c.team[0] != TP_TEAM &&
+					((countTeam && c.team.length > 1) ||
+						(countEFM && c.team.length == 1 && !c.solo) ||
+						(countSolo && c.team.length == 1 && c.solo))
+			).length + (countTP && m.tpSolve ? 1 : 0)
 		);
-	}
-
-	function numSolos(m: Mission) {
-		return m.completions.filter(c => c.team.length == 1 && c.solo).length;
 	}
 
 	function compare(
