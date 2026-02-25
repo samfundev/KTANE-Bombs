@@ -16,7 +16,8 @@
 		These manuals may <strong><u>not</u></strong> be used for any mission as they are considered too powerful. This list
 		is the result of voting and discussion by the sheet maintainers.<br />
 		On the <a href="https://ktane.timwi.de/">Manual Repo</a>, there is a checkbox in the Options menu that hides these
-		manuals when unchecked.
+		manuals when unchecked.<br />
+		All translations of a restricted manual are also restricted, even if they are not explicitly listed below.
 	</p>
 	{#if manuals !== null}
 		<table>
