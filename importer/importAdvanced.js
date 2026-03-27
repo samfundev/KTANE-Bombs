@@ -82,7 +82,11 @@ import client from '../src/lib/client';
 			missionsStart: season.missionsStart,
 			missionsEnd: season.missionsEnd,
 			notes: season.notes,
-			whitelist: season.whitelistNames.map(name => {
+			includeList: season.includeNames.map(name => {
+				const mission = missions.find(m => m.name === name);
+				return mission ? mission.id : null;
+			}).filter(id => id !== null),
+			excludeList: season.excludeNames.map(name => {
 				const mission = missions.find(m => m.name === name);
 				return mission ? mission.id : null;
 			}).filter(id => id !== null)

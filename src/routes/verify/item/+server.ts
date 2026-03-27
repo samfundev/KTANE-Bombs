@@ -2,7 +2,7 @@ import { Permission } from '$lib/types';
 import type { QueueItem } from '$lib/types';
 import { forbidden, hasPermission } from '$lib/util';
 import type { RequestEvent, RequestHandler } from '@sveltejs/kit';
-import { TP_TEAM } from '$lib/const';
+import { MISSION_UPDATE, TP_TEAM } from '$lib/const';
 import createAuditClient from '$lib/auditlog';
 
 export const POST: RequestHandler = async function ({ locals, request }: RequestEvent) {
@@ -16,7 +16,7 @@ export const POST: RequestHandler = async function ({ locals, request }: Request
 			}
 
 			if (accept) {
-				if (item.mission.name.startsWith('[[UPDATE]] ')) {
+				if (item.mission.name.startsWith(MISSION_UPDATE)) {
 					const name = item.mission.name.substring(11);
 					//find mission to be updated
 					const selected = await client.mission.findFirst({

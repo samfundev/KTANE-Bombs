@@ -2,6 +2,7 @@ import client from '$lib/client';
 import { type Completer } from '$lib/types';
 import { error, type ServerLoadEvent } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import { MISSION_UPDATE } from '$lib/const';
 
 export const load: PageServerLoad = async function ({ params }: ServerLoadEvent) {
 	const { season } = params;
@@ -17,7 +18,8 @@ export const load: PageServerLoad = async function ({ params }: ServerLoadEvent)
 			missionsStart: true,
 			missionsEnd: true,
 			notes: true,
-			whitelist: true,
+			includeList: true,
+			excludeList: true,
 			completions: {
 				select: {
 					mission: {
@@ -95,17 +97,17 @@ export const load: PageServerLoad = async function ({ params }: ServerLoadEvent)
 
 	let missionList = await client.mission.findMany({
 		where: {
+			// verified: true,
+			id: { notIn: seasonResult.excludeList },
 			OR: [
 				{
 					dateAdded: {
 						gte: seasonResult.missionsStart,
 						lte: seasonResult.missionsEnd
-					},
-					verified: true
+					}
 				},
 				{
-					id: { in: seasonResult.whitelist },
-					verified: true
+					id: { in: seasonResult.includeList }
 				}
 			]
 		},
@@ -118,6 +120,6 @@ export const load: PageServerLoad = async function ({ params }: ServerLoadEvent)
 	return {
 		seasonCompleters: sortedCompleters,
 		season: seasonResult,
-		missionList
+		missionList: missionList.filter(m => !m.name.includes(MISSION_UPDATE))
 	};
 };

@@ -51,7 +51,8 @@ export const load: PageServerLoad = async function () {
 		select: {
 			missionsStart: true,
 			missionsEnd: true,
-			whitelist: true
+			includeList: true,
+			excludeList: true
 		},
 		orderBy: {
 			id: 'desc'
@@ -59,17 +60,17 @@ export const load: PageServerLoad = async function () {
 	});
 	let seasonMissionsResult: {name: string}[] = !currentSeason ? [] : await client.mission.findMany({
 		where: {
+			verified: true,
+			id: { notIn: currentSeason.excludeList },
 			OR: [
 				{
 					dateAdded: {
 						gte: currentSeason.missionsStart,
 						lte: currentSeason.missionsEnd
-					},
-					verified: true
+					}
 				},
 				{
-					id: { in: currentSeason.whitelist },
-					verified: true
+					id: { in: currentSeason.includeList }
 				}
 			]
 		},

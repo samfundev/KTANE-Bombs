@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Input from '$lib/controls/Input.svelte';
 
-	import { formatUTCDate, parseUTCDate } from '$lib/util';
+	import { formatUTCDate, parseUTCDate, properUrlEncode } from '$lib/util';
 	import { applyAction } from '$app/forms';
 	import { type ID, Mission, Season } from '$lib/types';
 	import TextArea from '$lib/controls/TextArea.svelte';
@@ -12,10 +12,12 @@
 	let season: Season = $state(data.season);
 	let seasons: Pick<Season, 'name'>[] = data.seasons;
 	let missions: ID<Pick<Mission, 'name'>>[] = data.missions;
+	let defaultMissionList: ID<Pick<Mission, 'name'>>[] = data.missionList;
 	const missionNames = [...missions].sort((a, b) => a.name.localeCompare(b.name));
 
 	let originalSeason = $state() as Season;
-	let missionToAdd: ID<Pick<Mission, 'name'>> | null = $state(null);
+	let inMissionToAdd: ID<Pick<Mission, 'name'>> | null = $state(null);
+	let exMissionToAdd: ID<Pick<Mission, 'name'>> | null = $state(null);
 	function uniqueSeasonName(value: string) {
 		return seasons.some(s => s.name.toUpperCase() === value.toUpperCase() && value != originalSeason.name)
 			? 'Name already exists.'
@@ -31,30 +33,64 @@
 	setOriginalSeason();
 
 	let modified = $derived(JSON.stringify(season) !== JSON.stringify(originalSeason));
-	let whitelist: string[] = $state([]);
+	let includeList: string[] = $state([]);
+	let excludeList: string[] = $state([]);
+	let missionList: ID<Pick<Mission, 'name'>>[] = $state(defaultMissionList);
 
-	function updateWhitelist() {
-		season.whitelist = season.whitelist.filter(id => missions.some(m => m.id === id));
-		whitelist = missions.filter(m => season.whitelist.includes(m.id)).map(m => m.name);
+	function updateMissionList() {
+		missionList = [
+			...includeList.map(name => missions.find(m => m.name === name)).filter(m => m != undefined),
+			...defaultMissionList.filter(m => !excludeList.includes(m.name))
+		];
 	}
 
-	function removeMission() {
-		if (missionToAdd?.id && season.whitelist.includes(missionToAdd.id)) {
-			season.whitelist = season.whitelist.filter(id => id !== missionToAdd.id);
+	function updateIncludeList() {
+		season.includeList = season.includeList.filter(id => missions.some(m => m.id === id));
+		includeList = missions.filter(m => season.includeList.includes(m.id)).map(m => m.name);
+		updateMissionList();
+	}
+	function updateExcludeList() {
+		season.excludeList = season.excludeList.filter(id => missions.some(m => m.id === id));
+		excludeList = missions.filter(m => season.excludeList.includes(m.id)).map(m => m.name);
+		updateMissionList();
+	}
+
+	function removeMissionFromIncludeList() {
+		if (inMissionToAdd?.id && season.includeList.includes(inMissionToAdd.id)) {
+			season.includeList = season.includeList.filter(id => id !== inMissionToAdd.id);
 			season = season;
 		}
-		updateWhitelist();
+		updateIncludeList();
 	}
 
-	function addMission() {
-		if (missionToAdd?.id && !season.whitelist.includes(missionToAdd.id)) {
-			season.whitelist.push(missionToAdd.id);
-			season.whitelist.sort((a, b) => a - b);
+	function addMissionToIncludeList() {
+		if (inMissionToAdd?.id && !season.includeList.includes(inMissionToAdd.id)) {
+			season.includeList.push(inMissionToAdd.id);
+			season.includeList.sort((a, b) => a - b);
 			season = season;
 		}
-		updateWhitelist();
+		updateIncludeList();
 	}
-	addMission();
+	
+	function removeMissionFromExcludeList() {
+		if (exMissionToAdd?.id && season.excludeList.includes(exMissionToAdd.id)) {
+			season.excludeList = season.excludeList.filter(id => id !== exMissionToAdd.id);
+			season = season;
+		}
+		updateExcludeList();
+	}
+
+	function addMissionToExcludeList() {
+		if (exMissionToAdd?.id && !season.excludeList.includes(exMissionToAdd.id)) {
+			season.excludeList.push(exMissionToAdd.id);
+			season.excludeList.sort((a, b) => a - b);
+			season = season;
+		}
+		updateExcludeList();
+	}
+
+	addMissionToIncludeList();
+	addMissionToExcludeList();
 
 	async function saveChanges() {
 		const fData = new FormData();
@@ -138,17 +174,33 @@
 		parse={val => (val?.length > 0 ? val : null)} />
 	<div class="hstack">
 		<Input
-			id="season-mission-to-add"
-			label="Add/remove mission from whitelist"
+			id="season-mission-to-include"
+			label="Add/remove mission from Include List"
 			display={val => val?.name ?? ''}
 			options={missionNames}
-			bind:value={missionToAdd} />
-		<button class="add" disabled={!missionToAdd} onclick={addMission}>Add</button>
-		<button class="remove" disabled={!missionToAdd} onclick={removeMission}>Remove</button>
+			bind:value={inMissionToAdd} />
+		<button class="add" disabled={!inMissionToAdd} onclick={addMissionToIncludeList}>Add</button>
+		<button class="remove" disabled={!inMissionToAdd} onclick={removeMissionFromIncludeList}>Remove</button>
 	</div>
-	<strong class="whitelist-title">Mission Whitelist</strong>
+	<div class="hstack">
+		<Input
+			id="season-mission-to-exclude"
+			label="Add/remove mission from Exclude List"
+			display={val => val?.name ?? ''}
+			options={defaultMissionList}
+			bind:value={exMissionToAdd} />
+		<button class="add" disabled={!exMissionToAdd} onclick={addMissionToExcludeList}>Add</button>
+		<button class="remove" disabled={!exMissionToAdd} onclick={removeMissionFromExcludeList}>Remove</button>
+	</div>
+	<strong class="includelist-title">Mission Include List</strong>
 	<ul>
-		{#each whitelist as mission}
+		{#each includeList as mission}
+			<li>{mission}</li>
+		{/each}
+	</ul>
+	<strong class="includelist-title">Mission Exclude List</strong>
+	<ul>
+		{#each excludeList as mission}
 			<li>{mission}</li>
 		{/each}
 	</ul>
@@ -157,6 +209,14 @@
 		<button onclick={deleteSeason}>Delete</button>
 	</div>
 </div>
+{#if missionList.length > 0}
+	<div class="block title"><b>Allowed Missions</b> ({missionList.length})</div>
+	<div class="missions">
+		{#each missionList as mission}
+			<a class="mission block" href="/mission/{properUrlEncode(mission.name)}">{mission.name}</a>
+		{/each}
+	</div>
+{/if}
 <div class="bottom-center flex" class:visible={modified}>
 	<div class="save-changes block flex">
 		There are unsaved changes.
@@ -165,6 +225,10 @@
 </div>
 
 <style>
+	.title.block {
+		background-color: var(--block-separator);
+		text-align: center;
+	}
 	:global(:is(input, textarea).new-season-light) {
 		background-color: #eee;
 		color: #000;
@@ -190,7 +254,7 @@
 		opacity: 1;
 	}
 
-	.whitelist-title {
+	.includelist-title {
 		margin-top: 10px;
 	}
 	ul {
@@ -206,8 +270,19 @@
 		height: 1.8em;
 	}
 
-	:global(input#season-mission-to-add) {
+	:global(input#season-mission-to-include, input#season-mission-to-exclude) {
 		width: 500px;
+	}
+
+	.missions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--gap);
+		align-content: start;
+	}
+	.mission {
+		padding: var(--gap) 8px;
+		flex-grow: 1;
 	}
 
 	.save-changes {

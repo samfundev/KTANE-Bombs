@@ -3,6 +3,7 @@ import createAuditClient from '$lib/auditlog';
 import { error, type RequestEvent } from '@sveltejs/kit';
 import type { ReplaceableMission } from '../_types';
 import { forbidden } from '$lib/util';
+import { MISSION_UPDATE } from '$lib/const';
 
 export async function POST({ locals, request }: RequestEvent) {
 	if (locals.user == null) {
@@ -18,7 +19,7 @@ export async function POST({ locals, request }: RequestEvent) {
 
 	let context = '';
 	for (const mission of missions) {
-		const missionName = (mission.replace ? '[[UPDATE]] ' : '') + mission.name;
+		const missionName = (mission.replace ? MISSION_UPDATE : '') + mission.name;
 		const equalMission = await client.mission.findUnique({
 			where: {
 				name: missionName

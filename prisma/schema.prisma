@@ -106,5 +106,6 @@ model Season {
   missionsEnd    DateTime @default(now())
   notes          String?
   completions    Completion[]
-  whitelist      Int[] @default([])
+  includeList    Int[] @default([])
+  excludeList    Int[] @default([])
 }
