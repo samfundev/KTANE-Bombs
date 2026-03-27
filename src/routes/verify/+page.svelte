@@ -4,6 +4,7 @@
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import NoContent from '$lib/comp/NoContent.svelte';
 	import { formatTime, properUrlEncode } from '$lib/util';
+	import { MISSION_UPDATE } from '$lib/const.js';
 	let { data } = $props();
 	let queue: QueueItem[] = $state(data.queue);
 	let solverNames: string[] = data.solverNames;
@@ -72,7 +73,7 @@
 			{#if item.type === 'mission'}
 				<div>
 					<MissionCard mission={item.mission} />
-					{#if item.mission.name.startsWith('[[UPDATE]] ')}
+					{#if item.mission.name.startsWith(MISSION_UPDATE)}
 						<div class="block red">
 							This would update the parameters of the mission: {item.mission.name.substring(11)}
 						</div>

@@ -5,10 +5,11 @@ import { forbidden, hasPermission } from '$lib/util';
 import type { ServerLoadEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import { MISSION_UPDATE } from '$lib/const';
 
 export const load: PageServerLoad = async function ({ params, locals }: ServerLoadEvent) {
 	const { mission } = params;
-	const missionToUpdate = mission?.startsWith('[[UPDATE]]')
+	const missionToUpdate = mission?.startsWith(MISSION_UPDATE)
 		? await client.mission.findFirst({
 				where: {
 					name: mission?.substring(11)

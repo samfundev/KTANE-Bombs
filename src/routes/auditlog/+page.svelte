@@ -1,6 +1,6 @@
 <script lang="ts">
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
-	import { UNKNOWN_ITEM } from '$lib/const.js';
+	import { MISSION_UPDATE, UNKNOWN_ITEM } from '$lib/const.js';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import {
 		evaluateLogicalStringSearch,
@@ -61,7 +61,7 @@
 			if (
 				log.action === 'delete' &&
 				statsBef.verified === false &&
-				!(log.model === 'Mission' && log.name.includes('[[UPDATE]]'))
+				!(log.model === 'Mission' && log.name.includes(MISSION_UPDATE))
 			) {
 				return 'rejected';
 			} else if (log.action === 'update' && statsBef.verified === false && statsAft.verified === true)

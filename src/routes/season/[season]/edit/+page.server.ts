@@ -1,10 +1,11 @@
 import client from '$lib/client';
 import createAuditClient from '$lib/auditlog';
-import { Permission, Season } from '$lib/types';
+import { Permission, Season, type ID } from '$lib/types';
 import { forbidden, hasPermission, properUrlEncode } from '$lib/util';
 import type { RequestEvent, ServerLoadEvent } from '@sveltejs/kit';
 import { redirect, error } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
+import { MISSION_UPDATE } from '$lib/const';
 
 export const load: PageServerLoad = async function ({ params, locals }: ServerLoadEvent) {
 	if (!hasPermission(locals.user, Permission.ManageSeasons)) {
@@ -24,7 +25,8 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			missionsEnd: true,
 			end: true,
 			notes: true,
-			whitelist: true
+			includeList: true,
+			excludeList: true
 		}
 	});
 
@@ -46,11 +48,25 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		},
 		orderBy: { dateAdded: 'asc' }
 	});
+	let missionList = await client.mission.findMany({
+		where: {
+			dateAdded: {
+				gte: seasonResult.missionsStart,
+				lte: seasonResult.missionsEnd
+			}
+		},
+		select: {
+			name: true,
+			id: true
+		},
+		orderBy: { dateAdded: 'asc' }
+	});
 
 	return {
 		season: seasonResult,
 		seasons,
-		missions
+		missions,
+		missionList: missionList.filter(m => !m.name.includes(MISSION_UPDATE))
 	};
 };
 
@@ -82,7 +98,7 @@ export const actions: Actions = {
 		const auditClient = createAuditClient(locals.user);
 
 		const fData = await request.formData();
-		const season: Season = JSON.parse(fData.get('season')?.toString() ?? '');
+		const season: ID<Season> = JSON.parse(fData.get('season')?.toString() ?? '');
 
 		await auditClient.season.update({
 			where: {
@@ -95,7 +111,8 @@ export const actions: Actions = {
 				missionsStart: season.missionsStart,
 				missionsEnd: season.missionsEnd,
 				notes: season.notes,
-				whitelist: season.whitelist
+				includeList: season.includeList,
+				excludeList: season.excludeList
 			}
 		});
 

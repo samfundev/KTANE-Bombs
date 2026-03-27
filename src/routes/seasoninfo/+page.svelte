@@ -67,9 +67,9 @@
 </div>
 
 <div class="block">
-	<h2>Season 1 Rules</h2>
+	<h2>Season 2 Rules</h2>
 
-	<p>These rules need to be followed for season 1 solves</p>
+	<p>These rules need to be followed for season 2 solves</p>
 	<ul>
 		<li>
 			Experts and EFM can only use notepads with no extra functionalities other than taking notes, non-restricted <a
@@ -79,12 +79,6 @@
 		<li>Modded widgets are not allowed.</li>
 		<li>Note taking systems and the clipboard need to start empty.</li>
 		<li>Each team solve needs to have a maximum of 1 defuser and 2 experts.</li>
-		<li>The following bombs are also allowed for season 1 solves:</li>
-		<ul>
-			<li><a href="/mission/Easy%20Challenge">Easy Challenge</a></li>
-			<li><a href="/mission/Centurion">Centurion</a></li>
-			<li><a href="/mission/One-Souvenir%20Army">One-Souvenir Army</a></li>
-		</ul>
 	</ul>
 </div>
 
@@ -120,6 +114,28 @@
 		</li>
 		<ul>
 			<li>Yes.</li>
+		</ul>
+	</ul>
+</div>
+
+<div class="block">
+	<h2>Season 1 Rules</h2>
+
+	<p>These rules need to be followed for season 1 solves</p>
+	<ul>
+		<li>
+			Experts and EFM can only use notepads with no extra functionalities other than taking notes, non-restricted <a
+				href="https://ktane.timwi.de/">repository</a> manuals and calculators for basic arithmetic (addition, subtraction,
+			multiplication, division, and powers). Any other tool is not allowed.
+		</li>
+		<li>Modded widgets are not allowed.</li>
+		<li>Note taking systems and the clipboard need to start empty.</li>
+		<li>Each team solve needs to have a maximum of 1 defuser and 2 experts.</li>
+		<li>The following bombs are also allowed for season 1 solves:</li>
+		<ul>
+			<li><a href="/mission/Easy%20Challenge">Easy Challenge</a></li>
+			<li><a href="/mission/Centurion">Centurion</a></li>
+			<li><a href="/mission/One-Souvenir%20Army">One-Souvenir Army</a></li>
 		</ul>
 	</ul>
 </div>

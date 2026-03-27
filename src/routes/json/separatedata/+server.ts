@@ -34,7 +34,8 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			missionsStart: true,
 			missionsEnd: true,
 			notes: true,
-			whitelist: true
+			includeList: true,
+			excludeList: true
 		}
 	});
 
@@ -45,14 +46,20 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 		}
 	});
 	let seasons = seasonResults.map(s => {
-		const names = s.whitelist.map(missionId => {
+		const iNames = s.includeList.map(missionId => {
+			const mission = missions.find(m => m.id === missionId);
+			return mission ? mission.name : `Unknown Mission (${missionId})`;
+		});
+		const eNames = s.excludeList.map(missionId => {
 			const mission = missions.find(m => m.id === missionId);
 			return mission ? mission.name : `Unknown Mission (${missionId})`;
 		});
 		return {
 			...s,
-			whitelist: undefined,
-			whitelistNames: names
+			includeList: undefined,
+			excludeList: undefined,
+			includeNames: iNames,
+			excludeNames: eNames
 		};
 	});
 

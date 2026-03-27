@@ -64,7 +64,7 @@
 {/if}
 
 {#if missionList.length > 0}
-	<div class="block title"><b>Allowed Missions</b></div>
+	<div class="block title"><b>Allowed Missions</b> ({missionList.length})</div>
 	<div class="missions">
 		{#each missionList as mission}
 			<a class="mission block" href="/mission/{properUrlEncode(mission.name)}">{mission.name}</a>
