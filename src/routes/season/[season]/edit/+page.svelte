@@ -10,7 +10,7 @@
 	let { data }: PageProps = $props();
 
 	let season: Season = $state(data.season);
-	let seasons: Pick<Season, 'name'>[] = data.seasons;
+	let seasonNames: string[] = data.seasonNames;
 	let missions: ID<Pick<Mission, 'name'>>[] = data.missions;
 	let defaultMissionList: ID<Pick<Mission, 'name'>>[] = data.missionList;
 	const missionNames = [...missions].sort((a, b) => a.name.localeCompare(b.name));
@@ -71,7 +71,7 @@
 		}
 		updateIncludeList();
 	}
-	
+
 	function removeMissionFromExcludeList() {
 		if (exMissionToAdd?.id && season.excludeList.includes(exMissionToAdd.id)) {
 			season.excludeList = season.excludeList.filter(id => id !== exMissionToAdd.id);

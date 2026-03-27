@@ -64,7 +64,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 
 	return {
 		season: seasonResult,
-		seasons,
+		seasonNames: seasons.map(s => s.name.toUpperCase()).filter(n => n !== seasonResult.name.toUpperCase()),
 		missions,
 		missionList: missionList.filter(m => !m.name.includes(MISSION_UPDATE))
 	};

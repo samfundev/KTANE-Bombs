@@ -57,6 +57,7 @@
 		setOriginalMission();
 	});
 
+	let nameInvalid = $state(false);
 	let modified = $state(false);
 	let tpCompletion = $state(false);
 	let nameIsSame = $state(false);
@@ -72,8 +73,15 @@
 		let noCompMission = JSON.parse(JSON.stringify(mission));
 		noCompOrig.completions = undefined;
 		noCompMission.completions = undefined;
-		modified = JSON.stringify(noCompOrig) !== JSON.stringify(noCompMission);
+		modified = JSON.stringify(noCompOrig) !== JSON.stringify(noCompMission) && !nameInvalid;
 	});
+	function uniqueMissionName(value: string) {
+		return value.length < 1
+			? 'Name is required.'
+			: missionNames.some(n => n.toUpperCase() === value.toUpperCase())
+				? 'Name already exists.'
+				: true;
+	}
 
 	function intnan0(val: number): boolean | string {
 		return isNaN(val) ? 'int' : val >= 0 ? true : '≥0';
@@ -182,7 +190,13 @@
 </svelte:head>
 <div class="block relative">
 	<div class="flex top-edit-controls">
-		<Input label="Name" id="mission-name" bind:value={mission.name} validate={value => value.length > 0} />
+		<Input
+			label="Name"
+			id="mission-name"
+			bind:value={mission.name}
+			required
+			validate={uniqueMissionName}
+			bind:invalid={nameInvalid} />
 		<Input label="Authors" id="mission-authors" bind:value={mission.authors} parse={parseList} />
 		<Input
 			label="Mission Pack"
