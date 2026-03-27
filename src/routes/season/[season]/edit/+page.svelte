@@ -71,7 +71,7 @@
 		}
 		updateIncludeList();
 	}
-	
+
 	function removeMissionFromExcludeList() {
 		if (exMissionToAdd?.id && season.excludeList.includes(exMissionToAdd.id)) {
 			season.excludeList = season.excludeList.filter(id => id !== exMissionToAdd.id);

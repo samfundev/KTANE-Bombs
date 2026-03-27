@@ -43,11 +43,20 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		}
 	});
 
+	const packs = await client.missionPack.findMany({
+		select: {
+			name: true
+		}
+	});
+
 	if (pack === null) {
 		error(404, 'Mission pack not found.');
 	}
 
-	return { pack };
+	return {
+		pack,
+		names: packs.map(p => p.name.toUpperCase()).filter(n => n !== pack.name.toUpperCase())
+	 };
 };
 
 export const actions: Actions = {

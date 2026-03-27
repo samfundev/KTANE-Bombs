@@ -2,7 +2,6 @@
 	import Input from '$lib/controls/Input.svelte';
 
 	import { formatDate, getSteamID, parseDate, validateSteamID } from '$lib/util';
-	import equal from 'fast-deep-equal';
 	import { applyAction } from '$app/forms';
 	import type { EditMissionPack } from '../../_types';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
@@ -10,6 +9,7 @@
 	let { data } = $props();
 
 	let pack: EditMissionPack = $state(data.pack);
+	let names: string[] = data.names;
 
 	let originalPack: EditMissionPack = $state();
 
@@ -20,7 +20,12 @@
 
 	setOriginalMission();
 
-	let modified = $derived(JSON.stringify(pack) !== JSON.stringify(originalPack));
+	let nameInvalid = $state(true);
+	let modified = $derived(JSON.stringify(pack) !== JSON.stringify(originalPack) && !nameInvalid);
+
+	function uniquePackName(value: string) {
+		return names.includes(value.toUpperCase()) ? 'Name already exists.' : true;
+	}
 
 	async function saveChanges() {
 		const fData = new FormData();
@@ -57,7 +62,13 @@
 	<title>{pack.name}</title>
 </svelte:head>
 <div class="block flex column relative">
-	<Input label="Name" id="pack-name" required bind:value={pack.name} />
+	<Input
+		label="Name"
+		id="pack-name"
+		required
+		bind:value={pack.name}
+		validate={uniquePackName}
+		bind:invalid={nameInvalid} />
 	<Input
 		label="Steam ID / Workshop URL"
 		id="pack-steam-id"
