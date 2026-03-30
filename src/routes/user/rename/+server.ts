@@ -27,6 +27,15 @@ export const POST: RequestHandler = async function ({ locals, request }) {
 			}
 		}
 	});
+
+	const seasons = await client.season.findMany({
+		where: {
+			winners: {
+				has: oldUsername
+			}
+		}
+	});
+
 	if (!nameExistsOK) {
 		const completionsMerge = await client.completion.findFirst({
 			where: {
@@ -67,6 +76,17 @@ export const POST: RequestHandler = async function ({ locals, request }) {
 				},
 				data: {
 					team: completion.team.map(name => (name === oldUsername ? username : name))
+				}
+			})
+		),
+		// Seasons
+		...seasons.map(season =>
+			client.season.update({
+				where: {
+					id: season.id
+				},
+				data: {
+					winners: season.winners.map(name => (name === oldUsername ? username : name))
 				}
 			})
 		)

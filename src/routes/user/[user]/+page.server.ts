@@ -5,6 +5,7 @@ import { Permission } from '$lib/types';
 import { fixPools, forbidden, hasPermission } from '$lib/util';
 import type { Mission } from '$lib/generated/prisma/client';
 import { error } from '@sveltejs/kit';
+import { getSeasonWinners } from '$lib/season.js';
 
 export const load = async function ({ parent, params }: any) {
 	const { user } = await parent(); //logged-in user
@@ -196,14 +197,13 @@ export const load = async function ({ parent, params }: any) {
 		select: {
 			name: true
 		},
-		orderBy: {
-			id: 'desc'
-		}
+		orderBy: { start: 'desc' }
 	});
 	const currentSeasonName = currentSeason?.name ?? '';
 
 	return {
 		username: params.user,
+		seasonWinners: await getSeasonWinners(),
 		shownUser,
 		completions,
 		currentSeasonName,

@@ -14,6 +14,7 @@
 
 	let { data, children } = $props();
 	const user: FrontendUser | null = data.user;
+	const seasonWinners: string[] = data.seasonWinners;
 
 	let infoMenu = $state() as HTMLDivElement;
 	let infoTab = $state() as HTMLDivElement;
@@ -26,6 +27,8 @@
 			location.href = to.url.href;
 		}
 	});
+
+	const winner = user ? seasonWinners.includes(user.username) : false;
 
 	const updateNavbarHeight = () => {
 		if (!navbar) return;
@@ -62,9 +65,9 @@
 		</div>
 
 		{#if user}
-			<div>
+			<div class:winner>
 				<a href="/user/{properUrlEncode(user.username)}">
-					<UserCard {user} />
+					<UserCard {winner} {user} />
 				</a>
 			</div>
 			<a class="block" rel="external" href="/logout">Logout</a>
@@ -116,6 +119,9 @@
 	}
 	.info-button {
 		cursor: pointer;
+	}
+	.winner {
+		background-color: var(--winner-bg-color);
 	}
 
 	.max-width {

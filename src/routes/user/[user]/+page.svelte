@@ -26,6 +26,7 @@
 
 	let stats: SolveStats = data.stats;
 	let username: string = data.username;
+	const seasonWinners: string[] = data.seasonWinners;
 	let shownUser: FrontendUser | null = $state(data.shownUser);
 	let completions: MissionCompletion[] = data.completions;
 	let currentSeasonName: string = data.currentSeasonName;
@@ -211,7 +212,7 @@
 	<title>{username}</title>
 </svelte:head>
 
-<h1 class="header">{username}</h1>
+<h1 class="header" class:winner={seasonWinners.includes(username)}>{username}</h1>
 <div class="table">
 	<b class="block" title="Number of distinct missions solved.">Distinct: {stats.distinct}</b>
 	<b class="block" title="Number of missions solved (including duplicates)."
@@ -477,5 +478,9 @@
 	}
 	.block.gray {
 		background-color: var(--accent-gray);
+	}
+
+	.winner {
+		background-color: var(--winner-bg-color);
 	}
 </style>

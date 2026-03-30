@@ -1,11 +1,12 @@
 import client from '$lib/client';
 import createAuditClient from '$lib/auditlog';
-import { Permission, Season, type ID } from '$lib/types';
-import { forbidden, hasPermission, properUrlEncode } from '$lib/util';
+import { Permission, type ID } from '$lib/types';
+import { forbidden, hasPermission, onlyUnique, properUrlEncode } from '$lib/util';
 import type { RequestEvent, ServerLoadEvent } from '@sveltejs/kit';
 import { redirect, error } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import { MISSION_UPDATE } from '$lib/const';
+import type { SeasonWinners } from './_types';
 
 export const load: PageServerLoad = async function ({ params, locals }: ServerLoadEvent) {
 	if (!hasPermission(locals.user, Permission.ManageSeasons)) {
@@ -26,7 +27,13 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			end: true,
 			notes: true,
 			includeList: true,
-			excludeList: true
+			excludeList: true,
+			winners: true,
+			completions: {
+				select: {
+					team: true
+				}
+			}
 		}
 	});
 
@@ -62,10 +69,13 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		orderBy: { dateAdded: 'asc' }
 	});
 
+	console.log(seasonResult.completions.flatMap(c => c.team));
+
 	return {
 		season: seasonResult,
 		seasonNames: seasons.map(s => s.name.toUpperCase()).filter(n => n !== seasonResult.name.toUpperCase()),
-		missions,
+		names: seasonResult.completions.flatMap(c => c.team).filter(onlyUnique).sort((a, b) => a.localeCompare(b)),
+		missions: missions.filter(m => !m.name.includes(MISSION_UPDATE)),
 		missionList: missionList.filter(m => !m.name.includes(MISSION_UPDATE))
 	};
 };
@@ -98,7 +108,7 @@ export const actions: Actions = {
 		const auditClient = createAuditClient(locals.user);
 
 		const fData = await request.formData();
-		const season: ID<Season> = JSON.parse(fData.get('season')?.toString() ?? '');
+		const season: ID<SeasonWinners> = JSON.parse(fData.get('season')?.toString() ?? '');
 
 		await auditClient.season.update({
 			where: {
@@ -112,7 +122,8 @@ export const actions: Actions = {
 				missionsEnd: season.missionsEnd,
 				notes: season.notes,
 				includeList: season.includeList,
-				excludeList: season.excludeList
+				excludeList: season.excludeList,
+				winners: season.winners
 			}
 		});
 

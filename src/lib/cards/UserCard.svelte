@@ -5,9 +5,10 @@
 
 	interface Props {
 		user: FrontendUser;
+		winner?: boolean;
 	}
 
-	let { user }: Props = $props();
+	let { user, winner }: Props = $props();
 
 	let imageExists = $state(false);
 	let alternate = Math.max(0, parseInt(user.id.slice(-2)) % 5);
@@ -18,7 +19,7 @@
 		});
 </script>
 
-<div class="block user">
+<div class="block user" class:winner>
 	{#if user.avatar.length != 1 && imageExists}
 		<img class="avatar" src="https://cdn.discordapp.com/avatars/{user.id}/{user.avatar}.webp?size=32" alt="Avatar" />
 	{:else}
@@ -45,6 +46,9 @@
 	}
 	.discord {
 		margin-left: 10px;
+	}
+	.block.user.winner {
+		background-color: var(--winner-bg-color);
 	}
 
 	.avatar {
