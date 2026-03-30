@@ -42,9 +42,7 @@ export const load = async function ({ parent }: any) {
 		select: {
 			id: true
 		},
-		orderBy: {
-			id: 'desc'
-		}
+		orderBy: { start: 'desc' }
 	});
 	const currentSeasonId = currentSeason?.id ?? null;
 

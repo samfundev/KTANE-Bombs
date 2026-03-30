@@ -4,6 +4,7 @@
 	import { properUrlEncode } from '$lib/util.js';
 	let { data } = $props();
 	let completers: Completer[] = data.completers;
+	const seasonWinners: string[] = data.seasonWinners;
 	let ranks: { [name: string]: number } = $state({});
 	let rank = 1;
 	let tied = 1;
@@ -42,7 +43,9 @@
 	<b class="block">EFM</b>
 	{#each completers as completer}
 		<div class="block">{ranks[completer.name]}</div>
-		<div class="block"><a href="/user/{properUrlEncode(completer.name)}">{completer.name}</a></div>
+		<div class="block" class:winner={seasonWinners.includes(completer.name)}>
+			<a href="/user/{properUrlEncode(completer.name)}">{completer.name}</a>
+		</div>
 		<div class="block">{completer.distinct}</div>
 		<div class="block">{completer.defuser + completer.expert + completer.efm}</div>
 		<div class="block">{completer.defuser}</div>
@@ -77,6 +80,10 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+	}
+
+	.winner {
+		background-color: var(--winner-bg-color);
 	}
 
 	a {

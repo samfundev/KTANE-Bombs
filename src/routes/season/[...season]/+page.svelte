@@ -6,6 +6,7 @@
 
 	let { data }: PageProps = $props();
 	let { season } = data;
+	const seasonWinners: string[] = data.seasonWinners;
 	let completers: Completer[] = data.seasonCompleters;
 	let missionList: Pick<Mission, 'name'>[] = data.missionList;
 	let ranks: { [name: string]: number } = $state({});
@@ -83,7 +84,9 @@
 	<b class="block">EFM</b>
 	{#each completers as completer}
 		<div class="block">{ranks[completer.name]}</div>
-		<div class="block"><a href="/user/{properUrlEncode(completer.name)}">{completer.name}</a></div>
+		<div class="block" class:winner={seasonWinners.includes(completer.name)}>
+			<a href="/user/{properUrlEncode(completer.name)}">{completer.name}</a>
+		</div>
 		<div class="block">{completer.distinct}</div>
 		<div class="block">{completer.defuser + completer.expert + completer.efm}</div>
 		<div class="block">{completer.defuser}</div>
@@ -142,6 +145,10 @@
 
 	a {
 		color: var(--text-color);
+	}
+
+	.winner {
+		background-color: var(--winner-bg-color);
 	}
 
 	.top-right {

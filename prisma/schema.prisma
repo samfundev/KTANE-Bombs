@@ -108,4 +108,5 @@ model Season {
   completions    Completion[]
   includeList    Int[] @default([])
   excludeList    Int[] @default([])
+  winners        String[] @default([])
 }

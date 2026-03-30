@@ -18,6 +18,7 @@
 	--needy-color: #9999ff;
 	--quirks-color: #aae8ff;
 	--block-separator: #eeeeff;
+	--winner-bg-color: #7be17b;
 	--stick-under-navbar: calc(1.25em + 4 * var(--gap) + 2px);
 	--page-content-width: min(calc(100vw - 4 * var(--gap)), 1150px);
 }
@@ -41,6 +42,7 @@
 		--needy-color: #1e1e84;
 		--quirks-color: #216f86;
 		--block-separator: #1a1a22;
+		--winner-bg-color: #156a15;
 	}
 
 	.dark-invert {

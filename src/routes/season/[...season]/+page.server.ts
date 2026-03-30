@@ -20,6 +20,7 @@ export const load: PageServerLoad = async function ({ params }: ServerLoadEvent)
 			notes: true,
 			includeList: true,
 			excludeList: true,
+			winners: true,
 			completions: {
 				select: {
 					mission: {
@@ -120,6 +121,7 @@ export const load: PageServerLoad = async function ({ params }: ServerLoadEvent)
 	return {
 		seasonCompleters: sortedCompleters,
 		season: seasonResult,
+		seasonWinners: seasonResult.winners,
 		missionList: missionList.filter(m => !m.name.includes(MISSION_UPDATE))
 	};
 };

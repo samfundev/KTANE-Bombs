@@ -10,7 +10,7 @@ export const load: PageServerLoad = async function () {
 			end: true,
 			notes: true
 		},
-		orderBy: { id: 'desc' }
+		orderBy: { start: 'desc' }
 	});
 
 	const now = new Date();
@@ -22,9 +22,7 @@ export const load: PageServerLoad = async function () {
 		select: {
 			name: true
 		},
-		orderBy: {
-			id: 'desc'
-		}
+		orderBy: { start: 'desc' }
 	});
 	const currentSeasonName = currentSeason?.name ?? '';
 

@@ -54,9 +54,7 @@ export const load: PageServerLoad = async function () {
 			includeList: true,
 			excludeList: true
 		},
-		orderBy: {
-			id: 'desc'
-		}
+		orderBy: { start: 'desc' }
 	});
 	let seasonMissionsResult: {name: string}[] = !currentSeason ? [] : await client.mission.findMany({
 		where: {
