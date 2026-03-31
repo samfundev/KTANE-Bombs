@@ -14,7 +14,8 @@
 	let seasonNames: string[] = data.seasonNames;
 	let names: string[] = data.names;
 	let missions: ID<Pick<Mission, 'name'>>[] = data.missions;
-	let defaultMissionList: ID<Pick<Mission, 'name'>>[] = data.missionList;
+	let defaultMissionList: ID<Pick<Mission, 'name'>>[] = data.missionList.filter(m => m.verified);
+	let fullDefaultMissionList: ID<Pick<Mission, 'name'>>[] = data.missionList;
 	const missionNames = [...missions].sort((a, b) => a.name.localeCompare(b.name));
 
 	let originalSeason = $state() as Season;
@@ -238,7 +239,7 @@
 			id="season-mission-to-exclude"
 			label="Add/remove mission from Exclude List"
 			display={val => val?.name ?? ''}
-			options={defaultMissionList}
+			options={fullDefaultMissionList}
 			bind:value={exMissionToAdd} />
 		<button class="add" disabled={!exMissionToAdd} onclick={addMissionToExcludeList}>Add</button>
 		<button class="remove" disabled={!exMissionToAdd} onclick={removeMissionFromExcludeList}>Remove</button>

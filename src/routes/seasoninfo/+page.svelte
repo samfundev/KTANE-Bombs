@@ -67,18 +67,35 @@
 </div>
 
 <div class="block">
-	<h2>Season 2 Rules</h2>
+	<h2><a href="/season/Back%20to%20Basics">Season 2</a> Rules</h2>
 
 	<p>These rules need to be followed for season 2 solves</p>
 	<ul>
 		<li>
-			Experts and EFM can only use notepads with no extra functionalities other than taking notes, non-restricted <a
-				href="https://ktane.timwi.de/">repository</a> manuals and calculators for basic arithmetic (addition, subtraction,
-			multiplication, division, and powers). Any other tool is not allowed.
+			Experts and EFM can only use notepads with the same functionalities as those enabled by default in Notepad++
+			without accessing menus or keybinds (with the exception of dark mode, find, copy, and paste), manuals and
+			calculators with the same functionalities as the
+			<a href="https://samfundev.github.io/TextFieldCalculator/Calculator-v2.html?locked">
+				<b>Restricted</b> Text Field Calculator
+			</a>. Any other tool is not allowed.
+		</li>
+		<li>
+			The only manuals allowed to be used are the <b>default manuals</b> of each module on the mission being played, and those
+			that they directly link to.
 		</li>
 		<li>Modded widgets are not allowed.</li>
-		<li>Note taking systems and the clipboard need to start empty.</li>
+		<li>
+			Note taking systems and the clipboard need to start empty. Manuals need to start in their default state. This
+			applies at the beginning of each bomb, including sequence bombs.
+		</li>
 		<li>Each team solve needs to have a maximum of 1 defuser and 2 experts.</li>
+		<li>
+			The following bombs are also allowed for season 2 solves:
+			<ul>
+				<li><a href="/mission/Easy%20Bomb">Easy Bomb</a></li>
+				<li><a href="/mission/Swan%20Hell">Swan Hell</a></li>
+			</ul>
+		</li>
 	</ul>
 </div>
 
@@ -87,39 +104,50 @@
 
 	<ul>
 		<li>
-			Are the extra functionalities in the <a href="https://files.timwi.de/Tools/Calculator.html"
-				>Text Field Calculator</a
-			>, such as variable saving, allowed for season 1 solves?
-		</li>
-		<ul>
-			<li>No. The TFC can be used for note taking and basic arithmetic, but no extra functionalities are allowed.</li>
-		</ul>
-
-		<li>
 			I submitted a solve to the site before the season started, but it fits the criteria required for the current
 			season. Can it be used as a season solve?
+			<ul>
+				<li>No, you would need to solve it again.</li>
+			</ul>
 		</li>
-		<ul>
-			<li>No, you would need to solve it again.</li>
-		</ul>
-
-		<li>Are base converters/caesar cipher decryptors/macros/automatic line numbering allowed for season 1 solves?</li>
-		<ul>
-			<li>No.</li>
-		</ul>
 
 		<li>
-			For technical reasons one of the players can't fit their own POV in a single video. Can they submit more than 1
-			video as evidence?
+			Are base converters/caesar cipher decryptors/macros allowed for season 2 solves?
+			<ul>
+				<li>No.</li>
+			</ul>
 		</li>
-		<ul>
-			<li>Yes.</li>
-		</ul>
+
+		<li>
+			For technical reasons, one of the players can't fit their own POV in a single video. Can they submit more than 1
+			video as evidence?
+
+			<ul>
+				<li>Yes.</li>
+			</ul>
+		</li>
+
+		<li>
+			Are optimized, interactive, and other custom manuals allowed for season 2?
+			<ul>
+				<li>No.</li>
+			</ul>
+		</li>
+
+		<li>
+			Can tools (scissors, glue, etc.) be used to create physical items to help solve modules?
+			<ul>
+				<li>
+					Yes, as long as these items are created during the bomb, starting from the allowed objects (default manuals
+					and empty notepads).
+				</li>
+			</ul>
+		</li>
 	</ul>
 </div>
 
-<div class="block">
-	<h2>Season 1 Rules</h2>
+<div class="block old">
+	<h2><a href="/season/The%20Beginning">Season 1</a> Rules</h2>
 
 	<p>These rules need to be followed for season 1 solves</p>
 	<ul>
@@ -131,11 +159,19 @@
 		<li>Modded widgets are not allowed.</li>
 		<li>Note taking systems and the clipboard need to start empty.</li>
 		<li>Each team solve needs to have a maximum of 1 defuser and 2 experts.</li>
-		<li>The following bombs are also allowed for season 1 solves:</li>
-		<ul>
-			<li><a href="/mission/Easy%20Challenge">Easy Challenge</a></li>
-			<li><a href="/mission/Centurion">Centurion</a></li>
-			<li><a href="/mission/One-Souvenir%20Army">One-Souvenir Army</a></li>
-		</ul>
+		<li>
+			The following bombs are also allowed for season 1 solves:
+			<ul>
+				<li><a href="/mission/Easy%20Challenge">Easy Challenge</a></li>
+				<li><a href="/mission/Centurion">Centurion</a></li>
+				<li><a href="/mission/One-Souvenir%20Army">One-Souvenir Army</a></li>
+			</ul>
+		</li>
 	</ul>
 </div>
+
+<style>
+	.old {
+		opacity: 0.6;
+	}
+</style>

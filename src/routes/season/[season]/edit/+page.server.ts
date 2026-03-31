@@ -53,6 +53,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			id: true,
 			name: true
 		},
+		where: { verified: true },
 		orderBy: { dateAdded: 'asc' }
 	});
 	let missionList = await client.mission.findMany({
@@ -64,7 +65,8 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		},
 		select: {
 			name: true,
-			id: true
+			id: true,
+			verified: true
 		},
 		orderBy: { dateAdded: 'asc' }
 	});

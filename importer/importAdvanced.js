@@ -35,7 +35,7 @@ import client from '../src/lib/client';
 	await client.$transaction(userQueries);
 
 	//uncomment to wipe out your local audit log first
-	//await client.auditLog.deleteMany({});
+	// await client.auditLog.deleteMany({});
 
 	console.log('Creating audit logs');
 	logs.sort((a, b) => parseInt(a.id) - parseInt(b.id));
@@ -82,14 +82,24 @@ import client from '../src/lib/client';
 			missionsStart: season.missionsStart,
 			missionsEnd: season.missionsEnd,
 			notes: season.notes,
-			includeList: season.includeNames.map(name => {
-				const mission = missions.find(m => m.name === name);
-				return mission ? mission.id : null;
-			}).filter(id => id !== null),
-			excludeList: season.excludeNames.map(name => {
-				const mission = missions.find(m => m.name === name);
-				return mission ? mission.id : null;
-			}).filter(id => id !== null)
+			includeList:
+				season.includeNames == undefined
+					? []
+					: season.includeNames
+							.map(name => {
+								const mission = missions.find(m => m.name === name);
+								return mission ? mission.id : null;
+							})
+							.filter(id => id !== null),
+			excludeList:
+				season.excludeNames == undefined
+					? []
+					: season.excludeNames
+							.map(name => {
+								const mission = missions.find(m => m.name === name);
+								return mission ? mission.id : null;
+							})
+							.filter(id => id !== null)
 		};
 		seasonQueries.push(
 			client.season.upsert({

@@ -5,6 +5,20 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>31 Mar 2026</h3>
+	<ul>
+		<li><a href="/season/Back%20to%20Basics">Season 2</a> rules uploaded to <a href="/seasoninfo">Season Info</a>.</li>
+		<li>Colored names functionality for season winners.</li>
+		<li>
+			Add list of season solves (grouped by mission) to <a href="/season/The%20Beginning">season pages</a>.
+			<ul>
+				<li>Make Allowed Missions and Leaderboard sections collapsible.</li>
+			</ul>
+		</li>
+		<li>Improved some features for maintainers.</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>23 Feb 2026</h3>
 	<ul>
 		<li>Separate Team and EFM filters on the home page.</li>

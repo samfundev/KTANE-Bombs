@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { type Completer, Permission } from '$lib/types';
+	import { type Completer, type Completion, Permission } from '$lib/types';
 	import { properUrlEncode, hasPermission } from '$lib/util.js';
 	import { page } from '$app/state';
 	import type { PageProps } from './$types';
+	import NoContent from '$lib/comp/NoContent.svelte';
+	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 
 	let { data }: PageProps = $props();
 	let { season } = data;
@@ -19,6 +21,15 @@
 		hour: '2-digit',
 		minute: '2-digit'
 	};
+
+	let completions: { [miss: string]: Completion[] } = {};
+	season.completions.forEach(comp => {
+		if (!completions[comp.mission.name]) completions[comp.mission.name] = [];
+		completions[comp.mission.name].push(comp);
+	});
+	Object.entries(completions).forEach(([miss, comps]) => {
+		completions[miss] = comps.sort((a, b) => b.time - a.time);
+	});
 
 	if (completers.length > 0) ranks[completers[0].name] = rank;
 	for (let c = 1; c < completers.length; c++) {
@@ -65,35 +76,54 @@
 {/if}
 
 {#if missionList.length > 0}
-	<div class="block title"><b>Allowed Missions</b> ({missionList.length})</div>
+	<details open>
+		<summary class="block"><b>Allowed Missions</b> ({missionList.length})</summary>
 	<div class="missions">
 		{#each missionList as mission}
 			<a class="mission block" href="/mission/{properUrlEncode(mission.name)}">{mission.name}</a>
 		{/each}
 	</div>
-	<div class="block title"><b>Leaderboard</b></div>
+	</details>
+	<details open>
+		<summary class="block"><b>Leaderboard</b></summary>
+		<div class="table">
+			<b class="block"></b>
+			<b class="block">Name</b>
+			<b class="block" title="Number of distinct missions solved.">Distinct</b>
+			<b class="block" title="Number of missions solved (including duplicates).">Total</b>
+			<b class="block">Defuser</b>
+			<b class="block">Expert</b>
+			<b class="block">EFM</b>
+			{#each completers as completer}
+				<div class="block">{ranks[completer.name]}</div>
+				<div class="block" class:winner={seasonWinners.includes(completer.name)}>
+					<a href="/user/{properUrlEncode(completer.name)}">{completer.name}</a>
+				</div>
+				<div class="block">{completer.distinct}</div>
+				<div class="block">{completer.defuser + completer.expert + completer.efm}</div>
+				<div class="block">{completer.defuser}</div>
+				<div class="block">{completer.expert}</div>
+				<div class="block">{completer.efm}</div>
+			{/each}
+		</div>
+	</details>
 {/if}
 
-<div class="table">
-	<b class="block"></b>
-	<b class="block">Name</b>
-	<b class="block" title="Number of distinct missions solved.">Distinct</b>
-	<b class="block" title="Number of missions solved (including duplicates).">Total</b>
-	<b class="block">Defuser</b>
-	<b class="block">Expert</b>
-	<b class="block">EFM</b>
-	{#each completers as completer}
-		<div class="block">{ranks[completer.name]}</div>
-		<div class="block" class:winner={seasonWinners.includes(completer.name)}>
-			<a href="/user/{properUrlEncode(completer.name)}">{completer.name}</a>
-		</div>
-		<div class="block">{completer.distinct}</div>
-		<div class="block">{completer.defuser + completer.expert + completer.efm}</div>
-		<div class="block">{completer.defuser}</div>
-		<div class="block">{completer.expert}</div>
-		<div class="block">{completer.efm}</div>
+{#if Object.keys(completions).length > 0}
+	<div class="block title solve-header"><b>Solves</b></div>
+	{#each Object.entries(completions) as [miss, item]}
+		<details>
+			<summary class="block big"><b>{miss}</b> ({item.length})</summary>
+			<div class="solves">
+				{#each item as completion}
+					<CompletionCard {completion} />
+				{/each}
+			</div>
+		</details>
 	{/each}
-</div>
+{:else}
+	<NoContent>No solves yet.</NoContent>
+{/if}
 
 <style>
 	.table {
@@ -108,6 +138,11 @@
 	.title.block {
 		background-color: var(--block-separator);
 		text-align: center;
+	}
+	.title.block.solve-header {
+		margin-top: 10px;
+		font-size: 16pt;
+		background-color: var(--foreground);
 	}
 
 	.table b.block {
@@ -156,5 +191,22 @@
 		color: var(--text-color);
 		top: var(--gap);
 		right: var(--gap);
+	}
+
+	summary.block {
+		cursor: pointer;
+		padding-bottom: var(--gap);
+		margin-bottom: var(--gap);
+		background-color: var(--block-separator);
+		text-align: center;
+	}
+	summary.block.big {
+		font-size: 16pt;
+		text-align: left;
+	}
+	.solves {
+		display: grid;
+		gap: var(--gap);
+		grid-template-columns: 1fr 1fr;
 	}
 </style>
