@@ -25,10 +25,16 @@ export const load: PageServerLoad = async function ({ params }: ServerLoadEvent)
 				select: {
 					mission: {
 						select: {
+							name: true,
 							id: true,
 							variant: true
 						}
 					},
+					notes: true,
+					proofs: true,
+					first: true,
+					old: true,
+					time: true,
 					team: true,
 					solo: true,
 					seasonId: true
@@ -98,7 +104,7 @@ export const load: PageServerLoad = async function ({ params }: ServerLoadEvent)
 
 	let missionList = await client.mission.findMany({
 		where: {
-			// verified: true,
+			verified: true,
 			id: { notIn: seasonResult.excludeList },
 			OR: [
 				{
