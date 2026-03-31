@@ -1,4 +1,5 @@
 import client from '$lib/client';
+import { getCurrentSeason } from '$lib/season';
 import type { PageServerLoad } from '../$types';
 
 export const load: PageServerLoad = async function () {
@@ -13,17 +14,7 @@ export const load: PageServerLoad = async function () {
 		orderBy: { start: 'desc' }
 	});
 
-	const now = new Date();
-	const currentSeason = await client.season.findFirst({
-		where: {
-			start: { lte: now },
-			end: { gte: now }
-		},
-		select: {
-			name: true
-		},
-		orderBy: { start: 'desc' }
-	});
+	const currentSeason = await getCurrentSeason();
 	const currentSeasonName = currentSeason?.name ?? '';
 
 	return {

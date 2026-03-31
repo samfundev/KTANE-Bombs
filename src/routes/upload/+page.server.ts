@@ -1,4 +1,5 @@
 import client from '$lib/client';
+import { getCurrentSeason } from '$lib/season';
 import { onlyUnique, withoutArticle } from '$lib/util';
 import { redirect } from '@sveltejs/kit';
 
@@ -33,17 +34,7 @@ export const load = async function ({ parent }: any) {
 
 	const infoInit: { [name: string]: any } = {};
 
-	const now = new Date();
-	const currentSeason = await client.season.findFirst({
-		where: {
-			start: { lte: now },
-			end: { gte: now }
-		},
-		select: {
-			id: true
-		},
-		orderBy: { start: 'desc' }
-	});
+	const currentSeason = await getCurrentSeason();
 	const currentSeasonId = currentSeason?.id ?? null;
 
 	return {

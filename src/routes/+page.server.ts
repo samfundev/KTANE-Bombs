@@ -1,5 +1,6 @@
 import client from '$lib/client';
 import { getData } from '$lib/repo';
+import { getCurrentSeason } from '$lib/season';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async function () {
@@ -42,20 +43,7 @@ export const load: PageServerLoad = async function () {
 		};
 	}
 
-	const now = new Date();
-	const currentSeason = await client.season.findFirst({
-		where: {
-			start: { lte: now },
-			end: { gte: now }
-		},
-		select: {
-			missionsStart: true,
-			missionsEnd: true,
-			includeList: true,
-			excludeList: true
-		},
-		orderBy: { start: 'desc' }
-	});
+	const currentSeason = await getCurrentSeason();
 	let seasonMissionsResult: {name: string}[] = !currentSeason ? [] : await client.mission.findMany({
 		where: {
 			verified: true,

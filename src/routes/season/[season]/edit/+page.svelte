@@ -8,20 +8,26 @@
 	import type { PageProps } from './$types';
 	import type { SeasonWinners } from './_types';
 
+	type VMission = {
+		id: number;
+		name: string;
+		verified: boolean;
+	};
+
 	let { data }: PageProps = $props();
 
 	let season: SeasonWinners = $state(data.season);
 	let seasonNames: string[] = data.seasonNames;
 	let names: string[] = data.names;
-	let missions: ID<Pick<Mission, 'name'>>[] = data.missions;
-	let defaultMissionList: ID<Pick<Mission, 'name'>>[] = data.missionList.filter(m => m.verified);
-	let fullDefaultMissionList: ID<Pick<Mission, 'name'>>[] = data.missionList;
-	const missionNames = [...missions].sort((a, b) => a.name.localeCompare(b.name));
+	let missions: VMission[] = data.missions;
+	let defaultMissionList: VMission[] = data.missionList.filter(m => m.verified);
+	let fullDefaultMissionList: VMission[] = data.missionList;
+	const missionNames = [...missions].filter(m => m.verified);
 
 	let originalSeason = $state() as Season;
 	let winnerToAdd: string | null = $state(null);
-	let inMissionToAdd: ID<Pick<Mission, 'name'>> | null = $state(null);
-	let exMissionToAdd: ID<Pick<Mission, 'name'>> | null = $state(null);
+	let inMissionToAdd: VMission | null = $state(null);
+	let exMissionToAdd: VMission | null = $state(null);
 	function uniqueSeasonName(value: string) {
 		return value.length < 1
 			? 'Name is required.'
@@ -42,7 +48,7 @@
 	let modified = $derived(JSON.stringify(season) !== JSON.stringify(originalSeason) && !nameInvalid);
 	let includeList: string[] = $state([]);
 	let excludeList: string[] = $state([]);
-	let missionList: ID<Pick<Mission, 'name'>>[] = $state(defaultMissionList);
+	let missionList: VMission[] = $state(defaultMissionList);
 	let winnersList: string[] = $state([]);
 
 	function updateMissionList() {

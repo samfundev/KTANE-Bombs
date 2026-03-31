@@ -5,7 +5,7 @@ import { Permission } from '$lib/types';
 import { fixPools, forbidden, hasPermission } from '$lib/util';
 import type { Mission } from '$lib/generated/prisma/client';
 import { error } from '@sveltejs/kit';
-import { getSeasonWinners } from '$lib/season.js';
+import { getCurrentSeason, getSeasonWinners } from '$lib/season.js';
 
 export const load = async function ({ parent, params }: any) {
 	const { user } = await parent(); //logged-in user
@@ -187,18 +187,8 @@ export const load = async function ({ parent, params }: any) {
 			}
 		}
 	}
-
-	const now = new Date();
-	const currentSeason = await client.season.findFirst({
-		where: {
-			start: { lte: now },
-			end: { gte: now }
-		},
-		select: {
-			name: true
-		},
-		orderBy: { start: 'desc' }
-	});
+	
+	const currentSeason = await getCurrentSeason();
 	const currentSeasonName = currentSeason?.name ?? '';
 
 	return {

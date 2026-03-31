@@ -9,13 +9,13 @@ export async function getSeasonWinners(): Promise<string[]> {
 			end: { lte: now }
 		},
 		select: {
-			winners: true,
+			winners: true
 		},
 		orderBy: {
 			end: 'desc'
 		}
 	});
-	
+
 	return season?.winners ?? [];
 }
 
@@ -27,10 +27,12 @@ export async function getCurrentSeason(): Promise<CurrentSeason | null> {
 			end: { gte: now }
 		},
 		select: {
+			id: true,
 			missionsStart: true,
 			missionsEnd: true,
 			includeList: true,
-			excludeList: true
+			excludeList: true,
+			name: true
 		},
 		orderBy: { start: 'desc' }
 	});
