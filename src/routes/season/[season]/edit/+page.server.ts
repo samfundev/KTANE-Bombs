@@ -51,10 +51,10 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 	const missions = await client.mission.findMany({
 		select: {
 			id: true,
-			name: true
+			name: true,
+			verified: true
 		},
-		where: { verified: true },
-		orderBy: { dateAdded: 'asc' }
+		orderBy: { name: 'asc' }
 	});
 	let missionList = await client.mission.findMany({
 		where: {
@@ -64,14 +64,12 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			}
 		},
 		select: {
-			name: true,
 			id: true,
+			name: true,
 			verified: true
 		},
 		orderBy: { dateAdded: 'asc' }
 	});
-
-	console.log(seasonResult.completions.flatMap(c => c.team));
 
 	return {
 		season: seasonResult,

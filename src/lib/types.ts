@@ -163,4 +163,6 @@ export class Season {
 	excludeList: number[] = [];
 }
 
-export type CurrentSeason = Pick<Season, 'missionsStart' | 'missionsEnd' | 'includeList' | 'excludeList'> | null;
+export type CurrentSeason = ID<
+	Pick<Season, 'name' | 'missionsStart' | 'missionsEnd' | 'includeList' | 'excludeList'>
+> | null;
