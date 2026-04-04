@@ -117553,6 +117553,704 @@
 			"name": "Level 99||BladePL",
 			"action": "create",
 			"timestamp": "2026-03-30T17:11:03.525Z"
+		},
+		{
+			"id": 8976,
+			"userId": "150650873884704769",
+			"model": "Completion",
+			"recordId": "63935",
+			"name": "Centurion||AzaFTW, Termet",
+			"action": "create",
+			"timestamp": "2026-03-30T21:09:19.245Z"
+		},
+		{
+			"id": 8977,
+			"userId": "150650873884704769",
+			"model": "Completion",
+			"recordId": "63936",
+			"name": "Explosives Without Borders||AzaFTW, Faith, denial140",
+			"action": "create",
+			"timestamp": "2026-03-30T22:26:03.977Z"
+		},
+		{
+			"id": 8978,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "63937",
+			"name": "\"New\" Faces||Infusion",
+			"action": "create",
+			"timestamp": "2026-03-31T01:26:45.982Z"
+		},
+		{
+			"id": 8979,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "63938",
+			"name": "Forgot More Stuff?||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-03-31T02:47:43.976Z"
+		},
+		{
+			"id": 8980,
+			"userId": "688220820945895424",
+			"model": "Season",
+			"recordId": "2",
+			"name": "Back to Basics",
+			"action": "create",
+			"timestamp": "2026-03-31T12:48:12.504Z"
+		},
+		{
+			"id": 8981,
+			"userId": "688220820945895424",
+			"model": "Season",
+			"recordId": "2",
+			"name": "Back to Basics",
+			"action": "update",
+			"timestamp": "2026-03-31T12:48:39.079Z",
+			"before": { "includeList": [] },
+			"after": { "includeList": [9338, 9677] }
+		},
+		{
+			"id": 8982,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "63939",
+			"name": "Modder Marathon 8||_Play_",
+			"action": "create",
+			"timestamp": "2026-03-31T16:16:51.530Z"
+		},
+		{
+			"id": 8983,
+			"userId": "650299474824134677",
+			"model": "Completion",
+			"recordId": "63940",
+			"name": "Just Vibin'||roo hatch",
+			"action": "create",
+			"timestamp": "2026-03-31T16:28:49.368Z"
+		},
+		{
+			"id": 8984,
+			"userId": "782603015407403038",
+			"model": "Completion",
+			"recordId": "63941",
+			"name": "ÜberKlax Endurance||Moai",
+			"action": "create",
+			"timestamp": "2026-03-31T20:37:39.477Z"
+		},
+		{
+			"id": 8985,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63908",
+			"name": "CommRUniturion||_Play_",
+			"action": "update",
+			"timestamp": "2026-03-31T20:42:23.979Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 8986,
+			"userId": "587689217937637379",
+			"model": "Completion",
+			"recordId": "63942",
+			"name": "From 1 To 11||LegendWilleh",
+			"action": "create",
+			"timestamp": "2026-03-31T20:46:28.822Z"
+		},
+		{
+			"id": 8987,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63838",
+			"name": "Easy Challenge||AidanTR",
+			"action": "update",
+			"timestamp": "2026-03-31T21:08:52.877Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 8988,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63838",
+			"name": "Easy Challenge||AidanTR",
+			"action": "update",
+			"timestamp": "2026-03-31T21:09:04.132Z",
+			"before": { "seasonId": null },
+			"after": { "seasonId": 1 }
+		},
+		{
+			"id": 8989,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63913",
+			"name": "Easy Challenge||IHateLife, Penne",
+			"action": "update",
+			"timestamp": "2026-03-31T22:07:06.749Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 8990,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63925",
+			"name": "Explosives Without Borders||snfct",
+			"action": "update",
+			"timestamp": "2026-03-31T22:09:49.509Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 8991,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63929",
+			"name": "Almost Too Easy||RufflesTeiv",
+			"action": "update",
+			"timestamp": "2026-03-31T22:12:33.307Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 8992,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63930",
+			"name": "Alphabet Madness||Infusion, IHateLife, Penne",
+			"action": "update",
+			"timestamp": "2026-03-31T22:16:26.671Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 8993,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63935",
+			"name": "Centurion||AzaFTW, Termet",
+			"action": "update",
+			"timestamp": "2026-03-31T22:30:19.712Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 8994,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63936",
+			"name": "Explosives Without Borders||AzaFTW, Faith, denial140",
+			"action": "update",
+			"timestamp": "2026-03-31T22:31:06.740Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 8995,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63939",
+			"name": "Modder Marathon 8||_Play_",
+			"action": "update",
+			"timestamp": "2026-03-31T22:32:17.827Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 8996,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11091",
+			"name": "Event Roulette",
+			"action": "update",
+			"timestamp": "2026-03-31T23:54:32.383Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 8997,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11093",
+			"name": "Interruption",
+			"action": "update",
+			"timestamp": "2026-03-31T23:54:36.370Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 8998,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11095",
+			"name": "A Profile Bomb With 7 Experts",
+			"action": "update",
+			"timestamp": "2026-03-31T23:54:42.560Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 8999,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11096",
+			"name": "Labyrinthe de Maïs",
+			"action": "update",
+			"timestamp": "2026-03-31T23:54:46.512Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9000,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11098",
+			"name": "0 Expert",
+			"action": "update",
+			"timestamp": "2026-03-31T23:54:49.220Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9001,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11101",
+			"name": "Situations When Hunting for that $1 NYC Pizza",
+			"action": "update",
+			"timestamp": "2026-03-31T23:55:05.885Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9002,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11102",
+			"name": "The Elven Chronicles: Clara in Currency Wars and the Dudes of the Alphabet",
+			"action": "update",
+			"timestamp": "2026-03-31T23:55:20.138Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9003,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11103",
+			"name": "Swerve's favorites",
+			"action": "update",
+			"timestamp": "2026-03-31T23:55:21.876Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9004,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11116",
+			"name": "St. Vincent and the Grenadines",
+			"action": "update",
+			"timestamp": "2026-03-31T23:55:29.470Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9005,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11121",
+			"name": "Kole's Top 47",
+			"action": "update",
+			"timestamp": "2026-03-31T23:55:39.201Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9006,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11122",
+			"name": "Insomnia",
+			"action": "update",
+			"timestamp": "2026-03-31T23:55:41.006Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9007,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11123",
+			"name": "AMM's Flashbacks (Nerfed)",
+			"action": "update",
+			"timestamp": "2026-03-31T23:55:42.170Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9008,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11127",
+			"name": "Good Luck, Babe!",
+			"action": "update",
+			"timestamp": "2026-03-31T23:55:46.180Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9009,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11129",
+			"name": "I Don't Know About You",
+			"action": "update",
+			"timestamp": "2026-03-31T23:56:00.359Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9010,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11130",
+			"name": "23 and He",
+			"action": "update",
+			"timestamp": "2026-03-31T23:56:01.964Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9011,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11131",
+			"name": "Some Days are Better Than Others",
+			"action": "update",
+			"timestamp": "2026-03-31T23:56:03.760Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9012,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11132",
+			"name": "Can you match my speed though?",
+			"action": "update",
+			"timestamp": "2026-03-31T23:56:06.390Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9013,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11136",
+			"name": "Jungle Noises",
+			"action": "update",
+			"timestamp": "2026-03-31T23:56:11.165Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9014,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11137",
+			"name": "😭😭😭:sob: im crine😭😭😭\r :sob:",
+			"action": "update",
+			"timestamp": "2026-03-31T23:56:18.758Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9015,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11139",
+			"name": "Mathemadness",
+			"action": "update",
+			"timestamp": "2026-03-31T23:56:26.600Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9016,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11142",
+			"name": "Perfect Punctuation",
+			"action": "update",
+			"timestamp": "2026-03-31T23:56:29.393Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9017,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11143",
+			"name": "Evoluturion",
+			"action": "update",
+			"timestamp": "2026-03-31T23:56:30.861Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9018,
+			"userId": "424696431345926144",
+			"model": "Mission",
+			"recordId": "11144",
+			"name": "Vanilla Variety",
+			"action": "update",
+			"timestamp": "2026-03-31T23:56:32.908Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9019,
+			"userId": "725302560432324637",
+			"model": "Mission",
+			"recordId": "11148",
+			"name": "Almost TWO Easy",
+			"action": "create",
+			"timestamp": "2026-04-01T08:23:47.908Z"
+		},
+		{
+			"id": 9020,
+			"userId": "688220820945895424",
+			"model": "Season",
+			"recordId": "1",
+			"name": "The Beginning",
+			"action": "update",
+			"timestamp": "2026-04-01T09:40:21.784Z",
+			"before": { "winners": [] },
+			"after": { "winners": ["_Play_", "AzaFTW", "BladePL", "denial140", "IHateLife", "Megum", "Penne"] }
+		},
+		{
+			"id": 9021,
+			"userId": "566568608755613731",
+			"model": "Completion",
+			"recordId": "63943",
+			"name": "Nightmare Mode: Savor the Moment||Dani was here, Jawly_Gaming, Penne",
+			"action": "create",
+			"timestamp": "2026-04-01T17:23:37.928Z"
+		},
+		{
+			"id": 9022,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "63944",
+			"name": "Can you match my speed though?||Kugel",
+			"action": "create",
+			"timestamp": "2026-04-01T21:00:49.058Z"
+		},
+		{
+			"id": 9023,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "63945",
+			"name": "Manhattan Project||_Play_",
+			"action": "create",
+			"timestamp": "2026-04-01T23:59:25.639Z"
+		},
+		{
+			"id": 9024,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "63946",
+			"name": "Can you match my speed though?||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-04-02T03:40:59.318Z"
+		},
+		{
+			"id": 9025,
+			"userId": "655508025854918696",
+			"model": "Completion",
+			"recordId": "63947",
+			"name": "Blind Man||DerpyDeef",
+			"action": "create",
+			"timestamp": "2026-04-02T13:56:58.847Z"
+		},
+		{
+			"id": 9026,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11132",
+			"name": "Can you match my speed though?",
+			"action": "update",
+			"timestamp": "2026-04-02T16:08:25.356Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 9027,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63946",
+			"name": "Can you match my speed though?||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-04-02T16:08:26.366Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9028,
+			"userId": "667939964448931842",
+			"model": "Completion",
+			"recordId": "63948",
+			"name": "Vanilla Variety||IHateLife, Jawly_Gaming, Penne",
+			"action": "create",
+			"timestamp": "2026-04-02T17:24:51.257Z"
+		},
+		{
+			"id": 9029,
+			"userId": "717852650057760768",
+			"model": "Completion",
+			"recordId": "63949",
+			"name": "AMM's Flashbacks (Nerfed)||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-04-02T17:56:16.226Z"
+		},
+		{
+			"id": 9030,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11123",
+			"name": "AMM's Flashbacks (Nerfed)",
+			"action": "update",
+			"timestamp": "2026-04-02T18:58:04.404Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 9031,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63949",
+			"name": "AMM's Flashbacks (Nerfed)||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-04-02T18:58:04.413Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9032,
+			"userId": "329366208014974977",
+			"model": "Completion",
+			"recordId": "63950",
+			"name": "Crocell||miki2003pl",
+			"action": "create",
+			"timestamp": "2026-04-02T20:04:09.370Z"
+		},
+		{
+			"id": 9033,
+			"userId": "717852650057760768",
+			"model": "Completion",
+			"recordId": "63951",
+			"name": "Situations When Hunting for that $1 NYC Pizza||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-04-02T20:35:47.147Z"
+		},
+		{
+			"id": 9034,
+			"userId": "324745816260608012",
+			"model": "Completion",
+			"recordId": "63952",
+			"name": "jjjjjjjjjj||Eltrick",
+			"action": "create",
+			"timestamp": "2026-04-02T21:36:41.340Z"
+		},
+		{
+			"id": 9035,
+			"userId": "717852650057760768",
+			"model": "Completion",
+			"recordId": "63953",
+			"name": "A Profile Bomb With 7 Experts||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-04-02T22:01:41.437Z"
+		},
+		{
+			"id": 9036,
+			"userId": "569550498462564354",
+			"model": "Completion",
+			"recordId": "63954",
+			"name": "Insomnia||rand06",
+			"action": "create",
+			"timestamp": "2026-04-02T22:06:07.365Z"
+		},
+		{
+			"id": 9037,
+			"userId": "337934133751840769",
+			"model": "Completion",
+			"recordId": "63955",
+			"name": "Irene||Benjamin",
+			"action": "create",
+			"timestamp": "2026-04-02T22:19:37.288Z"
+		},
+		{
+			"id": 9038,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11101",
+			"name": "Situations When Hunting for that $1 NYC Pizza",
+			"action": "update",
+			"timestamp": "2026-04-03T00:17:33.493Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 9039,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63951",
+			"name": "Situations When Hunting for that $1 NYC Pizza||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-04-03T00:17:33.504Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9040,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11095",
+			"name": "A Profile Bomb With 7 Experts",
+			"action": "update",
+			"timestamp": "2026-04-03T00:17:34.762Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 9041,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63953",
+			"name": "A Profile Bomb With 7 Experts||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-04-03T00:17:34.770Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9042,
+			"userId": "717852650057760768",
+			"model": "Completion",
+			"recordId": "63956",
+			"name": "AMM's Flashbacks||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-04-03T00:27:11.525Z"
+		},
+		{
+			"id": 9043,
+			"userId": "705507300634263653",
+			"model": "Completion",
+			"recordId": "63957",
+			"name": "A Profile Bomb With 7 Experts||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-04-03T01:11:47.545Z"
 		}
 	],
 	"User": [
@@ -118654,7 +119352,7 @@
 			"id": "256088262911721482",
 			"username": "Maldevar",
 			"discordName": "maldevar",
-			"avatar": "34523a139964205ee32444ba5bacbe1c",
+			"avatar": "1704b1ad23b1f203e94c64ebfed5e8fc",
 			"permissions": []
 		},
 		{
@@ -119816,7 +120514,7 @@
 			"id": "485774478282981376",
 			"username": "weird",
 			"discordName": "weird_th",
-			"avatar": "fddbdc4be686e1904118d30ec366cc5e",
+			"avatar": "5aa117b579bbd1f9a10a48aed732cd87",
 			"permissions": []
 		},
 		{
@@ -120297,6 +120995,13 @@
 			"permissions": []
 		},
 		{
+			"id": "655508025854918696",
+			"username": "DerpyDeef",
+			"discordName": "docter_helth",
+			"avatar": "7057549bb4e496244ddca7ae1df9d378",
+			"permissions": []
+		},
+		{
 			"id": "661400019513114626",
 			"username": "gwendolyn",
 			"discordName": "gwendolyn1717",
@@ -120391,7 +121096,7 @@
 			"id": "682468566947332118",
 			"username": "BorisP",
 			"discordName": ".borisp1014",
-			"avatar": "b8694f203e3d40160cf8c20811a30fe6",
+			"avatar": "646aa04cf1bcf20c4fc545f4b944c5fb",
 			"permissions": []
 		},
 		{
@@ -120594,7 +121299,7 @@
 			"id": "725302560432324637",
 			"username": "Cookina",
 			"discordName": "momentcookie",
-			"avatar": "5571ce753d817d7ccca565ed38c277c4",
+			"avatar": "123730b0be24543ff8eeaddafc40fd4a",
 			"permissions": []
 		},
 		{
@@ -120875,7 +121580,7 @@
 			"id": "832703757615497298",
 			"username": "Axodeau",
 			"discordName": "axodeau",
-			"avatar": "74075ad5488cd1c23a6ab767d4ea39da",
+			"avatar": "3e5a118c7812dca026cec46c2f76c58f",
 			"permissions": []
 		},
 		{
@@ -121088,7 +121793,7 @@
 			"id": "996401106819235840",
 			"username": "ghdyo1",
 			"discordName": "ghdyo1",
-			"avatar": "19b7cc4ab5f167723cc41bca3cb75669",
+			"avatar": "9572616688c64d51796c8f707b57d30f",
 			"permissions": []
 		},
 		{
@@ -121107,7 +121812,18 @@
 			"end": "2026-03-31T23:59:00.000Z",
 			"missionsStart": "2025-10-01T00:00:00.000Z",
 			"missionsEnd": "2025-12-31T23:59:00.000Z",
-			"whitelistNames": ["Easy Challenge", "One-Souvenir Army", "Centurion"]
+			"includeNames": ["Easy Challenge", "One-Souvenir Army", "Centurion"],
+			"excludeNames": []
+		},
+		{
+			"id": 2,
+			"name": "Back to Basics",
+			"start": "2026-04-01T00:00:00.000Z",
+			"end": "2026-06-30T23:59:00.000Z",
+			"missionsStart": "2026-01-01T00:00:00.000Z",
+			"missionsEnd": "2026-03-31T23:59:00.000Z",
+			"includeNames": ["Swan Hell", "Easy Bomb"],
+			"excludeNames": []
 		}
 	]
 }

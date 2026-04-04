@@ -40,6 +40,8 @@ export async function POST({ locals, request }: RequestEvent) {
 
 	const equalSolves = mission.completions.filter(
 		c =>
+			c.seasonId == seasonId &&	//works even when seasonId is undefined and c.seasonId is null
+			c.first == completion.first &&
 			c.solo == completion.solo &&
 			JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
 				JSON.stringify(completion.team.slice(0, 1).concat(completion.team.slice(1).sort()))
@@ -56,14 +58,7 @@ export async function POST({ locals, request }: RequestEvent) {
 					id: mission.id
 				}
 			},
-			season:
-				seasonId == undefined
-					? undefined
-					: {
-							connect: {
-								id: seasonId
-							}
-						},
+			season: seasonId == undefined ? undefined : { connect: { id: seasonId } },
 			first: false, // This will be set to the correct value once the completion is verified.
 			verified: false
 		}

@@ -125,7 +125,7 @@ export interface MissionQueueItem {
 export interface CompletionQueueItem {
 	type: 'completion';
 	completion: ID<Completion> & { season: ID<Season> | null };
-	mission: Omit<ID<Mission>, 'completions'> & { completions: ID<Completion>[] };
+	mission: Omit<ID<Mission>, 'completions'> & { completions: ID<Completion & { seasonId: number | null }>[] };
 }
 
 export interface MissionPackQueueItem {
