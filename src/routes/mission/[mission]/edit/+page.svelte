@@ -12,6 +12,7 @@
 		formatTime,
 		getLogfileLinks,
 		hasPermission,
+		missionLogfileLink,
 		parseDate,
 		parseInteger,
 		parseList,
@@ -278,7 +279,7 @@
 		forceValidate
 		bind:value={logfile} />
 	{#if mission.logfile !== null}
-		<a href={mission.logfile}>Logfile</a>
+		<a href={missionLogfileLink(mission, page.url.origin)}>Logfile</a>
 	{/if}
 </div>
 <div class="block">

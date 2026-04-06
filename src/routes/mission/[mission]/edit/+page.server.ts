@@ -2,10 +2,10 @@ import client from '$lib/client';
 import createAuditClient from '$lib/auditlog';
 import { getData, type RepoModule } from '$lib/repo';
 import { type Completion, Permission, type ID } from '$lib/types';
-import { excludeArticleSort, forbidden, hasPermission, properUrlEncode } from '$lib/util';
+import { excludeArticleSort, forbidden, getLogfileLinks, hasPermission, properUrlEncode } from '$lib/util';
 import type { RequestEvent, ServerLoadEvent } from '@sveltejs/kit';
 import type { EditMission } from './_types';
-import { redirect, error } from '@sveltejs/kit';
+import { redirect, error, fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import { sortBombs } from '../../_shared';
 
@@ -286,6 +286,26 @@ export const actions: Actions = {
 			}
 		});
 		if (beforeMission) {
+			// logfile content
+			let logfileContent: string | null | undefined = undefined;
+			if (beforeMission.logfile !== mission.logfile) {
+				if (mission.logfile === null) {
+					logfileContent = null;
+				} else {
+					const [fileUrl] = getLogfileLinks(mission.logfile);
+					if (fileUrl.length > 0) {
+						const res = await fetch(fileUrl);
+						if (res.ok) {
+							logfileContent = await res.text();
+						} else {
+							fail(400, 'Failed to fetch logfile.');
+						}
+					} else {
+						fail(400, 'Invalid logfile URL.');
+					}
+				}
+			}
+
 			//bombs
 			sortBombs(mission, modules);
 			sortBombs(beforeMission, modules);
@@ -339,6 +359,7 @@ export const actions: Actions = {
 					tpSolve: mission.tpSolve,
 					designedForTP: mission.designedForTP,
 					logfile: mission.logfile,
+					logfileContent,
 					dateAdded: mission.dateAdded,
 					notes: mission.notes,
 					inGameId: mission.inGameId,

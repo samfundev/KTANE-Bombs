@@ -42,6 +42,7 @@ model Mission {
   verified       Boolean      @default(true)
   variant        Int?
   logfile        String?
+  logfileContent String?
   dateAdded      DateTime?
   notes          String?
   uploadedBy     String?
