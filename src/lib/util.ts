@@ -480,10 +480,10 @@ export function classifyLink(link: string): string {
 }
 
 export function currSeason(season: Pick<Season, 'name'> | null, currentSeasonName: string): boolean {
-	return season?.name === currentSeasonName;
+	return season?.name === currentSeasonName && currentSeasonName !== '';
 }
 export function pastSeason(season: Pick<Season, 'name'> | null, currentSeasonName: string): boolean {
-	return season != null && season.name !== currentSeasonName;
+	return season != null && season.name !== currentSeasonName && currentSeasonName !== '';
 }
 
 export function missionLogfileLink(mission: Mission, host: string): string {

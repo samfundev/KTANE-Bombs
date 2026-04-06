@@ -2,7 +2,7 @@
 	import Checkbox from '$lib/controls/Checkbox.svelte';
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import Input from '$lib/controls/Input.svelte';
-	import type { Completion } from '$lib/types';
+	import type { SeasonCompletion } from '$lib/types';
 	import { formatTime, getLogfileLinks, parseTime } from '$lib/util';
 	import toast from 'svelte-french-toast';
 	import { TP_TEAM } from '$lib/const';
@@ -18,7 +18,7 @@
 	let missionNames = Object.keys(missionInfo).sort((a, b) => a.localeCompare(b));
 	let missionName: string = $state('');
 
-	let completion: Completion = $state({
+	let completion: SeasonCompletion = $state({
 		proofs: [],
 		time: 0,
 		team: [],
@@ -27,7 +27,8 @@
 		solo: false,
 		notes: null,
 		dateAdded: null,
-		uploadedBy: null
+		uploadedBy: null,
+		season: null
 	});
 	completion.dateAdded = new Date();
 

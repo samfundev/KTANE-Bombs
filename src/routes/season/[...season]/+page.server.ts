@@ -37,7 +37,10 @@ export const load: PageServerLoad = async function ({ params }: ServerLoadEvent)
 					time: true,
 					team: true,
 					solo: true,
-					seasonId: true
+					seasonId: true,
+					season: {
+						select: { name: true }
+					}
 				},
 				where: {
 					verified: true

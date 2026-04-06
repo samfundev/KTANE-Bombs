@@ -1,4 +1,5 @@
 import client from '$lib/client';
+import { getCurrentSeason } from '$lib/season';
 import type { CompletionQueueItem, MissionQueueItem, QueueItem } from '$lib/types';
 import { Permission, type MissionPackQueueItem } from '$lib/types';
 import { dateAddedSort, fixPools, forbidden, hasAnyPermission, hasPermission, onlyUnique } from '$lib/util';
@@ -85,7 +86,15 @@ export const load = async function ({ parent, locals }: any) {
 					include: {
 						bombs: true,
 						completions: {
-							where: { verified: true }
+							where: { verified: true },
+							include: {
+								season: {
+									select: {
+										id: true,
+										name: true
+									}
+								}
+							}
 						}
 					}
 				},
@@ -150,8 +159,12 @@ export const load = async function ({ parent, locals }: any) {
 		);
 	}
 
+	const currentSeason = await getCurrentSeason();
+	const currentSeasonName = currentSeason?.name ?? '';
+
 	return {
 		queue,
+		currentSeasonName,
 		solverNames
 	};
 };

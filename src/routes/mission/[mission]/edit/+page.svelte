@@ -33,6 +33,7 @@
 	let { data }: PageProps = $props();
 
 	let mission: EditMission & { verified: boolean } = $state(data.mission);
+	const currentSeasonName: string = data.currentSeasonName;
 	let missionNames: string[] = data.missionNames;
 	let packs: MissionPackSelection[] = data.packs;
 	let modules: Record<string, RepoModule> | null = data.modules;
@@ -427,7 +428,7 @@
 					{/if}
 				{:else}
 					<div class="relative">
-						<CompletionCard {completion} />
+						<CompletionCard {completion} {currentSeasonName} />
 						{#if hasPermission(page.data.user, Permission.VerifyCompletion)}
 							<button class="actions edit" onclick={() => showComp(completion.id)}>Edit</button>
 						{/if}

@@ -4,10 +4,11 @@ import { getData, type RepoModule } from '$lib/repo';
 import { type Completion, Permission, type ID } from '$lib/types';
 import { excludeArticleSort, forbidden, getLogfileLinks, hasPermission, properUrlEncode } from '$lib/util';
 import type { RequestEvent, ServerLoadEvent } from '@sveltejs/kit';
-import type { EditMission } from './_types';
+import type { EditCompletion, EditMission } from './_types';
 import { redirect, error, fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import { sortBombs } from '../../_shared';
+import { getCurrentSeason } from '$lib/season';
 
 export const load: PageServerLoad = async function ({ params, locals }: ServerLoadEvent) {
 	if (!hasPermission(locals.user, Permission.VerifyMission)) {
@@ -104,6 +105,9 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		},
 		orderBy: { id: 'asc' }
 	});
+	
+	const currentSeason = await getCurrentSeason();
+	const currentSeasonName = currentSeason?.name ?? '';
 
 	return {
 		mission: {
@@ -111,6 +115,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			variantOf: firstVariant?.name ?? '',
 			uploadedBy: null
 		},
+		currentSeasonName,
 		missionNames: missions.map(m => m.name).sort(excludeArticleSort),
 		packs,
 		modules: await getData(),

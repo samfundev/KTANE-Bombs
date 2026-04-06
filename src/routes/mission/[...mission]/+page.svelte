@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Permission, Pool, type Mission, type MissionPack } from '$lib/types';
+	import { Permission, Pool, type Mission, type MissionPack, type SeasonCompletion } from '$lib/types';
 	import {
 		excludeArticleSort,
 		formatTime,
@@ -13,21 +13,32 @@
 	} from '$lib/util';
 	import CompletionList from '$lib/comp/CompletionList.svelte';
 	import type { RepoModule } from '$lib/repo';
-	import { page } from '$app/stores';
 	import { sortBombs } from '../_shared';
 	import ModuleCard from '$lib/cards/ModuleCard.svelte';
 	import Select from '$lib/controls/Select.svelte';
 	import { onMount } from 'svelte';
+	import { page } from '$app/state';
 
-	type Variant = Pick<Mission, 'name' | 'completions' | 'tpSolve'>;
+	type Variant = Pick<Mission, 'name' | 'tpSolve'> & { completions: SeasonCompletion[] };
 	interface Props {
 		data: any;
-		mission?: Mission & { missionPack: MissionPack; verified: boolean };
+		mission?: Omit<Mission, 'completions'> & {
+			missionPack: MissionPack;
+			verified: boolean;
+			completions: SeasonCompletion[];
+		};
+		currentSeasonName: string;
 		variants?: Variant[] | null;
 		modules?: Record<string, RepoModule> | null;
 	}
 
-	let { data, mission = data.mission, variants = data.variants, modules = data.modules }: Props = $props();
+	let {
+		data,
+		mission = data.mission,
+		variants = data.variants,
+		modules = data.modules,
+		currentSeasonName = data.currentSeasonName
+	}: Props = $props();
 
 	const viewOptions = ['Pools', 'Probabilities'];
 	let byPerc = $state('');
@@ -136,8 +147,8 @@
 			<a class="logfile" href={missionLogfileLink(mission, $page.url.origin)}>Logfile</a>
 		{/if}
 	</div>
-	{#if hasPermission($page.data.user, Permission.VerifyMission)}
-		<a href={$page.url.href + '/edit'} class="top-right">Edit</a>
+	{#if hasPermission(page.data.user, Permission.VerifyMission)}
+		<a href={page.url.href + '/edit'} class="top-right">Edit</a>
 	{/if}
 </div>
 {#if !mission.verified}
@@ -231,12 +242,12 @@
 			<span style="background-color: {getPersonColor(1, 0, false, true)}; color:#FFF">TP</span>
 		</div>
 		<div class="block header">Solves</div>
-		<CompletionList {mission} />
+		<CompletionList {mission} {currentSeasonName} />
 		{#each variants ?? [] as variant}
 			<a href="/mission/{properUrlEncode(variant.name)}" class="block header variant">
 				{variant.name}
 			</a>
-			<CompletionList mission={variant} />
+			<CompletionList mission={variant} {currentSeasonName} />
 		{/each}
 	</div>
 </div>
