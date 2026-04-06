@@ -487,5 +487,6 @@ export function pastSeason(season: Pick<Season, 'name'> | null, currentSeasonNam
 }
 
 export function missionLogfileLink(mission: Mission, host: string): string {
-	return `https://ktane.timwi.de/lfa#url=${properUrlEncode(`${host}/mission/${mission.name}/logfile`)}`;
+	return mission.logfile;
+	// return `https://ktane.timwi.de/lfa#url=${properUrlEncode(`${host}/mission/${mission.name}/logfile`)}`;
 }
