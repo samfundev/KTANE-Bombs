@@ -98,7 +98,12 @@ export const load = async function ({ parent, params }: any) {
 					include: {
 						bombs: true,
 						completions: {
-							where: { verified: true }
+							where: { verified: true },
+							include: {
+								season: {
+									select: { name: true }
+								}
+							}
 						}
 					}
 				}

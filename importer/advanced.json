@@ -118251,6 +118251,282 @@
 			"name": "A Profile Bomb With 7 Experts||Twitch Plays",
 			"action": "create",
 			"timestamp": "2026-04-03T01:11:47.545Z"
+		},
+		{
+			"id": 9044,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63958",
+			"name": "Red||BladePL",
+			"action": "create",
+			"timestamp": "2026-04-03T10:19:34.907Z"
+		},
+		{
+			"id": 9045,
+			"userId": "268360185997819904",
+			"model": "Completion",
+			"recordId": "63959",
+			"name": "Easy Bomb||RufflesTeiv",
+			"action": "create",
+			"timestamp": "2026-04-03T23:26:34.321Z"
+		},
+		{
+			"id": 9046,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11085",
+			"name": "AMM's Flashbacks",
+			"action": "update",
+			"timestamp": "2026-04-04T00:29:22.292Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 9047,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63956",
+			"name": "AMM's Flashbacks||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-04-04T00:29:22.314Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9048,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "63957",
+			"name": "A Profile Bomb With 7 Experts||Twitch Plays",
+			"action": "delete",
+			"timestamp": "2026-04-04T00:30:21.749Z",
+			"before": {
+				"id": 63957,
+				"old": false,
+				"solo": false,
+				"team": ["Twitch Plays"],
+				"time": 3356.06,
+				"first": false,
+				"notes": null,
+				"proofs": ["https://ktane.timwi.de/lfa#file=e84e9b2f1c52612137c6c4ddb33dcba38f39d8c0"],
+				"seasonId": null,
+				"verified": false,
+				"dateAdded": "2026-04-03T01:11:33.920Z",
+				"missionId": 11095,
+				"uploadedBy": "705507300634263653"
+			}
+		},
+		{
+			"id": 9049,
+			"userId": "705507300634263653",
+			"model": "Mission",
+			"recordId": "11149",
+			"name": "47 But My Experts Want Me Dead",
+			"action": "create",
+			"timestamp": "2026-04-04T03:26:50.963Z"
+		},
+		{
+			"id": 9050,
+			"userId": "488806494872272898",
+			"model": "Completion",
+			"recordId": "63960",
+			"name": "Easy Bomb||Men in Black, denial140",
+			"action": "create",
+			"timestamp": "2026-04-04T04:05:41.278Z"
+		},
+		{
+			"id": 9051,
+			"userId": "655508025854918696",
+			"model": "Completion",
+			"recordId": "63961",
+			"name": "Easy Challenge||DerpyDeef",
+			"action": "create",
+			"timestamp": "2026-04-04T11:26:35.534Z"
+		},
+		{
+			"id": 9052,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63962",
+			"name": "Boner Power||BladePL",
+			"action": "create",
+			"timestamp": "2026-04-04T13:25:11.420Z"
+		},
+		{
+			"id": 9053,
+			"userId": "769759393888993289",
+			"model": "Completion",
+			"recordId": "63963",
+			"name": "\"New\" Faces||Penne, IHateLife, Infusion",
+			"action": "create",
+			"timestamp": "2026-04-04T16:18:38.364Z"
+		},
+		{
+			"id": 9054,
+			"userId": "229385439767822336",
+			"model": "Completion",
+			"recordId": "63964",
+			"name": "Easy Challenge||PugCuber, e_shy1, nater7697",
+			"action": "create",
+			"timestamp": "2026-04-04T19:34:44.555Z"
+		},
+		{
+			"id": 9055,
+			"userId": "587689217937637379",
+			"model": "Completion",
+			"recordId": "63965",
+			"name": "Puzzlers 101||LegendWilleh",
+			"action": "create",
+			"timestamp": "2026-04-04T22:14:02.924Z"
+		},
+		{
+			"id": 9056,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63966",
+			"name": "Lilynator||Termet",
+			"action": "create",
+			"timestamp": "2026-04-05T00:39:29.968Z"
+		},
+		{
+			"id": 9057,
+			"userId": "998723698452332544",
+			"model": "Completion",
+			"recordId": "63967",
+			"name": "🤔||Infusion, Possessed, ufoencounter14",
+			"action": "create",
+			"timestamp": "2026-04-05T02:08:46.467Z"
+		},
+		{
+			"id": 9058,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63968",
+			"name": "Circles||BladePL",
+			"action": "create",
+			"timestamp": "2026-04-05T12:36:13.801Z"
+		},
+		{
+			"id": 9059,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63969",
+			"name": "The Bomb Blan Made||Termet",
+			"action": "create",
+			"timestamp": "2026-04-05T13:25:54.417Z"
+		},
+		{
+			"id": 9060,
+			"userId": "667939964448931842",
+			"model": "Completion",
+			"recordId": "63970",
+			"name": "Situations When Hunting for that $1 NYC Pizza||IHateLife, Penne, Jafary_human",
+			"action": "create",
+			"timestamp": "2026-04-05T16:35:10.028Z"
+		},
+		{
+			"id": 9061,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63839",
+			"name": "One-Souvenir Army||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2026-04-05T18:54:34.212Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9062,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63842",
+			"name": "Do a Favor||ufoencounter14",
+			"action": "update",
+			"timestamp": "2026-04-05T18:55:58.670Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9063,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63843",
+			"name": "Minitorian||Kugel",
+			"action": "update",
+			"timestamp": "2026-04-05T18:56:09.611Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9064,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63848",
+			"name": "Virus||Termet",
+			"action": "update",
+			"timestamp": "2026-04-05T18:56:23.162Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9065,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63850",
+			"name": "Siamese Twins||Infusion",
+			"action": "update",
+			"timestamp": "2026-04-05T18:58:02.067Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9066,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63851",
+			"name": "Achilles Destiny||Dani was here, Jawly_Gaming, Penne",
+			"action": "update",
+			"timestamp": "2026-04-05T18:58:31.142Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9067,
+			"userId": "424696431345926144",
+			"model": "Completion",
+			"recordId": "63853",
+			"name": "Eudaimonia||BladePL",
+			"action": "update",
+			"timestamp": "2026-04-05T18:58:50.900Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 9068,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "63971",
+			"name": "You Got The Baaaaaad Ending||Infusion",
+			"action": "create",
+			"timestamp": "2026-04-05T21:36:08.179Z"
+		},
+		{
+			"id": 9069,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63972",
+			"name": "Deeper Plunger||Termet",
+			"action": "create",
+			"timestamp": "2026-04-06T00:11:38.055Z"
+		},
+		{
+			"id": 9070,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "63973",
+			"name": "Weird's Bomb of Confusing Explosions||Kugel",
+			"action": "create",
+			"timestamp": "2026-04-06T02:21:10.283Z"
 		}
 	],
 	"User": [
@@ -121678,7 +121954,7 @@
 			"id": "898915665736515644",
 			"username": "Umbra Moruka",
 			"discordName": "umbra_moruka_official",
-			"avatar": "05f4bf05e50e5c755fa51a89b6155345",
+			"avatar": "ff5a3018578340d3ebd4b7dfe73c5952",
 			"permissions": []
 		},
 		{
@@ -121793,7 +122069,7 @@
 			"id": "996401106819235840",
 			"username": "ghdyo1",
 			"discordName": "ghdyo1",
-			"avatar": "9572616688c64d51796c8f707b57d30f",
+			"avatar": "0261a9deb8e5de60f5adb6821fed253b",
 			"permissions": []
 		},
 		{

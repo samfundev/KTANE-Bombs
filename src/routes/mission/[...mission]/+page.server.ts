@@ -6,6 +6,7 @@ import type { ServerLoadEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { MISSION_UPDATE } from '$lib/const';
+import { getCurrentSeason } from '$lib/season';
 
 export const load: PageServerLoad = async function ({ params, locals }: ServerLoadEvent) {
 	const { mission } = params;
@@ -35,7 +36,17 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			bombs: {
 				orderBy: { id: 'asc' }
 			},
-			completions: missionToUpdate === null ? { where: { verified: true } } : false,
+			completions:
+				missionToUpdate === null
+					? {
+							where: { verified: true },
+							include: {
+								season: {
+									select: { name: true }
+								}
+							}
+						}
+					: false,
 			designedForTP: true,
 			tpSolve: true,
 			factory: true,
@@ -84,7 +95,12 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 					select: {
 						name: true,
 						completions: {
-							where: { verified: true }
+							where: { verified: true },
+							include: {
+								season: {
+									select: { name: true }
+								}
+							}
 						},
 						tpSolve: true
 					}
@@ -95,6 +111,9 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		missionResult.dateAdded = missionToUpdate.dateAdded;
 	}
 
+	const currentSeason = await getCurrentSeason();
+	const currentSeasonName = currentSeason?.name ?? '';
+
 	return {
 		mission: {
 			...missionResult,
@@ -102,6 +121,7 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			inGameId: verify ? missionResult.inGameId : null,
 			inGameName: null
 		},
+		currentSeasonName,
 		variants,
 		modules: await getData()
 	};

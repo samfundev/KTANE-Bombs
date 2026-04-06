@@ -2,14 +2,15 @@
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import NoContent from '$lib/comp/NoContent.svelte';
 	import { TP_TEAM } from '$lib/const';
-	import type { Mission } from '$lib/types';
+	import type { Mission, SeasonCompletion } from '$lib/types';
 	import { classifyLink } from '$lib/util';
 
 	interface Props {
-		mission: Pick<Mission, 'completions' | 'tpSolve'>;
+		mission: Pick<Mission, 'tpSolve'> & { completions: SeasonCompletion[] };
+		currentSeasonName?: string;
 	}
 
-	let { mission }: Props = $props();
+	let { mission, currentSeasonName }: Props = $props();
 	let tpSolve = mission.completions.find(c => c.team[0] === TP_TEAM);
 
 	let sortedCompletions = $derived(mission.completions.toSorted((a, b) => b.time - a.time));
@@ -19,7 +20,7 @@
 	{#each sortedCompletions as completion}
 		{#if completion.team[0] !== TP_TEAM}
 			<!-- TP solves excluded from leaderboard by popular request -->
-			<CompletionCard {completion} />
+			<CompletionCard {completion} {currentSeasonName} />
 		{/if}
 	{:else}
 		<NoContent>No solves, <a href="/upload">be the first</a>!</NoContent>

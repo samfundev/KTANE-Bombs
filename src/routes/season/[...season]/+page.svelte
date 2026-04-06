@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type Completer, type Completion, Permission } from '$lib/types';
+	import { type Completer, Mission, Permission, type SeasonCompletion } from '$lib/types';
 	import { properUrlEncode, hasPermission } from '$lib/util.js';
 	import { page } from '$app/state';
 	import type { PageProps } from './$types';
@@ -22,7 +22,7 @@
 		minute: '2-digit'
 	};
 
-	let completions: { [miss: string]: Completion[] } = {};
+	let completions: { [miss: string]: SeasonCompletion[] } = {};
 	season.completions.forEach(comp => {
 		if (!completions[comp.mission.name]) completions[comp.mission.name] = [];
 		completions[comp.mission.name].push(comp);

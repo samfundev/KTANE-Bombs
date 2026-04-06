@@ -2,17 +2,24 @@
 	import Dialog from '$lib/controls/Dialog.svelte';
 	import Input from '$lib/controls/Input.svelte';
 	import Select from '$lib/controls/Select.svelte';
-	import { IndividualCompletion, Mission, MissionCompletion, Permission, type FrontendUser } from '$lib/types';
+	import {
+		IndividualCompletion,
+		Mission,
+		MissionCompletion,
+		Permission,
+		type FrontendUser,
+		type SeasonCompletion
+	} from '$lib/types';
 	import { getPersonColor, hasPermission, pluralize, properUrlEncode, withoutArticle } from '$lib/util';
 	import UserPermissions from '../_UserPermissions.svelte';
-	import { page } from '$app/stores';
 	import MissionCompletionCard from '$lib/cards/MissionCompletionCard.svelte';
 	import { TP_TEAM } from '$lib/const';
-	import type { Completion, MissionPack } from '$lib/generated/prisma/client';
+	import type { MissionPack } from '$lib/generated/prisma/client';
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import SingleCompletionCard from '$lib/cards/SingleCompletionCard.svelte';
 	import { onMount } from 'svelte';
+	import { page } from '$app/state';
 	let { data } = $props();
 
 	type SolveStats = {
@@ -31,7 +38,7 @@
 	let completions: MissionCompletion[] = data.completions;
 	let currentSeasonName: string = data.currentSeasonName;
 	let tpMissions: Mission[] = data.tpMissions;
-	let unverifSolves: (Completion & { mission: Mission })[] | null = data.unverifSolves;
+	let unverifSolves: (SeasonCompletion & { mission: Mission })[] | null = data.unverifSolves;
 	let unverifMissions: Mission[] | null = data.unverifMissions;
 	let unverifPacks: MissionPack[] | null = data.unverifPacks;
 	let bestTimes: MissionCompletion[] = data.bestTimes;
@@ -346,7 +353,7 @@
 		{/each}
 	</div>
 {/if}
-{#if hasPermission($page.data.user, Permission.RenameUser)}
+{#if hasPermission(page.data.user, Permission.RenameUser)}
 	<div class="block flex column content-width">
 		<button onclick={() => dialog.showModal()}>Edit Name</button>
 		<Dialog bind:dialog>
@@ -369,7 +376,7 @@
 		</Dialog>
 	</div>
 {/if}
-{#if shownUser !== null && hasPermission($page.data.user, Permission.ModifyPermissions)}
+{#if shownUser !== null && hasPermission(page.data.user, Permission.ModifyPermissions)}
 	<UserPermissions bind:shownUser />
 {/if}
 

@@ -91,6 +91,8 @@ export class IndividualCompletion {
 	solo = false;
 }
 
+export type SeasonCompletion = Completion & { season: Pick<Season, 'name'> | null };
+
 export enum MustHave {
 	Either = 0,
 	Yes = 1,
@@ -125,7 +127,7 @@ export interface MissionQueueItem {
 export interface CompletionQueueItem {
 	type: 'completion';
 	completion: ID<Completion> & { season: ID<Season> | null };
-	mission: Omit<ID<Mission>, 'completions'> & { completions: ID<Completion & { seasonId: number | null }>[] };
+	mission: Omit<ID<Mission>, 'completions'> & { completions: ID<Completion & { season: ID<Pick<Season, 'name'>> | null }>[] };
 }
 
 export interface MissionPackQueueItem {
