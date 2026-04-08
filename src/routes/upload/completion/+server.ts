@@ -40,7 +40,7 @@ export async function POST({ locals, request }: RequestEvent) {
 
 	const equalSolves = mission.completions.filter(
 		c =>
-			c.seasonId == seasonId &&	//works even when seasonId is undefined and c.seasonId is null
+			(c.seasonId == null) == (seasonId == undefined) && //old solve and uplaoded solve are both season or both non-season solves
 			c.first == completion.first &&
 			c.solo == completion.solo &&
 			JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==

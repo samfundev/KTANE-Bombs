@@ -12,9 +12,19 @@
 	let solverNames: string[] = data.solverNames;
 
 	let dialog: HTMLDialogElement | undefined = $state();
-	type SolveDetails = { title: string; time1: string; time2: string; seas1: string; seas2: string; fir1: boolean; fir2: boolean };
+	type SolveDetails = {
+		title: string;
+		desc: string;
+		time1: string;
+		time2: string;
+		seas1: string;
+		seas2: string;
+		fir1: boolean;
+		fir2: boolean;
+	};
 	let solveDetails: SolveDetails = $state({
 		title: '',
+		desc: '',
 		time1: '',
 		time2: '',
 		seas1: '',
@@ -48,10 +58,11 @@
 		return names.filter(n => !solverNames.some(sn => sn.toLowerCase() === n.toLowerCase()));
 	}
 
+	// Not a special category, definitely need to replace the duplicate solve
 	function matchingSolve(item: CompletionQueueItem) {
 		return item.mission.completions.findIndex(
 			c =>
-				c.season?.id == (item.completion.season?.id ?? null) &&
+				(c.season?.id == null) == (item.completion.season?.id == undefined) && //old solve and uploaded solve are both season or both non-season solves
 				c.first == item.completion.first &&
 				c.solo == item.completion.solo &&
 				JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
@@ -59,15 +70,33 @@
 		);
 	}
 
+	// There are 3 acceptable categories of duplicate solves
+	// Category 1: Duplicate of the first solve
 	function addingToFirstSolve(item: CompletionQueueItem) {
 		return item.mission.completions.findIndex(
 			c =>
+				(c.season?.id == null) == (item.completion.season?.id == undefined) && //old solve and uploaded solve are both season or both non-season solves
 				c.first !== item.completion.first &&
 				c.solo == item.completion.solo &&
 				JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
 					JSON.stringify(item.completion.team.slice(0, 1).concat(item.completion.team.slice(1).sort()))
 		);
 	}
+
+	// Category 2: Non-season solve being added that would be a duplicate of a season solve
+	function addingNonSeasonSolve(item: CompletionQueueItem) {
+		if (item.completion.team[0] == 'Megum') console.log(item.completion);
+		return item.mission.completions.findIndex(
+			c =>
+				c.season?.id != null && //old solve was a season solve
+				(item.completion.season?.id ?? null) == null && //and uploaded solve is a non-season solve
+				c.solo == item.completion.solo &&
+				JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
+					JSON.stringify(item.completion.team.slice(0, 1).concat(item.completion.team.slice(1).sort()))
+		);
+	}
+
+	// Category 3 is a season solve, no modal needed, already marked in the queue
 
 	async function verify(item: QueueItem, accept: boolean) {
 		let equalSolve = -1;
@@ -82,7 +111,8 @@
 			let addingToFirst = addingToFirstSolve(item);
 			if (addingToFirst >= 0) {
 				const confirmed = await showConfirm({
-					title: 'In Addition to First Solve',
+					title: 'Category 1: In Addition to First Solve',
+					desc: 'This solve will be a duplicate of the first solve.\nAccept only if time is better.',
 					time1: formatTime(item.mission.completions[addingToFirst].time),
 					time2: formatTime(item.completion.time),
 					seas1: item.mission.completions[addingToFirst].season?.name ?? NO_SEASON,
@@ -92,10 +122,25 @@
 				});
 				if (!confirmed) return;
 			}
+			let addingToSeasonSolve = addingNonSeasonSolve(item);
 			equalSolve = matchingSolve(item);
+			if (equalSolve < 0 && addingToSeasonSolve >= 0) {
+				const confirmed = await showConfirm({
+					title: 'Category 2: In Addition to Season Solve',
+					desc: 'This non-season solve will be a duplicate of a season solve.\nAccept only if time is better.',
+					time1: formatTime(item.mission.completions[addingToSeasonSolve].time),
+					time2: formatTime(item.completion.time),
+					seas1: item.mission.completions[addingToSeasonSolve].season?.name ?? NO_SEASON,
+					seas2: item.completion.season?.name ?? NO_SEASON,
+					fir1: item.mission.completions[addingToSeasonSolve].first,
+					fir2: item.completion.first
+				});
+				if (!confirmed) return;
+			}
 			if (equalSolve >= 0) {
 				const confirmed = await showConfirm({
 					title: 'Replacement Solve Details',
+					desc: 'This solve will replace an existing solve.\nAccept only if time is better.',
 					time1: formatTime(item.mission.completions[equalSolve].time),
 					time2: formatTime(item.completion.time),
 					seas1: item.mission.completions[equalSolve].season?.name ?? NO_SEASON,
@@ -136,6 +181,7 @@
 <Dialog bind:dialog>
 	<div class="flex column item-details-dialog">
 		<h2>{solveDetails.title}</h2>
+		<p>{solveDetails.desc}</p>
 		<table class="solve-replace">
 			<thead>
 				<tr>
@@ -189,7 +235,10 @@
 						<br /><span class="green">Season</span>
 					{/if}
 					{#if addingToFirstSolve(item) >= 0}
-						<br /><span class="red">Add to First</span>
+						<br /><span class="red">Dup of First</span>
+					{/if}
+					{#if addingNonSeasonSolve(item) >= 0}
+						<br /><span class="red">Dup of Season</span>
 					{/if}
 					{#if matchingSolve(item) >= 0}
 						<br /><span class="red">Resubmission</span>
@@ -263,6 +312,9 @@
 	}
 	.item-details-dialog button {
 		cursor: pointer;
+	}
+	.item-details-dialog > p {
+		white-space: pre;
 	}
 	.cancel-button:hover {
 		background-color: #aaa;
