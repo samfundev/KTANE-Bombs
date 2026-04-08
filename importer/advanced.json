@@ -118527,6 +118527,186 @@
 			"name": "Weird's Bomb of Confusing Explosions||Kugel",
 			"action": "create",
 			"timestamp": "2026-04-06T02:21:10.283Z"
+		},
+		{
+			"id": 9071,
+			"userId": "769759393888993289",
+			"model": "Completion",
+			"recordId": "63974",
+			"name": "Undefined 47||Penne, IHateLife, Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-04-06T07:52:15.613Z"
+		},
+		{
+			"id": 9072,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "63975",
+			"name": "Oompa Loompa Boon Poppycock||Jawly_Gaming, IHateLife, Penne",
+			"action": "create",
+			"timestamp": "2026-04-06T10:08:57.150Z"
+		},
+		{
+			"id": 9073,
+			"userId": "655508025854918696",
+			"model": "Completion",
+			"recordId": "63976",
+			"name": "SoulOrg Endurance||DerpyDeef",
+			"action": "create",
+			"timestamp": "2026-04-06T13:02:56.349Z"
+		},
+		{
+			"id": 9074,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "63977",
+			"name": "Oompa Loompa Boon Poppycock||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-04-06T14:03:04.208Z"
+		},
+		{
+			"id": 9075,
+			"userId": "337934133751840769",
+			"model": "Completion",
+			"recordId": "63978",
+			"name": "Experienced EFM||Benjamin, denial140",
+			"action": "create",
+			"timestamp": "2026-04-06T14:17:51.162Z"
+		},
+		{
+			"id": 9076,
+			"userId": "337934133751840769",
+			"model": "Completion",
+			"recordId": "63979",
+			"name": "Flag Madness||Benjamin, denial140",
+			"action": "create",
+			"timestamp": "2026-04-06T14:18:20.578Z"
+		},
+		{
+			"id": 9077,
+			"userId": "337934133751840769",
+			"model": "Completion",
+			"recordId": "63980",
+			"name": "Olievenhoutbosch||Benjamin",
+			"action": "create",
+			"timestamp": "2026-04-06T19:28:59.262Z"
+		},
+		{
+			"id": 9078,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63981",
+			"name": "Adjacency Matrix||Termet",
+			"action": "create",
+			"timestamp": "2026-04-06T21:20:06.547Z"
+		},
+		{
+			"id": 9079,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "63982",
+			"name": "Can you match my speed though?||Termet",
+			"action": "create",
+			"timestamp": "2026-04-06T21:50:38.755Z"
+		},
+		{
+			"id": 9080,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63983",
+			"name": "Souvenir Psycho 100 II||BladePL",
+			"action": "create",
+			"timestamp": "2026-04-07T13:22:31.897Z"
+		},
+		{
+			"id": 9081,
+			"userId": "782603015407403038",
+			"model": "Completion",
+			"recordId": "63984",
+			"name": "Dove||Moai",
+			"action": "create",
+			"timestamp": "2026-04-07T13:28:46.454Z"
+		},
+		{
+			"id": 9082,
+			"userId": "337934133751840769",
+			"model": "Completion",
+			"recordId": "63985",
+			"name": "Asmir's 47||Benjamin",
+			"action": "create",
+			"timestamp": "2026-04-07T19:52:10.708Z"
+		},
+		{
+			"id": 9083,
+			"userId": "587689217937637379",
+			"model": "Completion",
+			"recordId": "63986",
+			"name": "Puzzle Pandemonium||LegendWilleh",
+			"action": "create",
+			"timestamp": "2026-04-07T20:34:35.281Z"
+		},
+		{
+			"id": 9084,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "63987",
+			"name": "47||Infusion",
+			"action": "create",
+			"timestamp": "2026-04-07T22:38:33.559Z"
+		},
+		{
+			"id": 9085,
+			"userId": "622198629670584330",
+			"model": "Completion",
+			"recordId": "63988",
+			"name": "Can you match my speed though?||EricB",
+			"action": "create",
+			"timestamp": "2026-04-08T02:39:25.907Z"
+		},
+		{
+			"id": 9086,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "63989",
+			"name": "Medium-Popular Demand||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-04-08T04:33:50.941Z"
+		},
+		{
+			"id": 9087,
+			"userId": "485774478282981376",
+			"model": "Completion",
+			"recordId": "63990",
+			"name": "Flag Madness||weird",
+			"action": "create",
+			"timestamp": "2026-04-08T05:20:10.171Z"
+		},
+		{
+			"id": 9088,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "63991",
+			"name": "Crumbled 47||BladePL",
+			"action": "create",
+			"timestamp": "2026-04-08T17:34:48.532Z"
+		},
+		{
+			"id": 9089,
+			"userId": "268422349760495617",
+			"model": "Completion",
+			"recordId": "63992",
+			"name": "Dove||thunder725",
+			"action": "create",
+			"timestamp": "2026-04-08T20:09:55.144Z"
+		},
+		{
+			"id": 9090,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "63993",
+			"name": "Rave||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-04-08T20:47:27.342Z"
 		}
 	],
 	"User": [
