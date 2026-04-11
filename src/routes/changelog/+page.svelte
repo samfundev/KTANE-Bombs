@@ -5,6 +5,24 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>13 April 2026</h3>
+	<ul>
+		<li>Refactor how additional duplicate solves are handled. A team may have some special types of duplicate solves on a mission:
+			<ul>
+				<li>Global first solve of the mission.</li>
+				<li>One solve for every season this mission appears in.</li>
+				<li>That team's best time on the mission (season or not).</li>
+			</ul>
+		</li>
+		<li>Refactor how replacement solves are handled.
+			<ul>
+				<li>Previous solves will be replaced if a new solve is a better time.</li>
+				<li>The global first solve of the mission will not be replaced.</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>31 Mar 2026</h3>
 	<ul>
 		<li><a href="/season/Back%20to%20Basics">Season 2</a> rules uploaded to <a href="/seasoninfo">Season Info</a>.</li>
