@@ -8,6 +8,13 @@ config({ path: findConfig('.env') });
 const adapter = new PrismaPg({
 	connectionString: process.env.DATABASE_URL
 });
-const client = new PrismaClient({ adapter });
+const client = new PrismaClient({
+	adapter,
+	omit: {
+		mission: {
+			logfileContent: true
+		}
+	}
+});
 
 export default client;
