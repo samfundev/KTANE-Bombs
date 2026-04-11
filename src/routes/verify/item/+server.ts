@@ -6,7 +6,7 @@ import { MISSION_UPDATE, TP_TEAM } from '$lib/const';
 import createAuditClient from '$lib/auditlog';
 
 export const POST: RequestHandler = async function ({ locals, request }: RequestEvent) {
-	const { accept, item, replaceId }: { accept: boolean; item: QueueItem; replaceId: number } = await request.json();
+	const { accept, item, replaceIds }: { accept: boolean; item: QueueItem; replaceIds: number[] } = await request.json();
 
 	const client = createAuditClient(locals.user);
 	switch (item.type) {
@@ -107,20 +107,30 @@ export const POST: RequestHandler = async function ({ locals, request }: Request
 						data: { tpSolve: true }
 					});
 
-				if (replaceId >= 0) {
+				if (replaceIds.length > 0) {
+					const oldest = await client.completion.findFirst({
+						where: {
+							id: { in: replaceIds }
+						},
+						orderBy: {
+							dateAdded: 'asc'
+						}
+					});
 					await client.completion.update({
 						where: {
-							id: replaceId
+							id: item.completion.id
 						},
 						data: {
+							dateAdded: oldest?.dateAdded ?? null,
+							verified: true,
 							team: item.completion.team,
 							time: item.completion.time,
 							solo: item.completion.solo,
 							proofs: item.completion.proofs,
-							seasonId: item.completion.season?.id,
+							seasonId: item.completion.season?.id ?? null,
 						}
 					});
-					await client.completion.delete({ where: { id: item.completion.id } });
+					await client.completion.deleteMany({ where: { id: { in: replaceIds } } });
 				} else {
 					await client.completion.update({
 						where: {

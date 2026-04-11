@@ -144,7 +144,7 @@
 			<span class="date">{mission.dateAdded.toLocaleDateString(undefined, dateOptions)}</span>
 		{/if}
 		{#if mission.logfile !== null}
-			<a class="logfile" href={missionLogfileLink(mission, $page.url.origin)}>Logfile</a>
+			<a class="logfile" href={missionLogfileLink(mission, page.url.origin)}>Logfile</a>
 		{/if}
 	</div>
 	{#if hasPermission(page.data.user, Permission.VerifyMission)}

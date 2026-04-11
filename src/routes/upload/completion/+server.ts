@@ -28,7 +28,8 @@ export async function POST({ locals, request }: RequestEvent) {
 				where: {
 					team: {
 						hasSome: completion.team
-					}
+					},
+					first: false
 				}
 			}
 		}
@@ -40,8 +41,11 @@ export async function POST({ locals, request }: RequestEvent) {
 
 	const equalSolves = mission.completions.filter(
 		c =>
-			(c.seasonId == null) == (seasonId == undefined) && //old solve and uplaoded solve are both season or both non-season solves
-			c.first == completion.first &&
+			//new one is season and (old one is not season or is the same season)
+			//or neither new or old one is season
+			((seasonId != undefined && ((c.seasonId == null && c.time < completion.time) || c.seasonId === seasonId)) ||
+				(seasonId == undefined && c.seasonId == null)) &&
+			//same team and type
 			c.solo == completion.solo &&
 			JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
 				JSON.stringify(completion.team.slice(0, 1).concat(completion.team.slice(1).sort()))

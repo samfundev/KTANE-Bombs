@@ -15,22 +15,16 @@
 	type SolveDetails = {
 		title: string;
 		desc: string;
-		time1: string;
-		time2: string;
-		seas1: string;
-		seas2: string;
-		fir1: boolean;
-		fir2: boolean;
+		worseTime: boolean;
+		old: { time: string; fir: boolean; seas: string }[];
+		new: { time: string; fir: boolean; seas: string };
 	};
 	let solveDetails: SolveDetails = $state({
 		title: '',
 		desc: '',
-		time1: '',
-		time2: '',
-		seas1: '',
-		seas2: '',
-		fir1: false,
-		fir2: false
+		worseTime: false,
+		old: [],
+		new: { time: '', fir: false, seas: '' }
 	});
 	let resolveConfirm: ((value: boolean) => void) | null = null;
 
@@ -58,48 +52,49 @@
 		return names.filter(n => !solverNames.some(sn => sn.toLowerCase() === n.toLowerCase()));
 	}
 
-	// Not a special category, definitely need to replace the duplicate solve
-	function matchingSolve(item: CompletionQueueItem) {
-		return item.mission.completions.findIndex(
-			c =>
-				(c.season?.id == null) == (item.completion.season?.id == undefined) && //old solve and uploaded solve are both season or both non-season solves
-				c.first == item.completion.first &&
-				c.solo == item.completion.solo &&
-				JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
-					JSON.stringify(item.completion.team.slice(0, 1).concat(item.completion.team.slice(1).sort()))
+	function teamMatch(item: CompletionQueueItem, c: (typeof item.mission.completions)[0]) {
+		return (
+			c.solo == item.completion.solo &&
+			JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
+				JSON.stringify(item.completion.team.slice(0, 1).concat(item.completion.team.slice(1).sort()))
 		);
 	}
 
-	// There are 3 acceptable categories of duplicate solves
-	// Category 1: Duplicate of the first solve
-	function addingToFirstSolve(item: CompletionQueueItem) {
-		return item.mission.completions.findIndex(
-			c =>
-				(c.season?.id == null) == (item.completion.season?.id == undefined) && //old solve and uploaded solve are both season or both non-season solves
-				c.first !== item.completion.first &&
-				c.solo == item.completion.solo &&
-				JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
-					JSON.stringify(item.completion.team.slice(0, 1).concat(item.completion.team.slice(1).sort()))
-		);
+	// Category 1: Solve being added that would replace at least one solve
+	function solvesToReplace(item: CompletionQueueItem) {
+		let indicies: number[] = [];
+		item.mission.completions.forEach((c, idx) => {
+			if (
+				teamMatch(item, c) &&
+				!c.first &&
+				//new one is season and (old one is not season or is the same season)
+				//or neither new or old one is season
+				((item.completion.season != null &&
+					((c.season == null && c.time < item.completion.time) || c.season?.id === item.completion.season.id)) ||
+					(item.completion.season == null && c.season == null))
+			)
+				indicies.push(idx);
+		});
+		return indicies;
 	}
 
-	// Category 2: Non-season solve being added that would be a duplicate of a season solve
-	function addingNonSeasonSolve(item: CompletionQueueItem) {
-		if (item.completion.team[0] == 'Megum') console.log(item.completion);
-		return item.mission.completions.findIndex(
-			c =>
-				c.season?.id != null && //old solve was a season solve
-				(item.completion.season?.id ?? null) == null && //and uploaded solve is a non-season solve
-				c.solo == item.completion.solo &&
-				JSON.stringify(c.team.slice(0, 1).concat(c.team.slice(1).sort())) ==
-					JSON.stringify(item.completion.team.slice(0, 1).concat(item.completion.team.slice(1).sort()))
-		);
+	// Category 2: Solve being added that would be an additional duplicate solve
+	function duplicateSolves(item: CompletionQueueItem) {
+		let indicies: number[] = [];
+		item.mission.completions.forEach((c, idx) => {
+			if (teamMatch(item, c)) indicies.push(idx);
+			// 	teamMatch(item, c) &&
+			// 	(c.first || //queue items never have first==true
+			// 		// (c.season?.id ?? null) === (item.completion.season?.id ?? null)) || //same season or both non-season solves
+			// 	c.season != null)
+			// )
+			// 	indicies.push(idx);
+		});
+		return indicies;
 	}
-
-	// Category 3 is a season solve, no modal needed, already marked in the queue
 
 	async function verify(item: QueueItem, accept: boolean) {
-		let equalSolve = -1;
+		let replaceIds: number[] = [];
 		if (accept && item.type == 'completion') {
 			if (solverNames?.length > 0) {
 				let uNames = uniqueNames(item.completion.team);
@@ -108,45 +103,44 @@
 					if (!confirm(conf)) return;
 				}
 			}
-			let addingToFirst = addingToFirstSolve(item);
-			if (addingToFirst >= 0) {
-				const confirmed = await showConfirm({
-					title: 'Category 1: In Addition to First Solve',
-					desc: 'This solve will be a duplicate of the first solve.\nAccept only if time is better.',
-					time1: formatTime(item.mission.completions[addingToFirst].time),
-					time2: formatTime(item.completion.time),
-					seas1: item.mission.completions[addingToFirst].season?.name ?? NO_SEASON,
-					seas2: item.completion.season?.name ?? NO_SEASON,
-					fir1: item.mission.completions[addingToFirst].first,
-					fir2: item.completion.first
-				});
-				if (!confirmed) return;
-			}
-			let addingToSeasonSolve = addingNonSeasonSolve(item);
-			equalSolve = matchingSolve(item);
-			if (equalSolve < 0 && addingToSeasonSolve >= 0) {
-				const confirmed = await showConfirm({
-					title: 'Category 2: In Addition to Season Solve',
-					desc: 'This non-season solve will be a duplicate of a season solve.\nAccept only if time is better.',
-					time1: formatTime(item.mission.completions[addingToSeasonSolve].time),
-					time2: formatTime(item.completion.time),
-					seas1: item.mission.completions[addingToSeasonSolve].season?.name ?? NO_SEASON,
-					seas2: item.completion.season?.name ?? NO_SEASON,
-					fir1: item.mission.completions[addingToSeasonSolve].first,
-					fir2: item.completion.first
-				});
-				if (!confirmed) return;
-			}
-			if (equalSolve >= 0) {
+			let replacing = solvesToReplace(item);
+			let equalSolves = duplicateSolves(item);
+
+			if (replacing.length > 0) {
+				replaceIds = replacing.map(idx => item.mission.completions[idx].id);
+				const worseTime = replacing.every(idx => item.completion.time < item.mission.completions[idx].time);
 				const confirmed = await showConfirm({
 					title: 'Replacement Solve Details',
-					desc: 'This solve will replace an existing solve.\nAccept only if time is better.',
-					time1: formatTime(item.mission.completions[equalSolve].time),
-					time2: formatTime(item.completion.time),
-					seas1: item.mission.completions[equalSolve].season?.name ?? NO_SEASON,
-					seas2: item.completion.season?.name ?? NO_SEASON,
-					fir1: item.mission.completions[equalSolve].first,
-					fir2: item.completion.first
+					desc: `This solve will replace the "Old" solve${replacing.length > 1 ? 's' : ''} shown below.`,
+					worseTime,
+					old: replacing.map(idx => ({
+						time: formatTime(item.mission.completions[idx].time),
+						fir: item.mission.completions[idx].first,
+						seas: item.mission.completions[idx].season?.name ?? NO_SEASON
+					})),
+					new: {
+						time: formatTime(item.completion.time),
+						fir: item.completion.first,
+						seas: item.completion.season?.name ?? NO_SEASON
+					}
+				});
+				if (!confirmed) return;
+			} else if (equalSolves.length > 0) {
+				const worseTime = item.completion.season == null && equalSolves.every(idx => item.completion.time < item.mission.completions[idx].time) || equalSolves.some(idx => item.completion.time < item.mission.completions[idx].time);
+				const confirmed = await showConfirm({
+					title: 'Allowed Duplicate Solve Details',
+					desc: 'This will be an additional solve. Duplicates shown below.',
+					worseTime,
+					old: equalSolves.map(idx => ({
+						time: formatTime(item.mission.completions[idx].time),
+						fir: item.mission.completions[idx].first,
+						seas: item.mission.completions[idx].season?.name ?? NO_SEASON
+					})),
+					new: {
+						time: formatTime(item.completion.time),
+						fir: item.completion.first,
+						seas: item.completion.season?.name ?? NO_SEASON
+					}
 				});
 				if (!confirmed) return;
 			}
@@ -157,7 +151,7 @@
 				body: JSON.stringify({
 					item,
 					accept,
-					replaceId: equalSolve >= 0 ? (item as CompletionQueueItem).mission.completions[equalSolve].id : -1
+					replaceIds
 				})
 			});
 		} catch (error) {
@@ -181,35 +175,43 @@
 <Dialog bind:dialog>
 	<div class="flex column item-details-dialog">
 		<h2>{solveDetails.title}</h2>
-		<p>{solveDetails.desc}</p>
+		<p class="sh">
+			{solveDetails.desc}
+			{#if solveDetails.worseTime}
+				<br /><span class="red"><b>WARNING: This is NOT an improved time.</b></span>
+			{:else}
+				<br /><span>This is an improved time.</span>
+			{/if}
+		</p>
 		<table class="solve-replace">
 			<thead>
 				<tr>
-					<th>Property</th>
-					<th>Old</th>
-					<th>New</th>
+					<th></th>
+					<th>Time</th>
+					<th>First*</th>
+					<th>Season</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>Time</td>
-					<td>{solveDetails.time1}</td>
-					<td>{solveDetails.time2}</td>
-				</tr>
-				<tr>
-					<td>First</td>
-					<td>{solveDetails.fir1 ? 'Yes' : 'No'}</td>
-					<td>{solveDetails.fir2 ? 'Yes' : 'No'}</td>
-				</tr>
-				<tr>
-					<td>Season</td>
-					<td>{solveDetails.seas1}</td>
-					<td>{solveDetails.seas2}</td>
+				{#each solveDetails.old as solve}
+					<tr>
+						<td>Old</td>
+						<td>{solve.time}</td>
+						<td>{solve.fir ? 'Yes' : 'No'}</td>
+						<td>{solve.seas}</td>
+					</tr>
+				{/each}
+				<tr class="new">
+					<td>New</td>
+					<td>{solveDetails.new.time}</td>
+					<td>{solveDetails.new.fir ? 'Yes' : 'No'}</td>
+					<td>{solveDetails.new.seas}</td>
 				</tr>
 			</tbody>
 		</table>
+		<span class="small">* Global first solve of the mission</span>
 		<div class="flex right">
-			<button class="cancel-button" onclick={handleConfirmCancel}>Cancel</button>
+			<button class="info-button" onclick={handleConfirmCancel}>Cancel</button>
 			<button class="accept-button" onclick={handleConfirmAccept}>Accept</button>
 		</div>
 	</div>
@@ -227,33 +229,40 @@
 						</div>
 					{/if}
 				</div>
+				<div class="block flex content-width" style="align-items: center;">
+					<button onclick={() => verify(item, true)}>Accept</button>
+					<button onclick={() => verify(item, false)}>Reject</button>
+				</div>
 			{:else if item.type === 'completion'}
+				{@const replacing = solvesToReplace(item)}
+				{@const equalSolves = duplicateSolves(item)}
 				<CompletionCard completion={item.completion} {currentSeasonName} />
 				<div class="block completion-uploaded-by">
 					Uploaded by:<br />{item.completion.uploadedBy}
 					{#if item.completion.season}
 						<br /><span class="green">Season</span>
 					{/if}
-					{#if addingToFirstSolve(item) >= 0}
-						<br /><span class="red">Dup of First</span>
-					{/if}
-					{#if addingNonSeasonSolve(item) >= 0}
-						<br /><span class="red">Dup of Season</span>
-					{/if}
-					{#if matchingSolve(item) >= 0}
+					{#if replacing.length > 0}
 						<br /><span class="red">Resubmission</span>
+					{:else if equalSolves.length > 0}
+						<br /><span class="red">Duplicate</span>
 					{/if}
 				</div>
 				<MissionCard mission={item.mission} />
+				<div class="block flex content-width" style="align-items: center;">
+					<button class:info-button={replacing.length > 0 || equalSolves.length > 0} onclick={() => verify(item, true)}
+						>{replacing.length > 0 || equalSolves.length > 0 ? 'Details' : 'Accept'}</button>
+					<button onclick={() => verify(item, false)}>Reject</button>
+				</div>
 			{:else if item.type === 'missionpack'}
 				<div class="block">
 					<a href="/missionpack/{properUrlEncode(item.pack.name)}">{item.pack.name}</a>
 				</div>
+				<div class="block flex content-width" style="align-items: center;">
+					<button onclick={() => verify(item, true)}>Accept</button>
+					<button onclick={() => verify(item, false)}>Reject</button>
+				</div>
 			{/if}
-			<div class="block flex content-width" style="align-items: center;">
-				<button onclick={() => verify(item, true)}>Accept</button>
-				<button onclick={() => verify(item, false)}>Reject</button>
-			</div>
 		</div>
 	{:else}
 		<NoContent>Nothing to be verified.</NoContent>
@@ -275,6 +284,12 @@
 	}
 	:is(span, .block).green {
 		color: #009c0a;
+	}
+	p.sh {
+		margin-top: 0;
+	}
+	span.small {
+		font-size: 80%;
 	}
 
 	.completion-uploaded-by {
@@ -300,12 +315,12 @@
 	table.solve-replace tbody td {
 		text-align: center;
 	}
-	table.solve-replace tbody td:nth-child(3),
+	table.solve-replace tbody tr.new td,
 	table.solve-replace thead th {
 		font-weight: bold;
 	}
 
-	.cancel-button {
+	.info-button {
 		background-color: #bbb;
 		color: #000;
 		border-color: #000;
@@ -316,7 +331,7 @@
 	.item-details-dialog > p {
 		white-space: pre;
 	}
-	.cancel-button:hover {
+	.info-button:hover {
 		background-color: #aaa;
 	}
 	.flex.right {
