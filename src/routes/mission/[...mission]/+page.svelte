@@ -27,18 +27,11 @@
 			verified: boolean;
 			completions: SeasonCompletion[];
 		};
-		currentSeasonName: string;
 		variants?: Variant[] | null;
 		modules?: Record<string, RepoModule> | null;
 	}
 
-	let {
-		data,
-		mission = data.mission,
-		variants = data.variants,
-		modules = data.modules,
-		currentSeasonName = data.currentSeasonName
-	}: Props = $props();
+	let { data, mission = data.mission, variants = data.variants, modules = data.modules }: Props = $props();
 
 	const viewOptions = ['Pools', 'Probabilities'];
 	let byPerc = $state('');
@@ -242,12 +235,12 @@
 			<span style="background-color: {getPersonColor(1, 0, false, true)}; color:#FFF">TP</span>
 		</div>
 		<div class="block header">Solves</div>
-		<CompletionList {mission} {currentSeasonName} />
+		<CompletionList {mission} />
 		{#each variants ?? [] as variant}
 			<a href="/mission/{properUrlEncode(variant.name)}" class="block header variant">
 				{variant.name}
 			</a>
-			<CompletionList mission={variant} {currentSeasonName} />
+			<CompletionList mission={variant} />
 		{/each}
 	</div>
 </div>

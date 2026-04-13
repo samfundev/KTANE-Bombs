@@ -14,11 +14,7 @@ export const load: PageServerLoad = async function () {
 		orderBy: { start: 'desc' }
 	});
 
-	const currentSeason = await getCurrentSeason();
-	const currentSeasonName = currentSeason?.name ?? '';
-
 	return {
-		seasons,
-		currentSeasonName
+		seasons
 	};
 };

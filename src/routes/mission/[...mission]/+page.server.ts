@@ -111,9 +111,6 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		missionResult.dateAdded = missionToUpdate.dateAdded;
 	}
 
-	const currentSeason = await getCurrentSeason();
-	const currentSeasonName = currentSeason?.name ?? '';
-
 	return {
 		mission: {
 			...missionResult,
@@ -121,7 +118,6 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			inGameId: verify ? missionResult.inGameId : null,
 			inGameName: null
 		},
-		currentSeasonName,
 		variants,
 		modules: await getData()
 	};

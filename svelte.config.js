@@ -8,7 +8,16 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
-		adapter: node()
+		adapter: node(),
+		experimental: {
+			remoteFunctions: true
+		}
+	},
+
+	compilerOptions: {
+		experimental: {
+			async: true
+		}
 	}
 };
 

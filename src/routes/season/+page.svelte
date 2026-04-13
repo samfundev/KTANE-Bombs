@@ -7,7 +7,7 @@
 	import Dialog from '$lib/controls/Dialog.svelte';
 
 	let { data } = $props();
-	let { seasons, currentSeasonName } = data;
+	let { seasons } = $derived(data);
 
 	let dialog: HTMLDialogElement | undefined = $state();
 	let seasonName: string = $state('');
@@ -162,11 +162,7 @@
 					<h3 class="plain">{seasons.length - index}</h3>
 					<h3>{season.name}</h3>
 				</div>
-				<div
-					class="season-legend"
-					class:past={pastSeason(season, currentSeasonName)}
-					class:current={currSeason(season, currentSeasonName)}>
-				</div>
+				<div class="season-legend" class:past={await pastSeason(season)} class:current={await currSeason(season)}></div>
 			</div>
 		</div>
 	</a>

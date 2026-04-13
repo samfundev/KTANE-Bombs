@@ -105,9 +105,6 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 		},
 		orderBy: { id: 'asc' }
 	});
-	
-	const currentSeason = await getCurrentSeason();
-	const currentSeasonName = currentSeason?.name ?? '';
 
 	return {
 		mission: {
@@ -115,7 +112,6 @@ export const load: PageServerLoad = async function ({ params, locals }: ServerLo
 			variantOf: firstVariant?.name ?? '',
 			uploadedBy: null
 		},
-		currentSeasonName,
 		missionNames: missions.map(m => m.name).sort(excludeArticleSort),
 		packs,
 		modules: await getData(),

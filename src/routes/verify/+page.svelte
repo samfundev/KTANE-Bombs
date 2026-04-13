@@ -8,7 +8,6 @@
 	import Dialog from '$lib/controls/Dialog.svelte';
 	let { data } = $props();
 	let queue: QueueItem[] = $state(data.queue);
-	let currentSeasonName: string = data.currentSeasonName;
 	let solverNames: string[] = data.solverNames;
 
 	let dialog: HTMLDialogElement | undefined = $state();
@@ -126,7 +125,10 @@
 				});
 				if (!confirmed) return;
 			} else if (equalSolves.length > 0) {
-				const worseTime = item.completion.season == null && equalSolves.every(idx => item.completion.time < item.mission.completions[idx].time) || equalSolves.some(idx => item.completion.time < item.mission.completions[idx].time);
+				const worseTime =
+					(item.completion.season == null &&
+						equalSolves.every(idx => item.completion.time < item.mission.completions[idx].time)) ||
+					equalSolves.some(idx => item.completion.time < item.mission.completions[idx].time);
 				const confirmed = await showConfirm({
 					title: 'Allowed Duplicate Solve Details',
 					desc: 'This will be an additional solve. Duplicates shown below.',
@@ -236,7 +238,7 @@
 			{:else if item.type === 'completion'}
 				{@const replacing = solvesToReplace(item)}
 				{@const equalSolves = duplicateSolves(item)}
-				<CompletionCard completion={item.completion} {currentSeasonName} />
+				<CompletionCard completion={item.completion} />
 				<div class="block completion-uploaded-by">
 					Uploaded by:<br />{item.completion.uploadedBy}
 					{#if item.completion.season}

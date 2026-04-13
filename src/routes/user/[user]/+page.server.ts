@@ -192,16 +192,12 @@ export const load = async function ({ parent, params }: any) {
 			}
 		}
 	}
-	
-	const currentSeason = await getCurrentSeason();
-	const currentSeasonName = currentSeason?.name ?? '';
 
 	return {
 		username: params.user,
 		seasonWinners: await getSeasonWinners(),
 		shownUser,
 		completions,
-		currentSeasonName,
 		tpMissions,
 		unverifSolves,
 		unverifMissions:
