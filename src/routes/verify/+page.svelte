@@ -15,15 +15,15 @@
 		title: string;
 		desc: string;
 		worseTime: boolean;
-		old: { time: string; fir: boolean; seas: string }[];
-		new: { time: string; fir: boolean; seas: string };
+		old: number[];
+		item: CompletionQueueItem;
 	};
 	let solveDetails: SolveDetails = $state({
 		title: '',
 		desc: '',
 		worseTime: false,
 		old: [],
-		new: { time: '', fir: false, seas: '' }
+		item: {} as CompletionQueueItem
 	});
 	let resolveConfirm: ((value: boolean) => void) | null = null;
 
@@ -31,20 +31,12 @@
 		solveDetails = details;
 		dialog?.showModal();
 		return new Promise(resolve => {
-			resolveConfirm = resolve;
+			resolveConfirm = (value) => {
+				dialog?.close();
+				resolve(value);
+				resolveConfirm = null;
+			};
 		});
-	}
-
-	function handleConfirmAccept() {
-		dialog?.close();
-		resolveConfirm?.(true);
-		resolveConfirm = null;
-	}
-
-	function handleConfirmCancel() {
-		dialog?.close();
-		resolveConfirm?.(false);
-		resolveConfirm = null;
 	}
 
 	function uniqueNames(names: string[]): string[] {
@@ -82,12 +74,6 @@
 		let indicies: number[] = [];
 		item.mission.completions.forEach((c, idx) => {
 			if (teamMatch(item, c)) indicies.push(idx);
-			// 	teamMatch(item, c) &&
-			// 	(c.first || //queue items never have first==true
-			// 		// (c.season?.id ?? null) === (item.completion.season?.id ?? null)) || //same season or both non-season solves
-			// 	c.season != null)
-			// )
-			// 	indicies.push(idx);
 		});
 		return indicies;
 	}
@@ -112,16 +98,8 @@
 					title: 'Replacement Solve Details',
 					desc: `This solve will replace the "Old" solve${replacing.length > 1 ? 's' : ''} shown below.`,
 					worseTime,
-					old: replacing.map(idx => ({
-						time: formatTime(item.mission.completions[idx].time),
-						fir: item.mission.completions[idx].first,
-						seas: item.mission.completions[idx].season?.name ?? NO_SEASON
-					})),
-					new: {
-						time: formatTime(item.completion.time),
-						fir: item.completion.first,
-						seas: item.completion.season?.name ?? NO_SEASON
-					}
+					old: replacing,
+					item: item
 				});
 				if (!confirmed) return;
 			} else if (equalSolves.length > 0) {
@@ -133,16 +111,8 @@
 					title: 'Allowed Duplicate Solve Details',
 					desc: 'This will be an additional solve. Duplicates shown below.',
 					worseTime,
-					old: equalSolves.map(idx => ({
-						time: formatTime(item.mission.completions[idx].time),
-						fir: item.mission.completions[idx].first,
-						seas: item.mission.completions[idx].season?.name ?? NO_SEASON
-					})),
-					new: {
-						time: formatTime(item.completion.time),
-						fir: item.completion.first,
-						seas: item.completion.season?.name ?? NO_SEASON
-					}
+					old: equalSolves,
+					item: item
 				});
 				if (!confirmed) return;
 			}
@@ -195,26 +165,26 @@
 				</tr>
 			</thead>
 			<tbody>
-				{#each solveDetails.old as solve}
+				{#each solveDetails.old as idx}
 					<tr>
 						<td>Old</td>
-						<td>{solve.time}</td>
-						<td>{solve.fir ? 'Yes' : 'No'}</td>
-						<td>{solve.seas}</td>
+						<td>{formatTime(solveDetails.item.mission.completions[idx].time)}</td>
+						<td>{solveDetails.item.mission.completions[idx].first ? 'Yes' : 'No'}</td>
+						<td>{solveDetails.item.mission.completions[idx].season?.name ?? NO_SEASON}</td>
 					</tr>
 				{/each}
 				<tr class="new">
 					<td>New</td>
-					<td>{solveDetails.new.time}</td>
-					<td>{solveDetails.new.fir ? 'Yes' : 'No'}</td>
-					<td>{solveDetails.new.seas}</td>
+					<td>{formatTime(solveDetails.item.completion?.time ?? 0)}</td>
+					<td>{solveDetails.item.completion?.first ? 'Yes' : 'No'}</td>
+					<td>{solveDetails.item.completion?.season?.name ?? NO_SEASON}</td>
 				</tr>
 			</tbody>
 		</table>
 		<span class="small">* Global first solve of the mission</span>
 		<div class="flex right">
-			<button class="info-button" onclick={handleConfirmCancel}>Cancel</button>
-			<button class="accept-button" onclick={handleConfirmAccept}>Accept</button>
+			<button class="info-button" onclick={() => resolveConfirm?.(false)}>Cancel</button>
+			<button class="accept-button" onclick={() => resolveConfirm?.(true)}>Accept</button>
 		</div>
 	</div>
 </Dialog>
