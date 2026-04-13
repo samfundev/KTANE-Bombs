@@ -1,5 +1,5 @@
 import client from '$lib/client';
-import { getCurrentSeason } from '$lib/season';
+import { getCurrentSeason } from '$lib/data.remote';
 import { onlyUnique, withoutArticle } from '$lib/util';
 import { redirect } from '@sveltejs/kit';
 

@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import { getData } from '$lib/repo';
-import { getCurrentSeason } from '$lib/season';
+import { getCurrentSeason } from '$lib/data.remote';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async function () {
@@ -27,7 +27,7 @@ export const load: PageServerLoad = async function () {
 	});
 
 	const modules = (await getData()) ?? {};
-	const simpleModules = {};
+	const simpleModules: { [key: string]: any } = {};
 	for (const [key, module] of Object.entries(modules)) {
 		simpleModules[key] = {
 			ModuleID: module.ModuleID,

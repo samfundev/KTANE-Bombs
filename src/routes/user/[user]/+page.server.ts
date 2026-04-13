@@ -5,7 +5,7 @@ import { Permission } from '$lib/types';
 import { fixPools, forbidden, hasPermission } from '$lib/util';
 import type { Mission } from '$lib/generated/prisma/client';
 import { error } from '@sveltejs/kit';
-import { getCurrentSeason, getSeasonWinners } from '$lib/season.js';
+import { getSeasonWinners } from '$lib/data.remote';
 
 export const load = async function ({ parent, params }: any) {
 	const { user } = await parent(); //logged-in user

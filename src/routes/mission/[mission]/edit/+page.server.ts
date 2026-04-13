@@ -8,7 +8,6 @@ import type { EditCompletion, EditMission } from './_types';
 import { redirect, error, fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 import { sortBombs } from '../../_shared';
-import { getCurrentSeason } from '$lib/season';
 
 export const load: PageServerLoad = async function ({ params, locals }: ServerLoadEvent) {
 	if (!hasPermission(locals.user, Permission.VerifyMission)) {

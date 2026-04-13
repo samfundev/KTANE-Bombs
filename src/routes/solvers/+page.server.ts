@@ -1,6 +1,6 @@
 import client from '$lib/client';
 import { TP_TEAM } from '$lib/const';
-import { getSeasonWinners } from '$lib/season';
+import { getSeasonWinners } from '$lib/data.remote';
 import type { Completer } from '$lib/types';
 import type { PageServerLoad } from './$types';
 

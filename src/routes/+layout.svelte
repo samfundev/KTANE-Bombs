@@ -11,10 +11,11 @@
 	import { onMount } from 'svelte';
 	import HomeInfoMenu from '$lib/home/HomeInfoMenu.svelte';
 	import { navigating } from '$app/state';
+	import { getSeasonWinners } from '$lib/data.remote';
 
 	let { data, children } = $props();
 	const user: FrontendUser | null = data.user;
-	const seasonWinners: string[] = data.seasonWinners;
+	const seasonWinners: string[] = await getSeasonWinners();
 
 	let infoMenu = $state() as HTMLDivElement;
 	let infoTab = $state() as HTMLDivElement;
