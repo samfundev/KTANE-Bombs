@@ -1,5 +1,4 @@
 import client from '$lib/client';
-import { getCurrentSeason } from '$lib/season';
 import type { PageServerLoad } from '../$types';
 
 export const load: PageServerLoad = async function () {

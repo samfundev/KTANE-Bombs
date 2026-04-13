@@ -6,7 +6,6 @@ import type { ServerLoadEvent } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { MISSION_UPDATE } from '$lib/const';
-import { getCurrentSeason } from '$lib/season';
 
 export const load: PageServerLoad = async function ({ params, locals }: ServerLoadEvent) {
 	const { mission } = params;

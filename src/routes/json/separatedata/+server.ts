@@ -35,7 +35,8 @@ export const GET: RequestHandler = async function ({ locals }: RequestEvent) {
 			missionsEnd: true,
 			notes: true,
 			includeList: true,
-			excludeList: true
+			excludeList: true,
+			winners: true
 		}
 	});
 

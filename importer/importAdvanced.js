@@ -82,6 +82,7 @@ import client from '../src/lib/client';
 			missionsStart: season.missionsStart,
 			missionsEnd: season.missionsEnd,
 			notes: season.notes,
+			winners: season.winners,
 			includeList:
 				season.includeNames == undefined
 					? []

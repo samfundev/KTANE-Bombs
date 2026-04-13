@@ -1,5 +1,4 @@
 import client from '$lib/client';
-import { getCurrentSeason } from '$lib/season';
 import type { CompletionQueueItem, MissionQueueItem, QueueItem } from '$lib/types';
 import { Permission, type MissionPackQueueItem } from '$lib/types';
 import { dateAddedSort, fixPools, forbidden, hasAnyPermission, hasPermission, onlyUnique } from '$lib/util';
