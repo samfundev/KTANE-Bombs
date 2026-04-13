@@ -36,7 +36,6 @@
 	const seasonWinners: string[] = data.seasonWinners;
 	let shownUser: FrontendUser | null = $state(data.shownUser);
 	let completions: MissionCompletion[] = data.completions;
-	let currentSeasonName: string = data.currentSeasonName;
 	let tpMissions: Mission[] = data.tpMissions;
 	let unverifSolves: (SeasonCompletion & { mission: Mission })[] | null = data.unverifSolves;
 	let unverifMissions: Mission[] | null = data.unverifMissions;
@@ -286,7 +285,7 @@
 	</button>
 	<div class="solves role flex grow" class:hidden={hideTopTimes}>
 		{#each bestTimes.sort((a, b) => (a.time == undefined || b.time == undefined ? 0 : b.time - a.time)) as comp}
-			<SingleCompletionCard {comp} {username} {currentSeasonName} showTime />
+			<SingleCompletionCard {comp} {username} showTime />
 		{/each}
 	</div>
 {/if}
@@ -298,7 +297,7 @@
 	</button>
 	<div class="solves role flex grow" class:hidden={hideFirstSolves}>
 		{#each firstTimes as comp}
-			<SingleCompletionCard {comp} {username} {currentSeasonName} />
+			<SingleCompletionCard {comp} {username} />
 		{/each}
 	</div>
 {/if}
@@ -308,7 +307,7 @@
 	<div class="block" class:hidden={!displayAll}><h4>All</h4></div>
 	<div class="solves role flex grow">
 		{#each completionByNewest as comp}
-			<SingleCompletionCard {comp} {username} {currentSeasonName} />
+			<SingleCompletionCard {comp} {username} />
 		{/each}
 	</div>
 	<!-- By Role -->

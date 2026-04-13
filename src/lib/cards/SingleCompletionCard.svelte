@@ -7,10 +7,9 @@
 		comp: MissionCompletion;
 		username: string;
 		showTime?: boolean;
-		currentSeasonName: string;
 	}
 
-	let { comp, username, showTime = false, currentSeasonName = '' }: Props = $props();
+	let { comp, username, showTime = false }: Props = $props();
 
 	let tp = username === TP_TEAM;
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -27,13 +26,13 @@
 		<div class="flex name-box">
 			<div
 				class="season-solve"
-				class:current-season-solve={currSeason(comp.season, currentSeasonName)}
-				class:past-season-solve={pastSeason(comp.season, currentSeasonName)}>
+				class:current-season-solve={await currSeason(comp.season)}
+				class:past-season-solve={await pastSeason(comp.season)}>
 			</div>
 			<span
 				class="mission-name"
-				class:current-season-solve={currSeason(comp.season, currentSeasonName)}
-				class:past-season-solve={pastSeason(comp.season, currentSeasonName)}>
+				class:current-season-solve={await currSeason(comp.season)}
+				class:past-season-solve={await pastSeason(comp.season)}>
 				{comp.mission.name}
 			</span>
 		</div>

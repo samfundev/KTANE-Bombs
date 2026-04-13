@@ -159,12 +159,8 @@ export const load = async function ({ parent, locals }: any) {
 		);
 	}
 
-	const currentSeason = await getCurrentSeason();
-	const currentSeasonName = currentSeason?.name ?? '';
-
 	return {
 		queue,
-		currentSeasonName,
 		solverNames
 	};
 };

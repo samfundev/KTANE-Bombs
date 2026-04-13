@@ -3,6 +3,7 @@ import type { Bomb, FrontendUser, ID, Mission, Permission, Pool, Season } from '
 import { redirect, error } from '@sveltejs/kit';
 import type { RepoModule } from './repo';
 import { TP_TEAM } from './const';
+import { getCurrentSeasonName } from './data.remote';
 
 export function formatTime(seconds: number, milliseconds = false): string {
 	let timeParts = [];
@@ -479,10 +480,12 @@ export function classifyLink(link: string): string {
 	return 'Link';
 }
 
-export function currSeason(season: Pick<Season, 'name'> | null, currentSeasonName: string): boolean {
+export async function currSeason(season: Pick<Season, 'name'> | null): Promise<boolean> {
+	const currentSeasonName = await getCurrentSeasonName();
 	return season?.name === currentSeasonName && currentSeasonName !== '';
 }
-export function pastSeason(season: Pick<Season, 'name'> | null, currentSeasonName: string): boolean {
+export async function pastSeason(season: Pick<Season, 'name'> | null): Promise<boolean> {
+	const currentSeasonName = await getCurrentSeasonName();
 	return season != null && season.name !== currentSeasonName && currentSeasonName !== '';
 }
 

@@ -7,10 +7,9 @@
 
 	interface Props {
 		mission: Pick<Mission, 'tpSolve'> & { completions: SeasonCompletion[] };
-		currentSeasonName?: string;
 	}
 
-	let { mission, currentSeasonName }: Props = $props();
+	let { mission }: Props = $props();
 	let tpSolve = mission.completions.find(c => c.team[0] === TP_TEAM);
 
 	let sortedCompletions = $derived(mission.completions.toSorted((a, b) => b.time - a.time));
@@ -20,7 +19,7 @@
 	{#each sortedCompletions as completion}
 		{#if completion.team[0] !== TP_TEAM}
 			<!-- TP solves excluded from leaderboard by popular request -->
-			<CompletionCard {completion} {currentSeasonName} />
+			<CompletionCard {completion} />
 		{/if}
 	{:else}
 		<NoContent>No solves, <a href="/upload">be the first</a>!</NoContent>

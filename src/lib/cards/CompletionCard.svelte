@@ -5,13 +5,9 @@
 
 	interface Props {
 		completion: SeasonCompletion;
-		currentSeasonName?: string;
 	}
 
-	let {
-		completion,
-		currentSeasonName = ''
-	}: Props = $props();
+	let { completion }: Props = $props();
 
 	let tp = $derived(completion.team[0] === TP_TEAM);
 	let note = $state() as HTMLDivElement;
@@ -44,8 +40,8 @@
 		{#if completion.season !== null}
 			<div
 				class="season-legend"
-				class:past={pastSeason(completion.season, currentSeasonName)}
-				class:current={currSeason(completion.season, currentSeasonName)}>
+				class:past={await pastSeason(completion.season)}
+				class:current={await currSeason(completion.season)}>
 			</div>
 		{/if}
 	</div>
