@@ -486,7 +486,7 @@ export async function currSeason(season: Pick<Season, 'name'> | null): Promise<b
 }
 export async function pastSeason(season: Pick<Season, 'name'> | null): Promise<boolean> {
 	const currentSeasonName = await getCurrentSeasonName();
-	return season != null && season.name !== currentSeasonName && currentSeasonName !== '';
+	return season != null && (season.name !== currentSeasonName || currentSeasonName === '');
 }
 
 export function missionLogfileLink(mission: Mission, host: string): string {

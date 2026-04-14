@@ -5,7 +5,7 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
-	<h3>13 April 2026</h3>
+	<h3>14 April 2026</h3>
 	<ul>
 		<li>Refactor how additional duplicate solves are handled. A team may have some special types of duplicate solves on a mission:
 			<ul>
