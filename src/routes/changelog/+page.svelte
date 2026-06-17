@@ -5,16 +5,27 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>17 June 2026</h3>
+	<ul>
+		<li>
+			Added note to <a href="/upload">solve upload page</a> clarifying about the Time Remaining autofill feature.
+		</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>14 April 2026</h3>
 	<ul>
-		<li>Refactor how additional duplicate solves are handled. A team may have some special types of duplicate solves on a mission:
+		<li>
+			Refactor how additional duplicate solves are handled. A team may have some special types of duplicate solves on a
+			mission:
 			<ul>
 				<li>Global first solve of the mission.</li>
 				<li>One solve for every season this mission appears in.</li>
 				<li>That team's best time on the mission (season or not).</li>
 			</ul>
 		</li>
-		<li>Refactor how replacement solves are handled.
+		<li>
+			Refactor how replacement solves are handled.
 			<ul>
 				<li>Previous solves will be replaced if a new solve is a better time.</li>
 				<li>The global first solve of the mission will not be replaced.</li>

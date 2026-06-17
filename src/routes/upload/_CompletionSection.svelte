@@ -49,6 +49,7 @@
 	let seasonSolve = $state(false);
 	const MIN_TIME = 0.01;
 	let parsedTimes: number[] = $state([MIN_TIME]);
+	let timeParsed = $state(false);
 	let parsedLogfiles: string[] = [];
 	let timeInput = $state() as Input;
 
@@ -133,6 +134,7 @@
 						else time = n;
 						parsedTimes.push(n);
 						timeInput.setValue(time);
+						timeParsed = true;
 					}
 				}
 			}
@@ -239,6 +241,14 @@
 	}
 </script>
 
+{#if timeParsed}
+	<div class="block">
+		<p class="time-warning">
+			A time was extracted from the last mission found in the logfile.
+			<b>It is your responsibility to confirm the time is correct before you click Upload.</b>
+		</p>
+	</div>
+{/if}
 <form class="block flex">
 	<div class="wideBox">
 		{#each proofs as proof, i}
@@ -334,5 +344,8 @@
 	}
 	.wideBox {
 		width: 25%;
+	}
+	.time-warning {
+		font-size: 13pt;
 	}
 </style>
