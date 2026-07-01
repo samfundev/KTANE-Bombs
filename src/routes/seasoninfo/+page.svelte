@@ -67,21 +67,15 @@
 </div>
 
 <div class="block">
-	<h2><a href="/season/Back%20to%20Basics">Season 2</a> Rules</h2>
+	<h2><a href="/season/Taking%20It%20Easy">Season 3</a> Rules</h2>
 
-	<p>These rules need to be followed for season 2 solves</p>
+	<p>These rules need to be followed for season 3 solves</p>
 	<ul>
 		<li>
 			Experts and EFM can only use notepads with the same functionalities as those enabled by default in Notepad++
 			without accessing menus or keybinds (with the exception of dark mode, find, copy, and paste), manuals and
-			calculators with the same functionalities as the
-			<a href="https://samfundev.github.io/TextFieldCalculator/Calculator-v2.html?locked">
-				<b>Restricted</b> Text Field Calculator
-			</a>. Any other tool is not allowed.
-		</li>
-		<li>
-			The only manuals allowed to be used are the <b>default manuals</b> of each module on the mission being played, and those
-			that they directly link to.
+			calculators without functionalities beyond the default Windows calculator in Scientific mode. Any other tool is
+			not allowed.
 		</li>
 		<li>Modded widgets are not allowed.</li>
 		<li>
@@ -90,10 +84,11 @@
 		</li>
 		<li>Each team solve needs to have a maximum of 1 defuser and 2 experts.</li>
 		<li>
-			The following bombs are also allowed for season 2 solves:
+			The following bombs are also allowed for season 3 solves:
 			<ul>
-				<li><a href="/mission/Easy%20Bomb">Easy Bomb</a></li>
-				<li><a href="/mission/Swan%20Hell">Swan Hell</a></li>
+				<li><a href="/mission/Simplifier">Simplifier</a></li>
+				<li><a href="/mission/Fnuuy">Fnuuy</a></li>
+				<li><a href="/mission/One%20for%20the%20Road">One for the Road</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -141,6 +136,39 @@
 					Yes, as long as these items are created during the bomb, starting from the allowed objects (default manuals
 					and empty notepads).
 				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="block old">
+	<h2><a href="/season/Back%20to%20Basics">Season 2</a> Rules</h2>
+
+	<p>These rules need to be followed for season 2 solves</p>
+	<ul>
+		<li>
+			Experts and EFM can only use notepads with the same functionalities as those enabled by default in Notepad++
+			without accessing menus or keybinds (with the exception of dark mode, find, copy, and paste), manuals and
+			calculators with the same functionalities as the
+			<a href="https://samfundev.github.io/TextFieldCalculator/Calculator-v2.html?locked">
+				<b>Restricted</b> Text Field Calculator
+			</a>. Any other tool is not allowed.
+		</li>
+		<li>
+			The only manuals allowed to be used are the <b>default manuals</b> of each module on the mission being played, and those
+			that they directly link to.
+		</li>
+		<li>Modded widgets are not allowed.</li>
+		<li>
+			Note taking systems and the clipboard need to start empty. Manuals need to start in their default state. This
+			applies at the beginning of each bomb, including sequence bombs.
+		</li>
+		<li>Each team solve needs to have a maximum of 1 defuser and 2 experts.</li>
+		<li>
+			The following bombs are also allowed for season 2 solves:
+			<ul>
+				<li><a href="/mission/Easy%20Bomb">Easy Bomb</a></li>
+				<li><a href="/mission/Swan%20Hell">Swan Hell</a></li>
 			</ul>
 		</li>
 	</ul>

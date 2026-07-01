@@ -5,6 +5,14 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>1 July 2026</h3>
+	<ul>
+		<li>
+			Added <a href="/season/Taking%20It%20Easy">Season 3</a> info to <a href="/seasoninfo">Season Info</a> page.
+		</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>17 June 2026</h3>
 	<ul>
 		<li>
