@@ -480,6 +480,42 @@ export function classifyLink(link: string): string {
 	return 'Link';
 }
 
+export function getNextQuarterRange(fromDate: Date = new Date()): [Date, Date, Date, Date] {
+	let from = new Date(fromDate);
+	from.setUTCDate(from.getUTCDate() - 1);
+	const year = from.getUTCFullYear();
+
+	const quarterStarts = [
+		new Date(Date.UTC(year, 0, 1, 0, 0, 0, 0)), // Jan 1
+		new Date(Date.UTC(year, 3, 1, 0, 0, 0, 0)), // Apr 1
+		new Date(Date.UTC(year, 6, 1, 0, 0, 0, 0)), // Jul 1
+		new Date(Date.UTC(year, 9, 1, 0, 0, 0, 0)) // Oct 1
+	];
+
+	let start: Date | undefined;
+
+	for (const candidate of quarterStarts) {
+		if (candidate.getTime() > from.getTime()) {
+			start = candidate;
+			break;
+		}
+	}
+
+	// If none remain this year, use Jan 1 of next year
+	if (!start) {
+		start = new Date(Date.UTC(year + 1, 0, 1, 0, 0, 0, 0));
+	}
+
+	// End = start + 3 months, minus 1 minute
+	const end = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth() + 3, 1, 0, 0, 0, 0));
+	end.setUTCMinutes(end.getUTCMinutes() - 1);
+	const missionsStart = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth() - 3, 1, 0, 0, 0, 0));
+	const missionsEnd = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), 1, 0, 0, 0, 0));
+	missionsEnd.setUTCMinutes(missionsEnd.getUTCMinutes() - 1);
+
+	return [start, end, missionsStart, missionsEnd];
+}
+
 export async function currSeason(season: Pick<Season, 'name'> | null): Promise<boolean> {
 	const currentSeasonName = await getCurrentSeasonName();
 	return season?.name === currentSeasonName && currentSeasonName !== '';

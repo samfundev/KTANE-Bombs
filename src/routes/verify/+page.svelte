@@ -3,12 +3,17 @@
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import NoContent from '$lib/comp/NoContent.svelte';
-	import { formatTime, properUrlEncode } from '$lib/util';
+	import { formatTime, getNextQuarterRange, properUrlEncode } from '$lib/util';
 	import { MISSION_UPDATE, NO_SEASON } from '$lib/const.js';
 	import Dialog from '$lib/controls/Dialog.svelte';
 	let { data } = $props();
 	let queue: QueueItem[] = $state(data.queue);
 	let solverNames: string[] = data.solverNames;
+
+	let now = new Date();
+	now.setUTCMonth(now.getUTCMonth() - 3);
+	if (now.getUTCDate() == 1) now.setUTCDate(now.getUTCDate() + 1);
+	let [nextSeasonS, nextSeasonE, currSeasonS, currSeasonE] = getNextQuarterRange(now);
 
 	let dialog: HTMLDialogElement | undefined = $state();
 	type SolveDetails = {
@@ -31,7 +36,7 @@
 		solveDetails = details;
 		dialog?.showModal();
 		return new Promise(resolve => {
-			resolveConfirm = (value) => {
+			resolveConfirm = value => {
 				dialog?.close();
 				resolve(value);
 				resolveConfirm = null;
@@ -193,13 +198,21 @@
 	{#each queue as item (item)}
 		<div class="item {item.type}">
 			{#if item.type === 'mission'}
-				<div>
-					<MissionCard mission={item.mission} />
-					{#if item.mission.name.startsWith(MISSION_UPDATE)}
-						<div class="block red">
-							This would update the parameters of the mission: {item.mission.name.substring(11)}
-						</div>
-					{/if}
+				{@const mDate = item.mission.dateAdded ?? new Date()}
+				<div class="mission-box">
+					<div
+						class="season-legend"
+						class:current={!item.mission.name.startsWith(MISSION_UPDATE) && mDate > currSeasonS && mDate < currSeasonE}
+						class:next={!item.mission.name.startsWith(MISSION_UPDATE) && mDate > nextSeasonS && mDate < nextSeasonE}>
+					</div>
+					<div>
+						<MissionCard mission={item.mission} />
+						{#if item.mission.name.startsWith(MISSION_UPDATE)}
+							<div class="block red">
+								This would update the parameters of the mission: {item.mission.name.substring(11)}
+							</div>
+						{/if}
+					</div>
 				</div>
 				<div class="block flex content-width" style="align-items: center;">
 					<button onclick={() => verify(item, true)}>Accept</button>
@@ -308,5 +321,33 @@
 	}
 	.flex.right {
 		justify-content: flex-end;
+	}
+
+	.mission-box {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: var(--gap);
+		padding-left: var(--gap);
+		background: var(--foreground);
+	}
+
+	.season-legend {
+		display: inline-block;
+		height: 20px;
+		width: 20px;
+	}
+	@media (prefers-color-scheme: dark) {
+		.season-legend {
+			filter: invert(1);
+		}
+	}
+	.season-legend.next {
+		background: url('$lib/img/S-fancy.svg');
+		background-repeat: no-repeat;
+	}
+	.season-legend.current {
+		background: url('$lib/img/S-angular.svg');
+		background-repeat: no-repeat;
 	}
 </style>
