@@ -2,7 +2,7 @@ import client from '$lib/client';
 import createAuditClient from '$lib/auditlog';
 import { error, type RequestEvent } from '@sveltejs/kit';
 import type { ReplaceableMission } from '../_types';
-import { forbidden } from '$lib/util';
+import { forbidden, getLogfileLinks } from '$lib/util';
 import { MISSION_UPDATE } from '$lib/const';
 
 export async function POST({ locals, request }: RequestEvent) {
@@ -38,6 +38,17 @@ export async function POST({ locals, request }: RequestEvent) {
 			if (!context.includes('R')) context += 'R';
 		} else if (!context.includes('N')) context += 'N';
 
+		// Fetch the logfile content to store in the database
+		if (mission.logfile === null) error(400, 'Logfile is required.');
+
+		const [fileUrl] = getLogfileLinks(mission.logfile);
+		if (fileUrl.length === 0) error(400, 'Invalid logfile URL.');
+
+		const res = await fetch(fileUrl);
+		if (!res.ok) error(400, 'Failed to fetch logfile.');
+
+		const logfileContent: string = await res.text();
+
 		await auditClient.mission.create({
 			data: {
 				name: missionName,
@@ -59,7 +70,8 @@ export async function POST({ locals, request }: RequestEvent) {
 				dateAdded: mission.dateAdded,
 				uploadedBy: locals.user.id,
 				inGameId: mission.inGameId,
-				verified: false
+				verified: false,
+				logfileContent
 			}
 		});
 	}
