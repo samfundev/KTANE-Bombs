@@ -1,25 +1,25 @@
-<script lang="ts">
+<script lang="ts" generics="V">
 	import { onMount } from 'svelte';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 
 	type Props = {
-		value: any;
+		value: V | null;
 		label?: string;
 		class?: string;
 		labelClass?: string;
 		title?: string;
 		sideLabel?: boolean;
 		instantFormat?: boolean;
-		options?: any[] | null;
+		options?: V[] | null;
 		optionalOptions?: boolean;
-		display?: any;
-		parse?: any;
-		validate?: any;
+		display?: (value: V) => string;
+		parse?: (value: string) => V | null;
+		validate?: (value: V) => boolean | string;
 		invalid?: boolean;
 		forceValidate?: boolean;
 		children?: import('svelte').Snippet;
 		oninput?: () => void;
-	} & HTMLInputAttributes;
+	} & Omit<HTMLInputAttributes, 'value'>;
 
 	let {
 		value = $bindable(),
@@ -31,9 +31,9 @@
 		instantFormat = true,
 		options = $bindable(null),
 		optionalOptions = false,
-		display = (value: any) => value.toString(),
-		parse = (value: string): any => value,
-		validate = (_value: any): boolean | string => true,
+		display = value => String(value),
+		parse = (value): V | null => value as V | null,
+		validate = (): boolean | string => true,
 		invalid = $bindable(false),
 		forceValidate = false,
 		children,
@@ -43,16 +43,16 @@
 
 	let input = $state() as HTMLInputElement;
 	let last;
-	let displayValue = $derived(instantFormat ? (last = display(value)) : last);
+	let displayValue = $derived(instantFormat ? (last = wrappedDisplay(value)) : last);
 
 	let error = $state('');
-	export const setValue = (val: any) => {
+	export const setValue = (val: V) => {
 		value = val;
-		displayValue = display(value);
+		displayValue = wrappedDisplay(value);
 		doHandleInput(displayValue);
 	};
 
-	function doHandleInput(val: any) {
+	function doHandleInput(val: string) {
 		let newValue = parse(val);
 		if (options !== null && !optionalOptions) {
 			let match = false;
@@ -75,8 +75,8 @@
 		doHandleInput(displayValue);
 	};
 
-	function handleValidity(value: any, showErrors: boolean = true): boolean {
-		const validity = validate(value);
+	function handleValidity(value: V | null, showErrors: boolean = true): boolean {
+		const validity = value !== null ? validate(value) : false;
 		if (props.required || forceValidate) {
 			input.setCustomValidity(typeof validity === 'string' ? validity : validity ? '' : 'Invalid value');
 		}
@@ -85,6 +85,10 @@
 
 		invalid = !(validity === true || validity === '');
 		return !invalid;
+	}
+
+	function wrappedDisplay(value: V | null) {
+		return value !== null ? display(value) : '';
 	}
 
 	onMount(() => handleValidity(value, false));
@@ -104,7 +108,7 @@
 		oninput={handleInput}
 		onchange={e => {
 			if (error === '') {
-				displayValue = display(value);
+				displayValue = wrappedDisplay(value);
 			}
 			props.onchange?.(e);
 		}} />

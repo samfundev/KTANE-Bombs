@@ -1,16 +1,16 @@
-<script lang="ts">
+<script lang="ts" generics="V">
 	import type { HTMLSelectAttributes } from 'svelte/elements';
 
 	type Props = {
-		value: any;
+		value: V;
 		label: string;
-		options: any[];
+		options: V[];
 		title?: string;
 		labelClass?: string;
-		display?: any;
+		display?: (value: V) => string;
 		sideLabel?: boolean;
 		children?: import('svelte').Snippet;
-	} & HTMLSelectAttributes;
+	} & Omit<HTMLSelectAttributes, 'value'>;
 
 	let {
 		value = $bindable(),
@@ -18,7 +18,7 @@
 		options,
 		title = '',
 		labelClass = '',
-		display = (obj: any) => obj.toString(),
+		display = obj => String(obj),
 		sideLabel = false,
 		children,
 		...props

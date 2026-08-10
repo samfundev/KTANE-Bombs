@@ -1,20 +1,20 @@
-<script lang="ts">
+<script lang="ts" generics="V">
 	import { onMount } from 'svelte';
 	import type { HTMLTextareaAttributes } from 'svelte/elements';
 
 	type Props = {
-		value: any;
+		value: V | null;
 		label?: string;
 		labelClass?: string;
 		sideLabel?: boolean;
 		autoExpand?: boolean;
 		instantFormat?: boolean;
-		options?: any[] | null;
-		display?: any;
-		parse?: any;
-		validate?: any;
+		options?: V[] | null;
+		display?: (value: V | null) => string;
+		parse?: (value: string) => V | null;
+		validate?: (value: V | null) => boolean | string;
 		children?: import('svelte').Snippet;
-	} & HTMLTextareaAttributes;
+	} & Omit<HTMLTextareaAttributes, 'value'>;
 
 	let {
 		value = $bindable(),
@@ -25,9 +25,9 @@
 		autoExpand = false,
 		instantFormat = true,
 		options = null,
-		display = (value: any) => value.toString(),
-		parse = (value: string): any => value,
-		validate = (_value: any): boolean | string => true,
+		display = value => String(value),
+		parse = (value: string) => value as V,
+		validate = (): boolean | string => true,
 		children,
 		...props
 	}: Props = $props();
@@ -65,7 +65,7 @@
 		text_area.style.height = text_area.scrollHeight + 3 + 'px';
 	}
 
-	function handleValidity(value: any) {
+	function handleValidity(value: V | null) {
 		const validity = validate(value);
 		if (props.required) {
 			text_area.setCustomValidity(typeof validity === 'string' ? validity : validity ? '' : 'Invalid value.');
