@@ -10,7 +10,7 @@
 		selected?: boolean;
 		id?: string;
 		cardID?: string;
-		card?: any;
+		card?: HTMLElement;
 		nolink?: boolean;
 	}
 
@@ -24,16 +24,19 @@
 		nolink = false
 	}: Props = $props();
 
-	const solveTypes = getSolveTypes(mission);
+	const solveTypes = $derived(getSolveTypes(mission));
 
-	const solvers = [
-		solveTypes.normalSolve ? 'by a team' : null,
-		solveTypes.efmSolve ? 'via EFM' : null,
-		mission.tpSolve ? `on ${TP_TEAM}` : null,
-		solveTypes.soloSolve ? 'solo' : null
-	].flatMap(solver => solver ?? []);
-	const title =
-		solvers.length === 0 ? "This mission hasn't been solved." : `This mission has been solved ${listify(solvers)}.`;
+	const solvers = $derived(
+		[
+			solveTypes.normalSolve ? 'by a team' : null,
+			solveTypes.efmSolve ? 'via EFM' : null,
+			mission.tpSolve ? `on ${TP_TEAM}` : null,
+			solveTypes.soloSolve ? 'solo' : null
+		].flatMap(solver => solver ?? [])
+	);
+	const title = $derived(
+		solvers.length === 0 ? "This mission hasn't been solved." : `This mission has been solved ${listify(solvers)}.`
+	);
 </script>
 
 {#if selectable}

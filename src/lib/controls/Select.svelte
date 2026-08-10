@@ -42,7 +42,7 @@
 		{@render children?.()}
 	</label>
 	<select {...props} oninput={handleInput}>
-		{#each options as option}
+		{#each options as option (option)}
 			<option selected={option === value}>{display(option)}</option>
 		{/each}
 	</select>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Permission, Pool, type Mission, type MissionPack, type SeasonCompletion } from '$lib/types';
+	import { Permission, Pool } from '$lib/types';
 	import {
 		excludeArticleSort,
 		formatTime,
@@ -18,20 +18,10 @@
 	import Select from '$lib/controls/Select.svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
+	import type { PageProps } from './$types';
 
-	type Variant = Pick<Mission, 'name' | 'tpSolve'> & { completions: SeasonCompletion[] };
-	interface Props {
-		data: any;
-		mission?: Omit<Mission, 'completions'> & {
-			missionPack: MissionPack;
-			verified: boolean;
-			completions: SeasonCompletion[];
-		};
-		variants?: Variant[] | null;
-		modules?: Record<string, RepoModule> | null;
-	}
-
-	let { data, mission = data.mission, variants = data.variants, modules = data.modules }: Props = $props();
+	let { data }: PageProps = $props();
+	const { mission, variants, modules } = $derived(data);
 
 	const viewOptions = ['Pools', 'Probabilities'];
 	let byPerc = $state('');
@@ -80,30 +70,32 @@
 		};
 	}
 
-	sortBombs(mission, modules);
-
 	type BombFrac = {
 		mods: { mod: string; frac: number }[];
 		pools: { uniform: boolean; count: number; mods: { mod: string; frac: number }[] }[];
 	};
 
-	let bombFrac: BombFrac[] = [];
-	mission.bombs.forEach(b => {
-		let fPools = b.pools.map(p => condensedPool(p));
-		let modNames = b.pools
-			.flatMap(p => p.modules)
-			.filter(onlyUnique)
-			.sort(excludeArticleSort);
-		let mods: { mod: string; frac: number }[] = [];
-		modNames.forEach(m => {
-			let prob = 1;
-			fPools.forEach(p => {
-				let modF = p.mods.find(mod => mod.mod == m);
-				if (modF) prob *= Math.pow(1 - modF.frac, p.count);
+	let bombFrac = $derived.by(() => {
+		sortBombs(mission, modules);
+		let bombFrac: BombFrac[] = [];
+		mission.bombs.forEach(b => {
+			let fPools = b.pools.map(p => condensedPool(p));
+			let modNames = b.pools
+				.flatMap(p => p.modules)
+				.filter(onlyUnique)
+				.sort(excludeArticleSort);
+			let mods: { mod: string; frac: number }[] = [];
+			modNames.forEach(m => {
+				let prob = 1;
+				fPools.forEach(p => {
+					let modF = p.mods.find(mod => mod.mod == m);
+					if (modF) prob *= Math.pow(1 - modF.frac, p.count);
+				});
+				mods.push({ mod: m, frac: 1 - prob });
 			});
-			mods.push({ mod: m, frac: 1 - prob });
+			bombFrac.push({ mods, pools: fPools });
 		});
-		bombFrac.push({ mods, pools: fPools });
+		return bombFrac;
 	});
 
 	onMount(() => (byPerc = JSON.parse(localStorage.getItem('mission-pools-view') || JSON.stringify(viewOptions[0]))));
@@ -186,7 +178,7 @@
 				options={viewOptions}
 				bind:value={byPerc} />
 		</div>
-		{#each mission.bombs as bomb, bIdx}
+		{#each mission.bombs as bomb, bIdx (bIdx)}
 			<div class="block bomb-header">
 				{pluralize(bomb.modules, 'Module')} · {formatTime(bomb.time)} · {pluralize(bomb.strikes, 'Strike')} · {pluralize(
 					bomb.widgets,
@@ -196,7 +188,7 @@
 			{#if byPerc == viewOptions[1]}
 				<div class="pools column">
 					<div class="mod-list">
-						{#each bombFrac[bIdx].mods as pool}
+						{#each bombFrac[bIdx].mods as pool (pool.mod)}
 							{@const module = getModule(pool.mod, modules)}
 							<div class="single {poolClass([], module)}">
 								<ModuleCard {module} fraction={pool.frac} alwaysShow />
@@ -206,13 +198,13 @@
 				</div>
 			{:else}
 				<div class="pools">
-					{#each bombFrac[bIdx].pools as pool}
+					{#each bombFrac[bIdx].pools as pool, pIdx (pIdx)}
 						<div class="pool {poolClass(pool.mods.map(p => p.mod))}">
 							<div class="modules">
 								{#if pool.uniform}
 									<div class="all-percent">{Math.floor(pool.mods[0].frac * 1000) / 10}% each:</div>
 								{/if}
-								{#each pool.mods.map(mod => getModule(mod.mod, modules)) as module, idx}
+								{#each pool.mods.map(mod => getModule(mod.mod, modules)) as module, idx (module.ModuleID)}
 									<ModuleCard {module} fraction={!pool.uniform ? pool.mods[idx].frac : 1} />
 								{/each}
 							</div>
@@ -236,7 +228,7 @@
 		</div>
 		<div class="block header">Solves</div>
 		<CompletionList {mission} />
-		{#each variants ?? [] as variant}
+		{#each variants ?? [] as variant (variant.name)}
 			<a href="/mission/{properUrlEncode(variant.name)}" class="block header variant">
 				{variant.name}
 			</a>

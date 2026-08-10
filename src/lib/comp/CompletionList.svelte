@@ -2,21 +2,21 @@
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import NoContent from '$lib/comp/NoContent.svelte';
 	import { TP_TEAM } from '$lib/const';
-	import type { Mission, SeasonCompletion } from '$lib/types';
+	import type { ID, Mission, SeasonCompletion } from '$lib/types';
 	import { classifyLink } from '$lib/util';
 
 	interface Props {
-		mission: Pick<Mission, 'tpSolve'> & { completions: SeasonCompletion[] };
+		mission: Pick<Mission, 'tpSolve'> & { completions: ID<SeasonCompletion>[] };
 	}
 
 	let { mission }: Props = $props();
-	let tpSolve = mission.completions.find(c => c.team[0] === TP_TEAM);
+	let tpSolve = $derived(mission.completions.find(c => c.team[0] === TP_TEAM));
 
 	let sortedCompletions = $derived(mission.completions.toSorted((a, b) => b.time - a.time));
 </script>
 
 <div class="completions">
-	{#each sortedCompletions as completion}
+	{#each sortedCompletions as completion (completion.id)}
 		{#if completion.team[0] !== TP_TEAM}
 			<!-- TP solves excluded from leaderboard by popular request -->
 			<CompletionCard {completion} />
@@ -29,7 +29,7 @@
 			<div><span>Solved using</span> <span class="tp-solve">{TP_TEAM}</span></div>
 			<div class="flex column proof">
 				{#if tpSolve != undefined}
-					{#each tpSolve.proofs as proof}
+					{#each tpSolve.proofs as proof (proof)}
 						<a href={proof}>{classifyLink(proof)}</a>
 					{/each}
 				{/if}

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import type { FrontendUser } from '$lib/types';
 	import UserCard from '$lib/cards/UserCard.svelte';
 	import Dialog from '$lib/controls/Dialog.svelte';
 	import Input from '$lib/controls/Input.svelte';
 	import { applyAction } from '$app/forms';
+	import type { PageProps } from './$types';
 
-	let { data } = $props();
-	let users: FrontendUser[] = data.users;
+	let { data }: PageProps = $props();
+	let users = $derived(data.users.slice().sort((a, b) => a.username.localeCompare(b.username)));
 
 	// Sort users
 	let newUsername = $state('');
@@ -32,8 +32,6 @@
 		newUsername = oldUsername = username;
 		dialog.showModal();
 	}
-
-	users.sort((a, b) => a.username.localeCompare(b.username));
 </script>
 
 <svelte:head>
@@ -45,7 +43,7 @@
 	This page is for separating a user account from their solver name without changing any missions or solves.<br />
 	Do this only when you need to fix a user who has a username matching a solver or author that is not actually them.
 </div>
-{#each users as user}
+{#each users as user (user.username)}
 	<div class="relative">
 		<UserCard {user} />
 		<div class="actions">

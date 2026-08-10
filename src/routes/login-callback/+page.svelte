@@ -5,8 +5,7 @@
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
-	let { result: oauthResult, takenUsernames, firstTime } = data;
-	let username = $state(data.username);
+	let { result: oauthResult, takenUsernames, firstTime, username } = $derived(data);
 
 	function trimName(str: string): any {
 		return str.trim();

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import type { FrontendUser } from '$lib/types';
 	import { checkIfImageExists } from '$lib/util';
 
@@ -11,12 +10,14 @@
 	let { user, winner }: Props = $props();
 
 	let imageExists = $state(false);
-	let alternate = Math.max(0, parseInt(user.id.slice(-2)) % 5);
+	let alternate = $derived(Math.max(0, parseInt(user.id.slice(-2)) % 5));
 
-	if (user.avatar.length > 1 && browser)
-		checkIfImageExists(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`, exists => {
-			imageExists = exists;
-		});
+	$effect(() => {
+		if (user.avatar.length > 1)
+			checkIfImageExists(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`, exists => {
+				imageExists = exists;
+			});
+	});
 </script>
 
 <div class="block user" class:winner>

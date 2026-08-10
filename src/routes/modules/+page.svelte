@@ -3,14 +3,13 @@
 	import ModuleCard from '$lib/cards/ModuleCard.svelte';
 	import LayoutSearchFilter from '$lib/comp/LayoutSearchFilter.svelte';
 	import Checkbox from '$lib/controls/Checkbox.svelte';
-	import type { RepoModule } from '$lib/repo.js';
 	import { evaluateLogicalStringSearch, getModule, logicalSearchTooltip, properUrlEncode } from '$lib/util.js';
 	import { untrack } from 'svelte';
 	import { SvelteSet } from 'svelte/reactivity';
+	import type { PageProps } from './$types';
 
-	let { data } = $props();
-	let missionsOf = data.missionsOf;
-	let modules: Record<string, RepoModule> = data.modules;
+	let { data }: PageProps = $props();
+	let { missionsOf, modules } = $derived(data);
 	let moduleRows: any = $state({});
 	let sortOption: 'alphabetical' | 'popular' | 'published' = $state('alphabetical');
 	let layoutSearch: LayoutSearchFilter = $state();
@@ -64,7 +63,7 @@
 	function reveal(modID: string) {
 		modsRevealed.add(modID);
 	}
-	let mods = $state(Object.entries(modules).filter(mod => mod[1].Type == 'Regular' || mod[1].Type == 'Needy'));
+	let mods = $derived(Object.entries(modules).filter(mod => mod[1].Type == 'Regular' || mod[1].Type == 'Needy'));
 	alphabetical();
 	let resultsText: number = $state(untrack(() => mods.length));
 

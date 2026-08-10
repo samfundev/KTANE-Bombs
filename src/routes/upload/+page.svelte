@@ -1,15 +1,11 @@
 <script lang="ts">
+	import type { PageProps } from './$types';
 	import CompletionSection from './_CompletionSection.svelte';
 	import MissionPackSection from './_MissionPackSection.svelte';
 	import MissionSection from './_MissionSection.svelte';
-	import type { MissionPackSelection } from '$lib/types';
-	let { data } = $props();
+	let { data }: PageProps = $props();
 
-	let missionInfo: { [name: string]: number } = data.missionInfo;
-	let authorNames: string[] = data.authorNames;
-	let solverNames: string[] = data.solverNames;
-	let packs: MissionPackSelection[] = data.packs;
-	let currentSeasonId: number | null = data.currentSeasonId;
+	let { missionInfo, authorNames, solverNames, packs, currentSeasonId } = $derived(data);
 
 	let section: 'solve' | 'mission' | 'missionpack' = $state('solve');
 </script>

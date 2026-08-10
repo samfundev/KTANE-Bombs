@@ -1,14 +1,12 @@
 <script lang="ts">
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import HomeSearchBar from '$lib/home/HomeSearchBar.svelte';
-	import type { ID, Mission } from '$lib/types';
-	import type { RepoModule } from '$lib/repo';
+	import type { PageProps } from './$types';
 
-	let { data } = $props();
-	let missions: ID<Mission>[] = $state.raw(data.missions);
+	let { data }: PageProps = $props();
+	let missions = $derived(data.missions);
 	let missionCards: any = $state({});
-	let modules: Record<string, RepoModule> | null = data.modules;
-	let seasonMissions: string[] = data.seasonMissions;
+	let { modules, seasonMissions } = $derived(data);
 
 	let render = $state(false);
 	let searchBar = $state() as HomeSearchBar;

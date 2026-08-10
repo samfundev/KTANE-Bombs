@@ -78,7 +78,7 @@
 		<li>The mission name is vulgar or offensive.</li>
 		<li>
 			The mission name contains any of these reserved character sequences:
-			{#each reservedSearchStrings as str, index}
+			{#each reservedSearchStrings as str, index (str)}
 				<b>{str}</b>{index < reservedSearchStrings.length - 1 ? ', ' : '.'}
 			{/each}
 		</li>

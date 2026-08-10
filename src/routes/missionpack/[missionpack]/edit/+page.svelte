@@ -5,11 +5,11 @@
 	import { applyAction } from '$app/forms';
 	import type { EditMissionPack } from '../../_types';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
+	import type { PageProps } from './$types';
 
-	let { data } = $props();
+	let { data }: PageProps = $props();
 
-	let pack: EditMissionPack = $state(data.pack);
-	let names: string[] = data.names;
+	let { pack, names } = $derived(data);
 
 	let originalPack: EditMissionPack = $state();
 
@@ -18,7 +18,11 @@
 		originalPack.dateAdded = pack.dateAdded;
 	}
 
-	setOriginalMission();
+	$effect.pre(() => {
+		if (!originalPack) {
+			setOriginalMission();
+		}
+	});
 
 	let nameInvalid = $state(false);
 	let modified = $derived(JSON.stringify(pack) !== JSON.stringify(originalPack) && !nameInvalid);
@@ -93,7 +97,7 @@
 	</div>
 </div>
 <div class="main-content mission-card-grid">
-	{#each pack.missions as mission}
+	{#each pack.missions as mission (mission.name)}
 		<MissionCard {mission} />
 	{/each}
 </div>

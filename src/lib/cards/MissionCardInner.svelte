@@ -9,10 +9,13 @@
 
 	let { mission }: Props = $props();
 
-	const bombs = mission.bombs;
-	const statBomb = $state(new Bomb());
-	statBomb.modules = bombs.map(bomb => bomb.modules).reduce((a, b) => a + b, 0);
-	statBomb.widgets = Math.max(...bombs.map(bomb => bomb.widgets));
+	const bombs = $derived(mission.bombs);
+	const statBomb = $derived.by(() => {
+		const statBomb = new Bomb();
+		statBomb.modules = bombs.map(bomb => bomb.modules).reduce((a, b) => a + b, 0);
+		statBomb.widgets = Math.max(...bombs.map(bomb => bomb.widgets));
+		return statBomb;
+	});
 </script>
 
 <div class="mission-name">{mission.name}</div>

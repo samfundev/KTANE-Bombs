@@ -1,14 +1,12 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	interface Props {
-		status?: number;
-		error?: App.Error | null;
-		path?: string;
-	}
+	import { page } from '$app/state';
 
-	let { status = $page.status, error = $page.error, path = $bindable($page.url?.pathname) }: Props = $props();
-
-	const user: { username: string } | null = $page.data.user;
+	const {
+		status,
+		error,
+		url: { pathname },
+		data: { user }
+	} = page;
 
 	// https://stackoverflow.com/a/7616484/8213163
 	function hashCode(value: string) {
@@ -24,7 +22,7 @@
 		return hash;
 	}
 
-	path = decodeURIComponent(path);
+	const path = decodeURIComponent(pathname);
 	const message =
 		status >= 500
 			? `Looks like ${path} ran into a problem while loading the page, automatically solving page.`

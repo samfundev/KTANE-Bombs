@@ -1,12 +1,12 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import Input from '$lib/controls/Input.svelte';
 
 	import { formatUTCDate, parseUTCDate, properUrlEncode } from '$lib/util';
 	import { applyAction } from '$app/forms';
-	import { type ID, Mission, Season } from '$lib/types';
+	import { Season } from '$lib/types';
 	import TextArea from '$lib/controls/TextArea.svelte';
 	import type { PageProps } from './$types';
-	import type { SeasonWinners } from './_types';
 
 	type VMission = {
 		id: number;
@@ -16,13 +16,10 @@
 
 	let { data }: PageProps = $props();
 
-	let season: SeasonWinners = $state(data.season);
-	let seasonNames: string[] = data.seasonNames;
-	let names: string[] = data.names;
-	let missions: VMission[] = data.missions;
-	let defaultMissionList: VMission[] = data.missionList.filter(m => m.verified);
-	let fullDefaultMissionList: VMission[] = data.missionList;
-	const missionNames = [...missions].filter(m => m.verified);
+	let { season, seasonNames, names, missions } = $derived(data);
+	let defaultMissionList = $derived(data.missionList.filter(m => m.verified));
+	let fullDefaultMissionList = $derived(data.missionList);
+	const missionNames = $derived([...missions].filter(m => m.verified));
 
 	let originalSeason = $state() as Season;
 	let winnerToAdd: string | null = $state(null);
@@ -42,13 +39,17 @@
 		originalSeason.end = season.end;
 	}
 
-	setOriginalSeason();
+	$effect.pre(() => {
+		if (!originalSeason) {
+			setOriginalSeason();
+		}
+	});
 
 	let nameInvalid = $state(false);
 	let modified = $derived(JSON.stringify(season) !== JSON.stringify(originalSeason) && !nameInvalid);
 	let includeList: string[] = $state([]);
 	let excludeList: string[] = $state([]);
-	let missionList: VMission[] = $state(defaultMissionList);
+	let missionList: VMission[] = $state(untrack(() => [...defaultMissionList]));
 	let winnersList: string[] = $state([]);
 
 	function updateMissionList() {
@@ -224,7 +225,7 @@
 {#if winnersList.length > 0}
 	<div class="block title"><b>Winners</b> ({winnersList.length})</div>
 	<div class="winners">
-		{#each winnersList as winner}
+		{#each winnersList as winner (winner)}
 			<a class="winner block" href="/user/{properUrlEncode(winner)}">{winner}</a>
 		{/each}
 	</div>
@@ -252,13 +253,13 @@
 	</div>
 	<strong class="includelist-title">Mission Include List</strong>
 	<ul>
-		{#each includeList as mission}
+		{#each includeList as mission (mission)}
 			<li>{mission}</li>
 		{/each}
 	</ul>
 	<strong class="includelist-title">Mission Exclude List</strong>
 	<ul>
-		{#each excludeList as mission}
+		{#each excludeList as mission (mission)}
 			<li>{mission}</li>
 		{/each}
 	</ul>
@@ -270,7 +271,7 @@
 {#if missionList.length > 0}
 	<div class="block title"><b>Allowed Missions</b> ({missionList.length})</div>
 	<div class="missions">
-		{#each missionList as mission}
+		{#each missionList as mission (mission.id)}
 			<a class="mission block" href="/mission/{properUrlEncode(mission.name)}">{mission.name}</a>
 		{/each}
 	</div>
@@ -335,13 +336,15 @@
 		width: 300px;
 	}
 
-	.missions, .winners {
+	.missions,
+	.winners {
 		display: flex;
 		flex-wrap: wrap;
 		gap: var(--gap);
 		align-content: start;
 	}
-	.mission, .winner {
+	.mission,
+	.winner {
 		padding: var(--gap) 8px;
 		flex-grow: 1;
 	}

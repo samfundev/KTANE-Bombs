@@ -11,7 +11,7 @@
 
 	let { comp, username, showTime = false }: Props = $props();
 
-	let tp = username === TP_TEAM;
+	let tp = $derived(username === TP_TEAM);
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
 </script>
 

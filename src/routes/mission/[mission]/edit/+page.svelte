@@ -3,9 +3,8 @@
 	import Input from '$lib/controls/Input.svelte';
 	import NoContent from '$lib/comp/NoContent.svelte';
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
-	import type { RepoModule } from '$lib/repo';
 	import Select from '$lib/controls/Select.svelte';
-	import { Permission, type Completion, type ID, type Bomb, Pool, type MissionPackSelection } from '$lib/types';
+	import { Permission, type Completion, type ID, type Bomb, Pool } from '$lib/types';
 	import {
 		displayStringList,
 		formatDate,
@@ -31,12 +30,7 @@
 	import { SvelteSet } from 'svelte/reactivity';
 
 	let { data }: PageProps = $props();
-
-	let mission: EditMission & { verified: boolean } = $state(data.mission);
-	let missionNames: string[] = data.missionNames;
-	let packs: MissionPackSelection[] = data.packs;
-	let modules: Record<string, RepoModule> | null = data.modules;
-	let seasons: { name: string }[] = [{ name: '' }, ...data.seasons];
+	let { mission, missionNames, packs, modules, seasons } = $derived(data);
 	let logfile = $derived(mission.logfile ?? '');
 
 	let originalMission = $state() as EditMission;
@@ -183,7 +177,11 @@
 		shownComp.add(id);
 	}
 
-	missionNames.unshift('');
+	$effect(() => {
+		if (missionNames.indexOf('') === -1) {
+			missionNames.unshift('');
+		}
+	});
 </script>
 
 <svelte:head>
@@ -296,7 +294,7 @@
 {/if}
 <div class="main-content">
 	<div class="bombs">
-		{#each mission.bombs as bomb}
+		{#each mission.bombs as bomb (bomb.id)}
 			<div class="block flex relative">
 				<Input
 					label="Number of Modules"
@@ -365,7 +363,7 @@
 	</div>
 	<div class="flex column">
 		<div class="block header">Solves</div>
-		{#each mission.completions as completion, ci}
+		{#each mission.completions as completion, ci (completion.id)}
 			<div class="block flex column relative">
 				{#if shownComp.has(completion.id)}
 					<TextArea

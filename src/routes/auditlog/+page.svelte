@@ -13,6 +13,7 @@
 	import type { AuditLog } from '$lib/generated/prisma/client';
 	import type { JsonValue } from '$lib/generated/prisma/internal/prismaNamespace.js';
 	import { onMount } from 'svelte';
+	import type { PageProps } from './$types';
 
 	const dateOptions: Intl.DateTimeFormatOptions = {
 		year: 'numeric',
@@ -22,13 +23,11 @@
 		minute: '2-digit'
 	};
 
-	let { data } = $props();
-	let logs: (AuditLog & { linkable: boolean; mission: string | null })[] = data.logs;
-	let logCount: number = data.count;
-	let fetchLimit: number = data.limit;
+	let { data }: PageProps = $props();
+	let { logs, count: logCount, limit: fetchLimit } = $derived(data);
 
 	let logRows: any = $state({});
-	let resultsText: number = $state(logs.length);
+	let resultsText: number = $derived(logs.length);
 	let searchOptionBoxes = ['from user', 'mission', 'mission pack', 'solve', 'user', 'season', 'invert'];
 	let searchOptionTooltips = [
 		'Search for the user that made the change',
@@ -210,7 +209,7 @@
 			class="help" />
 		<button onclick={closeAll}>Close All</button>
 		<div class="flex search-options">
-			{#each searchOptionBoxes as option, index}
+			{#each searchOptionBoxes as option, index (option)}
 				<Checkbox
 					id="search-by-{option.replace(/ /g, '')}"
 					label={titleCase(option)}
@@ -234,7 +233,7 @@
 			<b>After</b>
 		</div>
 	</div>
-	{#each logs as log, index}
+	{#each logs as log, index (log.id)}
 		{@const display = displayLog(log.before, log.after)}
 		<div class="table-row" bind:this={logRows[index]}>
 			<div class="block number">{logCount - index}</div>
@@ -287,7 +286,7 @@
 			<div class="block dropdown d{index}" class:small={smallItem(display.full)} class:expand={smallItem(display.full)}>
 				<button class="reset short" onclick={() => reveal(index)}>
 					<div class="log-details">
-						{#each display.short as row}
+						{#each display.short as row (row.item)}
 							<div title={row.item} class="shorten-detail">{row.item}</div>
 							<div>{row.before}</div>
 							<div>{row.after}</div>
@@ -298,7 +297,7 @@
 				<div class="full">
 					<button class="reset contract" onclick={() => hide(index)} aria-label="Hide Details"></button>
 					<div class="log-details">
-						{#each display.full as row}
+						{#each display.full as row (row.item)}
 							<div title={row.item} class="shorten-detail">{row.item}</div>
 							<div>{row.before}</div>
 							<div>{row.after}</div>

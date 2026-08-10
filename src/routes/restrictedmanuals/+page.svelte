@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { RepoManual } from '$lib/repo.js';
+	import type { PageProps } from './$types';
 
-	let { data } = $props();
-	let manuals: RepoManual[] | null = data.manuals;
+	let { data }: PageProps = $props();
+	let manuals = $derived(data.manuals);
 </script>
 
 <svelte:head>
@@ -22,7 +22,7 @@
 	{#if manuals !== null}
 		<table>
 			<tbody>
-				{#each manuals as manual}
+				{#each manuals as manual (manual.Name + manual.Descriptor)}
 					<tr class="manual">
 						<td>{manual.Language ?? ''}</td>
 						<td>

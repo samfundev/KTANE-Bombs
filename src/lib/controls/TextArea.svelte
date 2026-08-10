@@ -33,10 +33,8 @@
 	}: Props = $props();
 
 	let text_area = $state() as HTMLTextAreaElement;
-	let displayValue = $state(display(value));
-	$effect(() => {
-		if (instantFormat) displayValue = display(value);
-	});
+	let last;
+	let displayValue = $derived(instantFormat ? (last = display(value)) : last);
 
 	let error = $state('');
 
@@ -111,7 +109,7 @@
 	{/if}
 	{#if options}
 		<datalist id={props.id + '-list'}>
-			{#each options as option}
+			{#each options as option (option)}
 				<option value={display(option)}></option>
 			{/each}
 		</datalist>

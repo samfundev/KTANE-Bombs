@@ -15,7 +15,7 @@
 
 	let { missionInfo, solverNames, currentSeasonId }: Props = $props();
 
-	let missionNames = Object.keys(missionInfo).sort((a, b) => a.localeCompare(b));
+	let missionNames = $derived(Object.keys(missionInfo).sort((a, b) => a.localeCompare(b)));
 	let missionName: string = $state('');
 
 	let completion: SeasonCompletion = $state({
@@ -251,7 +251,7 @@
 {/if}
 <form class="block flex">
 	<div class="wideBox">
-		{#each proofs as proof, i}
+		{#each proofs as proof, i (i)}
 			<div class="dynamicBlock">
 				<Input
 					id="proof-{i}"
@@ -291,7 +291,7 @@
 		bind:value={completion.time}
 		disabled={missionName == null || missionName.length < 1} />
 	<div>
-		{#each team as member, index}
+		{#each team as member, index (index)}
 			<div class="dynamicBlock">
 				<Input
 					id="member-{index}"

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import '../app.css';
 	import { Permission } from '$lib/types';
-	import type { FrontendUser } from '$lib/types';
 	import UserCard from '$lib/cards/UserCard.svelte';
 	import { hasAnyPermission, properUrlEncode } from '$lib/util';
 	import { Toaster } from 'svelte-french-toast';
@@ -12,9 +11,10 @@
 	import HomeInfoMenu from '$lib/home/HomeInfoMenu.svelte';
 	import { navigating } from '$app/state';
 	import { getSeasonWinners } from '$lib/data.remote';
+	import type { LayoutProps } from './$types';
 
-	let { data, children } = $props();
-	const user: FrontendUser | null = data.user;
+	let { data, children }: LayoutProps = $props();
+	const { user } = $derived(data);
 	const seasonWinners: string[] = await getSeasonWinners();
 
 	let infoMenu = $state() as HTMLDivElement;
@@ -29,7 +29,7 @@
 		}
 	});
 
-	const winner = user ? seasonWinners.includes(user.username) : false;
+	const winner = $derived(user ? seasonWinners.includes(user.username) : false);
 
 	const updateNavbarHeight = () => {
 		if (!navbar) return;

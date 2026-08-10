@@ -23,6 +23,7 @@ export const load: PageServerLoad = async function ({ params }: ServerLoadEvent)
 			winners: true,
 			completions: {
 				select: {
+					id: true,
 					mission: {
 						select: {
 							name: true,

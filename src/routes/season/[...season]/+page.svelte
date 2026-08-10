@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type Completer, Mission, Permission, type SeasonCompletion } from '$lib/types';
+	import { Permission, type ID, type SeasonCompletion } from '$lib/types';
 	import { properUrlEncode, hasPermission } from '$lib/util.js';
 	import { page } from '$app/state';
 	import type { PageProps } from './$types';
@@ -7,13 +7,28 @@
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 
 	let { data }: PageProps = $props();
-	let { season } = data;
-	const seasonWinners: string[] = data.seasonWinners;
-	let completers: Completer[] = data.seasonCompleters;
-	let missionList: Pick<Mission, 'name'>[] = data.missionList;
-	let ranks: { [name: string]: number } = $state({});
-	let rank = 1;
-	let tied = 1;
+	let { season, seasonWinners, seasonCompleters: completers, missionList } = $derived(data);
+	let ranks = $derived.by(() => {
+		let ranks: { [name: string]: number } = {};
+		let rank = 1;
+		let tied = 1;
+		if (completers.length > 0) ranks[completers[0].name] = rank;
+		for (let c = 1; c < completers.length; c++) {
+			const comp = completers[c];
+			const prev = completers[c - 1];
+			if (
+				comp.distinct === prev.distinct &&
+				comp.defuser + comp.expert + comp.efm === prev.defuser + prev.expert + prev.efm
+			) {
+				tied++; // Tied with previous
+			} else {
+				rank += tied; // New rank
+				tied = 1;
+			}
+			ranks[comp.name] = rank;
+		}
+		return ranks;
+	});
 	const dateOptions: Intl.DateTimeFormatOptions = {
 		year: 'numeric',
 		month: 'short',
@@ -22,30 +37,17 @@
 		minute: '2-digit'
 	};
 
-	let completions: { [miss: string]: SeasonCompletion[] } = {};
-	season.completions.forEach(comp => {
-		if (!completions[comp.mission.name]) completions[comp.mission.name] = [];
-		completions[comp.mission.name].push(comp);
+	let completions = $derived.by(() => {
+		let completions: { [miss: string]: ID<SeasonCompletion>[] } = {};
+		season.completions.forEach(comp => {
+			if (!completions[comp.mission.name]) completions[comp.mission.name] = [];
+			completions[comp.mission.name].push(comp);
+		});
+		Object.entries(completions).forEach(([miss, comps]) => {
+			comps.sort((a, b) => b.time - a.time);
+		});
+		return completions;
 	});
-	Object.entries(completions).forEach(([miss, comps]) => {
-		completions[miss] = comps.sort((a, b) => b.time - a.time);
-	});
-
-	if (completers.length > 0) ranks[completers[0].name] = rank;
-	for (let c = 1; c < completers.length; c++) {
-		const comp = completers[c];
-		const prev = completers[c - 1];
-		if (
-			comp.distinct === prev.distinct &&
-			comp.defuser + comp.expert + comp.efm === prev.defuser + prev.expert + prev.efm
-		) {
-			tied++; // Tied with previous
-		} else {
-			rank += tied; // New rank
-			tied = 1;
-		}
-		ranks[comp.name] = rank;
-	}
 </script>
 
 <svelte:head>
@@ -78,11 +80,11 @@
 {#if missionList.length > 0}
 	<details open>
 		<summary class="block"><b>Allowed Missions</b> ({missionList.length})</summary>
-	<div class="missions">
-		{#each missionList as mission}
-			<a class="mission block" href="/mission/{properUrlEncode(mission.name)}">{mission.name}</a>
-		{/each}
-	</div>
+		<div class="missions">
+			{#each missionList as mission (mission.name)}
+				<a class="mission block" href="/mission/{properUrlEncode(mission.name)}">{mission.name}</a>
+			{/each}
+		</div>
 	</details>
 	<details open>
 		<summary class="block"><b>Leaderboard</b></summary>
@@ -94,7 +96,7 @@
 			<b class="block">Defuser</b>
 			<b class="block">Expert</b>
 			<b class="block">EFM</b>
-			{#each completers as completer}
+			{#each completers as completer (completer.name)}
 				<div class="block">{ranks[completer.name]}</div>
 				<div class="block" class:winner={seasonWinners.includes(completer.name)}>
 					<a href="/user/{properUrlEncode(completer.name)}">{completer.name}</a>
@@ -111,11 +113,11 @@
 
 {#if Object.keys(completions).length > 0}
 	<div class="block title solve-header"><b>Solves</b></div>
-	{#each Object.entries(completions) as [miss, item]}
+	{#each Object.entries(completions) as [miss, item] (miss)}
 		<details>
 			<summary class="block big"><b>{miss}</b> ({item.length})</summary>
 			<div class="solves">
-				{#each item as completion}
+				{#each item as completion (completion.id)}
 					<CompletionCard {completion} />
 				{/each}
 			</div>

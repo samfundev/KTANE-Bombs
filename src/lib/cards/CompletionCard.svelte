@@ -19,7 +19,7 @@
 		>{formatTime(completion.time)}</span>
 	<div class="flex notes">
 		<div class="team">
-			{#each completion.team as person, i}
+			{#each completion.team as person, i (person)}
 				<span
 					class="person"
 					class:tp-solve={tp}
@@ -46,7 +46,7 @@
 		{/if}
 	</div>
 	<div class="flex column proof">
-		{#each completion.proofs as proof}
+		{#each completion.proofs as proof (proof)}
 			<a href={proof}>{classifyLink(proof)}</a>
 		{/each}
 	</div>

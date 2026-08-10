@@ -1,29 +1,32 @@
 <script lang="ts">
 	import { TP_TEAM } from '$lib/const';
-	import type { Completer } from '$lib/types';
 	import { properUrlEncode } from '$lib/util.js';
-	let { data } = $props();
-	let completers: Completer[] = data.completers;
-	const seasonWinners: string[] = data.seasonWinners;
-	let ranks: { [name: string]: number } = $state({});
-	let rank = 1;
-	let tied = 1;
+	import type { PageProps } from './$types';
+	let { data }: PageProps = $props();
+	let completers = $derived(data.completers);
+	const seasonWinners = $derived(data.seasonWinners);
 
-	if (completers.length > 0) ranks[completers[0].name] = rank;
-	for (let c = 1; c < completers.length; c++) {
-		const comp = completers[c];
-		const prev = completers[c - 1];
-		if (
-			comp.distinct === prev.distinct &&
-			comp.defuser + comp.expert + comp.efm === prev.defuser + prev.expert + prev.efm
-		) {
-			tied++; // Tied with previous
-		} else {
-			rank += tied; // New rank
-			tied = 1;
+	let ranks = $derived.by(() => {
+		let ranks: { [name: string]: number } = {};
+		let rank = 1;
+		let tied = 1;
+		if (completers.length > 0) ranks[completers[0].name] = rank;
+		for (let c = 1; c < completers.length; c++) {
+			const comp = completers[c];
+			const prev = completers[c - 1];
+			if (
+				comp.distinct === prev.distinct &&
+				comp.defuser + comp.expert + comp.efm === prev.defuser + prev.expert + prev.efm
+			) {
+				tied++; // Tied with previous
+			} else {
+				rank += tied; // New rank
+				tied = 1;
+			}
+			ranks[comp.name] = rank;
 		}
-		ranks[comp.name] = rank;
-	}
+		return ranks;
+	});
 </script>
 
 <svelte:head>
@@ -41,7 +44,7 @@
 	<b class="block">Defuser</b>
 	<b class="block">Expert</b>
 	<b class="block">EFM</b>
-	{#each completers as completer}
+	{#each completers as completer (completer.name)}
 		<div class="block">{ranks[completer.name]}</div>
 		<div class="block" class:winner={seasonWinners.includes(completer.name)}>
 			<a href="/user/{properUrlEncode(completer.name)}">{completer.name}</a>

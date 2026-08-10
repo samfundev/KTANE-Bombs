@@ -42,10 +42,8 @@
 	}: Props = $props();
 
 	let input = $state() as HTMLInputElement;
-	let displayValue = $state(display(value));
-	$effect(() => {
-		if (instantFormat) displayValue = display(value);
-	});
+	let last;
+	let displayValue = $derived(instantFormat ? (last = display(value)) : last);
 
 	let error = $state('');
 	export const setValue = (val: any) => {
@@ -115,7 +113,7 @@
 	{/if}
 	{#if options}
 		<datalist id={props.id + '-list'}>
-			{#each options as option}
+			{#each options as option (option)}
 				<option value={display(option)}></option>
 			{/each}
 		</datalist>

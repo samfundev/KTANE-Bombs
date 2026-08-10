@@ -9,13 +9,15 @@
 	}
 
 	let { mission, username }: Props = $props();
-	const methods = [
-		mission.defuser ? 'as a Defuser' : null,
-		mission.expert ? 'as an Expert' : null,
-		mission.efm ? 'via EFM' : null,
-		mission.solo ? 'solo' : null
-	].flatMap(method => method ?? []);
-	const title = `${username} solved this mission ${listify(methods)}.`;
+	const methods = $derived(
+		[
+			mission.defuser ? 'as a Defuser' : null,
+			mission.expert ? 'as an Expert' : null,
+			mission.efm ? 'via EFM' : null,
+			mission.solo ? 'solo' : null
+		].flatMap(method => method ?? [])
+	);
+	const title = $derived(`${username} solved this mission ${listify(methods)}.`);
 </script>
 
 <a class="mission" href="/mission/{properUrlEncode(mission.name)}">

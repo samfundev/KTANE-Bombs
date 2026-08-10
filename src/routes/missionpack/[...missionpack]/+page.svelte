@@ -1,16 +1,12 @@
 <script lang="ts">
 	import { Permission } from '$lib/types';
 	import { hasPermission, pluralize, properUrlEncode } from '$lib/util';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
-	import type { EditMissionPack } from '../_types';
+	import type { PageProps } from './$types';
 
-	interface Props {
-		data: any;
-		pack?: EditMissionPack;
-	}
-
-	let { data, pack = data.pack }: Props = $props();
+	let { data }: PageProps = $props();
+	const { pack } = $derived(data);
 
 	const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
 	// const dateOptions: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -31,15 +27,15 @@
 			<span>Uploaded by: <a href="/user/{properUrlEncode(pack.uploadedBy)}">{pack.uploadedBy}</a></span>
 		{/if}
 	</div>
-	{#if hasPermission($page.data.user, Permission.VerifyMissionPack)}
-		<a href={$page.url.href + '/edit'} class="top-right">Edit</a>
+	{#if hasPermission(page.data.user, Permission.VerifyMissionPack)}
+		<a href={page.url.href + '/edit'} class="top-right">Edit</a>
 	{/if}
 </div>
 {#if !pack.verified}
 	<div class="block centered not-verified">This mission pack has not been verified.</div>
 {/if}
 <div class="main-content mission-card-grid">
-	{#each pack.missions as mission}
+	{#each pack.missions as mission (mission.name)}
 		<MissionCard {mission} />
 	{/each}
 </div>

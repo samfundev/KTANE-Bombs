@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
 	import Input from '$lib/controls/Input.svelte';
 	import TextArea from '$lib/controls/TextArea.svelte';
 
@@ -47,6 +46,10 @@
 
 	let searchField: HTMLInputElement | null;
 
+	$effect(() => {
+		searchField = <HTMLInputElement>document.getElementById(id);
+	});
+
 	function clearSearch() {
 		rawSearchText = '';
 		updateSearch();
@@ -74,8 +77,6 @@
 		searching = false;
 		oninput();
 	}
-
-	if (browser) searchField = <HTMLInputElement>document.getElementById(id);
 </script>
 
 <div class="flex">

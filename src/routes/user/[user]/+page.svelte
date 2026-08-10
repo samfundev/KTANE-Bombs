@@ -2,25 +2,18 @@
 	import Dialog from '$lib/controls/Dialog.svelte';
 	import Input from '$lib/controls/Input.svelte';
 	import Select from '$lib/controls/Select.svelte';
-	import {
-		IndividualCompletion,
-		Mission,
-		MissionCompletion,
-		Permission,
-		type FrontendUser,
-		type SeasonCompletion
-	} from '$lib/types';
+	import { IndividualCompletion, MissionCompletion, Permission } from '$lib/types';
 	import { getPersonColor, hasPermission, pluralize, properUrlEncode, withoutArticle } from '$lib/util';
 	import UserPermissions from '../_UserPermissions.svelte';
 	import MissionCompletionCard from '$lib/cards/MissionCompletionCard.svelte';
 	import { TP_TEAM } from '$lib/const';
-	import type { MissionPack } from '$lib/generated/prisma/client';
 	import CompletionCard from '$lib/cards/CompletionCard.svelte';
 	import MissionCard from '$lib/cards/MissionCard.svelte';
 	import SingleCompletionCard from '$lib/cards/SingleCompletionCard.svelte';
-	import { onMount } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 	import { page } from '$app/state';
-	let { data } = $props();
+	import type { PageProps } from './$types';
+	let { data }: PageProps = $props();
 
 	type SolveStats = {
 		distinct: number;
@@ -31,20 +24,21 @@
 		solo: number;
 	};
 
-	let stats: SolveStats = data.stats;
-	let username: string = data.username;
-	const seasonWinners: string[] = data.seasonWinners;
-	let shownUser: FrontendUser | null = $state(data.shownUser);
-	let completions: MissionCompletion[] = data.completions;
-	let tpMissions: Mission[] = data.tpMissions;
-	let unverifSolves: (SeasonCompletion & { mission: Mission })[] | null = data.unverifSolves;
-	let unverifMissions: Mission[] | null = data.unverifMissions;
-	let unverifPacks: MissionPack[] | null = data.unverifPacks;
-	let bestTimes: MissionCompletion[] = data.bestTimes;
+	let {
+		stats,
+		username,
+		seasonWinners,
+		shownUser,
+		completions,
+		tpMissions,
+		unverifSolves,
+		unverifMissions,
+		unverifPacks,
+		bestTimes
+	} = $derived(data);
 
-	let newUsername = $state(username);
-	const oldUsername = username;
-	let tp = username === TP_TEAM;
+	let newUsername = $derived(username);
+	let tp = $derived(newUsername === TP_TEAM);
 
 	let dialog = $state() as HTMLDialogElement;
 
@@ -55,7 +49,7 @@
 		let response = await fetch('/user/rename', {
 			method: 'POST',
 			body: JSON.stringify({
-				oldUsername,
+				oldUsername: username,
 				username: newUsername,
 				nameExistsOK: false
 			})
@@ -66,7 +60,7 @@
 			response = await fetch('/user/rename', {
 				method: 'POST',
 				body: JSON.stringify({
-					oldUsername,
+					oldUsername: username,
 					username: newUsername,
 					nameExistsOK: true
 				})
@@ -84,59 +78,64 @@
 	let missions: { [name: string]: IndividualCompletion } = $state({});
 	let missionsNames: { [name: string]: MissionCompletion[] } = $state({});
 	// Sort completions
-	completions.sort((a, b) => withoutArticle(a.mission.name).localeCompare(withoutArticle(b.mission.name)));
-	let completionByNewest: MissionCompletion[] = Array(completions.length);
-	Object.assign(completionByNewest, completions);
-	completionByNewest.sort((a, b) =>
-		a.dateAdded == null || b.dateAdded == null
-			? a.dateAdded == null && b.dateAdded == null
-				? a.mission.name.localeCompare(b.mission.name)
-				: a.dateAdded == null
-					? 1
-					: -1
-			: b.dateAdded.getTime() - a.dateAdded.getTime()
-	);
+	let completionByNewest: MissionCompletion[] = $state([]);
+	untrack(() => {
+		completions.sort((a, b) => withoutArticle(a.mission.name).localeCompare(withoutArticle(b.mission.name)));
+		completionByNewest = Array(completions.length);
+		Object.assign(completionByNewest, completions);
+		completionByNewest.sort((a, b) =>
+			a.dateAdded == null || b.dateAdded == null
+				? a.dateAdded == null && b.dateAdded == null
+					? a.mission.name.localeCompare(b.mission.name)
+					: a.dateAdded == null
+						? 1
+						: -1
+				: b.dateAdded.getTime() - a.dateAdded.getTime()
+		);
+	});
 
-	let firstTimes = completions.filter(comp => comp.first);
-	let displayAll = bestTimes.length > 0 || firstTimes.length > 0;
+	let firstTimes = $derived(completions.filter(comp => comp.first));
+	let displayAll = $derived(bestTimes.length > 0 || firstTimes.length > 0);
 
-	if (tp) {
-		tpMissions.forEach(m => {
-			let name = m.name;
-			if (!(name in missions)) {
-				missions[name] = new IndividualCompletion();
-				missions[name].name = name;
-				missions[name].efm = true;
-				missions[name].nEFM = 1;
-			}
-		});
-	} else {
-		completions.forEach(c => {
-			let name = c.mission.name;
-			if (!(name in missions)) {
-				missions[name] = new IndividualCompletion();
-				missions[name].name = name;
-			}
-			if (tp) {
-				missions[name].efm = true;
-				missions[name].nEFM = 1;
-			} else if (c.team.length === 1) {
-				if (c.solo) {
-					missions[name].solo = true;
-					missions[name].nSolo += 1;
-				} else {
+	untrack(() => {
+		if (tp) {
+			tpMissions.forEach(m => {
+				let name = m.name;
+				if (!(name in missions)) {
+					missions[name] = new IndividualCompletion();
+					missions[name].name = name;
 					missions[name].efm = true;
-					missions[name].nEFM += 1;
+					missions[name].nEFM = 1;
 				}
-			} else if (c.team.indexOf(username) == 0) {
-				missions[name].defuser = true;
-				missions[name].nDefuser += 1;
-			} else {
-				missions[name].expert = true;
-				missions[name].nExpert += 1;
-			}
-		});
-	}
+			});
+		} else {
+			completions.forEach(c => {
+				let name = c.mission.name;
+				if (!(name in missions)) {
+					missions[name] = new IndividualCompletion();
+					missions[name].name = name;
+				}
+				if (tp) {
+					missions[name].efm = true;
+					missions[name].nEFM = 1;
+				} else if (c.team.length === 1) {
+					if (c.solo) {
+						missions[name].solo = true;
+						missions[name].nSolo += 1;
+					} else {
+						missions[name].efm = true;
+						missions[name].nEFM += 1;
+					}
+				} else if (c.team.indexOf(username) == 0) {
+					missions[name].defuser = true;
+					missions[name].nDefuser += 1;
+				} else {
+					missions[name].expert = true;
+					missions[name].nExpert += 1;
+				}
+			});
+		}
+	});
 	function filterUnique(item: MissionCompletion, pos: number, self: MissionCompletion[]): boolean {
 		return self.findIndex(c => c.mission.name == item.mission.name) == pos;
 	}
@@ -170,31 +169,33 @@
 		}
 	}
 
-	missionsNames['Defuser + Expert + EFM'] = Object.entries(missions)
-		.map(([name, c]) => (c.defuser && c.expert && c.efm ? completions.find(comp => comp.mission.name == name) : null))
-		.flatMap(m => m ?? []);
-	missionsNames['Solo'] = [];
-	missionsNames['Defuser'] = [];
-	missionsNames['Expert'] = [];
-	missionsNames['EFM'] = [];
-	if (tp) {
-		tpMissions.forEach(m => {
-			let c = new MissionCompletion();
-			c.mission.name = m.name;
-			c.team = [TP_TEAM];
-			missionsNames['EFM'].push(c);
-		});
-	} else {
-		completions.forEach(c => {
-			if (c.team.length === 1) {
-				if (c.solo) missionsNames['Solo'].push(c);
-				else missionsNames['EFM'].push(c);
-			} else {
-				if (c.team.indexOf(username) == 0) missionsNames['Defuser'].push(c);
-				else missionsNames['Expert'].push(c);
-			}
-		});
-	}
+	untrack(() => {
+		missionsNames['Defuser + Expert + EFM'] = Object.entries(missions)
+			.map(([name, c]) => (c.defuser && c.expert && c.efm ? completions.find(comp => comp.mission.name == name) : null))
+			.flatMap(m => m ?? []);
+		missionsNames['Solo'] = [];
+		missionsNames['Defuser'] = [];
+		missionsNames['Expert'] = [];
+		missionsNames['EFM'] = [];
+		if (tp) {
+			tpMissions.forEach(m => {
+				let c = new MissionCompletion();
+				c.mission.name = m.name;
+				c.team = [TP_TEAM];
+				missionsNames['EFM'].push(c);
+			});
+		} else {
+			completions.forEach(c => {
+				if (c.team.length === 1) {
+					if (c.solo) missionsNames['Solo'].push(c);
+					else missionsNames['EFM'].push(c);
+				} else {
+					if (c.team.indexOf(username) == 0) missionsNames['Defuser'].push(c);
+					else missionsNames['Expert'].push(c);
+				}
+			});
+		}
+	});
 
 	let render = $state(false);
 	let hideTopTimes = $state(true);
@@ -230,7 +231,7 @@
 
 {#if unverifSolves !== null}
 	<div class="block gray"><h4>Unverified Solves</h4></div>
-	{#each unverifSolves as comp}
+	{#each unverifSolves as comp (comp.id)}
 		<div class="unverif-item completion">
 			<CompletionCard completion={comp} />
 			<MissionCard mission={comp.mission} />
@@ -239,13 +240,13 @@
 {/if}
 {#if unverifMissions !== null}
 	<div class="block gray"><h4>Unverified Missions</h4></div>
-	{#each unverifMissions as miss}
+	{#each unverifMissions as miss (miss.name)}
 		<MissionCard mission={miss} selectable nolink />
 	{/each}
 {/if}
 {#if unverifPacks !== null}
 	<div class="block gray"><h4>Unverified Mission Packs</h4></div>
-	{#each unverifPacks as pack}
+	{#each unverifPacks as pack (pack.id)}
 		<div class="block flex">
 			<a class="unverif-pack" href="https://steamcommunity.com/sharedfiles/filedetails/?id={pack.steamId}"
 				>{pack.name}</a>
@@ -284,7 +285,7 @@
 		<span class:hidden={!hideTopTimes}>(hidden)</span>
 	</button>
 	<div class="solves role flex grow" class:hidden={hideTopTimes}>
-		{#each bestTimes.sort((a, b) => (a.time == undefined || b.time == undefined ? 0 : b.time - a.time)) as comp}
+		{#each bestTimes.sort( (a, b) => (a.time == undefined || b.time == undefined ? 0 : b.time - a.time) ) as comp (comp.dateAdded)}
 			<SingleCompletionCard {comp} {username} showTime />
 		{/each}
 	</div>
@@ -296,7 +297,7 @@
 		<span class:hidden={!hideFirstSolves}>(hidden)</span>
 	</button>
 	<div class="solves role flex grow" class:hidden={hideFirstSolves}>
-		{#each firstTimes as comp}
+		{#each firstTimes as comp (comp.dateAdded)}
 			<SingleCompletionCard {comp} {username} />
 		{/each}
 	</div>
@@ -306,13 +307,13 @@
 {#if render && viewMode == viewOptions[2]}
 	<div class="block" class:hidden={!displayAll}><h4>All</h4></div>
 	<div class="solves role flex grow">
-		{#each completionByNewest as comp}
+		{#each completionByNewest as comp (comp.dateAdded)}
 			<SingleCompletionCard {comp} {username} />
 		{/each}
 	</div>
 	<!-- By Role -->
 {:else if render && viewMode == viewOptions[1]}
-	{#each Object.entries(missionsNames) as [key, compList]}
+	{#each Object.entries(missionsNames) as [key, compList] (key)}
 		{#if compList.length > 0}
 			{@const dist = selectDistinctSolveCount(key, stats)}
 			<div class="block">
@@ -324,7 +325,9 @@
 				</h4>
 			</div>
 			<div class="solves role flex grow">
-				{#each compList.filter(filterUnique).sort((a, b) => a.mission.name.localeCompare(b.mission.name)) as comp}
+				{#each compList
+					.filter(filterUnique)
+					.sort((a, b) => a.mission.name.localeCompare(b.mission.name)) as comp (comp.dateAdded)}
 					{@const solveCount = selectSolveCount(key, missions[comp.mission.name])}
 					<a href="/mission/{properUrlEncode(comp.mission.name)}" class:green={key.includes('+')}>
 						<div
@@ -347,7 +350,7 @@
 {:else if render}
 	<div class="block" class:hidden={!displayAll}><h4>All</h4></div>
 	<div class="solves flex grow">
-		{#each Object.values(missions).sort((a, b) => a.name.localeCompare(b.name)) as mission}
+		{#each Object.values(missions).sort((a, b) => a.name.localeCompare(b.name)) as mission (mission.name)}
 			<MissionCompletionCard {mission} {username} />
 		{/each}
 	</div>
@@ -368,7 +371,7 @@
 						label="Username"
 						bind:value={newUsername}
 						required
-						validate={value => (value === oldUsername ? 'Please enter the new username.' : true)} />
+						validate={value => (value === username ? 'Please enter the new username.' : true)} />
 					<button type="submit">Submit</button>
 				</form>
 			</div>

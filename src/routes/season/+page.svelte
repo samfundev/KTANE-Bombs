@@ -12,8 +12,9 @@
 	import toast from 'svelte-french-toast';
 	import Input from '$lib/controls/Input.svelte';
 	import Dialog from '$lib/controls/Dialog.svelte';
+	import type { PageProps } from './$types';
 
-	let { data } = $props();
+	let { data }: PageProps = $props();
 	let { seasons } = $derived(data);
 
 	let dialog: HTMLDialogElement | undefined = $state();
@@ -125,7 +126,7 @@
 	</Dialog>
 {/if}
 
-{#each seasons as season, index}
+{#each seasons as season, index (season.name)}
 	<a class="plain" href="/season/{season.name}">
 		<div class="block">
 			<div class="flex season-box">

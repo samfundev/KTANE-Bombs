@@ -50,7 +50,7 @@
 
 <div class="block flex column content-width">
 	<div class="flex">
-		{#each Object.entries(permissions) as [name, value]}
+		{#each Object.entries(permissions) as [name, value] (name)}
 			<input type="checkbox" id={name} checked={newPermissions.has(value)} onchange={() => togglePermission(value)} />
 			<label for={name}>{name}</label>
 		{/each}

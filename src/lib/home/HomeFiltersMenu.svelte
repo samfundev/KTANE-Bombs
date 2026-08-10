@@ -433,7 +433,7 @@
 		<div>
 			<table>
 				<tbody>
-					{#each hasOptions as op, index}
+					{#each hasOptions as op, index (op)}
 						{@const dashOp = toDashed(op)}
 						<tr>
 							<td class="row-header nowrap">{op}</td>
@@ -480,7 +480,7 @@
 					labelAfter
 					onchange={setOption} />
 			</div>
-			{#each sortOptions as op}
+			{#each sortOptions as op (op)}
 				<RadioButton
 					id={`option-sort-${toDashed(op)}}`}
 					label={op}
@@ -560,7 +560,7 @@
 					<td class="top">
 						<div class="module-list">
 							{#if profile['EnabledList']}
-								{#each yesList as mod}
+								{#each yesList as mod (mod)}
 									{mod}<br />
 								{/each}
 							{/if}
@@ -569,7 +569,7 @@
 					<td class="top">
 						<div class="module-list">
 							{#if profile['DisabledList']}
-								{#each noList as mod}
+								{#each noList as mod (mod)}
 									{mod}<br />
 								{/each}
 							{/if}

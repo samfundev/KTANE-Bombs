@@ -6,9 +6,9 @@
 	import { formatTime, getNextQuarterRange, properUrlEncode } from '$lib/util';
 	import { MISSION_UPDATE, NO_SEASON } from '$lib/const.js';
 	import Dialog from '$lib/controls/Dialog.svelte';
-	let { data } = $props();
-	let queue: QueueItem[] = $state(data.queue);
-	let solverNames: string[] = data.solverNames;
+	import type { PageProps } from './$types';
+	let { data }: PageProps = $props();
+	let { queue, solverNames } = $derived(data);
 
 	let now = new Date();
 	now.setUTCMonth(now.getUTCMonth() - 3);

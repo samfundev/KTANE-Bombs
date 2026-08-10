@@ -355,7 +355,7 @@
 			bind:this={layoutSearch} />
 
 		<div class="hstack boxes">
-			{#each searchOptionBoxes as option, index}
+			{#each searchOptionBoxes as option, index (option)}
 				<Checkbox
 					id="search-by-{option.replace(/ /g, '')}"
 					label={titleCase(option)}

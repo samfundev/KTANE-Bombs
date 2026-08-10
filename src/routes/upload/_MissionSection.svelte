@@ -16,7 +16,7 @@
 
 	let { missionInfo, authorNames, packs }: Props = $props();
 
-	let missionNames = Object.keys(missionInfo).sort((a, b) => a.localeCompare(b));
+	let missionNames = $derived(Object.keys(missionInfo).sort((a, b) => a.localeCompare(b)));
 	let invalid = $state(false);
 	let logfileLink = $state('');
 	let parsedLogfileLink = '';
@@ -248,7 +248,7 @@
 							{:else if missionNameQuirk[mission.name] == RESERVED}
 								<span class="block error">
 									<b>Mission name may not contain any of these strings exactly:</b>
-									{#each reservedSearchStrings as str, index}
+									{#each reservedSearchStrings as str, index (str)}
 										<b>{str}</b>{index < reservedSearchStrings.length - 1 ? ', ' : ''}
 									{/each}
 								</span>
