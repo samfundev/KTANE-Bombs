@@ -49,12 +49,13 @@
 		</li>
 		<li>Using a <a class="link" href="/restrictedmanuals">Restricted Manual</a>.</li>
 		<li>Using a manual not accessible on the repo.</li>
-		<li>Using any needy listed below when given the choice of needy.</li>
-		<ul>
-			<li>Literally Nothing</li>
-			<li>Hearthur</li>
-			<li>Kawaiitlyn</li>
-		</ul>
+		<li>Using a needy that does not require attention to avoid strikes when given the choice of needy, such as:
+			<ul>
+				<li>Literally Nothing</li>
+				<li>Hearthur</li>
+				<li>Kawaiitlyn</li>
+			</ul>
+		</li>
 		<li>
 			A defuser taking or using any external notes or props to aid in solving. This excludes using props to aid with
 			colorblindness.
