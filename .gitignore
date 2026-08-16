@@ -9,3 +9,5 @@ node_modules
 .vscode/tasks.json
 RunServer.bat
 /src/lib/generated/prisma
+
+/test-results
