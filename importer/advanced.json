@@ -142485,6 +142485,5617 @@
 			"name": "Fibonacci Bombs||Termet",
 			"action": "create",
 			"timestamp": "2026-08-12T18:12:57.362Z"
+		},
+		{
+			"id": 10925,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64710",
+			"name": "Try Not To Forget||BladePL",
+			"action": "create",
+			"timestamp": "2026-08-12T20:30:10.980Z"
+		},
+		{
+			"id": 10926,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "64711",
+			"name": "[]/\\O||Kugel",
+			"action": "create",
+			"timestamp": "2026-08-13T08:47:09.188Z"
+		},
+		{
+			"id": 10927,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64712",
+			"name": "The Brilliant Behemoth||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-08-13T20:17:53.730Z"
+		},
+		{
+			"id": 10928,
+			"userId": "240325182391058434",
+			"model": "Completion",
+			"recordId": "64713",
+			"name": "Hindsight||AzaFTW, Kangablue",
+			"action": "create",
+			"timestamp": "2026-08-14T02:43:45.727Z"
+		},
+		{
+			"id": 10929,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64714",
+			"name": "Centurion||AsiccAP, fuller_HK",
+			"action": "create",
+			"timestamp": "2026-08-14T05:22:53.395Z"
+		},
+		{
+			"id": 10930,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64715",
+			"name": "Survivor||BladePL",
+			"action": "create",
+			"timestamp": "2026-08-14T11:56:03.456Z"
+		},
+		{
+			"id": 10931,
+			"userId": "1191631936616140863",
+			"model": "Completion",
+			"recordId": "64716",
+			"name": "Easy Challenge||a_shrip, fuller_HK, MoonWuzDrawing",
+			"action": "create",
+			"timestamp": "2026-08-14T14:05:15.579Z"
+		},
+		{
+			"id": 10932,
+			"userId": "340390426647199744",
+			"model": "Completion",
+			"recordId": "64717",
+			"name": "Just Vibin'||Dragon512",
+			"action": "create",
+			"timestamp": "2026-08-14T18:11:10.660Z"
+		},
+		{
+			"id": 10933,
+			"userId": "998723698452332544",
+			"model": "Mission",
+			"recordId": "11205",
+			"name": "Victory Road",
+			"action": "create",
+			"timestamp": "2026-08-15T01:39:43.173Z"
+		},
+		{
+			"id": 10934,
+			"userId": "998723698452332544",
+			"model": "Mission",
+			"recordId": "11206",
+			"name": "The Joy of Creation",
+			"action": "create",
+			"timestamp": "2026-08-15T01:40:18.795Z"
+		},
+		{
+			"id": 10935,
+			"userId": "998723698452332544",
+			"model": "Mission",
+			"recordId": "11207",
+			"name": "World Ending...",
+			"action": "create",
+			"timestamp": "2026-08-15T01:40:57.333Z"
+		},
+		{
+			"id": 10936,
+			"userId": "998723698452332544",
+			"model": "Mission",
+			"recordId": "11208",
+			"name": "Springlocked",
+			"action": "create",
+			"timestamp": "2026-08-15T01:41:28.466Z"
+		},
+		{
+			"id": 10937,
+			"userId": "998723698452332544",
+			"model": "Mission",
+			"recordId": "11209",
+			"name": "Hidden Gems",
+			"action": "create",
+			"timestamp": "2026-08-15T01:44:41.268Z"
+		},
+		{
+			"id": 10938,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11210",
+			"name": "[[UPDATE]] Monsplode Red & Blue",
+			"action": "create",
+			"timestamp": "2026-08-15T02:48:58.616Z"
+		},
+		{
+			"id": 10939,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11210",
+			"name": "[[UPDATE]] Monsplode Red & Blue",
+			"action": "delete",
+			"timestamp": "2026-08-15T02:51:53.473Z",
+			"before": {
+				"id": 11210,
+				"name": "[[UPDATE]] Monsplode Red & Blue",
+				"notes": null,
+				"authors": ["Arleen"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=6fb70828ce38bd44e3d084f999610f8522dfa2af",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_arleenmission_Monsplode Red & Blue",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2026-08-15T02:48:27.208Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "118831126239248397",
+				"designedForTP": false,
+				"missionPackId": 643
+			}
+		},
+		{
+			"id": 10940,
+			"userId": "118831126239248397",
+			"model": "MissionPack",
+			"recordId": "643",
+			"name": "Hatosable's missions",
+			"action": "update",
+			"timestamp": "2026-08-15T02:52:06.166Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10941,
+			"userId": "118831126239248397",
+			"model": "MissionPack",
+			"recordId": "644",
+			"name": "Penguins Personal Pack",
+			"action": "update",
+			"timestamp": "2026-08-15T02:52:21.238Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10942,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64718",
+			"name": "Quintuplets||Infusion",
+			"action": "create",
+			"timestamp": "2026-08-15T05:05:57.092Z"
+		},
+		{
+			"id": 10943,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "64719",
+			"name": "asdfghjkl||_Play_",
+			"action": "create",
+			"timestamp": "2026-08-15T07:32:07.419Z"
+		},
+		{
+			"id": 10944,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "64720",
+			"name": "hon'/||_Play_",
+			"action": "create",
+			"timestamp": "2026-08-15T07:32:36.023Z"
+		},
+		{
+			"id": 10945,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "64721",
+			"name": "Possibly Impossible: Ultra Deluxe Edition||_Play_",
+			"action": "create",
+			"timestamp": "2026-08-15T07:32:48.555Z"
+		},
+		{
+			"id": 10946,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64722",
+			"name": "Medium-Popular Demand||Jawly_Gaming, DrkL",
+			"action": "create",
+			"timestamp": "2026-08-15T10:02:44.771Z"
+		},
+		{
+			"id": 10947,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "64723",
+			"name": "'Not' Centurion||Kugel",
+			"action": "create",
+			"timestamp": "2026-08-15T10:52:29.772Z"
+		},
+		{
+			"id": 10948,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64724",
+			"name": "Mehturion||BladePL",
+			"action": "create",
+			"timestamp": "2026-08-15T11:50:58.889Z"
+		},
+		{
+			"id": 10949,
+			"userId": "998723698452332544",
+			"model": "Completion",
+			"recordId": "64725",
+			"name": "With Defusers Like These...||ufoencounter14",
+			"action": "create",
+			"timestamp": "2026-08-15T13:58:04.488Z"
+		},
+		{
+			"id": 10950,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "64726",
+			"name": "Mystery Shack||_Play_",
+			"action": "create",
+			"timestamp": "2026-08-15T19:25:06.447Z"
+		},
+		{
+			"id": 10951,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64727",
+			"name": "Magpink||ManiaMate",
+			"action": "create",
+			"timestamp": "2026-08-15T19:46:57.055Z"
+		},
+		{
+			"id": 10952,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "64728",
+			"name": "Master EFM||Termet",
+			"action": "create",
+			"timestamp": "2026-08-16T01:14:51.592Z"
+		},
+		{
+			"id": 10953,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "10193",
+			"name": "Monsplode Red & Blue",
+			"action": "update",
+			"timestamp": "2026-08-16T03:50:24.180Z",
+			"before": {},
+			"after": {
+				"bombs": {
+					"update": [
+						{
+							"data": {
+								"time": 6660,
+								"pools": [
+									{ "count": 1, "modules": ["AquariumModule"] },
+									{ "count": 1, "modules": ["atlantis"] },
+									{ "count": 1, "modules": ["blueArrowsModule"] },
+									{ "count": 1, "modules": ["blueCipher"] },
+									{ "count": 1, "modules": ["blueHexabuttons"] },
+									{ "count": 1, "modules": ["BombItModule"] },
+									{ "count": 1, "modules": ["BombItTranslatedModule"] },
+									{ "count": 1, "modules": ["britishSlang"] },
+									{ "count": 1, "modules": ["countdown"] },
+									{ "count": 1, "modules": ["boolMazeCruel"] },
+									{ "count": 1, "modules": ["cruelCandyLand"] },
+									{ "count": 1, "modules": ["cruelCountdown"] },
+									{ "count": 1, "modules": ["CruelKeypads"] },
+									{ "count": 1, "modules": ["eeBgnilleps"] },
+									{ "count": 1, "modules": ["epelleMoiCa"] },
+									{ "count": 1, "modules": ["errorCodes"] },
+									{ "count": 1, "modules": ["MemoryV2"] },
+									{ "count": 1, "modules": ["forgetThis"] },
+									{ "count": 1, "modules": ["TheHeart"] },
+									{ "count": 1, "modules": ["hillCycle"] },
+									{ "count": 1, "modules": ["MahjongQuizHard"] },
+									{ "count": 1, "modules": ["MahjongQuizScrambled"] },
+									{ "count": 1, "modules": ["Mastermind Cruel"] },
+									{ "count": 3, "modules": ["monsplodeCards"] },
+									{ "count": 3, "modules": ["monsplodeFight"] },
+									{ "count": 1, "modules": ["MorseV2"] },
+									{ "count": 1, "modules": ["NotSimaze"] },
+									{ "count": 1, "modules": ["NumberPad"] },
+									{ "count": 1, "modules": ["OnlyConnectModule"] },
+									{ "count": 1, "modules": ["MazeV2"] },
+									{ "count": 1, "modules": ["plungerButton"] },
+									{ "count": 1, "modules": ["PressX"] },
+									{ "count": 1, "modules": ["QuadrupleSimpletontModule"] },
+									{ "count": 1, "modules": ["redArrowsModule"] },
+									{ "count": 1, "modules": ["redCipher"] },
+									{ "count": 1, "modules": ["simonSounds"] },
+									{ "count": 1, "modules": ["simpleHexabuttons"] },
+									{ "count": 1, "modules": ["sqlCruel"] },
+									{ "count": 1, "modules": ["treasureHunt"] },
+									{ "count": 1, "modules": ["unfairCipher"] },
+									{ "count": 1, "modules": ["UnownCipher"] },
+									{ "count": 1, "modules": ["VoltorbFlip"] },
+									{ "count": 1, "modules": ["monsplodeWho"] }
+								],
+								"modules": 47,
+								"strikes": 5,
+								"widgets": 5
+							},
+							"where": { "id": 13801 }
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 10954,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "10193",
+			"name": "Monsplode Red & Blue",
+			"action": "update",
+			"timestamp": "2026-08-16T03:50:24.197Z",
+			"before": { "missionPackId": 567 },
+			"after": { "missionPackId": 643 }
+		},
+		{
+			"id": 10955,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64729",
+			"name": "Wish||Infusion",
+			"action": "create",
+			"timestamp": "2026-08-16T06:00:54.215Z"
+		},
+		{
+			"id": 10956,
+			"userId": "234733182442799104",
+			"model": "Completion",
+			"recordId": "64730",
+			"name": "Timeless||Danielstigman, BladePL, miki2003pl",
+			"action": "create",
+			"timestamp": "2026-08-16T07:58:30.393Z"
+		},
+		{
+			"id": 10957,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64731",
+			"name": "Ashtorian||ManiaMate",
+			"action": "create",
+			"timestamp": "2026-08-16T21:59:49.003Z"
+		},
+		{
+			"id": 10958,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64732",
+			"name": "Growler||Infusion",
+			"action": "create",
+			"timestamp": "2026-08-16T23:45:04.615Z"
+		},
+		{
+			"id": 10959,
+			"userId": "769759393888993289",
+			"model": "Completion",
+			"recordId": "64733",
+			"name": "By Popular Demand||Penne",
+			"action": "create",
+			"timestamp": "2026-08-17T06:15:35.109Z"
+		},
+		{
+			"id": 10960,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64734",
+			"name": "ÜberKlax Endurance||ManiaMate",
+			"action": "create",
+			"timestamp": "2026-08-17T19:05:38.286Z"
+		},
+		{
+			"id": 10961,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "64735",
+			"name": "Dove||_Play_",
+			"action": "create",
+			"timestamp": "2026-08-17T23:13:42.986Z"
+		},
+		{
+			"id": 10962,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64736",
+			"name": "Easy Challenge||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-08-17T23:56:31.503Z"
+		},
+		{
+			"id": 10963,
+			"userId": "998723698452332544",
+			"model": "Completion",
+			"recordId": "64737",
+			"name": "Boss Soloing||Infusion, LivreVerte, ufoencounter14",
+			"action": "create",
+			"timestamp": "2026-08-18T01:33:09.560Z"
+		},
+		{
+			"id": 10964,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64738",
+			"name": "Bnuuy||ManiaMate",
+			"action": "create",
+			"timestamp": "2026-08-18T06:01:57.542Z"
+		},
+		{
+			"id": 10965,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64685",
+			"name": "Outro (Pt. 2)||BladePL",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:26.602Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10966,
+			"userId": "386319360974651394",
+			"model": "Mission",
+			"recordId": "11149",
+			"name": "47 But My Experts Want Me Dead",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:27.777Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 10967,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64686",
+			"name": "47 But My Experts Want Me Dead||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:27.785Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10968,
+			"userId": "386319360974651394",
+			"model": "Mission",
+			"recordId": "11175",
+			"name": "Kole's Harder Top 47",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:28.722Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 10969,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64687",
+			"name": "Kole's Harder Top 47||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:29.644Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10970,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64688",
+			"name": "Cruel Fate||BladePL",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:30.650Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10971,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64689",
+			"name": "Chilli Pepper Ice Cream||AzaFTW, Penne",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:32.473Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10972,
+			"userId": "386319360974651394",
+			"model": "Mission",
+			"recordId": "11172",
+			"name": "I Forgot Them All",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:33.272Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 10973,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64690",
+			"name": "I Forgot Them All||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:33.284Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10974,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64691",
+			"name": "The Pigeon||ManiaMate",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:33.988Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10975,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64692",
+			"name": "Snivy's Arrogance||ufoencounter14, Infusion",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:34.613Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10976,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64693",
+			"name": "Centurion||RandomChamps",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:36.255Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10977,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64694",
+			"name": "One Hell of a Reset||BladePL",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:36.986Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10978,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64695",
+			"name": "Determination||ManiaMate",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:37.574Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10979,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64696",
+			"name": "XP4 Villains must shine!||ManiaMate",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:38.189Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10980,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64697",
+			"name": "Squares of Division||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:38.781Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10981,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64698",
+			"name": "Determination||Termet",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:39.339Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10982,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64699",
+			"name": "Schwarz und Weiß||AzaFTW, Termet, Sierra",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:39.903Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10983,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64700",
+			"name": "Universe Collapse||Kangablue",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:40.438Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10984,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64701",
+			"name": "Quickly Now!: Save Jesus!||Infusion, ufoencounter14",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:40.974Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10985,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64702",
+			"name": "Outro (Pt. 1)||Termet",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:42.497Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10986,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64704",
+			"name": "AMM's Flashbacks||Infusion, LivreVerte, Possessed, ufoencounter14",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:43.367Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 10987,
+			"userId": "386319360974651394",
+			"model": "Mission",
+			"recordId": "11154",
+			"name": "Don't join KTANE RU server at 3AM",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:44.706Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 10988,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64703",
+			"name": "Don't join KTANE RU server at 3AM||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:44.714Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10989,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64705",
+			"name": "Krow's Endurance||ManiaMate",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:45.430Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10990,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64706",
+			"name": "Redditorian||BladePL",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:46.030Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10991,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64707",
+			"name": "Em-Cee-A-Turion||Termet",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:46.571Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10992,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64708",
+			"name": "AMM's Flashbacks (Nerfed)||LegendWilleh",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:47.097Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 10993,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64709",
+			"name": "Fibonacci Bombs||Termet",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:48.780Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10994,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64710",
+			"name": "Try Not To Forget||BladePL",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:49.460Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10995,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64711",
+			"name": "[]/\\O||Kugel",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:50.445Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10996,
+			"userId": "386319360974651394",
+			"model": "Mission",
+			"recordId": "11083",
+			"name": "The Brilliant Behemoth",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:51.012Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 10997,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64712",
+			"name": "The Brilliant Behemoth||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:51.027Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10998,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64713",
+			"name": "Hindsight||AzaFTW, Kangablue",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:51.544Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 10999,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64714",
+			"name": "Centurion||AsiccAP, fuller_HK",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:52.149Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11000,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64715",
+			"name": "Survivor||BladePL",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:52.647Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11001,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64716",
+			"name": "Easy Challenge||a_shrip, fuller_HK, MoonWuzDrawing",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:53.497Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11002,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64717",
+			"name": "Just Vibin'||Dragon512",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:55.375Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11003,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64718",
+			"name": "Quintuplets||Infusion",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:56.252Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 11004,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64719",
+			"name": "asdfghjkl||_Play_",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:56.802Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11005,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64720",
+			"name": "hon'/||_Play_",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:57.334Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11006,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64721",
+			"name": "Possibly Impossible: Ultra Deluxe Edition||_Play_",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:57.840Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11007,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64722",
+			"name": "Medium-Popular Demand||Jawly_Gaming, DrkL",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:58.342Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11008,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64723",
+			"name": "'Not' Centurion||Kugel",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:58.864Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11009,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64724",
+			"name": "Mehturion||BladePL",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:59.374Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 11010,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64725",
+			"name": "With Defusers Like These...||ufoencounter14",
+			"action": "update",
+			"timestamp": "2026-08-18T06:26:59.884Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11011,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64726",
+			"name": "Mystery Shack||_Play_",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:00.386Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 11012,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64727",
+			"name": "Magpink||ManiaMate",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:02.541Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11013,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64727",
+			"name": "Magpink||ManiaMate",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:02.550Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11014,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64728",
+			"name": "Master EFM||Termet",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:03.165Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11015,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64729",
+			"name": "Wish||Infusion",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:03.648Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 11016,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64730",
+			"name": "Timeless||Danielstigman, BladePL, miki2003pl",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:04.114Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 11017,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64731",
+			"name": "Ashtorian||ManiaMate",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:05.585Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11018,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64732",
+			"name": "Growler||Infusion",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:07.014Z",
+			"before": { "first": false, "verified": false },
+			"after": { "first": true, "verified": true }
+		},
+		{
+			"id": 11019,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64733",
+			"name": "By Popular Demand||Penne",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:08.810Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11020,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64734",
+			"name": "ÜberKlax Endurance||ManiaMate",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:10.034Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11021,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64735",
+			"name": "Dove||_Play_",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:11.235Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11022,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64736",
+			"name": "Easy Challenge||fuller_HK",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:12.337Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11023,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64737",
+			"name": "Boss Soloing||Infusion, LivreVerte, ufoencounter14",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:13.417Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11024,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64738",
+			"name": "Bnuuy||ManiaMate",
+			"action": "update",
+			"timestamp": "2026-08-18T06:27:15.348Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11025,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64739",
+			"name": "74 Modules||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-08-18T10:42:40.007Z"
+		},
+		{
+			"id": 11026,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64740",
+			"name": "Easy Challenge||fuller_HK, AsiccAP",
+			"action": "create",
+			"timestamp": "2026-08-18T15:30:56.776Z"
+		},
+		{
+			"id": 11027,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64741",
+			"name": "SoulOrg Endurance||AsiccAP, fuller_HK",
+			"action": "create",
+			"timestamp": "2026-08-18T16:32:28.600Z"
+		},
+		{
+			"id": 11028,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64742",
+			"name": "Medium-Popular Demand||ManiaMate",
+			"action": "create",
+			"timestamp": "2026-08-18T18:35:19.894Z"
+		},
+		{
+			"id": 11029,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64743",
+			"name": "Symbolophilia||BladePL",
+			"action": "create",
+			"timestamp": "2026-08-18T18:44:54.490Z"
+		},
+		{
+			"id": 11030,
+			"userId": "150650873884704769",
+			"model": "Completion",
+			"recordId": "64744",
+			"name": "Operation Strix||AzaFTW, Sierra",
+			"action": "create",
+			"timestamp": "2026-08-18T19:19:40.655Z"
+		},
+		{
+			"id": 11031,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64745",
+			"name": "SoulOrg Endurance||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-08-19T04:26:08.914Z"
+		},
+		{
+			"id": 11032,
+			"userId": "1191631936616140863",
+			"model": "Completion",
+			"recordId": "64746",
+			"name": "SoulOrg Endurance||a_shrip",
+			"action": "create",
+			"timestamp": "2026-08-19T11:26:48.453Z"
+		},
+		{
+			"id": 11033,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64747",
+			"name": "Ultimatum||BladePL",
+			"action": "create",
+			"timestamp": "2026-08-19T11:57:22.001Z"
+		},
+		{
+			"id": 11034,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "64748",
+			"name": "\"New\" Faces||_Play_",
+			"action": "create",
+			"timestamp": "2026-08-19T14:48:21.925Z"
+		},
+		{
+			"id": 11035,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "64749",
+			"name": "Milkinator||_Play_",
+			"action": "create",
+			"timestamp": "2026-08-19T23:10:45.827Z"
+		},
+		{
+			"id": 11036,
+			"userId": "150650873884704769",
+			"model": "Completion",
+			"recordId": "64750",
+			"name": "Submersion III||AzaFTW, benjamin172, Bianca",
+			"action": "create",
+			"timestamp": "2026-08-19T23:23:40.881Z"
+		},
+		{
+			"id": 11037,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "64751",
+			"name": "Seifar Toy Company Reservation||_Play_",
+			"action": "create",
+			"timestamp": "2026-08-19T23:23:49.117Z"
+		},
+		{
+			"id": 11038,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64752",
+			"name": "Nightmare Mode: Savor the Moment||ManiaMate",
+			"action": "create",
+			"timestamp": "2026-08-20T04:16:41.865Z"
+		},
+		{
+			"id": 11039,
+			"userId": "265294329709330432",
+			"model": "Completion",
+			"recordId": "64753",
+			"name": "Build Easy Bomb, Then We'll Talk||Blan",
+			"action": "create",
+			"timestamp": "2026-08-20T05:23:46.894Z"
+		},
+		{
+			"id": 11040,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64754",
+			"name": "Possibly Impossible: Ultra Deluxe Edition||Jawly_Gaming, Penne",
+			"action": "create",
+			"timestamp": "2026-08-20T09:14:42.276Z"
+		},
+		{
+			"id": 11041,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64755",
+			"name": "The Kármán Line||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-08-20T20:34:05.797Z"
+		},
+		{
+			"id": 11042,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64756",
+			"name": "Binary Madness||BladePL",
+			"action": "create",
+			"timestamp": "2026-08-21T11:06:18.231Z"
+		},
+		{
+			"id": 11043,
+			"userId": "587689217937637379",
+			"model": "Completion",
+			"recordId": "64757",
+			"name": "Solo-47||LegendWilleh",
+			"action": "create",
+			"timestamp": "2026-08-21T12:56:04.402Z"
+		},
+		{
+			"id": 11044,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64758",
+			"name": "Kugel's 47: Reimagined (Soulless)||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-08-21T13:41:15.028Z"
+		},
+		{
+			"id": 11045,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64759",
+			"name": "Kugel's 47: Reimagined (Soulful)||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-08-21T15:44:13.670Z"
+		},
+		{
+			"id": 11046,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "52946",
+			"name": "Sound Madness||Diffuse",
+			"action": "update",
+			"timestamp": "2026-08-21T18:47:33.412Z",
+			"before": { "old": false },
+			"after": { "old": true }
+		},
+		{
+			"id": 11047,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "52945",
+			"name": "Sound Madness||LegendWilleh",
+			"action": "update",
+			"timestamp": "2026-08-21T18:47:50.353Z",
+			"before": { "old": false },
+			"after": { "old": true }
+		},
+		{
+			"id": 11048,
+			"userId": "705507300634263653",
+			"model": "Mission",
+			"recordId": "11211",
+			"name": "Refill Madness",
+			"action": "create",
+			"timestamp": "2026-08-22T04:17:36.861Z"
+		},
+		{
+			"id": 11049,
+			"userId": "705507300634263653",
+			"model": "Mission",
+			"recordId": "11212",
+			"name": "The Subtle Inversion",
+			"action": "create",
+			"timestamp": "2026-08-22T04:17:53.909Z"
+		},
+		{
+			"id": 11050,
+			"userId": "705507300634263653",
+			"model": "Mission",
+			"recordId": "11213",
+			"name": "Extreme Module Endurance",
+			"action": "create",
+			"timestamp": "2026-08-22T04:19:38.602Z"
+		},
+		{
+			"id": 11051,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11099",
+			"name": "30 Second Explanation",
+			"action": "delete",
+			"timestamp": "2026-08-22T05:56:36.700Z",
+			"before": {
+				"id": 11099,
+				"name": "30 Second Explanation",
+				"notes": null,
+				"authors": ["Possessed"],
+				"factory": "Sequence",
+				"logfile": "https://ktane.timwi.de/lfa#file=65aaa5600f0f7aabc34254257518702baeaa26bf",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_possessedsVolatileMissions_30 Second Explanation",
+				"timeMode": "Local",
+				"verified": false,
+				"dateAdded": "2026-01-05T00:48:47.100Z",
+				"inGameName": null,
+				"strikeMode": "Local",
+				"uploadedBy": "705507300634263653",
+				"designedForTP": false,
+				"missionPackId": 633
+			}
+		},
+		{
+			"id": 11052,
+			"userId": "154814006261972992",
+			"model": "Completion",
+			"recordId": "64680",
+			"name": "Inhumane||benjamin172, Bianca, AzaFTW",
+			"action": "update",
+			"timestamp": "2026-08-22T05:58:06.811Z",
+			"before": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=b2aed21cc77e4b9cd828d399528de9c20f72983d;bomb=NG5QQ5"
+				]
+			},
+			"after": {
+				"proofs": [
+					"https://youtu.be/SA82f44gkEg\nhttps://ktane.timwi.de/More/Logfile%20Analyzer.html#file=b2aed21cc77e4b9cd828d399528de9c20f72983d;bomb=NG5QQ5"
+				]
+			}
+		},
+		{
+			"id": 11053,
+			"userId": "154814006261972992",
+			"model": "Completion",
+			"recordId": "64680",
+			"name": "Inhumane||benjamin172, Bianca, AzaFTW",
+			"action": "update",
+			"timestamp": "2026-08-22T05:58:26.943Z",
+			"before": {
+				"proofs": [
+					"https://youtu.be/SA82f44gkEg\nhttps://ktane.timwi.de/More/Logfile%20Analyzer.html#file=b2aed21cc77e4b9cd828d399528de9c20f72983d;bomb=NG5QQ5"
+				]
+			},
+			"after": {
+				"proofs": [
+					"https://youtu.be/SA82f44gkEg\n\nhttps://ktane.timwi.de/More/Logfile%20Analyzer.html#file=b2aed21cc77e4b9cd828d399528de9c20f72983d;bomb=NG5QQ5"
+				]
+			}
+		},
+		{
+			"id": 11054,
+			"userId": "154814006261972992",
+			"model": "Completion",
+			"recordId": "64680",
+			"name": "Inhumane||benjamin172, Bianca, AzaFTW",
+			"action": "update",
+			"timestamp": "2026-08-22T05:58:43.291Z",
+			"before": {
+				"proofs": [
+					"https://youtu.be/SA82f44gkEg\n\nhttps://ktane.timwi.de/More/Logfile%20Analyzer.html#file=b2aed21cc77e4b9cd828d399528de9c20f72983d;bomb=NG5QQ5"
+				]
+			},
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=b2aed21cc77e4b9cd828d399528de9c20f72983d;bomb=NG5QQ5"
+				]
+			}
+		},
+		{
+			"id": 11055,
+			"userId": "154814006261972992",
+			"model": "Completion",
+			"recordId": "64680",
+			"name": "Inhumane||benjamin172, Bianca, AzaFTW",
+			"action": "update",
+			"timestamp": "2026-08-22T05:58:51.890Z",
+			"before": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=b2aed21cc77e4b9cd828d399528de9c20f72983d;bomb=NG5QQ5"
+				]
+			},
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=b2aed21cc77e4b9cd828d399528de9c20f72983d;bomb=NG5QQ5\nhttps://youtu.be/SA82f44gkEg"
+				]
+			}
+		},
+		{
+			"id": 11056,
+			"userId": "154814006261972992",
+			"model": "Completion",
+			"recordId": "64680",
+			"name": "Inhumane||benjamin172, Bianca, AzaFTW",
+			"action": "update",
+			"timestamp": "2026-08-22T05:59:17.959Z",
+			"before": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=b2aed21cc77e4b9cd828d399528de9c20f72983d;bomb=NG5QQ5\nhttps://youtu.be/SA82f44gkEg"
+				]
+			},
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=b2aed21cc77e4b9cd828d399528de9c20f72983d;bomb=NG5QQ5"
+				]
+			}
+		},
+		{
+			"id": 11057,
+			"userId": "154814006261972992",
+			"model": "Completion",
+			"recordId": "64680",
+			"name": "Inhumane||benjamin172, Bianca, AzaFTW",
+			"action": "update",
+			"timestamp": "2026-08-22T06:35:11.112Z",
+			"before": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=b2aed21cc77e4b9cd828d399528de9c20f72983d;bomb=NG5QQ5"
+				]
+			},
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=b2aed21cc77e4b9cd828d399528de9c20f72983d;bomb=NG5QQ5",
+					"https://youtu.be/SA82f44gkEg"
+				]
+			}
+		},
+		{
+			"id": 11058,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "9409",
+			"name": "Three Hydra Beasts",
+			"action": "update",
+			"timestamp": "2026-08-22T06:36:01.302Z",
+			"before": {},
+			"after": {
+				"bombs": {
+					"update": [
+						{
+							"data": {
+								"time": 9600,
+								"pools": [
+									{ "count": 1, "modules": ["OneHundredAndOneDalmatiansModule"] },
+									{ "count": 1, "modules": ["accumulation"] },
+									{ "count": 1, "modules": ["arithmelogic"] },
+									{ "count": 1, "modules": ["bamboozlingButton"] },
+									{ "count": 1, "modules": ["BattleshipModule"] },
+									{ "count": 1, "modules": ["benedictCumberbatch"] },
+									{ "count": 1, "modules": ["BigCircle"] },
+									{ "count": 1, "modules": ["BinaryLeds"] },
+									{ "count": 1, "modules": ["BinaryPuzzleModule"] },
+									{ "count": 1, "modules": ["BlindAlleyModule"] },
+									{ "count": 1, "modules": ["BlindMaze"] },
+									{ "count": 1, "modules": ["bombDiffusal"] },
+									{ "count": 1, "modules": ["booleanVennModule"] },
+									{ "count": 1, "modules": ["BrailleModule"] },
+									{ "count": 1, "modules": ["britishSlang"] },
+									{ "count": 1, "modules": ["ChordQualities"] },
+									{ "count": 1, "modules": ["Color Decoding"] },
+									{ "count": 1, "modules": ["ColoredSwitchesModule"] },
+									{ "count": 1, "modules": ["ColorfulInsanity"] },
+									{ "count": 1, "modules": ["combinationLock"] },
+									{ "count": 1, "modules": ["complicatedButtonsModule"] },
+									{ "count": 1, "modules": ["CruelPianoKeys"] },
+									{ "count": 1, "modules": ["curriculum"] },
+									{ "count": 1, "modules": ["daylightDirections"] },
+									{ "count": 1, "modules": ["digitalCipher"] },
+									{ "count": 1, "modules": ["digitalRoot"] },
+									{ "count": 1, "modules": ["DiscoloredSquaresModule"] },
+									{ "count": 1, "modules": ["EnglishTest"] },
+									{ "count": 1, "modules": ["equationsXModule"] },
+									{ "count": 1, "modules": ["ExtendedPassword"] },
+									{ "count": 1, "modules": ["FaultySink"] },
+									{ "count": 1, "modules": ["flashingLights"] },
+									{ "count": 1, "modules": ["ForeignExchangeRates"] },
+									{ "count": 1, "modules": ["GameOfLifeCruel"] },
+									{ "count": 1, "modules": ["GameOfLifeSimple"] },
+									{ "count": 1, "modules": ["graffitiNumbers"] },
+									{ "count": 1, "modules": ["GridlockModule"] },
+									{ "count": 1, "modules": ["hexabutton"] },
+									{ "count": 1, "modules": ["lgndHiddenColors"] },
+									{ "count": 1, "modules": ["hieroglyphics"] },
+									{ "count": 1, "modules": ["horribleMemory"] },
+									{ "count": 1, "modules": ["lgndHyperactiveNumbers"] },
+									{ "count": 1, "modules": ["insanetalk"] },
+									{ "count": 1, "modules": ["labyrinth"] },
+									{ "count": 1, "modules": ["LEDEnc"] },
+									{ "count": 1, "modules": ["ledGrid"] },
+									{ "count": 1, "modules": ["leftandRight"] },
+									{ "count": 1, "modules": ["LightCycleModule"] },
+									{ "count": 1, "modules": ["lightspeed"] },
+									{ "count": 1, "modules": ["LionsShareModule"] },
+									{ "count": 1, "modules": ["Listening"] },
+									{ "count": 1, "modules": ["Logic"] },
+									{ "count": 1, "modules": ["logicGates"] },
+									{ "count": 1, "modules": ["logicalButtonsModule"] },
+									{ "count": 1, "modules": ["MaritimeFlagsModule"] },
+									{ "count": 1, "modules": ["Mastermind Cruel"] },
+									{ "count": 1, "modules": ["Mastermind Simple"] },
+									{ "count": 1, "modules": ["KritMicroModules"] },
+									{ "count": 1, "modules": ["Microcontroller"] },
+									{ "count": 1, "modules": ["ModuleAgainstHumanity"] },
+									{ "count": 1, "modules": ["modulusManipulation"] },
+									{ "count": 1, "modules": ["monsplodeCards"] },
+									{ "count": 1, "modules": ["monsplodeFight"] },
+									{ "count": 1, "modules": ["MouseInTheMaze"] },
+									{ "count": 1, "modules": ["MysticSquareModule"] },
+									{ "count": 1, "modules": ["neutralization"] },
+									{ "count": 1, "modules": ["numberCipher"] },
+									{ "count": 1, "modules": ["numberNimbleness"] },
+									{ "count": 1, "modules": ["periodicTable"] },
+									{ "count": 1, "modules": ["PerplexingWiresModule"] },
+									{ "count": 1, "modules": ["Playfair"] },
+									{ "count": 1, "modules": ["MazeV2"] },
+									{ "count": 1, "modules": ["Questionmark"] },
+									{ "count": 1, "modules": ["quintuples"] },
+									{ "count": 1, "modules": ["raidingTemples"] },
+									{ "count": 1, "modules": ["RockPaperScissorsLizardSpockModule"] },
+									{ "count": 1, "modules": ["rubiksClock"] },
+									{ "count": 1, "modules": ["sevenDeadlySins"] },
+									{ "count": 1, "modules": ["Signals"] },
+									{ "count": 1, "modules": ["SillySlots"] },
+									{ "count": 1, "modules": ["simonSamples"] },
+									{ "count": 1, "modules": ["simonScrambles"] },
+									{ "count": 1, "modules": ["simonSounds"] },
+									{ "count": 1, "modules": ["sonicKnuckles"] },
+									{ "count": 1, "modules": ["SplittingTheLootModule"] },
+									{ "count": 1, "modules": ["stainedGlass"] },
+									{ "count": 1, "modules": ["SuperlogicModule"] },
+									{ "count": 1, "modules": ["symbolicColouring"] },
+									{ "count": 1, "modules": ["symbolicCoordinates"] },
+									{ "count": 1, "modules": ["symbolicPasswordModule"] },
+									{ "count": 1, "modules": ["TextField"] },
+									{ "count": 1, "modules": ["triangle"] },
+									{ "count": 1, "modules": ["theTriangleButton"] },
+									{ "count": 1, "modules": ["VaricoloredSquaresModule"] },
+									{ "count": 1, "modules": ["vexillology"] },
+									{ "count": 1, "modules": ["visual_impairment"] },
+									{ "count": 1, "modules": ["WirePlacementModule"] }
+								],
+								"modules": 97,
+								"strikes": 10,
+								"widgets": 5
+							},
+							"where": { "id": 12715 }
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 11059,
+			"userId": "769759393888993289",
+			"model": "Completion",
+			"recordId": "64760",
+			"name": "SoulOrg Endurance||Penne",
+			"action": "create",
+			"timestamp": "2026-08-22T10:38:15.869Z"
+		},
+		{
+			"id": 11060,
+			"userId": "1191631936616140863",
+			"model": "Completion",
+			"recordId": "64761",
+			"name": "SoulOrg Endurance||fuller_HK, a_shrip",
+			"action": "create",
+			"timestamp": "2026-08-22T10:55:24.827Z"
+		},
+		{
+			"id": 11061,
+			"userId": "723142961935941707",
+			"model": "Completion",
+			"recordId": "64762",
+			"name": "Easy Challenge||AsiccAP",
+			"action": "create",
+			"timestamp": "2026-08-22T10:55:56.284Z"
+		},
+		{
+			"id": 11062,
+			"userId": "723142961935941707",
+			"model": "Completion",
+			"recordId": "64763",
+			"name": "Easy Challenge||AsiccAP, fuller_HK",
+			"action": "create",
+			"timestamp": "2026-08-22T10:57:02.056Z"
+		},
+		{
+			"id": 11063,
+			"userId": "723142961935941707",
+			"model": "Completion",
+			"recordId": "64764",
+			"name": "SoulOrg Endurance||AsiccAP",
+			"action": "create",
+			"timestamp": "2026-08-22T10:58:21.744Z"
+		},
+		{
+			"id": 11064,
+			"userId": "723142961935941707",
+			"model": "Completion",
+			"recordId": "64765",
+			"name": "SoulOrg Endurance||fuller_HK, AsiccAP",
+			"action": "create",
+			"timestamp": "2026-08-22T10:59:10.524Z"
+		},
+		{
+			"id": 11065,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64766",
+			"name": "Sound Madness||BladePL",
+			"action": "create",
+			"timestamp": "2026-08-22T11:42:45.610Z"
+		},
+		{
+			"id": 11066,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "64767",
+			"name": "Centidiot||Termet, BladePL, EricB",
+			"action": "create",
+			"timestamp": "2026-08-22T16:27:34.623Z"
+		},
+		{
+			"id": 11067,
+			"userId": "150650873884704769",
+			"model": "Completion",
+			"recordId": "64768",
+			"name": "BlvdBroken's Bomb of Bangers (Easy): Abridged||Sierra, AzaFTW",
+			"action": "create",
+			"timestamp": "2026-08-22T19:06:46.050Z"
+		},
+		{
+			"id": 11068,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64769",
+			"name": "Minefield||ManiaMate",
+			"action": "create",
+			"timestamp": "2026-08-22T19:16:28.917Z"
+		},
+		{
+			"id": 11069,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "64770",
+			"name": "Climactic Collection||Kugel",
+			"action": "create",
+			"timestamp": "2026-08-22T21:29:34.247Z"
+		},
+		{
+			"id": 11070,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "64771",
+			"name": "Remix 1||Kugel",
+			"action": "create",
+			"timestamp": "2026-08-22T21:33:49.425Z"
+		},
+		{
+			"id": 11071,
+			"userId": "229385439767822336",
+			"model": "Completion",
+			"recordId": "64772",
+			"name": "Cookina's Simple Challenge||PugCuber, Sierra",
+			"action": "create",
+			"timestamp": "2026-08-22T22:29:47.860Z"
+		},
+		{
+			"id": 11072,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64773",
+			"name": "Disconnected||Infusion",
+			"action": "create",
+			"timestamp": "2026-08-22T23:42:57.074Z"
+		},
+		{
+			"id": 11073,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64774",
+			"name": "Rainbow Collection||BladePL",
+			"action": "create",
+			"timestamp": "2026-08-23T13:18:36.047Z"
+		},
+		{
+			"id": 11074,
+			"userId": "769759393888993289",
+			"model": "Completion",
+			"recordId": "64775",
+			"name": "Less Chillin'||Penne, AzaFTW, Sierra",
+			"action": "create",
+			"timestamp": "2026-08-23T13:53:16.203Z"
+		},
+		{
+			"id": 11075,
+			"userId": "296337834384687104",
+			"model": "Completion",
+			"recordId": "64776",
+			"name": "Eldoraigne||MásQuéÉlite, Seren, [Nick]",
+			"action": "create",
+			"timestamp": "2026-08-23T15:14:23.499Z"
+		},
+		{
+			"id": 11076,
+			"userId": "587689217937637379",
+			"model": "Completion",
+			"recordId": "64777",
+			"name": "Solo-47||LegendWilleh",
+			"action": "create",
+			"timestamp": "2026-08-23T15:29:41.886Z"
+		},
+		{
+			"id": 11077,
+			"userId": "682058880506658955",
+			"model": "Completion",
+			"recordId": "64778",
+			"name": "Klein gegen Groß||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-08-23T18:33:31.125Z"
+		},
+		{
+			"id": 11078,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64779",
+			"name": "0 Expert||Infusion",
+			"action": "create",
+			"timestamp": "2026-08-23T20:17:05.451Z"
+		},
+		{
+			"id": 11079,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64780",
+			"name": "Pedro||Sierra, AzaFTW, _Play_",
+			"action": "create",
+			"timestamp": "2026-08-23T21:12:37.882Z"
+		},
+		{
+			"id": 11080,
+			"userId": "655508025854918696",
+			"model": "Completion",
+			"recordId": "64781",
+			"name": "Just Vibin'||DerpyDeef, a_shrip, fuller_HK",
+			"action": "create",
+			"timestamp": "2026-08-24T07:42:32.492Z"
+		},
+		{
+			"id": 11081,
+			"userId": "769759393888993289",
+			"model": "Completion",
+			"recordId": "64782",
+			"name": "Asmir's 47||Penne",
+			"action": "create",
+			"timestamp": "2026-08-24T10:28:39.048Z"
+		},
+		{
+			"id": 11082,
+			"userId": "655508025854918696",
+			"model": "Completion",
+			"recordId": "64783",
+			"name": "Asmir's 47||DerpyDeef, thunder725, Sierra",
+			"action": "create",
+			"timestamp": "2026-08-24T10:36:38.642Z"
+		},
+		{
+			"id": 11083,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64519",
+			"name": "Simplifier||benjamin172, Bianca",
+			"action": "update",
+			"timestamp": "2026-08-24T12:07:40.934Z",
+			"before": {
+				"proofs": [
+					"https://www.youtube.com/watch?v=9lCgoLv0rgE",
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=19216ad3d0ed5554ef872ba4af864f440d62872b;bomb=UQ5UU7"
+				],
+				"seasonId": null
+			},
+			"after": {
+				"proofs": [
+					"https://www.youtube.com/watch?v=9lCgoLv0rgE",
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=19216ad3d0ed5554ef872ba4af864f440d62872b;bomb=UQ5UU7",
+					"https://www.youtube.com/watch?v=ZmIEjQ2ybEg"
+				],
+				"seasonId": 3
+			}
+		},
+		{
+			"id": 11084,
+			"userId": "705507300634263653",
+			"model": "Completion",
+			"recordId": "64784",
+			"name": "FMN Hell 3||Possessed",
+			"action": "create",
+			"timestamp": "2026-08-24T18:51:17.588Z"
+		},
+		{
+			"id": 11085,
+			"userId": "705507300634263653",
+			"model": "Completion",
+			"recordId": "64785",
+			"name": "FMN Hell 3||Possessed",
+			"action": "create",
+			"timestamp": "2026-08-24T18:51:17.591Z"
+		},
+		{
+			"id": 11086,
+			"userId": "705507300634263653",
+			"model": "Completion",
+			"recordId": "64786",
+			"name": "FMN Hell 3||Possessed",
+			"action": "create",
+			"timestamp": "2026-08-24T18:51:17.592Z"
+		},
+		{
+			"id": 11087,
+			"userId": "1007642590314778675",
+			"model": "Completion",
+			"recordId": "64787",
+			"name": "Asmir's 47||Eximilus",
+			"action": "create",
+			"timestamp": "2026-08-24T21:07:13.318Z"
+		},
+		{
+			"id": 11088,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "64645",
+			"name": "c12 is feeling lucky||TylerY2992, Men in Black, Brainiac614",
+			"action": "update",
+			"timestamp": "2026-08-24T23:19:25.299Z",
+			"before": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=255c3b3cb4608811eb46df9734a7904eb8298517;bomb=RW4ET7",
+					"https://www.youtube.com/watch?v=_fd0OKFvY18"
+				]
+			},
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=255c3b3cb4608811eb46df9734a7904eb8298517;bomb=RW4ET7",
+					"https://youtu.be/HGNq2YmplRk"
+				]
+			}
+		},
+		{
+			"id": 11089,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "64152",
+			"name": "One Winged Angel's Revenge||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-08-24T23:20:42.606Z",
+			"before": { "proofs": ["https://ktane.timwi.de/lfa#file=b2ec4b46addeaa46d705a22a46dfb0c25deeaec2)"] },
+			"after": { "proofs": ["https://ktane.timwi.de/lfa#file=b2ec4b46addeaa46d705a22a46dfb0c25deeaec2"] }
+		},
+		{
+			"id": 11090,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "64701",
+			"name": "Quickly Now!: Save Jesus!||Infusion, ufoencounter14",
+			"action": "update",
+			"timestamp": "2026-08-24T23:22:30.587Z",
+			"before": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=7a61b3ef4afd04f1b61beb574612b82cb6bdeb83;bomb=AE9IH3",
+					"https://youtube.com/watch?v=pTV3MzJwfYM",
+					"https://youtu.be/ODaHazs0Is8"
+				]
+			},
+			"after": {
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=7a61b3ef4afd04f1b61beb574612b82cb6bdeb83;bomb=AE9IH3",
+					"https://youtube.com/watch?v=pjAA6TAo47Y",
+					"https://youtu.be/ODaHazs0Is8"
+				]
+			}
+		},
+		{
+			"id": 11091,
+			"userId": "764562098466324531",
+			"model": "Completion",
+			"recordId": "64788",
+			"name": "Just Vibin'||Man1",
+			"action": "create",
+			"timestamp": "2026-08-25T00:51:21.361Z"
+		},
+		{
+			"id": 11092,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64785",
+			"name": "FMN Hell 3||Possessed",
+			"action": "delete",
+			"timestamp": "2026-08-25T03:01:11.910Z",
+			"before": {
+				"id": 64785,
+				"old": false,
+				"solo": false,
+				"team": ["Possessed"],
+				"time": 214.34,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=1829d8e9f89ef7a9a2afc017cb97939c212957da;bomb=XA9EN3"
+				],
+				"seasonId": null,
+				"verified": false,
+				"dateAdded": "2026-08-24T18:50:56.002Z",
+				"missionId": 9335,
+				"uploadedBy": "705507300634263653"
+			}
+		},
+		{
+			"id": 11093,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64784",
+			"name": "FMN Hell 3||Possessed",
+			"action": "delete",
+			"timestamp": "2026-08-25T03:01:12.825Z",
+			"before": {
+				"id": 64784,
+				"old": false,
+				"solo": false,
+				"team": ["Possessed"],
+				"time": 214.34,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=1829d8e9f89ef7a9a2afc017cb97939c212957da;bomb=XA9EN3"
+				],
+				"seasonId": null,
+				"verified": false,
+				"dateAdded": "2026-08-24T18:50:56.002Z",
+				"missionId": 9335,
+				"uploadedBy": "705507300634263653"
+			}
+		},
+		{
+			"id": 11094,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "10596",
+			"name": "Klein gegen Groß",
+			"action": "update",
+			"timestamp": "2026-08-25T03:01:18.920Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 11095,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64778",
+			"name": "Klein gegen Groß||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-08-25T03:01:18.931Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11096,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11028",
+			"name": "Kugel's 47: Reimagined (Soulless)",
+			"action": "update",
+			"timestamp": "2026-08-25T03:01:21.854Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 11097,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64758",
+			"name": "Kugel's 47: Reimagined (Soulless)||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-08-25T03:01:21.908Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11098,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11029",
+			"name": "Kugel's 47: Reimagined (Soulful)",
+			"action": "update",
+			"timestamp": "2026-08-25T03:01:22.435Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 11099,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64759",
+			"name": "Kugel's 47: Reimagined (Soulful)||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-08-25T03:01:22.445Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11100,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "10607",
+			"name": "The Kármán Line",
+			"action": "update",
+			"timestamp": "2026-08-25T03:01:24.211Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 11101,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64755",
+			"name": "The Kármán Line||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-08-25T03:01:24.222Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11102,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64703",
+			"name": "Don't join KTANE RU server at 3AM||Twitch Plays",
+			"action": "delete",
+			"timestamp": "2026-08-25T06:30:45.348Z",
+			"before": {
+				"id": 64703,
+				"old": false,
+				"solo": false,
+				"team": ["Twitch Plays"],
+				"time": 1503.73,
+				"first": false,
+				"notes": null,
+				"proofs": ["https://ktane.timwi.de/lfa#file=61773e305bd19055614ca025adb45a7dc875913a"],
+				"seasonId": null,
+				"verified": true,
+				"dateAdded": "2026-08-11T23:41:42.843Z",
+				"missionId": 11154,
+				"uploadedBy": "1199637423215353866"
+			}
+		},
+		{
+			"id": 11103,
+			"userId": "444785660318973952",
+			"model": "Completion",
+			"recordId": "64789",
+			"name": "Easy Challenge||Fidalukas, adamozcz",
+			"action": "create",
+			"timestamp": "2026-08-25T15:33:47.260Z"
+		},
+		{
+			"id": 11104,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64790",
+			"name": "Organisation Rush II||Sierra, Penne",
+			"action": "create",
+			"timestamp": "2026-08-25T15:39:29.594Z"
+		},
+		{
+			"id": 11105,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "64791",
+			"name": "maplebomb||Kugel",
+			"action": "create",
+			"timestamp": "2026-08-26T02:31:49.698Z"
+		},
+		{
+			"id": 11106,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64792",
+			"name": "Blind Man||Infusion",
+			"action": "create",
+			"timestamp": "2026-08-26T02:52:14.534Z"
+		},
+		{
+			"id": 11107,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64793",
+			"name": "Memory Hell||Jawly_Gaming, Penne, DrkL",
+			"action": "create",
+			"timestamp": "2026-08-26T03:17:57.673Z"
+		},
+		{
+			"id": 11108,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64794",
+			"name": "Inhumane||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-08-26T03:19:10.367Z"
+		},
+		{
+			"id": 11109,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64795",
+			"name": "Blitz||Jawly_Gaming, Penne, DrkL",
+			"action": "create",
+			"timestamp": "2026-08-26T03:19:50.768Z"
+		},
+		{
+			"id": 11110,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "9904",
+			"name": "Twitch Triumphs",
+			"action": "update",
+			"timestamp": "2026-08-26T09:21:43.674Z",
+			"before": { "designedForTP": false },
+			"after": { "designedForTP": true }
+		},
+		{
+			"id": 11111,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "64796",
+			"name": "Sorry||Danielstigman, miki2003pl, Termet",
+			"action": "create",
+			"timestamp": "2026-08-26T14:07:16.780Z"
+		},
+		{
+			"id": 11112,
+			"userId": "1007642590314778675",
+			"model": "Completion",
+			"recordId": "64797",
+			"name": "SoulOrg Endurance||Eximilus",
+			"action": "create",
+			"timestamp": "2026-08-26T22:09:11.759Z"
+		},
+		{
+			"id": 11113,
+			"userId": "265294329709330432",
+			"model": "Mission",
+			"recordId": "11214",
+			"name": "Microwave",
+			"action": "create",
+			"timestamp": "2026-08-27T02:18:59.547Z"
+		},
+		{
+			"id": 11114,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64798",
+			"name": "Sweet 16||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-08-27T02:25:55.580Z"
+		},
+		{
+			"id": 11115,
+			"userId": "265294329709330432",
+			"model": "Mission",
+			"recordId": "11215",
+			"name": "[[UPDATE]] One Winged Angel's Revenge",
+			"action": "create",
+			"timestamp": "2026-08-27T02:36:44.126Z"
+		},
+		{
+			"id": 11116,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64799",
+			"name": "Olievenhoutbosch||denial140",
+			"action": "create",
+			"timestamp": "2026-08-27T07:25:17.026Z"
+		},
+		{
+			"id": 11117,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64800",
+			"name": "Organisation Rush||Jawly_Gaming, Penne",
+			"action": "create",
+			"timestamp": "2026-08-27T08:55:52.281Z"
+		},
+		{
+			"id": 11118,
+			"userId": "444785660318973952",
+			"model": "Completion",
+			"recordId": "64801",
+			"name": "Nothing To Spare: Quickly Now!||adamozcz",
+			"action": "create",
+			"timestamp": "2026-08-27T11:22:28.896Z"
+		},
+		{
+			"id": 11119,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64802",
+			"name": "Nothing To Spare: Another Quick Bomb||Jawly_Gaming, Penne",
+			"action": "create",
+			"timestamp": "2026-08-27T11:39:02.863Z"
+		},
+		{
+			"id": 11120,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64803",
+			"name": "Doringkloof||AsiccAP, fuller_HK",
+			"action": "create",
+			"timestamp": "2026-08-27T11:44:27.279Z"
+		},
+		{
+			"id": 11121,
+			"userId": "998723698452332544",
+			"model": "Completion",
+			"recordId": "64804",
+			"name": "Quickly Now!: Go To Sainsbury's!||ufoencounter14, Penne, Infusion",
+			"action": "create",
+			"timestamp": "2026-08-27T12:11:23.072Z"
+		},
+		{
+			"id": 11122,
+			"userId": "612981293839286282",
+			"model": "Completion",
+			"recordId": "64805",
+			"name": "ÜberKlax Endurance||ExiledStarborn, PugCuber, AzaFTW",
+			"action": "create",
+			"timestamp": "2026-08-27T13:41:31.459Z"
+		},
+		{
+			"id": 11123,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64806",
+			"name": "Olievenhoutbosch||AsiccAP, fuller_HK",
+			"action": "create",
+			"timestamp": "2026-08-27T17:19:13.735Z"
+		},
+		{
+			"id": 11124,
+			"userId": "234733182442799104",
+			"model": "Completion",
+			"recordId": "64807",
+			"name": "Flyer's 49 Problems In A Parallel Universe||Danielstigman, BladePL, miki2003pl",
+			"action": "create",
+			"timestamp": "2026-08-27T17:27:56.867Z"
+		},
+		{
+			"id": 11125,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64808",
+			"name": "Central Defusing Unit||Infusion",
+			"action": "create",
+			"timestamp": "2026-08-28T03:15:44.076Z"
+		},
+		{
+			"id": 11126,
+			"userId": "1191631936616140863",
+			"model": "Completion",
+			"recordId": "64809",
+			"name": "Just Vibin'||a_shrip",
+			"action": "create",
+			"timestamp": "2026-08-28T10:49:56.015Z"
+		},
+		{
+			"id": 11127,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64810",
+			"name": "Asmir's 47 Vol. 2||Sierra, Penne",
+			"action": "create",
+			"timestamp": "2026-08-28T11:05:21.488Z"
+		},
+		{
+			"id": 11128,
+			"userId": "769759393888993289",
+			"model": "Completion",
+			"recordId": "64811",
+			"name": "Build Easy Bomb, Then We'll Talk||Penne",
+			"action": "create",
+			"timestamp": "2026-08-28T13:19:49.530Z"
+		},
+		{
+			"id": 11129,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64812",
+			"name": "Sweet 16||AsiccAP, Umbra Moruka, fuller_HK",
+			"action": "create",
+			"timestamp": "2026-08-28T15:31:11.182Z"
+		},
+		{
+			"id": 11130,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64813",
+			"name": "Decathlon||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-08-28T18:54:57.039Z"
+		},
+		{
+			"id": 11131,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64739",
+			"name": "74 Modules||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2026-08-29T07:30:29.286Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11132,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64740",
+			"name": "Easy Challenge||fuller_HK, AsiccAP",
+			"action": "update",
+			"timestamp": "2026-08-29T07:30:30.478Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11133,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64741",
+			"name": "SoulOrg Endurance||AsiccAP, fuller_HK",
+			"action": "update",
+			"timestamp": "2026-08-29T07:30:31.021Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11134,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64745",
+			"name": "SoulOrg Endurance||fuller_HK",
+			"action": "update",
+			"timestamp": "2026-08-29T07:30:39.038Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11135,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64746",
+			"name": "SoulOrg Endurance||a_shrip",
+			"action": "update",
+			"timestamp": "2026-08-29T07:30:39.601Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11136,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64760",
+			"name": "SoulOrg Endurance||Penne",
+			"action": "update",
+			"timestamp": "2026-08-29T07:30:47.846Z",
+			"before": { "verified": false, "dateAdded": "2026-08-22T10:38:08.439Z" },
+			"after": { "verified": true, "dateAdded": "2026-06-13T10:12:49.385Z" }
+		},
+		{
+			"id": 11137,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64368",
+			"name": "SoulOrg Endurance||Penne",
+			"action": "delete",
+			"timestamp": "2026-08-29T07:30:47.857Z",
+			"before": {
+				"id": 64368,
+				"old": false,
+				"solo": false,
+				"team": ["Penne"],
+				"time": 4597.73,
+				"first": false,
+				"notes": null,
+				"proofs": ["https://ktane.timwi.de/lfa#file=f922e42cb837a6890212fb998794ede44bba90d2"],
+				"seasonId": null,
+				"verified": true,
+				"dateAdded": "2026-06-13T10:12:49.385Z",
+				"missionId": 10460,
+				"uploadedBy": "769759393888993289"
+			}
+		},
+		{
+			"id": 11138,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64762",
+			"name": "Easy Challenge||AsiccAP",
+			"action": "update",
+			"timestamp": "2026-08-29T07:30:51.285Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11139,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64761",
+			"name": "SoulOrg Endurance||fuller_HK, a_shrip",
+			"action": "update",
+			"timestamp": "2026-08-29T07:30:54.028Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11140,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64763",
+			"name": "Easy Challenge||AsiccAP, fuller_HK",
+			"action": "update",
+			"timestamp": "2026-08-29T07:30:55.817Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11141,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64764",
+			"name": "SoulOrg Endurance||AsiccAP",
+			"action": "update",
+			"timestamp": "2026-08-29T07:30:56.785Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11142,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64765",
+			"name": "SoulOrg Endurance||fuller_HK, AsiccAP",
+			"action": "update",
+			"timestamp": "2026-08-29T07:30:57.884Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11143,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64776",
+			"name": "Eldoraigne||MásQuéÉlite, Seren, [Nick]",
+			"action": "update",
+			"timestamp": "2026-08-29T07:31:14.975Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11144,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64781",
+			"name": "Just Vibin'||DerpyDeef, a_shrip, fuller_HK",
+			"action": "update",
+			"timestamp": "2026-08-29T07:31:19.663Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11145,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64782",
+			"name": "Asmir's 47||Penne",
+			"action": "update",
+			"timestamp": "2026-08-29T07:31:22.013Z",
+			"before": { "verified": false, "dateAdded": "2026-08-24T10:28:32.861Z" },
+			"after": { "verified": true, "dateAdded": "2026-06-14T20:03:45.211Z" }
+		},
+		{
+			"id": 11146,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64426",
+			"name": "Asmir's 47||Penne",
+			"action": "delete",
+			"timestamp": "2026-08-29T07:31:22.026Z",
+			"before": {
+				"id": 64426,
+				"old": false,
+				"solo": false,
+				"team": ["Penne"],
+				"time": 1250.27,
+				"first": false,
+				"notes": null,
+				"proofs": ["https://ktane.timwi.de/lfa#file=bfc53e049ab377c3f853be7dadfd7c531f8c6e84"],
+				"seasonId": null,
+				"verified": true,
+				"dateAdded": "2026-06-14T20:03:45.211Z",
+				"missionId": 9629,
+				"uploadedBy": "769759393888993289"
+			}
+		},
+		{
+			"id": 11147,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64797",
+			"name": "SoulOrg Endurance||Eximilus",
+			"action": "update",
+			"timestamp": "2026-08-29T07:31:39.057Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11148,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64802",
+			"name": "Nothing To Spare: Another Quick Bomb||Jawly_Gaming, Penne",
+			"action": "update",
+			"timestamp": "2026-08-29T07:31:51.070Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11149,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11019",
+			"name": "Decathlon",
+			"action": "update",
+			"timestamp": "2026-08-29T07:32:01.068Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 11150,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64813",
+			"name": "Decathlon||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-08-29T07:32:01.079Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11151,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64742",
+			"name": "Medium-Popular Demand||ManiaMate",
+			"action": "update",
+			"timestamp": "2026-08-29T07:32:42.844Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11152,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64753",
+			"name": "Build Easy Bomb, Then We'll Talk||Blan",
+			"action": "update",
+			"timestamp": "2026-08-29T07:35:17.694Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11153,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64754",
+			"name": "Possibly Impossible: Ultra Deluxe Edition||Jawly_Gaming, Penne",
+			"action": "update",
+			"timestamp": "2026-08-29T07:49:04.558Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11154,
+			"userId": "764562098466324531",
+			"model": "Completion",
+			"recordId": "64814",
+			"name": "Possibly Impossible||Man1",
+			"action": "create",
+			"timestamp": "2026-08-29T08:35:56.123Z"
+		},
+		{
+			"id": 11155,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64815",
+			"name": "Organisation Rush||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-08-29T12:00:28.904Z"
+		},
+		{
+			"id": 11156,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64816",
+			"name": "Multi-Failure||BladePL",
+			"action": "create",
+			"timestamp": "2026-08-29T12:34:13.210Z"
+		},
+		{
+			"id": 11157,
+			"userId": "836147273418670101",
+			"model": "Completion",
+			"recordId": "64817",
+			"name": "Doringkloof||Jafary_human",
+			"action": "create",
+			"timestamp": "2026-08-29T13:32:20.467Z"
+		},
+		{
+			"id": 11158,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64818",
+			"name": "Sweet 16||fuller_HK, D3K, AsiccAP",
+			"action": "create",
+			"timestamp": "2026-08-29T17:00:09.550Z"
+		},
+		{
+			"id": 11159,
+			"userId": "268422349760495617",
+			"model": "Completion",
+			"recordId": "64819",
+			"name": "Hummingbird||thunder725",
+			"action": "create",
+			"timestamp": "2026-08-29T17:27:41.985Z"
+		},
+		{
+			"id": 11160,
+			"userId": "444785660318973952",
+			"model": "Completion",
+			"recordId": "64820",
+			"name": "Nothing To Spare: Another Quick Bomb||adamozcz",
+			"action": "create",
+			"timestamp": "2026-08-29T20:22:10.543Z"
+		},
+		{
+			"id": 11161,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64821",
+			"name": "Colored Colors||Infusion",
+			"action": "create",
+			"timestamp": "2026-08-30T03:43:12.418Z"
+		},
+		{
+			"id": 11162,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64822",
+			"name": "An Idol||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-08-30T06:18:16.307Z"
+		},
+		{
+			"id": 11163,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64823",
+			"name": "An Idol mk2||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-08-30T06:50:19.195Z"
+		},
+		{
+			"id": 11164,
+			"userId": "444785660318973952",
+			"model": "Completion",
+			"recordId": "64824",
+			"name": "Easy Challenge||adamozcz, Andy",
+			"action": "create",
+			"timestamp": "2026-08-30T09:29:58.617Z"
+		},
+		{
+			"id": 11165,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "9984",
+			"name": "Post This Bomb to Make Espik Instantly Laugh",
+			"action": "update",
+			"timestamp": "2026-08-30T12:02:04.362Z",
+			"before": {},
+			"after": {
+				"bombs": {
+					"update": [
+						{
+							"data": {
+								"time": 4500,
+								"pools": [
+									{ "count": 1, "modules": ["OneThousandWords"] },
+									{ "count": 1, "modules": ["TwennyWan"] },
+									{ "count": 1, "modules": ["AnsweringCanBeFun"] },
+									{ "count": 1, "modules": ["bamboozlingButton"] },
+									{ "count": 1, "modules": ["benedictCumberbatch"] },
+									{ "count": 1, "modules": ["blueWhale"] },
+									{ "count": 1, "modules": ["boobTubeModule"] },
+									{ "count": 1, "modules": ["BookOfMarioModule"] },
+									{ "count": 1, "modules": ["GSBottomGear"] },
+									{ "count": 1, "modules": ["GSBottomGear2"] },
+									{ "count": 1, "modules": ["Chalices"] },
+									{ "count": 1, "modules": ["colourTalk"] },
+									{ "count": 1, "modules": ["console"] },
+									{ "count": 1, "modules": ["cookieJars"] },
+									{ "count": 1, "modules": ["theCruelDuck"] },
+									{ "count": 1, "modules": ["thedealmaker"] },
+									{ "count": 1, "modules": ["Detonato"] },
+									{ "count": 1, "modules": ["Dictation"] },
+									{ "count": 1, "modules": ["doofenshmirtzEvilIncModule"] },
+									{ "count": 1, "modules": ["DIWindow"] },
+									{ "count": 1, "modules": ["duckKonundrum"] },
+									{ "count": 1, "modules": ["EmotiguyIdentification"] },
+									{ "count": 1, "modules": ["EnglishEntries"] },
+									{ "count": 1, "modules": ["gettinFunkyModule"] },
+									{ "count": 1, "modules": ["graduallyWatermelon"] },
+									{ "count": 1, "modules": ["JadenSmithTalk"] },
+									{ "count": 1, "modules": ["KMazeyTalk"] },
+									{ "count": 1, "modules": ["krazyTalk"] },
+									{ "count": 1, "modules": ["kusaNihonglish"] },
+									{ "count": 1, "modules": ["Lean"] },
+									{ "count": 1, "modules": ["LoganJukebox"] },
+									{ "count": 1, "modules": ["masherTheBottun"] },
+									{ "count": 1, "modules": ["NeeDeezNuts"] },
+									{ "count": 1, "modules": ["notPlungerButtonModule"] },
+									{ "count": 1, "modules": ["obamaGroceryStore"] },
+									{ "count": 1, "modules": ["oldFogey"] },
+									{ "count": 1, "modules": ["QLModule"] },
+									{ "count": 1, "modules": ["RedHerring"] },
+									{ "count": 1, "modules": ["RegularCrazyTalkModule"] },
+									{ "count": 1, "modules": ["theSamsung"] },
+									{ "count": 1, "modules": ["ScramboozledEggainModule"] },
+									{ "count": 1, "modules": ["SimonsSatire"] },
+									{ "count": 1, "modules": ["StockImages"] },
+									{ "count": 1, "modules": ["stupidSlots"] },
+									{ "count": 1, "modules": ["subblyJubbly"] },
+									{ "count": 1, "modules": ["tenpins"] },
+									{ "count": 1, "modules": ["weirdAlYankovic"] }
+								],
+								"modules": 47,
+								"strikes": 5,
+								"widgets": 5
+							},
+							"where": { "id": 13519 }
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 11166,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64825",
+			"name": "Primal Cipher||BladePL",
+			"action": "create",
+			"timestamp": "2026-08-30T12:42:43.555Z"
+		},
+		{
+			"id": 11167,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64826",
+			"name": "Locksmith||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-08-30T14:43:06.783Z"
+		},
+		{
+			"id": 11168,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64827",
+			"name": "Eldoraigne||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-08-30T16:06:57.051Z"
+		},
+		{
+			"id": 11169,
+			"userId": "898915665736515644",
+			"model": "Completion",
+			"recordId": "64828",
+			"name": "Eldoraigne||Umbra Moruka, D3K, AsiccAP",
+			"action": "create",
+			"timestamp": "2026-08-30T16:59:51.280Z"
+		},
+		{
+			"id": 11170,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64829",
+			"name": "Eldoraigne||fuller_HK, AsiccAP, Umbra Moruka",
+			"action": "create",
+			"timestamp": "2026-08-31T01:27:58.659Z"
+		},
+		{
+			"id": 11171,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "64830",
+			"name": "Crazyturion||Termet",
+			"action": "create",
+			"timestamp": "2026-08-31T02:02:41.671Z"
+		},
+		{
+			"id": 11172,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64831",
+			"name": "An Idol||Jawly_Gaming, Penne",
+			"action": "create",
+			"timestamp": "2026-08-31T08:35:08.743Z"
+		},
+		{
+			"id": 11173,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64832",
+			"name": "An Idol mk2||Jawly_Gaming, Penne",
+			"action": "create",
+			"timestamp": "2026-08-31T08:44:52.054Z"
+		},
+		{
+			"id": 11174,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64833",
+			"name": "Phoenix||Sierra",
+			"action": "create",
+			"timestamp": "2026-08-31T12:14:13.134Z"
+		},
+		{
+			"id": 11175,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "9498",
+			"name": "The Eagle",
+			"action": "update",
+			"timestamp": "2026-08-31T12:21:19.256Z",
+			"before": { "name": "The Eagle", "inGameName": null },
+			"after": { "name": "Eagle", "inGameName": "The Eagle" }
+		},
+		{
+			"id": 11176,
+			"userId": "1191631936616140863",
+			"model": "Completion",
+			"recordId": "64834",
+			"name": "Just Vibin'||a_shrip, DerpyDeef",
+			"action": "create",
+			"timestamp": "2026-08-31T12:43:47.684Z"
+		},
+		{
+			"id": 11177,
+			"userId": "836147273418670101",
+			"model": "MissionPack",
+			"recordId": "645",
+			"name": "Jafary_mission_pack",
+			"action": "create",
+			"timestamp": "2026-08-31T12:49:17.085Z"
+		},
+		{
+			"id": 11178,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64835",
+			"name": "A-Not-So-Hard||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-08-31T13:00:18.529Z"
+		},
+		{
+			"id": 11179,
+			"userId": "836147273418670101",
+			"model": "Mission",
+			"recordId": "11216",
+			"name": "\"X solved at Y\" Endurance",
+			"action": "create",
+			"timestamp": "2026-08-31T13:00:58.098Z"
+		},
+		{
+			"id": 11180,
+			"userId": "1007642590314778675",
+			"model": "Completion",
+			"recordId": "64836",
+			"name": "Dove||Eximilus",
+			"action": "create",
+			"timestamp": "2026-08-31T15:51:50.114Z"
+		},
+		{
+			"id": 11181,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64837",
+			"name": "Squares of Division||Jawly_Gaming, Penne",
+			"action": "create",
+			"timestamp": "2026-08-31T17:37:10.045Z"
+		},
+		{
+			"id": 11182,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64838",
+			"name": "Olievenhoutbosch||denial140, Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-08-31T17:56:24.339Z"
+		},
+		{
+			"id": 11183,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64839",
+			"name": "Firefly||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-09-01T06:04:18.830Z"
+		},
+		{
+			"id": 11184,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64840",
+			"name": "Em-Cee-A-Turion||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-09-01T11:13:32.760Z"
+		},
+		{
+			"id": 11185,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64841",
+			"name": "Irene||fuller_HK, AsiccAP",
+			"action": "create",
+			"timestamp": "2026-09-01T15:42:24.117Z"
+		},
+		{
+			"id": 11186,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64842",
+			"name": "I Forgot Them All||Infusion",
+			"action": "create",
+			"timestamp": "2026-09-01T23:24:51.960Z"
+		},
+		{
+			"id": 11187,
+			"userId": "329366208014974977",
+			"model": "Completion",
+			"recordId": "64843",
+			"name": "Ultimaturion||Danielstigman, miki2003pl, Termet",
+			"action": "create",
+			"timestamp": "2026-09-02T07:27:11.251Z"
+		},
+		{
+			"id": 11188,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64844",
+			"name": "Supernova||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-02T11:25:18.860Z"
+		},
+		{
+			"id": 11189,
+			"userId": "369759696577495041",
+			"model": "Completion",
+			"recordId": "64845",
+			"name": "A Way Out||DrkL",
+			"action": "create",
+			"timestamp": "2026-09-02T12:16:41.755Z"
+		},
+		{
+			"id": 11190,
+			"userId": "655508025854918696",
+			"model": "Completion",
+			"recordId": "64846",
+			"name": "jjjjjjjjjj||DerpyDeef, a_shrip, Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-09-02T13:03:05.867Z"
+		},
+		{
+			"id": 11191,
+			"userId": "1191631936616140863",
+			"model": "Completion",
+			"recordId": "64847",
+			"name": "SoulOrg Endurance||a_shrip, Andy, DerpyDeef",
+			"action": "create",
+			"timestamp": "2026-09-02T13:24:20.391Z"
+		},
+		{
+			"id": 11192,
+			"userId": "655508025854918696",
+			"model": "Completion",
+			"recordId": "64848",
+			"name": "Nothing To Spare: Quickly Now!||DerpyDeef",
+			"action": "create",
+			"timestamp": "2026-09-02T14:08:14.730Z"
+		},
+		{
+			"id": 11193,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64849",
+			"name": "One True Souvenir Army||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-09-02T17:30:37.523Z"
+		},
+		{
+			"id": 11194,
+			"userId": "556222727896170539",
+			"model": "Completion",
+			"recordId": "64850",
+			"name": "Easy Challenge||Ranger, Chaos",
+			"action": "create",
+			"timestamp": "2026-09-03T01:38:32.740Z"
+		},
+		{
+			"id": 11195,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64851",
+			"name": "Irene||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-09-03T10:25:10.018Z"
+		},
+		{
+			"id": 11196,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64852",
+			"name": "Doringkloof||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-09-03T11:17:24.449Z"
+		},
+		{
+			"id": 11197,
+			"userId": "769759393888993289",
+			"model": "Completion",
+			"recordId": "64853",
+			"name": "Easy Challenge||Penne",
+			"action": "create",
+			"timestamp": "2026-09-03T12:40:13.230Z"
+		},
+		{
+			"id": 11198,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64854",
+			"name": "Olievenhoutbosch||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-09-03T12:47:18.090Z"
+		},
+		{
+			"id": 11199,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64855",
+			"name": "Riptide||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-09-03T12:56:05.568Z"
+		},
+		{
+			"id": 11200,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64856",
+			"name": "Tyler-Why||Sierra, Penne",
+			"action": "create",
+			"timestamp": "2026-09-03T14:11:16.584Z"
+		},
+		{
+			"id": 11201,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64857",
+			"name": "Crystalless Riptide||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-09-03T15:20:20.971Z"
+		},
+		{
+			"id": 11202,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64858",
+			"name": "Simon's 47||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-03T17:50:22.173Z"
+		},
+		{
+			"id": 11203,
+			"userId": "489804737391230987",
+			"model": "Completion",
+			"recordId": "64859",
+			"name": "Just Vibin'||Chaos",
+			"action": "create",
+			"timestamp": "2026-09-03T21:43:55.959Z"
+		},
+		{
+			"id": 11204,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "64860",
+			"name": "Double Down||Termet",
+			"action": "create",
+			"timestamp": "2026-09-03T21:45:34.529Z"
+		},
+		{
+			"id": 11205,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64861",
+			"name": "Centurion||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-09-04T09:18:54.643Z"
+		},
+		{
+			"id": 11206,
+			"userId": "1191631936616140863",
+			"model": "Completion",
+			"recordId": "64862",
+			"name": "jjjjjjjjjj||a_shrip",
+			"action": "create",
+			"timestamp": "2026-09-04T10:25:12.364Z"
+		},
+		{
+			"id": 11207,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64863",
+			"name": "Unreasonable Affinities||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-04T12:30:04.941Z"
+		},
+		{
+			"id": 11208,
+			"userId": "769759393888993289",
+			"model": "Completion",
+			"recordId": "64864",
+			"name": "Doringkloof||Penne",
+			"action": "create",
+			"timestamp": "2026-09-04T14:11:33.904Z"
+		},
+		{
+			"id": 11209,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64865",
+			"name": "Modder Marathon 7 (Factory static)||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-09-04T16:14:55.136Z"
+		},
+		{
+			"id": 11210,
+			"userId": "386319360974651394",
+			"model": "Completion",
+			"recordId": "64866",
+			"name": "Master Group||ManiaMate, BladePL, Termet",
+			"action": "create",
+			"timestamp": "2026-09-04T20:04:33.666Z"
+		},
+		{
+			"id": 11211,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64867",
+			"name": "Mathematicality||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-05T09:44:12.755Z"
+		},
+		{
+			"id": 11212,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64868",
+			"name": "Hold It||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-05T14:54:23.415Z"
+		},
+		{
+			"id": 11213,
+			"userId": "1007642590314778675",
+			"model": "Completion",
+			"recordId": "64869",
+			"name": "Blank Madness||Eximilus",
+			"action": "create",
+			"timestamp": "2026-09-05T17:09:47.892Z"
+		},
+		{
+			"id": 11214,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64870",
+			"name": "CommRUniturion||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-09-05T17:29:47.816Z"
+		},
+		{
+			"id": 11215,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64871",
+			"name": "Just Vibin'||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-09-06T07:14:31.370Z"
+		},
+		{
+			"id": 11216,
+			"userId": "1191631936616140863",
+			"model": "Completion",
+			"recordId": "64872",
+			"name": "Bnuuy||a_shrip",
+			"action": "create",
+			"timestamp": "2026-09-06T13:13:26.851Z"
+		},
+		{
+			"id": 11217,
+			"userId": "1457124130359873579",
+			"model": "Mission",
+			"recordId": "11217",
+			"name": "Don't Lose Count",
+			"action": "create",
+			"timestamp": "2026-09-06T17:58:17.024Z"
+		},
+		{
+			"id": 11218,
+			"userId": "1457124130359873579",
+			"model": "Mission",
+			"recordId": "11218",
+			"name": "Univocalism",
+			"action": "create",
+			"timestamp": "2026-09-06T17:59:54.338Z"
+		},
+		{
+			"id": 11219,
+			"userId": "1457124130359873579",
+			"model": "Mission",
+			"recordId": "11219",
+			"name": "Drietrestrois",
+			"action": "create",
+			"timestamp": "2026-09-06T18:00:50.469Z"
+		},
+		{
+			"id": 11220,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64873",
+			"name": "Alternative Affinities||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-06T18:05:39.846Z"
+		},
+		{
+			"id": 11221,
+			"userId": "138339442346819584",
+			"model": "Mission",
+			"recordId": "11220",
+			"name": "Game Within The Game 2",
+			"action": "create",
+			"timestamp": "2026-09-06T20:03:19.577Z"
+		},
+		{
+			"id": 11222,
+			"userId": "138339442346819584",
+			"model": "Mission",
+			"recordId": "11221",
+			"name": "The cruelty of Sideral9999",
+			"action": "create",
+			"timestamp": "2026-09-06T20:03:50.026Z"
+		},
+		{
+			"id": 11223,
+			"userId": "138339442346819584",
+			"model": "Mission",
+			"recordId": "11222",
+			"name": "Stage 3",
+			"action": "create",
+			"timestamp": "2026-09-06T20:04:17.143Z"
+		},
+		{
+			"id": 11224,
+			"userId": "1191631936616140863",
+			"model": "Completion",
+			"recordId": "64874",
+			"name": "Bnuuy||a_shrip, DerpyDeef",
+			"action": "create",
+			"timestamp": "2026-09-07T11:34:11.825Z"
+		},
+		{
+			"id": 11225,
+			"userId": "350705948718923779",
+			"model": "Completion",
+			"recordId": "64875",
+			"name": "Easy Challenge||NickLatkovich",
+			"action": "create",
+			"timestamp": "2026-09-07T17:22:14.116Z"
+		},
+		{
+			"id": 11226,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64876",
+			"name": "Sink or Swim||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-09-08T07:26:38.314Z"
+		},
+		{
+			"id": 11227,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64877",
+			"name": "A Koopa's Favorite Modules||Jawly_Gaming, Penne",
+			"action": "create",
+			"timestamp": "2026-09-08T12:57:54.123Z"
+		},
+		{
+			"id": 11228,
+			"userId": "324745816260608012",
+			"model": "Completion",
+			"recordId": "64878",
+			"name": "Nervous Submission||Eltrick, nameless, Varunaxx",
+			"action": "create",
+			"timestamp": "2026-09-08T15:56:43.414Z"
+		},
+		{
+			"id": 11229,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64879",
+			"name": "Em-Cee-A-Turion (Abridged)||Jawly_Gaming, Penne",
+			"action": "create",
+			"timestamp": "2026-09-08T17:07:59.473Z"
+		},
+		{
+			"id": 11230,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64880",
+			"name": "Extraction (Pt. 3)||Jawly_Gaming, Penne",
+			"action": "create",
+			"timestamp": "2026-09-08T17:08:58.912Z"
+		},
+		{
+			"id": 11231,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64881",
+			"name": "Rendezvous (Pt. 1)||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-09-08T18:32:15.768Z"
+		},
+		{
+			"id": 11232,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64882",
+			"name": "Things Sometimes Don't Quite Go to Plan||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-09-08T21:36:13.671Z"
+		},
+		{
+			"id": 11233,
+			"userId": "774467699333398571",
+			"model": "Completion",
+			"recordId": "64883",
+			"name": "Easy Challenge||MoonWuzDrawing",
+			"action": "create",
+			"timestamp": "2026-09-09T00:03:45.155Z"
+		},
+		{
+			"id": 11234,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64884",
+			"name": "Orientation Week||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-09T10:39:39.217Z"
+		},
+		{
+			"id": 11235,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64885",
+			"name": "Insert Coin||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-09-09T11:12:15.599Z"
+		},
+		{
+			"id": 11236,
+			"userId": "213189526837919745",
+			"model": "Completion",
+			"recordId": "64886",
+			"name": "An Idol mk2||Crazycaleb",
+			"action": "create",
+			"timestamp": "2026-09-10T13:33:11.835Z"
+		},
+		{
+			"id": 11237,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64887",
+			"name": "Unfortunately Unsurprising||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-10T17:32:06.155Z"
+		},
+		{
+			"id": 11238,
+			"userId": "655508025854918696",
+			"model": "Completion",
+			"recordId": "64888",
+			"name": "Sweet 16||DerpyDeef",
+			"action": "create",
+			"timestamp": "2026-09-11T09:11:09.960Z"
+		},
+		{
+			"id": 11239,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64889",
+			"name": ":((=||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-09-11T14:49:38.125Z"
+		},
+		{
+			"id": 11240,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64890",
+			"name": "Puzzler's Gaming Fantasy||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-11T16:29:29.568Z"
+		},
+		{
+			"id": 11241,
+			"userId": "234733182442799104",
+			"model": "Completion",
+			"recordId": "64891",
+			"name": "Purple||Danielstigman, miki2003pl, Varunaxx",
+			"action": "create",
+			"timestamp": "2026-09-11T18:35:15.880Z"
+		},
+		{
+			"id": 11242,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64892",
+			"name": "Asmir's 47||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-09-12T03:24:31.846Z"
+		},
+		{
+			"id": 11243,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64893",
+			"name": "Another Audacious Alliterative Adventure||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-09-12T19:25:58.649Z"
+		},
+		{
+			"id": 11244,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64894",
+			"name": "Quickly Now!: !unclaimall||Infusion, AzaFTW, Penne",
+			"action": "create",
+			"timestamp": "2026-09-12T21:42:24.707Z"
+		},
+		{
+			"id": 11245,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11058",
+			"name": "Things Sometimes Don't Quite Go to Plan",
+			"action": "update",
+			"timestamp": "2026-09-13T02:56:36.237Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 11246,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64882",
+			"name": "Things Sometimes Don't Quite Go to Plan||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-09-13T02:56:36.275Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11247,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "10490",
+			"name": "CommRUniturion",
+			"action": "update",
+			"timestamp": "2026-09-13T02:56:39.034Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 11248,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64870",
+			"name": "CommRUniturion||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-09-13T02:56:39.068Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11249,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11111",
+			"name": "Modder Marathon 7 (Factory static)",
+			"action": "update",
+			"timestamp": "2026-09-13T02:56:42.369Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 11250,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64865",
+			"name": "Modder Marathon 7 (Factory static)||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-09-13T02:56:42.600Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11251,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11035",
+			"name": "Another Audacious Alliterative Adventure",
+			"action": "update",
+			"timestamp": "2026-09-13T02:57:30.010Z",
+			"before": { "tpSolve": false },
+			"after": { "tpSolve": true }
+		},
+		{
+			"id": 11252,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64893",
+			"name": "Another Audacious Alliterative Adventure||Twitch Plays",
+			"action": "update",
+			"timestamp": "2026-09-13T02:57:30.020Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11253,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64752",
+			"name": "Nightmare Mode: Savor the Moment||ManiaMate",
+			"action": "update",
+			"timestamp": "2026-09-13T03:47:18.012Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11254,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64757",
+			"name": "Solo-47||LegendWilleh",
+			"action": "update",
+			"timestamp": "2026-09-13T03:47:25.355Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11255,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64769",
+			"name": "Minefield||ManiaMate",
+			"action": "update",
+			"timestamp": "2026-09-13T03:48:15.477Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11256,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64770",
+			"name": "Climactic Collection||Kugel",
+			"action": "update",
+			"timestamp": "2026-09-13T03:48:51.100Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11257,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64768",
+			"name": "BlvdBroken's Bomb of Bangers (Easy): Abridged||Sierra, AzaFTW",
+			"action": "update",
+			"timestamp": "2026-09-13T03:48:53.077Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11258,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64772",
+			"name": "Cookina's Simple Challenge||PugCuber, Sierra",
+			"action": "update",
+			"timestamp": "2026-09-13T03:48:56.208Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11259,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64783",
+			"name": "Asmir's 47||DerpyDeef, thunder725, Sierra",
+			"action": "update",
+			"timestamp": "2026-09-13T03:49:11.416Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11260,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64787",
+			"name": "Asmir's 47||Eximilus",
+			"action": "update",
+			"timestamp": "2026-09-13T03:49:15.511Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11261,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64788",
+			"name": "Just Vibin'||Man1",
+			"action": "update",
+			"timestamp": "2026-09-13T03:49:16.960Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11262,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64786",
+			"name": "FMN Hell 3||Possessed",
+			"action": "update",
+			"timestamp": "2026-09-13T03:49:18.392Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11263,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64789",
+			"name": "Easy Challenge||Fidalukas, adamozcz",
+			"action": "update",
+			"timestamp": "2026-09-13T03:49:24.465Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11264,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64791",
+			"name": "maplebomb||Kugel",
+			"action": "update",
+			"timestamp": "2026-09-13T03:49:26.815Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11265,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64801",
+			"name": "Nothing To Spare: Quickly Now!||adamozcz",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:01.328Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11266,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64803",
+			"name": "Doringkloof||AsiccAP, fuller_HK",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:02.475Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11267,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64805",
+			"name": "ÜberKlax Endurance||ExiledStarborn, PugCuber, AzaFTW",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:03.612Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11268,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64806",
+			"name": "Olievenhoutbosch||AsiccAP, fuller_HK",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:04.599Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11269,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64809",
+			"name": "Just Vibin'||a_shrip",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:09.290Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11270,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64812",
+			"name": "Sweet 16||AsiccAP, Umbra Moruka, fuller_HK",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:12.240Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11271,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64817",
+			"name": "Doringkloof||Jafary_human",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:19.968Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11272,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64818",
+			"name": "Sweet 16||fuller_HK, D3K, AsiccAP",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:21.009Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11273,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64820",
+			"name": "Nothing To Spare: Another Quick Bomb||adamozcz",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:23.571Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11274,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64822",
+			"name": "An Idol||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:26.846Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11275,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64823",
+			"name": "An Idol mk2||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:27.582Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11276,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64824",
+			"name": "Easy Challenge||adamozcz, Andy",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:29.219Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11277,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64827",
+			"name": "Eldoraigne||fuller_HK",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:43.429Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11278,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64828",
+			"name": "Eldoraigne||Umbra Moruka, D3K, AsiccAP",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:44.047Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11279,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64829",
+			"name": "Eldoraigne||fuller_HK, AsiccAP, Umbra Moruka",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:45.457Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11280,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64831",
+			"name": "An Idol||Jawly_Gaming, Penne",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:47.098Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11281,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64832",
+			"name": "An Idol mk2||Jawly_Gaming, Penne",
+			"action": "update",
+			"timestamp": "2026-09-13T03:50:48.122Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11282,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64834",
+			"name": "Just Vibin'||a_shrip, DerpyDeef",
+			"action": "update",
+			"timestamp": "2026-09-13T03:51:11.763Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11283,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64836",
+			"name": "Dove||Eximilus",
+			"action": "update",
+			"timestamp": "2026-09-13T03:51:13.745Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11284,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64841",
+			"name": "Irene||fuller_HK, AsiccAP",
+			"action": "update",
+			"timestamp": "2026-09-13T03:51:18.168Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11285,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64847",
+			"name": "SoulOrg Endurance||a_shrip, Andy, DerpyDeef",
+			"action": "update",
+			"timestamp": "2026-09-13T03:51:28.729Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11286,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64848",
+			"name": "Nothing To Spare: Quickly Now!||DerpyDeef",
+			"action": "update",
+			"timestamp": "2026-09-13T03:51:30.570Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11287,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64850",
+			"name": "Easy Challenge||Ranger, Chaos",
+			"action": "update",
+			"timestamp": "2026-09-13T03:51:36.861Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11288,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64851",
+			"name": "Irene||fuller_HK",
+			"action": "update",
+			"timestamp": "2026-09-13T03:51:38.469Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11289,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64852",
+			"name": "Doringkloof||fuller_HK",
+			"action": "update",
+			"timestamp": "2026-09-13T03:51:39.583Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11290,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64853",
+			"name": "Easy Challenge||Penne",
+			"action": "update",
+			"timestamp": "2026-09-13T03:51:43.526Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11291,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64854",
+			"name": "Olievenhoutbosch||fuller_HK",
+			"action": "update",
+			"timestamp": "2026-09-13T03:51:44.920Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11292,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64859",
+			"name": "Just Vibin'||Chaos",
+			"action": "update",
+			"timestamp": "2026-09-13T03:51:50.687Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11293,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64864",
+			"name": "Doringkloof||Penne",
+			"action": "update",
+			"timestamp": "2026-09-13T03:51:56.027Z",
+			"before": { "verified": false, "dateAdded": "2026-09-04T14:11:19.424Z" },
+			"after": { "verified": true, "dateAdded": "2026-04-18T15:05:15.597Z" }
+		},
+		{
+			"id": 11294,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64065",
+			"name": "Doringkloof||Penne",
+			"action": "delete",
+			"timestamp": "2026-09-13T03:51:56.038Z",
+			"before": {
+				"id": 64065,
+				"old": false,
+				"solo": false,
+				"team": ["Penne"],
+				"time": 789.27,
+				"first": false,
+				"notes": null,
+				"proofs": [
+					"https://ktane.timwi.de/More/Logfile%20Analyzer.html#file=c7238e74d8567d8f96dd64a6822384fc2a126aab;bomb=E67TR6"
+				],
+				"seasonId": null,
+				"verified": true,
+				"dateAdded": "2026-04-18T15:05:15.597Z",
+				"missionId": 9883,
+				"uploadedBy": "769759393888993289"
+			}
+		},
+		{
+			"id": 11295,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64875",
+			"name": "Easy Challenge||NickLatkovich",
+			"action": "update",
+			"timestamp": "2026-09-13T03:52:12.791Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11296,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64883",
+			"name": "Easy Challenge||MoonWuzDrawing",
+			"action": "update",
+			"timestamp": "2026-09-13T03:52:18.092Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11297,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64886",
+			"name": "An Idol mk2||Crazycaleb",
+			"action": "update",
+			"timestamp": "2026-09-13T03:52:22.463Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11298,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64888",
+			"name": "Sweet 16||DerpyDeef",
+			"action": "update",
+			"timestamp": "2026-09-13T03:52:23.704Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11299,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64889",
+			"name": ":((=||fuller_HK",
+			"action": "update",
+			"timestamp": "2026-09-13T03:52:25.655Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11300,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64892",
+			"name": "Asmir's 47||fuller_HK",
+			"action": "update",
+			"timestamp": "2026-09-13T03:52:29.836Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11301,
+			"userId": "118831126239248397",
+			"model": "MissionPack",
+			"recordId": "645",
+			"name": "Jafary_mission_pack",
+			"action": "update",
+			"timestamp": "2026-09-13T03:52:35.398Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11302,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64895",
+			"name": "Extraction (Pt. 1)||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-09-13T06:00:20.541Z"
+		},
+		{
+			"id": 11303,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64896",
+			"name": "Hydra||Jawly_Gaming, Penne",
+			"action": "create",
+			"timestamp": "2026-09-13T07:23:47.572Z"
+		},
+		{
+			"id": 11304,
+			"userId": "769759393888993289",
+			"model": "Completion",
+			"recordId": "64897",
+			"name": "St. Vincent and the Grenadines||Penne, Infusion, ufoencounter14",
+			"action": "create",
+			"timestamp": "2026-09-13T10:46:48.088Z"
+		},
+		{
+			"id": 11305,
+			"userId": "1191631936616140863",
+			"model": "Completion",
+			"recordId": "64898",
+			"name": ":((=||a_shrip",
+			"action": "create",
+			"timestamp": "2026-09-13T12:52:53.782Z"
+		},
+		{
+			"id": 11306,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64899",
+			"name": "Protrusions||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-13T13:19:57.039Z"
+		},
+		{
+			"id": 11307,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64900",
+			"name": "Alfa Alfa Beta||Sierra, Penne",
+			"action": "create",
+			"timestamp": "2026-09-13T14:31:31.035Z"
+		},
+		{
+			"id": 11308,
+			"userId": "836147273418670101",
+			"model": "Completion",
+			"recordId": "64901",
+			"name": "Olievenhoutbosch||Jafary_human",
+			"action": "create",
+			"timestamp": "2026-09-13T14:51:28.434Z"
+		},
+		{
+			"id": 11309,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64902",
+			"name": "Awesome's 47||Infusion, GlaZe, Penne",
+			"action": "create",
+			"timestamp": "2026-09-13T16:41:48.061Z"
+		},
+		{
+			"id": 11310,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64744",
+			"name": "Operation Strix||AzaFTW, Sierra",
+			"action": "update",
+			"timestamp": "2026-09-13T21:24:29.841Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11311,
+			"userId": "118831126239248397",
+			"model": "Completion",
+			"recordId": "64750",
+			"name": "Submersion III||AzaFTW, benjamin172, Bianca",
+			"action": "update",
+			"timestamp": "2026-09-13T21:24:34.604Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11312,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64903",
+			"name": "Things Sometimes Don't Quite Go to Plan||Infusion",
+			"action": "create",
+			"timestamp": "2026-09-14T02:12:25.870Z"
+		},
+		{
+			"id": 11313,
+			"userId": "655508025854918696",
+			"model": "Completion",
+			"recordId": "64904",
+			"name": ":((=||DerpyDeef",
+			"action": "create",
+			"timestamp": "2026-09-14T10:33:41.333Z"
+		},
+		{
+			"id": 11314,
+			"userId": "213189526837919745",
+			"model": "Completion",
+			"recordId": "64905",
+			"name": "One or the Other||Crazycaleb",
+			"action": "create",
+			"timestamp": "2026-09-14T18:05:49.275Z"
+		},
+		{
+			"id": 11315,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64906",
+			"name": "Sunturion||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-14T18:22:47.197Z"
+		},
+		{
+			"id": 11316,
+			"userId": "764562098466324531",
+			"model": "Completion",
+			"recordId": "64907",
+			"name": "Build Easy Bomb, Then We'll Talk||AzaFTW, Man1",
+			"action": "create",
+			"timestamp": "2026-09-14T19:40:50.797Z"
+		},
+		{
+			"id": 11317,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64908",
+			"name": "Extraction (Pt. 2)||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-09-14T21:31:51.275Z"
+		},
+		{
+			"id": 11318,
+			"userId": "655508025854918696",
+			"model": "Completion",
+			"recordId": "64909",
+			"name": "Nothing To Spare: Another Quick Bomb||DerpyDeef",
+			"action": "create",
+			"timestamp": "2026-09-15T13:43:43.736Z"
+		},
+		{
+			"id": 11319,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64910",
+			"name": "D3K's Nightmare||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-09-15T18:46:20.103Z"
+		},
+		{
+			"id": 11320,
+			"userId": "213189526837919745",
+			"model": "Completion",
+			"recordId": "64911",
+			"name": "Can you match my speed though?||Crazycaleb",
+			"action": "create",
+			"timestamp": "2026-09-15T18:53:45.121Z"
+		},
+		{
+			"id": 11321,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "10861",
+			"name": "The Quincunx",
+			"action": "update",
+			"timestamp": "2026-09-15T19:49:42.418Z",
+			"before": { "strikeMode": "Local" },
+			"after": { "strikeMode": "Global" }
+		},
+		{
+			"id": 11322,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64912",
+			"name": "Cloud VII||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-16T15:06:07.002Z"
+		},
+		{
+			"id": 11323,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64913",
+			"name": "Modder Marathon 7||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-09-16T21:19:18.065Z"
+		},
+		{
+			"id": 11324,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64914",
+			"name": "Tsundere||Jawly_Gaming, Penne, Sierra",
+			"action": "create",
+			"timestamp": "2026-09-17T04:13:07.366Z"
+		},
+		{
+			"id": 11325,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64915",
+			"name": "Hateful||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-17T12:48:03.973Z"
+		},
+		{
+			"id": 11326,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64916",
+			"name": "Kugel's 47||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-09-17T22:59:18.821Z"
+		},
+		{
+			"id": 11327,
+			"userId": "213189526837919745",
+			"model": "Completion",
+			"recordId": "64917",
+			"name": "Hummingbird||Crazycaleb",
+			"action": "create",
+			"timestamp": "2026-09-18T04:47:07.351Z"
+		},
+		{
+			"id": 11328,
+			"userId": "701022177394294794",
+			"model": "Completion",
+			"recordId": "64918",
+			"name": "Easy Challenge||RainbowCamo8 (Cameron), Sierra",
+			"action": "create",
+			"timestamp": "2026-09-18T12:44:59.995Z"
+		},
+		{
+			"id": 11329,
+			"userId": "998723698452332544",
+			"model": "Mission",
+			"recordId": "11223",
+			"name": "Infusion and Golf Lima Alpha Zulu Echo",
+			"action": "create",
+			"timestamp": "2026-09-18T13:45:57.347Z"
+		},
+		{
+			"id": 11330,
+			"userId": "815044769884536904",
+			"model": "Completion",
+			"recordId": "64919",
+			"name": "Asmir's 47 Vol. 2||Jawly_Gaming",
+			"action": "create",
+			"timestamp": "2026-09-18T14:54:18.006Z"
+		},
+		{
+			"id": 11331,
+			"userId": "998723698452332544",
+			"model": "Mission",
+			"recordId": "11224",
+			"name": "The Will to Live: TP Edition",
+			"action": "create",
+			"timestamp": "2026-09-18T18:04:58.451Z"
+		},
+		{
+			"id": 11332,
+			"userId": "998723698452332544",
+			"model": "Mission",
+			"recordId": "11225",
+			"name": "The Will to Live",
+			"action": "create",
+			"timestamp": "2026-09-18T18:12:52.463Z"
+		},
+		{
+			"id": 11333,
+			"userId": "998723698452332544",
+			"model": "Mission",
+			"recordId": "11226",
+			"name": "I hate Ufoencounter14",
+			"action": "create",
+			"timestamp": "2026-09-18T18:14:13.909Z"
+		},
+		{
+			"id": 11334,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "64920",
+			"name": "Übercharge||Termet",
+			"action": "create",
+			"timestamp": "2026-09-18T21:21:33.059Z"
+		},
+		{
+			"id": 11335,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64921",
+			"name": "Forget This Hell||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-09-18T21:31:30.629Z"
+		},
+		{
+			"id": 11336,
+			"userId": "150650873884704769",
+			"model": "Completion",
+			"recordId": "64922",
+			"name": "Dementia||AzaFTW, Sierra",
+			"action": "create",
+			"timestamp": "2026-09-18T22:48:43.132Z"
+		},
+		{
+			"id": 11337,
+			"userId": "118831126239248397",
+			"model": "User",
+			"recordId": "1136647133068537926",
+			"name": "clutch from bb2",
+			"action": "update",
+			"timestamp": "2026-09-20T13:25:58.756Z",
+			"before": { "username": "clutch from bb2" },
+			"after": { "username": "Swervy" }
+		},
+		{
+			"id": 11338,
+			"userId": "655508025854918696",
+			"model": "Completion",
+			"recordId": "64923",
+			"name": "Nothing To Spare: Quickly Now!||DerpyDeef, a_shrip",
+			"action": "create",
+			"timestamp": "2026-09-20T14:16:21.603Z"
+		},
+		{
+			"id": 11339,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64924",
+			"name": "Phoenix||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-20T16:36:53.003Z"
+		},
+		{
+			"id": 11340,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64925",
+			"name": "No Mistakes Evil||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-20T18:30:19.192Z"
+		},
+		{
+			"id": 11341,
+			"userId": "655508025854918696",
+			"model": "Completion",
+			"recordId": "64926",
+			"name": "Dove||DerpyDeef",
+			"action": "create",
+			"timestamp": "2026-09-21T10:08:19.253Z"
+		},
+		{
+			"id": 11342,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64927",
+			"name": "Forget This Hell||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-21T11:08:08.585Z"
+		},
+		{
+			"id": 11343,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64928",
+			"name": "Quickly Now!: Become a Boozleglyph!||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-21T17:27:43.542Z"
+		},
+		{
+			"id": 11344,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64929",
+			"name": "Modder Marathon 9 (Factory static)||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-09-21T22:23:51.491Z"
+		},
+		{
+			"id": 11345,
+			"userId": "1007642590314778675",
+			"model": "Completion",
+			"recordId": "64930",
+			"name": "Bnuuy||Eximilus",
+			"action": "create",
+			"timestamp": "2026-09-22T08:17:05.315Z"
+		},
+		{
+			"id": 11346,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64743",
+			"name": "Symbolophilia||BladePL",
+			"action": "update",
+			"timestamp": "2026-09-22T10:07:34.450Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11347,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64747",
+			"name": "Ultimatum||BladePL",
+			"action": "update",
+			"timestamp": "2026-09-22T10:11:05.631Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11348,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64748",
+			"name": "\"New\" Faces||_Play_",
+			"action": "update",
+			"timestamp": "2026-09-22T10:24:30.204Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11349,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64931",
+			"name": "Devonian||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-22T12:29:27.303Z"
+		},
+		{
+			"id": 11350,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "64932",
+			"name": "0 Expert||Termet",
+			"action": "create",
+			"timestamp": "2026-09-22T15:19:58.054Z"
+		},
+		{
+			"id": 11351,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64933",
+			"name": "Jesus Is the One||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-22T15:32:10.868Z"
+		},
+		{
+			"id": 11352,
+			"userId": "213189526837919745",
+			"model": "Completion",
+			"recordId": "64934",
+			"name": "All Five Bomb||Crazycaleb",
+			"action": "create",
+			"timestamp": "2026-09-23T03:29:11.962Z"
+		},
+		{
+			"id": 11353,
+			"userId": "764562098466324531",
+			"model": "Completion",
+			"recordId": "64935",
+			"name": "Simplifier||AzaFTW, Man1",
+			"action": "create",
+			"timestamp": "2026-09-23T06:22:33.532Z"
+		},
+		{
+			"id": 11354,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64936",
+			"name": "Hotel Rwanda||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-23T12:06:50.173Z"
+		},
+		{
+			"id": 11355,
+			"userId": "769759393888993289",
+			"model": "Completion",
+			"recordId": "64937",
+			"name": "One for the Road||Sierra, Penne",
+			"action": "create",
+			"timestamp": "2026-09-23T15:25:48.482Z"
+		},
+		{
+			"id": 11356,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64938",
+			"name": "The Looming Darkness||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-23T16:01:12.613Z"
+		},
+		{
+			"id": 11357,
+			"userId": "769759393888993289",
+			"model": "Completion",
+			"recordId": "64939",
+			"name": "Build Easy Bomb, Then We'll Talk||Penne, Sierra",
+			"action": "create",
+			"timestamp": "2026-09-23T16:28:48.776Z"
+		},
+		{
+			"id": 11358,
+			"userId": "213189526837919745",
+			"model": "Completion",
+			"recordId": "64940",
+			"name": "Minefield||Crazycaleb",
+			"action": "create",
+			"timestamp": "2026-09-23T18:33:23.142Z"
+		},
+		{
+			"id": 11359,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11157",
+			"name": "Consumption Confusion",
+			"action": "delete",
+			"timestamp": "2026-09-23T20:14:38.548Z",
+			"before": {
+				"id": 11157,
+				"name": "Consumption Confusion",
+				"notes": null,
+				"authors": ["Infusion"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=73c55cce35377e80ca9255290994d6dab63bc9bc",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_infusion_missions_Consumption Confusion",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2026-04-29T05:34:06.854Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "1457124130359873579",
+				"designedForTP": false,
+				"missionPackId": 636
+			}
+		},
+		{
+			"id": 11360,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11195",
+			"name": "Modder Marathon 3 (TP Edition)",
+			"action": "update",
+			"timestamp": "2026-09-23T20:17:08.945Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11361,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11196",
+			"name": "Modder Marathon 3 (Factory Static TP Edition)",
+			"action": "update",
+			"timestamp": "2026-09-23T20:17:10.519Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11362,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11196",
+			"name": "Modder Marathon 3 (Factory Static TP Edition)",
+			"action": "update",
+			"timestamp": "2026-09-23T20:17:33.337Z",
+			"before": { "variant": null },
+			"after": { "variant": 24 }
+		},
+		{
+			"id": 11363,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11195",
+			"name": "Modder Marathon 3 (TP Edition)",
+			"action": "update",
+			"timestamp": "2026-09-23T20:18:18.179Z",
+			"before": { "variant": null },
+			"after": { "variant": 24 }
+		},
+		{
+			"id": 11364,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11178",
+			"name": "Tetris Madness",
+			"action": "delete",
+			"timestamp": "2026-09-23T20:24:18.780Z",
+			"before": {
+				"id": 11178,
+				"name": "Tetris Madness",
+				"notes": null,
+				"authors": ["Termet"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=92c5d4a7b70783c549b161e3fd24738c222eeab2",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_termetsawesomepack_TetrisMadness",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2026-06-13T21:04:30.090Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "1131645350554390560",
+				"designedForTP": false,
+				"missionPackId": 628
+			}
+		},
+		{
+			"id": 11365,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11170",
+			"name": "Indiscernibility",
+			"action": "delete",
+			"timestamp": "2026-09-23T21:11:09.459Z",
+			"before": {
+				"id": 11170,
+				"name": "Indiscernibility",
+				"notes": null,
+				"authors": ["Infusion"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=67706dd43b73cfa3296f572aa57d38df522f9328",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_infusion_missions_Indiscernibility",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2026-05-19T20:04:02.873Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "1457124130359873579",
+				"designedForTP": false,
+				"missionPackId": 636
+			}
+		},
+		{
+			"id": 11366,
+			"userId": "1457124130359873579",
+			"model": "Mission",
+			"recordId": "11227",
+			"name": "Indiscernibility",
+			"action": "create",
+			"timestamp": "2026-09-23T21:11:22.565Z"
+		},
+		{
+			"id": 11367,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11227",
+			"name": "Indiscernibility",
+			"action": "update",
+			"timestamp": "2026-09-23T21:11:43.378Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11368,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11226",
+			"name": "I hate Ufoencounter14",
+			"action": "update",
+			"timestamp": "2026-09-23T21:16:57.966Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11369,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11226",
+			"name": "I hate Ufoencounter14",
+			"action": "update",
+			"timestamp": "2026-09-23T21:17:38.482Z",
+			"before": { "notes": null },
+			"after": { "notes": "Motion Sense and Hot Potato augmented to stop at 2 modules remaining." }
+		},
+		{
+			"id": 11370,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11214",
+			"name": "Microwave",
+			"action": "update",
+			"timestamp": "2026-09-23T21:17:45.175Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11371,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11214",
+			"name": "Microwave",
+			"action": "update",
+			"timestamp": "2026-09-23T21:18:49.389Z",
+			"before": { "notes": null },
+			"after": { "notes": "Hot Potato augmented to have no cooldown and terminate with 1 module remaining." }
+		},
+		{
+			"id": 11372,
+			"userId": "118831126239248397",
+			"model": "Mission",
+			"recordId": "11026",
+			"name": "Warning - Venting Error",
+			"action": "update",
+			"timestamp": "2026-09-23T21:25:44.377Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11373,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11219",
+			"name": "Drietrestrois",
+			"action": "update",
+			"timestamp": "2026-09-23T21:33:57.626Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11374,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11179",
+			"name": "Five Stars v2",
+			"action": "delete",
+			"timestamp": "2026-09-23T21:37:03.860Z",
+			"before": {
+				"id": 11179,
+				"name": "Five Stars v2",
+				"notes": null,
+				"authors": ["Espik"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=620e76299446f4ddb3f225a42982d01c3da8f8ec",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_ktane_EspikHardMissions_fiveStarsV2",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2026-06-22T12:22:24.278Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "292774728014364686",
+				"designedForTP": false,
+				"missionPackId": 441
+			}
+		},
+		{
+			"id": 11375,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11217",
+			"name": "Don't Lose Count",
+			"action": "update",
+			"timestamp": "2026-09-23T21:38:27.273Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11376,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "10278",
+			"name": "One Winged Angel's Revenge",
+			"action": "update",
+			"timestamp": "2026-09-23T21:39:34.803Z",
+			"before": { "logfile": "https://ktane.timwi.de/lfa#file=4e5c995b22a1036b04b651b1def6db7bf9315567" },
+			"after": {
+				"bombs": {
+					"create": [
+						{
+							"time": 15000,
+							"pools": [
+								{ "count": 1, "modules": ["kugelblitz"] },
+								{ "count": 1, "modules": ["cipherMachine"] },
+								{ "count": 1, "modules": ["crimsonCipher"] },
+								{ "count": 1, "modules": ["bamboozledAgain"] },
+								{ "count": 1, "modules": ["bamboozlingTimeKeeper"] },
+								{ "count": 1, "modules": ["unfairsForgottenCiphers"] },
+								{ "count": 1, "modules": ["TheOctadecayotton"] },
+								{ "count": 1, "modules": ["Mischboozl"] },
+								{ "count": 1, "modules": ["omegaDestroyer"] },
+								{ "count": 1, "modules": ["cellLab"] },
+								{ "count": 1, "modules": ["notMurder"] },
+								{ "count": 1, "modules": ["shashki"] },
+								{ "count": 1, "modules": ["ColourShuffleModule"] },
+								{ "count": 1, "modules": ["uncolourFlash"] },
+								{ "count": 1, "modules": ["cursedVault"] },
+								{ "count": 1, "modules": ["OrientationHypercube"] },
+								{ "count": 1, "modules": ["ultimateCycle"] },
+								{ "count": 1, "modules": ["crypticCycle"] },
+								{ "count": 1, "modules": ["notX01"] },
+								{ "count": 1, "modules": ["rasterPrime"] },
+								{ "count": 1, "modules": ["TripleTraversalModule"] },
+								{ "count": 1, "modules": ["Phosphorescence"] },
+								{ "count": 1, "modules": ["stoichiometryModule"] },
+								{ "count": 1, "modules": ["14"] },
+								{ "count": 1, "modules": ["MazeSwitching"] },
+								{ "count": 1, "modules": ["mysticmaze"] },
+								{ "count": 1, "modules": ["qkForgetPerspective"] },
+								{ "count": 1, "modules": ["smbh"] },
+								{ "count": 1, "modules": ["GSXenocryst"] },
+								{ "count": 1, "modules": ["greatVoid"] },
+								{ "count": 1, "modules": ["WonderCipher"] },
+								{ "count": 1, "modules": ["mastermindRestrictedCruel"] },
+								{ "count": 1, "modules": ["cruelStars"] },
+								{ "count": 1, "modules": ["PuzzwordModule"] },
+								{ "count": 1, "modules": ["starmap_reconstruction"] },
+								{ "count": 1, "modules": ["ColouredCubes"] },
+								{ "count": 1, "modules": ["susadmin"] },
+								{ "count": 1, "modules": ["matrixMapping"] },
+								{ "count": 1, "modules": ["cruelColourFlash"] },
+								{ "count": 1, "modules": ["faultyrgbMaze"] },
+								{ "count": 1, "modules": ["partialDerivatives"] },
+								{ "count": 1, "modules": ["notSymbolicCoordinates"] },
+								{ "count": 1, "modules": ["regretbFiltering"] },
+								{ "count": 1, "modules": ["meteor"] },
+								{ "count": 1, "modules": ["NotWhosOnFirst"] },
+								{ "count": 1, "modules": ["RailwayCargoLoading"] },
+								{ "count": 1, "modules": ["synapseCipher"] }
+							],
+							"modules": 47,
+							"strikes": 9,
+							"widgets": 5
+						}
+					]
+				},
+				"logfile": "https://ktane.timwi.de/lfa#file=ce5b97cfcbf5ba4d948b4f79d8b8a9e99f251fdf"
+			}
+		},
+		{
+			"id": 11377,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11215",
+			"name": "[[UPDATE]] One Winged Angel's Revenge",
+			"action": "delete",
+			"timestamp": "2026-09-23T21:39:34.829Z",
+			"before": {
+				"id": 11215,
+				"name": "[[UPDATE]] One Winged Angel's Revenge",
+				"notes": null,
+				"authors": ["Kilo Bites"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=ce5b97cfcbf5ba4d948b4f79d8b8a9e99f251fdf",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_kbmissions2_One Winged Angel's Revenge",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2026-08-27T02:35:42.930Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "265294329709330432",
+				"designedForTP": false,
+				"missionPackId": 580
+			}
+		},
+		{
+			"id": 11378,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11207",
+			"name": "World Ending...",
+			"action": "delete",
+			"timestamp": "2026-09-23T21:48:44.061Z",
+			"before": {
+				"id": 11207,
+				"name": "World Ending...",
+				"notes": null,
+				"authors": ["Ufoencounter"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=768107ce240d4b8b304e1a112218d2715c2c0f06",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_Ufo_47_World Ending...",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2026-08-15T01:40:39.985Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "998723698452332544",
+				"designedForTP": false,
+				"missionPackId": 630
+			}
+		},
+		{
+			"id": 11379,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11204",
+			"name": "The Mathsquad's 47",
+			"action": "delete",
+			"timestamp": "2026-09-23T21:54:39.953Z",
+			"before": {
+				"id": 11204,
+				"name": "The Mathsquad's 47",
+				"notes": null,
+				"authors": ["Kole"],
+				"factory": "Sequence",
+				"logfile": "https://ktane.timwi.de/lfa#file=9ed80a202a1043828ba1e0fde725ed3560f5c4eb",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_kolebomb_TheMathSquad's47",
+				"timeMode": "Global",
+				"verified": false,
+				"dateAdded": "2026-08-08T19:01:15.515Z",
+				"inGameName": null,
+				"strikeMode": "Global",
+				"uploadedBy": "495981334003580930",
+				"designedForTP": false,
+				"missionPackId": 635
+			}
+		},
+		{
+			"id": 11380,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11199",
+			"name": "Noise Complaint",
+			"action": "update",
+			"timestamp": "2026-09-23T22:02:45.618Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11381,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11197",
+			"name": "'Not' Praetorian",
+			"action": "delete",
+			"timestamp": "2026-09-23T22:06:20.972Z",
+			"before": {
+				"id": 11197,
+				"name": "'Not' Praetorian",
+				"notes": null,
+				"authors": ["Tachatat"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=00a26ea28e35a2cda25363baaba4d6856a1db7b2",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_mudaemissions_notprae",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2026-07-23T11:27:09.462Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "488046550270869525",
+				"designedForTP": false,
+				"missionPackId": 572
+			}
+		},
+		{
+			"id": 11382,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11192",
+			"name": "Gray",
+			"action": "update",
+			"timestamp": "2026-09-23T22:09:12.684Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11383,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11193",
+			"name": "Rainbow",
+			"action": "update",
+			"timestamp": "2026-09-23T22:09:13.949Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11384,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11206",
+			"name": "The Joy of Creation",
+			"action": "delete",
+			"timestamp": "2026-09-23T23:08:06.111Z",
+			"before": {
+				"id": 11206,
+				"name": "The Joy of Creation",
+				"notes": null,
+				"authors": ["Ufoencounter"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=b5462a2eac4c7447259575b1c2e3982effbe3627",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_Ufo_47_The Joy of Creation",
+				"timeMode": null,
+				"verified": false,
+				"dateAdded": "2026-08-15T01:39:58.140Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": "998723698452332544",
+				"designedForTP": false,
+				"missionPackId": 630
+			}
+		},
+		{
+			"id": 11385,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "9999",
+			"name": "Situations When Maintaining the Challenge Bombs Website",
+			"action": "delete",
+			"timestamp": "2026-09-23T23:17:45.085Z",
+			"before": {
+				"id": 9999,
+				"name": "Situations When Maintaining the Challenge Bombs Website",
+				"notes": null,
+				"authors": ["Quinn Wuest"],
+				"factory": null,
+				"logfile": "https://ktane.timwi.de/lfa#file=9893161047b773b2392f569366b3981e9479968b",
+				"tpSolve": false,
+				"variant": null,
+				"inGameId": "mod_QuinnWuestsMissions_Situations When Maintaining the Challenge Bombs Website",
+				"timeMode": null,
+				"verified": true,
+				"dateAdded": "2022-12-29T07:13:20.000Z",
+				"inGameName": null,
+				"strikeMode": null,
+				"uploadedBy": null,
+				"designedForTP": false,
+				"missionPackId": 516
+			}
+		},
+		{
+			"id": 11386,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "64941",
+			"name": "Microwave||Kugel",
+			"action": "create",
+			"timestamp": "2026-09-23T23:57:04.322Z"
+		},
+		{
+			"id": 11387,
+			"userId": "764562098466324531",
+			"model": "Completion",
+			"recordId": "64942",
+			"name": "Krow's Endurance||AzaFTW, Man1, Sierra",
+			"action": "create",
+			"timestamp": "2026-09-24T06:16:06.733Z"
+		},
+		{
+			"id": 11388,
+			"userId": "154814006261972992",
+			"model": "Mission",
+			"recordId": "11199",
+			"name": "Noise Complaint",
+			"action": "update",
+			"timestamp": "2026-09-24T07:48:12.699Z",
+			"before": { "notes": null },
+			"after": { "notes": "Literally Nothings augmented to have no cooldown." }
+		},
+		{
+			"id": 11389,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64943",
+			"name": "Chocolate Sprinkles III||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-24T10:46:04.034Z"
+		},
+		{
+			"id": 11390,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64756",
+			"name": "Binary Madness||BladePL",
+			"action": "update",
+			"timestamp": "2026-09-24T19:23:28.001Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11391,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64766",
+			"name": "Sound Madness||BladePL",
+			"action": "update",
+			"timestamp": "2026-09-24T19:25:36.990Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11392,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64767",
+			"name": "Centidiot||Termet, BladePL, EricB",
+			"action": "update",
+			"timestamp": "2026-09-24T19:31:40.501Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11393,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64771",
+			"name": "Remix 1||Kugel",
+			"action": "update",
+			"timestamp": "2026-09-24T19:33:55.400Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11394,
+			"userId": "1131645350554390560",
+			"model": "Completion",
+			"recordId": "64944",
+			"name": "Bro...Just Solve?||Termet",
+			"action": "create",
+			"timestamp": "2026-09-24T22:06:20.155Z"
+		},
+		{
+			"id": 11395,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64945",
+			"name": "Quickly Now!: Give Up!||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-25T14:08:03.004Z"
+		},
+		{
+			"id": 11396,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64946",
+			"name": "No-One Can Hear You Scream||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-25T16:11:37.577Z"
+		},
+		{
+			"id": 11397,
+			"userId": "459108669636739072",
+			"model": "Completion",
+			"recordId": "64947",
+			"name": "Verbal Madness||Kugel",
+			"action": "create",
+			"timestamp": "2026-09-26T00:14:43.618Z"
+		},
+		{
+			"id": 11398,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64948",
+			"name": "17 Again||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-09-26T02:58:20.903Z"
+		},
+		{
+			"id": 11399,
+			"userId": "764562098466324531",
+			"model": "Completion",
+			"recordId": "64949",
+			"name": "Fnuuy||AzaFTW, Man1",
+			"action": "create",
+			"timestamp": "2026-09-26T05:42:15.968Z"
+		},
+		{
+			"id": 11400,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64950",
+			"name": "East Of The Cosmos||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-09-26T12:02:51.033Z"
+		},
+		{
+			"id": 11401,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64951",
+			"name": "The Council||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-09-26T14:47:52.357Z"
+		},
+		{
+			"id": 11402,
+			"userId": "1136647133068537926",
+			"model": "MissionPack",
+			"recordId": "646",
+			"name": "Swervy's Mission Pack!",
+			"action": "create",
+			"timestamp": "2026-09-26T16:07:18.644Z"
+		},
+		{
+			"id": 11403,
+			"userId": "1136647133068537926",
+			"model": "Mission",
+			"recordId": "11228",
+			"name": "Swervy's Favourite Modules",
+			"action": "create",
+			"timestamp": "2026-09-26T16:13:13.949Z"
+		},
+		{
+			"id": 11404,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64749",
+			"name": "Milkinator||_Play_",
+			"action": "update",
+			"timestamp": "2026-09-26T21:37:32.820Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11405,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64751",
+			"name": "Seifar Toy Company Reservation||_Play_",
+			"action": "update",
+			"timestamp": "2026-09-26T21:50:11.797Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11406,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64774",
+			"name": "Rainbow Collection||BladePL",
+			"action": "update",
+			"timestamp": "2026-09-26T21:54:03.633Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11407,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64795",
+			"name": "Blitz||Jawly_Gaming, Penne, DrkL",
+			"action": "update",
+			"timestamp": "2026-09-26T22:05:33.067Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11408,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64798",
+			"name": "Sweet 16||fuller_HK",
+			"action": "update",
+			"timestamp": "2026-09-26T22:07:41.821Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11409,
+			"userId": "192330681987235840",
+			"model": "Completion",
+			"recordId": "64815",
+			"name": "Organisation Rush||Jawly_Gaming",
+			"action": "update",
+			"timestamp": "2026-09-26T22:16:24.777Z",
+			"before": { "verified": false },
+			"after": { "verified": true }
+		},
+		{
+			"id": 11410,
+			"userId": "705507300634263653",
+			"model": "Completion",
+			"recordId": "64952",
+			"name": "Seifar Toy Company Reservation||Possessed, SkipzPlays, blckhawker",
+			"action": "create",
+			"timestamp": "2026-09-27T04:19:06.415Z"
+		},
+		{
+			"id": 11411,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64953",
+			"name": "Dove||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-09-27T07:29:23.733Z"
+		},
+		{
+			"id": 11412,
+			"userId": "655508025854918696",
+			"model": "Completion",
+			"recordId": "64954",
+			"name": ":((=||DerpyDeef, fuller_HK",
+			"action": "create",
+			"timestamp": "2026-09-27T11:10:31.894Z"
+		},
+		{
+			"id": 11413,
+			"userId": "836147273418670101",
+			"model": "Completion",
+			"recordId": "64955",
+			"name": "Praetorian New Ones||Jafary_human",
+			"action": "create",
+			"timestamp": "2026-09-27T14:39:15.631Z"
+		},
+		{
+			"id": 11414,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64956",
+			"name": "Dove||Umbra Moruka, fuller_HK",
+			"action": "create",
+			"timestamp": "2026-09-27T15:24:15.301Z"
+		},
+		{
+			"id": 11415,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64957",
+			"name": "Drietrestrois||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-09-27T20:46:36.492Z"
+		},
+		{
+			"id": 11416,
+			"userId": "1199637423215353866",
+			"model": "Completion",
+			"recordId": "64958",
+			"name": "Don't Lose Count||Twitch Plays",
+			"action": "create",
+			"timestamp": "2026-09-27T20:48:43.184Z"
+		},
+		{
+			"id": 11417,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64959",
+			"name": "One Button Could Change The World||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-28T11:49:13.910Z"
+		},
+		{
+			"id": 11418,
+			"userId": "998723698452332544",
+			"model": "Mission",
+			"recordId": "11229",
+			"name": "The Joy of Creation",
+			"action": "create",
+			"timestamp": "2026-09-28T21:07:49.984Z"
+		},
+		{
+			"id": 11419,
+			"userId": "472102323594854422",
+			"model": "Mission",
+			"recordId": "11230",
+			"name": "[[UPDATE]] Gray",
+			"action": "create",
+			"timestamp": "2026-09-28T21:22:28.714Z"
+		},
+		{
+			"id": 11420,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64960",
+			"name": "Final Exam||Infusion",
+			"action": "create",
+			"timestamp": "2026-09-29T00:28:52.438Z"
+		},
+		{
+			"id": 11421,
+			"userId": "727695250696568893",
+			"model": "Completion",
+			"recordId": "64961",
+			"name": "ÜberKlax Endurance||fuller_HK",
+			"action": "create",
+			"timestamp": "2026-09-29T15:37:41.587Z"
+		},
+		{
+			"id": 11422,
+			"userId": "705094454717186119",
+			"model": "Completion",
+			"recordId": "64962",
+			"name": "Module Endurance||BladePL",
+			"action": "create",
+			"timestamp": "2026-09-29T18:51:46.056Z"
+		},
+		{
+			"id": 11423,
+			"userId": "455035517872898050",
+			"model": "Completion",
+			"recordId": "64963",
+			"name": "QN!: FCDT||_Play_",
+			"action": "create",
+			"timestamp": "2026-09-29T19:33:30.959Z"
+		},
+		{
+			"id": 11424,
+			"userId": "213189526837919745",
+			"model": "Completion",
+			"recordId": "64964",
+			"name": "Forty-Kevins||Crazycaleb",
+			"action": "create",
+			"timestamp": "2026-09-29T21:17:16.035Z"
+		},
+		{
+			"id": 11425,
+			"userId": "1457124130359873579",
+			"model": "Completion",
+			"recordId": "64965",
+			"name": "\"New\" Faces||Infusion, Possessed",
+			"action": "create",
+			"timestamp": "2026-09-30T03:25:09.103Z"
 		}
 	],
 	"User": [
@@ -142715,9 +148326,9 @@
 		},
 		{
 			"id": "1136647133068537926",
-			"username": "clutch from bb2",
+			"username": "Swervy",
 			"discordName": "scervy_.",
-			"avatar": "beac0ce5c4281b7b24d8cec9b1090273",
+			"avatar": "c2f053fde22dd581e107369ab1cc3e91",
 			"permissions": []
 		},
 		{
@@ -142780,7 +148391,7 @@
 			"id": "1179187768048504902",
 			"username": "Yoshi Dojo",
 			"discordName": "yoshidojostamps87",
-			"avatar": "90e518a6323612fdfa5b6a7cd0a4d4fa",
+			"avatar": "b7472aa1b77f78af906b4ee9e9e8071a",
 			"permissions": []
 		},
 		{
@@ -142808,7 +148419,7 @@
 			"id": "1191631936616140863",
 			"username": "a_shrip",
 			"discordName": "a_shrip",
-			"avatar": "555d79e51127b8b81d25b8a8bb9cee4a",
+			"avatar": "bdd54ba26685eef4129cc21ccb329350",
 			"permissions": []
 		},
 		{
@@ -142955,7 +148566,7 @@
 			"id": "1341924464144945296",
 			"username": "Blizzus",
 			"discordName": "kulef11",
-			"avatar": "0df263cc21e0947162f30fc26f49e11c",
+			"avatar": "613b2c10ff7e9d29d3f9ce24e7f8412a",
 			"permissions": []
 		},
 		{
@@ -143005,7 +148616,7 @@
 			"id": "1437210618615697569",
 			"username": "LivreVerte",
 			"discordName": "livreverte",
-			"avatar": "0",
+			"avatar": "d21948e35f07d35fa572bcb60564d590",
 			"permissions": []
 		},
 		{
@@ -143057,6 +148668,7 @@
 			"avatar": "dd1baf479b85b9c89f26c73162b14424",
 			"permissions": []
 		},
+		{ "id": "150796065115734017", "username": "jbano2", "discordName": "jbano2", "avatar": "0", "permissions": [] },
 		{
 			"id": "154814006261972992",
 			"username": "BlvdBroken",
@@ -143257,7 +148869,7 @@
 			"id": "192330681987235840",
 			"username": "Sierra",
 			"discordName": "sierra.tango",
-			"avatar": "98c18832c2ad3b41a3d7e15c657704b0",
+			"avatar": "7fdbdc016d47257490077ef34da0a864",
 			"permissions": [1, 2, 3]
 		},
 		{
@@ -143270,8 +148882,8 @@
 		{
 			"id": "193444377375277056",
 			"username": "jay",
-			"discordName": "jay\\#5182",
-			"avatar": "3ec4961a65d4270d2941a523d0358183",
+			"discordName": "jay.cretin",
+			"avatar": "df6e4fd849df35afaccba6450d5a87d4",
 			"permissions": []
 		},
 		{
@@ -143411,7 +149023,7 @@
 			"id": "213189526837919745",
 			"username": "Crazycaleb",
 			"discordName": "crazycaleb",
-			"avatar": "0ccb92ccded4d7e1c4405f812f53e71b",
+			"avatar": "5af1749613294c5266d9780b7e2a982f",
 			"permissions": []
 		},
 		{
@@ -143954,6 +149566,13 @@
 			"permissions": []
 		},
 		{
+			"id": "296337834384687104",
+			"username": "Seren",
+			"discordName": "serenpollos",
+			"avatar": "0d0152c809239fd2a90f26883b0a36ee",
+			"permissions": []
+		},
+		{
 			"id": "297510765903216640",
 			"username": "Magicmanzach",
 			"discordName": "magicwitchamber",
@@ -144019,8 +149638,8 @@
 		{
 			"id": "306161751077158933",
 			"username": "GamyGamer",
-			"discordName": "GamyGamer#9868",
-			"avatar": "d764f2880f3c4d17fdc52d6283d98313",
+			"discordName": "gamygamer",
+			"avatar": "807f9105972fa1caa00685fff9413cc8",
 			"permissions": []
 		},
 		{
@@ -144290,6 +149909,13 @@
 			"permissions": []
 		},
 		{
+			"id": "350705948718923779",
+			"username": "NickLatkovich",
+			"discordName": "nicklatkovich",
+			"avatar": "cc4b06cd21f095b1c8a94d1ea914f722",
+			"permissions": []
+		},
+		{
 			"id": "350998699050139648",
 			"username": "Cirax856",
 			"discordName": "cirax856",
@@ -144376,8 +150002,8 @@
 		{
 			"id": "359623641861980165",
 			"username": "Axiomatic",
-			"discordName": "xmtc",
-			"avatar": "d44dc0c4aaa9970985280b7b39428552",
+			"discordName": "axiomatic7689",
+			"avatar": "2909e40df35dba0318217cd4b4c9c770",
 			"permissions": []
 		},
 		{
@@ -144668,6 +150294,13 @@
 			"permissions": []
 		},
 		{
+			"id": "430356359968587796",
+			"username": "Rawesomeness",
+			"discordName": "rawesomeness",
+			"avatar": "e2425b9140e8d5743cc39be00b233b7f",
+			"permissions": []
+		},
+		{
 			"id": "432651699388153856",
 			"username": "Želvík/Tortoise",
 			"discordName": "t0rt01se#0",
@@ -144696,6 +150329,13 @@
 			"permissions": []
 		},
 		{
+			"id": "436939819210244096",
+			"username": "Daluncio",
+			"discordName": "daluncio.",
+			"avatar": "6b8b1b83aa95483cdb5379779278ed06",
+			"permissions": []
+		},
+		{
 			"id": "442754336615956481",
 			"username": "CallmeZero",
 			"discordName": "callme_zero",
@@ -144720,7 +150360,7 @@
 			"id": "446152216156438539",
 			"username": "ObjectsCountries",
 			"discordName": "objectscountries",
-			"avatar": "fd6e4f27e8ced42a2bd32f3987287422",
+			"avatar": "d95f71f1160e5ae6ed32ae8dcd066033",
 			"permissions": []
 		},
 		{
@@ -144748,7 +150388,7 @@
 			"id": "450742874619904001",
 			"username": "SakiMaster1 🎸🎳",
 			"discordName": "sakimaster1",
-			"avatar": "a_4eb97b26e2565186148e5d985fc402a4",
+			"avatar": "e36a9b0ec34f0014e80e3ad4c0d251ed",
 			"permissions": []
 		},
 		{
@@ -144923,7 +150563,7 @@
 			"id": "485774478282981376",
 			"username": "weird",
 			"discordName": "weird_th",
-			"avatar": "1f89989cca0130b5dceda590b80782b3",
+			"avatar": "f189e2b66b31a54ac913116858587d87",
 			"permissions": []
 		},
 		{
@@ -145050,7 +150690,7 @@
 			"id": "505793920928710657",
 			"username": "Gekki",
 			"discordName": "gekki.jb",
-			"avatar": "c7df4a97c1287f18aa17c7b26b75df47",
+			"avatar": "b33da1d19cbc2566baf202ab65ff2200",
 			"permissions": []
 		},
 		{
@@ -145180,6 +150820,13 @@
 			"permissions": []
 		},
 		{
+			"id": "556222727896170539",
+			"username": "Ranger",
+			"discordName": "ranger1244",
+			"avatar": "2cab35760d8f7b3b66603ba6064d6c2e",
+			"permissions": []
+		},
+		{
 			"id": "557258630391529492",
 			"username": "𝔽𝕣𝕚𝕖𝕣𝕖𝕟 𝕋𝕣𝕚𝕓𝕓𝕚𝕒𝕟",
 			"discordName": "justice_play",
@@ -145232,7 +150879,7 @@
 			"id": "569550498462564354",
 			"username": "rand06",
 			"discordName": "rand06_",
-			"avatar": "e2750ec39499ae1a4b836470353ead4f",
+			"avatar": "9b168631fd065402499f312279f582ae",
 			"permissions": []
 		},
 		{
@@ -145343,8 +150990,8 @@
 		{
 			"id": "608722372547313674",
 			"username": "aestivus",
-			"discordName": "umeja",
-			"avatar": "46f6276f460eb84d59c5590c62de86b6",
+			"discordName": "umeja#0",
+			"avatar": "f14535d925395403c56c7305514829e0",
 			"permissions": []
 		},
 		{
@@ -145491,7 +151138,7 @@
 			"id": "664142806142550026",
 			"username": "Antonio",
 			"discordName": "antoniothespartan",
-			"avatar": "7480a2b44a007fd9c306828d776b10be",
+			"avatar": "e650a2be531efe1655860bcf7b785492",
 			"permissions": []
 		},
 		{
@@ -145520,6 +151167,13 @@
 			"username": "MemesAwesom",
 			"discordName": "memes.139",
 			"avatar": "a6a4e5af0469c2a28cf757f80f7e413f",
+			"permissions": []
+		},
+		{
+			"id": "674053237833465876",
+			"username": "GlaZe",
+			"discordName": "glaze8018_",
+			"avatar": "3e635bdcf0220e31a9f6fac5436e16e8",
 			"permissions": []
 		},
 		{
@@ -145663,6 +151317,13 @@
 			"permissions": []
 		},
 		{
+			"id": "701022177394294794",
+			"username": "RainbowCamo8",
+			"discordName": "rainbowcamo8",
+			"avatar": "53a8ad8e0f19c6224b2177e75e50410c",
+			"permissions": []
+		},
+		{
 			"id": "703044839599767582",
 			"username": "Zxen",
 			"discordName": "alecsisx",
@@ -145694,7 +151355,7 @@
 			"id": "705507300634263653",
 			"username": "PossessedHood416",
 			"discordName": "possessedhood416",
-			"avatar": "bff34d5403618cd4b4ca2bdad1feb8c7",
+			"avatar": "6ce0e27d38c9860dc1ecbcaf675e8807",
 			"permissions": []
 		},
 		{
@@ -145846,6 +151507,13 @@
 		},
 		{ "id": "732439079349649440", "username": "Swerve", "discordName": "swerve2535", "avatar": "0", "permissions": [] },
 		{
+			"id": "732654322961350806",
+			"username": "[Nick]",
+			"discordName": "oxnickxo",
+			"avatar": "046bfb8ee1f0e4dc0bebab7bdf61b131",
+			"permissions": []
+		},
+		{
 			"id": "73424461906325504",
 			"username": "Kakesu",
 			"discordName": "kakesu.",
@@ -145989,14 +151657,14 @@
 			"id": "769049591513219093",
 			"username": "Buff Kirby",
 			"discordName": "_wilwil1",
-			"avatar": "b0168dafc85f201243270c85c839660d",
+			"avatar": "338d254b2fc6677953697f26676b1ecf",
 			"permissions": []
 		},
 		{
 			"id": "769759393888993289",
 			"username": "Penne",
 			"discordName": "penne.",
-			"avatar": "47618b879fc44ddf4882cbcecc26f7f6",
+			"avatar": "e234b981f89d726683336515de167418",
 			"permissions": []
 		},
 		{
@@ -146049,6 +151717,13 @@
 			"permissions": []
 		},
 		{
+			"id": "790619059632341052",
+			"username": "TRAWIANNA",
+			"discordName": "callmetrawianna",
+			"avatar": "831a5b0d2c6c3e4ab52b3ae6f76a9608",
+			"permissions": []
+		},
+		{
 			"id": "791697119316279306",
 			"username": "Yarik._.xd",
 			"discordName": "yarik._.xd228",
@@ -146087,7 +151762,7 @@
 			"id": "815044769884536904",
 			"username": "Jawly_Gaming",
 			"discordName": "jawly_gaming",
-			"avatar": "993ab3c1a11f690636c0ef619fcd5f64",
+			"avatar": "038cb3daf08203b6bbebcc236b908898",
 			"permissions": []
 		},
 		{
@@ -146122,7 +151797,7 @@
 			"id": "824985696682115103",
 			"username": "JessieBee",
 			"discordName": "pgftw",
-			"avatar": "c80e10fa3adfc02645e9eae86ee6ba30",
+			"avatar": "732d8be4ced4c0e8532c77f331d05a62",
 			"permissions": []
 		},
 		{
@@ -146241,7 +151916,7 @@
 			"id": "898915665736515644",
 			"username": "Umbra Moruka",
 			"discordName": "umbra_moruka_official",
-			"avatar": "35001ac6ee927a181e2f6371e3d9f3b4",
+			"avatar": "cf8c668bc13784e4d3668f7a2799e234",
 			"permissions": []
 		},
 		{
@@ -146363,7 +152038,7 @@
 			"id": "996401106819235840",
 			"username": "ghdyo1",
 			"discordName": "ghdyo1",
-			"avatar": "0261a9deb8e5de60f5adb6821fed253b",
+			"avatar": "19b7cc4ab5f167723cc41bca3cb75669",
 			"permissions": []
 		},
 		{

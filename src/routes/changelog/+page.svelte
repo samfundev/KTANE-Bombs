@@ -5,6 +5,14 @@
 	<h1 class="header">What’s New?</h1>
 </div>
 <div class="block update">
+	<h3>1 October 2026</h3>
+	<ul>
+		<li>
+			Added <a href="/season/Precision%20is%20Key">Season 4</a> info to <a href="/seasoninfo">Season Info</a> page.
+		</li>
+	</ul>
+</div>
+<div class="block update">
 	<h3>1 July 2026</h3>
 	<ul>
 		<li>

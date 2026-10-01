@@ -1,6 +1,6 @@
 {
   "name": "ktane-bombs",
-  "version": "1.0.1783047100",
+  "version": "1.0.1790829800",
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",

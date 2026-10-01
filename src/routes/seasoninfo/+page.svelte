@@ -67,10 +67,11 @@
 </div>
 
 <div class="block">
-	<h2><a href="/season/Taking%20It%20Easy">Season 3</a> Rules</h2>
+	<h2><a href="/season/Precision%20is%20Key">Season 4</a> Rules</h2>
 
-	<p>These rules need to be followed for season 3 solves</p>
+	<p>These rules need to be followed for season 4 solves</p>
 	<ul>
+		<li><strong>A mission solve only counts if it finishes with zero strikes.</strong></li>
 		<li>
 			Experts and EFM can only use notepads with the same functionalities as those enabled by default in Notepad++
 			without accessing menus or keybinds (with the exception of dark mode, find, copy, and paste), manuals and
@@ -84,11 +85,11 @@
 		</li>
 		<li>Each team solve needs to have a maximum of 1 defuser and 2 experts.</li>
 		<li>
-			The following bombs are also allowed for season 3 solves:
+			The following bombs are also allowed for season 4 solves:
 			<ul>
-				<li><a href="/mission/Simplifier">Simplifier</a></li>
-				<li><a href="/mission/Fnuuy">Fnuuy</a></li>
-				<li><a href="/mission/One%20for%20the%20Road">One for the Road</a></li>
+				<li><a href="/mission/17%20Again">17 Again</a></li>
+				<li><a href="/mission/Bimb">Bimb</a></li>
+				<li><a href="/mission/Warrior">Warrior</a></li>
 			</ul>
 		</li>
 	</ul>
@@ -136,6 +137,34 @@
 					Yes, as long as these items are created during the bomb, starting from the allowed objects (default manuals
 					and empty notepads).
 				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="block old">
+	<h2><a href="/season/Taking%20It%20Easy">Season 3</a> Rules</h2>
+
+	<p>These rules need to be followed for season 3 solves</p>
+	<ul>
+		<li>
+			Experts and EFM can only use notepads with the same functionalities as those enabled by default in Notepad++
+			without accessing menus or keybinds (with the exception of dark mode, find, copy, and paste), manuals and
+			calculators without functionalities beyond the default Windows calculator in Scientific mode. Any other tool is
+			not allowed.
+		</li>
+		<li>Modded widgets are not allowed.</li>
+		<li>
+			Note taking systems and the clipboard need to start empty. Manuals need to start in their default state. This
+			applies at the beginning of each bomb, including sequence bombs.
+		</li>
+		<li>Each team solve needs to have a maximum of 1 defuser and 2 experts.</li>
+		<li>
+			The following bombs are also allowed for season 3 solves:
+			<ul>
+				<li><a href="/mission/Simplifier">Simplifier</a></li>
+				<li><a href="/mission/Fnuuy">Fnuuy</a></li>
+				<li><a href="/mission/One%20for%20the%20Road">One for the Road</a></li>
 			</ul>
 		</li>
 	</ul>
